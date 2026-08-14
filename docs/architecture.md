@@ -29,12 +29,24 @@ src/+rfscreen/
 │                 RiskLevel, PairResult, MatrixResult         (deps: —, value structs)
 ├── +interference/ LobeClassifier, InterferenceClassifier,
 │                 PairwiseAnalyzer, InterferenceAnalyzer      (deps: all above)
-└── +patterndata/ SourceCoordinateConvention, PatternFidelity,   [Phase 2]
-                  SamplingType, ValidationStatus, CanonicalPatternCut,
-                  PatternCanonicalizer, PatternValidator, CutValidationResult,
-                  PatternImporter, TablePatternImporter, CsvPatternImporter,
-                  PatternResampler, CutPatternAssembler       (deps: util, geometry, antenna, config)
+├── +patterndata/ SourceCoordinateConvention, PatternFidelity,   [Phase 2]
+│                 SamplingType, ValidationStatus, CanonicalPatternCut,
+│                 PatternCanonicalizer, PatternValidator, CutValidationResult,
+│                 PatternImporter, TablePatternImporter, CsvPatternImporter,
+│                 PatternResampler, CutPatternAssembler       (deps: util, geometry, antenna, config)
+├── +spectrum/    SpectrumModel, RectangularSpectrum,          [Phase 3]
+│                 TabulatedSpectrum, SpectrumProvenance        (deps: util)
+└── +receiver/    ReferencePlane, FilterProvenance,            [Phase 3]
+                  SusceptibilityValidity, AnalysisMode,
+                  ReceiverFilter, IdealBandpassFilter, TabulatedFilterResponse,
+                  ReceiverNoiseModel, InterferenceCriterion,
+                  ReceiverSusceptibilityResult,
+                  ReceiverSusceptibilityAnalyzer              (deps: util, spectrum, interference[SpectralCouplingAnalyzer])
 ```
+
+Phase-3 also adds `interference.SpectralCouplingAnalyzer` (deps: spectrum, receiver types) and
+`interference.RfCoexistenceAnalyzer` (orchestration), and optional fields on `rf.RFTransmitter`
+(`spectrum`) and `rf.RFReceiver` (`filter`/`noiseModel`/`interferenceCriterion`).
 
 ### Phase-2 pattern-data pipeline (dependency direction)
 
@@ -64,7 +76,26 @@ interference ◄── (geometry, antenna, rf, coupling, config, results, scenar
 ```
 
 - `interference` is the only orchestration layer and may depend on everything below it.
-- **No package depends on `interference`** (no back-edges).
+- **No package depends on `interference`** except `receiver` uses `interference.SpectralCouplingAnalyzer`
+  (a pure spectral function with no geometry); this is an acyclic downward edge, not a back-edge to
+  the geometric engine.
+
+### Phase-3 linear RF coexistence flow (separated concerns — SR-201)
+
+```
+Geometry/Pattern --> (Phase-1) PairwiseAnalyzer --> spatial coupling result
+TX SpectrumModel + RX ReceiverFilter --> SpectralCouplingAnalyzer --> spectral factor (linear)
+ReceiverNoiseModel --> kTB noise ;  InterferenceCriterion --> allowable
+        (spatial x spectral x receiver-criterion)
+        --> ReceiverSusceptibilityAnalyzer --> ReceiverSusceptibilityResult
+        --> RfCoexistenceAnalyzer (reuses Phase-1 matrix; no geometry recompute)
+```
+
+- **Spatial ≠ Spectral ≠ Receiver-susceptibility**: three separate modules; never one block.
+- Absolute RF power is produced only in Mode B (physical/far-field-valid coupling). Pattern-only
+  stays Mode A (relative); the DirectionalCouplingIndex is never promoted to an absolute loss.
+- `spectrum`/`receiver` have **no UI**, do **not** parse pattern files, and compute **no geometry**;
+  power integration is in **linear** units (dB never summed).
 - **No package references any UI** (App Designer / figure / uicontrol) — VR-080.
 - **No package calls any external EM solver** — HFSS/CST/measured are *interfaces only*, and
   their `computeCoupling` raises `NotImplementedPhase1` — VR-081.

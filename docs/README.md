@@ -18,5 +18,8 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
 - **Phase 1 (complete):** requirements, ICD, deterministic core RF interference engine.
 - **Phase 2 (complete):** external 2D antenna-cut ingestion & canonicalization pipeline
   (`icd/pattern_data.md`), feeding the unchanged Phase-1 core.
+- **Phase 3 (complete):** linear RF coexistence & receiver susceptibility — TX spectrum, RX
+  filter, kTB noise, I/N, interference margin, two analysis modes (`icd/spectrum.md`,
+  `icd/receiver_susceptibility.md`). Nonlinear receiver effects deferred to Phase 4.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.

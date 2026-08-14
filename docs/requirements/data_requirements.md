@@ -138,3 +138,29 @@ Normative field detail: ICD `pattern_data.md`. These requirements govern ingesti
   be created for production/reference use. *(§28, §41)*
 - **DR-111 (SHALL)** Import shall support `deg` angle unit and `dBi` gain unit in Phase 2;
   unsupported units shall be rejected by validation, not silently coerced. *(§25)*
+
+## 11. Linear RF Coexistence Data (Phase 3)
+
+Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
+
+- **DR-200 (SHALL)** PSD shall be stored/integrated in **W/Hz** (linear); total power in dBm.
+  Conversions W↔dBm, dB↔linear shall go through `util.Units` only. *(§7, §8)*
+- **DR-201 (SHALL)** Spectrum provenance ∈ {`IDEAL_MODEL`,`DATASHEET`,`MEASURED`,`SIMULATED`,
+  `SYNTHETIC_TEST`}, stored explicitly. *(§27)*
+- **DR-202 (SHALL)** Filter response canonical unit = power gain dB; provenance as above. *(§9, §28)*
+- **DR-203 (SHALL)** Noise model params: `noiseFigure_dB`(+`refTemp_K`) **or** `systemNoiseTemp_K`;
+  exactly one method; unknown ⇒ `NOISE_MODEL_INCOMPLETE`. *(§18)*
+- **DR-204 (SHALL)** Interference criterion: `type` + `thresholdValue` (dB or dBm). *(§19)*
+- **DR-205 (SHALL)** `ReceiverSusceptibilityResult` shall carry the fields of ICD
+  `receiver_susceptibility.md` §7, with unknowns explicit (`NaN`/`''`). *(§22)*
+- **DR-206 (SHALL)** Every RF power value shall carry a `ReferencePlane`. *(§4)*
+- **DR-207 (SHALL)** Synthetic spectrum/filter/noise fixtures shall be marked `SYNTHETIC_TEST`. *(§29)*
+- **DR-208 (SHALL)** No fake RF hardware values (filter rejection, NF, Tsys, I/N limit,
+  sensitivity, TX mask) shall be created for production/reference use. *(§29, §41)*
+- **DR-209 (SHALL)** `RFTransmitter.spectrum` and `RFReceiver.filter`/`noiseModel`/
+  `interferenceCriterion` shall be **optional** fields; absence preserves Phase-1/2 behavior. *(§32)*
+- **DR-210 (SHALL)** Boltzmann constant `k = 1.380649e-23 J/K` shall be centralized in
+  `util.Constants`. *(§17)*
+- **DR-211 (SHALL)** `config.RiskPolicy`/`FrequencyRelationPolicy` (screening) and
+  `receiver.InterferenceCriterion` (physical) shall be distinct types. *(§30, §31)*
+- **DR-212 (SHALL)** Integration-grid construction policy shall be documented and deterministic. *(§11)*

@@ -11,6 +11,7 @@ classdef RFTransmitter
         mode
         polarization
         dutyCycle           % reserved; default 1.0
+        spectrum            % optional spectrum.SpectrumModel (Phase 3); [] if absent
     end
 
     methods
@@ -37,6 +38,18 @@ classdef RFTransmitter
             else
                 obj.dutyCycle = 1.0;
             end
+            if isfield(opts, 'spectrum') && ~isempty(opts.spectrum)
+                if ~isa(opts.spectrum, 'rfscreen.spectrum.SpectrumModel')
+                    error('rfscreen:rf:badSpectrum', 'spectrum must be a rfscreen.spectrum.SpectrumModel.');
+                end
+                obj.spectrum = opts.spectrum;
+            else
+                obj.spectrum = [];
+            end
+        end
+
+        function tf = hasSpectrum(obj)
+            tf = ~isempty(obj.spectrum);
         end
 
         function band = occupiedBand_Hz(obj)

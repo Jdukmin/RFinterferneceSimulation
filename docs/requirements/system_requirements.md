@@ -157,3 +157,38 @@ fixed now but implemented later.
   HFSS results, receiver thresholds, spacecraft losses). *(Task §39)*
 - **SR-121 (SHALL)** Synthetic test data shall be impossible to mistake for reference/mission
   data (enforced by provenance = `SYNTHETIC_TEST` and by tests). *(Task §35)*
+
+## 14. Linear RF Coexistence & Receiver Susceptibility (Phase 3)
+
+Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
+
+- **SR-200 (SHALL)** The system shall extend the geometric/pattern screening engine into a
+  deterministic **linear** RF coexistence engine that computes TX spectral interference delivered
+  to an RX reference plane and evaluates a receiver interference margin. *(Phase-3 §0)*
+- **SR-201 (SHALL)** Spatial coupling, spectral coupling, and receiver susceptibility shall be
+  **separate** concerns/modules; they shall not be merged into one calculation block. *(§3)*
+- **SR-202 (SHALL)** Every RF power value shall carry an explicit **reference plane**. *(§4)*
+- **SR-203 (SHALL)** A TX `SpectrumModel` abstraction with explicit provenance shall exist; not
+  every TX is a perfect rectangle. *(§5, §27)*
+- **SR-204 (SHALL)** An RX `ReceiverFilter` abstraction (canonical power-gain dB) with provenance
+  shall exist. *(§9, §28)*
+- **SR-205 (SHALL)** A linear receiver noise model (kTB via NF or system temperature) with
+  explicit terms and reference plane shall exist; temperatures/NF shall not be mixed without a
+  documented conversion. *(§17, §18)*
+- **SR-206 (SHALL)** A physical `InterferenceCriterion` abstraction shall exist; mission values
+  shall come from configuration/input, never hard-coded. *(§19)*
+- **SR-207 (SHALL)** Two analysis modes shall be supported: relative/screening (Mode A) and
+  absolute linear RF (Mode B). *(§16)*
+- **SR-208 (SHALL)** Absolute RF metrics shall be produced only when sufficient valid evidence
+  exists; the pattern-only DirectionalCouplingIndex shall never be treated as an absolute link
+  loss (the central rule). *(§14, §15, Final Rule)*
+- **SR-209 (SHALL)** Coupling validity (`PATTERN_ONLY`, `FAR_FIELD_NOT_VERIFIED`, …) shall
+  propagate into interference-power validity. *(§14)*
+- **SR-210 (SHALL)** Screening policies (`RiskPolicy`, `FrequencyRelationPolicy`) shall remain
+  **distinct types** from physical interference criteria; neither shall be silently reinterpreted
+  as the other. *(§30, §31)*
+- **SR-211 (SHALL)** RF power integration shall occur in **linear** units; dB values shall not be
+  summed/integrated directly. *(§7, §8)*
+- **SR-212 (SHALL)** Nonlinear receiver effects (P1dB, compression/blocking, IIP3, IM2/IM3, mixer
+  spurs, ADC saturation) shall remain **unimplemented** (deferred to Phase 4); interfaces may be
+  reserved. *(§23, §24, §46)*

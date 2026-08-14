@@ -138,3 +138,35 @@ Deterministic behavior of the import/canonicalization pipeline. Normative detail
 - **AR-108 (SHALL)** The assembled `FreeSpacePattern` shall feed the **existing** Phase-1
   `PairwiseAnalyzer` unchanged; Phase 2 shall not introduce a separate interference engine.
   *(§36)*
+
+## 12. Linear RF Coexistence Analysis (Phase 3)
+
+Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
+
+- **AR-200 (SHALL)** The spectral/noise/criterion pipeline shall be deterministic. *(§47)*
+- **AR-201 (SHALL)** Spectrum normalization: `∫ PSD_W(f) df = P_total_W` over support. *(§7)*
+- **AR-202 (SHALL)** TX and RX may have independent frequency grids; a deterministic **union**
+  integration grid shall be built without mutating source grids. *(§10, §11)*
+- **AR-203 (SHALL)** The spectral overlap integral shall be computed in **linear** units by the
+  midpoint rule on the union grid, exact for piecewise-constant rectangular/ideal cases. *(§8, §35)*
+- **AR-204 (SHALL)** Filter response shall be power gain in dB with deterministic dB→linear
+  conversion applied **before** the linear integration. *(§9)*
+- **AR-205 (SHALL)** Noise power shall be `N_W = k·T·F·B` (NF method, `T=T0`) or `k·Tsys·B`. *(§17)*
+- **AR-206 (SHALL)** `I/N_dB = P_I_dBm − N_dBm`, computed only when both are physically valid. *(§20)*
+- **AR-207 (SHALL)** `Margin_dB = Allowable − Actual` (single fixed sign convention; `>0` PASS). *(§21)*
+- **AR-208 (SHALL)** Mode-B absolute interference: `P_I_dBm = txPower_dBm + absoluteTransfer_dB +
+  spectralFactor_dB`, referenced to `RECEIVER_RF_INPUT`. *(§16)*
+- **AR-209 (SHALL)** `absoluteTransfer_dB` shall be available only for physical (far-field-valid)
+  coupling (`= Gtx + Grx − FSPL`); pattern-only ⇒ absolute unavailable. *(§14, §15)*
+- **AR-210 (SHALL)** `FrequencyRelation` classification shall be metadata only and shall not
+  replace spectral integration when spectra/filters exist. *(§12, §31)*
+- **AR-211 (SHALL)** Noise bandwidth shall be the filter equivalent noise bandwidth (ENBW). *(§17)*
+- **AR-212 (SHALL)** Result validity shall map from coupling validity and missing-data
+  (`ABSOLUTE_COUPLING_UNAVAILABLE`, `NOISE_MODEL_INCOMPLETE`, `MISSING_CRITERION`, `MISSING_FILTER`).
+  *(§14, §39)*
+- **AR-213 (SHALL)** Phase-3 shall reuse the Phase-1 pairwise/coupling results; it shall not
+  recompute geometry or directional gain. *(§13)*
+- **AR-214 (SHALL)** Confidence shall derive from coupling validity and spectrum/filter
+  provenance, not be invented. *(§14)*
+- **AR-215 (SHALL)** Result/data structures shall keep future aggregate multi-TX interference
+  possible (linear-additive); full aggregation may be deferred. *(§25, §26)*

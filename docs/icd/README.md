@@ -14,6 +14,8 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`scenario.md`](scenario.md) | `Scenario`, `OperatingMode`, `AnalysisConfig` (policies/defaults) |
 | [`pair_result.md`](pair_result.md) | `PairResult`, `MatrixResult`, enums, validity |
 | [`pattern_data.md`](pattern_data.md) | **[Phase 2]** external 2D-cut ingestion, canonicalization, validation, `CutPatternAssembler` |
+| [`spectrum.md`](spectrum.md) | **[Phase 3]** TX spectrum model, linear PSD, normalization, integration grids |
+| [`receiver_susceptibility.md`](receiver_susceptibility.md) | **[Phase 3]** RX filter, spectral coupling, noise, I/N, interference criterion, margin, two modes |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 
@@ -64,3 +66,8 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **PatternFidelity** *(Phase 2)*: `MEASURED_2D_CUT`, `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`
 - **SamplingType** *(Phase 2)*: `UNIFORM`, `NON_UNIFORM`, `INVALID`
 - **ValidationStatus** *(Phase 2)*: `VALID`, `VALID_WITH_WARNINGS`, `INVALID`
+- **SpectrumProvenance** *(Phase 3)*: `IDEAL_MODEL`, `DATASHEET`, `MEASURED`, `SIMULATED`, `SYNTHETIC_TEST`
+- **FilterProvenance** *(Phase 3)*: `IDEAL_MODEL`, `DATASHEET`, `MEASURED`, `SIMULATED`, `SYNTHETIC_TEST`
+- **ReferencePlane** *(Phase 3)*: `TX_OUTPUT`, `TX_ANTENNA_INPUT`, `EIRP_REFERENCE`, `RX_ANTENNA_TERMINAL`, `RECEIVER_RF_INPUT`, `POST_FILTER`
+- **AnalysisMode** *(Phase 3)*: `RELATIVE_SCREENING`, `ABSOLUTE_LINEAR`
+- **SusceptibilityValidity** *(Phase 3)*: `VALID_ABSOLUTE`, `RELATIVE_SCREENING_ONLY`, `ABSOLUTE_COUPLING_UNAVAILABLE`, `NOISE_MODEL_INCOMPLETE`, `MISSING_CRITERION`, `MISSING_FILTER`, `MISSING_SPECTRUM`, `OUTSIDE_ANALYSIS_BAND`, `FAR_FIELD_NOT_VERIFIED`

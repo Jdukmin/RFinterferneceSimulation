@@ -11,6 +11,9 @@ classdef RFReceiver
         polarization
         interferenceThreshold_dBm   % NaN if unknown
         frontEnd                    % rfscreen.rf.RFFrontEnd or []
+        filter                      % optional receiver.ReceiverFilter (Phase 3); [] if absent
+        noiseModel                  % optional receiver.ReceiverNoiseModel (Phase 3); [] if absent
+        interferenceCriterion       % optional receiver.InterferenceCriterion (Phase 3); [] if absent
     end
 
     methods
@@ -46,6 +49,17 @@ classdef RFReceiver
             else
                 obj.frontEnd = [];
             end
+
+            obj.filter = rfscreen.rf.RFReceiver.optType(opts, 'filter', ...
+                'rfscreen.receiver.ReceiverFilter', 'filter');
+            obj.noiseModel = rfscreen.rf.RFReceiver.optType(opts, 'noiseModel', ...
+                'rfscreen.receiver.ReceiverNoiseModel', 'noiseModel');
+            obj.interferenceCriterion = rfscreen.rf.RFReceiver.optType(opts, 'interferenceCriterion', ...
+                'rfscreen.receiver.InterferenceCriterion', 'interferenceCriterion');
+        end
+
+        function tf = hasFilterModel(obj)
+            tf = ~isempty(obj.filter);
         end
 
         function band = band_Hz(obj)
@@ -59,6 +73,19 @@ classdef RFReceiver
 
         function tf = hasThreshold(obj)
             tf = ~isnan(obj.interferenceThreshold_dBm);
+        end
+    end
+
+    methods (Static, Access = private)
+        function v = optType(opts, name, cls, label)
+            if isfield(opts, name) && ~isempty(opts.(name))
+                if ~isa(opts.(name), cls)
+                    error('rfscreen:rf:badType', '%s must be a %s.', label, cls);
+                end
+                v = opts.(name);
+            else
+                v = [];
+            end
         end
     end
 end

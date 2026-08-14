@@ -168,3 +168,76 @@ filename (CSV importer requires an explicit `SourceCoordinateConvention` + `meta
 
 `+patterndata` uses the same MATLAB/Octave subset; the exact `src/` code runs under both. Full
 suite: **245 assertions, 15 files, all passing** (`tests/run_all_tests.m`).
+
+---
+
+# Phase 3 — Linear RF Coexistence & Receiver Susceptibility Reconciliation
+
+Phase 3 adds `+spectrum`, `+receiver`, `interference.SpectralCouplingAnalyzer` /
+`RfCoexistenceAnalyzer`, and optional `rf` fields — **without changing** the Phase-1 geometric core
+or Phase-2 pipeline. All 245 prior assertions still pass (regression, VR-214); full suite is now
+**371 assertions across 23 files, all passing**.
+
+## P3.1 Requirement → Code → Test map
+
+| Req | Code (src/+rfscreen/…) | Test (tests/…) |
+|-----|------------------------|----------------|
+| SR-200/AR-208, §0/§16 (linear RF, Mode B) | `receiver/ReceiverSusceptibilityAnalyzer` | test_rf_coexistence_integration, test_susceptibility_validity |
+| SR-201/§3 (spatial≠spectral≠susceptibility) | package split (`+spectrum`, `interference/SpectralCouplingAnalyzer`, `+receiver`) | test_phase3_architecture |
+| SR-202/DR-206/§4 (reference planes) | `receiver/ReferencePlane` | test_susceptibility_validity, test_rf_coexistence_integration |
+| SR-203/DR-201/§5/§27 (TX spectrum + provenance) | `+spectrum/SpectrumModel`,`RectangularSpectrum`,`TabulatedSpectrum`,`SpectrumProvenance` | test_spectrum |
+| SR-204/DR-202/§9/§28 (RX filter + provenance) | `receiver/ReceiverFilter`,`IdealBandpassFilter`,`TabulatedFilterResponse`,`FilterProvenance` | test_filter |
+| SR-205/AR-205/§17/§18 (noise kTB) | `receiver/ReceiverNoiseModel`, `util.Constants.boltzmann_JperK` | test_noise |
+| SR-206/DR-204/§19 (criterion, not hard-coded) | `receiver/InterferenceCriterion` | test_in_margin |
+| SR-207/§16 (two modes) | `receiver/AnalysisMode`, analyzer mode selection | test_susceptibility_validity |
+| SR-208/AR-209/§14/§15 (no absolute from pattern-only) | analyzer Mode-A guard | test_susceptibility_validity, test_phase3_architecture |
+| SR-209/AR-212/§14 (validity propagates) | `receiver/SusceptibilityValidity`, analyzer precedence | test_susceptibility_validity |
+| SR-210/DR-211/§30/§31 (screening ≠ physical) | distinct types (`config.RiskPolicy` vs `receiver.InterferenceCriterion`) | test_phase3_architecture |
+| SR-211/AR-203/§7/§8 (linear integration) | `SpectralCouplingAnalyzer` (linear midpoint) | test_spectrum, test_spectral_coupling, test_phase3_architecture |
+| SR-212/§24/§46 (nonlinear deferred) | reserved `RFFrontEnd` NaN; no nonlinear code | test_phase3_architecture |
+| AR-201/§7 (normalization) | `Rectangular`/`TabulatedSpectrum` | test_spectrum |
+| AR-202/§10/§11 (independent grids, union) | `SpectralCouplingAnalyzer` grid build | test_spectral_coupling |
+| AR-204/§9 (filter dB→linear) | `ReceiverFilter.responseLinear` | test_filter |
+| AR-206/§20 (I/N) | `InterferenceCriterion.evaluate` | test_in_margin |
+| AR-207/§21 (margin sign) | `InterferenceCriterion` (Allowable−Actual) | test_in_margin |
+| AR-210/§12/§31 (classification ≠ power) | classification untouched; spectral integral separate | test_phase3_architecture |
+| AR-211/§17 (ENBW) | `ReceiverFilter.equivalentNoiseBandwidth_Hz` | test_noise (indirect), test_filter |
+| AR-213/§13/§26 (reuse Phase-1) | `RfCoexistenceAnalyzer` reuses `InterferenceAnalyzer` | test_rf_coexistence_integration, test_phase3_architecture |
+| AR-215/§25 (aggregate reserved) | linear-additive `overlapPower_W`; per-pair result | (design; pairwise-first) |
+| DR-209/§32 (optional RF wiring) | `rf.RFTransmitter.spectrum`, `rf.RFReceiver.filter/…` | test_rf_coexistence_integration; Phase-1 regression |
+| DR-210/§17 (Boltzmann) | `util.Constants.boltzmann_JperK` | test_noise |
+| VR-200…VR-215 | see tests/ | test_spectrum … test_phase3_architecture |
+
+## P3.2 Canonical decisions (Phase 3)
+
+1. **Linear/log boundary.** PSD and filter response are combined in **linear W / linear ratio**;
+   `∫ PSD_W·H_lin df` by midpoint rule on a union grid; dB appears only at interfaces via
+   `util.Units`. (SR-211, AR-203.)
+2. **Reference planes.** TX power/spectrum at `TX_ANTENNA_INPUT`; interference, noise, I/N at
+   `RECEIVER_RF_INPUT` (post-preselector, pre-LNA). Every power carries a plane.
+3. **Absolute vs relative.** Mode B (absolute) requires physical (far-field-valid) coupling giving
+   `absoluteTransfer_dB = Gtx + Grx − FSPL`; pattern-only ⇒ Mode A, `interferencePower_dBm = NaN`,
+   validity `ABSOLUTE_COUPLING_UNAVAILABLE`. The central rule (SR-208).
+4. **Margin sign (fixed once).** `Margin_dB = Allowable − Actual`; `>0` PASS. Used identically by
+   both criterion types.
+5. **Noise honesty.** Exactly one of NF(+T0) or Tsys; neither present ⇒ constructor refuses and the
+   analyzer reports `NOISE_MODEL_INCOMPLETE` — no invented defaults.
+6. **Screening ≠ physical.** `config.RiskPolicy`/`FrequencyRelationPolicy` remain screening; the
+   physical acceptance test is `receiver.InterferenceCriterion` (distinct type). `FrequencyRelation`
+   classification is metadata and never replaces the spectral integral.
+7. **Reuse, not fork.** `RfCoexistenceAnalyzer` layers on the existing Phase-1 matrix; no geometry
+   or directional gain is recomputed (AR-213).
+
+## P3.3 Validity-honesty audit (Task §39)
+
+Absolute metrics are withheld, not fabricated, when evidence is insufficient: pattern-only ⇒ no
+`P_I`; no noise model ⇒ no I/N (`NOISE_MODEL_INCOMPLETE`); no criterion ⇒ no PASS/FAIL
+(`MISSING_CRITERION`); no filter/spectrum ⇒ `MISSING_FILTER`/`MISSING_SPECTRUM`. All verified in
+test_susceptibility_validity and test_phase3_architecture. No fake RF hardware values exist; all
+fixtures are `SYNTHETIC_TEST`.
+
+## P3.4 Verification result
+
+Octave 8.4: **PASS** — **371 assertions, 23 files** (`tests/run_all_tests.m`), the exact `src/`
+code executed. MATLAB: **NOT RUN** (no MATLAB available in this environment); the code stays within
+the MATLAB/Octave-common subset used since Phase 1, but MATLAB execution is not claimed.

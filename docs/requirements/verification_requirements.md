@@ -123,3 +123,31 @@ Maps DR-100…DR-111, AR-100…AR-108. Deterministic, synthetic (`SYNTHETIC_TEST
   object assumes no global fixed step; duplicate periodic endpoints never silently retained;
   source `+Z` convention does not overwrite internal frame contracts. *(§37)*
 - **VR-122 (SHALL)** All Phase-1 regression tests (131 assertions) still pass unchanged. *(§43)*
+
+## 13. Linear RF Coexistence Verification (Phase 3)
+
+Synthetic (`SYNTHETIC_TEST`), analytically predictable fixtures.
+
+- **VR-200 (SHALL)** Rectangular PSD normalization: `∫ PSD df = P_total` (linear). *(§33)*
+- **VR-201 (SHALL)** Linear-domain integration evidence (dB values not summed). *(§8)*
+- **VR-202 (SHALL)** Different TX/RX grid resolutions integrate consistently. *(§33, §35)*
+- **VR-203 (SHALL)** Spectral overlap: full, partial, none, edge-touching. *(§33, §35)*
+- **VR-204 (SHALL)** Filter: 0 dB passband, finite rejection, tabulated interpolation, TX/RX grid
+  mismatch, boundary interpolation. *(§34)*
+- **VR-205 (SHALL)** Spectral coupling: TX inside / partially inside / outside RX passband;
+  narrow-TX/wide-RX; wide-TX/narrow-RX; different sample steps. *(§35)*
+- **VR-206 (SHALL)** Noise: kTB, bandwidth scaling, temperature scaling, NF handling, dBm↔W. *(§36)*
+- **VR-207 (SHALL)** I/N cases (e.g. `I=-120, N=-110 ⇒ -10 dB`). *(§37)*
+- **VR-208 (SHALL)** Margin sign: with `I/N ≤ -6`, actual `-10→+4`, `-6→0`, `-3→-3`. *(§38)*
+- **VR-209 (SHALL)** Validity: pattern-only ⇒ no absolute `P_I`; missing noise ⇒ no I/N; missing
+  criterion ⇒ no PASS/FAIL; missing filter ⇒ degraded. *(§39)*
+- **VR-210 (SHALL)** Phase-3 reuses Phase-1 coupling; no geometry recompute. *(§13, §42)*
+- **VR-211 (SHALL)** Screening policy (`RiskPolicy`) ≠ physical `InterferenceCriterion`. *(§30, §42)*
+- **VR-212 (SHALL)** `FrequencyRelation` classification ≠ spectral power. *(§31, §42)*
+- **VR-213 (SHALL)** Architecture boundaries: spectrum has no UI; receiver does not parse antenna
+  pattern files; spectral analyzer computes no geometry; dB values are not integrated directly;
+  pattern-only index is not mislabeled absolute coupling loss; nonlinear receiver models remain
+  unimplemented. *(§42)*
+- **VR-214 (SHALL)** All 245 existing Phase-1/2 assertions still pass unchanged. *(§40)*
+- **VR-215 (SHALL)** End-to-end coexistence: scenario → Phase-1 pairwise → Phase-3 susceptibility
+  → absolute result (far-field) and relative result (pattern-only). *(§16, §26)*

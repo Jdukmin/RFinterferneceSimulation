@@ -150,6 +150,28 @@ fixed angular step, and either `[-180,180]` or `[0,360)` angle ranges.
 
 *(Realized by the `+patterndata` pipeline; see `docs/icd/pattern_data.md`.)*
 
+## R11. Receiver noise, I/N, and spectral coexistence (Phase 3)
+
+**What it stands for.** Standard linear RF interference analysis: thermal noise `N = kTB`
+(Boltzmann `k`, temperature `T`, bandwidth `B`), noise figure referred to a `T0 = 290 K`
+reference, interference-to-noise ratio `I/N`, and spectral overlap computed by integrating a TX
+power spectral density against a receiver filter response in **linear** power units. These are the
+textbook relations behind ITU-R-style protection criteria (e.g. `I/N` limits) and receiver
+sensitivity/blocking budgets.
+
+**Architecture implication (Phase 3).**
+- Power integration is performed in **linear** units (W, W/Hz); dB is an interface unit only,
+  never summed/integrated.
+- Every RF power has an explicit **reference plane**; noise and interference are compared at the
+  same plane (`RECEIVER_RF_INPUT`).
+- The physical acceptance test (`I/N ≤ limit`, or max interference power) is a configurable
+  **`InterferenceCriterion`**, kept distinct from screening heuristics.
+- Absolute interference power requires a physical propagation/coupling model; pattern-only
+  screening evidence must never be presented as absolute RF power.
+
+*(Realized by `+spectrum`, `+receiver`, and `interference.SpectralCouplingAnalyzer`; see
+`docs/icd/spectrum.md`, `docs/icd/receiver_susceptibility.md`.)*
+
 ## Cross-cutting architecture implications (binding for Phase 1)
 
 The references above converge on a small set of non-negotiable structural rules. These are the

@@ -21,9 +21,29 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > resolutions and coordinate conventions, normalizes it into one internal representation, and feeds
 > the **unchanged** Phase-1 screening core. See `docs/icd/pattern_data.md`.
 >
-> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, nonlinear receiver
-> interference, and any UI remain **deferred** (see `docs/traceability.md` and ICD extension
-> points).
+> **Phase 3 (complete).** A deterministic **linear RF coexistence & receiver-susceptibility**
+> engine (`+spectrum`, `+receiver`): TX spectrum × RX filter spectral coupling (linear
+> integration), receiver kTB noise, I/N, and an explicit interference-margin criterion — with
+> absolute RF power produced **only** when physical coupling evidence exists. See
+> `docs/icd/spectrum.md`, `docs/icd/receiver_susceptibility.md`.
+>
+> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, and **nonlinear**
+> receiver effects (P1dB/blocking, IIP3/IM, mixer spurs, ADC saturation) plus any UI remain
+> **deferred to Phase 4+** (see `docs/traceability.md` and ICD extension points).
+
+## Phase 3 — linear RF coexistence at a glance
+
+- **Two modes.** *Relative screening* (directional + spectral overlap, no fake absolute power) and
+  *absolute linear RF* (only with physical/far-field-valid coupling). The pattern-only
+  DirectionalCouplingIndex is **never** promoted to an absolute link loss.
+- **Separated concerns.** Spatial coupling (Phase-1) ≠ spectral coupling (`SpectralCouplingAnalyzer`)
+  ≠ receiver susceptibility (`ReceiverSusceptibilityAnalyzer`).
+- **Linear integration.** TX PSD (W/Hz) × RX filter (linear ratio) integrated over a deterministic
+  union grid; dB is never summed. TX and RX may use independent frequency grids.
+- **Noise / I/N / margin.** `N = kTB` (NF or system temperature), `I/N = P_I − N`, and
+  `Margin = Allowable − Actual` (`>0` PASS), all referenced to `RECEIVER_RF_INPUT`.
+- **Honest validity.** Missing noise → no I/N; missing criterion → no PASS/FAIL; pattern-only → no
+  absolute power. Nothing is invented.
 
 ## Phase 2 — external pattern input at a glance
 
@@ -52,6 +72,7 @@ docs/
 src/+rfscreen/                 Core engine (MATLAB packages)
   +util +geometry +antenna +rf +coupling +config +scenario +results +interference
   +patterndata                 [Phase 2] external 2D-cut ingestion & canonicalization
+  +spectrum +receiver          [Phase 3] TX spectrum, RX filter/noise/criterion, susceptibility
 tests/                         Deterministic test suite + portable harness
 examples/demo_screening.m      Console demo (synthetic data only, no UI)
 setup_paths.m                  Adds src/ to the path
@@ -86,13 +107,14 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **245 deterministic assertions across 15 test files, all passing** (131 Phase-1 +
-114 Phase-2). Covers geometry, coordinate transforms, pattern interpolation, pairwise lobe
-analysis, N×M matrix generation, invalid-input rejection, numerical invariants, Phase-1
-architecture boundaries, and the Phase-2 pipeline: variable angular step (0.25°/0.5°/1.0°),
-`[-180,180]→[0,360)` conversion, `±180` and `0/360` duplicate resolution, periodic interpolation,
-mixed XZ/YZ steps, source-frame axis mapping, validation, Phase-1 integration, and Phase-2
-architecture boundaries.
+Current status: **371 deterministic assertions across 23 test files, all passing** (131 Phase-1 +
+114 Phase-2 + 126 Phase-3), under **GNU Octave 8.4** (MATLAB not available in this environment, so
+MATLAB execution is not claimed). Covers geometry, coordinate transforms, pattern interpolation,
+pairwise lobe analysis, matrix generation, invalid-input rejection, numerical invariants, the
+Phase-2 ingestion pipeline, and the Phase-3 linear RF chain: spectrum normalization + linear
+integration, filter response, spectral overlap (full/partial/none/edge, narrow/wide, mixed grids),
+kTB noise, I/N, margin sign convention, validity honesty (no absolute power without evidence),
+end-to-end coexistence, and Phase-3 architecture boundaries.
 
 ## Quick demo
 
