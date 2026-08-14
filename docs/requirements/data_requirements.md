@@ -97,3 +97,44 @@ validation. Field-level normative detail lives in the ICD (`docs/icd/`).
 - **DR-080 (SHALL)** Missing data shall be represented explicitly (`NaN`, empty, or a validity
   enum), and shall propagate a corresponding validity/warning to the result. The system shall
   never substitute an invented default value for missing physics. *(Task §39, §40)*
+
+## 10. Pattern Data Pipeline (Phase 2)
+
+Normative field detail: ICD `pattern_data.md`. These requirements govern ingestion of external
+2D antenna-cut data into the canonical internal representation.
+
+- **DR-100 (SHALL)** Angular resolution and source coordinate convention shall be **per-dataset
+  properties**, never global constants. No fixed step (0.25°/0.5°/1.0°) and no sample count
+  (361/721) shall be hard-coded. *(Phase-2 §5, §17, Final Rule)*
+- **DR-101 (SHALL)** Each imported cut shall carry its **own** `theta_deg` grid; XZ and YZ of the
+  same antenna may have independent step sizes. *(§18)*
+- **DR-102 (SHALL)** The internal canonical angular coordinate shall be `0 ≤ theta_deg < 360`,
+  sorted ascending. Source ranges `[-180,180]` and `[0,360)` shall both be accepted. *(§8, §9)*
+- **DR-103 (SHALL)** A `SourceCoordinateConvention` descriptor shall express boresight axis, cut
+  plane, angle-zero axis, positive-rotation direction, angle range, angle unit, gain unit, and
+  polarization component. The importer shall canonicalize **using this descriptor**; no universal
+  sign convention shall be hard-coded. *(§14, §15)*
+- **DR-104 (SHALL)** Sampling type shall be classified explicitly as `UNIFORM`, `NON_UNIFORM`, or
+  `INVALID`, using a documented tolerance; float steps shall never be compared by exact equality.
+  `nominalStep_deg` shall record the detected step for UNIFORM data. *(§6, §7)*
+- **DR-105 (SHALL)** Duplicate canonical angles (including `−180/+180→180` and `0/360→0`) shall be
+  detected and resolved deterministically; two independent samples shall never be silently
+  retained at one canonical angle. Conflicting duplicates shall yield a warning or error per
+  policy, with evidence recorded. *(§10, §11, §12)*
+- **DR-106 (SHALL)** Pattern **fidelity** shall be stored explicitly (`MEASURED_2D_CUT`,
+  `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`) and
+  never inferred from filename. A 3D pattern assembled from 2D cuts shall be labeled
+  `APPROX_FROM_CUTS`, never `MEASURED_3D`/`SIMULATED_3D`. *(§21, §22)*
+- **DR-107 (SHALL)** The `CanonicalPatternCut` schema (ICD `pattern_data.md` §3) shall be the
+  single internal representation emitted by all importers. *(§16)*
+- **DR-108 (SHALL)** Provenance (ICD `pattern_data.md` §7) shall record source file/type, ids,
+  plane, frequency, original range/step, and which transforms were applied (canonicalization,
+  duplicate handling, resampling, gain normalization, coordinate transform). Unknown values stay
+  explicitly unknown. *(§27, §41)*
+- **DR-109 (SHALL)** Native-grid preservation is mandatory: resampling to a common grid shall be
+  a separate, recorded operation that does not mutate source data in place. *(§19)*
+- **DR-110 (SHALL)** Phase-2 test fixtures shall be synthetic and marked `SYNTHETIC_TEST`; no
+  mission/reference pattern or invented mainlobe/sidelobe/gain/cross-pol/axial-ratio value shall
+  be created for production/reference use. *(§28, §41)*
+- **DR-111 (SHALL)** Import shall support `deg` angle unit and `dBi` gain unit in Phase 2;
+  unsupported units shall be rejected by validation, not silently coerced. *(§25)*

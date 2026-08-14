@@ -27,9 +27,29 @@ src/+rfscreen/
 ├── +scenario/    Scenario, OperatingMode                    (deps: antenna, rf)
 ├── +results/     LobeClass, InterferenceType, ResultValidity,
 │                 RiskLevel, PairResult, MatrixResult         (deps: —, value structs)
-└── +interference/ LobeClassifier, InterferenceClassifier,
-                  PairwiseAnalyzer, InterferenceAnalyzer      (deps: all above)
+├── +interference/ LobeClassifier, InterferenceClassifier,
+│                 PairwiseAnalyzer, InterferenceAnalyzer      (deps: all above)
+└── +patterndata/ SourceCoordinateConvention, PatternFidelity,   [Phase 2]
+                  SamplingType, ValidationStatus, CanonicalPatternCut,
+                  PatternCanonicalizer, PatternValidator, CutValidationResult,
+                  PatternImporter, TablePatternImporter, CsvPatternImporter,
+                  PatternResampler, CutPatternAssembler       (deps: util, geometry, antenna, config)
 ```
+
+### Phase-2 pattern-data pipeline (dependency direction)
+
+```
+file/table --> PatternImporter --> PatternCanonicalizer --> PatternValidator
+            --> CanonicalPatternCut --> CutPatternAssembler --> antenna.FreeSpacePattern
+            --> (existing) interference.PairwiseAnalyzer
+```
+
+- `+patterndata` depends **downward only** (util, geometry, antenna, config). It has **no**
+  dependency on `+interference` (VR-121): importers never classify RF risk.
+- `CanonicalPatternCut` depends on **no file format** (importers translate files into it).
+- The core (`+interference`, `+coupling`, `+rf`) never parses files and is unchanged by Phase 2.
+- The source `+Z` boresight convention is confined to `+patterndata`; it reaches the Phase-1
+  antenna frame only through the explicit map `M` in `CutPatternAssembler` (VR-121).
 
 ## Dependency rules (acyclic, one-directional)
 

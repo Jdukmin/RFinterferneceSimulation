@@ -13,6 +13,7 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`coupling.md`](coupling.md) | `CouplingModel` family, coupling validity, near/far-field |
 | [`scenario.md`](scenario.md) | `Scenario`, `OperatingMode`, `AnalysisConfig` (policies/defaults) |
 | [`pair_result.md`](pair_result.md) | `PairResult`, `MatrixResult`, enums, validity |
+| [`pattern_data.md`](pattern_data.md) | **[Phase 2]** external 2D-cut ingestion, canonicalization, validation, `CutPatternAssembler` |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 
@@ -60,3 +61,6 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **LobeClass**: `MAIN`, `SIDE`, `BACK`
 - **ResultValidity**: `VALID_PATTERN_SCREENING`, `APPROXIMATE`, `OUTSIDE_PATTERN_DOMAIN`, `FAR_FIELD_NOT_VERIFIED`, `MISSING_RECEIVER_DATA`, `REQUIRES_FULL_WAVE_VERIFICATION`
 - **RiskLevel**: `NA`, `OK`, `LOW`, `WARN`, `HIGH`
+- **PatternFidelity** *(Phase 2)*: `MEASURED_2D_CUT`, `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`
+- **SamplingType** *(Phase 2)*: `UNIFORM`, `NON_UNIFORM`, `INVALID`
+- **ValidationStatus** *(Phase 2)*: `VALID`, `VALID_WITH_WARNINGS`, `INVALID`

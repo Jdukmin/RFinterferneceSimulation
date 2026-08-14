@@ -13,11 +13,32 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
         -> HFSS / measurement verification
 ```
 
-> **Phase 1 scope.** Requirements, ICD, and a deterministic **core RF interference engine** that
-> is independent of any real antenna reference pattern. Actual reference/installed pattern
-> generation, HFSS/CST/measured-S21 coupling import, detailed nonlinear receiver interference,
-> and any UI are **deferred** to later phases (see `docs/traceability.md` §3 and the ICD
-> extension points).
+> **Phase 1 (complete).** Requirements, ICD, and a deterministic **core RF interference engine**
+> independent of any real antenna reference pattern.
+>
+> **Phase 2 (complete).** A deterministic **antenna-pattern data ingestion & canonicalization
+> pipeline** (`+patterndata`) that accepts real external 2D antenna cut data with different angular
+> resolutions and coordinate conventions, normalizes it into one internal representation, and feeds
+> the **unchanged** Phase-1 screening core. See `docs/icd/pattern_data.md`.
+>
+> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, nonlinear receiver
+> interference, and any UI remain **deferred** (see `docs/traceability.md` and ICD extension
+> points).
+
+## Phase 2 — external pattern input at a glance
+
+- **Source convention:** boresight `+Z`; 2D `XZ`/`YZ` gain cuts; `theta` from `+Z`; angle range
+  `[-180,180]` or `[0,360)`; deg / dBi. Declared per dataset via a `SourceCoordinateConvention`
+  descriptor — never hard-coded.
+- **Variable step:** each pattern (and each of its XZ/YZ cuts) keeps its **own** angular step
+  (0.25° / 0.5° / 1.0° …). No global step or sample count is assumed.
+- **Canonicalization:** angles normalized to `0 ≤ theta < 360`, sorted; `±180→180`, `0/360→0`
+  resolved deterministically (mean-merge within tolerance; conflicts warn or error per policy).
+- **Periodic interpolation** across `0/360`; native resolution preserved in `CanonicalPatternCut`.
+- **Bridge to core:** `CutPatternAssembler` builds a `FreeSpacePattern` labeled
+  `APPROX_FROM_CUTS` (a documented two-cut approximation — never relabeled true 3D) that the
+  existing `PairwiseAnalyzer` consumes unchanged. The source `+Z` boresight reaches the antenna
+  frame only through the explicit map `M` in the assembler.
 
 ## Repository layout
 
@@ -30,10 +51,13 @@ docs/
   icd/                         Interface Control Documents (normative)
 src/+rfscreen/                 Core engine (MATLAB packages)
   +util +geometry +antenna +rf +coupling +config +scenario +results +interference
+  +patterndata                 [Phase 2] external 2D-cut ingestion & canonicalization
 tests/                         Deterministic test suite + portable harness
 examples/demo_screening.m      Console demo (synthetic data only, no UI)
 setup_paths.m                  Adds src/ to the path
 ```
+
+See `src/README.md` and `tests/README.md` for package-level detail.
 
 ## Core principles (from `docs/reference.md`)
 
@@ -62,11 +86,13 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **125 deterministic assertions across 8 test files, all passing**, including
-geometry, coordinate transforms, pattern interpolation, pairwise lobe analysis, N×M matrix
-generation, invalid-input rejection, numerical invariants, and **architecture-boundary** tests
-(no UI/solver dependency, pattern-only coupling ≠ measured S21, hardware owns no installation
-geometry, free/installed distinguishable, synthetic data unmistakable).
+Current status: **245 deterministic assertions across 15 test files, all passing** (131 Phase-1 +
+114 Phase-2). Covers geometry, coordinate transforms, pattern interpolation, pairwise lobe
+analysis, N×M matrix generation, invalid-input rejection, numerical invariants, Phase-1
+architecture boundaries, and the Phase-2 pipeline: variable angular step (0.25°/0.5°/1.0°),
+`[-180,180]→[0,360)` conversion, `±180` and `0/360` duplicate resolution, periodic interpolation,
+mixed XZ/YZ steps, source-frame axis mapping, validation, Phase-1 integration, and Phase-2
+architecture boundaries.
 
 ## Quick demo
 

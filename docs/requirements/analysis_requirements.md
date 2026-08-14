@@ -109,3 +109,32 @@ Cross-references System Requirements (SR-xxx) and is made field-normative by the
 
 - **AR-090 (SHALL)** The adjacent-band guard bandwidth shall be a configurable parameter with a
   documented default; `IN_BAND`/`ADJACENT_BAND`/`OUT_OF_BAND` boundaries shall be reproducible.
+
+## 11. Pattern-Data Canonicalization Analysis (Phase 2)
+
+Deterministic behavior of the import/canonicalization pipeline. Normative detail: ICD
+`pattern_data.md`.
+
+- **AR-100 (SHALL)** Canonicalization shall be deterministic: identical source data + convention +
+  policy yield identical `CanonicalPatternCut`. *(§42)*
+- **AR-101 (SHALL)** `theta → source direction` shall follow the data-driven descriptor mapping
+  `d = cosd(θ)·z0 + sind(θ)·t0` (ICD `pattern_data.md` §1.1). *(§14)*
+- **AR-102 (SHALL)** Canonical `theta` shall be recovered geometrically from the physical
+  direction (`atan2d` of in-plane components), giving `[-180,180]→[0,360)`, `±180→180`,
+  `0/360→0`, and absorbing rotation-direction/zero-axis differences. *(§9, §2.1)*
+- **AR-103 (SHALL)** Uniform-step detection shall use `median(diff(theta))` with a documented
+  tolerance; the pipeline shall report `UNIFORM`/`NON_UNIFORM`/`INVALID`. *(§6, §7)*
+- **AR-104 (SHALL)** Interpolation on a cut shall be **periodic** over 360° and operate against
+  the actual `theta_deg` vector (no `index = theta/step`). Wrap continuity across `0/360` shall
+  hold. *(§13, §20)*
+- **AR-105 (SHALL)** Duplicate resolution shall follow the deterministic policy of ICD
+  `pattern_data.md` §6 (mean-merge within tolerance; warn/error on conflict), recording evidence.
+  *(§10, §11)*
+- **AR-106 (SHALL)** The Canonical→Antenna frame map `M` (ICD `pattern_data.md` §1.2) shall be
+  applied only in `CutPatternAssembler`; the source `+Z` boresight shall never enter the Phase-1
+  core implicitly. *(§3, §37)*
+- **AR-107 (SHALL)** A 3D antenna pattern assembled from 2D cuts shall use the documented two-cut
+  azimuthal-interpolation approximation and be labeled `APPROX_FROM_CUTS`. *(§21, §11 assembler)*
+- **AR-108 (SHALL)** The assembled `FreeSpacePattern` shall feed the **existing** Phase-1
+  `PairwiseAnalyzer` unchanged; Phase 2 shall not introduce a separate interference engine.
+  *(§36)*

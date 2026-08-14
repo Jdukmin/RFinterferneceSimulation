@@ -93,3 +93,33 @@ architecture-boundary tests, and docs/code consistency. Maps tests to requiremen
 - **VR-100 (SHALL)** Phase 1 verification passes when: all VR-0xx tests pass, all
   architecture-boundary tests pass, no fake mission/reference pattern exists in the repo, and the
   traceability matrix shows no unreconciled divergence. *(Task §41)*
+
+## 12. Pattern-Data Pipeline Verification (Phase 2)
+
+Maps DR-100…DR-111, AR-100…AR-108. Deterministic, synthetic (`SYNTHETIC_TEST`) fixtures only.
+
+- **VR-110 (SHALL)** Variable angular step: independent fixtures at 0.25°, 0.5°, 1.0° each detect
+  their own step, sample count, and interpolate correctly — no global-step assumption. *(§29)*
+- **VR-111 (SHALL)** `[-180,180] → [0,360)` conversion + ordering; explicitly `−90→270`,
+  `−180→180`, `180→180`. *(§30)*
+- **VR-112 (SHALL)** `±180` duplicate: equivalent values collapse to one `180°` sample (VALID);
+  conflicting values yield warning/INVALID per policy, with evidence — never silent. *(§31)*
+- **VR-113 (SHALL)** `0/360` duplicate resolves deterministically to a single `0°` sample. *(§32)*
+- **VR-114 (SHALL)** Periodic interpolation across `359.x° / 0° / 0.x°` is continuous. *(§34)*
+- **VR-115 (SHALL)** One antenna with XZ step 0.25° and YZ step 1.0° coexists without forced
+  global resampling. *(§33)*
+- **VR-116 (SHALL)** Source-frame axis mapping: boresight, `±X`, `±Y`, back map to the documented
+  antenna `(az,el)` (ICD `pattern_data.md` §1.2). *(§35)*
+- **VR-117 (SHALL)** Sampling classification: `UNIFORM` vs `NON_UNIFORM` vs `INVALID` detected
+  explicitly. *(§7)*
+- **VR-118 (SHALL)** Validation detects empty/NaN/Inf/non-numeric/duplicate/inconsistent-step/
+  non-monotonic/unsupported-range/unsupported-unit/missing-plane/missing-provenance. *(§25)*
+- **VR-119 (SHALL)** Provenance + fidelity preserved end-to-end; a 2D cut is never labeled true
+  3D; assembled 3D is `APPROX_FROM_CUTS`. *(§21, §27)*
+- **VR-120 (SHALL)** Integration: synthetic external-style cuts → importer → canonical →
+  `FreeSpacePattern` → **existing** `PairwiseAnalyzer` → `PairResult`. *(§36)*
+- **VR-121 (SHALL)** Architecture-boundary (Phase 2): importer has no interference-engine
+  dependency; canonical pattern has no file-format dependency; core does not parse files; pattern
+  object assumes no global fixed step; duplicate periodic endpoints never silently retained;
+  source `+Z` convention does not overwrite internal frame contracts. *(§37)*
+- **VR-122 (SHALL)** All Phase-1 regression tests (131 assertions) still pass unchanged. *(§43)*

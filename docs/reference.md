@@ -132,6 +132,24 @@ products (governed by IIP3); adjacent-band and in-band overlap cause direct inte
 
 ---
 
+## R10. MathWorks — custom/tabulated 2D radiation-pattern cuts & interpolation (Phase 2)
+
+**What it is.** MATLAB practice for representing an antenna pattern from tabulated angle/gain data
+(principal-plane cuts), including angular interpolation and periodic (azimuthal) wrap. Source cut
+data commonly uses a `+Z`-boresight convention with `theta` measured from boresight, arbitrary
+fixed angular step, and either `[-180,180]` or `[0,360)` angle ranges.
+
+**Architecture implication (Phase 2).**
+- Angular resolution and coordinate convention are **per-dataset**, not global constants; the
+  importer must detect/validate each cut's own step and range (no hard-coded 0.25°/1°/361/721).
+- Interpolation must run against the **actual angle vector** with **periodic** wrap across
+  `0°/360°`, never `index = theta/step`.
+- Source `+Z` boresight is an *external* convention; it must be transformed explicitly into the
+  Phase-1 antenna-local frame and never leak into the core.
+- 2D cuts are not a measured 3D pattern; any 3D assembled from cuts is `APPROX_FROM_CUTS`.
+
+*(Realized by the `+patterndata` pipeline; see `docs/icd/pattern_data.md`.)*
+
 ## Cross-cutting architecture implications (binding for Phase 1)
 
 The references above converge on a small set of non-negotiable structural rules. These are the

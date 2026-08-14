@@ -118,3 +118,14 @@ Factory of **clearly-marked** synthetic patterns for tests only. Every product h
 | `mainSideBack(peak_dBi, side_dBi, back_dBi, freq_Hz)` | discrete main/side/back synthetic lobes for lobe-class tests |
 
 These return `FreeSpacePattern` objects. **No mission/reference data** is produced (SR-054).
+
+## 5. External pattern-data ingestion (Phase 2)
+
+Real external 2D antenna-cut data (XZ/YZ gain cuts, `+Z`-boresight source convention, variable
+angular step, `[-180,180]` or `[0,360)` ranges) is ingested by a dedicated pipeline documented in
+[`pattern_data.md`](pattern_data.md). That pipeline canonicalizes cuts into
+`patterndata.CanonicalPatternCut` and assembles a Phase-1 `FreeSpacePattern` with provenance
+`APPROX_FROM_CUTS` via `patterndata.CutPatternAssembler` — **without modifying this ICD's
+`AntennaPattern` contract or the Phase-1 core**. The assembled pattern is consumed by the existing
+`evaluate(frequency_Hz, az_deg, el_deg)` contract (§3.1). A 2D cut is never relabeled as true 3D
+(`MEASURED_3D`/`SIMULATED_3D`); see `pattern_data.md` §4, §11.
