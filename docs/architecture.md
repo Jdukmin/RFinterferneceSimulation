@@ -60,6 +60,21 @@ Phase-4 adds:
 plus optional `rf.RFReceiver` fields (`receiverFrontEnd`, `compressionCriterion`,
 `blockingCriterion`, `intermodulationCriterion`) and `util.Units.sumPowers_dBm` (linear power sum).
 
+Phase-5 adds:
+```
++geometry/   (extends) StructureType, GeometryFidelity, GeometryProvenance,       [Phase 5]
+             DeploymentState, LineOfSightStatus, StructureGeometry, BoxGeometry,
+             PanelGeometry, SpacecraftStructure, LineOfSight,
+             AntennaToStructureFOV (activated)                 (deps: util, antenna, interference[LobeClassifier], results)
++installed/  InstalledPatternPolicy, PatternSourceUsed,                            [Phase 5]
+             InstallationValidity, GeometryRisk,
+             InstalledPatternSelector, PatternComparison       (deps: util, antenna, results)
++interference/ (adds) InstalledEnvironmentAnalyzer            (deps: geometry, installed, results, scenario)
++results/    (extends) AntennaStructureFOVResult, LineOfSightResult,
+             InstalledEnvironmentResult, PatternComparisonResult
++scenario/   (extends) Scenario: structures + installedPatterns registries, activeConfigId
+```
+
 ### Phase-2 pattern-data pipeline (dependency direction)
 
 ```
@@ -126,6 +141,26 @@ Active TX_i --> (reused) PairwiseAnalyzer --> absolute spatial coupling (far-fie
 - Pattern-only coupling ⇒ no absolute LNA-input power ⇒ compression/blocking/IM3 withheld (the
   central invariant). Missing P1dB/IIP3/criteria ⇒ `MISSING_*`, never defaulted. dBm are summed
   only through `util.Units.sumPowers_dBm` (linear domain). Phase-3 linear results are unchanged.
+
+### Phase-5 spacecraft-geometry / installed-environment flow
+
+```
+Spacecraft geometry (structures) + antenna installation
+   -> LineOfSight (segment blockage)        [geometry evidence only]
+   -> AntennaToStructureFOV (footprint + lobe relation, TX & RX)
+   -> InstalledPatternSelector (INSTALLED / FREE_SPACE_FALLBACK, explicit)
+   -> InstalledEnvironmentAnalyzer -> InstalledEnvironmentResult
+The selected pattern flows through the UNCHANGED PairwiseAnalyzer (pattern substituted
+into the pair input); geometry alone never changes gain/coupling.
+```
+
+- **`geometry`/`installed` compute no EM loss**: blockage/intersection is geometry evidence; a
+  `BLOCKED` LOS never becomes an attenuation, an `InstalledPattern` is never derived from geometry,
+  and no scattering/reflection/diffraction/HFSS value is generated (central rule, VR-408).
+- `geometry` depends on `interference.LobeClassifier` (pattern lobe classification, not receiver
+  physics) — an acyclic downward reuse. `InstalledEnvironmentAnalyzer` adds evidence **around** the
+  engine and rewrites none of `PairwiseAnalyzer`/`RfCoexistenceAnalyzer`/`NonlinearSusceptibilityAnalyzer`.
+- Geometry risk is a **screening** label, distinct from Phase-3/4 physical margins.
 - **No package references any UI** (App Designer / figure / uicontrol) — VR-080.
 - **No package calls any external EM solver** — HFSS/CST/measured are *interfaces only*, and
   their `computeCoupling` raises `NotImplementedPhase1` — VR-081.

@@ -17,6 +17,8 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`spectrum.md`](spectrum.md) | **[Phase 3]** TX spectrum model, linear PSD, normalization, integration grids |
 | [`receiver_susceptibility.md`](receiver_susceptibility.md) | **[Phase 3]** RX filter, spectral coupling, noise, I/N, interference criterion, margin, two modes |
 | [`receiver_nonlinear.md`](receiver_nonlinear.md) | **[Phase 4]** front-end P1dB/IIP3, blocking, two-tone IM3, multi-interferer aggregation, LNA_INPUT plane |
+| [`spacecraft_geometry.md`](spacecraft_geometry.md) | **[Phase 5]** structure geometry, ray/segment intersection, antenna-to-structure FOV, LOS blockage |
+| [`installed_environment.md`](installed_environment.md) | **[Phase 5]** free-space vs installed pattern selection, comparison, config association, fallback |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 
@@ -76,3 +78,12 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **ProductType** *(Phase 4)*: `2F1_MINUS_F2`, `2F2_MINUS_F1`
 - **NonlinearValidity** *(Phase 4)*: `VALID`, `VALID_WITH_WARNINGS`, `ABSOLUTE_COUPLING_UNAVAILABLE`, `MISSING_FRONT_END`, `MISSING_P1DB`, `MISSING_IIP3`, `MISSING_BLOCKING_CRITERION`, `INCOMPLETE_INTERFERER_SET`, `NONLINEAR_MODEL_NOT_SUPPORTED`, `OUTSIDE_MODEL_DOMAIN`
 - **ReferencePlane** *(Phase 4 adds)*: `LNA_INPUT`
+- **StructureType** *(Phase 5)*: `BUS`, `PANEL`, `SOLAR_ARRAY`, `PAYLOAD`, `BOOM`, `REFLECTOR`, `ANTENNA_BODY`, `OTHER`
+- **GeometryFidelity** *(Phase 5)*: `CENTER_POINT`, `BOUNDING_VOLUME`, `VERTEX_SAMPLED`, `SURFACE_SAMPLED`, `MESH_INTERSECTION`
+- **GeometryProvenance** *(Phase 5)*: `USER_DEFINED`, `CAD_DERIVED`, `MEASURED`, `MISSION_CONFIG`, `SYNTHETIC_TEST`
+- **DeploymentState** *(Phase 5)*: `STOWED`, `DEPLOYED`, `CUSTOM`
+- **LineOfSightStatus** *(Phase 5)*: `CLEAR`, `BLOCKED`, `PARTIALLY_OCCLUDED`, `UNKNOWN`
+- **InstalledPatternPolicy** *(Phase 5)*: `PREFER_INSTALLED`, `REQUIRE_INSTALLED`
+- **PatternSourceUsed** *(Phase 5)*: `INSTALLED`, `FREE_SPACE_FALLBACK`, `NONE`
+- **InstallationValidity** *(Phase 5)*: `INSTALLED_PATTERN_AVAILABLE`, `FREE_SPACE_FALLBACK`, `INSTALLATION_EFFECT_UNKNOWN`, `REQUIRE_INSTALLED_UNAVAILABLE`, `GEOMETRY_ONLY`, `UNSUPPORTED_EM_PHYSICS`
+- **GeometryRisk** *(Phase 5)*: `NA`, `LOW`, `MODERATE`, `HIGH`

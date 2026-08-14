@@ -175,3 +175,32 @@ Synthetic (`SYNTHETIC_TEST`), analytically predictable fixtures.
   blocking needs no spectral overlap, generates no TX spurious, leaves Phase-3 semantics unchanged,
   never defaults missing hardware, explicit reference plane. *(§47)*
 - **VR-309 (SHALL)** All 371 existing Phase-1/2/3 assertions still pass unchanged. *(§48)*
+
+## 15. Spacecraft Structure & Installed Environment Verification (Phase 5)
+
+Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
+
+- **VR-400 (SHALL)** Ray intersection: hits box, misses box, tangent/boundary, origin near surface;
+  documented tolerance. *(§34)*
+- **VR-401 (SHALL)** Segment TX→RX blocked by a box; clear segment; endpoints excluded. *(§34)*
+- **VR-402 (SHALL)** FOV: structure in boresight; 90° off; behind antenna; translated/rotated
+  structure; translated/rotated antenna — deterministic. *(§33)*
+- **VR-403 (SHALL)** Angular footprint: structure center outside main region but an edge inside is
+  detected (center-point-only would miss it). *(§35)*
+- **VR-404 (SHALL)** Multiple structures; occupied-lobe set spans MAIN+SIDE where applicable. *(§19)*
+- **VR-405 (SHALL)** Installed vs free-space: correct selection, provenance preserved, config
+  association, directional delta correct, grid mismatch handled, no source mutation. *(§36)*
+- **VR-406 (SHALL)** Pattern selection: `PREFER_INSTALLED` fallback explicit; `REQUIRE_INSTALLED`
+  unavailable ⇒ result withheld; `INSTALLATION_EFFECT_UNKNOWN` on fallback. *(§39, §40, §42)*
+- **VR-407 (SHALL)** Fidelity propagation: `APPROX_FROM_CUTS` stays approximate; `SIMULATED_3D` ≠
+  `MEASURED_3D`. *(§41)*
+- **VR-408 (SHALL)** No-fake-physics guards: geometry blockage does not modify gain; intersection
+  does not create an InstalledPattern; blocked LOS ≠ infinite loss; no HFSS/scattering/reflection/
+  diffraction value generated. *(§37)*
+- **VR-409 (SHALL)** Architecture: structure geometry independent of receiver physics; geometry
+  analyzer parses no pattern files; pattern importer computes no intersections; installed selection
+  does not alter provenance; free-space fallback explicit; geometry risk ≠ physical margin; no
+  HFSS/CST dependency; Phase-1..4 result semantics unchanged. *(§50)*
+- **VR-410 (SHALL)** Installed pattern flows through the existing `PairwiseAnalyzer` (changing gain
+  via the pattern, not via geometry). *(§38, §44)*
+- **VR-411 (SHALL)** All 473 existing Phase-1..4 assertions still pass unchanged. *(§51)*

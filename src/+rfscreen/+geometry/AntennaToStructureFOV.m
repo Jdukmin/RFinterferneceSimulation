@@ -1,26 +1,91 @@
 classdef AntennaToStructureFOV
-    %ANTENNATOSTRUCTUREFOV Reserved interface for the antenna->structure FOV domain.
-    %   DISTINCT domain from AntennaToAntennaFOV (reference.md rule 5, SR-042).
-    %
-    %   This class fixes the INTERFACE only. Phase 1 does NOT implement structure
-    %   blockage / scattering; spacecraft structure geometry (STL/mesh, primitive
-    %   volumes for bus, panel, solar array, payload, reflector, boom, other
-    %   antenna) is a future extension point (reference.md R7).
-    %
-    %   No fake physics: the query method raises NotImplementedPhase1 rather than
-    %   returning an invented result (SR-120).
+    %ANTENNATOSTRUCTUREFOV Antenna-to-structure field-of-view (ACTIVATED, Phase 5).
+    %   Determines whether a structure occupies directions visible from an antenna,
+    %   with an angular footprint (vertex-sampled) and optional pattern/lobe relation.
+    %   GEOMETRY EVIDENCE ONLY: it never returns an EM gain/loss value (ICD 6, 9).
     methods (Static)
         function tf = isSupported()
-            %ISSUPPORTED Whether structure-FOV computation is available (false in Phase 1).
-            tf = false;
+            tf = true;   % activated in Phase 5
         end
 
-        function result = isStructureInFieldOfView(varargin) %#ok<STOUT,INUSD>
-            %ISSTRUCTUREINFIELDOFVIEW Reserved. Not implemented in Phase 1.
-            error('rfscreen:geometry:NotImplementedPhase1', ...
-                ['AntennaToStructureFOV is a reserved interface. Structure blockage/' ...
-                 'scattering is out of Phase-1 scope; integrate STL/primitive geometry ' ...
-                 'in a later phase.']);
+        function res = analyze(antennaId, antennaPos_B, R_BA, structure, opts)
+            %ANALYZE FOV of one structure from one antenna -> AntennaStructureFOVResult.
+            if nargin < 5 || isempty(opts); opts = struct(); end
+            rfscreen.geometry.Rotation.mustBeRotationMatrix(R_BA, 'R_BA');
+            antennaPos_B = rfscreen.util.Validate.vector3(antennaPos_B, 'antennaPos_B');
+            DC = rfscreen.geometry.DirectionCalculator;
+
+            samples = [structure.centroidBody(), structure.verticesBody()];  % 3 x (1+N)
+            nS = size(samples, 2);
+            az = zeros(1, nS); el = zeros(1, nS); dist = zeros(1, nS); off = zeros(1, nS);
+            unitA = zeros(3, nS);
+            warnings = {};
+            for k = 1:nS
+                dvec = samples(:, k) - antennaPos_B;
+                dist(k) = norm(dvec);
+                if dist(k) <= eps
+                    az(k) = NaN; el(k) = NaN; off(k) = NaN; unitA(:, k) = NaN; continue;
+                end
+                u_B = dvec / dist(k);
+                u_A = R_BA.' * u_B;
+                unitA(:, k) = u_A;
+                [az(k), el(k)] = DC.directionToAzEl(u_A);
+                off(k) = DC.offBoresightAngle(az(k), el(k));
+            end
+
+            s = struct();
+            s.antennaId = antennaId;
+            s.structureId = structure.id;
+            s.structureType = structure.structureType;
+            s.closestDistance_m = min(dist);
+            s.centerAz_deg = az(1); s.centerEl_deg = el(1); s.centerOffBoresight_deg = off(1);
+            valid = ~isnan(az);
+            s.minAz_deg = min(az(valid)); s.maxAz_deg = max(az(valid));
+            s.minEl_deg = min(el(valid)); s.maxEl_deg = max(el(valid));
+            % max angular radius: separation between centroid direction and each sample
+            uc = unitA(:, 1); maxrad = 0;
+            for k = 2:nS
+                if any(isnan(unitA(:, k))); continue; end
+                c = max(min(dot(uc, unitA(:, k)), 1), -1);
+                maxrad = max(maxrad, acosd(c));
+            end
+            s.maxAngularRadius_deg = maxrad;
+            s.geometryFidelity = rfscreen.geometry.GeometryFidelity.VERTEX_SAMPLED;
+
+            % center ray intersects the structure?
+            if dist(1) > eps
+                s.centerRayHits = structure.rayIntersectBody(antennaPos_B, samples(:, 1) - antennaPos_B);
+            else
+                s.centerRayHits = false;
+            end
+
+            % pattern/lobe relation (optional)
+            pattern = rfscreen.geometry.AntennaToStructureFOV.opt(opts, 'pattern', []);
+            freq = rfscreen.geometry.AntennaToStructureFOV.opt(opts, 'frequency_Hz', NaN);
+            lobePolicy = rfscreen.geometry.AntennaToStructureFOV.opt(opts, 'lobePolicy', []);
+            if ~isempty(pattern) && isfinite(freq)
+                lobes = {};
+                for k = 1:nS
+                    if isnan(az(k)); continue; end
+                    lc = rfscreen.interference.LobeClassifier.classify(pattern, freq, az(k), el(k), lobePolicy);
+                    if ~any(strcmp(lobes, lc)); lobes{end+1} = lc; end %#ok<AGROW>
+                end
+                s.occupiedLobes = lobes;
+                s.centerLobe = rfscreen.interference.LobeClassifier.classify(pattern, freq, az(1), el(1), lobePolicy);
+                s.validity = 'FOV_WITH_PATTERN';
+            else
+                s.occupiedLobes = {};
+                s.centerLobe = '';
+                s.validity = 'GEOMETRY_ONLY';
+                warnings{end+1} = 'no pattern supplied: FOV lobe classification unavailable (geometry evidence only)';
+            end
+            s.warnings = warnings;
+            res = rfscreen.results.AntennaStructureFOVResult(s);
+        end
+    end
+    methods (Static, Access = private)
+        function v = opt(s, name, default)
+            if isstruct(s) && isfield(s, name) && ~isempty(s.(name)); v = s.(name); else; v = default; end
         end
     end
 end

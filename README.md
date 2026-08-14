@@ -33,10 +33,32 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > `LNA_INPUT` plane and produced **only** with valid absolute coupling evidence. See
 > `docs/icd/receiver_nonlinear.md`.
 >
-> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, **transmitter**
-> nonlinearities (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC
-> saturation** plus any UI remain **deferred to Phase 5+** (see `docs/traceability.md` and ICD
-> extension points).
+> **Phase 5 (complete).** Spacecraft **structure geometry & installed-antenna environment**
+> (`+geometry`, `+installed`): deterministic structure primitives, ray/segment intersection,
+> antenna-to-structure FOV with angular footprint, antenna-to-antenna LOS blockage, and free-space
+> vs installed-pattern selection/comparison — all **geometry evidence only** (geometry never
+> manufactures EM behavior). See `docs/icd/spacecraft_geometry.md`,
+> `docs/icd/installed_environment.md`.
+>
+> HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
+> (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI
+> remain **deferred to Phase 6+** (see `docs/traceability.md` and ICD extension points).
+
+## Phase 5 — spacecraft structure & installed environment at a glance
+
+- **Central rule.** Geometry provides installation-risk **evidence**; it never manufactures
+  electromagnetic behavior. A structure in the FOV or a blocked line-of-sight does **not** imply a
+  gain loss, reflection, or diffraction value.
+- **Structure geometry.** `SpacecraftStructure` with box/panel primitives placed by `R_BS`
+  (structure→body); deterministic ray/segment intersection.
+- **Antenna-to-structure FOV.** Vertex-sampled **angular footprint** (not center-point only) and,
+  with a pattern, the set of lobe regions occupied (MAIN/SIDE/BACK).
+- **LOS blockage.** `CLEAR`/`BLOCKED` for TX and RX symmetrically — but `BLOCKED` never auto-applies
+  attenuation.
+- **Installed vs free-space.** `PREFER_INSTALLED` (explicit free-space fallback →
+  `INSTALLATION_EFFECT_UNKNOWN`) / `REQUIRE_INSTALLED`; provenance/fidelity preserved; the selected
+  pattern flows through the **unchanged** Phase-1 engine (installation changes gain only via the
+  pattern, never via geometry).
 
 ## Phase 4 — receiver nonlinear at a glance
 
@@ -96,6 +118,7 @@ src/+rfscreen/                 Core engine (MATLAB packages)
   +patterndata                 [Phase 2] external 2D-cut ingestion & canonicalization
   +spectrum +receiver          [Phase 3] TX spectrum, RX filter/noise/criterion, susceptibility
   +nonlinear                   [Phase 4] compression, blocking, IM3, multi-interferer aggregation
+  +geometry(struct) +installed [Phase 5] structure geometry/FOV/LOS, installed-pattern selection
 tests/                         Deterministic test suite + portable harness
 examples/demo_screening.m      Console demo (synthetic data only, no UI)
 setup_paths.m                  Adds src/ to the path
@@ -130,14 +153,15 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **473 deterministic assertions across 29 test files, all passing** (131 Phase-1 +
-114 Phase-2 + 126 Phase-3 + 102 Phase-4), under **GNU Octave 8.4** (MATLAB not available in this
-environment, so MATLAB execution is not claimed). Covers geometry, pattern interpolation, pairwise
-screening, the Phase-2 ingestion pipeline, the Phase-3 linear RF chain (spectrum/filter/noise/I-N/
-margin), and the Phase-4 nonlinear chain: linear-domain aggregate power, P1dB compression margin,
-blocking (in-band, out-of-band, tabulated, no-overlap), two-tone IM3 frequencies/power/third-order
-scaling, multi-interferer scenario enumeration, validity honesty (no nonlinear result without
-absolute evidence or hardware data), and Phase-4 architecture boundaries.
+Current status: **579 deterministic assertions across 35 test files, all passing** (131 Phase-1 +
+114 Phase-2 + 126 Phase-3 + 102 Phase-4 + 106 Phase-5), under **GNU Octave 8.4** (MATLAB not
+available in this environment, so MATLAB execution is not claimed). Covers pairwise screening, the
+Phase-2 ingestion pipeline, the Phase-3 linear RF chain, the Phase-4 nonlinear chain, and the
+Phase-5 spacecraft-geometry / installed-environment layer: ray/segment intersection (hit/miss/
+tangent/boundary), antenna-to-structure FOV with angular footprint (center-outside-edge-inside),
+TX→RX LOS blockage (clear/blocked, endpoints excluded), installed-vs-free-space pattern selection
+and comparison, fidelity/provenance propagation, and no-fake-physics guards (geometry never changes
+gain; blocked LOS is not attenuation; no installed pattern derived from geometry).
 
 ## Quick demo
 

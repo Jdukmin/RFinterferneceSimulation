@@ -238,3 +238,58 @@ authoritative nonlinear result; no nonlinear hardware data ⇒ unsupported, neve
 - **SR-316 (SHALL)** Phase-3 linear result semantics shall remain unchanged; nonlinear results shall
   be separate objects. TX nonlinear generation, mixer spur tables, and ADC saturation remain
   deferred. *(§38, §41, §42, §43)*
+
+## 16. Spacecraft Structure FOV & Installed Antenna Environment (Phase 5)
+
+Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`. **Central rule:
+geometry provides installation-risk evidence; it never manufactures electromagnetic behavior.**
+
+- **SR-400 (SHALL)** The system shall add deterministic spacecraft-structure geometry and
+  installed-antenna evidence so free-space vs spacecraft-installed behavior can be distinguished,
+  **without** implementing a full-wave EM solver. *(Phase-5 §0)*
+- **SR-401 (SHALL)** Geometric FOV obstruction, line-of-sight blockage, and structure intersection
+  shall each remain **distinct** from EM scattering result, known gain degradation, and known
+  installed pattern respectively. *(§3)*
+- **SR-402 (SHALL)** The system shall never manufacture EM degradation (loss/reflection/diffraction/
+  scattering) from geometry alone. *(§3, §37, §44)*
+- **SR-403 (SHALL)** `FreeSpacePattern` and `InstalledPattern` shall remain distinct; an
+  `InstalledPattern` shall not be derived because a structure intersects the FOV. *(§4, §24)*
+- **SR-404 (SHALL)** Installed patterns shall carry explicit provenance/source and optional
+  metadata (antenna, configuration, frequency, analysis id, coordinate convention, transform,
+  version); unknown values stay unknown. *(§5)*
+- **SR-405 (SHALL)** Installed patterns shall be associable by **(antenna, configuration,
+  frequency)**; a single fixed antenna→pattern binding shall not be assumed. *(§6, §29, §30)*
+- **SR-406 (SHALL)** A `SpacecraftStructure` domain with id/name/type/geometry/body-frame
+  transform/config-state/provenance shall exist; algorithms shall not depend strongly on the type
+  enum. *(§7)*
+- **SR-407 (SHALL)** Deterministic primitive geometry (box, rectangular panel) shall be supported;
+  no general CAD kernel; mesh/STL is a reserved extension. *(§8, §9)*
+- **SR-408 (SHALL)** Structure geometry shall transform deterministically into the body frame via a
+  documented `R_BS` (structure→body); no conflicting rotation convention. *(§10)*
+- **SR-409 (SHALL)** The reserved `AntennaToStructureFOV` domain shall be activated: determine
+  whether a structure occupies directions visible from the antenna, with the pattern as primary
+  evidence and configurable lobe regions (no universal hard-coded cone). *(§11, §12)*
+- **SR-410 (SHALL)** Structure angular footprint shall be represented beyond center-point (vertex/
+  surface sampling) to avoid center-only false negatives; geometry fidelity shall be explicit. *(§13, §14)*
+- **SR-411 (SHALL)** Deterministic ray/segment intersection shall be implemented, separating ray
+  intersection from EM attenuation. *(§15)*
+- **SR-412 (SHALL)** Antenna-to-antenna direct LOS blockage evidence (`CLEAR`/`BLOCKED`/
+  `PARTIALLY_OCCLUDED`/`UNKNOWN`) shall be supported for TX and RX symmetrically; `BLOCKED` shall
+  not auto-apply attenuation. *(§16, §26, §44)*
+- **SR-413 (SHALL)** A deterministic pattern-selection policy (`PREFER_INSTALLED`,
+  `REQUIRE_INSTALLED`) with **explicit** free-space fallback and `PatternSourceUsed` metadata shall
+  exist; fallback shall not be silent. *(§39, §40)*
+- **SR-414 (SHALL)** Missing installed evidence shall propagate `INSTALLATION_EFFECT_UNKNOWN` (not
+  ordinary `VALID`); pattern fidelity shall propagate and never upgrade. *(§41, §42)*
+- **SR-415 (SHALL)** Deterministic free-space vs installed pattern comparison shall be supported
+  over an explicit comparison grid without mutating either source. *(§21, §22)*
+- **SR-416 (SHALL)** Installed patterns shall be ingested via the existing Phase-2 pipeline; no
+  separate installed-pattern parser. *(§23)*
+- **SR-417 (SHALL)** A geometry-risk screening layer may exist but shall remain **separate** from
+  physical RF interference margins. *(§25)*
+- **SR-418 (SHALL)** Phase-5 shall integrate by adding evidence around the existing engine; it shall
+  not rewrite `PairwiseAnalyzer`/`RfCoexistenceAnalyzer`/`NonlinearSusceptibilityAnalyzer`. *(§38)*
+- **SR-419 (SHALL)** No HFSS/CST dependency and no fake scattering/reflection/diffraction shall be
+  introduced; full-wave/measured-S21 adapters remain reserved (Phase 6). *(§45, §46, §50)*
+- **SR-420 (SHALL)** Structure geometry shall carry provenance; synthetic test geometry shall not be
+  presented as flight configuration. *(§31, §32)*

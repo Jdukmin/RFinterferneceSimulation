@@ -186,3 +186,32 @@ Normative detail: ICD `receiver_nonlinear.md`.
   `intermodulationCriterion` shall be optional; absence preserves Phase-1/2/3 behavior. *(§39)*
 - **DR-307 (SHALL)** No fake nonlinear hardware values (P1dB, IIP3, blocking threshold, gain, IM3
   criterion) for production/reference use; test fixtures marked `SYNTHETIC_TEST`. *(§29, §30)*
+
+## 13. Spacecraft Structure & Installed Environment Data (Phase 5)
+
+Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
+
+- **DR-400 (SHALL)** `SpacecraftStructure` fields: `id`, `name`, `structureType`, `geometry`,
+  `R_BS`, `origin_m`, `configId`, `deploymentState`, `active`, `provenance`. *(§7)*
+- **DR-401 (SHALL)** `StructureType` ∈ {BUS,PANEL,SOLAR_ARRAY,PAYLOAD,BOOM,REFLECTOR,ANTENNA_BODY,
+  OTHER}; `GeometryFidelity` ∈ {CENTER_POINT,BOUNDING_VOLUME,VERTEX_SAMPLED,SURFACE_SAMPLED,
+  MESH_INTERSECTION}; `GeometryProvenance` ∈ {USER_DEFINED,CAD_DERIVED,MEASURED,MISSION_CONFIG,
+  SYNTHETIC_TEST}; `DeploymentState` ∈ {STOWED,DEPLOYED,CUSTOM}; `LineOfSightStatus` ∈
+  {CLEAR,BLOCKED,PARTIALLY_OCCLUDED,UNKNOWN}. *(§7, §14, §16, §31)*
+- **DR-402 (SHALL)** Primitive geometry: `BoxGeometry(halfSizes_m)`, `PanelGeometry(width_m,
+  height_m)` in the structure local frame. *(§8)*
+- **DR-403 (SHALL)** `results.AntennaStructureFOVResult`, `results.LineOfSightResult`,
+  `results.InstalledEnvironmentResult`, `results.PatternComparisonResult` per the ICDs; unknowns
+  explicit; existing az/el convention. *(§17, §18)*
+- **DR-404 (SHALL)** Installed-pattern registry keyed by `(antennaId, configId)`;
+  `configId=''` = configuration-independent. *(§6)*
+- **DR-405 (SHALL)** `installed.InstalledPatternPolicy` ∈ {PREFER_INSTALLED,REQUIRE_INSTALLED};
+  `PatternSourceUsed` ∈ {INSTALLED,FREE_SPACE_FALLBACK,NONE}; `InstallationValidity` ∈
+  {INSTALLED_PATTERN_AVAILABLE,FREE_SPACE_FALLBACK,INSTALLATION_EFFECT_UNKNOWN,
+  REQUIRE_INSTALLED_UNAVAILABLE,GEOMETRY_ONLY,UNSUPPORTED_EM_PHYSICS}; `GeometryRisk` ∈
+  {NA,LOW,MODERATE,HIGH}. *(§39, §40, §42, §25)*
+- **DR-406 (SHALL)** Installed-pattern fidelity/provenance propagate unchanged; no upgrade. *(§41)*
+- **DR-407 (SHALL)** Synthetic geometry/pattern fixtures marked `SYNTHETIC_TEST`; not presented as
+  flight data. *(§31, §32)*
+- **DR-408 (SHALL)** `Scenario` gains optional structure and installed-pattern registries; absence
+  preserves Phase-1..4 behavior. *(§29)*

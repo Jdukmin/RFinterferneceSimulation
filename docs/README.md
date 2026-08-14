@@ -23,7 +23,11 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
   `icd/receiver_susceptibility.md`).
 - **Phase 4 (complete):** receiver front-end nonlinear susceptibility — P1dB compression,
   blocking, two-tone IM3, and multi-interferer aggregation at the `LNA_INPUT` plane
-  (`icd/receiver_nonlinear.md`). TX nonlinearities, mixer spurs, and ADC saturation deferred to
-  Phase 5+.
+  (`icd/receiver_nonlinear.md`).
+- **Phase 5 (complete):** spacecraft structure geometry & installed-antenna environment —
+  structure primitives, ray/segment intersection, antenna-to-structure FOV, LOS blockage, and
+  free-space vs installed-pattern selection/comparison (`icd/spacecraft_geometry.md`,
+  `icd/installed_environment.md`). Geometry is evidence only; full-wave/measured-S21 and TX/mixer/
+  ADC effects deferred to Phase 6+.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.

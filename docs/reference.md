@@ -195,6 +195,29 @@ allowable blocker power that generally varies with frequency offset.
 *(Realized by `+receiver` (front-end + criteria) and `+nonlinear` (analyzers); see
 `docs/icd/receiver_nonlinear.md`.)*
 
+## R13. Spacecraft structure FOV & installed-antenna environment (Phase 5)
+
+**What it stands for.** The spacecraft-structure FOV / installed-antenna research themes (R7, and
+the KARI / Im Won-gyu installed S-band-antenna studies in R5): an antenna's realized behavior
+depends on its spacecraft-installed environment — nearby structure in the field of view, blockage,
+and installed-vs-free-space pattern differences (gain, and — where measured — axial-ratio /
+polarization). These are established by **installed pattern / full-wave / measurement** evidence,
+not by geometry alone.
+
+**Architecture implication (Phase 5).**
+- **Geometry provides installation-risk evidence; it never manufactures EM behavior.** A structure
+  in an antenna's FOV, or a blocked line-of-sight, is deterministic *geometric* evidence — it does
+  **not** imply a specific gain loss, isolation, reflection, or diffraction value.
+- Free-space and installed patterns stay distinct; an installed pattern is used only when supplied
+  (with its provenance/fidelity preserved), never derived from a structure intersection.
+- The screening chain becomes *free-space behavior → spacecraft installation/environment → installed
+  behavior*, but **MATLAB geometry screening ≠ full-wave EM solution** — full-wave/measured evidence
+  and solver integration are Phase 6.
+
+*(Realized by `+geometry` (structures, FOV, LOS), `+installed` (selection, comparison), and
+`interference.InstalledEnvironmentAnalyzer`; see `docs/icd/spacecraft_geometry.md`,
+`docs/icd/installed_environment.md`. Consistent with the KARI installed-antenna themes in R5.)*
+
 ## Cross-cutting architecture implications (binding for Phase 1)
 
 The references above converge on a small set of non-negotiable structural rules. These are the

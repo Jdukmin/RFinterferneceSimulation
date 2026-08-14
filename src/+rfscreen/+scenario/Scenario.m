@@ -12,6 +12,9 @@ classdef Scenario < handle
         activeTxIds      % cellstr or {} (=> all)
         activeRxIds      % cellstr or {} (=> all)
         operatingModeId
+        structures       % containers.Map id -> geometry.SpacecraftStructure (Phase 5)
+        installedPatterns% containers.Map 'antennaId|configId' -> antenna.InstalledPattern (Phase 5)
+        activeConfigId   % selected configuration id (Phase 5); '' = default
     end
 
     methods
@@ -25,6 +28,47 @@ classdef Scenario < handle
             obj.activeTxIds = {};
             obj.activeRxIds = {};
             obj.operatingModeId = '';
+            obj.structures        = containers.Map('KeyType', 'char', 'ValueType', 'any');
+            obj.installedPatterns = containers.Map('KeyType', 'char', 'ValueType', 'any');
+            obj.activeConfigId = '';
+        end
+
+        function addStructure(obj, st)
+            %ADDSTRUCTURE Register a spacecraft structure (Phase 5).
+            rfscreen.scenario.Scenario.requireType(st, 'rfscreen.geometry.SpacecraftStructure', 'structure');
+            obj.putUnique(obj.structures, st.id, st, 'structure');
+        end
+
+        function addInstalledPattern(obj, antennaId, configId, p)
+            %ADDINSTALLEDPATTERN Register an installed pattern for (antennaId, configId) (Phase 5).
+            rfscreen.scenario.Scenario.requireType(p, 'rfscreen.antenna.InstalledPattern', 'installedPattern');
+            key = rfscreen.scenario.Scenario.installedKey(antennaId, configId);
+            obj.putUnique(obj.installedPatterns, key, p, 'installedPattern');
+        end
+
+        function p = getInstalledPattern(obj, antennaId, configId)
+            %GETINSTALLEDPATTERN Installed pattern for (antennaId, configId) or [] if none.
+            key = rfscreen.scenario.Scenario.installedKey(antennaId, configId);
+            if obj.installedPatterns.isKey(key)
+                p = obj.installedPatterns(key);
+            else
+                p = [];
+            end
+        end
+
+        function list = activeStructures(obj)
+            %ACTIVESTRUCTURES Cell array of structures active in the current configuration.
+            list = {};
+            keys = obj.structures.keys();
+            for i = 1:numel(keys)
+                st = obj.structures(keys{i});
+                if ~st.active; continue; end
+                if ~isempty(st.configId) && ~isempty(obj.activeConfigId) ...
+                        && ~strcmp(st.configId, obj.activeConfigId)
+                    continue;   % belongs to a different configuration
+                end
+                list{end+1} = st; %#ok<AGROW>
+            end
         end
 
         function addPattern(obj, patternId, p)
@@ -120,6 +164,10 @@ classdef Scenario < handle
     end
 
     methods (Static, Access = private)
+        function key = installedKey(antennaId, configId)
+            if nargin < 2 || isempty(configId); configId = ''; end
+            key = [rfscreen.util.Validate.id(antennaId, 'antennaId') '|' configId];
+        end
         function requireType(obj, cls, kind)
             if ~isa(obj, cls)
                 error('rfscreen:scenario:badType', '%s must be a %s.', kind, cls);

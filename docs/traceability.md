@@ -313,3 +313,76 @@ spurs, and ADC saturation are not generated.
 
 Octave 8.4: **PASS** — **473 assertions, 29 files** (`tests/run_all_tests.m`), the exact `src/`
 code executed. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).
+
+---
+
+# Phase 5 — Spacecraft Structure FOV & Installed Antenna Environment Reconciliation
+
+Phase 5 adds `+geometry` structure classes (activating `AntennaToStructureFOV`), `+installed`,
+`interference.InstalledEnvironmentAnalyzer`, `+results` geometry/installed result objects, and
+`Scenario` structure/installed-pattern registries — **without changing** Phase-1..4 physics. All
+473 prior assertions still pass (regression, VR-411); full suite is now **579 assertions across 35
+files, all passing**.
+
+> One Phase-1 assertion was *updated* during reconciliation: `test_invalid_inputs` previously
+> asserted `AntennaToStructureFOV` was a reserved stub that throws `NotImplementedPhase1`. Phase 5
+> **activates** it (Task §11), so the assertion now confirms `isSupported()` is true. Documented
+> intentional evolution, not a defect (like the Phase-4 narrowing).
+
+## P5.1 Requirement → Code → Test map
+
+| Req | Code (src/+rfscreen/…) | Test (tests/…) |
+|-----|------------------------|----------------|
+| SR-400/§0 (structure geometry layer) | `+geometry` structures, `+installed` | all Phase-5 tests |
+| SR-401/402/§3/§37 (geometry ≠ EM) | geometry evidence carries no gain/loss | test_phase5_architecture |
+| SR-403/§4/§24 (free≠installed; not derived) | `FreeSpacePattern`/`InstalledPattern`; selector | test_installed_pattern, test_phase5_architecture |
+| SR-404/§5 (installed provenance/metadata) | `InstalledPattern`, selector propagation | test_installed_pattern |
+| SR-405/§6/§29 (config association) | `Scenario.addInstalledPattern`/`getInstalledPattern` | test_installed_pattern, test_installed_environment_integration |
+| SR-406/§7 (SpacecraftStructure) | `geometry/SpacecraftStructure`, `StructureType` | test_ray_intersection, test_structure_fov |
+| SR-407/§8 (primitives) | `BoxGeometry`, `PanelGeometry` | test_ray_intersection |
+| SR-408/§10 (R_BS transform) | `SpacecraftStructure` transforms | test_structure_fov, test_los_blockage |
+| SR-409/§11/§12 (FOV activated, pattern primary) | `AntennaToStructureFOV.analyze` | test_structure_fov |
+| SR-410/§13/§14 (footprint, fidelity) | vertex-sampled footprint + `GeometryFidelity` | test_structure_fov (VR-403) |
+| SR-411/§15 (ray/segment) | `BoxGeometry`/`PanelGeometry.rayIntersectLocal`, `LineOfSight` | test_ray_intersection, test_los_blockage |
+| SR-412/§16/§26/§44 (LOS blockage, symmetric, no auto-loss) | `LineOfSight.segment`, TX+RX FOV | test_los_blockage, test_installed_environment_integration |
+| SR-413/§39/§40 (selection policy + explicit fallback) | `InstalledPatternSelector`, `InstalledPatternPolicy` | test_installed_pattern |
+| SR-414/§41/§42 (INSTALLATION_EFFECT_UNKNOWN; fidelity propagates) | selector validity/provenance | test_installed_pattern (VR-406/407) |
+| SR-415/§21/§22 (comparison, no mutation) | `PatternComparison` | test_installed_pattern |
+| SR-416/§23 (reuse Phase-2 ingestion) | installed patterns are Phase-1/2 `InstalledPattern` | (design; ICD §2) |
+| SR-417/§25 (geometry risk ≠ physical margin) | `GeometryRisk` distinct | test_phase5_architecture |
+| SR-418/§38 (evidence around engine) | `InstalledEnvironmentAnalyzer`; pattern via existing `PairwiseAnalyzer` | test_installed_environment_integration (VR-410) |
+| SR-419/§45/§46/§50 (no HFSS/CST/fake EM) | absence; guards | test_phase5_architecture (VR-408) |
+| SR-420/§31/§32 (geometry provenance) | `GeometryProvenance`; `SYNTHETIC_TEST` fixtures | all Phase-5 tests |
+| VR-400…VR-411 | see tests/ | test_ray_intersection … test_phase5_architecture |
+
+## P5.2 Canonical decisions (Phase 5)
+
+1. **Frames.** Structure local S → body via `v_B = R_BS·v_S + origin_m`; ray transformed by the
+   inverse; unit direction ⇒ `tHit` in meters.
+2. **Primitives.** `BoxGeometry` (slab method) and `PanelGeometry` (ray-plane + in-bounds);
+   origin-inside returns the exit distance; on-surface returns `t=0`.
+3. **Segment blockage.** Endpoints excluded (`tolEps < tHit < L − tolEps`) so mount points do not
+   self-block; `CLEAR`/`BLOCKED` (geometry only).
+4. **FOV footprint.** Centroid + vertices (`VERTEX_SAMPLED`); `occupiedLobes` is the **set** of
+   regions spanned via the existing `LobeClassifier` — center-outside-but-edge-inside is detected.
+5. **Central rule.** Geometry never changes gain/coupling; a blocked LOS is never an attenuation;
+   an `InstalledPattern` is never derived from geometry; no scattering/reflection/diffraction/HFSS
+   value is generated.
+6. **Pattern selection.** `PREFER_INSTALLED` (explicit free-space fallback →
+   `INSTALLATION_EFFECT_UNKNOWN`) / `REQUIRE_INSTALLED` (withheld if absent); provenance/fidelity
+   propagate, never upgraded.
+7. **Reuse.** The selected pattern flows through the **unchanged** `PairwiseAnalyzer`; installation
+   effects change gain only via the pattern, never via geometry.
+
+## P5.3 No-fake-physics audit (Task §37, §50)
+
+`+geometry`/`+installed` contain no EM-loss computation, no `InstalledPattern` construction from
+geometry, no HFSS/CST solver execution, and no reflection/diffraction/scattering value; geometry
+result objects carry no gain/loss/margin field; `GeometryRisk` is a screening label distinct from
+physical margins. All verified in `test_phase5_architecture`. Full-wave/measured-S21 adapters remain
+reserved (Phase 6).
+
+## P5.4 Verification result
+
+Octave 8.4: **PASS** — **579 assertions, 35 files** (`tests/run_all_tests.m`), the exact `src/`
+code executed. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).

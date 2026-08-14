@@ -51,8 +51,18 @@ cd tests; ok = run_all_tests();
 | `test_nonlinear_scenario` | 2/3 TX→1 RX, multiple RX, inactive/wanted excluded, no self/duplicate IM3 pairs |
 | `test_phase4_architecture` | no file-parse/geometry/UI; reuses PairwiseAnalyzer; no dBm sum; no TX-spurious; Phase-3 unchanged |
 
+**Phase 5 (spacecraft structure & installed environment):**
+| File | Covers |
+|------|--------|
+| `test_ray_intersection` | box/panel hit/miss/tangent/boundary/on-surface/inside; rotated structure |
+| `test_structure_fov` | boresight/90°/behind, translated/rotated; angular footprint (center-outside-edge-inside) |
+| `test_los_blockage` | TX→RX clear/blocked; endpoints excluded; beyond/behind; inactive ignored; zero-length |
+| `test_installed_pattern` | selection (prefer/require), explicit fallback, provenance/fidelity, comparison, config association |
+| `test_installed_environment_integration` | LOS+FOV+source evidence; installed pattern via existing PairwiseAnalyzer; geometry ≠ gain change |
+| `test_phase5_architecture` | no file-parse/receiver-physics/EM-loss/solver; no InstalledPattern from geometry; geometry risk ≠ margin |
+
 ## Status
 
-**473 assertions across 29 files, all passing** (131 Phase-1 + 114 Phase-2 + 126 Phase-3 + 102
-Phase-4) under GNU Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not
-claimed.
+**579 assertions across 35 files, all passing** (131 Phase-1 + 114 Phase-2 + 126 Phase-3 + 102
+Phase-4 + 106 Phase-5) under GNU Octave 8.4. MATLAB is not available in this environment; MATLAB
+execution is not claimed.

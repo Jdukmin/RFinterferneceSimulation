@@ -21,6 +21,8 @@ blocks, no `import`), so the same code runs under MATLAB R2019b+ and Octave 6+.
 | **`+spectrum`** *(Phase 3)* | `SpectrumModel`, `RectangularSpectrum`, `TabulatedSpectrum` (linear PSD W/Hz), `SpectrumProvenance` |
 | **`+receiver`** *(Phase 3, extended Phase 4)* | Filters, noise, `InterferenceCriterion`, susceptibility (P3); plus `ReceiverFrontEnd`, `CompressionCriterion`/`BlockingCriterion`/`IntermodulationCriterion`, `NonlinearValidity`, `ProductType`, `FrontEndProvenance`, `ReferencePlane.LNA_INPUT` (P4) |
 | **`+nonlinear`** *(Phase 4)* | `InterfererAggregator`, `CompressionAnalyzer`, `BlockingAnalyzer`, `IntermodulationAnalyzer`, `NonlinearSusceptibilityAnalyzer` |
+| **`+geometry`** *(Phase 5 adds)* | `SpacecraftStructure`, `BoxGeometry`/`PanelGeometry`, `LineOfSight`, `AntennaToStructureFOV` (activated), structure enums |
+| **`+installed`** *(Phase 5)* | `InstalledPatternSelector`, `PatternComparison`, `InstalledPatternPolicy`/`PatternSourceUsed`/`InstallationValidity`/`GeometryRisk` |
 
 ## `+spectrum` / `+receiver` (Phase 3 — linear RF coexistence)
 
@@ -67,6 +69,26 @@ rx   = rfscreen.rf.RFReceiver('RX1','AR',2.41e9,20e6, struct('receiverFrontEnd',
 nl = rfscreen.nonlinear.NonlinearSusceptibilityAnalyzer.analyze(scenario, 'RX1', ...
          rfscreen.config.AnalysisConfig(struct('couplingModel','FAR_FIELD')), struct());
 nl.compression.compressionMargin_dB   % P1dB margin ; nl.blocking ; nl.im3{...}
+```
+
+## `+geometry` (structures) / `+installed` (Phase 5 — installed environment)
+
+Deterministic spacecraft-structure geometry (box/panel primitives, `R_BS` placement), ray/segment
+intersection, antenna-to-structure FOV (vertex-sampled angular footprint + lobe relation), and
+antenna-to-antenna LOS blockage — **geometry evidence only**. `+installed` selects free-space vs
+installed patterns (`PREFER_INSTALLED`/`REQUIRE_INSTALLED`, explicit fallback) and compares them.
+`interference.InstalledEnvironmentAnalyzer` adds this evidence **around** the unchanged engine; the
+selected pattern flows through the existing `PairwiseAnalyzer`. Geometry never changes gain/coupling,
+never derives an `InstalledPattern`, and generates no scattering/reflection/diffraction/HFSS value.
+Contracts: `docs/icd/spacecraft_geometry.md`, `docs/icd/installed_environment.md`.
+
+```matlab
+box = rfscreen.geometry.BoxGeometry([0.5;0.5;0.5]);
+st  = rfscreen.geometry.SpacecraftStructure('BUS','bus','BUS', box, eye(3), [10;0;0], ...
+          struct('provenance','SYNTHETIC_TEST'));
+fov = rfscreen.geometry.AntennaToStructureFOV.analyze('ANT',[0;0;0],eye(3), st, struct());
+los = rfscreen.geometry.LineOfSight.segment('AT','AR',[0;0;0],[10;0;0], {st});   % CLEAR/BLOCKED
+env = rfscreen.interference.InstalledEnvironmentAnalyzer.analyzePair(scenario,'TX1','RX1',struct());
 ```
 
 ## `+patterndata` (Phase 2)

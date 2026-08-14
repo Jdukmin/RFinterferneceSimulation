@@ -197,3 +197,27 @@ Normative detail: ICD `receiver_nonlinear.md`.
 - **AR-310 (SHALL)** Scenario nonlinear analysis reuses Phase-1 pairwise; interferers = active TX
   excluding self and optional wanted. *(§24, §25, §27)*
 - **AR-311 (SHALL)** Nonlinear analysis shall compute no geometry and parse no files. *(§47)*
+
+## 14. Spacecraft Structure & Installed Environment Analysis (Phase 5)
+
+Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
+
+- **AR-400 (SHALL)** Structure→body transform `v_B = R_BS·v_S + origin_B`; inverse for ray
+  transforms; deterministic. *(§10)*
+- **AR-401 (SHALL)** Box intersection by the slab method; panel by ray-plane + in-bounds; unit
+  direction ⇒ `tHit` in meters. *(§15)*
+- **AR-402 (SHALL)** Segment TX→RX blocked iff a structure is hit with `tolEps < tHit < L − tolEps`
+  (endpoints excluded); tolerance documented. *(§16, §34)*
+- **AR-403 (SHALL)** FOV: sample centroid + vertices; per sample `dir_A = R_BA'·unit(p−antPos)` →
+  az/el; footprint = min/max az/el + `maxAngularRadius`; center-outside-but-edge-inside detected. *(§13, §35)*
+- **AR-404 (SHALL)** Lobe relation via the existing `LobeClassifier`; `occupiedLobes` = set of
+  regions spanned; no pattern ⇒ FOV classification unavailable, geometry still valid. *(§12, §19, §20)*
+- **AR-405 (SHALL)** Pattern selection deterministic per policy; explicit fallback + `PatternSourceUsed`. *(§39, §40)*
+- **AR-406 (SHALL)** Comparison metrics (`peakGainDifference`, `maxAbsDifference`, `rmsDifference`,
+  `directionDelta`) over an explicit grid; sources not mutated; only well-defined metrics computed. *(§21, §22)*
+- **AR-407 (SHALL)** Installed pattern flows through the **existing** `PairwiseAnalyzer` (pattern
+  substituted into the pair input); geometry never changes gain/coupling. *(§38, §44)*
+- **AR-408 (SHALL)** Structure-FOV computed symmetrically for TX and RX. *(§26)*
+- **AR-409 (SHALL)** Geometry risk is a screening heuristic, separate from physical margins. *(§25)*
+- **AR-410 (SHALL)** Geometry/installed analysis parses no pattern files beyond the reused Phase-2
+  importer and depends on no receiver-physics/HFSS/CST. *(§50)*
