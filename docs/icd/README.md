@@ -16,6 +16,7 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`pattern_data.md`](pattern_data.md) | **[Phase 2]** external 2D-cut ingestion, canonicalization, validation, `CutPatternAssembler` |
 | [`spectrum.md`](spectrum.md) | **[Phase 3]** TX spectrum model, linear PSD, normalization, integration grids |
 | [`receiver_susceptibility.md`](receiver_susceptibility.md) | **[Phase 3]** RX filter, spectral coupling, noise, I/N, interference criterion, margin, two modes |
+| [`receiver_nonlinear.md`](receiver_nonlinear.md) | **[Phase 4]** front-end P1dB/IIP3, blocking, two-tone IM3, multi-interferer aggregation, LNA_INPUT plane |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 
@@ -71,3 +72,7 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **ReferencePlane** *(Phase 3)*: `TX_OUTPUT`, `TX_ANTENNA_INPUT`, `EIRP_REFERENCE`, `RX_ANTENNA_TERMINAL`, `RECEIVER_RF_INPUT`, `POST_FILTER`
 - **AnalysisMode** *(Phase 3)*: `RELATIVE_SCREENING`, `ABSOLUTE_LINEAR`
 - **SusceptibilityValidity** *(Phase 3)*: `VALID_ABSOLUTE`, `RELATIVE_SCREENING_ONLY`, `ABSOLUTE_COUPLING_UNAVAILABLE`, `NOISE_MODEL_INCOMPLETE`, `MISSING_CRITERION`, `MISSING_FILTER`, `MISSING_SPECTRUM`, `OUTSIDE_ANALYSIS_BAND`, `FAR_FIELD_NOT_VERIFIED`
+- **FrontEndProvenance** *(Phase 4)*: `DATASHEET`, `MEASURED`, `SIMULATED`, `USER_INPUT`, `SYNTHETIC_TEST`
+- **ProductType** *(Phase 4)*: `2F1_MINUS_F2`, `2F2_MINUS_F1`
+- **NonlinearValidity** *(Phase 4)*: `VALID`, `VALID_WITH_WARNINGS`, `ABSOLUTE_COUPLING_UNAVAILABLE`, `MISSING_FRONT_END`, `MISSING_P1DB`, `MISSING_IIP3`, `MISSING_BLOCKING_CRITERION`, `INCOMPLETE_INTERFERER_SET`, `NONLINEAR_MODEL_NOT_SUPPORTED`, `OUTSIDE_MODEL_DOMAIN`
+- **ReferencePlane** *(Phase 4 adds)*: `LNA_INPUT`

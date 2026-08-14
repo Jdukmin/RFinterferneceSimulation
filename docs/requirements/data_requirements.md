@@ -164,3 +164,25 @@ Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
 - **DR-211 (SHALL)** `config.RiskPolicy`/`FrequencyRelationPolicy` (screening) and
   `receiver.InterferenceCriterion` (physical) shall be distinct types. *(§30, §31)*
 - **DR-212 (SHALL)** Integration-grid construction policy shall be documented and deterministic. *(§11)*
+
+## 12. Receiver Nonlinear Data (Phase 4)
+
+Normative detail: ICD `receiver_nonlinear.md`.
+
+- **DR-300 (SHALL)** `ReceiverFrontEnd` fields: `linearGain_dB`, `p1dB_in_dBm`, `iip3_in_dBm`,
+  `noiseFigure_dB`, `preselector`, `channelFilter`, `referencePlane=LNA_INPUT`, `provenance`.
+  Input-referred; unknowns `NaN`/`[]`, never defaulted. *(§6, §30)*
+- **DR-301 (SHALL)** `FrontEndProvenance` ∈ {`DATASHEET`,`MEASURED`,`SIMULATED`,`USER_INPUT`,
+  `SYNTHETIC_TEST`}. *(§29)*
+- **DR-302 (SHALL)** Nonlinear power sums shall use `util.Units.sumPowers_dBm` (linear domain). *(§8)*
+- **DR-303 (SHALL)** `CompressionCriterion(requiredBackoff_dB)`, `BlockingCriterion` (constant or
+  tabulated offset→dBm), `IntermodulationCriterion('MAX_IM3_INPUT_POWER', dBm)`; distinct types. *(§28)*
+- **DR-304 (SHALL)** Result objects (`CompressionResult`, `BlockingResult`, `IntermodulationProduct`,
+  `NonlinearSusceptibilityResult`) shall carry the ICD `receiver_nonlinear.md` §9 fields, with
+  unknowns explicit and a reference plane. *(§22, §38)*
+- **DR-305 (SHALL)** `receiver.NonlinearValidity` codes per ICD §8; `ProductType` ∈
+  {`2F1_MINUS_F2`,`2F2_MINUS_F1`}. *(§31)*
+- **DR-306 (SHALL)** `RFReceiver.receiverFrontEnd`/`compressionCriterion`/`blockingCriterion`/
+  `intermodulationCriterion` shall be optional; absence preserves Phase-1/2/3 behavior. *(§39)*
+- **DR-307 (SHALL)** No fake nonlinear hardware values (P1dB, IIP3, blocking threshold, gain, IM3
+  criterion) for production/reference use; test fixtures marked `SYNTHETIC_TEST`. *(§29, §30)*

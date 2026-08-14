@@ -20,6 +20,10 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
   (`icd/pattern_data.md`), feeding the unchanged Phase-1 core.
 - **Phase 3 (complete):** linear RF coexistence & receiver susceptibility — TX spectrum, RX
   filter, kTB noise, I/N, interference margin, two analysis modes (`icd/spectrum.md`,
-  `icd/receiver_susceptibility.md`). Nonlinear receiver effects deferred to Phase 4.
+  `icd/receiver_susceptibility.md`).
+- **Phase 4 (complete):** receiver front-end nonlinear susceptibility — P1dB compression,
+  blocking, two-tone IM3, and multi-interferer aggregation at the `LNA_INPUT` plane
+  (`icd/receiver_nonlinear.md`). TX nonlinearities, mixer spurs, and ADC saturation deferred to
+  Phase 5+.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.

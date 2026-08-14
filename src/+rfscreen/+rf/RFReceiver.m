@@ -14,6 +14,10 @@ classdef RFReceiver
         filter                      % optional receiver.ReceiverFilter (Phase 3); [] if absent
         noiseModel                  % optional receiver.ReceiverNoiseModel (Phase 3); [] if absent
         interferenceCriterion       % optional receiver.InterferenceCriterion (Phase 3); [] if absent
+        receiverFrontEnd            % optional receiver.ReceiverFrontEnd (Phase 4); [] if absent
+        compressionCriterion        % optional receiver.CompressionCriterion (Phase 4); [] if absent
+        blockingCriterion           % optional receiver.BlockingCriterion (Phase 4); [] if absent
+        intermodulationCriterion    % optional receiver.IntermodulationCriterion (Phase 4); [] if absent
     end
 
     methods
@@ -56,6 +60,14 @@ classdef RFReceiver
                 'rfscreen.receiver.ReceiverNoiseModel', 'noiseModel');
             obj.interferenceCriterion = rfscreen.rf.RFReceiver.optType(opts, 'interferenceCriterion', ...
                 'rfscreen.receiver.InterferenceCriterion', 'interferenceCriterion');
+            obj.receiverFrontEnd = rfscreen.rf.RFReceiver.optType(opts, 'receiverFrontEnd', ...
+                'rfscreen.receiver.ReceiverFrontEnd', 'receiverFrontEnd');
+            obj.compressionCriterion = rfscreen.rf.RFReceiver.optType(opts, 'compressionCriterion', ...
+                'rfscreen.receiver.CompressionCriterion', 'compressionCriterion');
+            obj.blockingCriterion = rfscreen.rf.RFReceiver.optType(opts, 'blockingCriterion', ...
+                'rfscreen.receiver.BlockingCriterion', 'blockingCriterion');
+            obj.intermodulationCriterion = rfscreen.rf.RFReceiver.optType(opts, 'intermodulationCriterion', ...
+                'rfscreen.receiver.IntermodulationCriterion', 'intermodulationCriterion');
         end
 
         function tf = hasFilterModel(obj)

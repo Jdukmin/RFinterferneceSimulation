@@ -151,3 +151,27 @@ Synthetic (`SYNTHETIC_TEST`), analytically predictable fixtures.
 - **VR-214 (SHALL)** All 245 existing Phase-1/2 assertions still pass unchanged. *(§40)*
 - **VR-215 (SHALL)** End-to-end coexistence: scenario → Phase-1 pairwise → Phase-3 susceptibility
   → absolute result (far-field) and relative result (pattern-only). *(§16, §26)*
+
+## 14. Receiver Nonlinear Verification (Phase 4)
+
+Synthetic (`SYNTHETIC_TEST`), analytically predictable fixtures.
+
+- **VR-300 (SHALL)** Aggregate power: `-10 + -10 dBm → -6.99 dBm` (linear), not `-20`; two/three
+  interferers. *(§32)*
+- **VR-301 (SHALL)** Compression: single below/at/above P1dB; multiple individually below but
+  aggregate above; aggregate below. *(§32)*
+- **VR-302 (SHALL)** Blocking: below/at/above threshold; in-band and out-of-band; frequency-offset
+  tabulated threshold; **no spectral overlap but blocking violation** (mandatory). *(§33)*
+- **VR-303 (SHALL)** IM3 frequencies `2f1−f2`, `2f2−f1` exact; product inside/outside RX band; edge. *(§34)*
+- **VR-304 (SHALL)** IM3 power: equal tones (`3P−2·IIP3`), unequal tones, IIP3↑ reduces IM3, tone↑
+  raises IM3 faster than fundamental, consistent reference plane — numeric expected values. *(§35)*
+- **VR-305 (SHALL)** IM3 third-order scaling invariant (`+Δ` tones ⇒ `+3Δ`). *(§36)*
+- **VR-306 (SHALL)** Aggregate scenarios: 2 TX→1 RX, 3 TX→1 RX, multiple RX, inactive TX excluded;
+  deterministic interferer enumeration; no self/duplicate IM3 pairs. *(§37)*
+- **VR-307 (SHALL)** Validity honesty: pattern-only ⇒ no compression/blocking/IM3 physics; missing
+  P1dB/IIP3/blocking-criterion ⇒ `MISSING_*`; incomplete interferer set flagged. *(§4, §10, §30)*
+- **VR-308 (SHALL)** Architecture: nonlinear layer parses no pattern files, computes no geometry,
+  consumes existing absolute pair evidence, cannot be driven by pattern-only, does not sum dBm,
+  blocking needs no spectral overlap, generates no TX spurious, leaves Phase-3 semantics unchanged,
+  never defaults missing hardware, explicit reference plane. *(§47)*
+- **VR-309 (SHALL)** All 371 existing Phase-1/2/3 assertions still pass unchanged. *(§48)*

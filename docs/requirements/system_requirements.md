@@ -192,3 +192,49 @@ Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
 - **SR-212 (SHALL)** Nonlinear receiver effects (P1dB, compression/blocking, IIP3, IM2/IM3, mixer
   spurs, ADC saturation) shall remain **unimplemented** (deferred to Phase 4); interfaces may be
   reserved. *(§23, §24, §46)*
+
+## 15. Receiver Nonlinear Interference & Multi-Interferer Analysis (Phase 4)
+
+Normative detail: ICD `receiver_nonlinear.md`. Central invariant: no valid absolute coupling ⇒ no
+authoritative nonlinear result; no nonlinear hardware data ⇒ unsupported, never fabricated.
+
+- **SR-300 (SHALL)** The system shall evaluate receiver front-end susceptibility to strong
+  interferers — blocking, compression (P1dB), and third-order intermodulation (IIP3/IM3) — while
+  preserving explicit reference planes and absolute-coupling validity. *(Phase-4 §0)*
+- **SR-301 (SHALL)** Linear vs nonlinear receiver susceptibility, single-pair vs multi-interferer,
+  and TX-generated spurious vs RX-generated intermodulation shall remain separated. *(§3)*
+- **SR-302 (SHALL)** A canonical nonlinear reference plane (`LNA_INPUT`, after preselector, before
+  LNA) shall be fixed; the signal chain shall be explicit. *(§5)*
+- **SR-303 (SHALL)** A receiver front-end model shall represent input-referred `P1dB_in`,
+  `IIP3_in`, gain, optional NF, optional preselector/channel filters, reference plane, and
+  provenance. Input/output P1dB and IIP3/OIP3 shall not be mixed implicitly. *(§6)*
+- **SR-304 (SHALL)** Compression screening shall use `CompressionMargin = P1dB_in − AggregateInput`
+  (`>0` below P1dB). *(§7)*
+- **SR-305 (SHALL)** Aggregate input power from multiple simultaneously active interferers shall be
+  computed by **linear** summation; dBm shall never be summed directly. *(§8)*
+- **SR-306 (SHALL)** Only interferers with valid absolute power at the same reference plane shall be
+  aggregated; a missing/invalid interferer shall not be treated as zero power, and the set
+  completeness shall be represented explicitly. *(§9, §10)*
+- **SR-307 (SHALL)** Blocking shall be modeled independently of P1dB and independently of spectral
+  overlap; `NO_OVERLAP` shall not imply `NO_BLOCKING_RISK`. *(§11, §14)*
+- **SR-308 (SHALL)** A blocking criterion shall support a constant or frequency-offset-dependent
+  allowable blocker power; `BlockingMargin = Allowable − Actual`. *(§12, §13)*
+- **SR-309 (SHALL)** Two-tone IM3 shall compute product frequencies `2f1−f2`, `2f2−f1` exactly and
+  an input-referred IM3 power from a documented IIP3 relation, supporting unequal tones. *(§15–§18)*
+- **SR-310 (SHALL)** IM3 products shall be evaluated for receiver-passband relevance using existing
+  filter infrastructure, not duplicated logic. *(§19, §20)*
+- **SR-311 (SHALL)** IM2 taxonomy may be documented but shall not be fabricated from IIP3; if
+  unsupported it shall be `NOT_IMPLEMENTED`. *(§23)*
+- **SR-312 (SHALL)** A scenario-level nonlinear analyzer shall gather all active interfering TX to
+  one RX, reusing existing pairwise linear evidence (no duplication, no geometry recompute),
+  excluding self/wanted and duplicate IM3 combinations. *(§24, §25, §26, §27)*
+- **SR-313 (SHALL)** Structured nonlinear criteria (compression, blocking, intermodulation) shall be
+  distinct; one generic scalar shall not serve all mechanisms. Heuristic screening shall stay
+  distinct from nonlinear physical margins. *(§28, §40)*
+- **SR-314 (SHALL)** Nonlinear hardware parameters shall carry provenance; missing values shall be
+  represented as `MISSING_*` states, never defaulted. *(§29, §30)*
+- **SR-315 (SHALL)** Structured nonlinear validity codes shall be provided and propagate warnings.
+  *(§31)*
+- **SR-316 (SHALL)** Phase-3 linear result semantics shall remain unchanged; nonlinear results shall
+  be separate objects. TX nonlinear generation, mixer spur tables, and ADC saturation remain
+  deferred. *(§38, §41, §42, §43)*

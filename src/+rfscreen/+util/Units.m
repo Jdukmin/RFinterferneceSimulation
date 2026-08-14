@@ -28,5 +28,18 @@ classdef Units
             %WAVELENGTH_M Wavelength [m] for a frequency [Hz].
             lambda_m = rfscreen.util.Constants.speedOfLight_mps() ./ frequency_Hz;
         end
+
+        function dBm = sumPowers_dBm(powers_dBm)
+            %SUMPOWERS_DBM Incoherent power sum of dBm values via LINEAR domain.
+            %   Never sums dBm directly: P = w2dbm(sum(dbm2w(.))). Non-finite
+            %   entries are ignored; an all-empty/all-NaN input returns -Inf dBm.
+            v = powers_dBm(:);
+            v = v(isfinite(v));
+            if isempty(v)
+                dBm = -Inf; return;
+            end
+            wsum = sum(rfscreen.util.Units.dbm2w(v));
+            dBm = rfscreen.util.Units.w2dbm(wsum);
+        end
     end
 end

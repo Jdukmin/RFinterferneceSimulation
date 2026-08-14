@@ -172,6 +172,29 @@ sensitivity/blocking budgets.
 *(Realized by `+spectrum`, `+receiver`, and `interference.SpectralCouplingAnalyzer`; see
 `docs/icd/spectrum.md`, `docs/icd/receiver_susceptibility.md`.)*
 
+## R12. Receiver front-end nonlinearity: P1dB, IIP3, two-tone IM3, blocking (Phase 4)
+
+**What it stands for.** Standard RF receiver front-end nonlinear behavior. A weakly nonlinear
+device (LNA) driven by strong signals exhibits: gain compression characterized by the input
+1-dB compression point (`P1dB_in`); third-order intermodulation characterized by the input
+third-order intercept (`IIP3_in`), where two tones `f1,f2` generate products at `2f1−f2` and
+`2f2−f1` whose input-referred power follows the classic `P_IM3,in = 2·P_a + P_b − 2·IIP3`
+(equal-tone `3P − 2·IIP3`, third-order slope 3); and blocking/desensitization, where a strong
+undesired signal — possibly out of the wanted band — degrades the receiver, bounded by an
+allowable blocker power that generally varies with frequency offset.
+
+**Architecture implication (Phase 4).**
+- Nonlinear analysis is referenced to one explicit plane (`LNA_INPUT`) with **input-referred**
+  hardware quantities; input/output P1dB and IIP3/OIP3 are never mixed implicitly.
+- Compression depends on **aggregate** power from all simultaneously active interferers, summed in
+  the **linear** domain.
+- Blocking is independent of spectral overlap: `NO_OVERLAP ≠ NO_BLOCKING_RISK`.
+- These are **receiver-generated** effects; transmitter spurious/IMD and mixer spurs are separate
+  and out of scope. No result is produced without valid absolute coupling and real hardware data.
+
+*(Realized by `+receiver` (front-end + criteria) and `+nonlinear` (analyzers); see
+`docs/icd/receiver_nonlinear.md`.)*
+
 ## Cross-cutting architecture implications (binding for Phase 1)
 
 The references above converge on a small set of non-negotiable structural rules. These are the

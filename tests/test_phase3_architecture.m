@@ -53,8 +53,16 @@ function test_phase3_architecture(h)
     fe = rfscreen.rf.RFFrontEnd(struct());
     h.isNaNval('p1dB reserved NaN', fe.p1dB_dBm);
     h.isNaNval('iip3 reserved NaN', fe.iip3_dBm);
-    nlTokens = {'intermod','compression','blocking','iip3Compute','P1dBCompute','mixerSpur','saturation'};
-    h.ok('no nonlinear physics in receiver layer', isempty(scan(recvDir, nlTokens)));
+    % The Phase-3 LINEAR susceptibility analyzer performs no nonlinear physics.
+    % (Phase 4 adds nonlinear criteria to +receiver and physics to +nonlinear; those
+    % are separate layers, so this guard is scoped to the Phase-3 analyzer file.)
+    nlTokens = {'intermod','compression','blocking','iip3','p1db','mixerSpur','saturation'};
+    linTxt = lower(fileread(fullfile(recvDir, 'ReceiverSusceptibilityAnalyzer.m')));
+    hitNL = {};
+    for t = 1:numel(nlTokens)
+        if ~isempty(strfind(linTxt, lower(nlTokens{t}))); hitNL{end+1} = nlTokens{t}; end %#ok<AGROW>
+    end
+    h.ok('Phase-3 linear analyzer has no nonlinear physics', isempty(hitNL));
 
     % ---- spectrum layer depends only downward (no interference/geometry) ----
     h.ok('spectrum free of interference/geometry deps', ...

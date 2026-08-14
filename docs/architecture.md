@@ -48,6 +48,18 @@ Phase-3 also adds `interference.SpectralCouplingAnalyzer` (deps: spectrum, recei
 `interference.RfCoexistenceAnalyzer` (orchestration), and optional fields on `rf.RFTransmitter`
 (`spectrum`) and `rf.RFReceiver` (`filter`/`noiseModel`/`interferenceCriterion`).
 
+Phase-4 adds:
+```
++receiver/   (extends) ReceiverFrontEnd, FrontEndProvenance, NonlinearValidity, ProductType,
+             CompressionCriterion, BlockingCriterion, IntermodulationCriterion   (deps: util, receiver filters)
++nonlinear/  InterfererAggregator, CompressionAnalyzer, BlockingAnalyzer,        [Phase 4]
+             IntermodulationAnalyzer, NonlinearSusceptibilityAnalyzer            (deps: util, receiver, results, interference[PairwiseAnalyzer])
++results/    (extends) CompressionResult, BlockingResult, IntermodulationProduct,
+             NonlinearSusceptibilityResult                                        (plain value data)
+```
+plus optional `rf.RFReceiver` fields (`receiverFrontEnd`, `compressionCriterion`,
+`blockingCriterion`, `intermodulationCriterion`) and `util.Units.sumPowers_dBm` (linear power sum).
+
 ### Phase-2 pattern-data pipeline (dependency direction)
 
 ```
@@ -96,6 +108,24 @@ ReceiverNoiseModel --> kTB noise ;  InterferenceCriterion --> allowable
   stays Mode A (relative); the DirectionalCouplingIndex is never promoted to an absolute loss.
 - `spectrum`/`receiver` have **no UI**, do **not** parse pattern files, and compute **no geometry**;
   power integration is in **linear** units (dB never summed).
+
+### Phase-4 nonlinear flow (front-end susceptibility — SR-300)
+
+```
+Active TX_i --> (reused) PairwiseAnalyzer --> absolute spatial coupling (far-field valid only)
+        + preselector H_pre(f_i)  -->  per-interferer LNA-input power (LNA_INPUT plane)
+        --> InterfererAggregator (linear sum)  --> CompressionAnalyzer (P1dB margin)
+        --> per interferer/offset            --> BlockingAnalyzer   (blocking margin; no overlap needed)
+        --> i<j pairs                        --> IntermodulationAnalyzer (2f1-f2, 2f2-f1; IIP3->IM3)
+        --> NonlinearSusceptibilityAnalyzer  --> NonlinearSusceptibilityResult
+```
+
+- `+nonlinear` parses no files, computes no geometry, and **consumes existing** Phase-1 pair
+  evidence (reuses `PairwiseAnalyzer`); it holds the only edge into `+interference`, an acyclic
+  downward reuse.
+- Pattern-only coupling ⇒ no absolute LNA-input power ⇒ compression/blocking/IM3 withheld (the
+  central invariant). Missing P1dB/IIP3/criteria ⇒ `MISSING_*`, never defaulted. dBm are summed
+  only through `util.Units.sumPowers_dBm` (linear domain). Phase-3 linear results are unchanged.
 - **No package references any UI** (App Designer / figure / uicontrol) — VR-080.
 - **No package calls any external EM solver** — HFSS/CST/measured are *interfaces only*, and
   their `computeCoupling` raises `NotImplementedPhase1` — VR-081.

@@ -241,3 +241,75 @@ fixtures are `SYNTHETIC_TEST`.
 Octave 8.4: **PASS** — **371 assertions, 23 files** (`tests/run_all_tests.m`), the exact `src/`
 code executed. MATLAB: **NOT RUN** (no MATLAB available in this environment); the code stays within
 the MATLAB/Octave-common subset used since Phase 1, but MATLAB execution is not claimed.
+
+---
+
+# Phase 4 — Receiver Nonlinear Interference & Multi-Interferer Reconciliation
+
+Phase 4 adds `+nonlinear`, extends `+receiver` (front-end + criteria) and `+results` (nonlinear
+result objects), and adds `util.Units.sumPowers_dBm` + optional `rf.RFReceiver` fields — **without
+changing** Phase-1/2/3 contracts. All 371 prior assertions still pass (regression, VR-309); full
+suite is now **473 assertions across 29 files, all passing**.
+
+> One Phase-3 architecture assertion was *narrowed* during reconciliation: `test_phase3_architecture`
+> previously scanned the whole `+receiver` folder for "no nonlinear physics" (true in Phase 3).
+> Phase 4 intentionally adds nonlinear **criteria** to `+receiver` and physics to `+nonlinear`, so
+> that guard is now scoped to the Phase-3 **linear** analyzer file, where the guarantee still holds.
+> This is a documented intentional evolution, not a defect.
+
+## P4.1 Requirement → Code → Test map
+
+| Req | Code (src/+rfscreen/…) | Test (tests/…) |
+|-----|------------------------|----------------|
+| SR-300/AR-300, §0/§4 (nonlinear from valid absolute) | `nonlinear/NonlinearSusceptibilityAnalyzer`, `receiver/ReceiverFrontEnd` | test_nonlinear_scenario, test_nonlinear_validity |
+| SR-301/§3 (linear≠nonlinear; single≠multi; TX≠RX) | package split `+nonlinear` vs `+receiver`/Phase-3 | test_phase4_architecture |
+| SR-302/§5 (LNA_INPUT plane) | `receiver/ReferencePlane.LNA_INPUT` | test_compression, test_im3, test_phase4_architecture |
+| SR-303/§6 (front-end input-referred) | `receiver/ReceiverFrontEnd`, `FrontEndProvenance` | test_phase4_architecture, test_nonlinear_validity |
+| SR-304/AR-302/§7 (P1dB margin) | `nonlinear/CompressionAnalyzer`, `receiver/CompressionCriterion` | test_compression |
+| SR-305/AR-301/§8 (linear aggregate) | `util.Units.sumPowers_dBm`, `nonlinear/InterfererAggregator` | test_compression, test_phase4_architecture |
+| SR-306/§9/§10 (aggregate scope + completeness) | `InterfererAggregator`, analyzer validity | test_nonlinear_validity |
+| SR-307/AR-303/§11/§14 (blocking ≠ overlap) | `nonlinear/BlockingAnalyzer`, `receiver/BlockingCriterion` | test_blocking, test_phase4_architecture |
+| SR-308/§12/§13 (blocking criterion + margin) | `receiver/BlockingCriterion` | test_blocking |
+| SR-309/AR-304/AR-305/§15-§18 (IM3 freq + power) | `nonlinear/IntermodulationAnalyzer`, `receiver/ProductType` | test_im3 |
+| SR-310/AR-307/§19/§20 (passband relevance) | `IntermodulationAnalyzer` (channel filter reuse) | test_im3 |
+| SR-311/§23 (IM2 not fabricated) | `NonlinearSusceptibilityResult.im2='NOT_IMPLEMENTED'` | test_nonlinear_scenario |
+| SR-312/AR-308/AR-310/§24-§27 (scenario multi-interferer; reuse; no self/dup) | `NonlinearSusceptibilityAnalyzer` | test_nonlinear_scenario |
+| SR-313/§28/§40 (distinct criteria; screening≠physics) | 3 criterion classes; Phase-3 policies untouched | test_phase4_architecture |
+| SR-314/DR-300/§29/§30 (provenance; no defaults) | `ReceiverFrontEnd` (NaN unknowns), `FrontEndProvenance` | test_nonlinear_validity, test_phase4_architecture |
+| SR-315/DR-305/§31 (validity codes) | `receiver/NonlinearValidity` | test_nonlinear_validity |
+| SR-316/§38/§41-§43 (Phase-3 unchanged; TX/mixer/ADC deferred) | separate result objects; no TX/mixer/ADC code | test_phase4_architecture, regression |
+| AR-306/§36 (third-order scaling) | `IntermodulationAnalyzer` formula | test_im3 |
+| VR-300…VR-309 | see tests/ | test_compression … test_phase4_architecture |
+
+## P4.2 Canonical decisions (Phase 4)
+
+1. **Signal chain / reference plane.** `RX_ANTENNA_TERMINAL → preselector → LNA_INPUT (nonlinear
+   plane) → LNA → channel filter`. All P1dB/IIP3 are **input-referred** to `LNA_INPUT`;
+   `OIP3=IIP3+G`, `P1dB_out=P1dB_in+G−1` are explicit conversions.
+2. **Per-interferer power.** `P_lna,i = txPower_i + (Gtx+Grx−FSPL)_i + H_pre_dB(f_i)`, absolute
+   only for far-field-valid coupling; pattern-only ⇒ `NaN`.
+3. **Aggregate.** Linear sum over valid interferers via `sumPowers_dBm`; missing ≠ zero; any
+   invalid active interferer ⇒ `INCOMPLETE_INTERFERER_SET`; none valid ⇒
+   `ABSOLUTE_COUPLING_UNAVAILABLE`.
+4. **Compression.** `Margin = P1dB_in − P_agg` (`>0` below P1dB).
+5. **Blocking.** Per interferer by frequency offset, **independent of spectral overlap**;
+   `Margin = allowable(offset) − P_lna,i`; constant or tabulated criterion.
+6. **IM3.** Products `2f1−f2`, `2f2−f1` exact; `P_IM3,in = 2P_a+P_b−2·IIP3` (unequal-tone general,
+   equal `3P−2·IIP3`); effective power via channel filter at `f_IM`; unordered `i<j` pairs, no
+   self/duplicate.
+7. **Reuse.** Scenario analysis reuses `PairwiseAnalyzer`; no geometry/gain recompute.
+8. **Sign convention** everywhere `Margin = Allowable − Actual` (consistent with Phase 3).
+
+## P4.3 Validity-honesty audit (Task §4, §10, §30)
+
+Withheld, never fabricated: pattern-only ⇒ no compression/blocking/IM3; missing P1dB ⇒
+`MISSING_P1DB`; missing IIP3 ⇒ `MISSING_IIP3` (no products); missing blocking criterion ⇒
+`MISSING_BLOCKING_CRITERION`; missing front end ⇒ `MISSING_FRONT_END`; partial evidence ⇒
+`INCOMPLETE_INTERFERER_SET`. Verified in test_nonlinear_validity and test_phase4_architecture. No
+fake P1dB/IIP3/blocking/gain/IM3 values; all fixtures `SYNTHETIC_TEST`. IM2, TX spurious, mixer
+spurs, and ADC saturation are not generated.
+
+## P4.4 Verification result
+
+Octave 8.4: **PASS** — **473 assertions, 29 files** (`tests/run_all_tests.m`), the exact `src/`
+code executed. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).

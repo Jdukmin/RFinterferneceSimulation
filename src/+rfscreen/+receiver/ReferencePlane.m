@@ -6,12 +6,13 @@ classdef ReferencePlane
         EIRP_REFERENCE     = 'EIRP_REFERENCE'
         RX_ANTENNA_TERMINAL= 'RX_ANTENNA_TERMINAL'
         RECEIVER_RF_INPUT  = 'RECEIVER_RF_INPUT'   % after preselector filter, before LNA
+        LNA_INPUT          = 'LNA_INPUT'           % nonlinear reference plane (Phase 4)
         POST_FILTER        = 'POST_FILTER'
     end
     methods (Static)
         function v = values()
             v = {'TX_OUTPUT', 'TX_ANTENNA_INPUT', 'EIRP_REFERENCE', ...
-                 'RX_ANTENNA_TERMINAL', 'RECEIVER_RF_INPUT', 'POST_FILTER'};
+                 'RX_ANTENNA_TERMINAL', 'RECEIVER_RF_INPUT', 'LNA_INPUT', 'POST_FILTER'};
         end
         function tf = isValid(x)
             tf = ischar(x) && any(strcmp(x, rfscreen.receiver.ReferencePlane.values()));

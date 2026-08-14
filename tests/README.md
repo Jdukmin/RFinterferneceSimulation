@@ -39,9 +39,20 @@ cd tests; ok = run_all_tests();
 | `test_in_margin` | I/N cases; margin sign convention (Allowable−Actual) for both criteria |
 | `test_susceptibility_validity` | no absolute power without evidence (pattern-only/noise/criterion/filter) |
 | `test_rf_coexistence_integration` | scenario → Phase-1 pairwise → Phase-3 susceptibility (absolute + relative) |
-| `test_phase3_architecture` | boundaries: no UI/file-parse/geometry; linear-only; screening ≠ criterion; nonlinear deferred |
+| `test_phase3_architecture` | boundaries: no UI/file-parse/geometry; linear-only; screening ≠ criterion |
+
+**Phase 4 (receiver nonlinear):**
+| File | Covers |
+|------|--------|
+| `test_compression` | linear aggregate power; P1dB margin below/at/above; aggregate-above-from-individually-below |
+| `test_blocking` | constant/tabulated threshold; below/at/above; in-band + **out-of-band no-overlap** |
+| `test_im3` | product frequencies `2f1−f2`/`2f2−f1`; equal/unequal tone power; IIP3↓IM3; third-order scaling; passband |
+| `test_nonlinear_validity` | pattern-only/missing-P1dB/IIP3/criterion/front-end withheld; incomplete set |
+| `test_nonlinear_scenario` | 2/3 TX→1 RX, multiple RX, inactive/wanted excluded, no self/duplicate IM3 pairs |
+| `test_phase4_architecture` | no file-parse/geometry/UI; reuses PairwiseAnalyzer; no dBm sum; no TX-spurious; Phase-3 unchanged |
 
 ## Status
 
-**371 assertions across 23 files, all passing** (131 Phase-1 + 114 Phase-2 + 126 Phase-3) under
-GNU Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not claimed.
+**473 assertions across 29 files, all passing** (131 Phase-1 + 114 Phase-2 + 126 Phase-3 + 102
+Phase-4) under GNU Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not
+claimed.

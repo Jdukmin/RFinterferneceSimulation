@@ -170,3 +170,30 @@ Normative detail: ICD `spectrum.md`, `receiver_susceptibility.md`.
   provenance, not be invented. *(§14)*
 - **AR-215 (SHALL)** Result/data structures shall keep future aggregate multi-TX interference
   possible (linear-additive); full aggregation may be deferred. *(§25, §26)*
+
+## 13. Receiver Nonlinear Analysis (Phase 4)
+
+Normative detail: ICD `receiver_nonlinear.md`.
+
+- **AR-300 (SHALL)** Per-interferer LNA-input power: `P_lna,i = txPower_i + absoluteTransfer_dB(i)
+  + H_pre_dB(f_i)`, with `absoluteTransfer_dB = Gtx+Grx−FSPL` from physical (far-field-valid)
+  coupling only; pattern-only ⇒ `P_lna,i = NaN`. *(§4, §5)*
+- **AR-301 (SHALL)** Aggregate power `P_agg = w2dbm(Σ dbm2w(P_lna,i))` over valid interferers;
+  determinism preserved. *(§8)*
+- **AR-302 (SHALL)** `CompressionMargin_dB = p1dB_in − P_agg`. *(§7)*
+- **AR-303 (SHALL)** `offset_Hz = f_i − f_rx_center`; `BlockingMargin = allowable(offset) −
+  P_lna,i`; evaluated even with no spectral overlap. *(§13, §14)*
+- **AR-304 (SHALL)** IM3 product frequencies `2f1−f2`, `2f2−f1` computed exactly. *(§15)*
+- **AR-305 (SHALL)** `P_IM3_in(2f1−f2) = 2P1 + P2 − 2·IIP3`; `P_IM3_in(2f2−f1) = 2P2 + P1 −
+  2·IIP3` (dBm); equal-tone reduces to `3P − 2·IIP3`. *(§16, §18)*
+- **AR-306 (SHALL)** Third-order scaling: `+Δ` on both tones ⇒ `+3Δ` IM3; `+Δ` on IIP3 ⇒ `−2Δ`
+  IM3. *(§36)*
+- **AR-307 (SHALL)** `effectiveProductPower = P_IM3_in + H_chan(f_IM)`; `inPassband = f_IM ∈ RX
+  band`. *(§19)*
+- **AR-308 (SHALL)** IM3 enumerated over unordered distinct pairs `i<j`; no self/duplicate. *(§26)*
+- **AR-309 (SHALL)** Aggregate/nonlinear validity: `ABSOLUTE_COUPLING_UNAVAILABLE` if none valid;
+  `INCOMPLETE_INTERFERER_SET` if some invalid; `MISSING_P1DB`/`MISSING_IIP3`/
+  `MISSING_BLOCKING_CRITERION` when hardware/criterion absent. *(§10, §31)*
+- **AR-310 (SHALL)** Scenario nonlinear analysis reuses Phase-1 pairwise; interferers = active TX
+  excluding self and optional wanted. *(§24, §25, §27)*
+- **AR-311 (SHALL)** Nonlinear analysis shall compute no geometry and parse no files. *(§47)*

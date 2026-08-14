@@ -27,9 +27,31 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > absolute RF power produced **only** when physical coupling evidence exists. See
 > `docs/icd/spectrum.md`, `docs/icd/receiver_susceptibility.md`.
 >
-> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, and **nonlinear**
-> receiver effects (P1dB/blocking, IIP3/IM, mixer spurs, ADC saturation) plus any UI remain
-> **deferred to Phase 4+** (see `docs/traceability.md` and ICD extension points).
+> **Phase 4 (complete).** Receiver **front-end nonlinear** susceptibility (`+nonlinear`,
+> `+receiver`): multi-interferer aggregate compression (P1dB), blocking (independent of spectral
+> overlap), and two-tone third-order intermodulation (IIP3 → IM3), all input-referred to the
+> `LNA_INPUT` plane and produced **only** with valid absolute coupling evidence. See
+> `docs/icd/receiver_nonlinear.md`.
+>
+> HFSS/CST/measured-S21 coupling import, true installed-pattern generation, **transmitter**
+> nonlinearities (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC
+> saturation** plus any UI remain **deferred to Phase 5+** (see `docs/traceability.md` and ICD
+> extension points).
+
+## Phase 4 — receiver nonlinear at a glance
+
+- **Central invariant.** No valid absolute coupling ⇒ no authoritative nonlinear result; no
+  nonlinear hardware data ⇒ unsupported, never fabricated.
+- **Reference plane.** All P1dB/IIP3 are **input-referred** to `LNA_INPUT` (after preselector,
+  before LNA); the signal chain is explicit.
+- **Aggregate compression.** `Margin = P1dB_in − ΣP_i` with interferer powers summed in the
+  **linear** domain (dBm never added); missing interferers are not treated as zero.
+- **Blocking.** Per-interferer, by frequency offset, **independent of spectral overlap**
+  (`NO_OVERLAP ≠ NO_BLOCKING_RISK`); constant or tabulated allowable-blocker criterion.
+- **IM3.** Two-tone products `2f1−f2`, `2f2−f1` with `P_IM3,in = 2P_a+P_b−2·IIP3` (equal-tone
+  `3P−2·IIP3`), evaluated for receiver-passband relevance.
+- **Reuse.** Scenario analysis gathers all active interferers to one RX and reuses the Phase-1
+  pairwise engine — no geometry recompute, no duplication.
 
 ## Phase 3 — linear RF coexistence at a glance
 
@@ -73,6 +95,7 @@ src/+rfscreen/                 Core engine (MATLAB packages)
   +util +geometry +antenna +rf +coupling +config +scenario +results +interference
   +patterndata                 [Phase 2] external 2D-cut ingestion & canonicalization
   +spectrum +receiver          [Phase 3] TX spectrum, RX filter/noise/criterion, susceptibility
+  +nonlinear                   [Phase 4] compression, blocking, IM3, multi-interferer aggregation
 tests/                         Deterministic test suite + portable harness
 examples/demo_screening.m      Console demo (synthetic data only, no UI)
 setup_paths.m                  Adds src/ to the path
@@ -107,14 +130,14 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **371 deterministic assertions across 23 test files, all passing** (131 Phase-1 +
-114 Phase-2 + 126 Phase-3), under **GNU Octave 8.4** (MATLAB not available in this environment, so
-MATLAB execution is not claimed). Covers geometry, coordinate transforms, pattern interpolation,
-pairwise lobe analysis, matrix generation, invalid-input rejection, numerical invariants, the
-Phase-2 ingestion pipeline, and the Phase-3 linear RF chain: spectrum normalization + linear
-integration, filter response, spectral overlap (full/partial/none/edge, narrow/wide, mixed grids),
-kTB noise, I/N, margin sign convention, validity honesty (no absolute power without evidence),
-end-to-end coexistence, and Phase-3 architecture boundaries.
+Current status: **473 deterministic assertions across 29 test files, all passing** (131 Phase-1 +
+114 Phase-2 + 126 Phase-3 + 102 Phase-4), under **GNU Octave 8.4** (MATLAB not available in this
+environment, so MATLAB execution is not claimed). Covers geometry, pattern interpolation, pairwise
+screening, the Phase-2 ingestion pipeline, the Phase-3 linear RF chain (spectrum/filter/noise/I-N/
+margin), and the Phase-4 nonlinear chain: linear-domain aggregate power, P1dB compression margin,
+blocking (in-band, out-of-band, tabulated, no-overlap), two-tone IM3 frequencies/power/third-order
+scaling, multi-interferer scenario enumeration, validity honesty (no nonlinear result without
+absolute evidence or hardware data), and Phase-4 architecture boundaries.
 
 ## Quick demo
 
