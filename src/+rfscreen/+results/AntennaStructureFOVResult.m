@@ -13,6 +13,7 @@ classdef AntennaStructureFOVResult
         maxAz_deg = NaN
         minEl_deg = NaN
         maxEl_deg = NaN
+        azimuthSpan_deg = NaN       % circular arc width in az (wrap-safe, AUD-01)
         maxAngularRadius_deg = NaN
         occupiedLobes = {}
         centerLobe = ''

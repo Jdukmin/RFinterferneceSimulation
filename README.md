@@ -40,9 +40,26 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > manufactures EM behavior). See `docs/icd/spacecraft_geometry.md`,
 > `docs/icd/installed_environment.md`.
 >
+> **Phase 6 (complete).** **KARI reference replication, top-down validation & user manual** — a
+> validation/reproduction phase (no new physics). It measures how far the Phase 1–5 tool reproduces
+> four published KARI research cases, run top-down from a user's point of view; fixes one geometry
+> defect (AUD-01 circular azimuth footprint); adds a top-down **user manual**
+> (`docs/user_manual.md`), a **quick start** (`examples/quickstart.m`), and four runnable
+> **reference-case scripts** (`examples/reference_cases/`); and records the results with
+> reproducibility tiers and ranked model gaps — **no paper fitting, no fabricated EM, no HFSS/CST
+> introduced**. See `docs/reports/reference_validation/`.
+>
 > HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
 > (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI
-> remain **deferred to Phase 6+** (see `docs/traceability.md` and ICD extension points).
+> remain **deferred** (a scoped, data-only external-EM ingestion boundary is the recommended — not
+> automatic — next step; see `docs/reports/reference_validation/RPT-P6-05-phase6-closure.md §9`).
+
+## New here? Start with the user manual
+
+- **[`docs/user_manual.md`](docs/user_manual.md)** — top-down user manual: what the tool solves,
+  what it does **not**, coordinate conventions, and every workflow with runnable examples.
+- **[`examples/quickstart.m`](examples/quickstart.m)** — minimal Input→Run→Result screening path.
+- **`examples/reference_cases/`** — four runnable KARI reference-case reproductions.
 
 ## Phase 5 — spacecraft structure & installed environment at a glance
 
@@ -121,6 +138,11 @@ src/+rfscreen/                 Core engine (MATLAB packages)
   +geometry(struct) +installed [Phase 5] structure geometry/FOV/LOS, installed-pattern selection
 tests/                         Deterministic test suite + portable harness
 examples/demo_screening.m      Console demo (synthetic data only, no UI)
+examples/quickstart.m          [Phase 6] minimal Input->Run->Result screening path
+examples/reference_cases/      [Phase 6] four runnable KARI reference-case reproductions
+data/reference_cases/          [Phase 6] reference-data provenance guide
+docs/user_manual.md            [Phase 6] top-down user manual (start here)
+docs/reports/reference_validation/  [Phase 6] validation reports + case matrix
 setup_paths.m                  Adds src/ to the path
 ```
 
@@ -153,9 +175,10 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **579 deterministic assertions across 35 test files, all passing** (131 Phase-1 +
-114 Phase-2 + 126 Phase-3 + 102 Phase-4 + 106 Phase-5), under **GNU Octave 8.4** (MATLAB not
-available in this environment, so MATLAB execution is not claimed). Covers pairwise screening, the
+Current status: **598 deterministic assertions across 36 test files, all passing** (131 Phase-1 +
+114 Phase-2 + 126 Phase-3 + 102 Phase-4 + 106 Phase-5 + 19 Phase-6 audits), under **GNU Octave
+8.4** (MATLAB not available in this environment, so MATLAB execution is not claimed). Covers pairwise
+screening, the
 Phase-2 ingestion pipeline, the Phase-3 linear RF chain, the Phase-4 nonlinear chain, and the
 Phase-5 spacecraft-geometry / installed-environment layer: ray/segment intersection (hit/miss/
 tangent/boundary), antenna-to-structure FOV with angular footprint (center-outside-edge-inside),
@@ -166,8 +189,11 @@ gain; blocked LOS is not attenuation; no installed pattern derived from geometry
 ## Quick demo
 
 ```matlab
-run('examples/demo_screening.m')   % prints a synthetic interference matrix
+addpath('examples'); quickstart              % minimal Input->Run->Result (Phase 6)
+run('examples/demo_screening.m')             % prints a synthetic interference matrix
 ```
+
+See **[`docs/user_manual.md`](docs/user_manual.md)** for the full top-down walkthrough.
 
 ## Canonical units & frames (see `docs/icd/`)
 

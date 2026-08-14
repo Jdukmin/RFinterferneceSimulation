@@ -73,6 +73,19 @@ Phase 5 implements exact-primitive **ray intersection** plus **`VERTEX_SAMPLED`*
 footprints (and `CENTER_POINT` where only the centroid direction is used). Levels are reported
 explicitly and never treated as equivalent.
 
+**Sampling caveat (AUD-02).** `VERTEX_SAMPLED` is **not** an exact surface intersection: the
+angular footprint (`occupiedLobes`, `azimuthSpan_deg`, `minAz/maxAz`, `min/max el`) is derived
+from the centroid + corner directions only. There is no `EXACT_SURFACE_INTERSECTION` fidelity, and
+this level may miss a thin lobe region that a face interior enters between corners (a sampling
+false negative). The exact-primitive `rayIntersectBody` used for LOS blockage and `centerRayHits`
+is exact; the *angular footprint* is vertex-sampled. Do not overstate geometric certainty; a
+future `SURFACE_SAMPLED`/`MESH_INTERSECTION` level (reserved) would refine it.
+
+**Circular azimuth (AUD-01).** Azimuth is periodic: the footprint extent is computed **relative to
+the centroid azimuth and wrapped to `[-180,180]`** (`azimuthSpan_deg` is the true small arc), so a
+structure straddling the `+-180` seam (e.g. behind the antenna) is a small footprint, not a
+spurious ~360 deg span. `maxAngularRadius_deg` is inherently wrap-safe (unit-vector dot product).
+
 ## 5. Ray / segment intersection (Task §15, §34)
 
 - **Ray:** `structure.rayIntersectBody(o_B, unit_d_B)` → `[hit, tHit]`, `tHit` in meters.

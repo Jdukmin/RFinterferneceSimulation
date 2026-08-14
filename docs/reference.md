@@ -218,6 +218,84 @@ not by geometry alone.
 `interference.InstalledEnvironmentAnalyzer`; see `docs/icd/spacecraft_geometry.md`,
 `docs/icd/installed_environment.md`. Consistent with the KARI installed-antenna themes in R5.)*
 
+---
+
+## R14. KARI reference cases — reproduction targets (Phase 6)
+
+**What this section is.** Phase 6 is a validation/reproduction phase: it measures how far the
+Phase 1–5 tool reproduces specific published KARI (한국항공우주연구원) research cases, run top-down
+from a user's point of view. Each case below records its citation, the phase/component that
+addresses it, what the tool *can* validate, and its known reproduction limitation. **No paper
+fitting** and **no fabricated EM** (§9, §29): where the model differs from a paper the difference is
+*classified*, never corrected. Reproducibility tiers are assigned **after** running the cases (see
+`docs/reports/reference_validation/`). The primary documents are not bundled here; where a source is
+public but not attached, the entry records the engineering case it stands for.
+
+### RC-KARI-01 — Structure FOV effect on S-band radiation (KSAS 2015)
+
+- **Citation.** 임원규, 권기호, 김중표, 이선익, 김상구, 원영진, 문홍열, 이상곤, "위성 구조체의 FOV
+  간섭에 의한 S 대역 안테나의 방사 특성 영향성 분석", 한국항공우주학회 학술발표회, 2015.
+  Search: [한국항공우주학회 논문검색](https://www.koreascience.kr/) ·
+  [Google Scholar](https://scholar.google.com/scholar?q=위성+구조체+FOV+S대역+안테나+방사+특성+임원규).
+- **Phase / component.** Phase 5 — `geometry.AntennaToStructureFOV`, `geometry.LineOfSight`,
+  angular footprint. Script: `examples/reference_cases/rc_kari_01_structure_fov.m`.
+- **What the tool can validate.** That spacecraft structure enters the antenna FOV in the reported
+  region; angular footprint; occupied lobes (main/side/back); LOS blockage — **geometry evidence**
+  (Tier 2).
+- **Known reproduction limitation.** The electromagnetic radiation-pattern *deformation magnitude*
+  (scattering/diffraction) is `MODEL_GAP_FULL_WAVE`, **Tier 4** — requires full-wave/measured
+  evidence the tool does not own.
+
+### RC-KARI-02 — Installed S-band antenna performance (KSAS 2023)
+
+- **Citation.** 이선익, 임원규, 김중표, "S대역 안테나의 위성 설치상태에서의 성능 연구",
+  한국항공우주학회, 2023. Search:
+  [한국항공우주학회](https://www.koreascience.kr/) ·
+  [Google Scholar](https://scholar.google.com/scholar?q=S대역+안테나+위성+설치상태+성능+이선익+임원규).
+- **Phase / component.** Phase 2 pattern data + Phase 5 `FreeSpacePattern`/`InstalledPattern`,
+  `InstalledPatternSelector`, `PatternComparison`. Script:
+  `examples/reference_cases/rc_kari_02_installed_pattern.m`.
+- **What the tool can validate.** The **free-space ↔ installed comparison workflow** (peak/max/RMS
+  gain delta, boresight delta), with provenance preserved (Tier 2–3), when installed data is
+  supplied.
+- **Known reproduction limitation.** The installed pattern must be **supplied** (measured/simulated)
+  — it is never derived from geometry (`MODEL_GAP_INSTALLED_PATTERN`); axial-ratio/polarization
+  deltas are unsupported (`MODEL_GAP_AXIAL_RATIO/POLARIZATION`, Tier 4).
+
+### RC-KARI-03 — Installed-location electromagnetic analysis (KARI 2025)
+
+- **Citation.** 이선익, 임원규, "위성항법 정지궤도위성 원격측정명령계 S대역 안테나 설치위치에서의
+  전자장 해석", KARI research stream, 2025. Search:
+  [KARI](https://www.kari.re.kr/) ·
+  [Google Scholar](https://scholar.google.com/scholar?q=정지궤도위성+S대역+안테나+설치위치+전자장+해석+이선익).
+- **Phase / component.** Phase 5 installed environment (position + FOV + LOS) + explicit fidelity
+  boundary. Script: `examples/reference_cases/rc_kari_03_installation_analysis.m`.
+- **What the tool can validate.** Per-candidate-location installation position (Tier 1) and FOV/LOS
+  geometry (Tier 2) at each mount.
+- **Known reproduction limitation.** The full-wave EM field solution
+  (scattering/reflection/diffraction) is **Tier 4** by design — this case validates the
+  *architecture boundary*, cleanly separating reproducible installed-geometry evidence from the
+  full-wave field the tool does not compute.
+
+### RC-KARI-RF-01 — S-band signals interfering with a GNSS receiver (JKSAS 2019)
+
+- **Citation.** 권병문, 신용설, 마근수, 주정갑, 지기만, "S 대역 신호에 의한 위성항법수신기의 RF
+  신호간섭", 한국항공우주학회지 (JKSAS), 2019. **This is NOT an Im Won-gyu paper — do not
+  misattribute authorship.** Search:
+  [한국항공우주학회지](https://www.koreascience.kr/) ·
+  [Google Scholar](https://scholar.google.com/scholar?q=S대역+신호+위성항법수신기+RF+신호간섭+권병문).
+- **Phase / component.** Phase 3 linear + Phase 4 `CompressionAnalyzer` / `BlockingAnalyzer` /
+  `IntermodulationAnalyzer`. Script: `examples/reference_cases/rc_kari_rf_01_gnss_interference.m`.
+- **What the tool can validate.** The **mechanism/trend**: strong S-band signals driving a GNSS
+  active-antenna LNA toward/over P1dB (compression margin sign), and a two-tone IM3 product
+  (`2f1−f2`) landing inside the GNSS L1 band (Tier 2).
+- **Known reproduction limitation.** Absolute dB levels are **not fitted** — the paper's exact
+  hardware IIP3/P1dB and link budget are not public (`REFERENCE_DATA_INCOMPLETE`).
+
+*(Realized by the Phase-3/4/5 packages above; validated in
+`docs/reports/reference_validation/RPT-P6-01…05` and `reference_case_matrix.md`. Consistent with the
+KARI installed-antenna themes in R5 — this section names the specific cases R5 refers to.)*
+
 ## Cross-cutting architecture implications (binding for Phase 1)
 
 The references above converge on a small set of non-negotiable structural rules. These are the

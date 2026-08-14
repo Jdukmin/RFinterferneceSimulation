@@ -40,7 +40,20 @@ classdef AntennaToStructureFOV
             s.closestDistance_m = min(dist);
             s.centerAz_deg = az(1); s.centerEl_deg = el(1); s.centerOffBoresight_deg = off(1);
             valid = ~isnan(az);
-            s.minAz_deg = min(az(valid)); s.maxAz_deg = max(az(valid));
+            % Azimuth is CIRCULAR: compute the extent relative to the centroid azimuth
+            % and wrap to [-180,180] so a footprint straddling the +-180 seam stays a
+            % small arc instead of exploding to ~360 deg via naive min/max (AUD-01).
+            cAz = s.centerAz_deg;
+            if isnan(cAz)
+                s.minAz_deg = NaN; s.maxAz_deg = NaN; s.azimuthSpan_deg = NaN;
+            else
+                azRel = mod(az(valid) - cAz + 180, 360) - 180;   % relative, wrapped
+                azRelMin = min(azRel); azRelMax = max(azRel);
+                wrap180 = @(x) mod(x + 180, 360) - 180;
+                s.minAz_deg = wrap180(cAz + azRelMin);
+                s.maxAz_deg = wrap180(cAz + azRelMax);
+                s.azimuthSpan_deg = azRelMax - azRelMin;          % always the small arc
+            end
             s.minEl_deg = min(el(valid)); s.maxEl_deg = max(el(valid));
             % max angular radius: separation between centroid direction and each sample
             uc = unitA(:, 1); maxrad = 0;

@@ -386,3 +386,67 @@ reserved (Phase 6).
 
 Octave 8.4: **PASS** — **579 assertions, 35 files** (`tests/run_all_tests.m`), the exact `src/`
 code executed. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).
+
+---
+
+# Phase 6 — KARI Reference Replication & Top-down Validation Reconciliation
+
+Phase 6 is a **validation/reproduction** phase. It adds **no new physics**: the only code change is
+the AUD-01 circular-footprint fix in the existing `geometry.AntennaToStructureFOV` (a bug fix, not a
+feature), plus `results.AntennaStructureFOVResult.azimuthSpan_deg`, one audit test file, reference
+scripts, the user manual, and validation reports. All 579 Phase 1–5 assertions still pass
+(regression preserved); the full suite is now **598 assertions across 36 files, all passing**.
+
+## P6.1 Research validation traceability (Reference Case → Requirement → Component → Script → Report)
+
+| Reference case | Anchoring requirement | Component (src/+rfscreen/…) | Reference script | Validation report |
+|----------------|-----------------------|------------------------------|------------------|-------------------|
+| **RC-KARI-01** structure FOV (KSAS 2015) | R7/R13, SR-406..412 (structure FOV, LOS, footprint) | `geometry.AntennaToStructureFOV`, `geometry.LineOfSight`, `geometry.SpacecraftStructure` | `examples/reference_cases/rc_kari_01_structure_fov.m` | RPT-P6-02 §RC-KARI-01; matrix |
+| **RC-KARI-02** installed perf (KSAS 2023) | R5/R6/R13, SR-403..405/415 (free≠installed, comparison) | `antenna.FreeSpacePattern`/`InstalledPattern`, `installed.InstalledPatternSelector`, `installed.PatternComparison` | `examples/reference_cases/rc_kari_02_installed_pattern.m` | RPT-P6-02 §RC-KARI-02 |
+| **RC-KARI-03** installed-location EM (KARI 2025) | R7/R13, SR-406..412/417 (installed env, boundary) | `geometry.AntennaToStructureFOV`, installed environment | `examples/reference_cases/rc_kari_03_installation_analysis.m` | RPT-P6-02 §RC-KARI-03 |
+| **RC-KARI-RF-01** S-band→GNSS (JKSAS 2019, *not* Im W-G.) | R8/R9/R12, SR-304..310 (compression, IM3) | `nonlinear.CompressionAnalyzer`, `nonlinear.IntermodulationAnalyzer`, `receiver.ReceiverFrontEnd` | `examples/reference_cases/rc_kari_rf_01_gnss_interference.m` | RPT-P6-02 §RC-KARI-RF-01 |
+
+## P6.2 Phase-5 audit → RP → fix → test
+
+| Audit | RP | Code / doc change | Test |
+|-------|----|-------------------|------|
+| **AUD-01** circular azimuth footprint (358/359/0/1/2 ≠ 0→359) | RP-001 `RP-IMPLEMENTATION` | `geometry/AntennaToStructureFOV.m` (az extent relative to centroid, wrapped `[-180,180]`); `results/AntennaStructureFOVResult.m` (`azimuthSpan_deg`) | `test_phase6_audits` (AUD-01) |
+| **AUD-02** VERTEX_SAMPLED ≠ EXACT_SURFACE_INTERSECTION; false negatives | RP-002 `RP-DOCUMENTATION` | `docs/icd/spacecraft_geometry.md §4`; `docs/user_manual.md §18/§20` | `test_phase6_audits` (AUD-02) |
+| **AUD-03** InstalledPattern multi-frequency | RP-003 `RP-VALIDATION` | (verified; no code change) | `test_phase6_audits` (AUD-03) |
+
+## P6.3 Canonical decisions (Phase 6)
+
+1. **Circular footprint (AUD-01).** Azimuth extent is computed **relative to the footprint centroid
+   azimuth**, wrapped to `[-180,180]`, and reported as `azimuthSpan_deg` (the true arc). A structure
+   straddling the `±180°` seam no longer reports a spurious ~360° span. `maxAngularRadius_deg` was
+   already wrap-safe and is unchanged. This is a defect fix within the existing geometry domain — no
+   new physics.
+2. **Tiers assigned post-run.** Reproducibility tiers (1–4) are recorded **after** executing each
+   case, not asserted in advance. Tier 4 is a **declared boundary**, not a failure (§8, §53).
+3. **No paper fitting / no fake EM.** Where the model differs from a paper, the difference is
+   classified (`MODEL_GAP_*`, `REFERENCE_DATA_INCOMPLETE`), never corrected by an additive term.
+   No HFSS/CST is introduced; the next-phase recommendation is a *scoped, data-only* ingestion
+   boundary, not an automatic solver mandate (§29, §56; RPT-P6-05 §9).
+4. **Provenance-only data.** Reference scripts use `ASSUMED_FOR_REPLICATION` + `SYNTHETIC_TEST`
+   inputs exclusively; no proprietary/mission data. Real data would enter with an explicit
+   provenance class (`data/reference_cases/README.md`).
+5. **Top-down manual.** `docs/user_manual.md` is written from the user's objective inward; every
+   code block is verified to execute (RPT-P6-04). The RC-KARI-02 reference script derives its
+   installed grid by **perturbing the free-space pattern's own evaluated gains** (not a second base
+   formula), so the comparison delta is meaningful (RP-005).
+
+## P6.4 No-fake-physics / no-fitting audit (Phase 6)
+
+The Phase-6 change set adds no EM computation: `AntennaToStructureFOV` still emits only geometric
+evidence (the AUD-01 fix corrects an azimuth *arithmetic* bug, not a physics value); no reference
+script fits a paper number; no installed pattern is derived from geometry; no HFSS/CST solver is
+invoked. The Phase-5 architecture guard (`test_phase5_architecture`) continues to pass, confirming
+`+geometry`/`+installed` own no gain/loss/scattering value. All new fixtures are `SYNTHETIC_TEST` /
+`ASSUMED_FOR_REPLICATION`.
+
+## P6.5 Verification result
+
+Octave 8.4: **PASS** — **598 assertions, 36 files** (`tests/run_all_tests.m`), the exact `src/` code
+executed; all 579 prior assertions pass unchanged (regression). Reference scripts (quickstart, four
+RC scripts, figure generation) and the extracted manual snippets all execute. MATLAB: **NOT RUN**
+(unavailable in this environment; not claimed).
