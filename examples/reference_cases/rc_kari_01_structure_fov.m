@@ -11,7 +11,14 @@ function rc_kari_01_structure_fov()
 %     - Blocking structure = the PAYLOAD antenna reflector (P-ANT), a dish on a
 %       boom. The satellite BODY is deliberately EXCLUDED from the paper's model
 %       (only S-band antenna + P-ANT are simulated).
-%     - Real satellite size ~4 m; P-ANT height ~1000 mm in reality.
+%     - Real satellite size ~4 m; P-ANT height ~1000 mm in reality, i.e. the P-ANT
+%       sits at x ~= 15 deg ELEVATION above the S-band antenna's mounting plane
+%       (Fig. 1/Fig. 2). With a zenith-pointing hemispherical antenna that is
+%       theta ~= 75 deg off boresight. The 1 dB margin is then evaluated NEAR
+%       theta = 90 deg, where the shadow/reflection lobes appear (Fig. 5).
+%     - Fig. 5 sweeps the P-ANT ANGULAR WIDTH: 4, 8, 12 deg.
+%     - Fig. 6 sweeps the separation d = 350/425/500/575/650 mm (model scale),
+%       with the diameter co-varied so the angular width stays fixed.
 %     - Acceptance criterion: <= 1 dB radiation-characteristic change, evaluated
 %       near 90 deg off the S-band main beam (TC/TM link-budget experience).
 %     - REPORTED RESULT (Fig. 5, angular size sweep at the ~4 m stand-off):
@@ -39,7 +46,9 @@ function rc_kari_01_structure_fov()
     D_limit_m    = 0.80;     % PUBLIC_REPORTED: acceptable up to ~80 cm
     paperAng     = [4 12];   % PUBLIC_REPORTED angular widths [deg]
     criterion_dB = 1.0;      % PUBLIC_REPORTED: 1 dB allowance
-    offAxis_deg  = 90;       % PUBLIC_REPORTED: evaluated near 90 deg off main beam
+    offAxis_deg  = 90;       % PUBLIC_REPORTED: margin evaluated near 90 deg off main beam
+    pantElev_deg = 15;       % PUBLIC_REPORTED: x ~= 15 deg elevation (Fig. 1, Fig. 2)
+    paperSweep   = [4 8 12]; % PUBLIC_REPORTED: Fig. 5 angular-width sweep [deg]
 
     fc = 2.2e9;              % ASSUMED_FOR_REPLICATION (paper says "S band", no exact f)
 
@@ -48,8 +57,10 @@ function rc_kari_01_structure_fov()
     fprintf('  blocking structure : payload-antenna reflector (P-ANT), dish on boom\n');
     fprintf('  satellite body     : EXCLUDED from the model (as in the paper)\n');
     fprintf('  stand-off distance : %.1f m\n', standoff_m);
+    fprintf('  P-ANT elevation    : %d deg above the S-band mounting plane\n', pantElev_deg);
     fprintf('  criterion          : <= %.1f dB change near %d deg off main beam\n', ...
         criterion_dB, offAxis_deg);
+    fprintf('  Fig.5 sweep        : angular width %s deg\n', mat2str(paperSweep));
     fprintf('  frequency          : %.2f GHz  (ASSUMED_FOR_REPLICATION)\n', fc/1e9);
 
     % ---- S-band antenna: hemispherical pattern, boresight +X_A at origin ----
@@ -59,16 +70,19 @@ function rc_kari_01_structure_fov()
     antPos = [0;0;0];
     R_BA   = eye(3);                       % boresight = +X body
 
-    % ---- P-ANT placed near 90 deg off the S-band main beam, at the stand-off ----
-    % The paper's concern is a structure in the +/-90 deg hemisphere; the margin is
-    % exhausted NEAR 90 deg, so the P-ANT centre is put at 90 deg off-boresight.
-    pantCentre = [0; standoff_m; 0];        % 90 deg off +X, at 4 m
-    % dish plane faces the S-band antenna (disk normal +Z_S -> point it along -Y_B)
-    R_BS = rfscreen.geometry.Rotation.aboutX(90);
+    % ---- P-ANT at 15 deg elevation, at the ~4 m stand-off (Fig. 1 / Fig. 2) ----
+    % Boresight (+X_A) is the antenna zenith; the mounting plane is the X=0 plane.
+    % An elevation of 15 deg above that plane is theta = 75 deg off boresight.
+    theta_deg  = 90 - pantElev_deg;                       % = 75 deg off-boresight
+    pantCentre = standoff_m * [cosd(theta_deg); sind(theta_deg); 0];
+    % Orient the dish FACE-ON to the S-band antenna: aboutY(90) sends the disk
+    % normal (local +Z) onto +X, then aboutZ(theta) swings it onto the line of
+    % sight. (Leaving it edge-on would collapse the azimuth footprint to zero.)
+    R_BS = rfscreen.geometry.Rotation.aboutZ(theta_deg) * rfscreen.geometry.Rotation.aboutY(90);
 
     fprintf('\nAngular subtense of P-ANT vs the paper''s reported values:\n');
     fprintf('  %-10s %-12s %-14s %-14s %-10s\n', 'D [m]', 'paper [deg]', 'tool azSpan', 'tool 2*radius', 'delta');
-    diams = [D_small_m, D_large_m];
+    diams = [D_small_m, D_large_m];   % the two the paper translates to diameters
     for k = 1:numel(diams)
         D = diams(k);
         pant = rfscreen.geometry.SpacecraftStructure( ...
@@ -80,6 +94,12 @@ function rc_kari_01_structure_fov()
         tool = 2 * fov.maxAngularRadius_deg;
         fprintf('  %-10.2f %-12d %-14.2f %-14.2f %+.2f deg\n', ...
             D, paperAng(k), fov.azimuthSpan_deg, tool, tool - paperAng(k));
+    end
+
+    % ---- full Fig.5 sweep: angular width -> equivalent real diameter at 4 m ----
+    fprintf('\nFig.5 sweep (angular width -> equivalent P-ANT diameter at %.1f m):\n', standoff_m);
+    for a = paperSweep
+        fprintf('  %2d deg -> D = %.3f m (%.0f cm)\n', a, 2*standoff_m*tand(a/2), 100*2*standoff_m*tand(a/2));
     end
 
     % ---- closed-form cross-check (independent of the FOV engine) ----
@@ -97,7 +117,7 @@ function rc_kari_01_structure_fov()
         struct('provenance', 'PUBLIC_REPORTED'));
     fovL = rfscreen.geometry.AntennaToStructureFOV.analyze('ANT_S_TCTM', antPos, R_BA, pantLimit, ...
         struct('pattern', pat, 'frequency_Hz', fc));
-    fprintf('\nAt the paper''s acceptance limit (D=%.2f m):\n', D_limit_m);
+    fprintf('\nAt the paper''s acceptance limit (D=%.2f m, %d deg elevation):\n', D_limit_m, pantElev_deg);
     fprintf('  centre off-boresight = %.1f deg   occupied lobes = {%s}\n', ...
         fovL.centerOffBoresight_deg, strjoin(fovL.occupiedLobes, ','));
     fprintf('  angular width        = %.2f deg   centre-ray hit = %d   distance = %.2f m\n', ...
