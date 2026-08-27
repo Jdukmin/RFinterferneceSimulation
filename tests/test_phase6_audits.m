@@ -47,19 +47,26 @@ function test_phase6_audits(h)
     % analyzer flags which products fall inside a target receive band (GNSS-band check).
     fe = rfscreen.receiver.ReceiverFrontEnd(struct('iip3_in_dBm', -10, 'p1dB_in_dBm', -20, ...
         'linearGain_dB', 20, 'provenance', 'SYNTHETIC_TEST'));
-    f1 = 1.60e9; f2 = 1.625e9;                     % chosen so 2f1-f2 = 1.575 GHz (GNSS L1)
+    % REAL S-band tones (2-4 GHz). f2 is DERIVED from 2*f1 - f_L1, not hand-picked:
+    % this is the only way a two-tone S-band IM3 can land in L1 (RC-RF-01 fix).
+    fL1 = 1.57542e9;
+    f1 = 2.00e9; f2 = 2*f1 - fL1;                  % f2 = 2.42458 GHz, also S-band
     inputs = struct('txId', {'I1','I2'}, 'freq_Hz', {f1, f2}, ...
         'lnaInputPower_dBm', {-30, -30}, 'isAbsolute', {true, true}, ...
         'couplingValidity', {'FAR_FIELD_VALID','FAR_FIELD_VALID'});
-    gnssBand = [1.56e9 1.59e9];                    % ~ GNSS L1 band
+    gnssBand = [1.559e9 1.591e9];                  % ~ GNSS L1 band
+    h.isTrue('RC-RF-01 f1 is genuinely S-band', f1 >= 2e9 && f1 <= 4e9);
+    h.isTrue('RC-RF-01 f2 is genuinely S-band', f2 >= 2e9 && f2 <= 4e9);
     chan = rfscreen.receiver.IdealBandpassFilter(gnssBand, 0, -Inf);
     im = rfscreen.nonlinear.IntermodulationAnalyzer.analyze(inputs, fe, chan, gnssBand, []);
     pLow = byType(im, '2F1_MINUS_F2');
-    h.eqTol('RC-RF-01 IM3 2f1-f2 = 1.575 GHz', pLow.productFrequency_Hz, 1.575e9, 1);
+    h.eqTol('RC-RF-01 IM3 2f1-f2 = L1 exactly', pLow.productFrequency_Hz, fL1, 1);
     h.isTrue('RC-RF-01 IM3 lands in GNSS band', pLow.inPassband);
     pHigh = byType(im, '2F2_MINUS_F1');
-    h.eqTol('RC-RF-01 IM3 2f2-f1 = 1.65 GHz', pHigh.productFrequency_Hz, 1.65e9, 1);
+    h.eqTol('RC-RF-01 IM3 2f2-f1 = 2f2-f1', pHigh.productFrequency_Hz, 2*f2 - f1, 1);
     h.isFalse('RC-RF-01 upper IM3 outside GNSS band', pHigh.inPassband);
+    h.eqStr('RC-RF-01 small-signal IM3 is VALID', im.validity, 'VALID');
+    h.isTrue('RC-RF-01 IM3 product below the fundamental', pLow.equivalentInputPower_dBm < -30);
 
     % ================= Promoted RC invariant: structure FOV occupancy (RC-KARI-01) ===
     p = rfscreen.antenna.SyntheticPatternFactory.mainSideBack(15, -10, -30, 2.2e9, 15);
@@ -70,6 +77,98 @@ function test_phase6_audits(h)
     h.isTrue('RC-01 boresight structure occupies MAIN', fovB.occupies('MAIN'));
     h.isTrue('RC-01 boresight structure centre-ray hits', fovB.centerRayHits);
     h.eqTol('RC-01 boresight centre off-boresight = 0', fovB.centerOffBoresight_deg, 0, 1e-6);
+
+    % ========== DEFECT-A: IM3 small-signal domain guard (paper regime is saturation) ==========
+    feSat = rfscreen.receiver.ReceiverFrontEnd(struct('p1dB_in_dBm', -25, 'iip3_in_dBm', -15, ...
+        'linearGain_dB', 28, 'provenance', 'SYNTHETIC_TEST'));
+    bandL1 = [1.559e9 1.591e9];
+    chanL1 = rfscreen.receiver.IdealBandpassFilter(bandL1, 0, -Inf);
+    fS1 = 2.00e9; fS2 = 2*fS1 - 1.57542e9;
+    satIn = struct('txId', {'A','B'}, 'freq_Hz', {fS1, fS2}, ...
+        'lnaInputPower_dBm', {-8, -8}, 'isAbsolute', {true, true}, ...
+        'couplingValidity', {'FAR_FIELD_VALID','FAR_FIELD_VALID'});
+    imSat = rfscreen.nonlinear.IntermodulationAnalyzer.analyze(satIn, feSat, chanL1, bandL1, []);
+    h.eqStr('DEFECT-A saturated IM3 flagged OUTSIDE_MODEL_DOMAIN', imSat.validity, 'OUTSIDE_MODEL_DOMAIN');
+    pSat = byType(imSat, '2F1_MINUS_F2');
+    h.eqStr('DEFECT-A product flagged too', pSat.validity, 'OUTSIDE_MODEL_DOMAIN');
+    h.isTrue('DEFECT-A warning emitted', numel(pSat.warnings) >= 1);
+    h.eqTol('DEFECT-A headroom is negative (above P1dB)', pSat.toneHeadroomBelowP1dB_dB, -17, 1e-9);
+    h.isTrue('DEFECT-A product frequency still exact', abs(pSat.productFrequency_Hz - 1.57542e9) < 1);
+
+    smallIn = struct('txId', {'A','B'}, 'freq_Hz', {fS1, fS2}, ...
+        'lnaInputPower_dBm', {-40, -40}, 'isAbsolute', {true, true}, ...
+        'couplingValidity', {'FAR_FIELD_VALID','FAR_FIELD_VALID'});
+    imSml = rfscreen.nonlinear.IntermodulationAnalyzer.analyze(smallIn, feSat, chanL1, bandL1, []);
+    h.eqStr('DEFECT-A small-signal IM3 stays VALID', imSml.validity, 'VALID');
+    pSml = byType(imSml, '2F1_MINUS_F2');
+    h.eqTol('DEFECT-A small-signal headroom = 15 dB', pSml.toneHeadroomBelowP1dB_dB, 15, 1e-9);
+    h.eqTol('DEFECT-A small-signal P_IM3 = 3P-2*IIP3', pSml.equivalentInputPower_dBm, 3*(-40)-2*(-15), 1e-9);
+
+    % ========== RC-KARI-01 paper numbers: P-ANT angular subtense (PUBLIC_REPORTED) ==========
+    % 임원규 외, KSAS 2015 춘계 pp.832-835: 4 deg <-> ~30 cm, 12 deg <-> ~83 cm at ~4 m.
+    R = 4.0;
+    R_BS = rfscreen.geometry.Rotation.aboutX(90);
+    pantSmall = rfscreen.geometry.SpacecraftStructure('P30','P-ANT 30cm','REFLECTOR', ...
+        rfscreen.geometry.DiskGeometry(0.30, 32), R_BS, [0;R;0], ...
+        struct('provenance','PUBLIC_REPORTED'));
+    fSmall = rfscreen.geometry.AntennaToStructureFOV.analyze('S',[0;0;0],eye(3), pantSmall, struct());
+    h.eqTol('RC-01 30cm@4m subtense = 4 deg (paper)', 2*fSmall.maxAngularRadius_deg, 4.0, 0.5);
+    h.eqTol('RC-01 30cm subtense == closed form', 2*fSmall.maxAngularRadius_deg, ...
+        2*atand(0.30/2/R), 1e-6);
+
+    pantLarge = rfscreen.geometry.SpacecraftStructure('P83','P-ANT 83cm','REFLECTOR', ...
+        rfscreen.geometry.DiskGeometry(0.83, 32), R_BS, [0;R;0], ...
+        struct('provenance','PUBLIC_REPORTED'));
+    fLarge = rfscreen.geometry.AntennaToStructureFOV.analyze('S',[0;0;0],eye(3), pantLarge, struct());
+    h.eqTol('RC-01 83cm@4m subtense = 12 deg (paper)', 2*fLarge.maxAngularRadius_deg, 12.0, 0.5);
+    h.eqTol('RC-01 83cm subtense == closed form', 2*fLarge.maxAngularRadius_deg, ...
+        2*atand(0.83/2/R), 1e-6);
+    h.eqTol('RC-01 P-ANT sits at 90 deg off-boresight', fLarge.centerOffBoresight_deg, 90, 1e-6);
+
+    % DiskGeometry must NOT overestimate like a square panel's corner sampling
+    panelSq = rfscreen.geometry.SpacecraftStructure('PS','square panel','REFLECTOR', ...
+        rfscreen.geometry.PanelGeometry(0.83, 0.83), R_BS, [0;R;0], ...
+        struct('provenance','SYNTHETIC_TEST'));
+    fPan = rfscreen.geometry.AntennaToStructureFOV.analyze('S',[0;0;0],eye(3), panelSq, struct());
+    h.isTrue('RC-01 square-panel corners overestimate vs disk', ...
+        fPan.maxAngularRadius_deg > fLarge.maxAngularRadius_deg);
+
+    % ========== RC-KARI-02 paper numbers: minimum validity radius 30-40 cm ==========
+    h.isTrue('RC-02 40cm boom >= reported minimum validity radius', 0.40 >= 0.40);
+    h.isTrue('RC-02 4-5cm boom is below the minimum validity radius', 0.045 < 0.30);
+
+    % PatternComparison must honour an explicitly supplied grid (silent-default fix)
+    fcC = 2.2e9;
+    freeC = rfscreen.antenna.SyntheticPatternFactory.cosineDirectional(6, fcC, 1);
+    azC = -180:5:180; elC = -90:5:90;
+    Gi = zeros(numel(elC), numel(azC));
+    for ie = 1:numel(elC)
+        for ia = 1:numel(azC)
+            Gi(ie,ia) = freeC.evaluate(fcC, azC(ia), elC(ie)) + 3*sind(3*azC(ia))*cosd(elC(ie));
+        end
+    end
+    instC = rfscreen.antenna.InstalledPattern('SYNTHETIC_TEST_ripple','SIMULATED_3D', ...
+        rfscreen.antenna.PatternGrid(azC, elC, fcC, Gi), 'OTHER_SOLVER');
+    cmpC = rfscreen.installed.PatternComparison.compare(freeC, instC, ...
+        struct('frequency_Hz', fcC, 'az_deg', azC, 'el_deg', elC));
+    h.eqTol('RC-02 explicit grid honoured (n = 73*37)', cmpC.nGrid, numel(azC)*numel(elC), 0);
+    h.eqTol('RC-02 ripple read back = 3 dB (paper envelope)', cmpC.maxAbsDifference_dB, 3.0, 1e-6);
+
+    % ========== DiskGeometry primitive ==========
+    dk = rfscreen.geometry.DiskGeometry(0.5, 24);
+    h.eqTol('Disk bounding radius = D/2', dk.boundingRadius(), 0.25, 1e-12);
+    h.eqTol('Disk rim sample count', size(dk.verticesLocal(), 2), 24, 0);
+    [hitC, tC] = dk.rayIntersectLocal([0;0;-2], [0;0;1]);
+    h.isTrue('Disk centre ray hits', hitC);
+    h.eqTol('Disk centre ray distance', tC, 2, 1e-12);
+    [hitO, ~] = dk.rayIntersectLocal([0.4;0;-2], [0;0;1]);
+    h.isFalse('Disk ray outside rim misses', hitO);
+    [hitP, ~] = dk.rayIntersectLocal([0;0;-2], [1;0;0]);
+    h.isFalse('Disk ray parallel to plane misses', hitP);
+    h.isTrue('GeometryProvenance accepts PUBLIC_REPORTED', ...
+        rfscreen.geometry.GeometryProvenance.isValid('PUBLIC_REPORTED'));
+    h.isTrue('GeometryProvenance accepts ASSUMED_FOR_REPLICATION', ...
+        rfscreen.geometry.GeometryProvenance.isValid('ASSUMED_FOR_REPLICATION'));
 end
 
 function p = byType(im, ptype)

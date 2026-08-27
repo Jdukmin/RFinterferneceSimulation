@@ -4,23 +4,27 @@ Maps each KARI reference case to its research question, tool component, reproduc
 observed reproducibility tier. **Reproducibility tiers are assigned *after* running the cases**
 (§7). No paper fitting; no fake EM (§9, §29).
 
-## Reference cases
+## Reference cases  (full texts obtained and read — see RPT-P6-06)
 
-| Case | Citation (short) | Research question | Primary tool component | Script |
-|------|------------------|-------------------|------------------------|--------|
-| **RC-KARI-01** | 임원규 외, KSAS 2015 — 위성 구조체 FOV 간섭에 의한 S대역 안테나 방사특성 영향 | Does spacecraft structure in the antenna FOV change S-band radiation characteristics? | Phase-5 `AntennaToStructureFOV`, `LineOfSight`, angular footprint | `examples/reference_cases/rc_kari_01_structure_fov.m` |
-| **RC-KARI-02** | 이선익·임원규·김중표, KSAS 2023 — S대역 안테나 위성 설치상태 성능 | Free-space vs spacecraft-installed antenna performance | Phase-2 pattern data + Phase-5 `FreeSpacePattern`/`InstalledPattern` + `PatternComparison` | `examples/reference_cases/rc_kari_02_installed_pattern.m` |
-| **RC-KARI-03** | 이선익·임원규, KARI 2025 — 정지궤도위성 TT&C S대역 안테나 설치위치 전자장 해석 | Installed-location electromagnetic behavior at a chosen mount | Phase-5 installed environment (position/FOV/LOS) + **fidelity boundary** | `examples/reference_cases/rc_kari_03_installation_analysis.m` |
-| **RC-KARI-RF-01** | 권병문·신용설·마근수·주정갑·지기만, JKSAS 2019 — S대역 신호에 의한 위성항법수신기 RF 간섭 (**not** an Im Won-gyu paper) | Strong S-band signals → GNSS active-antenna LNA saturation / IM3 into GNSS band | Phase-3 linear + Phase-4 `CompressionAnalyzer`/`BlockingAnalyzer`/`IntermodulationAnalyzer` | `examples/reference_cases/rc_kari_rf_01_gnss_interference.m` |
+| Case | Citation (verified) | Research question | Primary tool component | Script |
+|------|---------------------|-------------------|------------------------|--------|
+| **RC-KARI-01** | 임원규 외, KSAS **2015 춘계**, **pp.832-835** — 위성 구조체 FOV 간섭에 의한 S대역 안테나 방사특성 영향 | How large may a payload-antenna reflector (P-ANT) in the S-band antenna's FOV be before the 1 dB allowance is exhausted? | `geometry.AntennaToStructureFOV` + `geometry.DiskGeometry` (angular subtense) | `rc_kari_01_structure_fov.m` |
+| **RC-KARI-02** | 이선익·임원규·김중표, KSAS **2023 추계**, **pp.1261-1263** — S대역 안테나 위성 설치상태 성능 | Which installed-performance analysis method is valid at a given antenna stand-off, and how large is the installed ripple? | stand-off validity screening + `installed.PatternComparison` | `rc_kari_02_installed_pattern.m` |
+| **RC-KARI-03** | 이선익·임원규, **항공우주시스템공학회(SASE) 2025 춘계** — 정지궤도위성 TT&C S대역 안테나 설치위치 전자장 해석 | Is the chosen placement (derived from inter-antenna RF interference analysis) acceptable? | `geometry.AntennaToAntennaFOV` screening + `AntennaToStructureFOV` | `rc_kari_03_installation_analysis.m` |
+| **RC-KARI-RF-01** | 권병문 외, JKSAS **47(5) pp.388-396**, 2019 — S대역 신호에 의한 위성항법수신기 RF 간섭 (**not** an Im Won-gyu paper; platform is a **test launch vehicle**) | Can two S-band tones saturate a GNSS LNA and put an IM product in the GNSS band? | `nonlinear.CompressionAnalyzer` / `IntermodulationAnalyzer` | `rc_kari_rf_01_gnss_interference.m` |
 
-## Per-case reproduction summary (post-run)
+## Per-case reproduction summary (verified against the full texts)
 
-| Case | Paper input (public) | Paper output | Reproduction inputs | Expected fidelity | **Observed tier** | Validation metric |
-|------|----------------------|--------------|---------------------|-------------------|-------------------|-------------------|
-| RC-KARI-01 | Structure geometry, S-band antenna, FOV interaction | RP characteristic change from structure FOV | `ASSUMED_FOR_REPLICATION` bus + solar array + boom geometry; synthetic S-band pattern | High (geometry) / None (EM RP) | **Tier 2** geometry FOV/LOS; **Tier 4** EM RP deformation (`MODEL_GAP_FULL_WAVE`) | FOV occupancy, angular footprint, off-boresight, LOS status |
-| RC-KARI-02 | Free/installed antenna configs | Installed pattern/gain change | Synthetic free-space pattern; installed = free perturbed (illustrative); a real digitized cut would slot in as `DIGITIZED_FROM_PUBLIC_FIGURE` | Medium-High | **Tier 2–3** (comparison workflow); axial-ratio/pol **Tier 4** (`MODEL_GAP_AXIAL_RATIO/POLARIZATION`) | peak/max/RMS gain delta, boresight delta |
-| RC-KARI-03 | Installation location, spacecraft EM environment | Installed EM behavior | `ASSUMED_FOR_REPLICATION` two mount locations + boom | Partial (boundary) | **Tier 1** position; **Tier 2** FOV/LOS; **Tier 4** scattering/reflection/diffraction | off-boresight, occupied lobes, centre-ray hit per location |
-| RC-KARI-RF-01 | S-band interferers, GNSS receiver | LNA saturation / IM degradation of GNSS | `ASSUMED_FOR_REPLICATION` front-end P1dB/IIP3, interferer powers; f1/f2 chosen so 2f1−f2∈L1 | Medium | **Tier 2** (trend/mechanism) | compression margin sign, IM3 product frequency + in-band flag |
+| Case | Paper's reported number | Tool's computed number | Class | **Tier** | Paper's headline result (Tier 4) |
+|------|-------------------------|------------------------|-------|----------|----------------------------------|
+| RC-KARI-01 | 4° ↔ ≈30 cm; 12° ↔ ≈83 cm @ ≈4 m; accept ≤ ≈80 cm | **4.30°** / **11.85°** / 11.42° | `EXACT_NUMERICAL` | **Tier 1** | ≤ 1 dB gain deformation (`MODEL_GAP_FULL_WAVE`) |
+| RC-KARI-02 | min validity radius **30–40 cm**; Case 1 (40 cm) valid, Case 2 (4–5 cm) unstable | VALID / NOT VALID / VALID — matches all three cases | `EXACT_NUMERICAL` | **Tier 1** | 1–3 dB gain **and axial-ratio** ripple (`MODEL_GAP_AXIAL_RATIO`) |
+| RC-KARI-03 | placement based on inter-antenna RF interference analysis; FEKO verdict "negligible" | inter-antenna screening matrix (dist / off-boresight / lobe) reproduced | `SAME_TREND` | **Tier 2** | "effect is negligible" + axial ratio (`MODEL_GAP_SCATTERING`) |
+| RC-KARI-RF-01 | LNA saturated; two S-band tones → IM product in GNSS band | `2f1−f2 = 1.57542 GHz` exactly; required spacing ≥ ≈425 MHz; compression FAIL | `EXACT_NUMERICAL` + `SAME_TREND` | **Tier 1/2** | C/N0 degradation (**no C/N0 channel**) |
+
+> **Two defects were found and fixed during verification** (RPT-P6-06 §4): the small-signal IM3 law
+> was being applied in saturation and reported `VALID`; and the RC-RF-01 "S-band" tones were actually
+> L-band, reverse-engineered so the product would land in L1.
 
 ## Reference case ↔ architecture matrix (observed, §45)
 
@@ -48,6 +52,9 @@ the script; boundary rows are **reported gaps**, not failures (§8 Tier 4, §53 
 ## Data provenance classes used (`data/reference_cases/`)
 
 `PUBLIC_REPORTED`, `PUBLIC_DIGITIZED` (`DIGITIZED_FROM_PUBLIC_FIGURE`), `SYNTHETIC_SUPPORT`,
-`ASSUMED_FOR_REPLICATION`. Phase-6 scripts use `ASSUMED_FOR_REPLICATION` + `SYNTHETIC_SUPPORT`
-only — no proprietary/mission data, no digitized figure was available to include here; the
-workflow supports digitized data with explicit provenance when provided.
+`ASSUMED_FOR_REPLICATION`. These are now expressible **in code** via
+`geometry.GeometryProvenance` (extended in Phase 6). After the full texts were obtained the scripts
+use **`PUBLIC_REPORTED`** for every value taken from a paper (P-ANT diameters, stand-off distances,
+validity radii, ripple envelope, acceptance criteria) and `ASSUMED_FOR_REPLICATION` only where the
+paper is silent (exact frequency, platform coordinates, front-end hardware). No proprietary or
+mission data; no digitized figure was needed since the required values appear in the paper text.

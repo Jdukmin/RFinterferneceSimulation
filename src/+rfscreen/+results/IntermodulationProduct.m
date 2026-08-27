@@ -10,6 +10,9 @@ classdef IntermodulationProduct
         productType = ''
         productFrequency_Hz = NaN
         iip3_in_dBm = NaN
+        p1dB_in_dBm = NaN                % small-signal domain reference (Task 36)
+        smallSignalMargin_dB = NaN       % headroom below P1dB_in required for the cubic law
+        toneHeadroomBelowP1dB_dB = NaN   % P1dB_in - max(tone); < margin => OUTSIDE_MODEL_DOMAIN
         equivalentInputPower_dBm = NaN   % input-referred IM3 (LNA_INPUT)
         channelResponse_dB = NaN
         effectiveProductPower_dBm = NaN
