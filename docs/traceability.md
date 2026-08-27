@@ -450,3 +450,58 @@ Octave 8.4: **PASS** — **598 assertions, 36 files** (`tests/run_all_tests.m`),
 executed; all 579 prior assertions pass unchanged (regression). Reference scripts (quickstart, four
 RC scripts, figure generation) and the extracted manual snippets all execute. MATLAB: **NOT RUN**
 (unavailable in this environment; not claimed).
+
+
+---
+
+# Phase 6b — Paper-Verified Replication (full texts obtained)
+
+The three KARI full texts were obtained and read. This section records the corrections that
+verification forced, the two real defects it exposed, and the resulting code changes. Full narrative:
+`docs/reports/reference_validation/RPT-P6-06-paper-verified-replication.md`.
+
+## P6b.1 Citation corrections
+
+| Case | Earlier (wrong) | Verified |
+|------|-----------------|----------|
+| RC-KARI-01 | KSAS 학술발표회, 2015 | KSAS **2015 춘계**, **pp.832-835** |
+| RC-KARI-02 | 한국항공우주학회, 2023 | KSAS **2023 추계**, **pp.1261-1263** |
+| RC-KARI-03 | **KARI research stream**, 2025 | **항공우주시스템공학회(SASE) 2025 춘계** |
+| RC-KARI-RF-01 | framed as spacecraft | platform is a **test launch vehicle (시험발사체)** |
+
+## P6b.2 Defects found and fixed
+
+| ID | Kind | Description | Fix | Test |
+|----|------|-------------|-----|------|
+| **DEFECT-A** | Implementation / physics-domain | The small-signal IM3 law `2Pa+Pb−2·IIP3` was applied with tones **17 dB above** `P1dB_in`, returning `P_IM3,in = +6 dBm` — **14 dB above the fundamental**, physically impossible — with `validity = VALID` and no warning. `OUTSIDE_MODEL_DOMAIN` existed but was wired only to `f_IM ≤ 0`. This is exactly the regime RC-KARI-RF-01's paper is about. | `IntermodulationAnalyzer` now requires a configurable headroom (default **10 dB**) below `P1dB_in`, and independently rejects any product exceeding its own fundamental; both set `OUTSIDE_MODEL_DOMAIN` with an explicit warning and **withhold** the level. New `IntermodulationProduct` fields: `p1dB_in_dBm`, `smallSignalMargin_dB`, `toneHeadroomBelowP1dB_dB`. | `test_phase6_audits` (DEFECT-A ×8) |
+| **DEFECT-B** | Reference-script fitting | RC-RF-01's "S-band" interferers were **1.600 / 1.625 GHz** — **L-band**, not S-band (2–4 GHz) — chosen so `2f1−f2` would land in L1 almost by construction. That is reverse-engineering the conclusion (violates §9). | `f2` is now **derived** as `2·f1 − f_L1` and both tones are checked against the S-band definition; the script reports the **required tone spacing** (≳425 MHz) instead. | `test_phase6_audits` (S-band assertions) |
+
+## P6b.3 Code changes
+
+| Change | Kind |
+|--------|------|
+| `nonlinear/IntermodulationAnalyzer` — small-signal domain guard | **defect fix** |
+| `results/IntermodulationProduct` — 3 domain fields | supporting |
+| `geometry/DiskGeometry` — new rim-sampled circular primitive | gap fix (the papers' P-ANT **is** a dish; a square panel's corner sampling overestimates subtense by √2) |
+| `geometry/GeometryProvenance` — `PUBLIC_REPORTED`, `PUBLIC_DIGITIZED`, `ASSUMED_FOR_REPLICATION` | consistency fix (Phase 6 documented these classes but the code could not express them) |
+| all four `examples/reference_cases/rc_kari_*.m` rewritten on verified data | correction (earlier scripts modelled structures the papers do not contain) |
+| RC-02 passes the comparison grid explicitly | correction (silent 15° default masked the stated 5° resolution) |
+
+## P6b.4 What is now reproduced, verified against the papers
+
+| Case | Paper reports | Tool computes | Class | Tier |
+|------|---------------|---------------|-------|------|
+| RC-KARI-01 | 4° ↔ ≈30 cm, 12° ↔ ≈83 cm @ ≈4 m | **4.30°**, **11.85°** | `EXACT_NUMERICAL` | 1 |
+| RC-KARI-02 | min validity radius 30–40 cm; 3 method cases | VALID / NOT VALID / VALID (all three match) | `EXACT_NUMERICAL` | 1 |
+| RC-KARI-03 | placement from inter-antenna RF interference analysis | inter-antenna screening matrix | `SAME_TREND` | 2 |
+| RC-KARI-RF-01 | two S-band tones → IM in GNSS band | `2f1−f2 = 1.57542 GHz` exact; spacing ≳425 MHz | `EXACT_NUMERICAL` | 1 |
+
+**Every paper's headline result remains Tier 4** (dB gain deformation, 1–3 dB ripple + axial ratio,
+FEKO "negligible" verdict, C/N0 degradation). What the tool reproduces exactly is the geometric /
+arithmetic precondition each paper's sweep is parameterized by.
+
+## P6b.5 Verification result
+
+Octave 8.4: **PASS** — **628 assertions, 36 files** (`tests/run_all_tests.m`), the exact `src/` code
+executed; all prior assertions pass (579 → 598 → **628**). All four reference scripts, the quickstart,
+and figure generation execute. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).

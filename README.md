@@ -41,9 +41,14 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > `docs/icd/installed_environment.md`.
 >
 > **Phase 6 (complete).** **KARI reference replication, top-down validation & user manual** — a
-> validation/reproduction phase (no new physics). It measures how far the Phase 1–5 tool reproduces
-> four published KARI research cases, run top-down from a user's point of view; fixes one geometry
-> defect (AUD-01 circular azimuth footprint); adds a top-down **user manual**
+> validation/reproduction phase (no new physics). The four papers' **full texts were obtained and
+> verified**: the tool reproduces the payload-reflector angular subtense (**4.30° / 11.85°** vs the
+> paper's 4° / 12°), the 30–40 cm analysis-method validity radius, the inter-antenna placement
+> screening, and the exact IM3 product frequency — all `EXACT_NUMERICAL`. Verification exposed and
+> fixed **two real defects** (small-signal IM3 law applied in saturation and reported `VALID`; RC-RF-01
+> "S-band" tones that were actually L-band, reverse-engineered to force the conclusion). It also fixes
+> a geometry defect (AUD-01 circular azimuth footprint), adds a `DiskGeometry` primitive, and adds a
+> top-down **user manual**
 > (`docs/user_manual.md`), a **quick start** (`examples/quickstart.m`), and four runnable
 > **reference-case scripts** (`examples/reference_cases/`); and records the results with
 > reproducibility tiers and ranked model gaps — **no paper fitting, no fabricated EM, no HFSS/CST
@@ -175,8 +180,8 @@ cd tests
 ok = run_all_tests();
 ```
 
-Current status: **598 deterministic assertions across 36 test files, all passing** (131 Phase-1 +
-114 Phase-2 + 126 Phase-3 + 102 Phase-4 + 106 Phase-5 + 19 Phase-6 audits), under **GNU Octave
+Current status: **628 deterministic assertions across 36 test files, all passing** (131 Phase-1 +
+114 Phase-2 + 126 Phase-3 + 102 Phase-4 + 106 Phase-5 + 49 Phase-6/6b audits), under **GNU Octave
 8.4** (MATLAB not available in this environment, so MATLAB execution is not claimed). Covers pairwise
 screening, the
 Phase-2 ingestion pipeline, the Phase-3 linear RF chain, the Phase-4 nonlinear chain, and the

@@ -73,6 +73,12 @@ Phase 5 implements exact-primitive **ray intersection** plus **`VERTEX_SAMPLED`*
 footprints (and `CENTER_POINT` where only the centroid direction is used). Levels are reported
 explicitly and never treated as equivalent.
 
+**Disk primitive (Phase 6).** `DiskGeometry(diameter_m, nRim)` models a circular reflector /
+dish aperture in the local XY plane (normal `+Z_S`). `verticesLocal()` returns `nRim` points on the
+**rim** (default 16), so the `VERTEX_SAMPLED` angular footprint equals the disk's true angular width
+`2·atan(D/2/R)`. A square `PanelGeometry` of side `D` is sampled at its **corners** and therefore
+overestimates that width by a factor √2 — use `DiskGeometry` for dishes.
+
 **Sampling caveat (AUD-02).** `VERTEX_SAMPLED` is **not** an exact surface intersection: the
 angular footprint (`occupiedLobes`, `azimuthSpan_deg`, `minAz/maxAz`, `min/max el`) is derived
 from the centroid + corner directions only. There is no `EXACT_SURFACE_INTERSECTION` fidelity, and

@@ -239,43 +239,67 @@ public but not attached, the entry records the engineering case it stands for.
   [Google Scholar](https://scholar.google.com/scholar?q=위성+구조체+FOV+S대역+안테나+방사+특성+임원규).
 - **Phase / component.** Phase 5 — `geometry.AntennaToStructureFOV`, `geometry.LineOfSight`,
   angular footprint. Script: `examples/reference_cases/rc_kari_01_structure_fov.m`.
-- **What the tool can validate.** That spacecraft structure enters the antenna FOV in the reported
-  region; angular footprint; occupied lobes (main/side/back); LOS blockage — **geometry evidence**
-  (Tier 2).
-- **Known reproduction limitation.** The electromagnetic radiation-pattern *deformation magnitude*
-  (scattering/diffraction) is `MODEL_GAP_FULL_WAVE`, **Tier 4** — requires full-wave/measured
-  evidence the tool does not own.
+- **Paper setup (PUBLIC_REPORTED, from the full text).** S-band TC/TM antenna = **quadrifilar**
+  (4× inverted-F, 90° phasing), circular polarization, **hemispherical** pattern (±90°), axial ratio
+  3 dB over ≈±55°. The blocking structure is the **payload-antenna reflector (P-ANT)**, a dish on a
+  boom; the **satellite body is deliberately excluded** from the model. Real scale ≈ 4 m; P-ANT
+  height ≈ 1000 mm. Acceptance criterion **≤ 1 dB** change, evaluated near **90° off** the main beam
+  (from TC/TM link-budget experience). Four swept variables: P-ANT diameter, thickness, spacing, boom.
+- **Reported result.** Angular width **4° ↔ ≈30 cm** diameter and **12° ↔ ≈83 cm** diameter at the
+  ≈4 m stand-off; at ≈12° the 1 dB margin is exhausted near 90° → **acceptable up to ≈80 cm**.
+- **What the tool can validate.** The **angular subtense** of the P-ANT — the paper's own sweep
+  parameter — is reproduced **exactly** (30 cm → 4.30°, 83 cm → 11.85°, vs the paper's "≈4°"/"12°"),
+  plus FOV occupancy, occupied lobes, and centre-ray blockage.
+- **Known reproduction limitation.** The **dB gain deformation** itself (scattering + reflection) is
+  the paper's EM output: `MODEL_GAP_FULL_WAVE`, **Tier 4** — requires full-wave/measured evidence
+  the tool does not own.
 
 ### RC-KARI-02 — Installed S-band antenna performance (KSAS 2023)
 
 - **Citation.** 이선익, 임원규, 김중표, "S대역 안테나의 위성 설치상태에서의 성능 연구",
-  한국항공우주학회, 2023. Search:
-  [한국항공우주학회](https://www.koreascience.kr/) ·
-  [Google Scholar](https://scholar.google.com/scholar?q=S대역+안테나+위성+설치상태+성능+이선익+임원규).
+  한국항공우주학회 **2023 추계**학술대회 논문집, **pp. 1261-1263**. (원문 확인 완료.)
 - **Phase / component.** Phase 2 pattern data + Phase 5 `FreeSpacePattern`/`InstalledPattern`,
   `InstalledPatternSelector`, `PatternComparison`. Script:
   `examples/reference_cases/rc_kari_02_installed_pattern.m`.
-- **What the tool can validate.** The **free-space ↔ installed comparison workflow** (peak/max/RMS
-  gain delta, boresight delta), with provenance preserved (Tier 2–3), when installed data is
-  supplied.
-- **Known reproduction limitation.** The installed pattern must be **supplied** (measured/simulated)
-  — it is never derived from geometry (`MODEL_GAP_INSTALLED_PATTERN`); axial-ratio/polarization
-  deltas are unsupported (`MODEL_GAP_AXIAL_RATIO/POLARIZATION`, Tier 4).
+- **Paper content (PUBLIC_REPORTED).** Compares installed-performance analysis methods: **full-wave**
+  (MoM/FEM, e.g. HFSS) vs **high-frequency** (GTD/UTD) with a far-field (`*.ffe`) or spherical-wave
+  mode (`*.sph`) source. Reported **minimum validity radius ≈ 30–40 cm** for this hemispherical
+  S-band antenna. Method campaign: **Case 1** 40 cm boom → all three methods agree; **Case 2**
+  4–5 cm boom → far-field ≈ HFSS but **spherical-mode source unstable**; **Case 3** box near antenna
+  → all agree. GEO application: S-band TC&R on a rod **≥ 40 cm** from the platform, neighbours = SBAS
+  (L), DCS (L), fixed-comm (Ka), solar panels; analysed with HF method + far-field source.
+- **Reported result.** Over the required coverage the platform/neighbour effect on **both gain and
+  axial ratio** is a small ripple of **1–3 dB or less**.
+- **What the tool can validate.** The **method-validity decision** from stand-off distance vs the
+  30–40 cm minimum radius (**exact**, Tier 1), and the free-space ↔ installed **comparison metric**
+  (Tier 2, instrument-verified against the reported 1–3 dB envelope).
+- **Known reproduction limitation.** The tool **cannot produce** the installed pattern (the paper's
+  FEKO/HFSS output) — it only consumes supplied data; **axial ratio is not represented at all**
+  (`MODEL_GAP_AXIAL_RATIO/POLARIZATION`, Tier 4).
 
 ### RC-KARI-03 — Installed-location electromagnetic analysis (KARI 2025)
 
 - **Citation.** 이선익, 임원규, "위성항법 정지궤도위성 원격측정명령계 S대역 안테나 설치위치에서의
-  전자장 해석", KARI research stream, 2025. Search:
-  [KARI](https://www.kari.re.kr/) ·
-  [Google Scholar](https://scholar.google.com/scholar?q=정지궤도위성+S대역+안테나+설치위치+전자장+해석+이선익).
+  전자장 해석" / "Scattering Analysis of S-band TC&R Antennas on Installed Location for a GEO
+  Positioning Satellite Application", **항공우주시스템공학회(SASE) 2025년도 춘계학술대회**.
+  한국항공우주연구원 위성우주탐사연구소. (원문 확인 완료. 이전 인용 "KARI research stream"은 오기.)
 - **Phase / component.** Phase 5 installed environment (position + FOV + LOS) + explicit fidelity
   boundary. Script: `examples/reference_cases/rc_kari_03_installation_analysis.m`.
-- **What the tool can validate.** Per-candidate-location installation position (Tier 1) and FOV/LOS
-  geometry (Tier 2) at each mount.
-- **Known reproduction limitation.** The full-wave EM field solution
-  (scattering/reflection/diffraction) is **Tier 4** by design — this case validates the
-  *architecture boundary*, cleanly separating reproducible installed-geometry evidence from the
-  full-wave field the tool does not compute.
+- **Paper content (PUBLIC_REPORTED).** GEO positioning satellite with a **large orbital
+  inclination**; the S-band TC&R antenna shares the platform with several satellite-navigation
+  service antennas. Crucially, the placement was arrived at **"이들 안테나간 RF 간섭 분석을 기초로"**
+  — *on the basis of RF interference analysis between the antennas* — and the EM analysis then
+  **verified** it. Verification tool: **FEKO**, with an antenna source file.
+- **Reported result.** The effect of the satellite structure and neighbouring antennas on the S-band
+  radiation characteristics is **negligible (미미)**, and the **coverage requirement is satisfied**.
+  Reported quantities: gain and axial ratio.
+- **What the tool can validate.** Exactly the paper's *upstream* step — the **inter-antenna RF
+  interference screening that drives placement** (Tier 2) — plus installation position and stand-off
+  validity (Tier 1) and structure-FOV coverage obstruction (Tier 2).
+- **Known reproduction limitation.** The *downstream* step — the **FEKO scattering solution** proving
+  the effect is negligible, and the axial ratio — is **Tier 4** by design. This case is the clearest
+  statement of the tool's intended role: it performs the screening that chooses the placement and
+  feeds a full-wave solver that proves it.
 
 ### RC-KARI-RF-01 — S-band signals interfering with a GNSS receiver (JKSAS 2019)
 
@@ -286,11 +310,15 @@ public but not attached, the entry records the engineering case it stands for.
   [Google Scholar](https://scholar.google.com/scholar?q=S대역+신호+위성항법수신기+RF+신호간섭+권병문).
 - **Phase / component.** Phase 3 linear + Phase 4 `CompressionAnalyzer` / `BlockingAnalyzer` /
   `IntermodulationAnalyzer`. Script: `examples/reference_cases/rc_kari_rf_01_gnss_interference.m`.
-- **What the tool can validate.** The **mechanism/trend**: strong S-band signals driving a GNSS
-  active-antenna LNA toward/over P1dB (compression margin sign), and a two-tone IM3 product
-  (`2f1−f2`) landing inside the GNSS L1 band (Tier 2).
-- **Known reproduction limitation.** Absolute dB levels are **not fitted** — the paper's exact
-  hardware IIP3/P1dB and link budget are not public (`REFERENCE_DATA_INCOMPLETE`).
+- **Platform note.** The platform is a **test launch vehicle (시험발사체)**, not a satellite.
+- **What the tool can validate.** (a) the **required S-band tone spacing** for a two-tone IM3 to land
+  in L1 (`f2 = 2·f1 − f_L1`) and the **exact product frequency** (Tier 1); (b) the **saturation
+  trend** — strong S-band aggregate driving the LNA past P1dB (Tier 2).
+- **Known reproduction limitation.** The paper's regime is **saturation**, where the small-signal
+  IM3 law `2Pa+Pb−2·IIP3` is **invalid**; the analyzer now reports `OUTSIDE_MODEL_DOMAIN` and
+  **withholds the level** rather than returning a non-physical value. Absolute levels are not fitted
+  (paper hardware not public); **C/N0 degradation — the paper's headline result — has no channel in
+  this tool** (Tier 4).
 
 *(Realized by the Phase-3/4/5 packages above; validated in
 `docs/reports/reference_validation/RPT-P6-01…05` and `reference_case_matrix.md`. Consistent with the

@@ -223,6 +223,9 @@ panel = rfscreen.geometry.SpacecraftStructure('SA','solar array', 'SOLAR_ARRAY',
 
 - `BoxGeometry([hx;hy;hz])` — a box with the given half-extents (metres), slab-method ray test.
 - `PanelGeometry(width, height)` — a flat panel, ray-plane intersection with in-bounds test.
+- `DiskGeometry(diameter, nRim)` — a circular disk (reflector / dish aperture), rim-sampled so its
+  angular footprint equals the true `2·atan(D/2/R)`. **Use this, not a square panel, for a dish**: a
+  square panel is sampled at its *corners* and overestimates the angular width by √2.
 - The 4th/5th/6th args are the rotation `R_BS`, the origin `origin_m`, and a metadata struct
   (always record `provenance`).
 
@@ -355,6 +358,13 @@ a value as physical when its validity says so.
 
 - **Screening ≠ coupling.** The `DirectionalCouplingIndex` is a relative pattern/geometry index,
   not an S21 isolation or a received power.
+- **Angular subtense is exact; the dB effect is not.** For a structure of size `D` at range `R` the
+  tool returns the true angular width `2·atan(D/2/R)`. What that width *does* to the pattern in dB
+  is a full-wave question the tool does not answer.
+- **Nonlinear results have a validity domain.** The IM3 law `P_IM3,in = 2Pa+Pb−2·IIP3` is a
+  *small-signal* extrapolation. If a tone is within 10 dB of `P1dB_in` (configurable) the device is
+  compressing and the analyzer returns `OUTSIDE_MODEL_DOMAIN` with the level **withheld** — it will
+  not hand you a number that a real device cannot produce.
 - **VERTEX_SAMPLED LOS can miss thin occluders (false negative).** Line-of-sight and footprint
   tests sample the centroid and primitive vertices. A thin obstruction that lies *between* sampled
   rays can be missed, reporting `CLEAR`/`hit=0` where a dense mesh would find a clip. This is a
@@ -378,10 +388,10 @@ model gaps. See `docs/reports/reference_validation/` for the full validation rep
 
 | Script | Reproduces | Tier reached |
 |--------|------------|--------------|
-| `rc_kari_01_structure_fov.m` | Structure-in-FOV geometry for an S-band antenna (Im W-G. et al., KSAS 2015) | Tier 2 geometry / Tier 4 EM deformation |
-| `rc_kari_02_installed_pattern.m` | Free-space vs installed pattern comparison workflow (Lee S-I. et al., KSAS 2023) | Tier 2–3 workflow / Tier 4 axial-ratio |
-| `rc_kari_03_installation_analysis.m` | Installed-location geometry & fidelity boundary (Lee S-I., Im W-G., KARI 2025) | Tier 1–2 geometry / Tier 4 full-wave |
-| `rc_kari_rf_01_gnss_interference.m` | S-band → GNSS LNA saturation + IM3 into band (Kwon B-M. et al., JKSAS 2019) | Tier 2 mechanism |
+| `rc_kari_01_structure_fov.m` | Payload-reflector angular subtense vs the paper's 4°/12° (Im W-G. et al., KSAS 2015 춘계 pp.832-835) | **Tier 1 exact** (4.30°/11.85°) / Tier 4 dB change |
+| `rc_kari_02_installed_pattern.m` | Analysis-method validity vs the 30–40 cm minimum radius (Lee S-I. et al., KSAS 2023 추계 pp.1261-1263) | **Tier 1 exact** / Tier 4 ripple & axial-ratio |
+| `rc_kari_03_installation_analysis.m` | Inter-antenna placement screening on a GEO platform (Lee S-I., Im W-G., **SASE** 2025 춘계) | Tier 2 screening / Tier 4 FEKO verdict |
+| `rc_kari_rf_01_gnss_interference.m` | Required S-band tone spacing + exact IM3 product frequency (Kwon B-M. et al., JKSAS 47(5) 2019) | **Tier 1 exact** / level withheld in saturation |
 
 Run one, e.g.:
 
@@ -389,9 +399,13 @@ Run one, e.g.:
 octave-cli --eval "addpath('examples/reference_cases'); rc_kari_01_structure_fov"
 ```
 
-The geometry values in these scripts are `ASSUMED_FOR_REPLICATION` reconstructions (the papers'
-exact CAD/hardware are not public); nothing is presented as flight data. The scripts validate the
-tool's *domain and boundary*, not a curve-fit to the papers.
+Values taken from a paper are marked `PUBLIC_REPORTED` (P-ANT diameters, stand-off distances,
+validity radii, ripple envelope, acceptance criteria); values the papers do not publish are marked
+`ASSUMED_FOR_REPLICATION` (exact frequency, platform coordinates, front-end hardware). Nothing is
+presented as flight data and nothing is fitted to a paper. Note that **every paper's headline result
+is a dB-level EM or C/N0 outcome and therefore Tier 4** — what these scripts reproduce exactly is the
+geometric/arithmetic precondition each paper's sweep is parameterized by. See
+`docs/reports/reference_validation/RPT-P6-06-paper-verified-replication.md`.
 
 ## 20. Troubleshooting
 
