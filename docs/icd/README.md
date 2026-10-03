@@ -10,7 +10,7 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`coordinate_system.md`](coordinate_system.md) | Frames (Body, Antenna Local, Pattern), rotation & az/el convention |
 | [`antenna.md`](antenna.md) | `Antenna`, `AntennaInstallation`, `AntennaPattern` / `FreeSpacePattern` / `InstalledPattern` |
 | [`rf_system.md`](rf_system.md) | `RFTransmitter`, `RFReceiver`, `RFFrontEnd`, `FrequencyRelation` |
-| [`coupling.md`](coupling.md) | `CouplingModel` family, coupling validity, near/far-field |
+| [`coupling.md`](coupling.md) | `CouplingModel` family, coupling validity, near/far-field; **[Phase 7d]** CST tabulated S21, `AbsoluteTransfer` |
 | [`scenario.md`](scenario.md) | `Scenario`, `OperatingMode`, `AnalysisConfig` (policies/defaults) |
 | [`pair_result.md`](pair_result.md) | `PairResult`, `MatrixResult`, enums, validity |
 | [`pattern_data.md`](pattern_data.md) | **[Phase 2]** external 2D-cut ingestion, canonicalization, validation, `CutPatternAssembler` |
@@ -61,7 +61,7 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **PatternProvenance**: `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`
 - **InstalledPatternSource**: `MEASURED`, `HFSS`, `CST`, `OTHER_SOLVER`, `APPROXIMATE`
 - **CouplingModelType**: `PATTERN_ONLY`, `FAR_FIELD`, `MEASURED_S21`, `HFSS`, `CST`, `OTHER_SOLVER`
-- **CouplingValidity**: `PATTERN_ONLY`, `FAR_FIELD_VALID`, `FAR_FIELD_INVALID_OR_UNKNOWN`, `MEASURED_COUPLING`, `FULL_WAVE_COUPLING`
+- **CouplingValidity**: `PATTERN_ONLY`, `FAR_FIELD_VALID`, `FAR_FIELD_INVALID_OR_UNKNOWN`, `MEASURED_COUPLING`, `FULL_WAVE_COUPLING`, `S21_UNAVAILABLE` *(Phase 7d)*
 - **FrequencyRelationType**: `IN_BAND`, `ADJACENT_BAND`, `OUT_OF_BAND`
 - **InterferenceType**: `NONE`, `IN_BAND`, `ADJACENT_BAND`, `BLOCKING_COMPRESSION`, `INTERMODULATION_SPURIOUS`
 - **LobeClass**: `MAIN`, `SIDE`, `BACK`

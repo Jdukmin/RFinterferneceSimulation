@@ -107,6 +107,18 @@ dataset CSV (mm) --> SpacecraftDataReader (only file parser; mm->m once)
   no existing contract (`AntennaInstallation` stays fixed; steering is separate metadata).
 - `+geometry` stays file-free; dataset parsing is confined to `SpacecraftDataReader`.
 
+Phase-7d adds:
+```
++coupling/     (extends) CstS21Table, CstCouplingModel, AbsoluteTransfer; CouplingValidity.S21_UNAVAILABLE
+               (deps: util; no file parsing, no geometry)
++couplingdata/ CstS21Importer      (CSV / Touchstone -> CstS21Table; deps: util, coupling)   [Phase 7d]
++mission/      (extends) EmSweepPlan, operating modes, front-end data path
+```
+S21 flow: `Touchstone/CSV -> CstS21Importer -> CstS21Table -> CstCouplingModel(ctx) -> PairResult
+(CST, physical) -> AbsoluteTransfer.fromPair -> susceptibility / nonlinear analyzers` (unchanged
+Phase-3/4 maths; the S21 replaces `Gtx+Grx−FSPL`, it is never added to it). `+couplingdata`
+mirrors `+patterndata`: importers live outside the core so `+coupling` stays file-free.
+
 ### Phase-2 pattern-data pipeline (dependency direction)
 
 ```

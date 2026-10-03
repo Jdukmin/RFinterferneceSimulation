@@ -67,6 +67,13 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > Phase-2 pipeline); ISL uses the CST `ISL_C4_CUP_R14P7` 10.4 GHz pattern (`data/Xband_ISL`); SAR
 > RF analysis is deferred to the closed network. See `examples/mission_cases.m`.
 >
+> **Phase 7d.** Ka baseline corrected to the full 1500 MHz allocation; free-space patterns
+> **frozen** (`data/PATTERN_FREEZE.md`); `CouplingModelType.CST` implemented on tabulated S21(f)
+> (`coupling.CstCouplingModel`, `couplingdata.CstS21Importer`; S21 is the absolute transfer);
+> installed-geometry EM sweep **plan** (`docs/reports/em_sweep/` — Learning Edition feasibility is
+> limited to ≈ 2.2 GHz locally); explicit `SCREENING_ALL_TX` vs provisional nominal modes; no public
+> receiver P1dB/IIP3 found (data path ready). See `docs/traceability.md` Phase 7d.
+>
 > HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
 > (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI
 > remain **deferred** (a scoped, data-only external-EM ingestion boundary is the recommended — not

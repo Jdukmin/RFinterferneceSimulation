@@ -335,3 +335,22 @@ unchanged: geometry is installation evidence only.**
   P1dB/IIP3 shall remain unknown (NaN), never defaulted.
 - **SR-442 (SHALL)** A system shall be registered in a case only when its baseline applies to that
   case (`requires_pattern_key`); deferred systems (SAR) shall be stored but not registered.
+
+## 18. Ka baseline, pattern freeze, CST coupling, EM sweep, modes, nonlinear data (Phase 7d)
+
+- **SR-443 (SHALL)** The Ka TX baseline shall occupy the full 25.50–27.00 GHz allocation
+  (1500 MHz); modulation / data-rate discussion shall not be part of the RFC SSOT.
+- **SR-444 (SHALL)** The free-space S/L/ISL/Ka patterns shall be frozen (hash manifest +
+  enforcing test); no pattern reconstruction work; unfreezing needs explicit owner approval.
+- **SR-445 (SHALL)** `CouplingModelType.CST` shall be implemented on tabulated, frequency-dependent
+  port-to-port S21 with explicit provenance; absence or out-of-range shall yield an explicit
+  unavailable state, never a free-space number, extrapolation or default.
+- **SR-446 (SHALL)** The S21 shall be connected as `absoluteTransfer_dB` through one shared
+  derivation; installed S21 shall not be combined with `Gtx`/`Grx` again.
+- **SR-447 (SHALL)** The installed-geometry EM sweep shall be planned (coarse 1–27 GHz + dense
+  bands) and partitioned into local and pairwise regions with a stated feasibility rule for the
+  Learning Edition; planning shall not fabricate coupling results.
+- **SR-448 (SHALL)** The all-TX case shall be labelled `SCREENING_ALL_TX` (a stress case, not an
+  operating mode); nominal operating modes shall be separate, provisional until confirmed.
+- **SR-449 (SHALL)** Receiver P1dB/IIP3 shall be applied only from sourced data with mandatory
+  provenance; unknown values stay NaN and no criterion shall be invented.

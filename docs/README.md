@@ -45,3 +45,8 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
   pattern (`data/Xband_ISL`), and defers SAR RF analysis to the closed network.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.
+- **Phase 7d (complete):** Ka baseline corrected to 1500 MHz (25.50–27.00 GHz) with the data-rate
+  discussion moved to `notes/`; free-space pattern **freeze** (`data/PATTERN_FREEZE.md`); `CouplingModelType.CST`
+  on tabulated S21(f) (`icd/coupling.md` §6–7); installed-geometry EM sweep **plan**
+  (`reports/em_sweep/`); explicit `SCREENING_ALL_TX` vs provisional nominal modes; receiver
+  nonlinear data search (`notes/receiver_nonlinear_data_search_2026-10-04.md`, none public).

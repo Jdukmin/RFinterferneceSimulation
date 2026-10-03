@@ -1,0 +1,14 @@
+# simplified_spacecraft_v1 -- operating modes
+# active_tx / active_rx: semicolon-separated system_id lists from rf_systems.csv, or ALL.
+# Ids that are not registered in a case (e.g. GPS L1 receivers in L2/L5 cases) are skipped with a
+# warning; a mode that leaves no active TX or no active RX is an error (an empty active list would
+# silently mean ALL in Scenario).
+# kind SCREENING: stress / worst-case assumption, NOT an operating mode.
+# kind NOMINAL: operating-mode TEMPLATE. status PROVISIONAL_NEEDS_OWNER_CONFIRMATION = the
+#   active sets are an engineering placeholder (one SBA and one KAA at a time, ISL link up, GPS
+#   receiving) until the ops concept is confirmed; do not quote results as the mission timeline.
+# Fields must not contain commas.
+mode_id,kind,status,active_tx,active_rx,description
+SCREENING_ALL_TX,SCREENING,DEFINED,ALL,ALL,Every registered TX and RX active simultaneously (both SBA TM both KAA and ISL): worst-case stress screening and not an operating mode
+NOM_NADIR_KAA1,NOMINAL,PROVISIONAL_NEEDS_OWNER_CONFIRMATION,S_TM_TX@SBA_NADIR;KA_DLS_TX@KAA_1;ISL_X_TX,S_TC_RX@SBA_NADIR;GPS_L1_RX@GPSA_1;GPS_L1_RX@GPSA_2;ISL_X_RX,Nadir S-band TT&C plus KAA_1 Ka downlink plus ISL link with GPS receiving
+NOM_ZENITH_KAA2,NOMINAL,PROVISIONAL_NEEDS_OWNER_CONFIRMATION,S_TM_TX@SBA_ZENITH;KA_DLS_TX@KAA_2;ISL_X_TX,S_TC_RX@SBA_ZENITH;GPS_L1_RX@GPSA_1;GPS_L1_RX@GPSA_2;ISL_X_RX,Zenith S-band TT&C plus KAA_2 Ka downlink plus ISL link with GPS receiving

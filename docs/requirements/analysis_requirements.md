@@ -232,3 +232,13 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
   `atan2d(‖n×u‖, n·u) ≤ maxOffAxis_deg + 1e-9°`; HEMISPHERE ⇔ `maxOffAxis_deg = 90`. *(SR-435)*
 - **AR-433 (SHALL)** Convex-polygon ray test: plane intersection `t ≥ 0`, inclusion by edge
   half-planes, boundary inclusive within `1e-12·max(1,|v|)`. *(SR-432)*
+
+## Phase 7d — CST S21 coupling
+
+- **AR-434 (SHALL)** S21 interpolation is linear in dB over frequency, no extrapolation; band
+  reduction is the flat-PSD mean of |S21|² (or the maximum) and requires full band coverage.
+- **AR-435 (SHALL)** For port-to-port models: `P_rx = P_tx + S21`; `absoluteTransfer_dB = S21`;
+  interference `= P_tx + S21 + spectralFactor`, S21 reduced over the TX/RX overlap band (TX
+  occupied band if there is no overlap).
+- **AR-436 (SHALL)** Lower-bound cells of a box region `= ∏((L_i + 2·pad)/(λ/n))`, `pad = 0.25 λ`,
+  `n = 8`; the limit is 100 000 cells.

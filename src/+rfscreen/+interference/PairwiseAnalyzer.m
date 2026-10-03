@@ -96,6 +96,10 @@ classdef PairwiseAnalyzer
             ctx.frequency_Hz = fAnalysis; ctx.txPower_dBm = in.tx.power_dBm;
             ctx.txMaxDim_m = in.txAntenna.maxDimension_m;
             ctx.rxMaxDim_m = in.rxAntenna.maxDimension_m;
+            ctx.txAntennaId = in.txAntenna.id; ctx.rxAntennaId = in.rxAntenna.id;
+            txB = in.tx.occupiedBand_Hz(); rxB = in.rx.band_Hz();
+            ovB = [max(txB(1), rxB(1)), min(txB(2), rxB(2))];
+            if ovB(2) > ovB(1); ctx.band_Hz = ovB; else; ctx.band_Hz = txB; end
             cres = couplingModel.computeCoupling(ctx);
             pr.couplingModelType = cres.modelType;
             pr.couplingMetric_dB = cres.metric_dB;
@@ -105,7 +109,13 @@ classdef PairwiseAnalyzer
 
             % ---- Interference screening metric (referenced to RX antenna port) ----
             farFieldRequestedNotVerified = false;
-            if cres.isPhysicalCoupling && isfinite(cres.metric_dB)
+            if cres.isPhysicalCoupling && isfinite(cres.metric_dB) ...
+                    && rfscreen.coupling.AbsoluteTransfer.isPortToPort(cres.modelType)
+                % Port-to-port S21 (CST etc.): installed transfer already includes both
+                % antennas' patterns, so Gtx/Grx are NOT added: P_rx = P + S21.
+                pr.interferenceMetric_dB = in.tx.power_dBm + cres.metric_dB;
+                pr.receiverInputPower_dBm = pr.interferenceMetric_dB;
+            elseif cres.isPhysicalCoupling && isfinite(cres.metric_dB)
                 % Far-field valid: received power at RX input = P + Gtx + Grx - FSPL.
                 if isfinite(dci)
                     pr.interferenceMetric_dB = in.tx.power_dBm + dci - cres.metric_dB;
@@ -147,6 +157,11 @@ classdef PairwiseAnalyzer
                 pr.warnings{end+1} = 'no receiver interference threshold: margin undefined';
             elseif inBand && patternOnly && isfinite(dci) && dci >= config.risk.indexHigh_dB
                 pr.validity = RV.REQUIRES_FULL_WAVE_VERIFICATION;
+            elseif strcmp(cres.validity, rfscreen.coupling.CouplingValidity.S21_UNAVAILABLE)
+                pr.validity = RV.REQUIRES_FULL_WAVE_VERIFICATION;
+                pr.warnings{end+1} = 'no tabulated installed S21 for this pair/frequency';
+            elseif strcmp(cres.validity, rfscreen.coupling.CouplingValidity.FULL_WAVE_COUPLING)
+                pr.validity = RV.APPROXIMATE;
             elseif farFieldRequestedNotVerified
                 pr.validity = RV.FAR_FIELD_NOT_VERIFIED;
             else

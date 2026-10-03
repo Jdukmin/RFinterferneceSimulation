@@ -16,7 +16,11 @@ classdef NonlinearSusceptibilityAnalyzer
             rxBand = rx.band_Hz();
             channelFilter = rfscreen.nonlinear.NonlinearSusceptibilityAnalyzer.pickChannelFilter(rx, fe, rxBand);
 
-            couplingModel = rfscreen.interference.InterferenceAnalyzer.makeCouplingModel(config.couplingModel);
+            if isfield(opts, 'couplingModel') && ~isempty(opts.couplingModel)
+                couplingModel = opts.couplingModel;      % explicit instance (e.g. coupling.CstCouplingModel)
+            else
+                couplingModel = rfscreen.interference.InterferenceAnalyzer.makeCouplingModel(config.couplingModel);
+            end
 
             wantedTxId = '';
             if isfield(opts, 'wantedTxId') && ~isempty(opts.wantedTxId); wantedTxId = opts.wantedTxId; end
@@ -36,26 +40,21 @@ classdef NonlinearSusceptibilityAnalyzer
                 in = scenario.buildPairInput(txId, rxId);
                 pr = rfscreen.interference.PairwiseAnalyzer.analyze(in, couplingModel, config);
 
-                isAbs = strcmp(pr.couplingModelType, 'FAR_FIELD') && pr.isPhysicalCoupling ...
-                        && isfinite(pr.couplingMetric_dB) && isfinite(pr.txGain_dBi) && isfinite(pr.rxGain_dBi);
+                at = rfscreen.coupling.AbsoluteTransfer.fromPair(pr);
                 entry = struct();
                 entry.txId = txId;
                 entry.freq_Hz = tx.fc_Hz;
-                if isAbs
-                    absT = pr.txGain_dBi + pr.rxGain_dBi - pr.couplingMetric_dB;
+                if at.isAbsolute
                     presel = 0;
                     if ~isempty(fe); presel = fe.preselectorResponse_dB(tx.fc_Hz); end
-                    entry.lnaInputPower_dBm = tx.power_dBm + absT + presel;
+                    entry.lnaInputPower_dBm = tx.power_dBm + at.absoluteTransfer_dB + presel;
                     entry.isAbsolute = true;
-                    entry.couplingValidity = 'FAR_FIELD_VALID';
+                    entry.couplingValidity = at.couplingValidity;
                 else
                     entry.lnaInputPower_dBm = NaN;
                     entry.isAbsolute = false;
-                    if strcmp(pr.couplingModelType, 'PATTERN_ONLY')
-                        entry.couplingValidity = 'PATTERN_ONLY';
-                    else
-                        entry.couplingValidity = 'FAR_FIELD_INVALID_OR_UNKNOWN';
-                    end
+                    if isempty(at.couplingValidity); entry.couplingValidity = 'FAR_FIELD_INVALID_OR_UNKNOWN';
+                    else; entry.couplingValidity = at.couplingValidity; end
                 end
                 inputs(end+1) = entry; %#ok<AGROW>
             end

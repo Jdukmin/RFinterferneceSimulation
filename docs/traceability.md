@@ -615,3 +615,41 @@ coupling (antenna `maxDimension_m` and a coupling model), and out-of-band blocki
 P1dB/IIP3; neither is available yet.
 
 Verification: GNU Octave 9.2.0 — 1142/1142 assertions, 39 files (+53 in `test_mission_cases`). MATLAB: NOT RUN.
+
+---
+
+# Phase 7d — Ka correction, pattern freeze, CST S21 coupling, EM sweep plan, modes, nonlinear data
+
+Owner instructions (2026-10-04, P7d-1…6). Verification: GNU Octave 9.2.0, **1321/1321 assertions,
+43 files**; the 1089 assertions of Phase 7b and the 53 of 7c unchanged; MATLAB **NOT RUN**.
+
+| Item | Req | Code / data | Test |
+|------|-----|-------------|------|
+| P7d-1 Ka 1500 MHz; data-rate discussion separated | SR-443, DR-439 | `rf_systems.csv` Ka rows; `docs/notes/ka_downlink_datarate_open_issue.md` | test_mission_cases (Ka BW, band 25.50–27.00) |
+| P7d-2 pattern freeze | SR-444, DR-440 | `data/PATTERN_FREEZE.md`, `data/pattern_freeze_manifest.csv`, `cst/PATTERN_FREEZE.md` | test_pattern_freeze (VR-452) |
+| P7d-3 CST S21 coupling | SR-445/446, DR-441/443, AR-434/435 | `coupling/CstS21Table`, `CstCouplingModel`, `AbsoluteTransfer`, `couplingdata/CstS21Importer`; `PairwiseAnalyzer`, `ReceiverSusceptibilityAnalyzer`, `NonlinearSusceptibilityAnalyzer` use the shared derivation | test_cst_coupling (VR-446…449) |
+| P7d-4 EM sweep plan | SR-447, DR-442, AR-436 | `mission/EmSweepPlan`, `em_sweep_policy.csv`, `examples/em_sweep_plan.m`, `docs/reports/em_sweep/` | test_em_sweep_plan (VR-450/451) |
+| P7d-5 operating modes | SR-448, DR-442 | `operating_modes.csv`, `MissionCaseBuilder.applyMode/listModes` | test_mission_cases (VR-444) |
+| P7d-6 nonlinear receiver data | SR-449 | `rf_systems.csv: frontend_prov`; builder front-end path; `docs/notes/receiver_nonlinear_data_search_2026-10-04.md` | test_mission_cases (VR-445) |
+
+Decisions:
+1. **Ka:** the 1500 MHz is an allocation-filling bound (conservative for coexistence); modulation
+   facts moved out of the SSOT.
+2. **Freeze:** hashes are of CR-stripped content (autocrlf-proof); the freeze also covers the legacy
+   unbound Ka cuts so they cannot drift back in.
+3. **S21 ≠ free-space transfer:** installed S21 already contains both antennas' patterns, so
+   `absoluteTransfer_dB = S21` and `Gtx/Grx` are **not** added (the FAR_FIELD branch is unchanged).
+   Out-of-range / missing tables give `S21_UNAVAILABLE`, never extrapolation. The importer lives in
+   a new `+couplingdata` package because an existing architecture test keeps `+coupling` file-free.
+4. **ctx extension is additive** (`txAntennaId`, `rxAntennaId`, `band_Hz`); existing models ignore it.
+5. **EM sweep:** planning only. The lower-bound cell estimate shows the Learning Edition cannot mesh
+   the vehicle at any sweep frequency and a 0.7 m local box only up to ≈ 2.2 GHz; X-band/Ka installed
+   coupling needs another solver class. No coupling values were produced.
+6. **Modes:** `SCREENING_ALL_TX` is explicit and the default (behaviour unchanged for existing
+   callers); nominal modes are provisional templates awaiting owner confirmation.
+7. **Nonlinear data:** nothing public found for MSBT / PODRIX / ISL receiver; values stay NaN, the
+   path is implemented and tested; PODRIX datasheet PDFs could not be machine-read (re-check by hand).
+
+Pre-existing behaviour noticed (not changed): the Phase-1 pair validity is `MISSING_RECEIVER_DATA`
+for an in-band pair whose receiver has no legacy `interferenceThreshold_dBm`, even when a Phase-3
+`I_N_MAX` criterion exists; the Phase-3 susceptibility result is the authoritative one.

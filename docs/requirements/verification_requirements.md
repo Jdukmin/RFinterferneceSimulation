@@ -238,3 +238,26 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
   1 W → 30, SAR 2.5/5 kW → 63.98/66.99 dBm), RX filter bands, NF, `I_N_MAX` = −6 dB for all receivers,
   allowable interference ≈ −124 / −105 / −104 / −87.8 dBm, no `ReceiverFrontEnd`, GPS receiver only
   in the L1 case, SAR not registered, scenario validates. *(test_mission_cases)*
+
+## 17. Phase 7d verification
+
+- **VR-444 (SHALL)** Operating modes: default `SCREENING_ALL_TX` explicit and warned; nominal modes
+  set active sets; unregistered ids skipped with a warning; unknown mode rejected; matrix follows
+  the mode. *(test_mission_cases)*
+- **VR-445 (SHALL)** Front-end data path: baseline has none; P1dB/IIP3 applied with mandatory
+  provenance; no criterion invented; missing provenance rejected. *(test_mission_cases)*
+- **VR-446 (SHALL)** S21 table: interpolation, no extrapolation, band reduction vs analytic values,
+  passive/identity/NaN/length validation. *(test_cst_coupling)*
+- **VR-447 (SHALL)** Importers: CSV units/phase/header errors; Touchstone 2-port order (S21 vs S12),
+  3-port S(j,i) mapping, DB/MA/RI, units, port-count/truncation/non-S errors. *(test_cst_coupling)*
+- **VR-448 (SHALL)** `CstCouplingModel`: validity/type/metric, band reduction options, unavailable
+  states, reciprocity (and disabling), duplicate pairs, CST not selectable by name, HFSS reserved.
+- **VR-449 (SHALL)** End-to-end through the existing analyzers: `P_rx = P + S21`, ABSOLUTE_LINEAR,
+  FULL_WAVE_COUPLING, I/N and FAIL, frequency-dependent S21 changes the result, nonlinear LNA power
+  and compression margin, pattern-only and missing-S21 behaviour unchanged/explicit.
+- **VR-450 (SHALL)** Sweep plan: 261-point coarse grid, dense bands, analytic cell estimate,
+  threshold property, 8 local + 28 pair models, feasibility consistency, determinism, CSV export.
+  *(test_em_sweep_plan)*
+- **VR-451 (SHALL)** Plan is planning-only (no solver call, no coupling model construction).
+- **VR-452 (SHALL)** Pattern freeze: all 41 manifest files unchanged, no unlisted file in frozen
+  directories, all bound patterns frozen, legacy Ka bound to nothing. *(test_pattern_freeze)*

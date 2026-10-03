@@ -1,0 +1,15 @@
+# simplified_spacecraft_v1 -- installed-geometry EM sweep policy (P7d-4)
+# Drives mission.EmSweepPlan. Values are planning parameters, not physics results.
+# provenance: OWNER_REQUEST = stated by the project owner; WORKER_RULE = taken from the CST worker
+# records (cst/WORKLOG.md: Hex 8 cells/wavelength, Learning Edition 100k hex cells);
+# ENGINEERING_ASSUMPTION = our planning choice. Fields must not contain commas.
+key,value,unit,provenance,note
+coarse_start_ghz,1,GHz,OWNER_REQUEST,coarse sweep start
+coarse_stop_ghz,27,GHz,OWNER_REQUEST,coarse sweep stop
+coarse_step_mhz,100,MHz,ENGINEERING_ASSUMPTION,export grid of the coarse S21(f) (a broadband time-domain run yields a continuous S21 and the grid only sets the export resolution)
+dense_points_per_band,41,count,ENGINEERING_ASSUMPTION,points across each actual TX/RX band incl. both edges
+cells_per_wavelength,8,count,WORKER_RULE,Hex 8 cells per wavelength used for the accepted CST models
+max_cells,100000,count,WORKER_RULE,CST Learning Edition hex-cell limit
+boundary_pad_wavelengths,0.25,wavelength,ENGINEERING_ASSUMPTION,open-boundary padding added on every side of a model region
+pair_margin_m,0.15,m,ENGINEERING_ASSUMPTION,margin added around the two antennas of a pairwise region (largest antenna offset from its panel plane is 0.19 m)
+local_radius_m,0.35,m,ENGINEERING_ASSUMPTION,half-size of a local region around one antenna; from the 30-40 cm validity radius of the KARI RC-02 method

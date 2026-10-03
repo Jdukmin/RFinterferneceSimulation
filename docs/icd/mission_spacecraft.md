@@ -3,7 +3,7 @@
 Normative interface for loading the **simplified spacecraft baseline** (hull + antenna
 installation registry + gimbal steering metadata) from a repository dataset and attaching it to
 the existing Phase-5 geometry/FOV/LOS machinery, and for building the per-case RFC/RFI scenarios
-(§9). Requirements: SR-430…SR-442, DR-430…DR-438, VR-430…VR-443.
+(§9). Requirements: SR-430…SR-449, DR-430…DR-443, VR-430…VR-452.
 
 Builds on Phase-1..6 **without changing** any existing contract (`AntennaInstallation`,
 `SpacecraftStructure`, `Scenario`, FOV/LOS analyzers). **Central rule (unchanged): geometry
@@ -197,7 +197,7 @@ frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
 | `S_TM_TX` | SBA_NADIR_TM, SBA_ZENITH_TM | 2.250 GHz | 2.7 MHz | 5 W = 36.99 dBm | — |
 | `S_TC_RX` | SBA_NADIR_TC, SBA_ZENITH_TC | 2.050 GHz | 0.2 MHz | — | NF 3 dB, I/N ≤ −6 dB (≈ −124 dBm) |
 | `GPS_L1_RX` | GPSA_1, GPSA_2 (L1 case only) | 1.57542 GHz | 20.46 MHz | — | NF 2 dB, I/N ≤ −6 dB (≈ −105 dBm) |
-| `KA_DLS_TX` | KAA_1, KAA_2 | 26.25 GHz | 1.44 GHz | 70 W = 48.45 dBm | — |
+| `KA_DLS_TX` | KAA_1, KAA_2 | 26.25 GHz | 1.5 GHz (25.50–27.00 GHz, full EESS allocation) | 70 W = 48.45 dBm | — |
 | `ISL_X_TX/RX` | ISL | 10.475 GHz (provisional) | 20 MHz (provisional) | 1 W = 30 dBm | NF 3 dB, I/N ≤ −6 dB (≈ −104 dBm) |
 | `SAR_X_TX/RX` | SAR_ANT — **deferred, not registered** | 9.65 GHz | 525 MHz | 2.5 kW nominal (63.98 dBm) / 5 kW screening (66.99 dBm) | NF 5 dB (≈ −87.8 dBm) |
 
@@ -214,3 +214,30 @@ frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
 - The GNSS I/N criterion is **temporary**; GNSS acceptance should finally use C/N0 or J/S.
 
 KAA FOV uses the gimbal reference orientation; steering sweeps use `GimbalSteeringDomain` (§7).
+
+## 10. Operating modes (P7d-5)
+
+`operating_modes.csv` (`mode_id,kind,status,active_tx,active_rx,description`; `;`-separated
+system ids or `ALL`). `buildCase(..., struct('modeId', id))` applies the mode through
+`Scenario.activeTxIds/activeRxIds/operatingModeId`; the default is **`SCREENING_ALL_TX`**, an
+explicit stress case with every registered TX active at once (warned: *not an operating mode*).
+Nominal modes are **templates** (`PROVISIONAL_NEEDS_OWNER_CONFIRMATION`): `NOM_NADIR_KAA1` and
+`NOM_ZENITH_KAA2` (one SBA, one KAA, ISL link up, GPS receiving). Ids that are not registered in a
+case (e.g. GPS L1 receivers in L2/L5 cases) are skipped with a warning; a mode that would leave no
+active TX or RX is an error (an empty list would silently mean *all*). All systems stay
+registered; only the active sets change.
+
+## 11. Receiver front-end data path (P7d-6)
+
+`rf_systems.csv` columns `p1db_in_dbm`, `iip3_in_dbm` (empty = unknown = NaN) and `frontend_prov`
+(mandatory when either is given). A `ReceiverFrontEnd` is created only then; no compression,
+blocking or IM3 criterion is derived from them. No public values were found for the S-band
+transponder, the GNSS receiver or an ISL receiver
+(`docs/notes/receiver_nonlinear_data_search_2026-10-04.md`).
+
+## 12. Installed-geometry EM sweep plan (P7d-4)
+
+`mission.EmSweepPlan` + `em_sweep_policy.csv` + `examples/em_sweep_plan.m` → `docs/reports/em_sweep/`:
+coarse 1–27 GHz grid, dense grids across each actual band, LOCAL (per antenna) and PAIRWISE
+(antenna pair) partition with lower-bound hex-cell feasibility for the Learning Edition. Planning
+only — no solver run, no coupling value.

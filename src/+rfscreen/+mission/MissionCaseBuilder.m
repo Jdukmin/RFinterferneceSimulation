@@ -28,6 +28,8 @@ classdef MissionCaseBuilder
             %   opts.patternCache containers.Map (pattern_key -> FreeSpacePattern) reused across cases
             %   opts.azStep_deg / opts.elStep_deg  assembly grid (default 2 deg)
             %   opts.powerMode    'NOMINAL' (default) | 'SCREENING' (uses tx_power_screen_dbm)
+            %   opts.modeId       operating mode (operating_modes.csv); default SCREENING_ALL_TX,
+            %                     which is an explicit all-TX stress case, not an operating mode
             if nargin < 2 || isempty(opts); opts = struct(); end
             MB = rfscreen.mission.MissionCaseBuilder;
             R = rfscreen.spacecraft.SpacecraftDataReader;
@@ -98,12 +100,84 @@ classdef MissionCaseBuilder
             end
             warnings{end+1} = 'receiver P1dB/IIP3 unknown (NaN): nonlinear analyses report MISSING_P1DB/MISSING_IIP3';
             warnings{end+1} = 'GPS acceptance uses a temporary thermal I/N criterion; final GNSS acceptance needs C/N0 or J/S';
-            warnings{end+1} = 'all TX/RX instances are registered (both SBA, both KAA, both GPSA); select activeTxIds/activeRxIds for an operating mode';
+            [mode, mwarn] = MB.applyMode(sc, rfSystems, MB.opt(opts, 'modeId', 'SCREENING_ALL_TX'), ...
+                fullfile(dsDir, 'operating_modes.csv'), fullfile(dsDir, 'rf_systems.csv'));
+            warnings = [warnings, mwarn]; %#ok<AGROW>
 
             c = struct('caseId', caseId, 'sbaVariant', cs.sbaVariant, 'gpsBand', cs.gpsBand, ...
-                'scenario', sc, 'model', model, 'functions', funcs, 'rfSystems', rfSystems, ...
+                'scenario', sc, 'model', model, 'functions', funcs, 'rfSystems', rfSystems, 'mode', mode, ...
                 'powerMode', powerMode, 'patternCache', cache);
             c.warnings = warnings;
+        end
+
+        function modes = listModes(datasetDir)
+            %LISTMODES Struct array (modeId, kind, status, activeTx, activeRx, description).
+            if nargin < 1 || isempty(datasetDir)
+                datasetDir = rfscreen.spacecraft.SimplifiedSpacecraftBuilder.defaultDatasetDir();
+            end
+            T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(datasetDir, 'operating_modes.csv'));
+            modes = struct('modeId', {}, 'kind', {}, 'status', {}, 'activeTx', {}, 'activeRx', {}, 'description', {});
+            for r = 1:T.nRows
+                modes(end+1) = struct('modeId', T.mode_id{r}, 'kind', T.kind{r}, 'status', T.status{r}, ...
+                    'activeTx', {rfscreen.mission.MissionCaseBuilder.splitList(T.active_tx{r})}, ...
+                    'activeRx', {rfscreen.mission.MissionCaseBuilder.splitList(T.active_rx{r})}, ...
+                    'description', T.description{r}); %#ok<AGROW>
+            end
+            if numel(unique({modes.modeId})) ~= numel(modes)
+                error('rfscreen:mission:duplicateId', 'duplicate mode id in operating_modes.csv.');
+            end
+        end
+
+        function [mode, warn] = applyMode(sc, rfSystems, modeId, modesFile, rfFile)
+            %APPLYMODE Set the scenario's active TX/RX sets and operatingModeId from a mode.
+            MB = rfscreen.mission.MissionCaseBuilder;
+            V = rfscreen.util.Validate;
+            modes = MB.listModes(fileparts(modesFile));
+            mi = find(strcmp({modes.modeId}, modeId));
+            if isempty(mi)
+                error('rfscreen:mission:unknownMode', 'unknown operating mode %s.', modeId);
+            end
+            m = modes(mi);
+            T = rfscreen.spacecraft.SpacecraftDataReader.readTable(rfFile);
+            known = struct('TX', {T.system_id(strcmp(T.kind, 'TX'))}, 'RX', {T.system_id(strcmp(T.kind, 'RX'))});
+            V.member(m.kind, {'SCREENING', 'NOMINAL'}, [modeId ' kind']);
+            warn = {};
+            regTx = sc.transmitters.keys(); regRx = sc.receivers.keys();
+            if strcmp(m.kind, 'SCREENING') || (isscalar(m.activeTx) && strcmp(m.activeTx{1}, 'ALL') ...
+                    && isscalar(m.activeRx) && strcmp(m.activeRx{1}, 'ALL'))
+                sc.activeTxIds = {}; sc.activeRxIds = {};     % {} = all registered
+                txIds = regTx; rxIds = regRx;
+            else
+                for k = 1:numel(m.activeTx)
+                    if ~any(strcmp(known.TX, m.activeTx{k}))
+                        error('rfscreen:mission:badRef', 'mode %s lists unknown TX %s.', modeId, m.activeTx{k});
+                    end
+                end
+                for k = 1:numel(m.activeRx)
+                    if ~any(strcmp(known.RX, m.activeRx{k}))
+                        error('rfscreen:mission:badRef', 'mode %s lists unknown RX %s.', modeId, m.activeRx{k});
+                    end
+                end
+                txIds = m.activeTx(ismember(m.activeTx, regTx));
+                rxIds = m.activeRx(ismember(m.activeRx, regRx));
+                skipped = [m.activeTx(~ismember(m.activeTx, regTx)), m.activeRx(~ismember(m.activeRx, regRx))];
+                if ~isempty(skipped)
+                    warn{end+1} = sprintf('mode %s: not registered in this case, skipped: %s', modeId, strjoin(skipped, ', '));
+                end
+                if isempty(txIds) || isempty(rxIds)
+                    error('rfscreen:mission:emptyMode', 'mode %s leaves no active TX or no active RX in this case.', modeId);
+                end
+                sc.activeTxIds = txIds; sc.activeRxIds = rxIds;
+            end
+            sc.operatingModeId = modeId;
+            if strcmp(m.kind, 'SCREENING')
+                warn{end+1} = sprintf('%s: stress case, every registered TX active at once (%d TX, %d RX); not an operating mode', ...
+                    modeId, numel(txIds), numel(rxIds));
+            else
+                warn{end+1} = sprintf('%s: operating-mode template, status %s', modeId, m.status);
+            end
+            mode = struct('modeId', modeId, 'kind', m.kind, 'status', m.status, 'isScreening', strcmp(m.kind, 'SCREENING'), ...
+                'activeTxIds', {txIds}, 'activeRxIds', {rxIds}, 'description', m.description);
         end
 
         function sys = registerRfSystems(sc, funcs, filePath, powerMode)
@@ -117,7 +191,8 @@ classdef MissionCaseBuilder
             numOrNaN = @(c) str2double(c);
             sys = struct('systemId', {}, 'templateId', {}, 'functionId', {}, 'kind', {}, 'included', {}, ...
                 'bindingStatus', {}, 'fc_Hz', {}, 'bw_Hz', {}, 'power_dBm', {}, 'noiseFigure_dB', {}, ...
-                'iOverNMax_dB', {}, 'noise_dBm', {}, 'allowableInterference_dBm', {});
+                'iOverNMax_dB', {}, 'noise_dBm', {}, 'allowableInterference_dBm', {}, ...
+                'p1dB_in_dBm', {}, 'iip3_in_dBm', {});
             incl = {funcs([funcs.included]).functionId};
             keyOf = containers.Map({funcs.functionId}, {funcs.patternKey});
             for r = 1:T.nRows
@@ -126,7 +201,7 @@ classdef MissionCaseBuilder
                 s = struct('systemId', sid, 'templateId', T.template_id{r}, 'functionId', fid, ...
                     'kind', T.kind{r}, 'included', any(strcmp(incl, fid)), 'bindingStatus', T.binding_status{r}, ...
                     'fc_Hz', fc, 'bw_Hz', bw, 'power_dBm', NaN, 'noiseFigure_dB', NaN, 'iOverNMax_dB', NaN, ...
-                    'noise_dBm', NaN, 'allowableInterference_dBm', NaN);
+                    'noise_dBm', NaN, 'allowableInterference_dBm', NaN, 'p1dB_in_dBm', NaN, 'iip3_in_dBm', NaN);
                 req = T.requires_pattern_key{r};
                 if s.included && ~isempty(req) && ~strcmp(keyOf(fid), req)
                     s.included = false; s.bindingStatus = 'NO_BASELINE_FOR_CASE';
@@ -156,12 +231,24 @@ classdef MissionCaseBuilder
                         n_dBm = rfscreen.util.Units.w2dbm(nm.noisePower_W(bw));
                         s.noiseFigure_dB = nf; s.iOverNMax_dB = inmax;
                         s.noise_dBm = n_dBm; s.allowableInterference_dBm = n_dBm + inmax;
+                        p1 = numOrNaN(T.p1db_in_dbm{r}); ip3 = numOrNaN(T.iip3_in_dbm{r});
+                        s.p1dB_in_dBm = p1; s.iip3_in_dBm = ip3;
                         if s.included
                             filt = rfscreen.receiver.IdealBandpassFilter([fc - bw/2, fc + bw/2], 0, -Inf);
                             crit = rfscreen.receiver.InterferenceCriterion('I_N_MAX', inmax, ...
                                 struct('provenance', 'ENGINEERING_ASSUMPTION'));
-                            sc.addReceiver(rfscreen.rf.RFReceiver(sid, fid, fc, bw, struct('polarization', pol, ...
-                                'filter', filt, 'noiseModel', nm, 'interferenceCriterion', crit)));
+                            ro = struct('polarization', pol, 'filter', filt, 'noiseModel', nm, 'interferenceCriterion', crit);
+                            if isfinite(p1) || isfinite(ip3)
+                                fprov = T.frontend_prov{r};
+                                if isempty(fprov)
+                                    error('rfscreen:mission:badRf', '%s: p1dB/iip3 given without frontend_prov.', sid);
+                                end
+                                fo = struct('noiseFigure_dB', nf, 'provenance', fprov);
+                                if isfinite(p1); fo.p1dB_in_dBm = p1; end
+                                if isfinite(ip3); fo.iip3_in_dBm = ip3; end
+                                ro.receiverFrontEnd = rfscreen.receiver.ReceiverFrontEnd(fo);
+                            end
+                            sc.addReceiver(rfscreen.rf.RFReceiver(sid, fid, fc, bw, ro));
                         end
                     otherwise
                         error('rfscreen:mission:badRf', '%s: kind must be TX or RX.', sid);
@@ -235,6 +322,14 @@ classdef MissionCaseBuilder
     end
 
     methods (Static, Access = private)
+        function c = splitList(s)
+            if isempty(s); c = {}; return; end
+            idx = [0, strfind(s, ';'), numel(s) + 1];
+            c = cell(1, numel(idx) - 1);
+            for k = 1:numel(idx) - 1
+                c{k} = strtrim(s(idx(k) + 1 : idx(k + 1) - 1));
+            end
+        end
         function key = resolveSelector(sel, cs)
             switch sel
                 case 'CASE_SBA_TC'; key = [cs.sbaVariant '_TC'];

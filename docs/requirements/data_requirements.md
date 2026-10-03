@@ -239,3 +239,16 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
 - **DR-438 (SHALL)** Ka KAA pattern dataset `data/Kaband_KAA_CST/` is a byte-identical copy of the
   CST feed + reflector aperture-integration export (`SIMULATED_2D_CUT`); it supersedes the legacy
   `data/Kaband_DLS/` cuts for KAA.
+
+## Phase 7d
+
+- **DR-439 (SHALL)** `rf_systems.csv` Ka rows: `bw_mhz = 1500`, `fc_mhz = 26250`.
+- **DR-440 (SHALL)** `data/pattern_freeze_manifest.csv` (path, SHA-256 and byte count of the
+  CR-stripped content, group, status) covering `Sband_TMTC`, `Lband_GPS`, `Xband_ISL`,
+  `Kaband_KAA_CST` (frozen) and `Kaband_DLS` (frozen, unbound).
+- **DR-441 (SHALL)** S21 inputs: Touchstone `.sNp` (DB/MA/RI) or CSV (`frequency_*`, `s21_db`
+  [, `phase_deg`]) with explicit port ↔ antenna mapping.
+- **DR-442 (SHALL)** `operating_modes.csv` and `em_sweep_policy.csv` per ICD `mission_spacecraft.md`
+  §10, §12; `rf_systems.csv` gains `frontend_prov` (§11).
+- **DR-443 (SHALL)** `CouplingValidity` adds `S21_UNAVAILABLE`; `CouplingModel.newContext` adds
+  `txAntennaId`, `rxAntennaId`, `band_Hz` (additive).

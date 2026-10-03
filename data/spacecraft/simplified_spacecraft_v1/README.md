@@ -160,3 +160,13 @@ S TC ≈ −124 dBm, GPS L1 ≈ −105 dBm, ISL ≈ −104 dBm, SAR ≈ −87.8 
 is a simulation baseline, **not** a vendor spec; GPS (Beyond Gravity PODRIX class) final acceptance
 should use C/N0 / J/S rather than total-power I/N. Replace table values when qualification data
 exist; no code change is needed.
+
+## Phase 7d additions
+
+- **Ka:** baseline bandwidth is the full 1500 MHz allocation (25.50–27.00 GHz); the modulation /
+  data-rate discussion is **not** an RFC input (`docs/notes/ka_downlink_datarate_open_issue.md`).
+- **Pattern freeze:** all bound free-space patterns are frozen (`data/PATTERN_FREEZE.md`).
+- **Operating modes:** `operating_modes.csv` — `SCREENING_ALL_TX` (explicit stress case, default) and
+  two provisional nominal templates.
+- **EM sweep plan:** `em_sweep_policy.csv` → `docs/reports/em_sweep/`.
+- **Front end:** `rf_systems.csv` has `frontend_prov`; P1dB/IIP3 remain unknown (none public).

@@ -75,8 +75,74 @@ function test_mission_cases(h)
     end
     h.eqTol('pattern cache: 9 distinct patterns over 6 cases', cache.Count, 9, 0);
 
+    % ================= VR-444 operating modes =================
+    h.eqStr('default mode is explicit SCREENING_ALL_TX', built{1}.mode.modeId, 'SCREENING_ALL_TX');
+    h.isTrue('default mode flagged screening', built{1}.mode.isScreening);
+    h.eqStr('scenario carries operatingModeId', built{1}.scenario.operatingModeId, 'SCREENING_ALL_TX');
+    h.eqTol('all-TX: 5 active TX', numel(built{1}.scenario.resolveActiveTxIds()), 5, 0);
+    h.isTrue('screening warning says not an operating mode', any(~cellfun(@isempty, strfind(built{1}.warnings, 'not an operating mode'))));
+    modes = MB.listModes();
+    h.isTrue('modes: 1 screening + 2 nominal', isequal(sort({modes.kind}), {'NOMINAL','NOMINAL','SCREENING'}));
+    cN = MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'modeId', 'NOM_NADIR_KAA1'));
+    h.isFalse('nominal mode not screening', cN.mode.isScreening);
+    h.isTrue('nominal active TX = nadir TM + KAA_1 + ISL', isequal(sort(cN.scenario.resolveActiveTxIds()), ...
+        sort({'S_TM_TX@SBA_NADIR', 'KA_DLS_TX@KAA_1', 'ISL_X_TX'})));
+    h.eqTol('nominal active RX count (TC nadir + 2 GPS + ISL)', numel(cN.scenario.resolveActiveRxIds()), 4, 0);
+    h.isFalse('zenith TM inactive in nadir mode', any(strcmp(cN.scenario.resolveActiveTxIds(), 'S_TM_TX@SBA_ZENITH')));
+    h.isFalse('KAA_2 inactive in nadir mode', any(strcmp(cN.scenario.resolveActiveTxIds(), 'KA_DLS_TX@KAA_2')));
+    h.isTrue('nominal warns PROVISIONAL', any(~cellfun(@isempty, strfind(cN.warnings, 'PROVISIONAL'))));
+    h.eqTol('all registered TX remain registered', cN.scenario.transmitters.Count, 5, 0);
+    outN = rfscreen.interference.InterferenceAnalyzer.analyze(cN.scenario);
+    h.isTrue('matrix follows the mode (3 TX x 4 RX)', numel(outN.txIds) == 3 && numel(outN.rxIds) == 4);
+    cL2 = MB.buildCase('CASE_SBA1_L2', struct('patternCache', cache, 'modeId', 'NOM_ZENITH_KAA2'));
+    h.eqTol('L2 nominal: GPS skipped, RX = TC + ISL', numel(cL2.scenario.resolveActiveRxIds()), 2, 0);
+    h.isTrue('L2 nominal warns skipped GPS', any(~cellfun(@isempty, strfind(cL2.warnings, 'skipped'))));
+    h.throws('unknown mode rejected', @() MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'modeId', 'NOPE')), 'rfscreen:mission:unknownMode');
+
     % ================= VR-443 RF baseline numbers (CASE_SBA1_L1 has every system) =================
     sc = built{1}.scenario; c1 = built{1};
+
+    % ================= VR-445 receiver front-end data path (P7d-6) =================
+    for q = 1:numel(c1.rfSystems)
+        if strcmp(c1.rfSystems(q).kind, 'RX')
+            h.isNaNval([c1.rfSystems(q).systemId ' P1dB unknown (NaN)'], c1.rfSystems(q).p1dB_in_dBm);
+            h.isNaNval([c1.rfSystems(q).systemId ' IIP3 unknown (NaN)'], c1.rfSystems(q).iip3_in_dBm);
+        end
+    end
+    noFe = true; rkeys = c1.scenario.receivers.keys();
+    for q = 1:numel(rkeys)
+        rq = c1.scenario.receivers(rkeys{q}); noFe = noFe && isempty(rq.receiverFrontEnd);
+    end
+    h.isTrue('baseline creates no ReceiverFrontEnd', noFe);
+    srcDs = rfscreen.spacecraft.SimplifiedSpacecraftBuilder.defaultDatasetDir();
+    tmpDs = tempname(); mkdir(tmpDs);
+    dsFiles = dir(srcDs);
+    for q = 1:numel(dsFiles)
+        if ~dsFiles(q).isdir; copyfile(fullfile(srcDs, dsFiles(q).name), fullfile(tmpDs, dsFiles(q).name)); end
+    end
+    rfTxt = fileread(fullfile(srcDs, 'rf_systems.csv'));
+    lines = regexp(rfTxt, '\r\n|\r|\n', 'split'); iL = find(strncmp(lines, 'ISL_X_RX,', 9));
+    fld = regexp(lines{iL}, ',', 'split');                 % 22 fields; p1dB=11 iip3=12 frontend_prov=22
+    fld{11} = '-30'; fld{12} = '-10'; fld{22} = 'SYNTHETIC_TEST';
+    lines{iL} = strjoin(fld, ',');
+    fid = fopen(fullfile(tmpDs, 'rf_systems.csv'), 'w'); fwrite(fid, strjoin(lines, char(10))); fclose(fid);
+    cF = MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'datasetDir', tmpDs));
+    rxI = cF.scenario.receivers('ISL_X_RX');
+    h.isTrue('front end created when P1dB/IIP3 given', ~isempty(rxI.receiverFrontEnd));
+    h.eqTol('P1dB applied', rxI.receiverFrontEnd.p1dB_in_dBm, -30, 0);
+    h.eqTol('IIP3 applied', rxI.receiverFrontEnd.iip3_in_dBm, -10, 0);
+    h.eqStr('front-end provenance recorded', rxI.receiverFrontEnd.provenance, 'SYNTHETIC_TEST');
+    h.isTrue('no compression/blocking/IM3 criterion invented', isempty(rxI.compressionCriterion) && ...
+        isempty(rxI.blockingCriterion) && isempty(rxI.intermodulationCriterion));
+    rxS = cF.scenario.receivers('S_TC_RX@SBA_NADIR');
+    h.isTrue('other receivers stay without a front end', isempty(rxS.receiverFrontEnd));
+    h.eqTol('rfSystems reports the P1dB', cF.rfSystems(strcmp({cF.rfSystems.systemId}, 'ISL_X_RX')).p1dB_in_dBm, -30, 0);
+    fld{22} = '';
+    lines{iL} = strjoin(fld, ',');
+    fid = fopen(fullfile(tmpDs, 'rf_systems.csv'), 'w'); fwrite(fid, strjoin(lines, char(10))); fclose(fid);
+    h.throws('P1dB without provenance rejected', @() MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'datasetDir', tmpDs)), 'rfscreen:mission:badRf');
+    delete(fullfile(tmpDs, '*')); rmdir(tmpDs);
+
     rfs = struct();
     for q = 1:numel(c1.rfSystems)
         rfs.(strrep(c1.rfSystems(q).systemId, '@', '_')) = c1.rfSystems(q);
@@ -88,9 +154,9 @@ function test_mission_cases(h)
     h.isTrue('TX carries rectangular spectrum', tx.hasSpectrum());
     tx = sc.transmitters('KA_DLS_TX@KAA_2');
     h.eqTol('Ka TX fc 26.25 GHz', tx.fc_Hz, 26.25e9, 0);
-    h.eqTol('Ka TX BW 1.44 GHz (1.2 Gsym/s x 1.2)', tx.bw_Hz, 1.44e9, 0);
+    h.eqTol('Ka TX BW 1.5 GHz (full 25.5-27.0 GHz allocation)', tx.bw_Hz, 1.5e9, 0);
     h.eqTol('Ka TX 70 W = 48.45 dBm', tx.power_dBm, 48.45, 0.005);
-    h.eqTol('Ka occupied band 25.53-26.97 GHz', tx.occupiedBand_Hz(), [25.53e9 26.97e9], 1);
+    h.eqTol('Ka occupied band 25.50-27.00 GHz', tx.occupiedBand_Hz(), [25.50e9 27.00e9], 1);
     tx = sc.transmitters('ISL_X_TX');
     h.eqTol('ISL TX 1 W = 30 dBm', tx.power_dBm, 30, 1e-9);
     h.eqTol('ISL fc 10.475 GHz / BW 20 MHz', [tx.fc_Hz tx.bw_Hz], [10.475e9 20e6], 0);
@@ -158,7 +224,8 @@ function test_mission_cases(h)
     h.eqTol('FOV does not change pattern gain', pI.evaluate(10.4e9, 17, -23), g0, 0);
     h.isFalse('FOV rows carry no gain/loss field', anyContains(fieldnames(rows), {'gain','loss','attenuation','s21','margin'}));
     mDir = fullfile(repoRoot, 'src', '+rfscreen', '+mission');
-    h.ok('mission creates no ReceiverFrontEnd / no invented P1dB-IIP3', isempty(scan(mDir, {'ReceiverFrontEnd(', 'p1dB_in_dBm', 'iip3_in_dBm'})));
+    h.ok('mission code holds no hard-coded P1dB/IIP3 value (data-driven only)', isempty(scan(mDir, ...
+        {'p1dB_in_dBm'', -', 'iip3_in_dBm'', -', 'p1dB_in_dBm = -', 'iip3_in_dBm = -', 'p1dB_in_dBm'', 0', 'iip3_in_dBm'', 0'})));
     h.ok('mission generates no EM loss', isempty(scan(mDir, ...
         {'reflectionCoeff','diffractionLoss','scatteringLoss','FreeSpacePathLoss','applyBlockage','attenuation_dB','S21_dB'})));
     deps = {};

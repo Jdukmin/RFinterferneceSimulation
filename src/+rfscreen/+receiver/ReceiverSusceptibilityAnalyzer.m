@@ -107,22 +107,10 @@ classdef ReceiverSusceptibilityAnalyzer
             spatial.txGain_dBi = pr.txGain_dBi;
             spatial.rxGain_dBi = pr.rxGain_dBi;
             spatial.txPower_dBm = txPower_dBm;
-            isFarField = strcmp(pr.couplingModelType, 'FAR_FIELD');
-            if isFarField && pr.isPhysicalCoupling && isfinite(pr.couplingMetric_dB)
-                spatial.isAbsolute = true;
-                spatial.absoluteTransfer_dB = pr.txGain_dBi + pr.rxGain_dBi - pr.couplingMetric_dB;
-                spatial.couplingValidity = 'FAR_FIELD_VALID';
-            else
-                spatial.isAbsolute = false;
-                spatial.absoluteTransfer_dB = NaN;
-                if strcmp(pr.couplingModelType, 'PATTERN_ONLY')
-                    spatial.couplingValidity = 'PATTERN_ONLY';
-                elseif isFarField
-                    spatial.couplingValidity = 'FAR_FIELD_INVALID_OR_UNKNOWN';
-                else
-                    spatial.couplingValidity = '';
-                end
-            end
+            at = rfscreen.coupling.AbsoluteTransfer.fromPair(pr);
+            spatial.isAbsolute = at.isAbsolute;
+            spatial.absoluteTransfer_dB = at.absoluteTransfer_dB;
+            spatial.couplingValidity = at.couplingValidity;
             if nargin < 5; noiseModel = []; end
             if nargin < 6; criterion = []; end
             request = struct('spatial', spatial, 'txSpectrum', txSpectrum, 'rxFilter', rxFilter, ...

@@ -279,6 +279,16 @@ c.warnings                                                % KAA candidate, SAR d
   L1 only. P1dB/IIP3 are unknown, so nonlinear analyses are withheld. Then run
   `rfscreen.interference.RfCoexistenceAnalyzer.analyze(c.scenario)`; with pattern-only coupling the
   result is relative screening (`ABSOLUTE_COUPLING_UNAVAILABLE`).
+- **Operating mode:** the default is `SCREENING_ALL_TX` (every registered TX at once — a stress
+  case). Pick a nominal template with `struct('modeId','NOM_NADIR_KAA1')` (provisional until the
+  ops concept is confirmed); `c.mode` lists the active TX/RX ids.
+- **Installed (CST) coupling:** build tables with `rfscreen.couplingdata.CstS21Importer`
+  (`fromTouchstone(file, {portAntennaIds})` or `fromCsv`), wrap them in
+  `rfscreen.coupling.CstCouplingModel(tables)` and pass the model to
+  `RfCoexistenceAnalyzer.analyze(c.scenario, cfg, model)` (or
+  `NonlinearSusceptibilityAnalyzer.analyze(sc, rxId, cfg, struct('couplingModel', model))`). The S21
+  is the absolute transfer (it already includes both antennas); a missing pair or frequency gives
+  `S21_UNAVAILABLE`. Which S21 solves are feasible: `docs/reports/em_sweep/`.
 - Pattern assembly takes ~15 s per pattern in Octave at the default 2° grid; pass the same
   `patternCache` to every case (9 distinct patterns in total). Example: `examples/mission_cases.m`.
 

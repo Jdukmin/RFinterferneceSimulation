@@ -17,7 +17,11 @@ classdef CouplingModel
             %NEWCONTEXT Template context struct with the canonical fields.
             ctx = struct('distance_m', NaN, 'txGain_dBi', NaN, 'rxGain_dBi', NaN, ...
                          'frequency_Hz', NaN, 'txPower_dBm', NaN, ...
-                         'txMaxDim_m', NaN, 'rxMaxDim_m', NaN);
+                         'txMaxDim_m', NaN, 'rxMaxDim_m', NaN, ...
+                         'txAntennaId', '', 'rxAntennaId', '', 'band_Hz', [NaN NaN]);
+            %   Phase 7 (additive): txAntennaId/rxAntennaId identify the pair for tabulated
+            %   (S21) models; band_Hz = TX/RX overlap band if overlapping, else the TX occupied
+            %   band (frequency-dependent models reduce over it). Existing models ignore them.
         end
     end
 end
