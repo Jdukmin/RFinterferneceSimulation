@@ -1,0 +1,34 @@
+{
+  "label": "KA_FEED_C_OEWG",
+  "inputs": {
+    "wg_radius": 4.4,
+    "wall": 1.0,
+    "wg_length": 20.0,
+    "probe_z": 4.4,
+    "probe_radius": 0.5,
+    "probe_length": 2.2,
+    "feed_gap": 0.5,
+    "aperture_radius": 4.4,
+    "flare_length": 0.0,
+    "flare_steps": 0.0
+  },
+  "derived_mm_ghz": {
+    "aperture_diameter": 8.8,
+    "total_length": 21.0,
+    "te11_cutoff_ghz": 19.965910698152406,
+    "tm01_cutoff_ghz": 26.077570088484087
+  },
+  "monitors_ghz": [
+    25.5,
+    26.25,
+    27.0
+  ],
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "mesh": "Hex 8 cells/wavelength resource budget",
+  "mesh_validation": "DISABLED_BY_USER"
+}

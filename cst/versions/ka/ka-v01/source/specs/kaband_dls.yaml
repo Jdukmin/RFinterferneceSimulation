@@ -1,0 +1,60 @@
+model_identity: KABAND_DLS_RFC_SURROGATE
+purpose: RFC/RFI screening radiation model of a 0.22 m Ka-band (K-band 25.5-27 GHz) downlink reflector; NOT a product reconstruction.
+reference_audit:   # 2026-10-03
+  repository_csv:
+    files: [data/Kaband_DLS/KARMA7_FG_KaBand_XZ.csv, data/Kaband_DLS/KARMA7_FG_KaBand_YZ.csv]
+    sha256: 978192418349ec60b7fce5069de7b74ac41e651d25d1da925b1c7abe30ce82e6   # both files, matches repository_ssot.json
+    samples: 360 per cut, 1 deg, XZ == YZ, 0-180 mirrored
+    main_beam_samples_dbi: {0: 32.95, 1: 31.40, 2: 28.50}
+    assumed_regions: '3 deg onward (15 dBi first-sidelobe plateau, generic far sidelobes/backlobe to -20 dBi) - README: model assumption, not measured'
+    linear_interp_on_1deg_grid_dbi: {0.5: 32.175, 0.75: 31.788}   # below datasheet band-average; README calls this conservative
+  primary_source:
+    document: Beyond Gravity, K-band link antennas datasheet 1399728/01-22, page 3 (0.22 m all-metal reflector, MetOp-SG)
+    url: https://www.beyondgravity.com/sites/default/files/media_document/2023-11/K-band-Link-Antennas.pdf
+    retrieved: 2026-10-03 (text extracted; PDF not stored - document marked not to be copied)
+    values:
+      frequency_ghz: [25.5, 27.0]
+      polarization: RHCP or LHCP (septum polarizer, unused port terminated)
+      boresight_gain_dbi: {25.5: 32.6, 27.0: 33.3}
+      eoc_gain_dbi:
+        0.5:  {25.5: 32.3, 27.0: 33.0}
+        0.75: {25.5: 32.0, 27.0: 32.6}
+        1.0:  {25.5: 31.6, 27.0: 31.2}
+      xpd_db: '> 29 within +/-1.0 deg'
+      return_loss_db: '> 25'
+      rf_interface: WR-42 (WR-34 optional)
+      overall_height_mm: '< 92.2'
+      diameter_mm: '< 222'
+      architecture: reflector dish + integrated feed horn + sub-reflector on integrated tripod + septum polarizer (all metal)
+    confidence: A (vendor datasheet; spec values, likely guaranteed limits incl. margins - not a measured EM pattern table)
+  csv_vs_source: 'README band-average anchors (32.95/32.65/32.30/31.40) equal the mean of the datasheet 25.5/27 GHz values. Verified.'
+  conflict_resolution: >-
+    repository_ssot.json ka_conflict mentions a user-range 32.2 dBi at 1 deg / 27 GHz. The datasheet says 31.2 dBi.
+    Datasheet value is retained (PUBLIC_DATASHEET); 32.2 has no located source.
+  physics_check:
+    aperture_efficiency_from_boresight: '53-55 % of (pi D/lambda)^2 - plausible for a tapered Cassegrain'
+    eoc_slope_note: >-
+      The 1.0 deg EOC at 26.25/27 GHz (1.55/2.1 dB below boresight) implies HPBW 2.8/2.4 deg, narrower than the
+      uniform-illumination limit of a 0.22 m aperture (3.0/2.95 deg). A physical 0.22 m reflector with 54 % efficiency
+      should drop about 1.0-1.3 dB at 1 deg. Interpretation: EOC values are guaranteed minima including pointing/thermal/
+      manufacturing margins. A physical EM model is therefore expected to sit ABOVE the 27 GHz 1.0 deg value by up to ~1 dB.
+      This is a source characteristic, not a model error; it must be reported, not tuned away.
+    csv_3deg_note: >-
+      CSV drops to 15 dBi at 3 deg; a 0.22 m reflector main lobe is still about 20-25 dBi at 3 deg (first null near
+      4.3-4.7 deg). The 3 deg+ CSV region is an assumption; scalar export uses max(CST, reference) there.
+assumptions:
+  - {id: KA-A1, item: frequencies, value: 'monitors 25.5 / 26.25 / 27.0 GHz', tag: ASSUMPTION}
+  - {id: KA-A2, item: polarization, value: 'RHCP (datasheet allows RHCP or LHCP)', tag: ASSUMPTION}
+  - {id: KA-A3, item: optics, value: 'axisymmetric Cassegrain, D 220 mm, height < 92.2 mm; F/D, subreflector size and horn are confidence C', tag: ASSUMED_GEOMETRY}
+analysis_method:
+  constraint: 'Learning Edition: Time/Frequency domain only, 100k hex cells, no asymptotic/PO/IE solver. D = 19 lambda reflector cannot be solved full-wave.'
+  permitted: feed_subreflector_fullwave_plus_equivalent_aperture_or_PO   # specs/rfc_acceptance.yaml ka.permitted_analysis
+  plan: 'CST full-wave CP feed horn -> complex feed pattern -> Python reflector PO / aperture integration (labelled NON-CST stage)'
+acceptance:   # specs/rfc_acceptance.yaml ka
+  gain_basis: ACCEPTED_POWER_GAIN
+  boresight_error_db: 0.7
+  anchors_deg: [0, 0.5, 0.75, 1.0]     # evaluated on a sub-degree model grid against datasheet values, per frequency
+  anchor_error_db: 1.0
+  hpbw_relative_error: 0.10
+  hard_anchor_source: datasheet values only; CSV 1 deg interpolation is MAE-only; 3 deg+ never anchors
+  mesh_validation: DISABLED_BY_USER

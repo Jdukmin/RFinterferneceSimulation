@@ -1,0 +1,33 @@
+{
+  "version": "isl-v05",
+  "label": "ISL_C_CUPPATCH_10G4",
+  "recorded_utc": "2026-10-03T13:21:58.686512+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C_CUPPATCH_10G4.cst",
+  "project_sha256": "5cd1e23d99534eedf610416278e8de7162a41a43e65a7ec10186b2113383f897",
+  "note": "10.4GHz-scaled-cup-patch-HPBW-67",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_isl.py": "c723aaa14da163cfcfe358332d2d88cc24cdca0de062793bec84fbdd5b2e2405",
+    "verify_isl_results.py": "b6744a483999eb89b31ca47dd39f63e63f3748475a2679890ae617b9b0daa12b",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\xband_isl.yaml": "6a0873cfc819bdd7d4322707cbc475232aea28308a7a4982690e5bcce780903b",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "results\\ISL_C_CUPPATCH_10G4\\validation.json": "5995c3d8e3e7724cefc6b5da4b9245ed85df959693d6afea1769086dd7a3254a",
+    "results\\ISL_C_CUPPATCH_10G4\\s_matrix.npz": "dbc141d387c876f524a2ae32d62bd1d9e5f2fcba8be2e26e03fd5d263c83ba77",
+    "results\\ISL_C_CUPPATCH_10G4\\s_parameters.csv": "bd37fe22926e9d207537e1b8bd48b1adec449a8cfc09da1fb03caedc2e12bb4c",
+    "tools\\commands\\ISL_C_CUPPATCH_10G4\\history.vba": "0dcee825bceffb9841c8ca3f26c471d736cd954b31dd09107886d0d42bb0d45a",
+    "tools\\commands\\ISL_C_CUPPATCH_10G4\\job.json": "cf89863241439075c5417d9f44944072f397baaf2b1a446c3b4893a542985803",
+    "tools\\commands\\ISL_C_CUPPATCH_10G4\\candidate.json": "9b294a848af4768a4c22f11e564dbdae8fbd3b0d7d1ed0c37dcabd0846ff25bf",
+    "projects\\ISL_C_CUPPATCH_10G4\\Result\\Model.log": "47c6f9a9958074e1925c1db7292c854fc572f19dcf516563917d68051ebdf00a"
+  }
+}

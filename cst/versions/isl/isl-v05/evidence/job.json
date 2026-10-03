@@ -1,0 +1,51 @@
+{
+  "label": "ISL_C_CUPPATCH_10G4",
+  "topology": "cuppatch",
+  "vars": {
+    "fmin": "10.2",
+    "fmax": "10.6",
+    "accuracy": "-40",
+    "steps": "8",
+    "ratio": "5"
+  },
+  "steps": [
+    {
+      "action": "NewProject"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/units_solver_frequency.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/boundaries_open.vba"
+    },
+    {
+      "action": "History",
+      "file": "history.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/mesh_resource_hex.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/view_structure.vba"
+    },
+    {
+      "action": "SaveAs",
+      "path": "../../../projects/ISL_C_CUPPATCH_10G4.cst"
+    },
+    {
+      "action": "Solve"
+    },
+    {
+      "action": "Save"
+    },
+    {
+      "action": "ExportSParameters",
+      "out": "../../../results/ISL_C_CUPPATCH_10G4/s_parameters.csv",
+      "ports": 4
+    }
+  ]
+}

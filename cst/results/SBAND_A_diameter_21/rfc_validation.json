@@ -1,0 +1,258 @@
+{
+  "SBA1_TC_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 3.471759671889818,
+      "main_max_error_db": 13.321045934012723,
+      "main_rmse_db": 5.284702629353453,
+      "peak_error_db": 0.36288090885001356,
+      "anchor_errors_db": {
+        "0": 0.36288090885001356,
+        "30": 1.306997176866532,
+        "60": -3.1130578444412063,
+        "80": -10.422094084513233,
+        "90": -13.321045934012723
+      },
+      "eoc_gain_error_db": -13.321045934012723,
+      "boresight_error_db": 0.36288090885001356
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": true,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 3.471010842276686,
+      "main_max_error_db": 13.270562580779334,
+      "main_rmse_db": 5.279775103626747,
+      "peak_error_db": 0.36288090885001356,
+      "anchor_errors_db": {
+        "0": 0.36288090885001356,
+        "30": 1.3037307718922646,
+        "60": -3.1000727014990295,
+        "80": -10.367174378836836,
+        "90": -13.270562580779334
+      },
+      "eoc_gain_error_db": -13.270562580779334,
+      "boresight_error_db": 0.36288090885001356
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": true,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 4.187798169678866,
+      "main_max_error_db": 11.821045934012723,
+      "main_rmse_db": 5.6585257907065944,
+      "peak_error_db": 0.16288090885001338,
+      "anchor_errors_db": {
+        "0": 1.6628809088500134,
+        "30": 0.40699717686653214,
+        "60": -5.413057844441206,
+        "80": -10.522094084513233,
+        "90": -11.821045934012723
+      },
+      "eoc_gain_error_db": -11.821045934012723,
+      "boresight_error_db": 1.6628809088500134
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": true,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 4.1875106926025945,
+      "main_max_error_db": 11.770562580779334,
+      "main_rmse_db": 5.655361492969077,
+      "peak_error_db": 0.16288090885001338,
+      "anchor_errors_db": {
+        "0": 1.6628809088500134,
+        "30": 0.4037307718922647,
+        "60": -5.400072701499029,
+        "80": -10.467174378836836,
+        "90": -11.770562580779334
+      },
+      "eoc_gain_error_db": -11.770562580779334,
+      "boresight_error_db": 1.6628809088500134
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": true,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 2.255475376090276,
+      "main_max_error_db": 9.206829089746437,
+      "main_rmse_db": 2.9152109199348346,
+      "peak_error_db": 1.0898757293063879,
+      "anchor_errors_db": {
+        "0": 1.0533772188081025,
+        "30": 1.749360879294858,
+        "60": 1.3917107263578279,
+        "80": -4.620059730776565,
+        "90": -9.206829089746437
+      },
+      "eoc_gain_error_db": -9.206829089746437,
+      "boresight_error_db": 1.0533772188081025
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 2.249932936993574,
+      "main_max_error_db": 9.15112207801717,
+      "main_rmse_db": 2.9035045722165562,
+      "peak_error_db": 1.0891926048602532,
+      "anchor_errors_db": {
+        "0": 1.0533772188081016,
+        "30": 1.7473567671524006,
+        "60": 1.3938563506900974,
+        "80": -4.593911493328933,
+        "90": -9.15112207801717
+      },
+      "eoc_gain_error_db": -9.15112207801717,
+      "boresight_error_db": 1.0533772188081016
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 2.2221347540881546,
+      "main_max_error_db": 8.706829089746437,
+      "main_rmse_db": 2.9530149931720184,
+      "peak_error_db": 1.3898757293063881,
+      "anchor_errors_db": {
+        "0": 1.4533772188081029,
+        "30": 1.4493608792948578,
+        "60": -1.408289273642172,
+        "80": -5.120059730776565,
+        "90": -8.706829089746437
+      },
+      "eoc_gain_error_db": -8.706829089746437,
+      "boresight_error_db": 1.4533772188081029
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 2.2173343444640943,
+      "main_max_error_db": 8.65112207801717,
+      "main_rmse_db": 2.9417290838570205,
+      "peak_error_db": 1.3891926048602534,
+      "anchor_errors_db": {
+        "0": 1.453377218808102,
+        "30": 1.4473567671524004,
+        "60": -1.4061436493099024,
+        "80": -5.093911493328933,
+        "90": -8.65112207801717
+      },
+      "eoc_gain_error_db": -8.65112207801717,
+      "boresight_error_db": 1.453377218808102
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  }
+}

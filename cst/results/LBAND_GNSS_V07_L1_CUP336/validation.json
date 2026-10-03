@@ -1,0 +1,530 @@
+{
+  "f1.563_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.5391292681180688,
+      "main_max_error_db": 4.98353358244526,
+      "main_rmse_db": 1.9872312415546554,
+      "peak_error_db": 0.9165407413748508,
+      "anchor_errors_db": {
+        "0": 0.9165407413748508,
+        "30": -0.23443096822870846,
+        "60": -1.721479358348411,
+        "80": -3.392030890669015,
+        "90": -4.907238089805359
+      },
+      "eoc_gain_error_db": -4.907238089805359,
+      "boresight_error_db": 0.9165407413748508
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.5391292681180688,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 0.9165407413748508,
+          "limit_db": 1.0,
+          "pass": true
+        },
+        "10": {
+          "error_db": 0.7697841013056586,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.3398480109342188,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.23443096822870846,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.7907985524748753,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.3490499378324143,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 1.721479358348411,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.3355497284730107,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.392030890669015,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 4.907238089805359,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.04841815930178718,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011152223367408842,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 92.34313284172144,
+    "coverage_axial_ratio_max_db": 12.107220302975028,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.563_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.539337575372345,
+      "main_max_error_db": 4.987220365082541,
+      "main_rmse_db": 1.9875757650643193,
+      "peak_error_db": 0.9165407413748508,
+      "anchor_errors_db": {
+        "0": 0.9165407413748508,
+        "30": -0.23243306536004393,
+        "60": -1.719784165136634,
+        "80": -3.422580319280722,
+        "90": -4.987220365082541
+      },
+      "eoc_gain_error_db": -4.987220365082541,
+      "boresight_error_db": 0.9165407413748508
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.539337575372345,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 0.9165407413748508,
+          "limit_db": 1.0,
+          "pass": true
+        },
+        "10": {
+          "error_db": 0.7702503327234407,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.3409499526597539,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.23243306536004393,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.7877995010151633,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.3456104176867774,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 1.719784165136634,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.341681329289147,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.422580319280722,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 4.987220365082541,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.04841815930178718,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011152223367408842,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 92.34313284172701,
+    "coverage_axial_ratio_max_db": 12.211815329289479,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.57542_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.6513908348094637,
+      "main_max_error_db": 5.301848584973493,
+      "main_rmse_db": 2.137000295900383,
+      "peak_error_db": 0.9635138056788595,
+      "anchor_errors_db": {
+        "0": 0.9635138056788595,
+        "30": -0.23502307898434527,
+        "60": -1.860949193925343,
+        "80": -3.6682953663797937,
+        "90": -5.191877765461493
+      },
+      "eoc_gain_error_db": -5.191877765461493,
+      "boresight_error_db": 0.9635138056788595
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.6513908348094637,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 0.9635138056788595,
+          "limit_db": 1.0,
+          "pass": true
+        },
+        "10": {
+          "error_db": 0.8118993959589282,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.3660124454301421,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.23502307898434527,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.8283797838519504,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.4330850127442138,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 1.860949193925343,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.5400392603237862,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.6682953663797937,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 5.191877765461493,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.048972266191894674,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011318695880715435,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 90.35373489458519,
+    "coverage_axial_ratio_max_db": 13.440638118220914,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.57542_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.6516264816501274,
+      "main_max_error_db": 5.304568263463695,
+      "main_rmse_db": 2.13742688131688,
+      "peak_error_db": 0.9635138056788612,
+      "anchor_errors_db": {
+        "0": 0.9635138056788612,
+        "30": -0.2324298592937568,
+        "60": -1.858747389960243,
+        "80": -3.7133435453313863,
+        "90": -5.304568263463695
+      },
+      "eoc_gain_error_db": -5.304568263463695,
+      "boresight_error_db": 0.9635138056788612
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.6516264816501274,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 0.9635138056788612,
+          "limit_db": 1.0,
+          "pass": true
+        },
+        "10": {
+          "error_db": 0.8124781749831609,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.3674080849286021,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.2324298592937568,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.8243951373301499,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.4284385049525445,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 1.858747389960243,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.5492461672000766,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.7133435453313863,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 5.304568263463695,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.048972266191894674,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011318695880715435,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 90.35373489458874,
+    "coverage_axial_ratio_max_db": 13.619066418886089,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.588_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.7563823537028846,
+      "main_max_error_db": 5.555400049950988,
+      "main_rmse_db": 2.272343849745257,
+      "peak_error_db": 1.0064217119569268,
+      "anchor_errors_db": {
+        "0": 1.0064217119569268,
+        "30": -0.23847264767239995,
+        "60": -2.001717528856954,
+        "80": -3.9183171155280645,
+        "90": -5.402582562844584
+      },
+      "eoc_gain_error_db": -5.402582562844584,
+      "boresight_error_db": 1.0064217119569268
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.7563823537028846,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 1.0064217119569268,
+          "limit_db": 1.0,
+          "pass": false
+        },
+        "10": {
+          "error_db": 0.8505188251323403,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.38910415677130317,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.23847264767239995,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.8687891063317998,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.5197918909316455,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 2.001717528856954,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.7398527386615705,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.9183171155280645,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 5.402582562844584,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.049316809383244876,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011465930255372903,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 87.47695738947506,
+    "coverage_axial_ratio_max_db": 14.694269852912104,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.588_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.7566835981052196,
+      "main_max_error_db": 5.566959247688649,
+      "main_rmse_db": 2.2729240788537046,
+      "peak_error_db": 1.006421711956925,
+      "anchor_errors_db": {
+        "0": 1.006421711956925,
+        "30": -0.236148040801905,
+        "60": -1.9997472408878707,
+        "80": -3.9860795018762927,
+        "90": -5.566959247688649
+      },
+      "eoc_gain_error_db": -5.566959247688649,
+      "boresight_error_db": 1.006421711956925
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 1.7566835981052196,
+      "main_mae_pass": false,
+      "source_anchor_guards": {
+        "0": {
+          "error_db": 1.006421711956925,
+          "limit_db": 1.0,
+          "pass": false
+        },
+        "10": {
+          "error_db": 0.8508201767618395,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "20": {
+          "error_db": 0.39008932309536526,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "30": {
+          "error_db": 0.236148040801905,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "40": {
+          "error_db": 0.8646370256658251,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "50": {
+          "error_db": 1.5145801457516752,
+          "limit_db": 2.0,
+          "pass": true
+        },
+        "60": {
+          "error_db": 1.9997472408878707,
+          "limit_db": 1.5,
+          "pass": false
+        },
+        "70": {
+          "error_db": 2.754423496248576,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "80": {
+          "error_db": 3.9860795018762927,
+          "limit_db": 2.0,
+          "pass": false
+        },
+        "90": {
+          "error_db": 5.566959247688649,
+          "limit_db": 1.5,
+          "pass": false
+        }
+      },
+      "source_anchors_verified": true,
+      "anchor_pass": false
+    },
+    "reference_limitation": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS.",
+    "reference_band": "L1_1575MHz",
+    "active_return_loss_db": 0.049316809383244876,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.011465930255372903,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 87.47695738947506,
+    "coverage_axial_ratio_max_db": 15.06768639475743,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  }
+}

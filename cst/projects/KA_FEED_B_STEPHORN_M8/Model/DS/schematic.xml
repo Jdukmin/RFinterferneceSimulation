@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SchematicTopology Grid="25" Seed="1" Version="2.5">
+    <Block Class="MWSSCHEM" ForeignId="1959295298" Id="1" ImageIndex="1">
+        <Size Height="225" Width="225"/>
+        <Pins Distribution="TwoSidesDownward">
+            <Pin BlockPosition="Left" Index="0" Port="0">
+                <Label>1<LabelAppearance Color="#000000" Flags="Right Top" HorizontalMargin="0" LeftMargin="0" Placement="Inside" RightMargin="0" VerticalMargin="0">
+                        <Font PointSize="16"/>
+                    </LabelAppearance>
+                </Label>
+            </Pin>
+            <Pin BlockPosition="Left" Index="1" Port="1">
+                <Label>2<LabelAppearance Color="#000000" Flags="Right Top" HorizontalMargin="0" LeftMargin="0" Placement="Inside" RightMargin="0" VerticalMargin="0">
+                        <Font PointSize="16"/>
+                    </LabelAppearance>
+                </Label>
+            </Pin>
+            <Pin BlockPosition="Right" Index="0" Port="2">
+                <Label>3<LabelAppearance Color="#000000" Flags="Left Top" HorizontalMargin="0" LeftMargin="0" Placement="Inside" RightMargin="0" VerticalMargin="0">
+                        <Font PointSize="16"/>
+                    </LabelAppearance>
+                </Label>
+            </Pin>
+            <Pin BlockPosition="Right" Index="1" Port="3">
+                <Label>4<LabelAppearance Color="#000000" Flags="Left Top" HorizontalMargin="0" LeftMargin="0" Placement="Inside" RightMargin="0" VerticalMargin="0">
+                        <Font PointSize="16"/>
+                    </LabelAppearance>
+                </Label>
+            </Pin>
+            <Ports>
+                <Port Label="" Name="1"/>
+                <Port Label="" Name="2"/>
+                <Port Label="" Name="3"/>
+                <Port Label="" Name="4"/>
+            </Ports>
+        </Pins>
+        <Image FileName="../3D/Model.dib" IconPosition="TopRight" Scale="AutoFit">
+            <Size Height="392" Width="512"/>
+        </Image>
+        <Pos X="87.5" Y="-12.5"/>
+        <ToolTip>CST MICROWAVE STUDIO schematic block MWSSCHEM1</ToolTip>
+    </Block>
+</SchematicTopology>

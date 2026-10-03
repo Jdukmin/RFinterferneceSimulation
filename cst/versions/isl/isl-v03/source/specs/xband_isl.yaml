@@ -1,0 +1,58 @@
+model_identity: XBAND_ISL_RFC_SURROGATE
+purpose: RFC/RFI screening free-space radiation model; NOT a product reconstruction.
+repository_evidence:
+  numeric_target: NONE  # repository_ssot.json xband_isl.status = NO_REPOSITORY_NUMERIC_TARGET_FOUND
+  coverage_note: '+/-60 deg coverage is a user requirement, not a published 120 deg HPBW'
+assumptions:
+  - id: ISL-A1
+    item: frequency
+    value: {fmin_ghz: 8.0, f0_ghz: 8.2, fmax_ghz: 8.4}
+    tag: ASSUMPTION
+    reason: No ISL frequency in repository; X-band 8.0-8.4 GHz chosen as representative screening band.
+  - id: ISL-A2
+    item: polarization
+    value: RHCP (IEEE), CST e^(+jwt) cp_plus
+    tag: ASSUMPTION
+  - id: ISL-A3
+    item: reference pattern
+    value: 'G(theta) = 10*log10(2*(q+1)*cos(theta)^q), q = 1 -> 6.02 dBi peak, -3.01 dB at 60 deg'
+    tag: ASSUMPTION
+    reason: >-
+      Smallest energy-consistent broad-beam CP template whose half-power edge equals the
+      +/-60 deg coverage requirement. Every point is ASSUMED: none is a hard anchor.
+  - id: ISL-A4
+    item: unvalidated region conservative envelope
+    value: 'max(template for theta<90, -10 dBi floor)'
+    tag: ASSUMED_CONSERVATIVE
+  - id: ISL-A5
+    item: feed
+    value: four ideal 50-ohm discrete ports, equal amplitude, phases 0/-90/-180/-270 deg
+    tag: SURROGATE
+acceptance:
+  gain_basis: ACCEPTED_POWER_GAIN   # active return loss diagnostic only
+  coverage_deg: 60
+  main_mae_db: 1.5                  # vs assumed template, 0..60 deg, both cuts, low/center/high
+  hpbw_target_deg: 120
+  hpbw_relative_error: 0.10
+  hard_anchors: []                  # no source data exist
+  axial_ratio_diagnostic_db: 3      # boresight; coverage worst case reported only
+  mesh_validation: DISABLED_BY_USER
+  max_candidates: 4                 # no infinite tuning
+candidates:
+  ISL_A_QHELIX_SCALED:
+    topology: 4-arm resonant multifilar helix, accepted S-band surrogate scaled by 2.25/8.2, mirrored for RHCP
+    scale: 0.274390244
+    source_geometry: SBAND_MATCHING_WIRE15 (frozen) - helix D18 H52 0.5 turn wire r1.5 gap1.2, base D65 depth32 groove depth20
+  ISL_B_CUPPATCH:
+    topology: short PEC cup + air-loaded circular patch + 4-probe quadrature feed
+    dimensions_mm:   # all confidence C (EM initial estimate)
+      ground_radius: 15.0
+      floor_thickness: 1.0
+      rim_height: 4.0
+      rim_thickness: 1.0
+      patch_diameter: 16.6     # air TM11 with Hammerstad fringing at h=2.5 mm, 8.2 GHz
+      patch_height: 2.5
+      patch_thickness: 0.5
+      feed_radius: 3.0
+      probe_radius: 0.4
+      feed_gap: 0.5

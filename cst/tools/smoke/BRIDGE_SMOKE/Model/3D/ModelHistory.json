@@ -1,0 +1,84 @@
+{
+    "general": {
+        "version": "2026.4",
+        "date": "2026-04-14",
+        "acis": "35.0.0",
+        "buildnumber": "20260414",
+        "project_type": "MWS",
+        "length": "mm",
+        "frequency": {
+            "unit": "GHz",
+            "minimum": "8",
+            "maximum": "8.4000000000000004",
+            "minimum_expr": "8.0",
+            "maximum_expr": "8.4"
+        },
+        "time": "ns",
+        "created": "2026.4|35.0.0|20260414"
+    },
+    "history": [
+        {
+            "caption": "Units mm/GHz/ns",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"048509ac47107bdc52f1b2d0e2fe01bce9644ff706ef32ed090b17925ccada54cb7a8ff060ba11beffb1c8037d38192ad83ea2aaa840ebc890fdd2c3e93534439d68ec8b3b3a40c1c4d0c71e8f3a2efecab8714a1e1295efbcbceadbc9673ec37f60154aa456cdd624d9e1728bef4d8746\""
+            ]
+        },
+        {
+            "caption": "Time domain solver and frequency band",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e271d7b1e4ff3737161fad3fb141406ca64aee9068337c5eeb081885a182d11d78514757ebdb3306e4f1570b9345921994024d69e98f1d36c6d1658354f7a5ba41ef2f09e04abce87bc135c54b013aa10f9e646249faa302ebb6b30b39b3bc460a3f69c5dad50942f3eaee7304a3db8e36c3277d4856774f6a8b802aa78daf8e6f3f87648a067d6100558937a460ee1d4b84e82999c3274b88426dcf2700b7b947672e08efddc3b1b0e9a9f5be31ae2afbeab5dc6429f5fdd7bb5a94ea76798f41328bba4718ab26fcbeb1c1ee3655e4\""
+            ]
+        },
+        {
+            "caption": "Vacuum background and open (add space) boundaries",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e7c5b4f03b43cf7cb95e591abfefdb76905c9b0e09f03bb5dc6eccbfce7f77f51e6ece663ef9b7fe083c45b74292a2b6fbdf996361057dd86fa6cda92df31a17c29f6ba70d5f0a36a6f1113ea0b62aab7c6f4a03a5928fa22953d7711e7700a08412d651f68ffddb1a96a6f8f633453902290748860c9cdf5a08e0246fb1eb9fd58f90ddcb3c925c1009dcfe884d3538ce51ecac60959a756c0e0de68940695889bbde99b856d2945075b1551910c0f8b4f65c0d105601986ec1273170a3b966eaba841f523c019acb9f955aedf25220549f6498a39a18ba2f513caef2c29992db04020f761c9e573086ae0467326db3b87c6da05a45d3ac1e9c15b345b35a04a1b71c9a4392839dc175937e83d3766ded3dd1305900a456365d9fdf4dc82c0575b502c0c81e52a4843a0319531efb8994282f433abf60940060da87da94f7aba770ad0d9d4369743c5daab79b8c1f1308927fec1cdfa0b168cdef08b57271cc7f1af10cf982a4ac1ea64c36bf1d2a90efaa6badda232aeb4c027b4f03f8b717ff9f4778d3eaa9751d2d8edce29d9395f943f934b8355893fc48dc2314f3dac562c19c041b103a13d09b59d079884437\""
+            ]
+        },
+        {
+            "caption": "PML reference includes lowest monitor",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"049446002bacda08ca93d36740482223a44aeb4f9800231e6c91481741f8761f7e7c925962c4891dd3b5ae9ae5cf68e1a3c0475888cb0c9b6c187f0e9c73696e782f2aab3708061747ac88a4d26b14f7fb\""
+            ]
+        },
+        {
+            "caption": "Parameter smoke_len",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"041c81e9b16cd35743b9856005b234e7eee516b412f49abd967653d93d9c206aea743162390d74e057652b0eed1f1cbe5567b754e5dd2bc79e9a3013569864932d4b28e7333780140dedb2e2a8acbf575c\""
+            ]
+        },
+        {
+            "caption": "Brick BRIDGE_SMOKE:brick",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"0486f6e89e8f00d72768a24702f2b8c90c6b1da1c943f6fa02e2f1b59e6f0d28d3a4581053177d1241f57d39ed91e775bab01424e6200bdd242faff76f443cb801cdd11c5cd5bb2c82254fd560d92677f555327866733042f54c74b93dc46d539ae4d947cf8ab71544cfa4d09c2bb4501af279853ca238ccc714183aecf560c46fcbb29c9cb3c70beaed034a4838e476e4f13797e343e6b514e62d84dc528ebca5c144b1492cb8baed2c9ab85af30a4da7e19d03a31b5c58aa64a591a6d8a93fb0\""
+            ]
+        },
+        {
+            "caption": "param brick",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"042f33a8c67c3aaab44f3bc4e2418699fb82b0f725a6c61a0e7cc39813c90d49894f05cd3ef0eb4c39805e5d9dc70a6941ddbe34e445fc3f173c18c52ae1891ad9dfecbe4e005955e4aa94a95ab844454ded893d247ddeed2aadc2053d36ab05fc6f17167f69765b5fa17b29e87d5b3457bd6d331efc7ed674735e5a01df9cd4627add911799d136fe0a7fcd301d42840fc839298d6abcccdcfa313bda990fe87d58e6cdeed94beb1e9b343d1687428c3d\""
+            ]
+        }
+    ]
+}

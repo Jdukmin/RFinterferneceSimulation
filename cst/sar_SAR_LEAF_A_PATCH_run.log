@@ -1,0 +1,13 @@
+﻿[START] job {"label":"SAR_LEAF_A_PATCH","steps":10,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":7,"sha256":"9A7A5C70D03800580D8C54630A9B63DA08B90FD91007035AA31477DA14FACB52","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\history.vba"}
+[OK] history {"blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\..\\..\\templates\\mesh_resource_hex.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\SAR_LEAF_A_PATCH.cst"}
+[OK] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\SAR_LEAF_A_PATCH\\Result\\Model.log","seconds":13,"successful_excitations":1,"exists":true,"errors":[],"mesh_cells":[23976],"warnings":[],"start_returned":"1"}
+[OK] save {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\SAR_LEAF_A_PATCH.cst"}
+[OK] export_sparameters {"out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\SAR_LEAF_A_PATCH\\s_parameters.csv","ports":1,"points":1001}
+[DONE] job {"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_A_PATCH\\job.json"}

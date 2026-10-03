@@ -1,0 +1,33 @@
+{
+  "version": "isl-v06",
+  "label": "ISL_C2_CUP_RIM7P2",
+  "recorded_utc": "2026-10-03T13:21:58.897618+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C2_CUP_RIM7P2.cst",
+  "project_sha256": "02d723d2b211b0cd9e826e5e9b79df4b1047eb90227e0eeeaa3f4869833c7067",
+  "note": "rim-7.2-HPBW-70-rejected",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_isl.py": "c723aaa14da163cfcfe358332d2d88cc24cdca0de062793bec84fbdd5b2e2405",
+    "verify_isl_results.py": "b6744a483999eb89b31ca47dd39f63e63f3748475a2679890ae617b9b0daa12b",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\xband_isl.yaml": "6a0873cfc819bdd7d4322707cbc475232aea28308a7a4982690e5bcce780903b",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "results\\ISL_C2_CUP_RIM7P2\\validation.json": "ff2838587133f4faa7578902e1bfcf811c554855a022c3c3490e95a23b274e9b",
+    "results\\ISL_C2_CUP_RIM7P2\\s_matrix.npz": "fbedfeebd7ce59cdbfa0d460e51a21d22e69bf113ac5344c2149456307ddef5a",
+    "results\\ISL_C2_CUP_RIM7P2\\s_parameters.csv": "239599a105900e4b20295c6938e92bf925c4d64d000f5e9fc90e77868506d050",
+    "tools\\commands\\ISL_C2_CUP_RIM7P2\\history.vba": "2ba4f619bf12e3331164a5cf1dc82ce09298b5964bf14359f8c1e2c84dcc51a3",
+    "tools\\commands\\ISL_C2_CUP_RIM7P2\\job.json": "04bf4e7df6369d0dde62f30575d9f679ca82f348fd22c8ca6d67a2d5b816ba1a",
+    "tools\\commands\\ISL_C2_CUP_RIM7P2\\candidate.json": "269cf02834f5604e78e436800ca44af14d8b3f2e506e014d10cc8827cbd21a9b",
+    "projects\\ISL_C2_CUP_RIM7P2\\Result\\Model.log": "8e8477aa5a91ed2d659e6a26c9e4ad0bee76e5e703b535cc85b3d61f4a12bf48"
+  }
+}

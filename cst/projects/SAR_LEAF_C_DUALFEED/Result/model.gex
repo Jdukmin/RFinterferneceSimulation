@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaGeometryFile version="20200202" creator="MatrixCalc">
+  <Components>
+    <Shape name="Components\RECONSTRUCTION:ground" id="1" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="1 2 3 4 5 6"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:patch" id="2" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="7 8 9 10 11 12"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:probe1" id="3" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="13 14 15"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:probe2" id="4" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="16 17 18"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+  </Components>
+  <Materials>
+    <Material name="air_0" priority="1">
+      <Drawstyle color="0.600000024 0.600000024 0.600000024" transparency="0" linestrength="1"/>
+    </Material>
+    <Material name="PEC" priority="4">
+      <Drawstyle color="0.800000012 0.800000012 0.800000012" transparency="0" linestrength="1"/>
+    </Material>
+    <Material name="$NFSMaterial$" priority="2">
+      <Drawstyle color="0 1 1" transparency="0" linestrength="1"/>
+    </Material>
+  </Materials>
+  <Groups/>
+  <SimulationDomain min="-23.6005306 -23.6005306 -10.5475302" max="23.6005306 23.6005306 12.5475302"/>
+  <MeshType type="HEX"/>
+  <HexMesh>
+    <Dimensions nx="40" ny="37" nz="19"/>
+    <MeshPlanesX values="-23.60053050955414 -21.34916474441015 -19.320470839156144 -17.849690881214663 -16.584127254143105 -15.318563627071548 -14.053000000000001 -12.722400000000002 -11.391800000000003 -10.061200000000005 -8.7306000000000061 -7.4000000000000004 -6.084547531118651 -4.7742157177393105 -3.7252779657475679 -3 -2.5 -2 -1.3530648409024715 -0.50529329131448453 0.50529329131448431 1.3530648409024708 2 2.5 3 3.7252779657475688 4.7742157177393141 6.0845475311186483 7.4000000000000004 8.730599999999999 10.061199999999998 11.391799999999996 12.722399999999995 14.053000000000001 15.31856362707156 16.584127254143116 17.849690881214677 19.320470839156155 21.349164744410139 23.60053050955414"/>
+    <MeshPlanesY values="-23.60053050955414 -21.34916474441015 -19.320470839156144 -17.849690881214663 -16.584127254143105 -15.318563627071548 -14.053000000000001 -12.66475 -11.276499999999993 -9.888249999999994 -8.5 -7.2407099171630556 -5.9814198343261147 -4.7221297514891667 -3.4628396686522187 -2.212084921927107 -1.2090336651506295 -0.5 0 0.5 1.2090336651506355 2.2120849219271115 3.4628396686522116 4.7221297514891472 5.9814198343260951 7.2407099171630431 8.5 9.8882500000000029 11.276500000000008 12.664750000000007 14.053000000000001 15.31856362707156 16.584127254143116 17.849690881214677 19.320470839156155 21.349164744410139 23.60053050955414"/>
+    <MeshPlanesZ values="-10.547530509554139 -8.1081348447645123 -6.0009426404740926 -4.543969474977013 -3.2277027759758186 -1.9506090005064927 -1 -0.44544205791631714 0 0.5 0.99297760822004999 1.7112625564556585 2.75 4.0413555578390996 5.3390199323699203 6.6366843069007349 8.0984469134176162 10.178917921267974 12.547530509554139"/>
+    <SnappingPlanesX values="0 6 11 15 16 17 22 23 24 28 33 39"/>
+    <SnappingPlanesY values="0 6 10 17 18 19 26 30 36"/>
+    <SnappingPlanesZ values="0 6 8 9 12 18"/>
+  </HexMesh>
+  <UnitCell/>
+  <GeometryFile filename="3d.slm" type="slim" scale_factor_to_meter="0.001"/>
+</MetaGeometryFile>

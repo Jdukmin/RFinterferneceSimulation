@@ -1,0 +1,50 @@
+{
+  "label": "KA_FEED_C_OEWG",
+  "vars": {
+    "fmin": "25.0",
+    "fmax": "27.5",
+    "accuracy": "-40",
+    "steps": "8",
+    "ratio": "5"
+  },
+  "steps": [
+    {
+      "action": "NewProject"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/units_solver_frequency.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/boundaries_open.vba"
+    },
+    {
+      "action": "History",
+      "file": "history.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/mesh_resource_hex.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/view_structure.vba"
+    },
+    {
+      "action": "SaveAs",
+      "path": "../../../projects/KA_FEED_C_OEWG.cst"
+    },
+    {
+      "action": "Solve"
+    },
+    {
+      "action": "Save"
+    },
+    {
+      "action": "ExportSParameters",
+      "out": "../../../results/KA_FEED_C_OEWG/s_parameters.csv",
+      "ports": 4
+    }
+  ]
+}

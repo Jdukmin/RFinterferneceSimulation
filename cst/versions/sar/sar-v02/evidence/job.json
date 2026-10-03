@@ -1,0 +1,50 @@
+{
+  "label": "SAR_LEAF_B_L14P8",
+  "vars": {
+    "fmin": "7.6",
+    "fmax": "8.4",
+    "accuracy": "-40",
+    "steps": "10",
+    "ratio": "5"
+  },
+  "steps": [
+    {
+      "action": "NewProject"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/units_solver_frequency.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/boundaries_open.vba"
+    },
+    {
+      "action": "History",
+      "file": "history.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/mesh_resource_hex.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/view_structure.vba"
+    },
+    {
+      "action": "SaveAs",
+      "path": "../../../projects/SAR_LEAF_B_L14P8.cst"
+    },
+    {
+      "action": "Solve"
+    },
+    {
+      "action": "Save"
+    },
+    {
+      "action": "ExportSParameters",
+      "out": "../../../results/SAR_LEAF_B_L14P8/s_parameters.csv",
+      "ports": 1
+    }
+  ]
+}

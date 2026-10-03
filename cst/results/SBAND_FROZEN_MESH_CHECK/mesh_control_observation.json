@@ -1,0 +1,12 @@
+{
+  "status": "NOT_A_PROVEN_REFINEMENT",
+  "frozen_geometry_config": "cst/specs/sband_matching_wire15.json",
+  "baseline_mesh_cells": 79376,
+  "candidate_mesh_cells": 79376,
+  "control": "Mesh.LinesPerWavelength 12",
+  "syntax_evidence": "Installed CST Library/Macros/File/ADS Converter 1.bas, With Mesh block",
+  "solver_log": "cst/projects/SBAND_FROZEN_MESH_CHECK/Result/Model.log",
+  "convergence_pass": false,
+  "reason": "Identical cell counts and active reflection indicate the wavelength limit did not refine the geometry-dominated mesh. Equal results from an unchanged mesh do not prove numerical convergence.",
+  "geometry_tuning_resumed": false
+}

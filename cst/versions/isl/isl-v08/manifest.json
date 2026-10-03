@@ -1,0 +1,33 @@
+{
+  "version": "isl-v08",
+  "label": "ISL_C4_CUP_R14P7",
+  "recorded_utc": "2026-10-03T13:21:59.314690+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C4_CUP_R14P7.cst",
+  "project_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
+  "note": "R14.7-SELECTED-PASS",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_isl.py": "c723aaa14da163cfcfe358332d2d88cc24cdca0de062793bec84fbdd5b2e2405",
+    "verify_isl_results.py": "b6744a483999eb89b31ca47dd39f63e63f3748475a2679890ae617b9b0daa12b",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\xband_isl.yaml": "6a0873cfc819bdd7d4322707cbc475232aea28308a7a4982690e5bcce780903b",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "results\\ISL_C4_CUP_R14P7\\validation.json": "7ce77dc516e5732bf83cc870a7a894a777268de12182b6f21d78b5627a8fed06",
+    "results\\ISL_C4_CUP_R14P7\\s_matrix.npz": "d0403c2df21d24f447ea89b1ec14bd8321c95238df3a9a084a17bb0c00983299",
+    "results\\ISL_C4_CUP_R14P7\\s_parameters.csv": "863b86253a071165737ef59a937730eb508f26416ab9d03746ff1df98c18b5f2",
+    "tools\\commands\\ISL_C4_CUP_R14P7\\history.vba": "3e9b0b95646e296ea3ac97ffaf9a8f14deb20ac95e03d6825012294b10b21075",
+    "tools\\commands\\ISL_C4_CUP_R14P7\\job.json": "9580dedd436f4756dd7cb3c2556352803415e35fa73d102a8cbe30d81f84b912",
+    "tools\\commands\\ISL_C4_CUP_R14P7\\candidate.json": "188483b5c6060dc24224e4958f602aa66d777e422ec820e6328c56da846447ef",
+    "projects\\ISL_C4_CUP_R14P7\\Result\\Model.log": "ff221dc83114c33dcc182256bd20a05c3f6179a347fe33936a67d38fe2753eca"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "version": "L-v05",
+  "label": "LBAND_GNSS_V05_BANDCHECK",
+  "recorded_utc": "2026-10-03T11:59:08.310155+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\LBAND_GNSS_V05_BANDCHECK.cst",
+  "project_sha256": "5ac80532900f07d75d63b31aa5387cde60ac5628342b67395488e6358c8c2081",
+  "note": "Frozen L5 shape checked across bands; 1207 proxy center adequate; L1 FAIL; broadband L5 endpoints differ, do not overwrite v04 acceptance",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_lband_gnss.py": "5a6ca1adb851c5eb20db8cd3214f61c287649f339a3ff4e5eeed35d9dcd60d18",
+    "verify_lband_results.py": "a518ff3c902e36ccbfa49de4c43f8c19a8146fabc4efe9268f8b4b0eafbdeafe",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "specs\\lband_gnss.yaml": "00d47f85a0ce23509a9b9a21cf1ce6a96cf927f807ee43be0d840ef9a7613d72",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba"
+  },
+  "evidence": {
+    "projects\\LBAND_GNSS_V05_BANDCHECK.geometry.json": "5eea57eb3ecf6b20d46cce7fcf1c1692f0db9b93da3c511fbee886d248279ed5",
+    "results\\LBAND_GNSS_V05_BANDCHECK\\validation.json": "ecda52707d3809777456e57cfc104ff467ef7e0a0826f0bc99dd598dcb3c0864",
+    "results\\LBAND_GNSS_V05_BANDCHECK\\s_matrix.npz": "1b004ba8a7259172ae8b104d3a1fb952ababa9fb3a98e9d47fd3a0ccf4db93a2",
+    "projects\\LBAND_GNSS_V05_BANDCHECK\\Result\\Model.log": "210ac103015d421e2875e6912bd3bcc19ba9c28b6642aecb450103efbb5a7552"
+  }
+}

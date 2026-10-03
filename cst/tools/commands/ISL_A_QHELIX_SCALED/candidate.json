@@ -1,0 +1,42 @@
+{
+  "label": "ISL_A_QHELIX_SCALED",
+  "topology": "helix",
+  "inputs": {
+    "scale": 0.274390244
+  },
+  "derived_geometry_mm": {
+    "helix_diameter": 4.939024392,
+    "helix_height": 14.268292688,
+    "turns": 0.5,
+    "wire_radius": 0.411585366,
+    "feed_gap": 0.3292682928,
+    "base_diameter": 17.83536586,
+    "base_depth": 8.780487808,
+    "groove_depth": 5.4878048800000006,
+    "winding": "mirrored (clockwise rising)"
+  },
+  "monitors_ghz": [
+    8.0,
+    8.2,
+    8.4
+  ],
+  "solve_range_ghz": [
+    7.9,
+    8.5
+  ],
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "mesh": "CST default (as S-band)",
+  "mesh_validation": "DISABLED_BY_USER",
+  "assumptions": [
+    "ISL-A1",
+    "ISL-A2",
+    "ISL-A3",
+    "ISL-A4",
+    "ISL-A5"
+  ]
+}

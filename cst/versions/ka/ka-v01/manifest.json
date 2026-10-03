@@ -1,0 +1,32 @@
+{
+  "version": "ka-v01",
+  "label": "KA_FEED_A_STEPHORN",
+  "recorded_utc": "2026-10-03T13:34:16.424708+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_A_STEPHORN.cst",
+  "project_sha256": "143ab8ba4ea94067b81eebb68a7c5be6b7835cde0a577a0ddb4fa6067e4b5c65",
+  "note": "stepped-horn-exceeded-100k-cell-limit-not-solved",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_ka_feed.py": "6d33bda04d2c4b27b148b961032e162bed27b12dc21be32cdd7ce8e6c134860a",
+    "ka_feed_results.py": "7bb473c1d4d21f374edb170d3769f8cf6b985817ebff54ebddf8654c201166b5",
+    "ka_reflector_po.py": "e026086076c5b19e4d1b8763eefbf4f56d360a260b8fce7cd727d4b941509b45",
+    "ka_reflector_eval.py": "5825c540c7d966774a88b7cff4cf63649b3a692acc587e9d5a985f7e6cfda160",
+    "finalize_ka.py": "f915d741d73066e1c7d525c65885b5bf9d2a1cf321c894e6167c0dfc329b920a",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "specs\\kaband_dls.yaml": "926f914567cbb4b976c84de50f7883d01467b04abd4fdba6a4b7a8ce9b62e8ee",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "tools\\commands\\KA_FEED_A_STEPHORN\\history.vba": "a3e3833556b9dc21d75be88290a27b3a13fd11b9902ba45ce4f14714c6cfcefd",
+    "tools\\commands\\KA_FEED_A_STEPHORN\\job.json": "79b13f7817d12c71f956222c558d7232f100f7287b368926a120c2a15afa7aa5",
+    "tools\\commands\\KA_FEED_A_STEPHORN\\candidate.json": "e4c5893d4f2462d2b22b0aeda01d113daaf0787e8a460526679ee2bf919ae482",
+    "projects\\KA_FEED_A_STEPHORN\\Result\\Model.log": "68ba68120e20dcf21f1408cb5cfe9466a94716fac6860c7981e0d5cca593b7d0"
+  }
+}

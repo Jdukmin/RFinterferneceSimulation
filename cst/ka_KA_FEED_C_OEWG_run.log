@@ -1,0 +1,13 @@
+﻿[START] job {"label":"KA_FEED_C_OEWG","steps":10,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":13,"sha256":"D6031EFA26744E9FB66820ED13BFB7FF946F25A1ED5396E2B48515D0A33D672A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\history.vba"}
+[OK] history {"blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\..\\..\\templates\\mesh_resource_hex.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_C_OEWG.cst"}
+[OK] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_C_OEWG\\Result\\Model.log","seconds":65,"successful_excitations":4,"exists":true,"errors":[],"mesh_cells":[25872,25872,25872,25872],"warnings":[],"start_returned":"1"}
+[OK] save {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_C_OEWG.cst"}
+[OK] export_sparameters {"out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\KA_FEED_C_OEWG\\s_parameters.csv","ports":4,"points":1001}
+[DONE] job {"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_C_OEWG\\job.json"}

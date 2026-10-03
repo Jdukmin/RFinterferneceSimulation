@@ -1,0 +1,153 @@
+{
+  "overall": "FAIL",
+  "scope": "ONLY_FREQUENCIES_AND_CUTS_IN_THIS_REPORT",
+  "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+  "cuts": {
+    "f1.563_XZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": true,
+        "source_screening_anchors": false,
+        "boresight": true,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 59.44763406387935,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 3.4914766607291545,
+      "hemisphere_rhcp_discrimination_min_db": 4.401915201040744,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    },
+    "f1.563_YZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": true,
+        "source_screening_anchors": false,
+        "boresight": true,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 59.447262432998116,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 3.4916611372714335,
+      "hemisphere_rhcp_discrimination_min_db": 4.346983823396968,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    },
+    "f1.57542_XZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": true,
+        "source_screening_anchors": false,
+        "boresight": true,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 58.95935615828593,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 3.805350328324362,
+      "hemisphere_rhcp_discrimination_min_db": 3.7540505890298093,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    },
+    "f1.57542_YZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": true,
+        "source_screening_anchors": false,
+        "boresight": true,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 58.95884879999967,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 3.802898813399307,
+      "hemisphere_rhcp_discrimination_min_db": 3.6753970109355762,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    },
+    "f1.588_XZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": false,
+        "source_screening_anchors": false,
+        "boresight": false,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 58.483815024942544,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 4.143344370697928,
+      "hemisphere_rhcp_discrimination_min_db": 3.2368033312466835,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    },
+    "f1.588_YZ": {
+      "checks": {
+        "main_mae": false,
+        "peak_gain": false,
+        "source_screening_anchors": false,
+        "boresight": false,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "overall": "FAIL",
+      "hpbw_deg": 58.48310874197389,
+      "reference_hpbw_deg": 72.94117647058823,
+      "pointing_error_deg": 0,
+      "ar_max_through60_db": 4.136713683904308,
+      "hemisphere_rhcp_discrimination_min_db": 3.0976264702170297,
+      "mesh_validation": "DISABLED_BY_USER",
+      "active_matching": "DIAGNOSTIC_ONLY",
+      "polarization_scope": "Intended RHCP verified; AR<3\u20135 dB is a preferred source-supported target, not an invented hard hemisphere guarantee.",
+      "reference_scope": "Digitized upper-envelope screening anchors, confidence B; independent lower envelope unavailable. This is not a measured point-table or source min/max interval PASS."
+    }
+  },
+  "geometry_screenshots": "SEPARATE_DELIVERABLE_NOT_YET_PROVEN",
+  "installed_complex_source": "SEPARATE_DELIVERABLE_NOT_YET_PROVEN"
+}

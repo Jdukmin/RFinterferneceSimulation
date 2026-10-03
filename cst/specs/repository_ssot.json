@@ -1,0 +1,814 @@
+{
+  "cuts": [
+    {
+      "path": "data/Sband_TMTC/SBA1_TC_XZ.csv",
+      "sha256": "04ab1ce09ae991e018f29dd7f9632ae7a9eeb78fe4187666cc2122ba52cdb8d3",
+      "samples": 360,
+      "peak_gain_dbi": 3.8,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 3.8,
+        "15": 3.25,
+        "30": 2.2,
+        "45": 1.5,
+        "60": 1.5,
+        "75": 0.8,
+        "80": 0.4,
+        "85": -0.55,
+        "90": -1.5,
+        "105": -5.25,
+        "120": -9.5,
+        "150": -17.5,
+        "180": -20.5
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA1_TC_YZ.csv",
+      "sha256": "04ab1ce09ae991e018f29dd7f9632ae7a9eeb78fe4187666cc2122ba52cdb8d3",
+      "samples": 360,
+      "peak_gain_dbi": 3.8,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 3.8,
+        "15": 3.25,
+        "30": 2.2,
+        "45": 1.5,
+        "60": 1.5,
+        "75": 0.8,
+        "80": 0.4,
+        "85": -0.55,
+        "90": -1.5,
+        "105": -5.25,
+        "120": -9.5,
+        "150": -17.5,
+        "180": -20.5
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA1_TM_XZ.csv",
+      "sha256": "9a042385234231043e2b9bd99f3fc18265473c37585c1a00edac74c3a09a0d1e",
+      "samples": 360,
+      "peak_gain_dbi": 3.2,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 3.2,
+        "15": 3.1,
+        "30": 2.4,
+        "45": 1.05,
+        "60": 0.0,
+        "75": 0.45,
+        "80": 0.5,
+        "85": 0.0,
+        "90": -0.5,
+        "105": -3.5,
+        "120": -7.0,
+        "150": -14.5,
+        "180": -18.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA1_TM_YZ.csv",
+      "sha256": "9a042385234231043e2b9bd99f3fc18265473c37585c1a00edac74c3a09a0d1e",
+      "samples": 360,
+      "peak_gain_dbi": 3.2,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 3.2,
+        "15": 3.1,
+        "30": 2.4,
+        "45": 1.05,
+        "60": 0.0,
+        "75": 0.45,
+        "80": 0.5,
+        "85": 0.0,
+        "90": -0.5,
+        "105": -3.5,
+        "120": -7.0,
+        "150": -14.5,
+        "180": -18.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA4_TC_XZ.csv",
+      "sha256": "fc58d2b658b37e3e86d74d55f155e2a8d6443d6e6c71e0bbbe2aebbef3573873",
+      "samples": 360,
+      "peak_gain_dbi": 4.0,
+      "peak_theta_deg": 50.0,
+      "angle_gain_dbi": {
+        "0": 2.5,
+        "15": 2.65,
+        "30": 3.1,
+        "45": 3.75,
+        "60": 3.8,
+        "75": 1.65,
+        "80": 0.5,
+        "85": -1.25,
+        "90": -3.0,
+        "105": -11.0,
+        "120": -15.0,
+        "150": -18.0,
+        "180": -23.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA4_TC_YZ.csv",
+      "sha256": "fc58d2b658b37e3e86d74d55f155e2a8d6443d6e6c71e0bbbe2aebbef3573873",
+      "samples": 360,
+      "peak_gain_dbi": 4.0,
+      "peak_theta_deg": 50.0,
+      "angle_gain_dbi": {
+        "0": 2.5,
+        "15": 2.65,
+        "30": 3.1,
+        "45": 3.75,
+        "60": 3.8,
+        "75": 1.65,
+        "80": 0.5,
+        "85": -1.25,
+        "90": -3.0,
+        "105": -11.0,
+        "120": -15.0,
+        "150": -18.0,
+        "180": -23.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA4_TM_XZ.csv",
+      "sha256": "b8149610f732a7186fb194dacba9c4dba7aaf0b2cca0d61c882b2b41cc87a2e7",
+      "samples": 360,
+      "peak_gain_dbi": 2.9,
+      "peak_theta_deg": 10.0,
+      "angle_gain_dbi": {
+        "0": 2.8,
+        "15": 2.9,
+        "30": 2.7,
+        "45": 2.55,
+        "60": 2.8,
+        "75": 1.65,
+        "80": 1.0,
+        "85": 0.0,
+        "90": -1.0,
+        "105": -7.75,
+        "120": -15.0,
+        "150": -16.0,
+        "180": -21.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Sband_TMTC/SBA4_TM_YZ.csv",
+      "sha256": "b8149610f732a7186fb194dacba9c4dba7aaf0b2cca0d61c882b2b41cc87a2e7",
+      "samples": 360,
+      "peak_gain_dbi": 2.9,
+      "peak_theta_deg": 10.0,
+      "angle_gain_dbi": {
+        "0": 2.8,
+        "15": 2.9,
+        "30": 2.7,
+        "45": 2.55,
+        "60": 2.8,
+        "75": 1.65,
+        "80": 1.0,
+        "85": 0.0,
+        "90": -1.0,
+        "105": -7.75,
+        "120": -15.0,
+        "150": -16.0,
+        "180": -21.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L1_1575MHz_XZ.csv",
+      "sha256": "1150cb6db8cb35adff4fae9de204718333bde438cb77f59e8bbd2bbbd83a4a43",
+      "samples": 360,
+      "peak_gain_dbi": 9.1,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 9.1,
+        "15": 8.6,
+        "30": 7.2,
+        "45": 4.4,
+        "60": 0.5,
+        "75": -3.8,
+        "80": -5.2,
+        "85": -6.55,
+        "90": -7.9,
+        "105": -11.45,
+        "120": -14.0,
+        "150": -19.8,
+        "180": -25.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L1_1575MHz_YZ.csv",
+      "sha256": "1150cb6db8cb35adff4fae9de204718333bde438cb77f59e8bbd2bbbd83a4a43",
+      "samples": 360,
+      "peak_gain_dbi": 9.1,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 9.1,
+        "15": 8.6,
+        "30": 7.2,
+        "45": 4.4,
+        "60": 0.5,
+        "75": -3.8,
+        "80": -5.2,
+        "85": -6.55,
+        "90": -7.9,
+        "105": -11.45,
+        "120": -14.0,
+        "150": -19.8,
+        "180": -25.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L2_proxy_1207MHz_XZ.csv",
+      "sha256": "a46acc8553f6239a18b3c4fa88830b5ea5b47ff4ece60b6a661eb23d11a766fb",
+      "samples": 360,
+      "peak_gain_dbi": 7.9,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 7.9,
+        "15": 7.35,
+        "30": 6.1,
+        "45": 3.65,
+        "60": 0.4,
+        "75": -3.35,
+        "80": -4.5,
+        "85": -5.3,
+        "90": -6.1,
+        "105": -8.65,
+        "120": -11.4,
+        "150": -15.5,
+        "180": -25.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L2_proxy_1207MHz_YZ.csv",
+      "sha256": "a46acc8553f6239a18b3c4fa88830b5ea5b47ff4ece60b6a661eb23d11a766fb",
+      "samples": 360,
+      "peak_gain_dbi": 7.9,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 7.9,
+        "15": 7.35,
+        "30": 6.1,
+        "45": 3.65,
+        "60": 0.4,
+        "75": -3.35,
+        "80": -4.5,
+        "85": -5.3,
+        "90": -6.1,
+        "105": -8.65,
+        "120": -11.4,
+        "150": -15.5,
+        "180": -25.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L5_1176MHz_XZ.csv",
+      "sha256": "b5e0d9aaf97d52aab693b7d825e92782cb43ea43bc1d93b6d15fd376e61ee3d4",
+      "samples": 360,
+      "peak_gain_dbi": 7.8,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 7.8,
+        "15": 7.2,
+        "30": 5.7,
+        "45": 3.3,
+        "60": 0.2,
+        "75": -3.5,
+        "80": -4.8,
+        "85": -5.5,
+        "90": -6.2,
+        "105": -8.1,
+        "120": -10.8,
+        "150": -15.5,
+        "180": -18.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Lband_GPS/Extended_GNSS_PEC_L5_1176MHz_YZ.csv",
+      "sha256": "b5e0d9aaf97d52aab693b7d825e92782cb43ea43bc1d93b6d15fd376e61ee3d4",
+      "samples": 360,
+      "peak_gain_dbi": 7.8,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 7.8,
+        "15": 7.2,
+        "30": 5.7,
+        "45": 3.3,
+        "60": 0.2,
+        "75": -3.5,
+        "80": -4.8,
+        "85": -5.5,
+        "90": -6.2,
+        "105": -8.1,
+        "120": -10.8,
+        "150": -15.5,
+        "180": -18.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Kaband_DLS/KARMA7_FG_KaBand_XZ.csv",
+      "sha256": "978192418349ec60b7fce5069de7b74ac41e651d25d1da925b1c7abe30ce82e6",
+      "samples": 360,
+      "peak_gain_dbi": 32.95,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 32.95,
+        "15": 3.0,
+        "30": -5.0,
+        "45": -9.0,
+        "60": -12.0,
+        "75": -13.5,
+        "80": -14.0,
+        "85": -14.5,
+        "90": -15.0,
+        "105": -16.0,
+        "120": -17.0,
+        "150": -18.5,
+        "180": -20.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    },
+    {
+      "path": "data/Kaband_DLS/KARMA7_FG_KaBand_YZ.csv",
+      "sha256": "978192418349ec60b7fce5069de7b74ac41e651d25d1da925b1c7abe30ce82e6",
+      "samples": 360,
+      "peak_gain_dbi": 32.95,
+      "peak_theta_deg": 0.0,
+      "angle_gain_dbi": {
+        "0": 32.95,
+        "15": 3.0,
+        "30": -5.0,
+        "45": -9.0,
+        "60": -12.0,
+        "75": -13.5,
+        "80": -14.0,
+        "85": -14.5,
+        "90": -15.0,
+        "105": -16.0,
+        "120": -17.0,
+        "150": -18.5,
+        "180": -20.0
+      },
+      "provenance": "DATASHEET_DERIVED_SCREENING_ENVELOPE_NOT_COMPLEX_EM_TRUTH"
+    }
+  ],
+  "repository_text_audit": {
+    "src/README.md": {
+      "sha256": "45c2caec68029f7613545e41b320e266a7b950003fd08902ddf12964c37b941b",
+      "characters": 7861
+    },
+    "src/+rfscreen/+antenna/Antenna.m": {
+      "sha256": "eaaad19c321ea34155752f767809f6a4bb8b277685f8770d68fb2b70fa717d30",
+      "characters": 2434
+    },
+    "src/+rfscreen/+antenna/AntennaInstallation.m": {
+      "sha256": "9226cc619aae18e7d3bc3cbf398e2c578ef3e792fd96ad00cbb0591b3a6dfc7e",
+      "characters": 1274
+    },
+    "src/+rfscreen/+antenna/AntennaPattern.m": {
+      "sha256": "292d516cfeb4b10e301c31c917ff2af838f5a299d95d8cbaaca55849fe8118c5",
+      "characters": 3910
+    },
+    "src/+rfscreen/+antenna/FreeSpacePattern.m": {
+      "sha256": "e225cb8dd1ecae81947acc11315d1e7ccf0ddc269edef85ad56ba9abf295c279",
+      "characters": 703
+    },
+    "src/+rfscreen/+antenna/InstalledPattern.m": {
+      "sha256": "86400eee32ec9780c7e57045861bd231399d10c7d9226e5a93c36a95f6488efa",
+      "characters": 1085
+    },
+    "src/+rfscreen/+antenna/InstalledPatternSource.m": {
+      "sha256": "1f4ca566746a2cf2542dec291be012e47f38feb5ab6aa5baecee6ecb7bf4190a",
+      "characters": 611
+    },
+    "src/+rfscreen/+antenna/PatternGrid.m": {
+      "sha256": "47454307d5ff63b4339d7192ed9a53c35af9e2e1bdcb22bbf8c6590399187ea3",
+      "characters": 8910
+    },
+    "src/+rfscreen/+antenna/PatternProvenance.m": {
+      "sha256": "27702f418e4bc2d5c4f69054c559897396f7c69431a4d79d7aec0f0f30501eb9",
+      "characters": 819
+    },
+    "src/+rfscreen/+antenna/Polarization.m": {
+      "sha256": "8bfc552147f29780728ad6c52ec922a4d0b5f62d0d21c5fab0d87cc7cfb93aa1",
+      "characters": 574
+    },
+    "src/+rfscreen/+antenna/Role.m": {
+      "sha256": "07fa8f469fba2a3d18c86bcd14c3ebecafecb0340cc6c0aac43a894f8149735c",
+      "characters": 621
+    },
+    "src/+rfscreen/+antenna/SyntheticPatternFactory.m": {
+      "sha256": "6c6559d6cc4df21b9a438d04b700abc0778b6bce2cc0e1071b9c8ccc2f7de1a5",
+      "characters": 3588
+    },
+    "src/+rfscreen/+config/AnalysisConfig.m": {
+      "sha256": "f63e42fdd095d2e2f8c9b43011a5d583d0a255e29c778276d0b79922729af2b6",
+      "characters": 1841
+    },
+    "src/+rfscreen/+config/PatternImportPolicy.m": {
+      "sha256": "4c8ddffaa80d71786282bae5fa0a02e89727477a007f1ea495588d2469853e66",
+      "characters": 1534
+    },
+    "src/+rfscreen/+config/PatternInterpolationPolicy.m": {
+      "sha256": "c3313421e33e4e24eb39480332488ef073573a936766adde0b43451dd6313e51",
+      "characters": 1143
+    },
+    "src/+rfscreen/+coupling/CouplingModel.m": {
+      "sha256": "56829232bd9f8962cbd5590a40e760ab859cb83c85085f05c0e9bd14ea780bde",
+      "characters": 1125
+    },
+    "src/+rfscreen/+coupling/CouplingModelType.m": {
+      "sha256": "8611daba7d6268ae4531ec9c7a5ffc689cc35ded0966bbf78b5ab590762d8ecd",
+      "characters": 638
+    },
+    "src/+rfscreen/+coupling/CouplingValidity.m": {
+      "sha256": "176195b781e263ad5f852ba48fcd3a566ba5577dcbc78ccc7df720765b8a72da",
+      "characters": 806
+    },
+    "src/+rfscreen/+coupling/HFSSCouplingModel.m": {
+      "sha256": "e2698663e361dd37cf675f13536fa4ecb31e8d3835a66e1263d4a4cad917c795",
+      "characters": 699
+    },
+    "src/+rfscreen/+coupling/PatternOnlyCouplingModel.m": {
+      "sha256": "7d2574fa86d9daeb01b6cdd6d59c559c6cbedbf2ee1ed62ea63f863c17d45430",
+      "characters": 1303
+    },
+    "src/+rfscreen/+geometry/AntennaToAntennaFOV.m": {
+      "sha256": "9c62b42d8184a8cde51d144f65552f62cd47f0a2adb298ece0aa3811e30973a2",
+      "characters": 1962
+    },
+    "src/+rfscreen/+geometry/AntennaToStructureFOV.m": {
+      "sha256": "b086d358b72d19312dc8cc7319718067ed67636e8fb6459ae1863e75b7d26e14",
+      "characters": 5192
+    },
+    "src/+rfscreen/+geometry/DirectionCalculator.m": {
+      "sha256": "5a248ee27a4e16ca49db6462f0b178ae5c8042c3f939f314748b1266f41111e6",
+      "characters": 2513
+    },
+    "src/+rfscreen/+geometry/DiskGeometry.m": {
+      "sha256": "3572bf10b2b53977089f3e7665f6a8b4b4f25ac1d70dfc9ac1fa84d327ded8e3",
+      "characters": 2312
+    },
+    "src/+rfscreen/+geometry/LineOfSight.m": {
+      "sha256": "25a31a65d36e86694a0e1c434e13d01746a95484e6a21a150af54ad01fc40349",
+      "characters": 2251
+    },
+    "src/+rfscreen/+geometry/Rotation.m": {
+      "sha256": "ac680cd89082891356bc061abbdaa931ff7ba47a9180f8c968aed27e7d3cb2a7",
+      "characters": 4439
+    },
+    "src/+rfscreen/+geometry/StructureType.m": {
+      "sha256": "cce94d57d0a45d792b800c2fcf734203303ef2a87357c0319082ff50d18642f7",
+      "characters": 775
+    },
+    "src/+rfscreen/+installed/InstallationValidity.m": {
+      "sha256": "eef087ea32f5bd9a24294a7010b761cae264a27833e5ce095b5691eba5160a56",
+      "characters": 968
+    },
+    "src/+rfscreen/+installed/InstalledPatternPolicy.m": {
+      "sha256": "f1123f0e711b3c42167edabd9b58b84a8eef7764a5e01d7f7c116b45a4c86b3a",
+      "characters": 534
+    },
+    "src/+rfscreen/+installed/InstalledPatternSelector.m": {
+      "sha256": "fd3094bc1fe90bc1aa9adccb1eadeee299ae4964859a95e1c9a388350d815cfc",
+      "characters": 2359
+    },
+    "src/+rfscreen/+installed/PatternComparison.m": {
+      "sha256": "7dfe64a382ace1a8168ede25ae4a0d99feca4d37b32035c805dc96109e11653b",
+      "characters": 3437
+    },
+    "src/+rfscreen/+installed/PatternSourceUsed.m": {
+      "sha256": "a6c8e631ddd9299dfacce44cc38efbb5886cc1036287fd1b0429a4257eef106c",
+      "characters": 557
+    },
+    "src/+rfscreen/+interference/InstalledEnvironmentAnalyzer.m": {
+      "sha256": "8e9f81a96430473eb6819768c9c92f8c142d41a1601ded21a3ff3cc4d04cfffb",
+      "characters": 5536
+    },
+    "src/+rfscreen/+interference/InterferenceAnalyzer.m": {
+      "sha256": "7f7b0e7fd2a5996b437ad2910bb627b72592546fcefa08f11696465b3d24659f",
+      "characters": 2410
+    },
+    "src/+rfscreen/+interference/InterferenceClassifier.m": {
+      "sha256": "3b82d85f2a2a472de418a0f853d258f9d09f060fb4344e0f1f679b6e4e25743d",
+      "characters": 814
+    },
+    "src/+rfscreen/+interference/LobeClassifier.m": {
+      "sha256": "9191bcf5213a7d2c35d213fda435ed7de4505f6ca91046c35e89f2ad600c4845",
+      "characters": 1953
+    },
+    "src/+rfscreen/+interference/PairwiseAnalyzer.m": {
+      "sha256": "dd96aeb47d92f0c548b4858aaad3b6e68a92100a70c5b496ff8b0c8df4991926",
+      "characters": 9532
+    },
+    "src/+rfscreen/+interference/RfCoexistenceAnalyzer.m": {
+      "sha256": "145c2b5393245083f29fee83bb0361d5d4c5f6b7bff710789b76a9fa3899009c",
+      "characters": 2293
+    },
+    "src/+rfscreen/+nonlinear/NonlinearSusceptibilityAnalyzer.m": {
+      "sha256": "505c8537467f29d1db036701c2768f0bbbbf462cf7b8c11620ca073498479f5c",
+      "characters": 5247
+    },
+    "src/+rfscreen/+patterndata/CanonicalPatternCut.m": {
+      "sha256": "4df069d99d4c34e545536c88285838628de61c3e07fcd77f1100d179d35a21cb",
+      "characters": 4891
+    },
+    "src/+rfscreen/+patterndata/CsvPatternImporter.m": {
+      "sha256": "7fccba8b293dfda55c2e74c6fa485882edd0c21782b2acf14c15ce466f40e2ea",
+      "characters": 2249
+    },
+    "src/+rfscreen/+patterndata/CutPatternAssembler.m": {
+      "sha256": "ce9dcc5bbf9d43699335555ea9b2b814c0aff3bcf8ddcd47e521271f96f18686",
+      "characters": 4226
+    },
+    "src/+rfscreen/+patterndata/CutValidationResult.m": {
+      "sha256": "2b6a6186ff755358919d63611b3d8c251c43c33c4df62e32fab67b029c8e9cbf",
+      "characters": 834
+    },
+    "src/+rfscreen/+patterndata/PatternCanonicalizer.m": {
+      "sha256": "77328a8a7b85750fa81fa70a4a5e99ad0d4e550fcd038007c08c06d462f02d55",
+      "characters": 10764
+    },
+    "src/+rfscreen/+patterndata/PatternFidelity.m": {
+      "sha256": "52b6f11c0be31964d54f4564614d2876f7368b6f41366b1ee3e8880fc85d5681",
+      "characters": 1040
+    },
+    "src/+rfscreen/+patterndata/PatternImporter.m": {
+      "sha256": "32258b7175c143fe3a89bc61f4134f386a8a3861c8e7ff27bb55aaddef7d8aee",
+      "characters": 1525
+    },
+    "src/+rfscreen/+patterndata/PatternResampler.m": {
+      "sha256": "4d47ac640170bdb544f32a3456d12db7bb478cffbbc71df7723a620dffc9505c",
+      "characters": 1688
+    },
+    "src/+rfscreen/+patterndata/PatternValidator.m": {
+      "sha256": "5fd92c336c3fb15816938eb5aa53572367fd034ddc88d72bca5bf1bff8f74a11",
+      "characters": 3967
+    },
+    "src/+rfscreen/+patterndata/SamplingType.m": {
+      "sha256": "6d98077a40d94376fc2271e47a00762d3ca2d05e4907175dbd2baf0488c8ce8e",
+      "characters": 485
+    },
+    "src/+rfscreen/+patterndata/SourceCoordinateConvention.m": {
+      "sha256": "102dc48f7618b959357503c3b64d8173cf941ddbd0300e08caf14116764cb92e",
+      "characters": 5155
+    },
+    "src/+rfscreen/+patterndata/TablePatternImporter.m": {
+      "sha256": "9cf2044c3fc33b4fb23a1b78a6186ac5963dae97d98b673f76ac2fdbdc9b64cf",
+      "characters": 1063
+    },
+    "src/+rfscreen/+patterndata/ValidationStatus.m": {
+      "sha256": "66dd9d7fbf40452b4ba1108225158ff22010d8777cdb42026d99dc08d295741c",
+      "characters": 820
+    },
+    "src/+rfscreen/+receiver/ReceiverSusceptibilityAnalyzer.m": {
+      "sha256": "69ef7fd2b8c76b53f54a464df7631ebd74758febf66d2ed4b882efcda995c5a4",
+      "characters": 7712
+    },
+    "src/+rfscreen/+receiver/ReferencePlane.m": {
+      "sha256": "0292225807c75ee52b2c5a0f48970738270db9440bb37ae090afb0048af177f7",
+      "characters": 926
+    },
+    "src/+rfscreen/+results/AntennaStructureFOVResult.m": {
+      "sha256": "a7dabfe254c374597c0f9b1523c5e834a93f3a59d3a5a91a459b0d37e0505294",
+      "characters": 1190
+    },
+    "src/+rfscreen/+results/InstalledEnvironmentResult.m": {
+      "sha256": "2d83ad1ffa43b21d43ed8c2b26be1d56e58107a0a0bf0ccfbd6e84ee340cfb26",
+      "characters": 939
+    },
+    "src/+rfscreen/+results/LineOfSightResult.m": {
+      "sha256": "d6b5cfc598705884c4fa64556dd8394c9075bdf59fba1f932be1bea1973a19b2",
+      "characters": 876
+    },
+    "src/+rfscreen/+results/PairResult.m": {
+      "sha256": "d7859a3c5d24357b4fcccd61788581f2a9c7d8d26b7fedf962a9c51df385986d",
+      "characters": 2377
+    },
+    "src/+rfscreen/+results/PatternComparisonResult.m": {
+      "sha256": "96c370492dc9c2f426664972379fd0d26d282f86bf44a94b995dd4c418feb3b6",
+      "characters": 837
+    },
+    "src/+rfscreen/+results/ResultValidity.m": {
+      "sha256": "1765224099b2389cd3ffa7936ac2497db924434bff55715c6bb0e950f52f6831",
+      "characters": 943
+    },
+    "src/+rfscreen/+rf/RFFrontEnd.m": {
+      "sha256": "9e9c39fa504f69d73be739aeab3a2ee90f0a471f2bc8be26295bf23c3c676dd1",
+      "characters": 2339
+    },
+    "src/+rfscreen/+rf/RFReceiver.m": {
+      "sha256": "45c460d24b5e4a5428fb1d7dbe480e510a18133b0e8b8d68baada799e0382300",
+      "characters": 5051
+    },
+    "src/+rfscreen/+rf/RFTransmitter.m": {
+      "sha256": "201d8cd2c07aa23c112c2b838d4a0ea4b0c999788a0634d08f1335e319d53028",
+      "characters": 2844
+    },
+    "src/+rfscreen/+scenario/Scenario.m": {
+      "sha256": "d9badc1faa4de2cc41351aab75a7c7a80cb1f38d52440cd882b34a398e3c23d8",
+      "characters": 8529
+    },
+    "src/+rfscreen/+spectrum/RectangularSpectrum.m": {
+      "sha256": "d62597c9dd2f825ee58d96c8b627bde7a4fa4dc8bbf54274e79cf10994f85d19",
+      "characters": 2334
+    },
+    "src/+rfscreen/+spectrum/SpectrumModel.m": {
+      "sha256": "a90c118f81073ea207d096d478b73b3de02c16bf73ba322e5d7306969061a42d",
+      "characters": 1650
+    },
+    "src/+rfscreen/+spectrum/TabulatedSpectrum.m": {
+      "sha256": "23bcca29e81b9d49015c478419d85f3fdee07cec7a7755c9d8064f319060cdf7",
+      "characters": 3442
+    },
+    "docs/architecture.md": {
+      "sha256": "d3c259524a1a30cbd708710398fb539acf084662890acc6cea32d032e825a83b",
+      "characters": 10963
+    },
+    "docs/README.md": {
+      "sha256": "45d0ca16bd6653286d4ba83f25341cb89c0bb00d8ed5c7f10157c1ac0a066933",
+      "characters": 2819
+    },
+    "docs/reference.md": {
+      "sha256": "b3280372e7cc4b616b3c1a1f6c411a84edac29b02e252e0af7e0f9ccede67994",
+      "characters": 22882
+    },
+    "docs/traceability.md": {
+      "sha256": "ea5bdd3fa8fc08d4c2f043d4694bc480ec8151a888582b5d3dcf71ddfb1838f7",
+      "characters": 39675
+    },
+    "docs/user_manual.md": {
+      "sha256": "9dd6c4255de11fc1a9d25c8d1523fb9428db7cfa5fb74a13474f9e1a70134da1",
+      "characters": 24704
+    },
+    "docs/icd/antenna.md": {
+      "sha256": "7c42f3c2fb59b6ed9a0c21cc5acd0ab34c0b112137f5f20e5c4b5302b72b12de",
+      "characters": 7535
+    },
+    "docs/icd/coordinate_system.md": {
+      "sha256": "08fc1fab02496de8c8b355ed2fe5b0cd089c30e9a496c6f48da23232fe01d557",
+      "characters": 4450
+    },
+    "docs/icd/coupling.md": {
+      "sha256": "a5859f9b1331f27a6c8b5a2cf5e722934a98c457b13c787623091e1c43db687d",
+      "characters": 4796
+    },
+    "docs/icd/installed_environment.md": {
+      "sha256": "35280430c9efb935d44679c3d6400cbcc557625474e8f664a0f27c96c983e875",
+      "characters": 6748
+    },
+    "docs/icd/pair_result.md": {
+      "sha256": "a87ce19079680d299316c04272309c1ae8891cd7ab1212c58841d2c0190de8a7",
+      "characters": 5563
+    },
+    "docs/icd/pattern_data.md": {
+      "sha256": "79719bfbc2c4d558a953f06f4ffa2c7c2e010a9ac057aaf9b2e47276eb1e9ce4",
+      "characters": 12062
+    },
+    "docs/icd/README.md": {
+      "sha256": "17a0ebd1e70b01b6b032dcf345580490a0d74c7a824180e61aac01e4b30a0e3c",
+      "characters": 6557
+    },
+    "docs/icd/receiver_nonlinear.md": {
+      "sha256": "15a974a6773f9e6e5a95e7227b6012d9f56cc3eb291a4cee12fdd02f19ab7f92",
+      "characters": 9346
+    },
+    "docs/icd/receiver_susceptibility.md": {
+      "sha256": "1c0ac3b837615c7139951ba0b376639d295e0568a7ca8e9c47c933f1a341a3e7",
+      "characters": 8897
+    },
+    "docs/icd/rf_system.md": {
+      "sha256": "b315cba43cc06cbb05c4800e79dd0d89b51cc1e3e78a951241feaddef00f9c10",
+      "characters": 3961
+    },
+    "docs/icd/scenario.md": {
+      "sha256": "7c32cef5c7753c96658199107d617f2533a119097ec5d05561c67f48b9c110a4",
+      "characters": 4100
+    },
+    "docs/icd/spacecraft_geometry.md": {
+      "sha256": "463d7a384d7699c119300d405827b1214a96404c7442d9d0f6ae03e7e1d45b16",
+      "characters": 8983
+    },
+    "docs/icd/spectrum.md": {
+      "sha256": "7d82de88cc3a397be3bd429c25fdd060cedcf71a8b5fd6ccfa6100471b6cf8ae",
+      "characters": 3744
+    },
+    "docs/requirements/analysis_requirements.md": {
+      "sha256": "b381cdaf944c0698ef23a27b464243ee4725119e39c466550f9415804640261a",
+      "characters": 14732
+    },
+    "docs/requirements/data_requirements.md": {
+      "sha256": "32e064a25f484b7b2ca67abb5285b0a75c0705701607691ef111ef6be5e51ee2",
+      "characters": 13879
+    },
+    "docs/requirements/system_requirements.md": {
+      "sha256": "f8dd1f6627205753f5a933b13aa004f9212c1290ac3aa31b6d35bf8c22b17fec",
+      "characters": 20167
+    },
+    "docs/requirements/verification_requirements.md": {
+      "sha256": "b6ea3d39b306cef92a182cefb39558fc9d3cd6cc36e62f633d3f49031f98f488",
+      "characters": 12893
+    },
+    "docs/reports/reference_validation/reference_case_matrix.md": {
+      "sha256": "6e2d3f7dbbe6c141139cab71d1b94dce431ceac2178d081bc44957384ada6794",
+      "characters": 5026
+    },
+    "docs/reports/reference_validation/RPT-P6-01-top-down-rp-validation.md": {
+      "sha256": "2e7aaf59ee89ad0173adf5868f6a67569ee12b7d1672c3c8689fe6481156a7aa",
+      "characters": 5427
+    },
+    "docs/reports/reference_validation/RPT-P6-02-kari-reference-replication.md": {
+      "sha256": "77082c475dea28c50d81fba0aa741054085fdf2ff6d65279462441b92c2064d4",
+      "characters": 6857
+    },
+    "docs/reports/reference_validation/RPT-P6-03-model-gap-analysis.md": {
+      "sha256": "7a877652b6be5a8ef67d0a69aad6d4068795c825913ebe5c3449147d244a7872",
+      "characters": 6342
+    },
+    "docs/reports/reference_validation/RPT-P6-04-user-manual-validation.md": {
+      "sha256": "bc0b572b13333f4d958a2b4ea478db5e4f80f19985982b242e3489e9e71a1342",
+      "characters": 4593
+    },
+    "docs/reports/reference_validation/RPT-P6-05-phase6-closure.md": {
+      "sha256": "b844cad4a6921c83f2d105dd7c77bf088c909633b2a64e09be3cacdf67b7a488",
+      "characters": 7789
+    },
+    "docs/reports/reference_validation/RPT-P6-06-paper-verified-replication.md": {
+      "sha256": "f87717353c5452017a6f8fb5320aa83776fc57d759ae72ea6671519e4f3426bc",
+      "characters": 9783
+    },
+    "examples/demo_screening.m": {
+      "sha256": "5bab8ad1baf5091ceff23d1890d38675ceca271d1417b4fef5c2dbece14f2f4f",
+      "characters": 2914
+    },
+    "examples/quickstart.m": {
+      "sha256": "4e5308ad8884db6defe4b0c2d4ac61a96b54a9a91b16dfc73675e58fb72d7972",
+      "characters": 2719
+    },
+    "examples/reference_cases/generate_figures.m": {
+      "sha256": "b2876d5e12defda973f24d3685842ed7e3f56fb0dc6a3c4bdcf99bdd26050ebb",
+      "characters": 3516
+    },
+    "examples/reference_cases/rc_kari_01_structure_fov.m": {
+      "sha256": "86724addc7670f5a0d1fae2672fc9fa8c3de9261301115123097feef6065adaa",
+      "characters": 8654
+    },
+    "examples/reference_cases/rc_kari_02_installed_pattern.m": {
+      "sha256": "3687424c97cc245d029a558eaaa4c70c2f8ddaac15b657859155548dced9327e",
+      "characters": 6940
+    },
+    "examples/reference_cases/rc_kari_03_installation_analysis.m": {
+      "sha256": "3fb95f05b1b419e3170f703f7ab1af12697fd67cad1b8a7391f24136fbdf1e31",
+      "characters": 6039
+    },
+    "examples/reference_cases/rc_kari_rf_01_gnss_interference.m": {
+      "sha256": "c4a2672d99b9c88f2a8ed20e0fb22ecf6f9e0d1ec6cad636533ae0378f03fbfd",
+      "characters": 7062
+    }
+  },
+  "coordinate_map_source_to_antenna": [
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ]
+  ],
+  "xband_isl": {
+    "status": "NO_REPOSITORY_NUMERIC_TARGET_FOUND",
+    "frequency": "ASSUMPTION_REQUIRED",
+    "beamwidth": "120 deg coverage is user requirement, not established HPBW"
+  },
+  "xband_sar": {
+    "status": "NO_REPOSITORY_NUMERIC_TARGET_FOUND",
+    "f0_ghz": 9.65,
+    "provenance": "USER_REFERENCE_ARCHITECTURE"
+  },
+  "ka_conflict": "Repository README says 31.2 dBi at 27 GHz / 1 deg; user range says 32.2. Preserve CSV 31.4 representative and report separately."
+}

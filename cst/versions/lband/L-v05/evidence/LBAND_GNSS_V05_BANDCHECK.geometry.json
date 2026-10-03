@@ -1,0 +1,95 @@
+{
+  "model_identity": "SURROGATE_NOT_PRODUCT_CAD",
+  "parameters": {
+    "outer_diameter": 200,
+    "maximum_overall_height": 87,
+    "cup_inner_diameter": 160,
+    "cup_wall_thickness": 2,
+    "cup_depth": 45,
+    "lower_patch_diameter": 140,
+    "upper_patch_diameter": 123.0,
+    "patch_to_ground_height": 12,
+    "patch_spacing": 12,
+    "patch_thickness": 1,
+    "feed_radius": 35,
+    "feed_probe_radius": 1.5,
+    "choke1_inner_radius": 82,
+    "choke1_outer_radius": 91,
+    "choke2_inner_radius": 93,
+    "choke2_outer_radius": 98,
+    "choke_depth": 63.7
+  },
+  "solids": {
+    "RECONSTRUCTION:cup_floor": {
+      "volume_mm3": 60318.60082126902,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:cup_wall": {
+      "volume_mm3": 64838.6835650414,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:choke_floor": {
+      "volume_mm3": 30875.566707617567,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:choke_separator": {
+      "volume_mm3": 73643.89433115546,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 79247.30003209272,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:lower_patch": {
+      "volume_mm3": 15393.809584594705,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:upper_patch": {
+      "volume_mm3": 11882.288814039994,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 77.75436178670795,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 77.75441817634737,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 77.75436178670795,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 77.7544181763474,
+      "material": "PEC"
+    }
+  },
+  "mesh_validation": "DISABLED_BY_USER",
+  "gain_basis": "ACCEPTED_POWER_GAIN",
+  "feed_gap_mm": 2.0,
+  "status": "SOLVER_COMPLETED",
+  "frequency": {
+    "center_ghz": 1.17645,
+    "initial_solve_ghz": [
+      1.164,
+      1.588
+    ],
+    "initial_monitors_ghz": [
+      1.164,
+      1.17645,
+      1.189,
+      1.207,
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "bandwidth_provenance": "ASSUMED_L5_SCREENING_WINDOW_NOT_PRODUCT_BANDWIDTH",
+    "subsequent_reference_ghz": [
+      1.207,
+      1.57542
+    ],
+    "note": "1.207 GHz target is an E5b/L2 screening proxy, not GPS L2 1.22760 GHz."
+  },
+  "mesh_resource_setting": "Hex 8 cells/wavelength and model box; thin PEC merging; ratio limit 5; no convergence claim"
+}

@@ -1,0 +1,52 @@
+{
+  "label": "ISL_B_CUPPATCH",
+  "topology": "cuppatch",
+  "inputs": {
+    "ground_radius": 15.0,
+    "floor_thickness": 1.0,
+    "rim_height": 4.0,
+    "rim_thickness": 1.0,
+    "patch_diameter": 16.6,
+    "patch_height": 2.5,
+    "patch_thickness": 0.5,
+    "feed_radius": 3.0,
+    "probe_radius": 0.4,
+    "feed_gap": 0.5
+  },
+  "derived_geometry_mm": {
+    "ground_radius": 15.0,
+    "floor_thickness": 1.0,
+    "rim_height": 4.0,
+    "rim_thickness": 1.0,
+    "patch_diameter": 16.6,
+    "patch_height": 2.5,
+    "patch_thickness": 0.5,
+    "feed_radius": 3.0,
+    "probe_radius": 0.4,
+    "feed_gap": 0.5
+  },
+  "monitors_ghz": [
+    8.0,
+    8.2,
+    8.4
+  ],
+  "solve_range_ghz": [
+    7.9,
+    8.5
+  ],
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "mesh": "Hex 8 cells/wavelength resource budget",
+  "mesh_validation": "DISABLED_BY_USER",
+  "assumptions": [
+    "ISL-A1",
+    "ISL-A2",
+    "ISL-A3",
+    "ISL-A4",
+    "ISL-A5"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "selected_leaf": "SAR_LEAF_C_DUALFEED",
+  "leaf_validation": {
+    "leaf": {
+      "s11_min_db": -9.934430547012438,
+      "s11_min_freq_ghz": 8.095199584960938,
+      "return_loss_role": "DIAGNOSTIC_ONLY"
+    },
+    "array_example": {
+      "stage": "NON_CST_ANALYTIC",
+      "layout": "80 x 13, 28.106 mm, Taylor -25 dB"
+    },
+    "mesh_validation": "DISABLED_BY_USER",
+    "f7.85": {
+      "leaf": {
+        "XZ": {
+          "broadside_dbi": 9.282136689245611,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 60.030343263224346,
+          "xpol_broadside_db": 308.41753831313474,
+          "front_to_back_db": 15.791546858966651
+        },
+        "YZ": {
+          "broadside_dbi": 9.282136689245611,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 66.77447826174209,
+          "xpol_broadside_db": 308.41753831313474,
+          "front_to_back_db": 15.791546858966644
+        }
+      },
+      "accepted_power_fraction": 0.8194834033035491,
+      "return_loss_db": 7.434220590191662,
+      "array_example": {
+        "XZ": {
+          "hpbw_deg": 1.0261733337294117,
+          "first_sidelobe_db": -14.968532538755897
+        },
+        "YZ": {
+          "hpbw_deg": 6.302340554599436,
+          "first_sidelobe_db": -14.817819967782453
+        },
+        "gain_aperture_dbi": 37.63501996192645,
+        "gain_leaf_crosscheck_dbi": 38.58809809612204
+      }
+    },
+    "f8": {
+      "leaf": {
+        "XZ": {
+          "broadside_dbi": 9.375456552379998,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 58.88485090671728,
+          "xpol_broadside_db": 308.8492712274679,
+          "front_to_back_db": 15.461833577058384
+        },
+        "YZ": {
+          "broadside_dbi": 9.375456552379998,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 65.75329102231147,
+          "xpol_broadside_db": 308.8492712274679,
+          "front_to_back_db": 15.461833577058389
+        }
+      },
+      "accepted_power_fraction": 0.8858934027579826,
+      "return_loss_db": 9.426135434888469,
+      "array_example": {
+        "XZ": {
+          "hpbw_deg": 1.0069224422645668,
+          "first_sidelobe_db": -14.939811858432261
+        },
+        "YZ": {
+          "hpbw_deg": 6.184398568647209,
+          "first_sidelobe_db": -14.808528228633083
+        },
+        "gain_aperture_dbi": 37.79942656686028,
+        "gain_leaf_crosscheck_dbi": 38.68141795925642
+      }
+    },
+    "f8.15": {
+      "leaf": {
+        "XZ": {
+          "broadside_dbi": 9.457933643326552,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 57.774452669448095,
+          "xpol_broadside_db": 308.97294682378356,
+          "front_to_back_db": 15.137954441024444
+        },
+        "YZ": {
+          "broadside_dbi": 9.457933643326552,
+          "peak_angle_deg": 0,
+          "hpbw_deg": 64.7216966003012,
+          "xpol_broadside_db": 308.97294682378356,
+          "front_to_back_db": 15.137954441024453
+        }
+      },
+      "accepted_power_fraction": 0.8943372461636157,
+      "return_loss_db": 9.76028626450754,
+      "array_example": {
+        "XZ": {
+          "hpbw_deg": 0.9883787289290652,
+          "first_sidelobe_db": -14.880006128485293
+        },
+        "YZ": {
+          "hpbw_deg": 6.070791515915532,
+          "first_sidelobe_db": -14.837311104539392
+        },
+        "gain_aperture_dbi": 37.96077900182093,
+        "gain_leaf_crosscheck_dbi": 38.763895050202976
+      }
+    },
+    "status": "SAR_LEAF_PASS"
+  },
+  "leaf_native_source": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\exports\\sar\\sar_leaf_broadband.ffs",
+  "array_example": {
+    "layout": "80 x 13, 28.106 mm, Taylor -25 dB nbar 4",
+    "gain": "aperture 4 pi A/lambda^2 x taper efficiency",
+    "pattern": "leaf cut x array factor; coupling neglected",
+    "stage": "NON_CST_ANALYTIC",
+    "note": "Owner: SAR is an example; beamwidth is an array property, not a leaf gate. 1 deg grid cannot resolve a 1 deg beam; use fine_0p01deg files for the main beam."
+  },
+  "screening_1deg_rule": "front |theta|<=90: max(model, -10 dBi ASSUMED floor); back: peak-40 dB ASSUMED (large continuous ground panel); fine_0p01deg files are raw model",
+  "mesh_validation": "DISABLED_BY_USER"
+}

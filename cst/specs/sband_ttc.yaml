@@ -1,0 +1,49 @@
+antenna: sband_ttc
+model_identity: SOURCE_GUIDED_RECONSTRUCTION_NOT_SBA_FLIGHT_CAD
+frequency:
+  solve_ghz: [2.0, 2.3]
+  tc_ghz: [2.0, 2.12]
+  tm_ghz: [2.2, 2.3]
+  monitors_ghz: [2.0, 2.06, 2.12, 2.2, 2.25, 2.3]
+topology: four resonant helical arms; common far-end termination; conductive cylindrical base with two annular grooves
+dimensions:
+  base_diameter: {value: 65, unit: mm, confidence: A, source: datasheet page 3, tuning_range: [65, 65]}
+  base_depth: {value: 32, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [20, 50]}
+  helix_diameter: {value: 18, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [12, 48]}
+  helix_height: {value: 150, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [45, 175]}
+  turns: {value: 3, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [0.5, 4]}
+  wire_radius: {value: 1, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [0.5, 1.5]}
+  feed_gap: {value: 2, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [0.5, 4]}
+  groove_depth: {value: 20, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [8, 32]}
+  groove1_radii: {value: [12, 20], unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS}
+  groove2_radii: {value: [22, 30], unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS}
+  perturbation_amplitude: {value: 0, unit: mm, confidence: C, tag: DERIVED_INITIAL_GUESS, tuning_range: [0, 2]}
+  segments_per_turn: {value: 24, confidence: C, convergence_required: true}
+feed:
+  topology: four ideal discrete arm-to-base ports; commercial waveguide/septum network de-embedded
+  amplitudes: [1, 1, 1, 1]
+  phases_deg: [0, 90, 180, 270]
+  reference_impedance_ohm: 50
+  polarization: CP handedness must be measured from farfield; phase sequence alone does not establish RHCP
+  active_reflection: Gamma_active_i = sum_j(S_ij * a_j) / a_i
+material: PEC initial conductor; radome and printed substrate omitted pending grounded material data
+boundary: six expanded open boundaries; vacuum; no symmetry
+target:
+  primary: data/Sband_TMTC/SBA1_TM_XZ.csv
+  additional: [SBA1_TM_YZ, SBA1_TC_XZ, SBA1_TC_YZ, SBA4_TM_XZ, SBA4_TM_YZ, SBA4_TC_XZ, SBA4_TC_YZ]
+  angles_deg: [0, 15, 30, 45, 60, 75, 80, 85, 90, 105, 120, 150, 180]
+  coverage_deg: [0, 105]
+  provenance: screening maximum envelope; not a single-frequency EM field
+  acceptance: rfc_acceptance.yaml
+optimization:
+  pattern_order: [helix_diameter, pitch_via_height, turns, arm_angular_placement, corrugation]
+  matching_order: [feed_gap, feed_position, wire_radius]
+  objective: pattern_rmse + 0.5*peak_error + 0.2*active_match_penalty + 0.2*axial_ratio_penalty + 0.2*beam_shape_penalty
+sources:
+  - {url: 'https://www.beyondgravity.com/sites/default/files/media_document/2024-07/S-band_TTC_Antennas_R-1308999-RSE_01-24.PDF', evidence: 'page 3: diameter 65 mm, total height under 289 mm, height over mounting interface under 204 mm; band and pattern envelope'}
+  - {url: 'https://patents.google.com/patent/US10079433B2/en', evidence: 'Fig 2 and description: 3+ resonant arms, quadrifilar permitted; common far-end termination, distributed impedance perturbations, two circular grooves'}
+uncertainties:
+  - Patent Fig 2 is perspective and schematic; no metric pixel scaling claimed. Internal dimensions remain confidence C.
+  - Four arms selected per user; patent preferred embodiment is trifilar, not proof that SBA1/SBA4 has four arms.
+  - Circular wire approximates etched conductor; width perturbation and dielectric must be added after topology validation.
+  - Multiport radiation must be coherently combined; single port pattern is not target pattern.

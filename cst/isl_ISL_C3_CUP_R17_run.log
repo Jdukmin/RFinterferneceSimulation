@@ -1,0 +1,13 @@
+﻿[START] job {"label":"ISL_C3_CUP_R17","steps":10,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":24,"sha256":"F9294F186A7FD963E4F157332D00B3B79100EE4158DEFC3628B0633CA6EA80A8","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\history.vba"}
+[OK] history {"blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\..\\..\\templates\\mesh_resource_hex.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C3_CUP_R17.cst"}
+[OK] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C3_CUP_R17\\Result\\Model.log","seconds":54,"successful_excitations":4,"exists":true,"errors":[],"mesh_cells":[32912,32912,32912,32912],"warnings":[],"start_returned":"1"}
+[OK] save {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_C3_CUP_R17.cst"}
+[OK] export_sparameters {"out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\ISL_C3_CUP_R17\\s_parameters.csv","ports":4,"points":1001}
+[DONE] job {"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_C3_CUP_R17\\job.json"}

@@ -1,0 +1,33 @@
+{
+  "version": "isl-v04",
+  "label": "ISL_B3_FLAT_RG9P5",
+  "recorded_utc": "2026-10-03T13:10:29.440873+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_B3_FLAT_RG9P5.cst",
+  "project_sha256": "6479dd95d9b3c35ccc73786eaf6137e805116a100104776fc6257cff6ecdb2dd",
+  "note": "ISL candidate vs ASSUMED cos^1 template; NOT_PASS; see results/ISL_B3_FLAT_RG9P5/validation.json",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_isl.py": "cde6b6537fec9182d7bc8888ba4e4c31d79945e3d9abde52b448bf55ac42dce7",
+    "verify_isl_results.py": "889af83745dece44fd1d31929b60c0296fc466402559f5d53baf5f2741391ee0",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\xband_isl.yaml": "f81303d93545fef3e4bd27e5ee6e8bb5084f174366fcb8d05ec4ea7ca5b3379a",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "results\\ISL_B3_FLAT_RG9P5\\validation.json": "6d7346b943e87f4e42a563d7d8f3f35505fd28fe2c2ee09e114a9b900bfa08f6",
+    "results\\ISL_B3_FLAT_RG9P5\\s_matrix.npz": "9463bf3a86a25fe1232f60200defdefd370ee0d733c25a662042728d8edbf993",
+    "results\\ISL_B3_FLAT_RG9P5\\s_parameters.csv": "14be7a005b34a92c0f3aea85a4170fb6260cfe940db9ef5857826ec7abff9e68",
+    "tools\\commands\\ISL_B3_FLAT_RG9P5\\history.vba": "4557ef694581a415787c9b69fa3817bc9fd025485070c14612bb3ac898c7f39b",
+    "tools\\commands\\ISL_B3_FLAT_RG9P5\\job.json": "5a2fc0b55fbef9acd95d9e2e0ee1ac8465add45360e34eea001f6b03ea2bcf48",
+    "tools\\commands\\ISL_B3_FLAT_RG9P5\\candidate.json": "63acf1c30ccb636b5bdcf0228dd6e127434a6229af79530ace56a27aa59d849e",
+    "projects\\ISL_B3_FLAT_RG9P5\\Result\\Model.log": "ef85cb0a8868ae16804c6ed6e6f27fd1b9b2845de5c9df4eb1786fd2988ca0ff"
+  }
+}

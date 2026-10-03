@@ -1,0 +1,212 @@
+{
+  "f1.164_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.39811019809693604,
+      "main_max_error_db": 1.3968514199066817,
+      "main_rmse_db": 0.5529380280323378,
+      "peak_error_db": 0.30830433622750864,
+      "anchor_errors_db": {
+        "0": 0.30830433622750864,
+        "30": -0.023057897772675418,
+        "60": -0.22932888618558406,
+        "80": 1.2097853832877945,
+        "90": 1.3404772908702922
+      },
+      "eoc_gain_error_db": 1.3404772908702922,
+      "boresight_error_db": 0.30830433622750864
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.39811019809693604,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 3.4710365115469783,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.5566284982707554,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 32.5555135967513,
+    "coverage_axial_ratio_max_db": 15.573349617199895,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.164_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.3622621575362034,
+      "main_max_error_db": 1.1881694484738574,
+      "main_rmse_db": 0.4739765287430037,
+      "peak_error_db": 0.30830433622750864,
+      "anchor_errors_db": {
+        "0": 0.30830433622750864,
+        "30": -0.0018948292389850963,
+        "60": -0.22455118157990467,
+        "80": 1.1159749321896015,
+        "90": 1.1881694484738574
+      },
+      "eoc_gain_error_db": 1.1881694484738574,
+      "boresight_error_db": 0.30830433622750864
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.3622621575362034,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 3.4710365115469783,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.5566284982707554,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 32.5555135967513,
+    "coverage_axial_ratio_max_db": 15.366119906879288,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.17645_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.45592720077134075,
+      "main_max_error_db": 0.9143293453257737,
+      "main_rmse_db": 0.544268409203567,
+      "peak_error_db": 0.832869387280085,
+      "anchor_errors_db": {
+        "0": 0.832869387280085,
+        "30": 0.5081505350528301,
+        "60": -0.02655216877981076,
+        "80": 0.7758240455499488,
+        "90": 0.35652652325639256
+      },
+      "eoc_gain_error_db": 0.35652652325639256,
+      "boresight_error_db": 0.832869387280085
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.45592720077134075,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 4.15764969916448,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.6184217353185604,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 34.9665584994593,
+    "coverage_axial_ratio_max_db": 9.427313764484245,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.17645_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.4491989000222516,
+      "main_max_error_db": 0.913485078328689,
+      "main_rmse_db": 0.5375693592767063,
+      "peak_error_db": 0.832869387280085,
+      "anchor_errors_db": {
+        "0": 0.832869387280085,
+        "30": 0.5244919853963568,
+        "60": 0.05212429179545802,
+        "80": 0.836240472574155,
+        "90": 0.39509337352440177
+      },
+      "eoc_gain_error_db": 0.39509337352440177,
+      "boresight_error_db": 0.832869387280085
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.4491989000222516,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 4.15764969916448,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.6184217353185604,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 34.966558499459275,
+    "coverage_axial_ratio_max_db": 9.148514163560261,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.189_XZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.5080026033340546,
+      "main_max_error_db": 1.1319044454872174,
+      "main_rmse_db": 0.6329358259548499,
+      "peak_error_db": 1.0516256637753267,
+      "anchor_errors_db": {
+        "0": 1.0516256637753267,
+        "30": 0.7130049841588537,
+        "60": 0.01717625432111508,
+        "80": 0.4837294474863203,
+        "90": -0.1528552592442196
+      },
+      "eoc_gain_error_db": -0.1528552592442196,
+      "boresight_error_db": 1.0516256637753267
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.5080026033340546,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 4.807312761904745,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.6706919670522364,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 32.82865181576581,
+    "coverage_axial_ratio_max_db": 5.55432305642959,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  },
+  "f1.189_YZ": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.5192750814005831,
+      "main_max_error_db": 1.1322739563458324,
+      "main_rmse_db": 0.6381305703100443,
+      "peak_error_db": 1.0516256637753267,
+      "anchor_errors_db": {
+        "0": 1.0516256637753267,
+        "30": 0.7273766390664704,
+        "60": 0.12274828546570732,
+        "80": 0.6405046479074805,
+        "90": 0.0069653557021487345
+      },
+      "eoc_gain_error_db": 0.0069653557021487345,
+      "boresight_error_db": 1.0516256637753267
+    },
+    "source_comparison": {
+      "comparison": "SCREENING_REFERENCE_DEVIATION",
+      "main_mae_db": 0.5192750814005831,
+      "main_mae_pass": true,
+      "source_anchor_guards": {},
+      "source_anchors_verified": false,
+      "anchor_pass": null
+    },
+    "active_return_loss_db": 4.807312761904745,
+    "matching_role": "DIAGNOSTIC_ONLY",
+    "accepted_power_fraction": 0.6706919670522364,
+    "normalization_reliable": true,
+    "boresight_cp_discrimination_db": 32.82865181576581,
+    "coverage_axial_ratio_max_db": 5.40862942129042,
+    "mesh_validation": "DISABLED_BY_USER",
+    "status": "PRE_FINAL_NOT_RFC_PASS"
+  }
+}

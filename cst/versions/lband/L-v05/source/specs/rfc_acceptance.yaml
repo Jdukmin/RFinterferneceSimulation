@@ -1,0 +1,53 @@
+purpose: RFC_VALID_SURROGATE_NOT_PRODUCT_QUALIFICATION
+policy_override:
+  gain_basis: ACCEPTED_POWER_GAIN
+  matching: DIAGNOSTIC_ONLY_UNLESS_REALIZED_GAIN_OR_ABSOLUTE_POWER_TRANSFER
+  mesh_validation: DISABLED_BY_USER
+  source_anchors_only: true
+  interpolated_points: MAE_ONLY
+  assumed_sidelobe_backlobe_points: NEVER_HARD_ANCHORS
+  source_min_max_envelope: ZERO_ERROR_INSIDE_INTERVAL
+  missing_envelope_bound: DO_NOT_INVENT
+  supersedes_legacy_matching_and_mesh_gates: true
+stop_when_all_pass: true
+provenance_tags: [PUBLIC_DATASHEET, PUBLIC_PAPER, PATENT_DERIVED, ASSUMED_GEOMETRY, SURROGATE, CONSERVATIVE_ENVELOPE]
+common:
+  peak_error_db: 1.0
+  main_mae_db: 1.5
+  main_max_error_db: 2.5
+  hpbw_relative_error: 0.10
+  eoc_angle_error_deg: 10
+  pointing_hpbw_fraction: 0.1
+  eoc_gain_error_db: 1.5
+  first_sidelobe_error_db: 3
+  min_return_loss_db: 10
+  convergence_peak_change_db: 0.3
+  convergence_angular_relative_change: 0.03
+  frequencies: [low, center, high]
+sband:
+  coverage_deg: [0, 90]
+  main_mae_db: 1.5
+  anchors_deg: [0, 30, 60, 80, 90]
+  anchor_max_error_db: 2.0
+  peak_error_db: 1.0
+  active_return_loss_db: 10
+  require_rolloff_trend: true
+  require_cp_hand_and_phase: true
+lband:
+  coverage_deg: [0, 90]
+  boresight_error_db: 1.0
+  gain60_error_db: 1.5
+  gain90_error_db: 2.0
+  axial_ratio_goal_db: [3, 5]
+ka:
+  boresight_error_db: 0.7
+  anchors_deg: [0, 0.5, 0.75, 1.0]
+  anchor_error_db: 1.0
+  hpbw_relative_error: 0.10
+  permitted_analysis: feed_subreflector_fullwave_plus_equivalent_aperture_or_PO
+regions: [VALIDATED_MAIN, VALIDATED_FIRST_SIDELOBE, UNVALIDATED_SIDELOBE, BACKLOBE, UNKNOWN]
+screening_export:
+  validated: CST
+  unvalidated: max_CST_conservative_envelope
+  never_modify_raw_complex_source: true
+  note: Clipped scalar screening envelope is not a complex field; do not import it as a physically solved installed-pattern source.

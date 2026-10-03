@@ -1,0 +1,12 @@
+﻿[START] job {"label":"ISL_A_QHELIX_SCALED","steps":9,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":20,"sha256":"D0264BB4D0EA840A08A39BE2169BCF650750BDEE5740D57FEC05778C82AE5926","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\history.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_A_QHELIX_SCALED.cst"}
+[OK] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_A_QHELIX_SCALED\\Result\\Model.log","seconds":108,"successful_excitations":4,"exists":true,"errors":[],"mesh_cells":[79376,79376,79376,79376],"warnings":["The current settings will probably lead to a very long simulation time."],"start_returned":"1"}
+[OK] save {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_A_QHELIX_SCALED.cst"}
+[OK] export_sparameters {"out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\ISL_A_QHELIX_SCALED\\s_parameters.csv","ports":4,"points":1001}
+[DONE] job {"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_A_QHELIX_SCALED\\job.json"}

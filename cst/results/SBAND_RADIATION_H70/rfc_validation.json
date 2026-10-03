@@ -1,0 +1,770 @@
+{
+  "SBA1_TC_XZ_f2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 5.665494845119756,
+      "main_max_error_db": 8.748442135371528,
+      "main_rmse_db": 5.88661270878856,
+      "peak_error_db": 6.804001612862535,
+      "anchor_errors_db": {
+        "0": -8.748442135371528,
+        "30": -6.1764588381924455,
+        "60": -4.509874563026491,
+        "80": -4.4095575615195575,
+        "90": -3.7766249494313904
+      },
+      "eoc_gain_error_db": -3.7766249494313904,
+      "boresight_error_db": -8.748442135371528
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_YZ_f2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 5.666046831728093,
+      "main_max_error_db": 8.748442135371528,
+      "main_rmse_db": 5.887028058113683,
+      "peak_error_db": 6.803504174011493,
+      "anchor_errors_db": {
+        "0": -8.748442135371528,
+        "30": -6.177828681751805,
+        "60": -4.511770606180494,
+        "80": -4.410641211990034,
+        "90": -3.776860321118626
+      },
+      "eoc_gain_error_db": -3.776860321118626,
+      "boresight_error_db": -8.748442135371528
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_XZ_f2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.40858876777169,
+      "main_max_error_db": 7.448442135371528,
+      "main_rmse_db": 6.542605536365879,
+      "peak_error_db": 7.0040016128625355,
+      "anchor_errors_db": {
+        "0": -7.448442135371528,
+        "30": -7.076458838192445,
+        "60": -6.809874563026492,
+        "80": -4.509557561519557,
+        "90": -2.2766249494313904
+      },
+      "eoc_gain_error_db": -2.2766249494313904,
+      "boresight_error_db": -7.448442135371528
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_YZ_f2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.409140754380027,
+      "main_max_error_db": 7.448442135371528,
+      "main_rmse_db": 6.54305181313372,
+      "peak_error_db": 7.003504174011494,
+      "anchor_errors_db": {
+        "0": -7.448442135371528,
+        "30": -7.0778286817518055,
+        "60": -6.8117706061804935,
+        "80": -4.510641211990033,
+        "90": -2.276860321118626
+      },
+      "eoc_gain_error_db": -2.276860321118626,
+      "boresight_error_db": -7.448442135371528
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.101567360727513,
+      "main_max_error_db": 9.504896629578127,
+      "main_rmse_db": 6.362110164242106,
+      "peak_error_db": 7.094274930815209,
+      "anchor_errors_db": {
+        "0": -9.504896629578127,
+        "30": -6.755029356116986,
+        "60": -4.796180403728757,
+        "80": -4.571167928269782,
+        "90": -3.9119411848905425
+      },
+      "eoc_gain_error_db": -3.9119411848905425,
+      "boresight_error_db": -9.504896629578127
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.102080307733669,
+      "main_max_error_db": 9.504896629578125,
+      "main_rmse_db": 6.362483178967867,
+      "peak_error_db": 7.093870615284616,
+      "anchor_errors_db": {
+        "0": -9.504896629578125,
+        "30": -6.756472731802894,
+        "60": -4.79806671497231,
+        "80": -4.572112077553701,
+        "90": -3.9119588692286023
+      },
+      "eoc_gain_error_db": -3.9119588692286023,
+      "boresight_error_db": -9.504896629578125
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.8446612833794465,
+      "main_max_error_db": 8.204896629578126,
+      "main_rmse_db": 7.004467854333742,
+      "peak_error_db": 7.2942749308152095,
+      "anchor_errors_db": {
+        "0": -8.204896629578126,
+        "30": -7.6550293561169855,
+        "60": -7.096180403728756,
+        "80": -4.6711679282697816,
+        "90": -2.4119411848905425
+      },
+      "eoc_gain_error_db": -2.4119411848905425,
+      "boresight_error_db": -8.204896629578126
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.845174230385603,
+      "main_max_error_db": 8.204896629578126,
+      "main_rmse_db": 7.004867456247221,
+      "peak_error_db": 7.293870615284616,
+      "anchor_errors_db": {
+        "0": -8.204896629578126,
+        "30": -7.656472731802895,
+        "60": -7.09806671497231,
+        "80": -4.672112077553701,
+        "90": -2.4119588692286023
+      },
+      "eoc_gain_error_db": -2.4119588692286023,
+      "boresight_error_db": -8.204896629578126
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_XZ_f2.12": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.460176292319671,
+      "main_max_error_db": 10.201349807673669,
+      "main_rmse_db": 6.767431146473134,
+      "peak_error_db": 7.283767532367969,
+      "anchor_errors_db": {
+        "0": -10.201349807673669,
+        "30": -7.256856500700137,
+        "60": -4.9988593313918255,
+        "80": -4.649631698149454,
+        "90": -3.9639026092892085
+      },
+      "eoc_gain_error_db": -3.9639026092892085,
+      "boresight_error_db": -10.201349807673669
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TC_YZ_f2.12": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.460654655878903,
+      "main_max_error_db": 10.201349807673669,
+      "main_rmse_db": 6.7677649232649095,
+      "peak_error_db": 7.283671863809013,
+      "anchor_errors_db": {
+        "0": -10.201349807673669,
+        "30": -7.258118723678472,
+        "60": -5.000419119846914,
+        "80": -4.650193939344373,
+        "90": -3.9635455698775566
+      },
+      "eoc_gain_error_db": -3.9635455698775566,
+      "boresight_error_db": -10.201349807673669
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_XZ_f2.12": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.203270214971602,
+      "main_max_error_db": 8.90134980767367,
+      "main_rmse_db": 7.3950385208075335,
+      "peak_error_db": 7.48376753236797,
+      "anchor_errors_db": {
+        "0": -8.90134980767367,
+        "30": -8.156856500700137,
+        "60": -7.298859331391825,
+        "80": -4.749631698149454,
+        "90": -2.4639026092892085
+      },
+      "eoc_gain_error_db": -2.4639026092892085,
+      "boresight_error_db": -8.90134980767367
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TC_YZ_f2.12": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.203748578530839,
+      "main_max_error_db": 8.90134980767367,
+      "main_rmse_db": 7.395395729858546,
+      "peak_error_db": 7.483671863809013,
+      "anchor_errors_db": {
+        "0": -8.90134980767367,
+        "30": -8.158118723678472,
+        "60": -7.3004191198469135,
+        "80": -4.750193939344372,
+        "90": -2.4635455698775566
+      },
+      "eoc_gain_error_db": -2.4635455698775566,
+      "boresight_error_db": -8.90134980767367
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_XZ_f2.2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.51289536213957,
+      "main_max_error_db": 10.471695034254694,
+      "main_rmse_db": 6.95975243625869,
+      "peak_error_db": 6.800724792267168,
+      "anchor_errors_db": {
+        "0": -10.471695034254694,
+        "30": -8.028861503661046,
+        "60": -3.654744520678129,
+        "80": -4.739420241626236,
+        "90": -4.917083703823442
+      },
+      "eoc_gain_error_db": -4.917083703823442,
+      "boresight_error_db": -10.471695034254694
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_YZ_f2.2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.513333726516318,
+      "main_max_error_db": 10.471695034254694,
+      "main_rmse_db": 6.9600329399557,
+      "peak_error_db": 6.801531873741053,
+      "anchor_errors_db": {
+        "0": -10.471695034254694,
+        "30": -8.029571472899008,
+        "60": -3.6555402081206863,
+        "80": -4.739301361095553,
+        "90": -4.916180882763708
+      },
+      "eoc_gain_error_db": -4.916180882763708,
+      "boresight_error_db": -10.471695034254694
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_XZ_f2.2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.35543679860366,
+      "main_max_error_db": 10.082652259878516,
+      "main_rmse_db": 7.562806701924429,
+      "peak_error_db": 6.500724792267167,
+      "anchor_errors_db": {
+        "0": -10.071695034254695,
+        "30": -8.328861503661045,
+        "60": -6.454744520678129,
+        "80": -5.239420241626236,
+        "90": -4.417083703823442
+      },
+      "eoc_gain_error_db": -4.417083703823442,
+      "boresight_error_db": -10.071695034254695
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_YZ_f2.2": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.355875162980406,
+      "main_max_error_db": 10.08270275577554,
+      "main_rmse_db": 7.563129663928468,
+      "peak_error_db": 6.501531873741053,
+      "anchor_errors_db": {
+        "0": -10.071695034254695,
+        "30": -8.329571472899008,
+        "60": -6.455540208120686,
+        "80": -5.239301361095553,
+        "90": -4.416180882763708
+      },
+      "eoc_gain_error_db": -4.416180882763708,
+      "boresight_error_db": -10.071695034254695
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.702901830819553,
+      "main_max_error_db": 11.00402734207606,
+      "main_rmse_db": 7.2102037047118595,
+      "peak_error_db": 6.803803469308356,
+      "anchor_errors_db": {
+        "0": -11.00402734207606,
+        "30": -8.341930962133588,
+        "60": -3.6926788439950005,
+        "80": -4.672727401105588,
+        "90": -4.826368562137681
+      },
+      "eoc_gain_error_db": -4.826368562137681,
+      "boresight_error_db": -11.00402734207606
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.703318454576368,
+      "main_max_error_db": 11.00402734207606,
+      "main_rmse_db": 7.210456195683745,
+      "peak_error_db": 6.805047468706919,
+      "anchor_errors_db": {
+        "0": -11.00402734207606,
+        "30": -8.342315665478738,
+        "60": -3.693051847258883,
+        "80": -4.6722712737938785,
+        "90": -4.825220500653475
+      },
+      "eoc_gain_error_db": -4.825220500653475,
+      "boresight_error_db": -11.00402734207606
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_XZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.545443267283642,
+      "main_max_error_db": 10.613673347795187,
+      "main_rmse_db": 7.79814025564367,
+      "peak_error_db": 6.503803469308355,
+      "anchor_errors_db": {
+        "0": -10.604027342076058,
+        "30": -8.64193096213359,
+        "60": -6.492678843995,
+        "80": -5.172727401105588,
+        "90": -4.326368562137681
+      },
+      "eoc_gain_error_db": -4.326368562137681,
+      "boresight_error_db": -10.604027342076058
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_YZ": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.5458598910404575,
+      "main_max_error_db": 10.613701457490693,
+      "main_rmse_db": 7.798433040291254,
+      "peak_error_db": 6.505047468706918,
+      "anchor_errors_db": {
+        "0": -10.604027342076058,
+        "30": -8.642315665478737,
+        "60": -6.493051847258883,
+        "80": -5.1722712737938785,
+        "90": -4.325220500653475
+      },
+      "eoc_gain_error_db": -4.325220500653475,
+      "boresight_error_db": -10.604027342076058
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_XZ_f2.3": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.86493001724928,
+      "main_max_error_db": 11.546756167755287,
+      "main_rmse_db": 7.444035027982707,
+      "peak_error_db": 6.758014946592285,
+      "anchor_errors_db": {
+        "0": -11.546756167755287,
+        "30": -8.629547827855573,
+        "60": -3.688646062327017,
+        "80": -4.5631501896047215,
+        "90": -4.691682160370153
+      },
+      "eoc_gain_error_db": -4.691682160370153,
+      "boresight_error_db": -11.546756167755287
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA1_TM_YZ_f2.3": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 6.865327281004192,
+      "main_max_error_db": 11.546756167755287,
+      "main_rmse_db": 7.444260710740224,
+      "peak_error_db": 6.759575018351696,
+      "anchor_errors_db": {
+        "0": -11.546756167755287,
+        "30": -8.629706633864346,
+        "60": -3.6887228834634933,
+        "80": -4.562466271960771,
+        "90": -4.6903700060081
+      },
+      "eoc_gain_error_db": -4.6903700060081,
+      "boresight_error_db": -11.546756167755287
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_XZ_f2.3": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.707471453713369,
+      "main_max_error_db": 11.154811178549815,
+      "main_rmse_db": 8.014399870829212,
+      "peak_error_db": 6.458014946592285,
+      "anchor_errors_db": {
+        "0": -11.146756167755289,
+        "30": -8.929547827855572,
+        "60": -6.4886460623270175,
+        "80": -5.0631501896047215,
+        "90": -4.191682160370153
+      },
+      "eoc_gain_error_db": -4.191682160370153,
+      "boresight_error_db": -11.146756167755289
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  },
+  "SBA4_TM_YZ_f2.3": {
+    "metrics": {
+      "coverage_deg": 90,
+      "main_mae_db": 7.70786871746828,
+      "main_max_error_db": 11.154824464937109,
+      "main_rmse_db": 8.014664078677288,
+      "peak_error_db": 6.459575018351696,
+      "anchor_errors_db": {
+        "0": -11.146756167755289,
+        "30": -8.929706633864345,
+        "60": -6.488722883463494,
+        "80": -5.062466271960771,
+        "90": -4.1903700060081
+      },
+      "eoc_gain_error_db": -4.1903700060081,
+      "boresight_error_db": -11.146756167755289
+    },
+    "circular_sense": "cp_minus_db",
+    "handedness": "UNVERIFIED",
+    "checks": {
+      "peak": false,
+      "main_mae": false,
+      "main_max": false,
+      "anchors": false,
+      "eoc_gain": false,
+      "active_match": false,
+      "polarization": false,
+      "mesh_convergence": false,
+      "frequency_robustness": false
+    },
+    "overall": "FAIL"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "producer": "ACTUAL_CST_COMPLEX_FARFIELD",
+  "monitor": "Farfields\\farfield (f=8) [LEAF_DIFF]",
+  "api_evidence": "CST 2026 Library/Macros/Results/- Import and Export/Export to EMIT^+MWS.mcr:253",
+  "normalization": "Preserve native file power metadata; normalize to accepted/radiated power when importing. This is not absolute conducted-power transfer.",
+  "screening_envelope_clipped": false,
+  "unknown_regions": "Raw physical source is not conservatively clipped; use separate conservative scalar screening envelopes."
+}

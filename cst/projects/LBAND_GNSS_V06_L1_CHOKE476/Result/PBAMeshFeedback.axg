@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Connected" id="1">
+      <PointSet points="-2.14313185e-15 -35 0 -35 2.14313185e-15 0 35 2.14313185e-15 0 -2.14313185e-15 35 0 -2.14313185e-15 -35 2 -35 2.14313185e-15 2 35 2.14313185e-15 2 -2.14313185e-15 35 2" material="$00f219"/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$00f219">
+      <Drawstyle color="0 0.949019611 0.0980392173" transparency="0" linestrength="3"/>
+    </Material>
+  </Materials>
+  <Groups>
+    <Group name="Wire Endpoints" ID="1">
+      <Item name="Connected" id="1"/>
+    </Group>
+  </Groups>
+</CSTAuxiliaryGeometry>

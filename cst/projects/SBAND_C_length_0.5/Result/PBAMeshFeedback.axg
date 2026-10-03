@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Components\RECONSTRUCTION:arm1" id="5">
+      <LineSet points="6.53274345 6.53274345 42.5598259 6.89238977 6.53274345 42.5598259 6.53274345 6.53274345 48.8620567 6.53274345 7.20065784 48.8620567 6.53274345 6.53274345 42.5598259 6.53274345 6.53274345 48.8620567" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm2" id="6">
+      <LineSet points="-7.20065784 6.53274345 48.8620567 -6.53274345 6.53274345 48.8620567 -6.53274345 6.53274345 42.5598259 -6.53274345 6.89238977 42.5598259 -6.53274345 6.53274345 42.5598259 -6.53274345 6.53274345 48.8620567" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm3" id="7">
+      <LineSet points="-6.89238977 -6.53274345 42.5598259 -6.53274345 -6.53274345 42.5598259 -6.53274345 -7.20065784 48.8620567 -6.53274345 -6.53274345 48.8620567 -6.53274345 -6.53274345 42.5598259 -6.53274345 -6.53274345 48.8620567" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm4" id="8">
+      <LineSet points="6.53274345 -6.53274345 48.8620567 7.20065784 -6.53274345 48.8620567 6.53274345 -6.89238977 42.5598259 6.53274345 -6.53274345 42.5598259 6.53274345 -6.53274345 42.5598259 6.53274345 -6.53274345 48.8620567" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Connected" id="1">
+      <PointSet points="-6.42939565e-16 -10.5 0 -10.5 6.42939565e-16 0 10.5 6.42939565e-16 0 -6.42939565e-16 10.5 0 -6.42939565e-16 -10.5 2 -10.5 6.42939565e-16 2 10.5 6.42939565e-16 2 -6.42939565e-16 10.5 2" material="$00f219"/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$00f219">
+      <Drawstyle color="0 0.949019611 0.0980392173" transparency="0" linestrength="3"/>
+    </Material>
+    <Material name="$49bce1">
+      <Drawstyle color="0.286274523 0.737254918 0.882352948" transparency="0" linestrength="3"/>
+    </Material>
+  </Materials>
+  <Groups>
+    <Group name="Metal Filled" ID="1" selectiontype="main">
+      <Item name="Components\RECONSTRUCTION:arm1" id="5"/>
+      <Item name="Components\RECONSTRUCTION:arm2" id="6"/>
+      <Item name="Components\RECONSTRUCTION:arm3" id="7"/>
+      <Item name="Components\RECONSTRUCTION:arm4" id="8"/>
+    </Group>
+    <Group name="Wire Endpoints" ID="2">
+      <Item name="Connected" id="1"/>
+    </Group>
+  </Groups>
+</CSTAuxiliaryGeometry>

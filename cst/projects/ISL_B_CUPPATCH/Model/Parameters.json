@@ -1,0 +1,65 @@
+{
+    "parameters": [
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "15",
+            "name": "ground_radius",
+            "value": "15"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "1",
+            "name": "floor_thickness",
+            "value": "1"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "4",
+            "name": "rim_height",
+            "value": "4"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "1",
+            "name": "rim_thickness",
+            "value": "1"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "16.6",
+            "name": "patch_diameter",
+            "value": "16.6"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "2.5",
+            "name": "patch_height",
+            "value": "2.5"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "0.5",
+            "name": "patch_thickness",
+            "value": "0.5"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "3",
+            "name": "feed_radius",
+            "value": "3"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "0.4",
+            "name": "probe_radius",
+            "value": "0.4"
+        },
+        {
+            "descr": "documentation only; geometry is numeric",
+            "expr": "0.5",
+            "name": "feed_gap",
+            "value": "0.5"
+        }
+    ],
+    "version": 1
+}

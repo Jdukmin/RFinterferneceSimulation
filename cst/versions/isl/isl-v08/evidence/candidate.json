@@ -1,0 +1,53 @@
+{
+  "label": "ISL_C4_CUP_R14P7",
+  "topology": "cuppatch",
+  "inputs": {
+    "ground_radius": 14.7,
+    "floor_thickness": 0.789,
+    "rim_height": 3.154,
+    "rim_thickness": 0.789,
+    "patch_diameter": 13.089,
+    "patch_height": 1.971,
+    "patch_thickness": 0.394,
+    "feed_radius": 2.365,
+    "probe_radius": 0.315,
+    "feed_gap": 0.394
+  },
+  "derived_geometry_mm": {
+    "ground_radius": 14.7,
+    "floor_thickness": 0.789,
+    "rim_height": 3.154,
+    "rim_thickness": 0.789,
+    "patch_diameter": 13.089,
+    "patch_height": 1.971,
+    "patch_thickness": 0.394,
+    "feed_radius": 2.365,
+    "probe_radius": 0.315,
+    "feed_gap": 0.394
+  },
+  "monitors_ghz": [
+    10.3,
+    10.4,
+    10.5
+  ],
+  "solve_range_ghz": [
+    10.2,
+    10.6
+  ],
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "mesh": "Hex 8 cells/wavelength resource budget",
+  "mesh_validation": "DISABLED_BY_USER",
+  "assumptions": [
+    "ISL-A1",
+    "ISL-A2",
+    "ISL-A3",
+    "ISL-A3b",
+    "ISL-A4",
+    "ISL-A5"
+  ]
+}

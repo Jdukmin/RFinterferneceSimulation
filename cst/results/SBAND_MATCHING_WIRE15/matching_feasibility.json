@@ -1,0 +1,83 @@
+{
+  "status": "ANALYTICAL_FEASIBILITY_NOT_CST_PASS",
+  "modal_gamma_max_arm_deviation": 0.0004889906944265121,
+  "frequency_band_ghz": [
+    2.0,
+    2.299999952316284
+  ],
+  "assumptions": [
+    "identical per-arm network",
+    "ideal lumped elements; self resonance unverified",
+    "quadrature eigenmode reduction; verify symmetry before implementation"
+  ],
+  "cases": [
+    {
+      "topology_load_to_source": [
+        "series_C",
+        "shunt_L"
+      ],
+      "values_nH_or_pF": [
+        2.2131617857951684,
+        8.251600535167093
+      ],
+      "ideal_min_rl_db": 4.838571713784374,
+      "Q50_min_rl_db": 4.944234461153455,
+      "finite_Q_note": "Return loss alone does not measure radiation efficiency or network dissipation."
+    },
+    {
+      "topology_load_to_source": [
+        "series_C",
+        "shunt_L",
+        "series_L",
+        "shunt_C"
+      ],
+      "values_nH_or_pF": [
+        2.7504566468626788,
+        0.7703124491353509,
+        0.0524769859793444,
+        6.3095734305197055
+      ],
+      "ideal_min_rl_db": 8.619502999109026,
+      "Q50_min_rl_db": 8.133083987464536,
+      "finite_Q_note": "Return loss alone does not measure radiation efficiency or network dissipation."
+    },
+    {
+      "topology_load_to_source": [
+        "shunt_C",
+        "series_L",
+        "shunt_L",
+        "series_C"
+      ],
+      "values_nH_or_pF": [
+        1.902143204613809,
+        0.05011879954770762,
+        2.319249753716521,
+        6.309573306217331
+      ],
+      "ideal_min_rl_db": 4.604022132947368,
+      "Q50_min_rl_db": 4.61896905734371,
+      "finite_Q_note": "Return loss alone does not measure radiation efficiency or network dissipation."
+    },
+    {
+      "topology_load_to_source": [
+        "series_C",
+        "shunt_L",
+        "series_L",
+        "shunt_C",
+        "series_C",
+        "shunt_L"
+      ],
+      "values_nH_or_pF": [
+        1.8510028771141993,
+        1.0461326780111488,
+        0.05011884432750374,
+        0.13525566858402902,
+        2.426048530551246,
+        1.2121211700125745
+      ],
+      "ideal_min_rl_db": 8.743954375210867,
+      "Q50_min_rl_db": 8.201077289067957,
+      "finite_Q_note": "Return loss alone does not measure radiation efficiency or network dissipation."
+    }
+  ]
+}

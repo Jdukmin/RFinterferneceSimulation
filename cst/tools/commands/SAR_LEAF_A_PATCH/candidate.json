@@ -1,0 +1,21 @@
+{
+  "label": "SAR_LEAF_A_PATCH",
+  "inputs": {
+    "cell": 28.106,
+    "ground_thickness": 1.0,
+    "patch_length": 15.5,
+    "patch_width": 17.0,
+    "patch_height": 2.5,
+    "patch_thickness": 0.5,
+    "feed_offset": 2.5,
+    "probe_radius": 0.5,
+    "feed_gap": 0.5
+  },
+  "monitors_ghz": [
+    7.85,
+    8.0,
+    8.15
+  ],
+  "mesh": "Hex 10 cells/wavelength resource budget",
+  "mesh_validation": "DISABLED_BY_USER"
+}

@@ -1,0 +1,109 @@
+{
+  "leaf": {
+    "s11_min_db": -5.65257945390117,
+    "s11_min_freq_ghz": 7.950399875640869,
+    "return_loss_role": "DIAGNOSTIC_ONLY"
+  },
+  "array_example": {
+    "stage": "NON_CST_ANALYTIC",
+    "layout": "80 x 13, 28.106 mm, Taylor -25 dB"
+  },
+  "mesh_validation": "DISABLED_BY_USER",
+  "f7.85": {
+    "leaf": {
+      "XZ": {
+        "broadside_dbi": 8.355509175468493,
+        "peak_angle_deg": 9,
+        "hpbw_deg": 83.8079693891576,
+        "xpol_broadside_db": 306.90243511294864,
+        "front_to_back_db": 15.763560727871347
+      },
+      "YZ": {
+        "broadside_dbi": 8.355509175468493,
+        "peak_angle_deg": 0,
+        "hpbw_deg": 71.85664241096201,
+        "xpol_broadside_db": 306.90243511294864,
+        "front_to_back_db": 15.763560727871353
+      }
+    },
+    "accepted_power_fraction": 0.7156366824602785,
+    "return_loss_db": 5.461264276946441,
+    "array_example": {
+      "XZ": {
+        "hpbw_deg": 1.0314861931527757,
+        "first_sidelobe_db": -15.31960861968514
+      },
+      "YZ": {
+        "hpbw_deg": 6.3063873788288065,
+        "first_sidelobe_db": -14.80173531863763
+      },
+      "gain_aperture_dbi": 37.63501996192645,
+      "gain_leaf_crosscheck_dbi": 37.66147058234492
+    }
+  },
+  "f8": {
+    "leaf": {
+      "XZ": {
+        "broadside_dbi": 8.232737771774726,
+        "peak_angle_deg": 9,
+        "hpbw_deg": 81.92363677104227,
+        "xpol_broadside_db": 306.8364761461478,
+        "front_to_back_db": 15.433133694362358
+      },
+      "YZ": {
+        "broadside_dbi": 8.232737771774726,
+        "peak_angle_deg": 0,
+        "hpbw_deg": 71.92064916339811,
+        "xpol_broadside_db": 306.8364761461478,
+        "front_to_back_db": 15.433133694362365
+      }
+    },
+    "accepted_power_fraction": 0.7250598175910623,
+    "return_loss_db": 5.607617835352857,
+    "array_example": {
+      "XZ": {
+        "hpbw_deg": 1.011763129725499,
+        "first_sidelobe_db": -15.302822703903471
+      },
+      "YZ": {
+        "hpbw_deg": 6.189484509558979,
+        "first_sidelobe_db": -14.787916786984272
+      },
+      "gain_aperture_dbi": 37.79942656686028,
+      "gain_leaf_crosscheck_dbi": 37.53869917865115
+    }
+  },
+  "f8.15": {
+    "leaf": {
+      "XZ": {
+        "broadside_dbi": 7.9518862726833,
+        "peak_angle_deg": 9,
+        "hpbw_deg": 81.35905046320445,
+        "xpol_broadside_db": 306.3321710710607,
+        "front_to_back_db": 15.108409299183325
+      },
+      "YZ": {
+        "broadside_dbi": 7.9518862726833,
+        "peak_angle_deg": 0,
+        "hpbw_deg": 72.27902664990614,
+        "xpol_broadside_db": 306.3321710710607,
+        "front_to_back_db": 15.108409299183329
+      }
+    },
+    "accepted_power_fraction": 0.6886974577487264,
+    "return_loss_db": 5.068173326384243,
+    "array_example": {
+      "XZ": {
+        "hpbw_deg": 0.9929005735608719,
+        "first_sidelobe_db": -15.252162156155844
+      },
+      "YZ": {
+        "hpbw_deg": 6.077751600442699,
+        "first_sidelobe_db": -14.808563846143116
+      },
+      "gain_aperture_dbi": 37.96077900182093,
+      "gain_leaf_crosscheck_dbi": 37.257847679559724
+    }
+  },
+  "status": "SAR_LEAF_NOT_PASS"
+}

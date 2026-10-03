@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Components\RECONSTRUCTION:arm1" id="7">
+      <LineSet points="6.5548768 6.5548768 22.1704941 6.93164539 6.5548768 22.1704941 -6.93164539 6.5548768 59.8511467 -6.5548768 6.5548768 59.8511467 6.5548768 6.5548768 22.1704941 6.5548768 8.74698257 22.1704941 -6.5548768 6.5548768 59.8511467 -6.5548768 8.74698257 59.8511467 6.5548768 8.74698257 22.1704941 6.5548768 8.74698257 24.5675907 -6.5548768 8.74698257 57.454052 -6.5548768 8.74698257 59.8511467" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm2" id="8">
+      <LineSet points="-8.74698257 6.5548768 22.1704941 -6.5548768 6.5548768 22.1704941 -8.74698257 -6.5548768 59.8511467 -6.5548768 -6.5548768 59.8511467 -6.5548768 6.5548768 22.1704941 -6.5548768 6.93164539 22.1704941 -6.5548768 -6.93164539 59.8511467 -6.5548768 -6.5548768 59.8511467 -8.74698257 6.5548768 22.1704941 -8.74698257 6.5548768 24.5675907 -8.74698257 -6.5548768 57.454052 -8.74698257 -6.5548768 59.8511467" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm3" id="9">
+      <LineSet points="-6.93164539 -6.5548768 22.1704941 -6.5548768 -6.5548768 22.1704941 6.5548768 -6.5548768 59.8511467 6.93164539 -6.5548768 59.8511467 -6.5548768 -8.74698257 22.1704941 -6.5548768 -6.5548768 22.1704941 6.5548768 -8.74698257 59.8511467 6.5548768 -6.5548768 59.8511467 -6.5548768 -8.74698257 22.1704941 -6.5548768 -8.74698257 24.5675907 6.5548768 -8.74698257 57.454052 6.5548768 -8.74698257 59.8511467" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Components\RECONSTRUCTION:arm4" id="10">
+      <LineSet points="6.5548768 -6.5548768 22.1704941 8.74698257 -6.5548768 22.1704941 6.5548768 6.5548768 59.8511467 8.74698257 6.5548768 59.8511467 6.5548768 -6.93164539 22.1704941 6.5548768 -6.5548768 22.1704941 6.5548768 6.5548768 59.8511467 6.5548768 6.93164539 59.8511467 8.74698257 -6.5548768 22.1704941 8.74698257 -6.5548768 24.5675907 8.74698257 6.5548768 57.454052 8.74698257 6.5548768 59.8511467" stripped="0" material="$InfoMaterial$"/>
+    </Object>
+    <Object name="Connected" id="1">
+      <PointSet points="-6.42939565e-16 -10.5 0 -10.5 6.42939565e-16 0 10.5 6.42939565e-16 0 -6.42939565e-16 10.5 0 -6.42939565e-16 -10.5 2 -10.5 6.42939565e-16 2 10.5 6.42939565e-16 2 -6.42939565e-16 10.5 2" material="$00f219"/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$00f219">
+      <Drawstyle color="0 0.949019611 0.0980392173" transparency="0" linestrength="3"/>
+    </Material>
+    <Material name="$49bce1">
+      <Drawstyle color="0.286274523 0.737254918 0.882352948" transparency="0" linestrength="3"/>
+    </Material>
+  </Materials>
+  <Groups>
+    <Group name="Metal Filled" ID="1" selectiontype="main">
+      <Item name="Components\RECONSTRUCTION:arm1" id="7"/>
+      <Item name="Components\RECONSTRUCTION:arm2" id="8"/>
+      <Item name="Components\RECONSTRUCTION:arm3" id="9"/>
+      <Item name="Components\RECONSTRUCTION:arm4" id="10"/>
+    </Group>
+    <Group name="Wire Endpoints" ID="2">
+      <Item name="Connected" id="1"/>
+    </Group>
+  </Groups>
+</CSTAuxiliaryGeometry>

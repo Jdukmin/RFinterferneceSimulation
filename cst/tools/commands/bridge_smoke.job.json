@@ -1,0 +1,16 @@
+{
+  "label": "BRIDGE_SMOKE",
+  "purpose": "End-to-end bridge smoke test in a NEW empty project; no existing project touched.",
+  "vars": {"fmin": "8.0", "fmax": "8.4", "accuracy": "-40", "component": "BRIDGE_SMOKE"},
+  "steps": [
+    {"action": "NewProject"},
+    {"action": "History", "file": "../templates/units_solver_frequency.vba"},
+    {"action": "History", "file": "../templates/boundaries_open.vba"},
+    {"action": "History", "file": "../templates/parameter.vba", "vars": {"name": "smoke_len", "value": "10", "description": "bridge smoke"}},
+    {"action": "History", "file": "../templates/brick_pec.vba", "vars": {"name": "brick", "xmin": "0", "xmax": "10", "ymin": "0", "ymax": "10", "zmin": "0", "zmax": "10"}},
+    {"action": "SetParameter", "name": "smoke_len", "value": "12"},
+    {"action": "Rebuild"},
+    {"action": "Status"},
+    {"action": "SaveAs", "path": "../smoke/BRIDGE_SMOKE.cst"}
+  ]
+}

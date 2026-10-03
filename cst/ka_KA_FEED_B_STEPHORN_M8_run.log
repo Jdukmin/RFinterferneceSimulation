@@ -1,0 +1,11 @@
+﻿[START] job {"label":"KA_FEED_B_STEPHORN_M8","steps":10,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":18,"sha256":"2515B7F97BB4962E1FCF108F9EAB043E6DD71CDE25408A542779BD9E9F550CA4","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\history.vba"}
+[OK] history {"blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\..\\..\\templates\\mesh_resource_hex.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\KA_FEED_B_STEPHORN_M8\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_B_STEPHORN_M8.cst"}
+[FAILED] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_B_STEPHORN_M8\\Result\\Model.log","seconds":3,"successful_excitations":0,"exists":true,"errors":["This software is licensed for up to 100000 mesh cells only. The current mesh"],"mesh_cells":[],"warnings":[],"start_returned":"0"}
+[ERROR] Job {"error":"Solver did not complete cleanly; inspect C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\KA_FEED_B_STEPHORN_M8\\Result\\Model.log","dialogs":[]}

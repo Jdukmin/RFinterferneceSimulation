@@ -1,0 +1,57 @@
+===================================================================================
+-----------------------------------------------------------------------------------
+ 
+===================================================================================
+== CST Matrix Calculation Priority Log ==
+===================================================================================
+Priorities are sorted in ascending order beginning with the lowest priority
+Priority scheme based on: material properties [priority defaults]
+All shapes have a 2D or 3D geometric representation
+ 
+Group | Shape-ID | Shape-name                      | Material | Material-attributes
+    1 |        1 | RECONSTRUCTION:arm1             | PEC      |                pec.
+    1 |        2 | RECONSTRUCTION:arm1_termination | PEC      |                pec.
+    1 |        3 | RECONSTRUCTION:arm2             | PEC      |                pec.
+    1 |        4 | RECONSTRUCTION:arm2_termination | PEC      |                pec.
+    1 |        5 | RECONSTRUCTION:arm3             | PEC      |                pec.
+    1 |        6 | RECONSTRUCTION:arm3_termination | PEC      |                pec.
+    1 |        7 | RECONSTRUCTION:arm4             | PEC      |                pec.
+    1 |        8 | RECONSTRUCTION:arm4_termination | PEC      |                pec.
+    1 |        9 | RECONSTRUCTION:base_center      | PEC      |                pec.
+    1 |       10 | RECONSTRUCTION:base_floor       | PEC      |                pec.
+    1 |       11 | RECONSTRUCTION:groove_wall_1    | PEC      |                pec.
+    1 |       12 | RECONSTRUCTION:outer_wall       | PEC      |                pec.
+===================================================================================
+ 
+-----------------------------------------------------------------------------------
+ 
+===================================================================================
+
+************************************************************************************************
+------------------------------------------------------------------------------------------------
+Geometry processor: default
+	Geo accuracy: 69.000000
+	Watertightness check: true
+	Self intersection check: false
+	Inheritance (all): false
+	Normal dominance (all): false
+	Normal dominance (ports): false
+	Flanges hollow: true
+	One shape per flange: false
+	Multi threading: true
+		max # of threads used: 16
+		requested max # of threads: 16
+		representation: indexed
+		method: multi thread
+		retry: no
+------------------------------------------------------------------------------------------------
+CAD processing settings are set to default
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+CAD Processing Version Info
+	ACIS version installed:	35.0.0
+	ACIS version used:	35.0.0
+------------------------------------------------------------------------------------------------
+Success method:	multi-thread-22
+************************************************************************************************
+

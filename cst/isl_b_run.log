@@ -1,0 +1,13 @@
+﻿[START] job {"label":"ISL_B_CUPPATCH","steps":10,"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\job.json"}
+[OK] connect {"mode":"GetActiveObject"}
+[OK] new_project 
+[OK] history {"blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\..\\..\\templates\\units_solver_frequency.vba"}
+[OK] history {"blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\..\\..\\templates\\boundaries_open.vba"}
+[OK] history {"blocks":24,"sha256":"E6D3C5321814DCD14BDF6C7D2B995C6EBE8E05D9B54C34E668BC4909056AD5E7","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\history.vba"}
+[OK] history {"blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\..\\..\\templates\\mesh_resource_hex.vba"}
+[OK] history {"blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\..\\..\\templates\\view_structure.vba"}
+[OK] save_as {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_B_CUPPATCH.cst"}
+[OK] solve {"log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_B_CUPPATCH\\Result\\Model.log","seconds":42,"successful_excitations":4,"exists":true,"errors":[],"mesh_cells":[34848,34848,34848,34848],"warnings":[],"start_returned":"1"}
+[OK] save {"project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_B_CUPPATCH.cst"}
+[OK] export_sparameters {"out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\ISL_B_CUPPATCH\\s_parameters.csv","ports":4,"points":1001}
+[DONE] job {"job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_B_CUPPATCH\\job.json"}

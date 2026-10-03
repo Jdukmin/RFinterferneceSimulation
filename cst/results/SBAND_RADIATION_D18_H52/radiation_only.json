@@ -1,0 +1,202 @@
+{
+  "SBA1_TC_XZ": {
+    "accepted_power_fraction": 0.7070268669329622,
+    "matching_loss_db": 1.5056408275326463,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.7492559615440796,
+      "main_max_error_db": 1.5228816368532834,
+      "main_rmse_db": 0.883405571621267,
+      "peak_error_db": 0.32908237502826143,
+      "anchor_errors_db": {
+        "0": -0.32908237502826143,
+        "30": 1.1038926153359272,
+        "60": 0.8616017950621773,
+        "80": 0.26256010463355517,
+        "90": 0.7841717804895871
+      },
+      "eoc_gain_error_db": 0.7841717804895871,
+      "boresight_error_db": -0.32908237502826143
+    },
+    "radiation_score": 0.9137971490582103,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA1_TC_YZ": {
+    "accepted_power_fraction": 0.7070268669329622,
+    "matching_loss_db": 1.5056408275326463,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.7494143775514734,
+      "main_max_error_db": 1.5225327281574237,
+      "main_rmse_db": 0.8835847754496613,
+      "peak_error_db": 0.32908237502826143,
+      "anchor_errors_db": {
+        "0": -0.32908237502826143,
+        "30": 1.105440633323484,
+        "60": 0.8640616293811498,
+        "80": 0.26512341070985024,
+        "90": 0.7867637538361338
+      },
+      "eoc_gain_error_db": 0.7867637538361338,
+      "boresight_error_db": -0.32908237502826143
+    },
+    "radiation_score": 0.9139555650656042,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA1_TM_XZ": {
+    "accepted_power_fraction": 0.4803884535192,
+    "matching_loss_db": 3.1840743972283843,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.0066647899303736,
+      "main_max_error_db": 2.37103999236193,
+      "main_rmse_db": 1.245139668224654,
+      "peak_error_db": 0.41177929601725083,
+      "anchor_errors_db": {
+        "0": -0.44486377268929544,
+        "30": 0.3833998309706428,
+        "60": 2.367943039736282,
+        "80": 0.5619193290346911,
+        "90": 0.3261029187553297
+      },
+      "eoc_gain_error_db": 0.3261029187553297,
+      "boresight_error_db": -0.44486377268929544
+    },
+    "radiation_score": 1.212554437938999,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA1_TM_YZ": {
+    "accepted_power_fraction": 0.4803884535192,
+    "matching_loss_db": 3.1840743972283843,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 1.0068684076134986,
+      "main_max_error_db": 2.3701580598432077,
+      "main_rmse_db": 1.245363186883765,
+      "peak_error_db": 0.412486802076947,
+      "anchor_errors_db": {
+        "0": -0.44486377268929544,
+        "30": 0.38479869500147323,
+        "60": 2.3701580598432077,
+        "80": 0.5643142053233761,
+        "90": 0.3285532275346803
+      },
+      "eoc_gain_error_db": 0.3285532275346803,
+      "boresight_error_db": -0.44486377268929544
+    },
+    "radiation_score": 1.213111808651972,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA4_TC_XZ": {
+    "accepted_power_fraction": 0.7070268669329622,
+    "matching_loss_db": 1.5056408275326463,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.8280253692500207,
+      "main_max_error_db": 2.286457419331767,
+      "main_rmse_db": 0.9559466620562341,
+      "peak_error_db": 0.5290823750282616,
+      "anchor_errors_db": {
+        "0": 0.9709176249717384,
+        "30": 0.20389261533592729,
+        "60": -1.4383982049378226,
+        "80": 0.1625601046335552,
+        "90": 2.2841717804895874
+      },
+      "eoc_gain_error_db": 2.2841717804895874,
+      "boresight_error_db": 0.9709176249717384
+    },
+    "radiation_score": 1.0925665567641514,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA4_TC_YZ": {
+    "accepted_power_fraction": 0.7070268669329622,
+    "matching_loss_db": 1.5056408275326463,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.8279313195360908,
+      "main_max_error_db": 2.2867637538361336,
+      "main_rmse_db": 0.9558377395697852,
+      "peak_error_db": 0.5290823750282616,
+      "anchor_errors_db": {
+        "0": 0.9709176249717384,
+        "30": 0.20544063332348417,
+        "60": -1.43593837061885,
+        "80": 0.16512341070985026,
+        "90": 2.2867637538361336
+      },
+      "eoc_gain_error_db": 2.2867637538361336,
+      "boresight_error_db": 0.9709176249717384
+    },
+    "radiation_score": 1.0924725070502217,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA4_TM_XZ": {
+    "accepted_power_fraction": 0.4803884535192,
+    "matching_loss_db": 3.1840743972283843,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.20528568820465692,
+      "main_max_error_db": 0.8283889577162604,
+      "main_rmse_db": 0.2695269627458531,
+      "peak_error_db": 0.11177929601725056,
+      "anchor_errors_db": {
+        "0": -0.04486377268929509,
+        "30": 0.08339983097064252,
+        "60": -0.43205696026371765,
+        "80": 0.061919329034691106,
+        "90": 0.8261029187553297
+      },
+      "eoc_gain_error_db": 0.8261029187553297,
+      "boresight_error_db": -0.04486377268929509
+    },
+    "radiation_score": 0.2611753362132822,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  },
+  "SBA4_TM_YZ": {
+    "accepted_power_fraction": 0.4803884535192,
+    "matching_loss_db": 3.1840743972283843,
+    "passivity_power_error": 0,
+    "normalization_reliable": true,
+    "handedness": "IEEE_LHCP",
+    "metrics_accepted_power_cp": {
+      "coverage_deg": 90,
+      "main_mae_db": 0.2052673881384354,
+      "main_max_error_db": 0.8285532275346803,
+      "main_rmse_db": 0.26951735282041656,
+      "peak_error_db": 0.11248680207694672,
+      "anchor_errors_db": {
+        "0": -0.04486377268929509,
+        "30": 0.08479869500147297,
+        "60": -0.4298419401567921,
+        "80": 0.06431420532337606,
+        "90": 0.8285532275346803
+      },
+      "eoc_gain_error_db": 0.8285532275346803,
+      "boresight_error_db": -0.04486377268929509
+    },
+    "radiation_score": 0.26151078917690873,
+    "status": "RADIATION_ONLY_NOT_RFC_PASS"
+  }
+}

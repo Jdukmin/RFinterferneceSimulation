@@ -1,0 +1,59 @@
+{
+   "execution": {
+      "classname": "SMAPowerByEmagHPCFrame",
+      "libname": "SMAPowerByEmagUI"
+   },
+   "inputVariables": [
+      {
+         "name": "ground_radius",
+         "type": "float",
+         "value": 17.0
+      },
+      {
+         "name": "floor_thickness",
+         "type": "float",
+         "value": 0.789
+      },
+      {
+         "name": "rim_height",
+         "type": "float",
+         "value": 3.154
+      },
+      {
+         "name": "rim_thickness",
+         "type": "float",
+         "value": 0.789
+      },
+      {
+         "name": "patch_diameter",
+         "type": "float",
+         "value": 13.089
+      },
+      {
+         "name": "patch_height",
+         "type": "float",
+         "value": 1.971
+      },
+      {
+         "name": "patch_thickness",
+         "type": "float",
+         "value": 0.394
+      },
+      {
+         "name": "feed_radius",
+         "type": "float",
+         "value": 2.365
+      },
+      {
+         "name": "probe_radius",
+         "type": "float",
+         "value": 0.315
+      },
+      {
+         "name": "feed_gap",
+         "type": "float",
+         "value": 0.394
+      }
+   ],
+   "outputVariables": []
+}

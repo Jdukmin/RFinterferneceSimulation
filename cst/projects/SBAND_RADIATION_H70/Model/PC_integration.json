@@ -1,0 +1,59 @@
+{
+   "execution": {
+      "classname": "SMAPowerByEmagHPCFrame",
+      "libname": "SMAPowerByEmagUI"
+   },
+   "inputVariables": [
+      {
+         "name": "base_diameter",
+         "type": "float",
+         "value": 65.0
+      },
+      {
+         "name": "base_depth",
+         "type": "float",
+         "value": 32.0
+      },
+      {
+         "name": "helix_diameter",
+         "type": "float",
+         "value": 21.0
+      },
+      {
+         "name": "helix_height",
+         "type": "float",
+         "value": 70.0
+      },
+      {
+         "name": "turns",
+         "type": "float",
+         "value": 0.5
+      },
+      {
+         "name": "wire_radius",
+         "type": "float",
+         "value": 1.0
+      },
+      {
+         "name": "feed_gap",
+         "type": "float",
+         "value": 2.0
+      },
+      {
+         "name": "groove_depth",
+         "type": "float",
+         "value": 20.0
+      },
+      {
+         "name": "perturbation_amplitude",
+         "type": "float",
+         "value": 0.0
+      },
+      {
+         "name": "segments_per_turn",
+         "type": "float",
+         "value": 24.0
+      }
+   ],
+   "outputVariables": []
+}

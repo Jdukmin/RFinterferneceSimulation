@@ -1,0 +1,237 @@
+{
+    "general": {
+        "version": "2026.4",
+        "date": "2026-04-14",
+        "acis": "35.0.0",
+        "buildnumber": "20260414",
+        "project_type": "MWS",
+        "length": "mm",
+        "frequency": {
+            "unit": "GHz",
+            "minimum": "1.1639999999999999",
+            "maximum": "1.1890000000000001",
+            "minimum_expr": "1.164",
+            "maximum_expr": "1.189"
+        },
+        "time": "ns",
+        "created": "2026.4|35.0.0|20260414"
+    },
+    "history": [
+        {
+            "caption": "Surrogate: mm/GHz/ns units",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e91ec006f995ab2b324a559a43aa42ea8f81897d788b48b2fb2c9951b83635a87515fb7ad0ceda5bdc1d3bb62f772913e009302b272ce4d837347179f99f0f2dc0c119d8d255d984ebc70259fdafa804d0c8a160b45efe318ab32154a6503ee8\""
+            ]
+        },
+        {
+            "caption": "Surrogate: time domain and frequency band",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04754c310c243f2f6cafecbcc248f5230d156880084e5f0703e2a7ae1d3669f5e70d30918a8c2df843228b978afe11736d979b98324d5cb03a040df25d798e5dad9837136c013fbe5b3ab39ba65b193de46fc739cbaf6e73a32f07c8bc40cff09c4df16acf7f9e907278ba7c794b21c76e1685fa850cecfd4b653345ae729a3cc6834c79e6de85131930163be28320c6dca5bd43439262ee8edf7bdea6f7c908ec46566912337b66535a6df370a45f4f87b496c8a34661fca531323c399f261a11\""
+            ]
+        },
+        {
+            "caption": "Surrogate: vacuum and open (add space)",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e68d0f09c513cec169770395b470ea6e71f31198781722db7e3ceff22b7363427df837648c23e61e7a818c4d8c5662e12853aaef469cf5c62bc33faef1d8cd9b693121bb6331035725cfedbed3a0c67567284ffe5466b536a3ab9e1c85a3984a567137f585e41aefadbea0af3796990c52535af92b2a92b26d418552d6f32dc8f4efaa8307a94511bbd9a2c81cb96707e34076b3ab0eaf2b9ae077bc1d41e1f87f47cc98247deb65aee300557595b8a026b8c7821a04f1c928e7b86e1b9f4c44ef924021cee713afc5a8a471b4640542446cf62de7dd0b944ecfad29d42ef9badd1d92c0318fb59af88c0fe7ceac3555d0ad87a977e6ad70e542255527ab246a88fa96ce90b4c2c4e828b6be6311a8dda1cc76066eb7fd0fc70701312a5f1eb423d19b67f1abd1b3d78781e3e26368b30fd2df0340fdf41f3bb07234eab466437e14fae7931e826d33839ebbe89b6d815d79a2f77a67d0181053381db86d2ae070a0fbcce481fcfa3c2cc819553dcbd1a7f041a5827f747d5342a323316ec1648e157fe91f26b136d7e3fd3dfccd7949\""
+            ]
+        },
+        {
+            "caption": "PML reference includes lowest monitor",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e8094598f60891918f6971ad62aab7240da74fbc6b4329ba1daba5cf897f20fd23fd2bc352fa06bc92eded11556555f7d48dbf7141262f468756f2868cfc23c289ef93c51ba64b9b5159ffbb382f57f5\""
+            ]
+        },
+        {
+            "caption": "Analysis accuracy",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"0463b943c87c6714f5d2799616a9de229a5de3a3fede7387cc091cd9005ea53db0d3263fc7cd58e460a255dab126e8e888\""
+            ]
+        },
+        {
+            "caption": "cup_floor",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"0404841fade02c1adab123bbb4c2cf2e4f9259050cd90ac6606390cfbe24afab846a82ad1be1d59b3f1a645de4b9fd4c229a06bec6e30d6cf70bd0b06d5dfea9735ad4a906b680e0e37c6e6a2a3bad9a3d1f0ed49e116d6ff8d82cf548467f4dc467b9233755eb2b04c6a6e605eb01ba119cea45fcc2eb384ef9dd827f4d1cc4563a6ad890c0c7c694374d7a00f439873c840e11d37c3723f5674ca163613892b7c25510d54b699dab3c4a8b3c51039c51a6d1505ca663fd638b54fe0a5a5bd7d47738559e688c0431d193c2981812cefdc4c60a4444383ffb9840ad46041bb7d7\""
+            ]
+        },
+        {
+            "caption": "cup_wall",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e250e76fdb04fc8d5045345c3ab2da683e198003e36615dba9129d6f4909a6e5236eebb78e27b78ae3289e4c703cb846e43b3e776e35c4e4a89ac4730411b63e1d88b4ebda68be77e020ca6dbf71282e18ddbf80584b32f236199dd4a262d1c1223a7276a14a0c884eee607a81db6f6252006c7d563f1318249dd3934b5fed7404cbdffbb306f0c6215bbb36211e7ed0c17db718f0a6874817aae84b474cd74565f1a8dcb7870b6c95be1b043247224a95a5fa3b0d5dd768405da59af46e1315d031e7ab238d6ccce8a7cc976b25f07bcf3568b230ca34c39f9909bfc58fbadc\""
+            ]
+        },
+        {
+            "caption": "choke_floor",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04b7378f37984d24c3fc5b05300db09171df2b0676245a78a5a557d6f7c52da38fa4e07e3669fe88c1aa881ddaddcc7dd783ecd24af803a90d9423193479f7793c1b28f3949167ffacf02dff6d57baf1eb2890552da402b459a4bc451621be04900651aec5c6923995e2857c0ac31ced2d73eb8f0c260dd4955fc828965acd79eb7e4184486dd8c08a7522a53e6d5f2eeec9299776f068b0b71abf6e8627bc9d5dd3e3be6652ddcd7d99b9772800ab5c94f8f9306bb5c1c428759506177ba96367351617c43adba95ecb5fea1d06c15f86e5cfe33ef146cd20cf1d08273350902a2199ee5aa4de4ff7014dc9d4f3317299\""
+            ]
+        },
+        {
+            "caption": "choke_separator",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04c51cfc0cd47ee68eacef928644a04d764e6db451a87c82e8a25211c759c6de50757269ab3154d8b9191941031af9e32e2813b7adecc85782c136d9ea1884ef7843e8f69089c5496df22eb6d028f792309b226ab67eb7bba7b9b91499ea57a65fbf2a407eac026285b1bbd97dcbb5b01a547b23426bdbab1aa1e74de13633a160d55456e453c3bb7a8357504b02f18bdaf5fadd4a23dceccc3ecd865f973b9a99f713510b46a910165a81952e8058d2d6539cc1a3db380033afba0a8158e1ec282d1969aa1d7c348e4454ffd35747d8cd4f79f25622771c60250609ae7f2c494f87590733f1e49416b151613ab8299304\""
+            ]
+        },
+        {
+            "caption": "outer_wall",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04e308c8a50ed279d4c68394277f5a49aecc6e62eb14a5c549b271628088b3e84358de6a5f69ce169732d5b235fa081eccfdc69880f9eab92607f489c171a95c245f21980e36ce976e306340981b569a97ff9f4380a339fb8c50d1dc70f267aa7e8d639c1559684241a20eb2690bbfa8e2eab428039c74ddba39b0df5bf2c34fabaa959a21309b021e3a2da0292690ae976f3cb33c6ac9b29f6247614b5b2610fdef690e29e5a803384001be179b4f6533f9f45d98a31734528c0e46e40821a5ca84e92919e208ceab8abfb1ec30e196469a066ca8d1ce6ff2a9b13f4cc3537924\""
+            ]
+        },
+        {
+            "caption": "lower_patch",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"043d7adf2ea12a860891b5105985d8ce82c06da2c7c447358a6f87a7cc6fc3441813161591e0aa09cafcf903683ae518818c631d0c4a75fc8ce6164cf5129ed5c99056ae768b8b4cd0cfa4f7a76c46a80d95c814d4a35d778bb248d4d21a294cefc1cbb50aa141edb7166934467dda77c7c6f5908d9a87015338900120a9086cb6102bf8becc03a448cfb244b8a283a622a29efa411b67d369efa7bfdb96b5b0f79a15b1deabd2bb6650f2f5061a45d25cc24ba488dfc2f69c3e11c03e83fe59241b4bb528d5978ca4ee8ff67bc8c9358a98a4e8a0f300925a1af8f4768a379bd2\""
+            ]
+        },
+        {
+            "caption": "upper_patch",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04a2800b5b2d2b60bf1ab7e45b41b5c2c23ad4177fe2456eded3bd20923724e40c4233b72fedb38c8a8771430d94f81f693c3f9f752631e7fbb2f6b5cb28a367917099585fe10d00db5cf0e8af96225921239957565c5ea6f3abab88442b049cef2a0ce5602901f1d845f39d510ac6da27f95e0dbd0e5011442ed34260c5bad437bce71099d247826bbd3185b2a4d6036c8169b6cbf5bca44f2c44044109bfb3bcef51446337813711fb7911aa72f960a3b75d73adcdcf5d442d2cde2419df85e737caae003a86d0a2efdf0532b1863c1261348086571bac1e27b7707f02cbba43\""
+            ]
+        },
+        {
+            "caption": "probe1",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"0459c4481f2c38edfe0a4b69da965f4aef9b33ab33c6a25476a74d7eb55962a89a05d5d24348592c958fb4f8c05346d28d0b171f9daf7bc3c57d35f7a111dff0ad2de5ee1edb21af903bf9f8c4aa9913271af1645966a0ac8fde41e8eccdb2d4e050d0b8d7d5649210722e402acb360f3d4597eeaa5621247eeb8f865b7d512eac054ff6340513b3c1e22fcd9a31744cd3dc8d73669b5f39ef296d7d6be68bad8ab2854e641d2ea93d62a01edd07cfc7a72de5f724daa8c0f9daf26db7a609adaec54158337565cc9e2928c7a2bbb306ddd2f2c0a82563bfcd86d2c1aecbf551da\""
+            ]
+        },
+        {
+            "caption": "Port 1",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04bdbc7db9702b37251964064e4e4d32de5c9278522e6169d70421c4043d9702aad16bc34861fbf8af49f5066e3737fc16bb70dd883bde9611511ef4d53278ca3d3b4f5edb4c7a961301e7a64eeaae3b18195d930f6c3670b23e4ff3df1319ff807af9c25e87266db0870d93cec22cf843980835e7e435f8e6deaf05f98a38c36d726d67bf64070a0acc24c5924b57e5240d4825587e2e7a8a2f652e6aba2f286bb48ebf8926aba045f334bc5e1810529c35a696903439f3ef039edaddc233c73c237a41bea83422f8a24b1ad2536c6cccc4e412cc125f11e2ef94ab628f170e00341e7ce60ee85ff05c07a27bb31c1d2d8fef6cdc1492458cd507914d154d007e\""
+            ]
+        },
+        {
+            "caption": "probe2",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"041edacdc6ed6be95b18106701d7e93417d02b3cd5b293d83ecb0442e2709cc84f491a01dda5fd4034191a2bfe32e7a3085791c0c429041e8e941074358fb87b8c22e7ef4bbaca7385a382934154015494b13d708f7fcd0579167d79bb7a64e381ed37de270134e7363b065b0f456f6089a341bc1258779b68749d20027ecca2b89477c07314b51b5c5969b04856ebed1964b29c917848694b64f9d9aecdf87bd165dce4ae6890dcdd87ae4b1c2dcbe4cb32c8e315d92391c7f1d555a6a0809be592b8300346b7147ede2802f4ec980c90a295ff3110a0e3ac47903be1e3c894d0d9d8dfbf4e0bf7f941ab16009b26778e\""
+            ]
+        },
+        {
+            "caption": "Port 2",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"0430c64f72ca1b8df6c5dc89d3d786535320621cbf2c64de49b0731910318fd413d931b301395a582ade367a156b86fbd874e3b14fe9b6c7c03791167c707c0b1d3abbf4be7bbe170de23e8e2e96cea1ec1510b4cc5c61373b1adc012c5deed8e7e45e1f408794c18fd63509f009b087949c1db0de37dbd504210841cc603c844fb8fba577a07c55399884bbd66d56dce670da2f731b799965049b1d1e5af224b8b50251fba278962e2f6813f6cd23b123cf16380939f3651a7885b2af9de591ea839b6ee28e787b88d84fd901648115d05353784b386cf930021b3e7f21edb53843b6f6c4b614da3d2d00f51e1bc2c8036ba5037662475f42c334b61504f4a34b917150fa4f32d98d970ff2acd991eb8a36d91a6ec89ae24ddc187d2840de5b25\""
+            ]
+        },
+        {
+            "caption": "probe3",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"046b09a25b069823894c46aef74e5d6f9b6624f2a0dd8ca3ea82c45d922bf7687bf4484566a395cc94b3be1927d55ec9991b3f3d6e6907f8d9046b61b8b5be6016909be72b6bf5102a6c8ed31063a135d8ed3e72acc8a598839fb6bf3872503bd7b2c0130f1f8b8968a80fcb9e2bfbfe07be5205e49fc1b7ab852c171a3564c56e9537b3d18fb69c0151d5c39011ababac7e7f4139c8242ecfcd47bef725635b5b72fa5fada58e181369d0393a09605261a1933fe683f252df5787159518974b230fdc8312bea8e0016feba6bbd225dd6114e356d90fb07851a0eae8aa76c595dbb8c9799bddf15500c417599a92f58766\""
+            ]
+        },
+        {
+            "caption": "Port 3",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04cd78e6936d077dd7851e9c87f08499721c6d3c35ab78e2353a4cf15d16e32027b795c5e5ebd3e65611918b2ab46dadc94ff662329a8a902d8c8e9edc4fd834e701db9d470bf62da4f8eebd2e98ae9c5a20a0dde1b44acf32e7813a90ad3b3a3fa396e276be6c190565261ebc58626231b8d3f0af4aa8d4780b327e4292d35505480fe0c044f2279581d505b6bcc4d5a240b0b15a9d6eae8f2eae3756fd8e1559b0546e5674d7de83c9783541f1f8204e48deec7d628c34a044e22ab06cd77f57b0007d5f2375a78008de0ee4095e0a4725c37713a713732b13f3839c6908a1f53ba56e9779e4ef6ed798ff934fbcb491394a8702d2739047ed80fb5b53482da8cb9660bf5b273d0bb9f6d70aedbd2a385dd3c7c65fb17ab7577735c2131bce2a\""
+            ]
+        },
+        {
+            "caption": "probe4",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"044e6004cfcad440a0c6b8017ffa197b2109b47af94b90179409708f3d135441f8f7712fd36d3c089eeb167107d03df1be47ad95427ddb142ab683da4e388cdceba12071f2fc913c775c7ed070a41bdc3161b783119037509234e13fd9d3ab062f03fe06f3264986d07edbce159457283a750f4cef9912802a5e60209c8dadb0f4500ade8461ddcbb8084fe1812f23865b98e4f41a5a6685981e75d5f438ac84de72f668367af70fff682d3d00e901d5e6be34787680b757f72102961c8e80c726d4fa2471fde660b3107f814eb58c2b48527bbfc6420fe866db40ef5a81329b7ff187c3d312f3f01b0057250d738f71bf\""
+            ]
+        },
+        {
+            "caption": "Port 4",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04fba8e58986773e717417c22c19d9ecc96dab20ce0e23bdbb08887fc67a11dc1097b038701906e21bfc9c4d57e99ac4b2e4267eb7831d2b3509cb8bfdafeb8e3140a9f098bbef42c863bcdc41a93d236319e3708700bc3b49e101ed6346eee1e306bcfd272a4330ea21ec26f8ee7be87f908026c3866ebc6d87ec8ac2aacda16b64b5909bf199f898f62e5eb5431cdf16ea29f75003d147e3f221c194bc569d07b346f9be1d8ae58b3cdea38142e36d1a297803bc492755c99b83dad20b8274aa10169778e22fe0066f85b42c176e6dc667ef0d071734f8d50fd722ee04c52e07a65736682a8bdb515819ff5cd6eea06daf44f03909871f3f15f032f86e03dae363f4a3193286b9eaaa5c1a99a27ad036951b30055741aa299b869d411b9ae21d\""
+            ]
+        },
+        {
+            "caption": "Farfield 1.164 GHz",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"042d0783f73f337383a738b6d328111a69099c1432debfa93aaf1231bf54d8605453de6c49d6b638aca9e734d3acf0ad7529633473cca0de178b30b94ab9af114aab6c3fe7020bbd37b63cfeb08bc07fb12f04c647b5b05bed6f674783efe6f225e5057e3428de052d986d7b7dd653c86b40e190fe885cdcc73062b7a32d2d02f51079ed35d3c42abbca60c1fba2126afa\""
+            ]
+        },
+        {
+            "caption": "Farfield 1.17645 GHz",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04dab0eb4a0f9ff50f55056c1a29af195e42a78390526f78e4af12b898d864197d4641ea1c0788e9df15ed7ee24e8db054c1c22d6b110d6011ce7aab5a9e630b16a96b6d20969e70b4b036eabba88eccaf62f04768656c287bf24d78cd7327c362471b63bcc1d5a67634467898baf178b88fb14373828cffb444e3c896fa6be396740f3af19e3e3461888ffc307add0aea\""
+            ]
+        },
+        {
+            "caption": "Farfield 1.189 GHz",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04accf9d544c9ab90596e6eecbbef0a47b5d3bbdb36b12338bf8e647701edfd49c7f542a06b705f65257662e48a374ca19ddcb640784918390b315ccdfd51c89a9604be88cfe75632a035ce4f5a7bcda7d03b9a4cbb7ed65d64bfb8f6fc9c69407979cb7cb993c02c14d9a1da25de023419ddfb53a19fdd33fa50d4b43955f32565e7a6a1ed27785356033b239705ca0d0\""
+            ]
+        },
+        {
+            "caption": "Structure view",
+            "version": "2026.4|35.0.0|20260414",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Scrambled \"04156f36885f0f749b19fde10b3434d91a34a0de92cfbeb24a531147fc83d43b6f4dc98ef2727796d223e1f43228d14d69\""
+            ]
+        }
+    ]
+}

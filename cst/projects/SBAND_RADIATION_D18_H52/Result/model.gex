@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaGeometryFile version="20200202" creator="MatrixCalc">
+  <Components>
+    <Shape name="Components\RECONSTRUCTION:arm1" id="1" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="1 2 3"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm1_termination" id="2" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="4 5 6"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm2" id="3" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="7 8 9"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm2_termination" id="4" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="10 11 12"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm3" id="5" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="13 14 15"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm3_termination" id="6" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="16 17 18"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm4" id="7" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="19 20 21"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:arm4_termination" id="8" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="22 23 24"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:base_center" id="9" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="25 26 27"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:base_floor" id="10" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="28 29 30"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:groove_wall_1" id="11" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="31 32 33 34"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+    <Shape name="Components\RECONSTRUCTION:outer_wall" id="12" visible="1" material="PEC" line_material="">
+      <MeshGroup0D list=""/>
+      <MeshGroup1D list=""/>
+      <MeshGroup2D>
+        <Pos list="35 36 37 38"/>
+        <Neg list=""/>
+        <DS list=""/>
+      </MeshGroup2D>
+      <MeshGroup3D list=""/>
+    </Shape>
+  </Components>
+  <Materials>
+    <Material name="air_0" priority="1">
+      <Drawstyle color="0.600000024 0.600000024 0.600000024" transparency="0" linestrength="1"/>
+    </Material>
+    <Material name="PEC" priority="4">
+      <Drawstyle color="0.800000012 0.800000012 0.800000012" transparency="0" linestrength="1"/>
+    </Material>
+    <Material name="$NFSMaterial$" priority="2">
+      <Drawstyle color="0 1 1" transparency="0" linestrength="1"/>
+    </Material>
+  </Materials>
+  <Groups/>
+  <SimulationDomain min="-67.3595886 -67.3595886 -66.8595886" max="67.3595886 67.3595886 93.8595886"/>
+  <MeshType type="HEX"/>
+  <HexMesh>
+    <Dimensions nx="43" ny="43" nz="41"/>
+    <MeshPlanesX values="-67.359588139534878 -57.75294658986023 -50.10658760034822 -44.84317741688924 -40.475483394357454 -36.108354545357322 -32.5 -30 -27.265439786720496 -24.351782206952258 -22 -20 -17.612341741416266 -14.659607679484028 -12 -10.441518246035436 -9.0000000000000018 -7.0873540349536519 -4.5475467263844598 -2.4570816969872 -0.99999999999999933 -5.510910596170001e-16 1.0000000000000011 2.4570816969871991 4.5475467263844553 7.0873540349536492 9.0000000000000018 10.441518246035439 12 14.659607679484031 17.612341741416266 20 22 24.351782206952258 27.265439786720499 30 32.5 36.108354545357322 40.475483394357383 44.843177416889155 50.106587600348071 57.752946589859917 67.359588139534878"/>
+    <MeshPlanesY values="-67.359588139534878 -57.75294658986023 -50.10658760034822 -44.84317741688924 -40.475483394357454 -36.108354545357322 -32.5 -30 -27.265439786720496 -24.351782206952258 -22 -20 -17.612341741416266 -14.659607679484028 -12 -10.441518246035436 -9.0000000000000018 -7.0873540349536528 -4.5475467263844607 -2.4570816969872009 -1.0000000000000011 5.5109105961500004e-16 1 2.4570816969871987 4.5475467263844589 7.0873540349536519 9.0000000000000018 10.441518246035439 12 14.659607679484031 17.612341741416266 20 22 24.351782206952258 27.265439786720499 30 32.5 36.108354545357322 40.475483394357383 44.843177416889155 50.106587600348071 57.752946589859917 67.359588139534878"/>
+    <MeshPlanesZ values="-66.859588139534878 -57.660963770983017 -50.187049411597023 -44.841698338608758 -40.561132225739144 -36.28056611286955 -32 -28.000000000000004 -24.000000000000025 -20 -16.063226017726745 -12.126452035453491 -8.1896780531802396 -4.5648862593847461 -1.9108177673145748 0 2 3.9738161004647337 6.8645262202552217 10.948000191126358 15.305094253501643 19.662188315876929 24.01928237825221 28.376376440627499 32.733470503002778 37.090564565378074 41.447658627753349 45.804752690128637 50.083778174606572 53.312294361522056 55.512713472709422 57 58 59.000000000000007 60.497490790895604 62.737553981651011 66.081707340034029 70.530051725054079 75.668992452364819 83.545995049784977 93.859588139534878"/>
+    <SnappingPlanesX values="0 6 7 10 11 14 16 20 21 22 26 28 31 32 35 36 42"/>
+    <SnappingPlanesY values="0 6 7 10 11 14 16 20 21 22 26 28 31 32 35 36 42"/>
+    <SnappingPlanesZ values="0 6 9 15 16 31 32 33 40"/>
+  </HexMesh>
+  <UnitCell/>
+  <GeometryFile filename="3d.slm" type="slim" scale_factor_to_meter="0.001"/>
+</MetaGeometryFile>

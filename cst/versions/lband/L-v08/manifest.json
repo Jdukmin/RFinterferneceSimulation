@@ -1,0 +1,31 @@
+{
+  "version": "L-v08",
+  "label": "LBAND_GNSS_V08_COMPROMISE",
+  "recorded_utc": "2026-10-03T12:18:33.443203+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\LBAND_GNSS_V08_COMPROMISE.cst",
+  "project_sha256": "2b4043782c902c1d9d42a795bed52eaf930920d2a9920c7dbd74e300cb88e4db",
+  "note": "Arithmetic midpoint choke caused resonant pattern degradation; candidate rejected; no further dimension tuning",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_lband_gnss.py": "1de5910c054ab9128bb3757ce60bc27e6b6b94496415191f28d104c5bad3ab2f",
+    "verify_lband_results.py": "a518ff3c902e36ccbfa49de4c43f8c19a8146fabc4efe9268f8b4b0eafbdeafe",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "finalize_lband_band.py": "b213fd05abb75cb789d1532987d5b4366d30330f4e4f7cdda8612ef9e5ed60e7",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\lband_gnss.yaml": "00d47f85a0ce23509a9b9a21cf1ce6a96cf927f807ee43be0d840ef9a7613d72",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba"
+  },
+  "evidence": {
+    "projects\\LBAND_GNSS_V08_COMPROMISE.geometry.json": "414934b6a6399c30915ba75b981feb47961c5161656069de6388e812db34310e",
+    "results\\LBAND_GNSS_V08_COMPROMISE\\validation.json": "9a6305a8cf109ca928f2d431a0735fd2513efdc2041446c39236be86a8152e16",
+    "results\\LBAND_GNSS_V08_COMPROMISE\\s_matrix.npz": "53041fff4b3c3bd85a1e91d3f5e9b9bd72fd0b4c79dcc30e26fb2777c59be5eb",
+    "results\\LBAND_GNSS_V08_COMPROMISE\\rfc_pass_matrix.json": "8cffe3ad090e5a995ba85118e493fdb38f0d539d44fcee43eb9f9f1891a42b92",
+    "projects\\LBAND_GNSS_V08_COMPROMISE\\Result\\Model.log": "4ed0e56f52f34e7ce0d3bf73a852eb62401e0f534354c2e7f5aa881d8b9a8f7e"
+  }
+}

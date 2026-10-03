@@ -1,0 +1,33 @@
+{
+  "version": "isl-v02",
+  "label": "ISL_B_CUPPATCH",
+  "recorded_utc": "2026-10-03T13:10:29.066401+00:00",
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_B_CUPPATCH.cst",
+  "project_sha256": "691cb0c6a35a730da63842970d71200068ea1ab8b6414b457a81cea073bd03e4",
+  "note": "ISL candidate vs ASSUMED cos^1 template; NOT_PASS; see results/ISL_B_CUPPATCH/validation.json",
+  "source_snapshot_scope": "CURRENT_CHECKPOINT_STATE_NOT_RETROACTIVE_GENERATION_PROOF",
+  "mesh_validation": "DISABLED_BY_USER",
+  "sources": {
+    "generate_isl.py": "cde6b6537fec9182d7bc8888ba4e4c31d79945e3d9abde52b448bf55ac42dce7",
+    "verify_isl_results.py": "889af83745dece44fd1d31929b60c0296fc466402559f5d53baf5f2741391ee0",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "rfc_validation.py": "c7d97df3e97e1af351271042ebcaefa03f45bfa58f87f139f37ad7233693cc4c",
+    "export_cst_source.py": "3cee207a9825b2d5680b5ec7d1416e1a017e8cecdf4dfa280d047fcc42ad47c5",
+    "specs\\xband_isl.yaml": "f81303d93545fef3e4bd27e5ee6e8bb5084f174366fcb8d05ec4ea7ca5b3379a",
+    "specs\\rfc_acceptance.yaml": "99d70624c189f6da569480cf6ac5c425d2c63287e1a61a64597c0ea99f0d65ba",
+    "tools\\invoke-cst.ps1": "faea9d5543bcf866760dc66f6bfad5776bde0b42d5d31c1208cb79433608ae47"
+  },
+  "evidence": {
+    "results\\ISL_B_CUPPATCH\\validation.json": "76d2633c7db3a83f9c35837fe312dafe56cea1b0d3185d35d8583ab889448c1c",
+    "results\\ISL_B_CUPPATCH\\s_matrix.npz": "3738438834bc6a9d0093a6b04913519a14957ae03e30b471219a200ce0a67813",
+    "results\\ISL_B_CUPPATCH\\s_parameters.csv": "a2e86517cf82e81ad64df00b0f8bbb3880098b2fd1b0cc998eb4e2053290a942",
+    "tools\\commands\\ISL_B_CUPPATCH\\history.vba": "e6d3c5321814dcd14bdf6c7d2b995c6ebe8e05d9b54c34e668bc4909056ad5e7",
+    "tools\\commands\\ISL_B_CUPPATCH\\job.json": "d8124c08ea71fd7a8fb13164c0140547204a4632ee93b78397cfa0015f882258",
+    "tools\\commands\\ISL_B_CUPPATCH\\candidate.json": "eadacf1e64012ea84902338e915abfbdac08cc77a14427e6b4383f897877cd26",
+    "projects\\ISL_B_CUPPATCH\\Result\\Model.log": "81ddde2c48a8ae95f1f4fb3cd7ed04f90802661ca52ce03c2f470074dffe2451"
+  }
+}

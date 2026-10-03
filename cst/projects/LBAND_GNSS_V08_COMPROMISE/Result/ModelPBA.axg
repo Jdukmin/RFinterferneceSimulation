@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Ports\port1" id="1">
+      <Cone position="35 2.14313185e-15 1" direction="0 0 1" dimension="10 10 10" material="$PortMaterial$" text="1" short="1"/>
+      <LineSet points="35 2.14313185e-15 0 35 2.14313185e-15 2" stripped="1" material="$WireMaterial$"/>
+      <LineSet points="35 2.14313185e-15 0 35 2.14313185e-15 2" stripped="1" material=""/>
+    </Object>
+    <Object name="Ports\port2" id="2">
+      <Cone position="-2.14313185e-15 35 1" direction="0 0 1" dimension="10 10 10" material="$PortMaterial$" text="2" short="2"/>
+      <LineSet points="-2.14313185e-15 35 0 -2.14313185e-15 35 2" stripped="1" material="$WireMaterial$"/>
+      <LineSet points="-2.14313185e-15 35 0 -2.14313185e-15 35 2" stripped="1" material=""/>
+    </Object>
+    <Object name="Ports\port3" id="3">
+      <Cone position="-35 2.14313185e-15 1" direction="0 0 1" dimension="10 10 10" material="$PortMaterial$" text="3" short="3"/>
+      <LineSet points="-35 2.14313185e-15 0 -35 2.14313185e-15 2" stripped="1" material="$WireMaterial$"/>
+      <LineSet points="-35 2.14313185e-15 0 -35 2.14313185e-15 2" stripped="1" material=""/>
+    </Object>
+    <Object name="Ports\port4" id="4">
+      <Cone position="-2.14313185e-15 -35 1" direction="0 0 1" dimension="10 10 10" material="$PortMaterial$" text="4" short="4"/>
+      <LineSet points="-2.14313185e-15 -35 0 -2.14313185e-15 -35 2" stripped="1" material="$WireMaterial$"/>
+      <LineSet points="-2.14313185e-15 -35 0 -2.14313185e-15 -35 2" stripped="1" material=""/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$noSnappingMaterial$">
+      <Drawstyle color="0 0 0" transparency="0" linestrength="5"/>
+    </Material>
+    <Material name="">
+      <Drawstyle color="0 0 0.949999988" transparency="0.600000024" linestrength="0"/>
+    </Material>
+  </Materials>
+  <Groups/>
+</CSTAuxiliaryGeometry>

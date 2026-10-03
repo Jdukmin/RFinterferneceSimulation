@@ -1,0 +1,55 @@
+{
+    "parameters": [
+        {
+            "expr": "65",
+            "name": "base_diameter",
+            "value": "65"
+        },
+        {
+            "expr": "32",
+            "name": "base_depth",
+            "value": "32"
+        },
+        {
+            "expr": "18",
+            "name": "helix_diameter",
+            "value": "18"
+        },
+        {
+            "expr": "52",
+            "name": "helix_height",
+            "value": "52"
+        },
+        {
+            "expr": "0.5",
+            "name": "turns",
+            "value": "0.5"
+        },
+        {
+            "expr": "1",
+            "name": "wire_radius",
+            "value": "1"
+        },
+        {
+            "expr": "2",
+            "name": "feed_gap",
+            "value": "2"
+        },
+        {
+            "expr": "20",
+            "name": "groove_depth",
+            "value": "20"
+        },
+        {
+            "expr": "0",
+            "name": "perturbation_amplitude",
+            "value": "0"
+        },
+        {
+            "expr": "24",
+            "name": "segments_per_turn",
+            "value": "24"
+        }
+    ],
+    "version": 1
+}

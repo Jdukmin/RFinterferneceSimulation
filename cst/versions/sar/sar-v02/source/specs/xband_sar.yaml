@@ -1,0 +1,33 @@
+model_identity: XBAND_SAR_EXAMPLE_RFC_SURROGATE
+purpose: Example X-band SAR antenna for RFC screening (owner 2026-10-03, "SAR is an example").
+user_requirements: {frequency_ghz: 8.0, beamwidth_deg: 1, design_level: leaf (element) only; array may be analytic}
+superseded: 'repository_ssot.json xband_sar f0 9.65 GHz (USER_REFERENCE_ARCHITECTURE) replaced by owner 8 GHz statement'
+assumptions:
+  - {id: SAR-A1, item: band, value: '7.85 / 8.00 / 8.15 GHz monitors (300 MHz)', tag: ASSUMPTION}
+  - {id: SAR-A2, item: beam, value: 'azimuth (XZ) HPBW 1.0 deg; elevation (YZ) about 6 deg, typical stripmap', tag: ASSUMPTION}
+  - {id: SAR-A3, item: polarization, value: 'single linear, E-plane = XZ (azimuth)', tag: ASSUMPTION}
+  - {id: SAR-A4, item: array, value: '80 (az) x 13 (el), 0.75 lambda = 28.106 mm spacing, Taylor -25 dB nbar 4 both axes, broadside, 2.248 m x 0.365 m', tag: ASSUMPTION}
+  - {id: SAR-A5, item: array method, value: 'isolated CST leaf pattern x analytic array factor; mutual coupling neglected (Learning Edition: no periodic/unit-cell boundary)', tag: SURROGATE}
+  - {id: SAR-A6, item: array gain, value: '10 log10(4 pi A / lambda^2 * taper efficiency); isolated-leaf + 10 log N reported as cross-check', tag: SURROGATE}
+  - {id: SAR-A7, item: array back hemisphere / far sidelobes, value: 'back = peak - 40 dB; front floor -10 dBi in 1-deg screening export', tag: ASSUMED_CONSERVATIVE, reason: 'isolated-leaf F/B times coherent array factor gives an artificial 22 dBi backlobe; a 2.25 m continuous ground panel is not modelled'}
+  - {id: SAR-A8, item: owner note, value: 'beamwidth is an array-level result, not a leaf acceptance gate; az/el HPBW below are array-example checks only', tag: USER}
+leaf:   # air-loaded probe-fed rectangular patch on one 0.75 lambda cell of PEC ground; confidence C
+  cell: 28.106
+  ground_thickness: 1.0
+  patch_length: 15.5      # resonant (x), air, h 2.5 mm fringing estimate
+  patch_width: 17.0
+  patch_height: 2.5
+  patch_thickness: 0.5
+  feed_offset: 2.5        # probe offset from centre along x
+  probe_radius: 0.5
+  feed_gap: 0.5
+  dual_feed: 0            # 1 = two symmetric probes at +/-feed_offset, 0/180 deg
+acceptance:
+  gain_basis: ACCEPTED_POWER_GAIN
+  az_hpbw_deg: [0.9, 1.1]      # 1 deg +/- 10 %
+  el_hpbw_deg: [5.4, 6.6]      # assumed 6 deg +/- 10 %
+  leaf_peak_at_broadside: true
+  leaf_xpol_broadside_db: 20   # diagnostic
+  return_loss: DIAGNOSTIC_ONLY
+  mesh_validation: DISABLED_BY_USER
+  max_candidates: 3

@@ -1,0 +1,277 @@
+{
+  "decision": "USER_DIRECTED_ACCEPTED_COMMON_GEOMETRY_COMPROMISE",
+  "strict_all_band_em_fit": "NOT_PASS",
+  "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+  "geometry_project": "cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst",
+  "geometry_parameters": {
+    "outer_diameter": 200,
+    "maximum_overall_height": 87,
+    "cup_inner_diameter": 160,
+    "cup_wall_thickness": 2,
+    "cup_depth": 45,
+    "lower_patch_diameter": 140,
+    "upper_patch_diameter": 123.0,
+    "patch_to_ground_height": 12,
+    "patch_spacing": 12,
+    "patch_thickness": 1,
+    "feed_radius": 35,
+    "feed_probe_radius": 1.5,
+    "choke1_inner_radius": 82,
+    "choke1_outer_radius": 91,
+    "choke2_inner_radius": 93,
+    "choke2_outer_radius": 98,
+    "choke_depth": 63.7
+  },
+  "matching": "DIAGNOSTIC_ONLY",
+  "mesh_validation": "DISABLED_BY_USER",
+  "bands": {
+    "f1.17645_XZ": {
+      "reference_band": "L5_1176MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 0.5362980109910097,
+        "main_max_error_db": 0.936536659542349,
+        "main_rmse_db": 0.5892495789361928,
+        "peak_error_db": 0.8509111648727972,
+        "anchor_errors_db": {
+          "0": 0.8509111648727972,
+          "30": 0.6590545931649059,
+          "60": 0.26784809922800185,
+          "80": 0.6393322319441594,
+          "90": -0.18939784596486575
+        },
+        "eoc_gain_error_db": -0.18939784596486575,
+        "boresight_error_db": 0.8509111648727972
+      },
+      "strict_checks": {
+        "main_mae": true,
+        "peak_gain": true,
+        "source_screening_anchors": true,
+        "boresight": true,
+        "eoc_gain": true,
+        "gain60": true,
+        "hpbw": true,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 69.05121376045176,
+      "ar_through60_db": 1.2429709221262986,
+      "active_return_loss_db": 3.264290706739823,
+      "screening_treatment": "CST accepted-power CP in validated main; conservative max outside",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L5_1176MHz_XZ.csv"
+    },
+    "f1.17645_YZ": {
+      "reference_band": "L5_1176MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 0.5369363899693025,
+        "main_max_error_db": 0.93786101126073,
+        "main_rmse_db": 0.5899056190384956,
+        "peak_error_db": 0.8509111648727972,
+        "anchor_errors_db": {
+          "0": 0.8509111648727972,
+          "30": 0.6517911219295094,
+          "60": 0.24810355332432338,
+          "80": 0.6124955228822948,
+          "90": -0.21672688197332413
+        },
+        "eoc_gain_error_db": -0.21672688197332413,
+        "boresight_error_db": 0.8509111648727972
+      },
+      "strict_checks": {
+        "main_mae": true,
+        "peak_gain": true,
+        "source_screening_anchors": true,
+        "boresight": true,
+        "eoc_gain": true,
+        "gain60": true,
+        "hpbw": true,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 69.05569449554235,
+      "ar_through60_db": 1.2348807196369354,
+      "active_return_loss_db": 3.264290706739823,
+      "screening_treatment": "CST accepted-power CP in validated main; conservative max outside",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L5_1176MHz_YZ.csv"
+    },
+    "f1.207_XZ": {
+      "reference_band": "L2_proxy_1207MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 0.43960631541430306,
+        "main_max_error_db": 1.0780264048481643,
+        "main_rmse_db": 0.5539180528381349,
+        "peak_error_db": 0.9948947265697665,
+        "anchor_errors_db": {
+          "0": 0.9948947265697665,
+          "30": 0.44961075738964773,
+          "60": 0.09685262339399536,
+          "80": 0.16305094530514985,
+          "90": -0.6034028959155897
+        },
+        "eoc_gain_error_db": -0.6034028959155897,
+        "boresight_error_db": 0.9948947265697665
+      },
+      "strict_checks": {
+        "main_mae": true,
+        "peak_gain": true,
+        "source_screening_anchors": true,
+        "boresight": true,
+        "eoc_gain": true,
+        "gain60": true,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 68.19918102346614,
+      "ar_through60_db": 1.0231972421303839,
+      "active_return_loss_db": 4.055749989665595,
+      "screening_treatment": "Entire uncertain cut uses max(CST accepted-power CP, screening reference)",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L2_proxy_1207MHz_XZ.csv"
+    },
+    "f1.207_YZ": {
+      "reference_band": "L2_proxy_1207MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 0.4397593069360742,
+        "main_max_error_db": 1.0786439182133334,
+        "main_rmse_db": 0.553957103603044,
+        "peak_error_db": 0.9948947265697665,
+        "anchor_errors_db": {
+          "0": 0.9948947265697665,
+          "30": 0.44549919478089617,
+          "60": 0.08935312328072931,
+          "80": 0.15586601305919334,
+          "90": -0.6092905762919347
+        },
+        "eoc_gain_error_db": -0.6092905762919347,
+        "boresight_error_db": 0.9948947265697665
+      },
+      "strict_checks": {
+        "main_mae": true,
+        "peak_gain": true,
+        "source_screening_anchors": true,
+        "boresight": true,
+        "eoc_gain": true,
+        "gain60": true,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 68.20017821714904,
+      "ar_through60_db": 1.043383719687084,
+      "active_return_loss_db": 4.055749989665595,
+      "screening_treatment": "Entire uncertain cut uses max(CST accepted-power CP, screening reference)",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L2_proxy_1207MHz_YZ.csv"
+    },
+    "f1.57542_XZ": {
+      "reference_band": "L1_1575MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 1.5187928932929309,
+        "main_max_error_db": 4.998009711676355,
+        "main_rmse_db": 1.9447496194197729,
+        "peak_error_db": 1.2230646669420935,
+        "anchor_errors_db": {
+          "0": 1.2230646669420935,
+          "30": 0.014765317209355366,
+          "60": -1.5524595303487772,
+          "80": -3.330234425061678,
+          "90": -4.998009711676355
+        },
+        "eoc_gain_error_db": -4.998009711676355,
+        "boresight_error_db": 1.2230646669420935
+      },
+      "strict_checks": {
+        "main_mae": false,
+        "peak_gain": false,
+        "source_screening_anchors": false,
+        "boresight": false,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 58.90309078095685,
+      "ar_through60_db": 2.967920903414984,
+      "active_return_loss_db": 0.05811761380684896,
+      "screening_treatment": "Entire uncertain cut uses max(CST accepted-power CP, screening reference)",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L1_1575MHz_XZ.csv"
+    },
+    "f1.57542_YZ": {
+      "reference_band": "L1_1575MHz",
+      "raw_metrics": {
+        "coverage_deg": 90,
+        "main_mae_db": 1.5195306578371468,
+        "main_max_error_db": 5.039164738068871,
+        "main_rmse_db": 1.9455940174601318,
+        "peak_error_db": 1.2230646669420935,
+        "anchor_errors_db": {
+          "0": 1.2230646669420935,
+          "30": 0.042020329778870824,
+          "60": -1.5022300022818058,
+          "80": -3.3049037521707474,
+          "90": -5.039164738068871
+        },
+        "eoc_gain_error_db": -5.039164738068871,
+        "boresight_error_db": 1.2230646669420935
+      },
+      "strict_checks": {
+        "main_mae": false,
+        "peak_gain": false,
+        "source_screening_anchors": false,
+        "boresight": false,
+        "eoc_gain": false,
+        "gain60": false,
+        "hpbw": false,
+        "pointing": true,
+        "intended_rhcp": true,
+        "accepted_power_normalization": true
+      },
+      "hpbw_deg": 58.90071497590603,
+      "ar_through60_db": 3.0609159791358023,
+      "active_return_loss_db": 0.05811761380684896,
+      "screening_treatment": "Entire uncertain cut uses max(CST accepted-power CP, screening reference)",
+      "export": "cst\\exports\\lband\\Extended_GNSS_PEC_L1_1575MHz_YZ.csv"
+    }
+  },
+  "pooled_nominal_coverage_mae_db": 0.8318205957401279,
+  "complex_source": {
+    "file": "cst/exports/lband/lband_nominal_sources.ffs",
+    "native_source": "cst/exports/lband/lband_common_compromise.ffs",
+    "frequency_count": 3,
+    "angular_sampling_deg": 5,
+    "sample_grid_per_frequency": [
+      73,
+      37
+    ],
+    "field_samples_unchanged": true,
+    "conservative_envelope_applied_to_complex_fields": false,
+    "normalization": "Retain native radiated/accepted/stimulated powers; use accepted or radiated power at import, not conducted-power transfer.",
+    "installed_axis_rotation_CST_to_repository": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "limitation": "Raw installed-source model retains L1 coverage uncertainty. Conservative scalar screening exports remain the RFC bound; do not treat the raw source as product truth."
+  }
+}

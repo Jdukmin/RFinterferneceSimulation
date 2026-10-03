@@ -1,0 +1,47 @@
+{
+  "label": "ISL_A_QHELIX_SCALED",
+  "topology": "helix",
+  "vars": {
+    "fmin": "7.9",
+    "fmax": "8.5",
+    "accuracy": "-40",
+    "steps": "8",
+    "ratio": "5"
+  },
+  "steps": [
+    {
+      "action": "NewProject"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/units_solver_frequency.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/boundaries_open.vba"
+    },
+    {
+      "action": "History",
+      "file": "history.vba"
+    },
+    {
+      "action": "History",
+      "file": "../../templates/view_structure.vba"
+    },
+    {
+      "action": "SaveAs",
+      "path": "../../../projects/ISL_A_QHELIX_SCALED.cst"
+    },
+    {
+      "action": "Solve"
+    },
+    {
+      "action": "Save"
+    },
+    {
+      "action": "ExportSParameters",
+      "out": "../../../results/ISL_A_QHELIX_SCALED/s_parameters.csv",
+      "ports": 4
+    }
+  ]
+}

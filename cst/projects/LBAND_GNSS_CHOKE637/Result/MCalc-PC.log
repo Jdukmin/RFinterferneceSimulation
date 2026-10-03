@@ -1,0 +1,266 @@
+ParaControl_AMD64-1xN @ JDM:  ==============================================================================================================
+                              Log
+                              --------------------------------------------------------------------------------------------------------------
+                              {106016} >2026-10-03 20:40:52.00823< Event :  MCalc::ParallelAgentBaseData::ParallelAgentBaseData
+                              {106016} >2026-10-03 20:40:52.00837< Event :  MCalcAgent::MCalcAgent
+                              {106016} >2026-10-03 20:40:52.00837< Event :   
+                              {106016} >2026-10-03 20:40:52.00837< Event :  constructor
+                              {106016} >2026-10-03 20:40:53.00984< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:53.00984< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:53.00984< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:53.00984< Event :  true
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00010< Event :  true
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00010< Event :  true
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00010< Event :  true
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00010< Event :  true
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00010< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00010< Event :  true
+                              {106016} >2026-10-03 20:40:54.00044< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00044< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00044< Event :  job submit section: 
+                              {106016} >2026-10-03 20:40:54.00044< Event :  0
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::sumReservedMemoryForRunningJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::sumReservedMemoryForRunningJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job creation concurrency, # of waiting jibs: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  2
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job creation concurrency, max if no job is running: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  2
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job creation concurrency, used considering running jobs: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  2
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::CreateJob
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  true
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::CreateJob
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::checkJobQueue
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job queue ok: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  true
+                              {106016} >2026-10-03 20:40:54.00045< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:40:54.00045< Event :  job creation info: 
+                              {106016} >2026-10-03 20:40:54.00045< Event :  Matrix calculation job submit section 0
+                                                                            Currently running jobs: 0
+                                                                            Waiting jobs: 2
+                                                                            Concurrency for section: 2/2
+                                                                            Memory physically installed: 34.3012 GB
+                                                                            Memory hidden from installed: 0 GB
+                                                                            Memory currently available: 16.1426 GB
+                                                                            Memory already used: 18.1587 GB
+                                                                            Memory reserved: 0 GB - Scale: 0.6
+                                                                            Running 2 number of jobs in parallel
+                                                                            Matrix calculation @ 1xN-Node 0001
+                                                                            	Mesh coverage: 3244800.00 %
+                                                                            	Estimated peak memory usage per node: 83 MB , tightness: 0.51 %
+                                                                            	GPU acceleration: off
+                                                                            	Processor group: 0
+                                                                            Matrix calculation @ 1xN-Node 0000
+                                                                            	Mesh coverage: 2870400.00 %
+                                                                            	Estimated peak memory usage per node: 82 MB , tightness: 0.51 %
+                                                                            	GPU acceleration: off
+                                                                            	Processor group: 0
+                                                                            Node distribution on 1 processor group: 2
+                              {106016} >2026-10-03 20:40:54.00121< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00121< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00121< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00121< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00131< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00131< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00131< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00131< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00136< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00136< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00140< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00140< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00155< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00155< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00160< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00160< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00170< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00170< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00174< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:54.00174< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00311< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00311< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00321< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00321< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00443< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00443< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00546< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00546< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00672< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00672< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00787< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00787< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:54.00863< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:54.00863< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:55.00291< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:55.00291< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:55.00471< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:55.00471< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:55.00514< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:55.00514< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00055< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00056< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00114< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00114< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00200< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00200< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00541< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00541< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00698< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00698< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00732< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00732< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00767< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00767< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00818< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00818< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00857< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00857< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00864< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:56.00864< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00868< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:56.00868< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00873< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:56.00873< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00885< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:56.00885< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:56.00886< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:56.00886< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00191< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:57.00191< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00198< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:57.00198< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00202< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:57.00202< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00209< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:57.00209< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00221< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:57.00221< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:57.00222< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:40:57.00222< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00502< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00502< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00591< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00591< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00599< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00599< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00611< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00611< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00611< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00611< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00622< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00622< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00634< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00634< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00634< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00634< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00646< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00646< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00646< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00646< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00670< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00670< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00707< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00707< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:40:59.00927< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00095< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00095< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00175< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00175< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00183< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00183< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00197< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00197< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00197< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00197< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00209< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00209< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00222< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00222< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00222< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00222< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00235< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00235< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00235< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00235< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00263< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00263< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00302< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00302< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00532< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00549< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00549< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00633< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00633< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:00.00738< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:00.00738< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:01.00183< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:01.00183< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:01.00222< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:01.00222< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:01.00261< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:01.00261< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:01.00367< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:01.00367< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00009< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:02.00009< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00359< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:02.00359< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00361< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:02.00361< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00499< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:41:02.00499< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00500< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:02.00501< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:41:02.00501< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:41:02.00501< Event :  job submit section: 
+                              {106016} >2026-10-03 20:41:02.00501< Event :  1
+                              {106016} >2026-10-03 20:41:02.00501< Event :  MCalc::ParallelAgentBaseData::sumReservedMemoryForRunningJobs
+                              {106016} >2026-10-03 20:41:03.00157< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:03.00157< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:03.00159< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:03.00159< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:03.00307< Event :  MCalc::ParallelAgentBaseData::CatchWorkerStringMessage
+                              {106016} >2026-10-03 20:41:03.00307< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:03.00307< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:03.00309< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:41:03.00309< Event :  MCalc::ParallelAgentBaseData::SubmitMatrixcalculationJobs
+                              {106016} >2026-10-03 20:41:03.00309< Event :  job submit section: 
+                              {106016} >2026-10-03 20:41:03.00309< Event :  1
+                              {106016} >2026-10-03 20:41:03.00309< Event :  MCalc::ParallelAgentBaseData::sumReservedMemoryForRunningJobs
+                              {106016} >2026-10-03 20:41:04.00816< Event :  MCalc::ParallelAgentBaseData::SendFinishMessage
+                              {106016} >2026-10-03 20:41:04.00816< Event :  MCalc::ParallelAgentBaseData::SendProgressToFrontend
+                              {106016} >2026-10-03 20:41:04.00841< Event :  MCalc::ParallelAgentBaseData::AnsweringMachine
+                              {106016} >2026-10-03 20:41:04.00841< Event :  MCalcAgent::Finished
+                              {106016} >2026-10-03 20:41:04.00841< Event :   
+                              {106016} >2026-10-03 20:41:04.00841< Event :  entered finished state
+                              ==============================================================================================================

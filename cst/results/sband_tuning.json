@@ -1,0 +1,114 @@
+{
+  "initial_score": 8.470193916495333,
+  "best_score": 6.502619263576827,
+  "current": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 21,
+    "helix_height": 150,
+    "turns": 3,
+    "wire_radius": 1,
+    "feed_gap": 2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "records": [
+    {
+      "label": "SBAND_A_diameter_12",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 12,
+        "helix_height": 150,
+        "turns": 3,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 12.529346980767068
+    },
+    {
+      "label": "SBAND_A_diameter_21",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 21,
+        "helix_height": 150,
+        "turns": 3,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 6.502619263576827
+    },
+    {
+      "label": "SBAND_B_pitch_45",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 21,
+        "helix_height": 45,
+        "turns": 3,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 25.217347226150743
+    },
+    {
+      "label": "SBAND_B_pitch_75",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 21,
+        "helix_height": 75,
+        "turns": 3,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 11.333862166652798
+    },
+    {
+      "label": "SBAND_C_length_0.5",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 21,
+        "helix_height": 150,
+        "turns": 0.5,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 14.986762244129896
+    },
+    {
+      "label": "SBAND_C_length_1",
+      "parameters": {
+        "base_diameter": 65,
+        "base_depth": 32,
+        "helix_diameter": 21,
+        "helix_height": 150,
+        "turns": 1.0,
+        "wire_radius": 1,
+        "feed_gap": 2,
+        "groove_depth": 20,
+        "perturbation_amplitude": 0,
+        "segments_per_turn": 24
+      },
+      "pattern_score": 10.762994810769268
+    }
+  ]
+}

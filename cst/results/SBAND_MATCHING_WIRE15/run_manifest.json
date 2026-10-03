@@ -1,0 +1,39 @@
+{
+  "git_sha": "1eb389ea3099a6a9d4a402456b94356600675a82",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "config": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "source_sha256": {
+    "audit_targets.py": "6d829e37542bb00aea3c52077be9604a202345d76375cf31d92dec4813e1ceed",
+    "cst_com.py": "7a43958501d0ebd8536ec1498530485f897e31c6232d7395f0c96ddae0c022de",
+    "cst_com_common.py": "05c564d59024c85ccb618a7f12150209cf637c0c18fecc439b136f91bc86b35f",
+    "cst_com_smoketest.py": "2f443508392e37ec502d3572d91ec4866965bf5d0b7fe9ba28d01653e8c17acc",
+    "cst_geometry.py": "26a075b9488d0512b3dad0005f64f7278d8f33e5ced7bd6be4f101621aae6c08",
+    "cst_results.py": "a75699b3d6dfecd50a1450d4728a223916ac3290aec011fc7e6bb6751600a342",
+    "cst_sband_helix_com.py": "b5188a9502040874e6dee726aefe4e746ddc7ad41510e5e144cec6a1b7a3cc90",
+    "cst_sband_helix_surrogate.py": "f59a827eec06bd39439aecc2f09fcaeabb8b13cbfbc5c8694abdb7e35e0168d5",
+    "generate_sband_ttc.py": "d914ad736e31fb5e7c33392b4f3272d84204b41cc53487cc6fad07d6e5fa7784",
+    "rfc_validation.py": "9fab71c1531c7b278b7ae62cf817242d36603f46538fed9f698138c8f508f7d0",
+    "run_candidate.py": "395e3f371541fd05f37703d1145284e2499875247fe31046fb4cdabdca665b23",
+    "score_radiation.py": "e3333a7fd681e437ef18637455f4fc9aca6f84978ec35485a28f1e84d88f9658",
+    "test_results_math.py": "5a44ac02b0f3d649b49b57b556c4186c69dfe5a4fa7c3d849abc644a1cd10403",
+    "test_rfc_validation.py": "73e7ea55f089fa1a5bfed5f5bdb29518d4e3833586139cdf8d703b41a3abf339",
+    "tune_sband.py": "fa343ebd5594cbcc9eabc73cf95213a3cf0004f7e79b83a0c07fdee9293668a4",
+    "verify_geometry_com.py": "003153fdaae08932f0a4a1a927b6684ea244f4bb275f3108c7b80b2272fd07ea",
+    "verify_sband_results.py": "19c9cf873809fcf55a4bb2a6f5a77c19b7c8c3861c4eb9457358939ba362cfda",
+    "specs/rfc_acceptance.yaml": "7571db6db4d0da1289ebe76160958b399b2f1a5fd7b411f278cb28bd37059bd0",
+    "specs/sband_ttc.yaml": "9af803a20507b49abd806d673919d5ee47d383aac4073dfe1f71f39434ddb06c"
+  },
+  "evidence_status": "PRE_FINAL_UNTIL_ALL_GATES_PASS",
+  "source_config_stable": true
+}

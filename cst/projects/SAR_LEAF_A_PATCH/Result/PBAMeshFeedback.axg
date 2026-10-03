@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSTAuxiliaryGeometry version="20170928">
+  <Objects>
+    <Object name="Lines" id="2">
+      <LineSet points="14.0530005 14.0530005 -1 14.0530005 14.0530005 0 14.0530005 -14.0530005 -1 14.0530005 -14.0530005 0 -14.0530005 14.0530005 -1 -14.0530005 14.0530005 0 -14.0530005 -14.0530005 -1 -14.0530005 -14.0530005 0 7.75 -8.5 2.75 7.75 8.5 2.75 -7.75 -8.5 2.75 -7.75 8.5 2.75 14.0530005 -14.0530005 0 14.0530005 14.0530005 0 -14.0530005 -14.0530005 0 -14.0530005 14.0530005 0 14.0530005 -14.0530005 -1 14.0530005 14.0530005 -1 -14.0530005 -14.0530005 -1 -14.0530005 14.0530005 -1 -14.0530005 14.0530005 0 14.0530005 14.0530005 0 -14.0530005 14.0530005 -1 14.0530005 14.0530005 -1 -7.75 8.5 2.75 7.75 8.5 2.75 -7.75 -8.5 2.75 7.75 -8.5 2.75 -14.0530005 -14.0530005 0 14.0530005 -14.0530005 0 -14.0530005 -14.0530005 -1 14.0530005 -14.0530005 -1" stripped="0" material="$CornerCorrectionMaterial$"/>
+    </Object>
+    <Object name="Connected" id="1">
+      <PointSet points="2.5 0 0 2.5 0 0.5" material="$00f219"/>
+    </Object>
+  </Objects>
+  <Materials>
+    <Material name="$00f219">
+      <Drawstyle color="0 0.949019611 0.0980392173" transparency="0" linestrength="3"/>
+    </Material>
+  </Materials>
+  <Groups>
+    <Group name="Wire Endpoints" ID="1">
+      <Item name="Connected" id="1"/>
+    </Group>
+    <Group name="Corner Correction" ID="2">
+      <Item name="Lines" id="2"/>
+    </Group>
+  </Groups>
+</CSTAuxiliaryGeometry>

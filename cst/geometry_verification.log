@@ -1,0 +1,11 @@
+COM: attached using GetActiveObject
+SOLIDS ['SURROGATE_TRAINING_MODEL:ground', 'SURROGATE_TRAINING_MODEL:helix']
+SURROGATE_TRAINING_MODEL:ground material= PEC volume mm^3= 24200.0
+SURROGATE_TRAINING_MODEL:helix material= PEC volume mm^3= 1988.8591937902129
+HELIX: all 72 chord midpoints inside PEC; 3 turns advance along +Z
+FEED (21.2059785,0,-1) inside solids: {'SURROGATE_TRAINING_MODEL:ground': True, 'SURROGATE_TRAINING_MODEL:helix': False}
+FEED (21.2059785,0,1) inside solids: {'SURROGATE_TRAINING_MODEL:ground': False, 'SURROGATE_TRAINING_MODEL:helix': False}
+FEED (21.2059785,0,2.1) inside solids: {'SURROGATE_TRAINING_MODEL:ground': False, 'SURROGATE_TRAINING_MODEL:helix': True}
+PORT COUNT 1
+PORT 1 impedance 50.0
+PASS: two PEC solids, feed clearance, Port #1 impedance
