@@ -234,3 +234,7 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
   distinct patterns over the 6 cases; assembled boresight = source CSV θ=0; SBA1≠SBA4, L1≠L2≠L5.
 - **VR-442 (SHALL)** Pattern-aware structure FOV (72 rows, `FOV_WITH_PATTERN`) leaves gains
   unchanged; `+mission` creates no RF systems or EM-loss values; no package depends on `+mission`.
+- **VR-443 (SHALL)** RF baseline: TX/RX frequencies, bandwidths, powers (5 W → 36.99, 70 W → 48.45,
+  1 W → 30, SAR 2.5/5 kW → 63.98/66.99 dBm), RX filter bands, NF, `I_N_MAX` = −6 dB for all receivers,
+  allowable interference ≈ −124 / −105 / −104 / −87.8 dBm, no `ReceiverFrontEnd`, GPS receiver only
+  in the L1 case, SAR not registered, scenario validates. *(test_mission_cases)*

@@ -20,6 +20,7 @@ screening** (structure FOV, LOS blockage, installation evidence). Consumed by
 | `antenna_installations.csv` | 8 antenna installation reference points (mm), panel assignment, mount type, pattern linkage status | per row |
 | `steering_constraints.csv` | KAA gimbal steering domains (hemisphere) | `SIMPLIFIED_ASSUMPTION` |
 | `analysis_cases.csv`, `antenna_functions.csv`, `pattern_bindings.csv` | the 6 RFC/RFI analysis cases and their pattern bindings (see below) | per row |
+| `rf_systems.csv` | RF baseline: TX power/BW/fc, RX NF/filter/I-N criterion, per-quantity provenance (see below) | per column |
 
 CSV rules: `#` lines are comments, first remaining line is the header, fields contain no commas.
 
@@ -129,7 +130,7 @@ The geometry builder loads **no** pattern. Patterns are bound per analysis case 
 | SBA_NADIR / SBA_ZENITH | `CASE_DEPENDENT` | `data/Sband_TMTC` | SBA1 and SBA4 analysed as separate cases; TC (2000–2120 MHz, RX) and TM (2200–2300 MHz, TX) |
 | GPSA_1 / GPSA_2 | `CASE_DEPENDENT` | `data/Lband_GPS` | L1 (1575 MHz plot, 1563–1588), L2 (**1207 MHz proxy**), L5 (1176 MHz plot, 1164–1189) as separate cases |
 | ISL | `BOUND` | `data/Xband_ISL` | CST `ISL_C4_CUP_R14P7`, 10.4 GHz centre cut (10.3/10.5 edge cuts available) |
-| KAA_1 / KAA_2 | `CANDIDATE_DATASET` | `data/Kaband_DLS` | used in every case with a warning; KAA ↔ DLS reflector equivalence still to be confirmed |
+| KAA_1 / KAA_2 | `BOUND` | `data/Kaband_KAA_CST` | CST feed + Python reflector aperture integration (D 220 mm), datasheet anchors pass; replaces the legacy `data/Kaband_DLS` cuts |
 | SAR_ANT | `DEFERRED_CLOSED_NETWORK` | — | RF analysis later in the closed network; geometry only here |
 
 GNSS band windows follow the CST worker's monitor windows (`cst/specs/lband_gnss.yaml`) and are
@@ -142,6 +143,20 @@ No synthetic pattern is substituted for a missing one, and no dataset is relabel
 2. Long/Short ratio fixed at the nominal 2.6 (range 2.5–2.7 not swept).
 3. SBA assignments near corners are inferred from the simplified geometry.
 4. KAA steering domain = full outward hemisphere (placeholder for real gimbal limits).
-5. KAA pattern binding is a candidate; SAR RF analysis is deferred to the closed network.
-6. No RF transmitter/receiver data (power, bandwidth, link frequencies, receiver criteria) are in
-   this dataset; pairwise RF screening needs them.
+5. KAA uses a reflector-approximation surrogate (no public numeric reflector pattern exists); only
+   0-1 deg is model-validated. SAR RF analysis is deferred to the closed network.
+6. RF baseline (`rf_systems.csv`) is mostly **engineering assumption** (NF, bandwidths, powers,
+   I/N = -6 dB); only the GPS L1 centre/bandwidth are published-standard values. ISL frequency and
+   bandwidth are provisional. P1dB/IIP3 unknown (NaN). GPS receiver baseline exists for L1 only.
+7. SAR power is not published: 2.5 kW nominal / 5 kW screening are inferred from comparable X-band
+   SARs; the CST SAR example (8 GHz) does not match the 9.65 GHz reference.
+
+## RF baseline (`rf_systems.csv`)
+
+Vendor/standard-published values are kept apart from our engineering assumptions via per-quantity
+provenance tags. Receivers use filter + NF + `I_N_MAX` (−6 dB) — the form the engine supports —
+not a bare `interferenceThreshold_dBm`. Allowable in-band interference = kTB + NF + I/N:
+S TC ≈ −124 dBm, GPS L1 ≈ −105 dBm, ISL ≈ −104 dBm, SAR ≈ −87.8 dBm. The S-band receiver NF (3 dB)
+is a simulation baseline, **not** a vendor spec; GPS (Beyond Gravity PODRIX class) final acceptance
+should use C/N0 / J/S rather than total-power I/N. Replace table values when qualification data
+exist; no code change is needed.

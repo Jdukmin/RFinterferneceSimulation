@@ -76,8 +76,8 @@ Note: these files use the real repository datasets `data/spacecraft/simplified_s
 
 ## Status
 
-**1089 assertions across 39 files, all passing** under GNU Octave 9.2.0 (Phase 7b): the 628
+**1142 assertions across 39 files, all passing** under GNU Octave 9.2.0 (Phase 7c): the 628
 assertions of Phases 1–6 unchanged, plus 25 (`test_convex_polygon`), 264
-(`test_simplified_spacecraft`) and 172 (`test_mission_cases`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
+(`test_simplified_spacecraft`) and 225 (`test_mission_cases`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
 (Phase 6) under Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not
 claimed.

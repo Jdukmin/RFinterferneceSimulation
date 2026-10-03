@@ -589,3 +589,29 @@ Canonical decisions:
 Verification: GNU Octave 9.2.0 — **1089/1089 assertions, 39 files** (+172 `test_mission_cases`, +2
 net in `test_simplified_spacecraft`); `examples/mission_cases.m` builds all 6 cases (2° grid).
 MATLAB: NOT RUN.
+
+## P7c — RF baseline & Ka reflector surrogate
+
+Owner decisions (2026-10-04): 1st RF baseline (table in `rf_systems.csv`); receivers via filter + NF
++ `I_N_MAX` = −6 dB; P1dB/IIP3 unknown → NaN; Ka reflector pattern: use a real numeric pattern if it
+exists, otherwise the feed-on-reflector approximation; push to `main`.
+
+| Req | Code / data | Test |
+|-----|-------------|------|
+| SR-441, DR-437 (RF table, provenance, filter+NF+I/N, P1dB/IIP3 NaN) | `rf_systems.csv`, `MissionCaseBuilder.registerRfSystems` | test_mission_cases (VR-443) |
+| SR-442 (case applicability, SAR deferred) | `requires_pattern_key`, `binding_status` | test_mission_cases (VR-443) |
+| DR-438 (Ka surrogate dataset) | `data/Kaband_KAA_CST/` (copy of `cst/exports/ka/screening_1deg`) | test_mission_cases (KAA pattern bound) |
+
+Decisions: (1) No public numeric reflector pattern exists (the CST audit found only datasheet
+anchors), so the CST worker's feed + equivalent-paraboloid aperture integration (anchors pass) is
+KAA's pattern; the legacy `data/Kaband_DLS` cuts are kept unchanged but unbound. (2) SAR RF values are
+stored but not registered: the SAR antenna is analysed in the closed network and the only CST SAR
+pattern is an 8 GHz example (reference is 9.65 GHz). (3) Both instances of each function are
+registered (no operating mode assumed). (4) GNSS I/N is a temporary criterion.
+
+First engine run (CASE_SBA1_L1, pattern-only coupling): all pairs `OUT_OF_BAND`;
+`ABSOLUTE_COUPLING_UNAVAILABLE` for every pair — absolute interference power needs far-field-valid
+coupling (antenna `maxDimension_m` and a coupling model), and out-of-band blocking/IM need receiver
+P1dB/IIP3; neither is available yet.
+
+Verification: GNU Octave 9.2.0 — 1142/1142 assertions, 39 files (+53 in `test_mission_cases`). MATLAB: NOT RUN.

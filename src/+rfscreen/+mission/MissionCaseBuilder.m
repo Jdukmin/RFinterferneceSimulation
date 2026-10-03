@@ -5,8 +5,10 @@ classdef MissionCaseBuilder
     %     + per-case pattern binding (analysis_cases / antenna_functions / pattern_bindings CSV)
     %     -> EXISTING Phase-2 pipeline (CsvPatternImporter -> CutPatternAssembler)
     %     -> Scenario with structures, installations, antennas (one per RF function), patterns.
-    %   No RF transmitter/receiver is created: TX power / bandwidth / receiver data are not in
-    %   the dataset and are never invented. Geometry never alters any gain (central rule).
+    %   RF systems (rf_systems.csv, owner-specified baseline) -> RFTransmitter (rectangular
+    %   spectrum) and RFReceiver (ideal bandpass filter + NF noise + I_N_MAX criterion).
+    %   Unknown P1dB/IIP3 stay NaN (no ReceiverFrontEnd is created). Geometry never alters any
+    %   gain (central rule).
     methods (Static)
         function cases = listCases(datasetDir)
             %LISTCASES Struct array (caseId, sbaVariant, gpsBand, note) from analysis_cases.csv.
@@ -25,6 +27,7 @@ classdef MissionCaseBuilder
             %   opts.datasetDir   dataset folder (default simplified_spacecraft_v1)
             %   opts.patternCache containers.Map (pattern_key -> FreeSpacePattern) reused across cases
             %   opts.azStep_deg / opts.elStep_deg  assembly grid (default 2 deg)
+            %   opts.powerMode    'NOMINAL' (default) | 'SCREENING' (uses tx_power_screen_dbm)
             if nargin < 2 || isempty(opts); opts = struct(); end
             MB = rfscreen.mission.MissionCaseBuilder;
             R = rfscreen.spacecraft.SpacecraftDataReader;
@@ -86,11 +89,85 @@ classdef MissionCaseBuilder
                 end
                 funcs(end+1) = f; %#ok<AGROW>
             end
-            warnings{end+1} = 'no RF transmitter/receiver registered: TX power, bandwidth and receiver data are not in the dataset';
+            powerMode = MB.opt(opts, 'powerMode', 'NOMINAL');
+            rfSystems = MB.registerRfSystems(sc, funcs, fullfile(dsDir, 'rf_systems.csv'), powerMode);
+            for q = 1:numel(rfSystems)
+                if ~rfSystems(q).included
+                    warnings{end+1} = sprintf('%s not registered (%s)', rfSystems(q).systemId, rfSystems(q).bindingStatus); %#ok<AGROW>
+                end
+            end
+            warnings{end+1} = 'receiver P1dB/IIP3 unknown (NaN): nonlinear analyses report MISSING_P1DB/MISSING_IIP3';
+            warnings{end+1} = 'GPS acceptance uses a temporary thermal I/N criterion; final GNSS acceptance needs C/N0 or J/S';
+            warnings{end+1} = 'all TX/RX instances are registered (both SBA, both KAA, both GPSA); select activeTxIds/activeRxIds for an operating mode';
 
             c = struct('caseId', caseId, 'sbaVariant', cs.sbaVariant, 'gpsBand', cs.gpsBand, ...
-                'scenario', sc, 'model', model, 'functions', funcs, 'patternCache', cache);
+                'scenario', sc, 'model', model, 'functions', funcs, 'rfSystems', rfSystems, ...
+                'powerMode', powerMode, 'patternCache', cache);
             c.warnings = warnings;
+        end
+
+        function sys = registerRfSystems(sc, funcs, filePath, powerMode)
+            %REGISTERRFSYSTEMS rf_systems.csv -> RFTransmitter / RFReceiver on the scenario.
+            %   Systems whose antenna function is not instantiated are returned with
+            %   included = false and are not registered.
+            R = rfscreen.spacecraft.SpacecraftDataReader;
+            V = rfscreen.util.Validate;
+            V.member(powerMode, {'NOMINAL', 'SCREENING'}, 'powerMode');
+            T = R.readTable(filePath);
+            numOrNaN = @(c) str2double(c);
+            sys = struct('systemId', {}, 'templateId', {}, 'functionId', {}, 'kind', {}, 'included', {}, ...
+                'bindingStatus', {}, 'fc_Hz', {}, 'bw_Hz', {}, 'power_dBm', {}, 'noiseFigure_dB', {}, ...
+                'iOverNMax_dB', {}, 'noise_dBm', {}, 'allowableInterference_dBm', {});
+            incl = {funcs([funcs.included]).functionId};
+            keyOf = containers.Map({funcs.functionId}, {funcs.patternKey});
+            for r = 1:T.nRows
+                sid = T.system_id{r}; fid = T.function_id{r};
+                fc = 1e6 * R.num(T, 'fc_mhz', r, sid); bw = 1e6 * R.num(T, 'bw_mhz', r, sid);
+                s = struct('systemId', sid, 'templateId', T.template_id{r}, 'functionId', fid, ...
+                    'kind', T.kind{r}, 'included', any(strcmp(incl, fid)), 'bindingStatus', T.binding_status{r}, ...
+                    'fc_Hz', fc, 'bw_Hz', bw, 'power_dBm', NaN, 'noiseFigure_dB', NaN, 'iOverNMax_dB', NaN, ...
+                    'noise_dBm', NaN, 'allowableInterference_dBm', NaN);
+                req = T.requires_pattern_key{r};
+                if s.included && ~isempty(req) && ~strcmp(keyOf(fid), req)
+                    s.included = false; s.bindingStatus = 'NO_BASELINE_FOR_CASE';
+                end
+                pol = V.member(T.polarization{r}, rfscreen.antenna.Polarization.values(), [sid ' polarization']);
+                switch T.kind{r}
+                    case 'TX'
+                        pw = numOrNaN(T.tx_power_dbm{r});
+                        if strcmp(powerMode, 'SCREENING') && ~isempty(T.tx_power_screen_dbm{r})
+                            pw = numOrNaN(T.tx_power_screen_dbm{r});
+                        end
+                        if ~isfinite(pw); error('rfscreen:mission:badRf', '%s: tx_power_dbm missing.', sid); end
+                        s.power_dBm = pw;
+                        if s.included
+                            spec = rfscreen.spectrum.RectangularSpectrum(fc, bw, pw, ...
+                                struct('provenance', rfscreen.spectrum.SpectrumProvenance.IDEAL_MODEL));
+                            sc.addTransmitter(rfscreen.rf.RFTransmitter(sid, fid, fc, bw, pw, ...
+                                struct('polarization', pol, 'spectrum', spec)));
+                        end
+                    case 'RX'
+                        nf = numOrNaN(T.nf_db{r}); inmax = numOrNaN(T.i_n_max_db{r});
+                        if ~(isfinite(nf) && isfinite(inmax))
+                            error('rfscreen:mission:badRf', '%s: nf_db / i_n_max_db missing.', sid);
+                        end
+                        nm = rfscreen.receiver.ReceiverNoiseModel(struct('noiseFigure_dB', nf, ...
+                            'provenance', 'ENGINEERING_ASSUMPTION'));
+                        n_dBm = rfscreen.util.Units.w2dbm(nm.noisePower_W(bw));
+                        s.noiseFigure_dB = nf; s.iOverNMax_dB = inmax;
+                        s.noise_dBm = n_dBm; s.allowableInterference_dBm = n_dBm + inmax;
+                        if s.included
+                            filt = rfscreen.receiver.IdealBandpassFilter([fc - bw/2, fc + bw/2], 0, -Inf);
+                            crit = rfscreen.receiver.InterferenceCriterion('I_N_MAX', inmax, ...
+                                struct('provenance', 'ENGINEERING_ASSUMPTION'));
+                            sc.addReceiver(rfscreen.rf.RFReceiver(sid, fid, fc, bw, struct('polarization', pol, ...
+                                'filter', filt, 'noiseModel', nm, 'interferenceCriterion', crit)));
+                        end
+                    otherwise
+                        error('rfscreen:mission:badRf', '%s: kind must be TX or RX.', sid);
+                end
+                sys(end+1) = s; %#ok<AGROW>
+            end
         end
 
         function rows = structureFov(c, lobePolicy)

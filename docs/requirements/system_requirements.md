@@ -329,3 +329,9 @@ unchanged: geometry is installation evidence only.**
   Phase-2 pattern pipeline and Phase-1 `Scenario`, one `Antenna` per RF function.
 - **SR-440 (SHALL)** Case building shall not invent RF system data (TX power, bandwidth,
   receiver criteria) and shall warn about candidate (unconfirmed) and deferred bindings.
+- **SR-441 (SHALL)** The baseline shall carry an RF system table (TX power/bandwidth/frequency,
+  RX noise figure/filter/I-N criterion) with per-quantity provenance distinguishing published values
+  from engineering assumptions; receivers shall use filter + noise model + `I_N_MAX`, and unknown
+  P1dB/IIP3 shall remain unknown (NaN), never defaulted.
+- **SR-442 (SHALL)** A system shall be registered in a case only when its baseline applies to that
+  case (`requires_pattern_key`); deferred systems (SAR) shall be stored but not registered.

@@ -13,7 +13,7 @@ SBA_ZENITH_TC,SBA_ZENITH,RX,DATASET_README,CASE_SBA_TC,CASE_DEPENDENT,S-band tel
 SBA_ZENITH_TM,SBA_ZENITH,TX,DATASET_README,CASE_SBA_TM,CASE_DEPENDENT,S-band telemetry transmit
 GPSA_1,GPSA_1,RX,GNSS_RECEIVE,CASE_GPS,CASE_DEPENDENT,GNSS receive
 GPSA_2,GPSA_2,RX,GNSS_RECEIVE,CASE_GPS,CASE_DEPENDENT,GNSS receive
-KAA_1,KAA_1,TX,DATASET_README_DOWNLINK,FIXED_KA_DLS,CANDIDATE,gimbal reference orientation only; steering via steering_constraints.csv
-KAA_2,KAA_2,TX,DATASET_README_DOWNLINK,FIXED_KA_DLS,CANDIDATE,gimbal reference orientation only; steering via steering_constraints.csv
+KAA_1,KAA_1,TX,DATASET_README_DOWNLINK,FIXED_KAA_KA_26P25,BOUND,CST feed + reflector surrogate; gimbal reference orientation only; steering via steering_constraints.csv
+KAA_2,KAA_2,TX,DATASET_README_DOWNLINK,FIXED_KAA_KA_26P25,BOUND,CST feed + reflector surrogate; gimbal reference orientation only; steering via steering_constraints.csv
 ISL,ISL,TXRX,ASSUMED_LINK_TERMINAL,FIXED_ISL_10P4,BOUND,CST ISL_C4_CUP_R14P7 10.4 GHz centre cut
 SAR_ANT,SAR_ANT,TXRX,ASSUMED,NONE,DEFERRED_CLOSED_NETWORK,analysed later in the closed network; geometry only here

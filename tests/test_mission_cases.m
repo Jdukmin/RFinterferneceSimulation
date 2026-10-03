@@ -45,7 +45,7 @@ function test_mission_cases(h)
         h.isTrue([id ' 9 RF functions (SAR excluded)'], isequal(sort(sc.antennas.keys()), expFuncs));
         h.isTrue([id ' SAR installation kept for geometry'], sc.installations.isKey('SAR_ANT'));
         h.eqTol([id ' 8 structures'], sc.structures.Count, 8, 0);
-        expPat = sort({[cs.sbaVariant '_TC'], [cs.sbaVariant '_TM'], ['GPS_' cs.gpsBand], 'ISL_10P4', 'KA_DLS'});
+        expPat = sort({[cs.sbaVariant '_TC'], [cs.sbaVariant '_TM'], ['GPS_' cs.gpsBand], 'ISL_10P4', 'KAA_KA_26P25'});
         h.isTrue([id ' pattern set'], isequal(sort(sc.patterns.keys()), expPat));
         a = sc.antennas('SBA_NADIR_TC'); h.eqStr([id ' SBA_NADIR_TC pattern'], a.patternId, [cs.sbaVariant '_TC']);
         h.eqStr([id ' SBA_NADIR_TC role RX'], a.role, 'RX');
@@ -59,14 +59,74 @@ function test_mission_cases(h)
         end
         a = sc.antennas('ISL'); h.eqStr([id ' ISL pattern 10.4 GHz'], a.patternId, 'ISL_10P4');
         h.eqTol([id ' ISL band'], [a.freqMin_Hz a.freqMax_Hz], [10.3e9 10.5e9], 0);
-        h.eqTol([id ' no transmitters invented'], sc.transmitters.Count, 0, 0);
-        h.eqTol([id ' no receivers invented'], sc.receivers.Count, 0, 0);
         h.isTrue([id ' warns SAR deferred'], any(~cellfun(@isempty, strfind(c.warnings, 'SAR_ANT'))));
-        h.isTrue([id ' warns KAA candidate'], any(~cellfun(@isempty, strfind(c.warnings, 'CANDIDATE'))));
+        h.isTrue([id ' no KAA candidate warning (bound to CST surrogate)'], isempty(strfind(strjoin(c.warnings, '|'), 'CANDIDATE')));
+        a = sc.antennas('KAA_1'); h.eqStr([id ' KAA_1 pattern = CST reflector surrogate'], a.patternId, 'KAA_KA_26P25');
+        nGps = 2 * strcmp(cs.gpsBand, 'L1');
+        h.eqTol([id ' TX count (2 TM + 2 KAA + ISL)'], sc.transmitters.Count, 5, 0);
+        h.eqTol([id ' RX count (2 TC + ISL + GPS only for L1)'], sc.receivers.Count, 3 + nGps, 0);
+        h.isFalse([id ' SAR RF not registered'], sc.transmitters.isKey('SAR_X_TX') || sc.receivers.isKey('SAR_X_RX'));
+        h.isTrue([id ' warns P1dB/IIP3 unknown'], any(~cellfun(@isempty, strfind(c.warnings, 'P1dB'))));
+        if nGps == 0
+            h.isTrue([id ' warns no GPS baseline for case'], any(~cellfun(@isempty, strfind(c.warnings, 'GPS_L1_RX'))));
+        end
         fs = c.functions(strcmp({c.functions.functionId}, 'SAR_ANT'));
         h.isTrue([id ' SAR function not included'], ~fs.included && strcmp(fs.bindingStatus, 'DEFERRED_CLOSED_NETWORK'));
     end
     h.eqTol('pattern cache: 9 distinct patterns over 6 cases', cache.Count, 9, 0);
+
+    % ================= VR-443 RF baseline numbers (CASE_SBA1_L1 has every system) =================
+    sc = built{1}.scenario; c1 = built{1};
+    rfs = struct();
+    for q = 1:numel(c1.rfSystems)
+        rfs.(strrep(c1.rfSystems(q).systemId, '@', '_')) = c1.rfSystems(q);
+    end
+    tx = sc.transmitters('S_TM_TX@SBA_NADIR');
+    h.eqTol('S TM TX fc 2.250 GHz', tx.fc_Hz, 2.25e9, 0);
+    h.eqTol('S TM TX BW 2.7 MHz', tx.bw_Hz, 2.7e6, 0);
+    h.eqTol('S TM TX 5 W = 36.99 dBm', tx.power_dBm, 36.99, 0.005);
+    h.isTrue('TX carries rectangular spectrum', tx.hasSpectrum());
+    tx = sc.transmitters('KA_DLS_TX@KAA_2');
+    h.eqTol('Ka TX fc 26.25 GHz', tx.fc_Hz, 26.25e9, 0);
+    h.eqTol('Ka TX BW 1.44 GHz (1.2 Gsym/s x 1.2)', tx.bw_Hz, 1.44e9, 0);
+    h.eqTol('Ka TX 70 W = 48.45 dBm', tx.power_dBm, 48.45, 0.005);
+    h.eqTol('Ka occupied band 25.53-26.97 GHz', tx.occupiedBand_Hz(), [25.53e9 26.97e9], 1);
+    tx = sc.transmitters('ISL_X_TX');
+    h.eqTol('ISL TX 1 W = 30 dBm', tx.power_dBm, 30, 1e-9);
+    h.eqTol('ISL fc 10.475 GHz / BW 20 MHz', [tx.fc_Hz tx.bw_Hz], [10.475e9 20e6], 0);
+    rx = sc.receivers('S_TC_RX@SBA_ZENITH');
+    h.eqTol('S TC RX fc/BW', [rx.fc_Hz rx.bw_Hz], [2.05e9 0.2e6], 0);
+    h.eqTol('S TC RX filter 200 kHz', rx.filter.band_Hz, [2.05e9 - 1e5, 2.05e9 + 1e5], 1e-3);
+    h.eqTol('S TC allowable ~ -124 dBm', rfs.S_TC_RX_SBA_NADIR.allowableInterference_dBm, -124, 0.1);
+    h.eqTol('S TC noise ~ -118 dBm', rfs.S_TC_RX_SBA_NADIR.noise_dBm, -118, 0.1);
+    h.eqTol('GPS L1 filter 1.56519-1.58565 GHz', sc.receivers('GPS_L1_RX@GPSA_1').filter.band_Hz, [1.56519e9 1.58565e9], 1e-3);
+    h.eqTol('GPS allowable ~ -105 dBm', rfs.GPS_L1_RX_GPSA_1.allowableInterference_dBm, -105, 0.2);
+    h.eqTol('ISL allowable ~ -104 dBm', rfs.ISL_X_RX.allowableInterference_dBm, -104, 0.1);
+    rx = sc.receivers('GPS_L1_RX@GPSA_2');
+    h.eqStr('criterion I_N_MAX', rx.interferenceCriterion.type, 'I_N_MAX');
+    h.eqTol('criterion -6 dB', rx.interferenceCriterion.thresholdValue, -6, 0);
+    h.eqTol('GPS NF 2 dB', rx.noiseModel.noiseFigure_dB, 2, 0);
+    h.isTrue('no front end -> P1dB/IIP3 stay unknown', isempty(rx.receiverFrontEnd));
+    h.isFalse('threshold dBm not used', rx.hasThreshold());
+    rk = sc.receivers.keys(); allM6 = true;
+    for q = 1:numel(rk)
+        r = sc.receivers(rk{q});
+        allM6 = allM6 && r.interferenceCriterion.thresholdValue == -6 && strcmp(r.interferenceCriterion.type, 'I_N_MAX');
+    end
+    h.isTrue('all RX use I_N_MAX with -6 dB', allM6);
+    ok = true; try; sc.validate(); catch; ok = false; end
+    h.isTrue('scenario with RF systems validates', ok);
+    sar = c1.rfSystems(strcmp({c1.rfSystems.systemId}, 'SAR_X_TX'));
+    h.isTrue('SAR TX deferred, not registered', ~sar.included && strcmp(sar.bindingStatus, 'DEFERRED_CLOSED_NETWORK'));
+    h.eqTol('SAR nominal 2.5 kW = 63.98 dBm', sar.power_dBm, 63.98, 0.005);
+    h.eqTol('SAR fc 9.65 GHz / BW 525 MHz', [sar.fc_Hz sar.bw_Hz], [9.65e9 525e6], 0);
+    cS = MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'powerMode', 'SCREENING'));
+    sarS = cS.rfSystems(strcmp({cS.rfSystems.systemId}, 'SAR_X_TX'));
+    h.eqTol('SAR screening 5 kW = 66.99 dBm', sarS.power_dBm, 66.99, 0.005);
+    h.eqTol('screening mode leaves other TX unchanged', cS.scenario.transmitters('ISL_X_TX').power_dBm, 30, 0);
+    sarR = c1.rfSystems(strcmp({c1.rfSystems.systemId}, 'SAR_X_RX'));
+    h.eqTol('SAR RX allowable ~ -87.8 dBm', sarR.allowableInterference_dBm, -87.8, 0.1);
+    h.throws('bad powerMode rejected', @() MB.buildCase('CASE_SBA1_L1', struct('patternCache', cache, 'powerMode', 'X')), 'rfscreen:validate:member');
 
     % ---- pattern content: boresight equals the source CSV theta=0 value; cases really differ ----
     B = MB.readBindings(fullfile(rfscreen.spacecraft.SimplifiedSpacecraftBuilder.defaultDatasetDir(), 'pattern_bindings.csv'));
@@ -98,7 +158,7 @@ function test_mission_cases(h)
     h.eqTol('FOV does not change pattern gain', pI.evaluate(10.4e9, 17, -23), g0, 0);
     h.isFalse('FOV rows carry no gain/loss field', anyContains(fieldnames(rows), {'gain','loss','attenuation','s21','margin'}));
     mDir = fullfile(repoRoot, 'src', '+rfscreen', '+mission');
-    h.ok('mission creates no RF systems', isempty(scan(mDir, {'RFTransmitter(', 'RFReceiver('})));
+    h.ok('mission creates no ReceiverFrontEnd / no invented P1dB-IIP3', isempty(scan(mDir, {'ReceiverFrontEnd(', 'p1dB_in_dBm', 'iip3_in_dBm'})));
     h.ok('mission generates no EM loss', isempty(scan(mDir, ...
         {'reflectionCoeff','diffractionLoss','scatteringLoss','FreeSpacePathLoss','applyBlockage','attenuation_dB','S21_dB'})));
     deps = {};

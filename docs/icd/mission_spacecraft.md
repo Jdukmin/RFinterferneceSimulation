@@ -3,7 +3,7 @@
 Normative interface for loading the **simplified spacecraft baseline** (hull + antenna
 installation registry + gimbal steering metadata) from a repository dataset and attaching it to
 the existing Phase-5 geometry/FOV/LOS machinery, and for building the per-case RFC/RFI scenarios
-(§9). Requirements: SR-430…SR-440, DR-430…DR-436, VR-430…VR-442.
+(§9). Requirements: SR-430…SR-442, DR-430…DR-438, VR-430…VR-443.
 
 Builds on Phase-1..6 **without changing** any existing contract (`AntennaInstallation`,
 `SpacecraftStructure`, `Scenario`, FOV/LOS analyzers). **Central rule (unchanged): geometry
@@ -170,7 +170,7 @@ mount by `installationId` (an installation may host several functions):
 | SBA_NADIR_TC / SBA_ZENITH_TC | SBA_NADIR / SBA_ZENITH | RX | `<variant>_TC` | `CASE_DEPENDENT` |
 | SBA_NADIR_TM / SBA_ZENITH_TM | SBA_NADIR / SBA_ZENITH | TX | `<variant>_TM` | `CASE_DEPENDENT` |
 | GPSA_1 / GPSA_2 | GPSA_1 / GPSA_2 | RX | `GPS_<band>` | `CASE_DEPENDENT` |
-| KAA_1 / KAA_2 | KAA_1 / KAA_2 | TX | `KA_DLS` | `CANDIDATE` (warned) |
+| KAA_1 / KAA_2 | KAA_1 / KAA_2 | TX | `KAA_KA_26P25` (CST feed + reflector aperture integration, `data/Kaband_KAA_CST`) | `BOUND` |
 | ISL | ISL | TXRX | `ISL_10P4` | `BOUND` |
 | SAR_ANT | SAR_ANT | — | `NONE` | `DEFERRED_CLOSED_NETWORK` |
 
@@ -187,7 +187,30 @@ frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
 | `structureFov(c, lobePolicy)` | pattern-aware `AntennaToStructureFOV` for every included function × panel at the reference orientation (rows: off-boresight, angular radius, distance, centre lobe, occupied lobes, centre-ray hit, validity) |
 | `assemblePattern(binding, opts)`, `readBindings(path)` | pattern assembly / binding table |
 
-**Not created:** no `RFTransmitter`/`RFReceiver` — TX power, bandwidth, centre frequency per link
-and receiver data are not in the dataset and are never invented; register them on `c.scenario`
-to run the existing pairwise / coexistence / nonlinear analyzers. KAA FOV uses the gimbal
-reference orientation; steering sweeps use `GimbalSteeringDomain` (§7).
+**RF systems** (`rf_systems.csv`, owner-specified 1st baseline; per-quantity provenance tags
+`PUBLIC_STANDARD` / `PUBLIC_REPORTED` / `ENGINEERING_ASSUMPTION` / `PROVISIONAL` /
+`SCREENING_ASSUMPTION`): one row per RF function instance, registered through
+`buildCase` → `registerRfSystems`:
+
+| Template | Function(s) | fc | BW | TX power | RX NF / criterion |
+|----------|-------------|----|----|----------|-------------------|
+| `S_TM_TX` | SBA_NADIR_TM, SBA_ZENITH_TM | 2.250 GHz | 2.7 MHz | 5 W = 36.99 dBm | — |
+| `S_TC_RX` | SBA_NADIR_TC, SBA_ZENITH_TC | 2.050 GHz | 0.2 MHz | — | NF 3 dB, I/N ≤ −6 dB (≈ −124 dBm) |
+| `GPS_L1_RX` | GPSA_1, GPSA_2 (L1 case only) | 1.57542 GHz | 20.46 MHz | — | NF 2 dB, I/N ≤ −6 dB (≈ −105 dBm) |
+| `KA_DLS_TX` | KAA_1, KAA_2 | 26.25 GHz | 1.44 GHz | 70 W = 48.45 dBm | — |
+| `ISL_X_TX/RX` | ISL | 10.475 GHz (provisional) | 20 MHz (provisional) | 1 W = 30 dBm | NF 3 dB, I/N ≤ −6 dB (≈ −104 dBm) |
+| `SAR_X_TX/RX` | SAR_ANT — **deferred, not registered** | 9.65 GHz | 525 MHz | 2.5 kW nominal (63.98 dBm) / 5 kW screening (66.99 dBm) | NF 5 dB (≈ −87.8 dBm) |
+
+- TX: `RFTransmitter` (power at the antenna input port) + `RectangularSpectrum` (`IDEAL_MODEL`).
+- RX: `RFReceiver` = `IdealBandpassFilter [fc − bw/2, fc + bw/2]` + `ReceiverNoiseModel` (NF, 290 K)
+  + `InterferenceCriterion('I_N_MAX', −6)`; **no** `interferenceThreshold_dBm`. P1dB/IIP3 are
+  unknown → no `ReceiverFrontEnd` is created (nonlinear analyzers report `MISSING_P1DB/IIP3`).
+- `requires_pattern_key`: a system is registered only if its function is bound to that pattern in
+  the case. The GPS receiver baseline exists for **L1 only**, so L2/L5 cases have no GPS receiver
+  (warned) until their baselines are provided.
+- `opts.powerMode = 'SCREENING'` switches SAR TX to `tx_power_screen_dbm`; other TX unchanged.
+- All instances (both SBA, both KAA, both GPSA) are registered; no operating mode is assumed —
+  select with `activeTxIds` / `activeRxIds`.
+- The GNSS I/N criterion is **temporary**; GNSS acceptance should finally use C/N0 or J/S.
+
+KAA FOV uses the gimbal reference orientation; steering sweeps use `GimbalSteeringDomain` (§7).

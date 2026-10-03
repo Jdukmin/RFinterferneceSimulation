@@ -234,3 +234,8 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
   `mission_spacecraft.md` §9; pattern frequency/band/fidelity/polarization each carry provenance.
 - **DR-436 (SHALL)** `PatternFidelity` adds `DATASHEET_ENVELOPE_2D_CUT` for datasheet-envelope cuts;
   the ISL CST surrogate cuts (`data/Xband_ISL`) are `SIMULATED_2D_CUT`.
+- **DR-437 (SHALL)** `rf_systems.csv` schema per ICD `mission_spacecraft.md` §9 (fc/bw in MHz,
+  powers in dBm, NF/I-N in dB; empty P1dB/IIP3 = unknown).
+- **DR-438 (SHALL)** Ka KAA pattern dataset `data/Kaband_KAA_CST/` is a byte-identical copy of the
+  CST feed + reflector aperture-integration export (`SIMULATED_2D_CUT`); it supersedes the legacy
+  `data/Kaband_DLS/` cuts for KAA.
