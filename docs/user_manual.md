@@ -24,7 +24,7 @@ under GNU Octave 8.4 (and the same MATLAB/Octave-common subset under MATLAB R201
 6. [Inputs you provide](#6-inputs-you-provide)
 7. [Coordinate conventions](#7-coordinate-conventions)
 8. [Radiation-pattern format](#8-radiation-pattern-format)
-9. [Spacecraft geometry & structures](#9-spacecraft-geometry--structures)
+9. [Spacecraft geometry & structures](#9-spacecraft-geometry--structures) — incl. [9.1 simplified mission spacecraft baseline](#91-simplified-mission-spacecraft-baseline-phase-7)
 10. [RF systems: transmitters & receivers](#10-rf-systems-transmitters--receivers)
 11. [Building a scenario](#11-building-a-scenario)
 12. [Antenna-to-antenna screening](#12-antenna-to-antenna-screening)
@@ -226,8 +226,37 @@ panel = rfscreen.geometry.SpacecraftStructure('SA','solar array', 'SOLAR_ARRAY',
 - `DiskGeometry(diameter, nRim)` — a circular disk (reflector / dish aperture), rim-sampled so its
   angular footprint equals the true `2·atan(D/2/R)`. **Use this, not a square panel, for a dish**: a
   square panel is sampled at its *corners* and overestimates the angular width by √2.
+- `ConvexPolygonGeometry(vertices2D)` — an exact flat convex polygon (2×N vertices, kept exactly),
+  for faces that are neither rectangles nor disks (e.g. an irregular hexagonal end cap).
 - The 4th/5th/6th args are the rotation `R_BS`, the origin `origin_m`, and a metadata struct
   (always record `provenance`).
+
+### 9.1 Simplified mission spacecraft baseline (Phase 7)
+
+The analysis-baseline spacecraft — an irregular hexagonal prism (X = 0…6 m, Long/Short = 2.6,
+Ø 2.239 m circumscribed) with Panel #1–#8 and 8 antenna installation points — is shipped as data
+in `data/spacecraft/simplified_spacecraft_v1/` (read its README: simplified screening geometry, not
+CAD; no installed-EM fidelity). Build it and attach it to a scenario:
+
+```matlab
+m  = rfscreen.spacecraft.SimplifiedSpacecraftBuilder.build();   % hull, 8 panels, installations, KAA steering
+sc = rfscreen.scenario.Scenario('SC');
+rfscreen.spacecraft.SimplifiedSpacecraftBuilder.attachToScenario(sc, m);   % structures + installations
+a = sc.installations('SBA_NADIR'); b = sc.installations('SBA_ZENITH');
+los = rfscreen.geometry.LineOfSight.segment('SBA_NADIR','SBA_ZENITH', a.position_m, b.position_m, sc.activeStructures());
+los.status                                   % 'BLOCKED' (through the hull) -- evidence, not a loss value
+kaa = m.steering('KAA_1');                    % gimbal: outward hemisphere about the Panel #1 normal
+U   = kaa.sampleDirections(15);               % deterministic sweep of commanded boresights
+s   = kaa.steeredInstallation(sc.installations('KAA_1'), U(:, 10));   % installation for one sample
+```
+
+- Fixed antennas point along their panel's outward normal (`R_BA(:,1)`); KAA_1/KAA_2 are
+  registered at the gimbal reference and their steering set lives in `m.steering` (simplified
+  hemisphere, **not** hardware limits).
+- `m.installationRecords` gives panel assignment, signed offset from the panel plane, and the
+  pattern-linkage status (`CANDIDATE_DATASET` / `PENDING`). The builder loads **no** pattern: add
+  antennas and patterns yourself once the binding is confirmed.
+- Full walk-through: `examples/simplified_spacecraft_geometry.m`. Contract: `docs/icd/mission_spacecraft.md`.
 
 Geometry gives **evidence** (does it enter the FOV, is the LOS blocked, how far). It never produces
 a gain, loss, isolation, or scattering value — that boundary is enforced in the architecture.

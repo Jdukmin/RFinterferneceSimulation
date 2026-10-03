@@ -1,0 +1,135 @@
+# Simplified spacecraft geometry + antenna installation baseline — v1
+
+Analysis-baseline spacecraft hull and antenna installation registry for **RFC/RFI geometry
+screening** (structure FOV, LOS blockage, installation evidence). Consumed by
+`rfscreen.spacecraft.SimplifiedSpacecraftBuilder` (ICD [`docs/icd/mission_spacecraft.md`](../../../docs/icd/mission_spacecraft.md)).
+
+> **What this is not.** This is **not** the original CAD and claims **no mechanical CAD fidelity**.
+> It claims **no full-wave / installed-EM fidelity**: the geometry produces geometric evidence only
+> (FOV occupancy, LOS `CLEAR`/`BLOCKED`, distances, angles) and **never** a gain loss, S21,
+> attenuation, reflection, diffraction or scattering value. Dimensions and positions are the
+> current **analysis baseline**, not a released mechanical configuration.
+
+## Files (source data — SSOT)
+
+| File | Content | Provenance |
+|------|---------|------------|
+| `hull_cross_section.csv` | the **six** (Y,Z) cross-section vertices, mm, CCW | `SOURCE_EXPLICIT` |
+| `hull_parameters.csv` | X extrusion range (0..6000 mm) + design parameters used only for cross-checks + reference envelopes | per row |
+| `panels.csv` | Panel #1–#8: side edge / end-cap reference, LONG/SHORT class, canonical outward normals | `SOURCE_EXPLICIT` |
+| `antenna_installations.csv` | 8 antenna installation reference points (mm), panel assignment, mount type, pattern linkage status | per row |
+| `steering_constraints.csv` | KAA gimbal steering domains (hemisphere) | `SIMPLIFIED_ASSUMPTION` |
+
+CSV rules: `#` lines are comments, first remaining line is the header, fields contain no commas.
+
+**Units.** Source values are kept in **mm** exactly as supplied. The repository's canonical unit is
+the metre; the conversion `m = mm / 1000` is applied in exactly one place
+(`SpacecraftDataReader.mmToM`). Nothing is stored twice in two units.
+
+**Derived data is not stored.** Edge lengths, normals, panel centres/frames, area, volume,
+circumradius, and antenna→panel offsets are computed from the vertices by
+`rfscreen.spacecraft.PrismHull`. Design parameters (`d_long_mm`, `d_short_mm`,
+`nominal_long_short_ratio`) and the tabulated normals are **cross-checked** against the vertices
+at build time (mismatch ⇒ error); they never regenerate or adjust the vertices.
+
+## Body frame B
+
+- `+X_B` = direction of flight; `Y_B`, `Z_B` span the cross-section.
+- Panel #8 (aft) at `X = 0`; Panel #7 (forward) at `X = 6000 mm`; side-panel length 6000 mm.
+- The hull is the **irregular hexagonal cross-section extruded from X = 0 to X = 6000 mm**.
+
+## Cross-section (equiangular irregular hexagon — NOT regular)
+
+Three LONG faces (Panel #1/#3/#5, supporting-plane distance `d_long = 800.000 mm`) alternate with
+three SHORT faces (Panel #2/#4/#6, `d_short = 1078.260870 mm`, from the nominal Long/Short ratio
+**2.6**; plausible design range ≈ 2.5–2.7, not modelled).
+
+| Vertex | Y [mm] | Z [mm] |
+|--------|--------|--------|
+| V12 | −783.188191 | +800.000000 |
+| V23 | −1084.414419 | +278.260870 |
+| V34 | −301.226227 | −1078.260870 |
+| V45 | +301.226227 | −1078.260870 |
+| V56 | +1084.414419 | +278.260870 |
+| V61 | +783.188191 | +800.000000 |
+
+| Panel | Edge | Class | Width [mm] | Outward normal (B) | Centre (X,Y,Z) [mm] |
+|-------|------|-------|-----------:|--------------------|---------------------|
+| #1 | V61→V12 | LONG | 1566.376383 | (0, 0, +1) | (3000, 0, +800) |
+| #2 | V12→V23 | SHORT | 602.452455 | (0, −0.866025404, +0.5) | (3000, −933.801305, +539.130435) |
+| #3 | V23→V34 | LONG | 1566.376383 | (0, −0.866025404, −0.5) | (3000, −692.820323, −400) |
+| #4 | V34→V45 | SHORT | 602.452455 | (0, 0, −1) | (3000, 0, −1078.260870) |
+| #5 | V45→V56 | LONG | 1566.376383 | (0, +0.866025404, −0.5) | (3000, +692.820323, −400) |
+| #6 | V56→V61 | SHORT | 602.452455 | (0, +0.866025404, +0.5) | (3000, +933.801305, +539.130435) |
+| #7 | all six vertices at X = 6000 | END | — | (+1, 0, 0) | — |
+| #8 | all six vertices at X = 0 | END | — | (−1, 0, 0) | — |
+
+Derived regression values (verified by `tests/test_simplified_spacecraft.m`):
+
+| Quantity | Value |
+|----------|-------|
+| cross-section area | 2.854053021 m² |
+| cross-section perimeter | 6.506486512 m |
+| prism volume | 17.124318124 m³ |
+| total side-panel area | 39.038919071 m² (LONG 9.398258295, SHORT 3.614714729 each) |
+| circumradius / circumdiameter | 1119.546222 mm / **2.239092444 m** |
+| centroid | (Y,Z) = (0, 0) |
+| extents | X 0..6000, Y ±1084.414419, Z −1078.260870..+800 mm |
+
+### Envelopes (reference only — the hull is **not** scaled to them)
+
+- Simplified panel geometry (this dataset): **Ø ≈ 2.239 m** circumscribed.
+- Actual panel envelope: up to ≈ Ø 2.5 m.
+- Component-inclusive spacecraft envelope (protrusions): ≈ Ø 2.7 m class.
+
+## Antenna installation reference points
+
+Positions are **installation reference points** supplied as the baseline; they are used **as
+given** and are never snapped/projected onto the simplified hull (ISL at X = 6375 mm, beyond the
+X = 6000 mm end cap, is an intentional protrusion).
+
+| Antenna | (X,Y,Z) [mm] | Panel | Mount | Outward offset from panel plane | Assignment provenance |
+|---------|--------------|-------|-------|--------------------------------:|-----------------------|
+| SBA_NADIR | (255, 870, 1030) | #6 | FIXED | ≈ +190.2 mm | `INFERRED_FROM_SIMPLIFIED_GEOMETRY` (corner) |
+| SBA_ZENITH | (255, −530, −1240) | #4 | FIXED | ≈ +161.7 mm | `INFERRED_FROM_SIMPLIFIED_GEOMETRY` (corner) |
+| GPSA_1 | (2045, −265, −1295) | #3 | FIXED | ≈ +77.0 mm | `SOURCE_EXPLICIT` |
+| GPSA_2 | (3145, −265, −1295) | #3 | FIXED | ≈ +77.0 mm | `SOURCE_EXPLICIT` |
+| KAA_1 | (5965, −1100, 850) | #1 | GIMBAL | +50.0 mm (exact) | `SOURCE_EXPLICIT` |
+| KAA_2 | (5965, +1285, 530) | #5 | GIMBAL | ≈ +47.8 mm | `SOURCE_EXPLICIT` |
+| ISL | (6375, −595, −805) | #3 | FIXED | ≈ +117.8 mm | `SOURCE_EXPLICIT` |
+| SAR_ANT | (3250, 0, 800) | #1 | FIXED | 0.0 mm (on the plane) | `SOURCE_EXPLICIT` |
+
+**Fixed boresight** = assigned panel's outward normal, with the repository antenna frame
+(`+X_A` = boresight). Deterministic roll: `x_A = n`, `z_A = +X_B`, `y_A = z_A × x_A`,
+`R_BA = [x_A y_A z_A]` (proper DCM).
+
+## KAA gimbal steering (simplified assumption)
+
+KAA_1 / KAA_2 are **not** fixed-boresight antennas. The `AntennaInstallation` holds the gimbal
+**reference (zero)** orientation (base normal = Panel #1 resp. Panel #5 outward normal). The
+allowed commanded boresight set is the outward **hemisphere** `|u_B| = 1, u_B·n_base ≥ 0`
+(off-axis ≤ 90°). This is a simplified RFC/RFI screening domain — **not** a hardware gimbal
+hard-stop, keep-out zone or slew envelope. When real limits are available, change the row in
+`steering_constraints.csv` to `CONE` with a smaller `max_off_axis_deg`; no code change is needed.
+
+## Pattern linkage (not resolved here)
+
+The geometry builder loads **no** pattern. `pattern_status` records what is known:
+
+| Antenna | Status | Candidate dataset | Open item |
+|---------|--------|-------------------|-----------|
+| SBA_NADIR / SBA_ZENITH | `CANDIDATE_DATASET` | `data/Sband_TMTC` | SBA1 vs SBA4 variant, TM/TC cut binding |
+| GPSA_1 / GPSA_2 | `CANDIDATE_DATASET` | `data/Lband_GPS` | L1/L2/L5 cut binding |
+| KAA_1 / KAA_2 | `CANDIDATE_DATASET` | `data/Kaband_DLS` | confirm KAA ↔ DLS reflector equivalence |
+| ISL | `PENDING` | — | no pattern data in the repository |
+| SAR_ANT | `PENDING` | — | no pattern data in the repository |
+
+No synthetic pattern is substituted for a pending one, and no dataset is relabelled as mission data.
+
+## Assumptions / TBD
+
+1. Hull = simplified prism; no protrusions, appendages, solar arrays or payload bodies modelled.
+2. Long/Short ratio fixed at the nominal 2.6 (range 2.5–2.7 not swept).
+3. SBA assignments near corners are inferred from the simplified geometry.
+4. KAA steering domain = full outward hemisphere (placeholder for real gimbal limits).
+5. Pattern bindings above are open; geometry-only FOV results carry `validity = GEOMETRY_ONLY`.

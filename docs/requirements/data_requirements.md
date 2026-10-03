@@ -215,3 +215,18 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
   flight data. *(§31, §32)*
 - **DR-408 (SHALL)** `Scenario` gains optional structure and installed-pattern registries; absence
   preserves Phase-1..4 behavior. *(§29)*
+
+## Phase 7 — Simplified mission spacecraft dataset
+
+- **DR-430 (SHALL)** Dataset `data/spacecraft/simplified_spacecraft_v1/`: `hull_cross_section.csv`,
+  `hull_parameters.csv`, `panels.csv`, `antenna_installations.csv`, `steering_constraints.csv`
+  (schemas in ICD `mission_spacecraft.md` §2); `#` comments; comma-free fields.
+- **DR-431 (SHALL)** Source lengths in mm, converted once (`SpacecraftDataReader.mmToM`); every
+  row/parameter carries provenance (`SOURCE_EXPLICIT`, `SOURCE_DERIVED`, `DESIGN_ESTIMATE`,
+  `REFERENCE_ENVELOPE`, `INFERRED_FROM_SIMPLIFIED_GEOMETRY`, `SIMPLIFIED_ASSUMPTION`, …).
+- **DR-432 (SHALL)** Built structures carry `GeometryProvenance` from the dataset (`USER_DEFINED`);
+  never `CAD_DERIVED`/`MEASURED` unless such a source exists.
+- **DR-433 (SHALL)** `ConvexPolygonGeometry(vertices2D_m)`: 2×N finite, N ≥ 3, unique, strictly
+  convex, simple.
+- **DR-434 (SHALL)** `GimbalSteeringDomain` fields `antennaId`, `referenceAxis_B`,
+  `steeringModel` ∈ {HEMISPHERE, CONE}, `maxOffAxis_deg`, `provenance`.

@@ -505,3 +505,58 @@ arithmetic precondition each paper's sweep is parameterized by.
 Octave 8.4: **PASS** — **628 assertions, 36 files** (`tests/run_all_tests.m`), the exact `src/` code
 executed; all prior assertions pass (579 → 598 → **628**). All four reference scripts, the quickstart,
 and figure generation execute. MATLAB: **NOT RUN** (unavailable in this environment; not claimed).
+
+
+---
+
+# Phase 7 — Simplified Mission Spacecraft Geometry & Antenna Installation Baseline
+
+Adds the analysis-baseline spacecraft hull and antenna installation registry as repository data,
+one exact geometry primitive, and a leaf `+spacecraft` package that wires the data into the
+**unchanged** Phase-5 structure/FOV/LOS machinery. No new physics; no pattern loaded or created.
+
+## P7.1 Requirement → Code → Test map
+
+| Req | Code / data | Test |
+|-----|-------------|------|
+| SR-430, DR-430/431 (dataset SSOT, mm → m once) | `data/spacecraft/simplified_spacecraft_v1/*.csv`, `spacecraft/SpacecraftDataReader` | test_simplified_spacecraft (VR-431, VR-433) |
+| SR-431, AR-430 (exact irregular hexagonal prism) | `spacecraft/PrismHull` | test_simplified_spacecraft (VR-431) |
+| SR-432, DR-433, AR-433 (end caps exact polygon) | `geometry/ConvexPolygonGeometry`, `SimplifiedSpacecraftBuilder.build` | test_convex_polygon (VR-430), test_simplified_spacecraft (VR-432) |
+| SR-433 (positions as given; assignment provenance) | `antenna_installations.csv`, builder records | test_simplified_spacecraft (VR-433, VR-434) |
+| SR-434, AR-431 (fixed boresight = panel normal) | `SimplifiedSpacecraftBuilder.sideMountR_BA` | test_simplified_spacecraft (VR-435) |
+| SR-435, DR-434, AR-432 (KAA hemisphere, separate metadata) | `spacecraft/GimbalSteeringDomain`, `steering_constraints.csv` | test_simplified_spacecraft (VR-436) |
+| SR-436 (attach to existing scenario/analyzers) | `SimplifiedSpacecraftBuilder.attachToScenario`; `examples/simplified_spacecraft_geometry.m` | test_simplified_spacecraft (VR-437) |
+| SR-437 (no pattern synthesis; explicit linkage status) | `pattern_status` column; builder loads no pattern | test_simplified_spacecraft (VR-437) |
+| SR-438 (reject inconsistent datasets) | builder cross-checks | test_simplified_spacecraft (corrupted-dataset cases) |
+| DR-432 (provenance `USER_DEFINED`, not CAD) | `hull_parameters.csv: geometry_provenance` | test_simplified_spacecraft (VR-432) |
+
+## P7.2 Canonical decisions (Phase 7)
+
+1. **SSOT = the six vertices.** `d_long`, `d_short`, the 2.6 ratio and the tabulated normals are
+   cross-checks only (error on mismatch); they never regenerate the vertices. Panel normals used
+   in `R_BS`/`R_BA` are **derived from the vertices** so panel corners land exactly on the hull
+   edges; they agree with the tabulated 9-digit normals to ≤ 1.1e-9 (vertex rounding is 1e-6 mm).
+2. **End caps** use a new exact `ConvexPolygonGeometry` (smallest extension; no triangulation, so
+   ray results are those of one polygon by construction). Side panels reuse `PanelGeometry`.
+3. **Side-panel frame** `R_BS = [+X_B, n×X_B, n]` (`PanelGeometry` width = 6 m along +X_B,
+   height = panel width). **End-cap frame** `z_S = ±X_B`, `x_S = +Y_B`, `y_S = z_S×x_S`.
+4. **Mount DCM** `x_A = n`, `z_A = +X_B`, `y_A = z_A×x_A` (no prior installation helper existed).
+5. **KAA** keeps `AntennaInstallation` at the gimbal reference; steering lives in
+   `GimbalSteeringDomain` (HEMISPHERE now, CONE when real limits exist — a data change).
+6. **New package `+spacecraft`** (not `+geometry`): `+geometry` must stay file-free (VR-409), and
+   mission data loading is a consumer of the core, not part of it.
+
+## P7.3 No-fake-physics audit
+
+`+spacecraft` constructs no pattern, contains no loss/S21/attenuation/reflection/diffraction
+identifiers, and has no dependency from any core package; model/record/panel structs carry no EM
+field; attaching the baseline leaves `Scenario.patterns`/`installedPatterns` empty. ISL/SAR stay
+`PENDING`; candidate datasets are not bound or relabelled. Geometry provenance is `USER_DEFINED`
+(never `CAD_DERIVED`).
+
+## P7.4 Verification result
+
+GNU Octave 9.2.0: **PASS — 915 assertions, 38 files** (`tests/run_all_tests.m`); the 628
+pre-existing assertions pass unchanged, +25 `test_convex_polygon`, +262
+`test_simplified_spacecraft`. `examples/simplified_spacecraft_geometry.m` executes. MATLAB: **NOT
+RUN** (unavailable in this environment; not claimed).

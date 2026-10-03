@@ -19,6 +19,7 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`receiver_nonlinear.md`](receiver_nonlinear.md) | **[Phase 4]** front-end P1dB/IIP3, blocking, two-tone IM3, multi-interferer aggregation, LNA_INPUT plane |
 | [`spacecraft_geometry.md`](spacecraft_geometry.md) | **[Phase 5]** structure geometry, ray/segment intersection, antenna-to-structure FOV, LOS blockage |
 | [`installed_environment.md`](installed_environment.md) | **[Phase 5]** free-space vs installed pattern selection, comparison, config association, fallback |
+| [`mission_spacecraft.md`](mission_spacecraft.md) | **[Phase 7]** simplified spacecraft hull dataset, `ConvexPolygonGeometry` end caps, antenna installation registry, KAA gimbal steering domain |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 
@@ -87,3 +88,7 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **PatternSourceUsed** *(Phase 5)*: `INSTALLED`, `FREE_SPACE_FALLBACK`, `NONE`
 - **InstallationValidity** *(Phase 5)*: `INSTALLED_PATTERN_AVAILABLE`, `FREE_SPACE_FALLBACK`, `INSTALLATION_EFFECT_UNKNOWN`, `REQUIRE_INSTALLED_UNAVAILABLE`, `GEOMETRY_ONLY`, `UNSUPPORTED_EM_PHYSICS`
 - **GeometryRisk** *(Phase 5)*: `NA`, `LOW`, `MODERATE`, `HIGH`
+- **Steering model** *(Phase 7, `GimbalSteeringDomain.steeringModel`)*: `HEMISPHERE`, `CONE`
+- **Mount type** *(Phase 7 dataset)*: `FIXED`, `GIMBAL`
+- **Pattern linkage status** *(Phase 7 dataset)*: `CANDIDATE_DATASET`, `PENDING`, `UNSUPPORTED`
+- **Assignment provenance** *(Phase 7 dataset)*: `SOURCE_EXPLICIT`, `INFERRED_FROM_SIMPLIFIED_GEOMETRY`

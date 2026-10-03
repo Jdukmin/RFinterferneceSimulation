@@ -204,3 +204,25 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
 - **VR-410 (SHALL)** Installed pattern flows through the existing `PairwiseAnalyzer` (changing gain
   via the pattern, not via geometry). *(§38, §44)*
 - **VR-411 (SHALL)** All 473 existing Phase-1..4 assertions still pass unchanged. *(§51)*
+
+## 16. Simplified Mission Spacecraft Verification (Phase 7)
+
+- **VR-430 (SHALL)** `ConvexPolygonGeometry`: metrics, interior/edge/outside/parallel/behind ray
+  cases, CW acceptance, rejection of <3 / non-finite / duplicate / collinear / reflex /
+  self-intersecting input. *(test_convex_polygon)*
+- **VR-431 (SHALL)** Section: 6 vertices, 6 unique, SSOT coordinates, LONG 1.566376383 m ×3,
+  SHORT 0.602452455 m ×3, alternation, ratio 2.6, not regular, interior angles 120°, support
+  distances 0.8 / 1.078260870 m, circumdiameter 2.239092444 m (< 2.5 m), X 0..6 m, area
+  2.854053021 m², perimeter 6.506486512 m, centroid (0,0), volume 17.124318124 m³, side areas.
+- **VR-432 (SHALL)** Panel structures: side panels reuse `PanelGeometry` with local +X = +X_B,
+  local normal = outward normal, SSOT centres, corners on the hull edges; end caps are exact
+  six-vertex polygons; end-cap ray hits equal exact-hexagon membership on a dense grid.
+- **VR-433 (SHALL)** All 8 antenna positions equal the source values exactly (mm and m); no snapping.
+- **VR-434 (SHALL)** Panel assignments and signed normal offsets (KAA_1 = +50 mm, SAR_ANT = 0 exactly).
+- **VR-435 (SHALL)** Fixed antennas: `R_BA` proper and `R_BA(:,1)` = assigned panel normal.
+- **VR-436 (SHALL)** KAA: base normal #1/#5; 0°, 89.999°, 90° PASS; 90.001°, 180° FAIL; non-unit and
+  zero vectors rejected; steered DCM proper; sweep samples allowed.
+- **VR-437 (SHALL)** Scenario attachment; LOS/FOV through unchanged analyzers; no pattern or EM
+  quantity created; `+spacecraft` free of pattern/EM identifiers; no core package depends on it;
+  corrupted datasets rejected. *(test_simplified_spacecraft)*
+- **VR-438 (SHALL)** All pre-existing assertions (628) still pass unchanged.

@@ -54,6 +54,15 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > reproducibility tiers and ranked model gaps — **no paper fitting, no fabricated EM, no HFSS/CST
 > introduced**. See `docs/reports/reference_validation/`.
 >
+> **Phase 7 (complete).** **Simplified mission spacecraft geometry & antenna installation
+> baseline** — the analysis-baseline hull (exact irregular hexagonal prism, X = 0…6 m, Long/Short =
+> 2.6, Ø 2.239 m) and 8 antenna installation points ship as data in
+> `data/spacecraft/simplified_spacecraft_v1/`; `+spacecraft` builds Panel #1–#8 (side panels reuse
+> `PanelGeometry`, end caps use a new exact `ConvexPolygonGeometry`), panel-normal boresights, and a
+> separate KAA gimbal hemisphere steering domain, then feeds the **unchanged** FOV/LOS machinery.
+> Not CAD; geometry evidence only; no pattern loaded or synthesised. See
+> `docs/icd/mission_spacecraft.md`, `examples/simplified_spacecraft_geometry.m`.
+>
 > HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
 > (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI
 > remain **deferred** (a scoped, data-only external-EM ingestion boundary is the recommended — not

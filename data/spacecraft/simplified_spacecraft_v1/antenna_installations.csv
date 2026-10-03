@@ -1,0 +1,20 @@
+# simplified_spacecraft_v1 -- antenna installation reference points (SSOT)
+# provenance of x/y/z: SOURCE_EXPLICIT (user-provided installation reference points, mm).
+# Positions are used AS GIVEN: never snapped / projected onto the simplified hull
+# (e.g. ISL X = 6375 mm lies beyond the X = 6000 mm end cap on purpose: protrusion).
+# mount_type FIXED: nominal boresight = outward normal of panel_id.
+# mount_type GIMBAL: panel normal = gimbal reference (zero) axis; steering domain in
+#   steering_constraints.csv.
+# pattern_status: CANDIDATE_DATASET = a repository pattern dataset exists for this antenna
+#   class but the exact variant/cut binding is not yet confirmed; PENDING = no pattern data.
+#   Patterns are never loaded or synthesised by the geometry builder.
+# Fields must not contain commas.
+antenna_id,x_mm,y_mm,z_mm,panel_id,mount_type,assignment_provenance,pattern_status,pattern_dataset,note
+SBA_NADIR,255,870,1030,PANEL_6,FIXED,INFERRED_FROM_SIMPLIFIED_GEOMETRY,CANDIDATE_DATASET,data/Sband_TMTC,near the V56/V61 corner; SBA1 vs SBA4 variant TBD
+SBA_ZENITH,255,-530,-1240,PANEL_4,FIXED,INFERRED_FROM_SIMPLIFIED_GEOMETRY,CANDIDATE_DATASET,data/Sband_TMTC,near the V34 corner; SBA1 vs SBA4 variant TBD
+GPSA_1,2045,-265,-1295,PANEL_3,FIXED,SOURCE_EXPLICIT,CANDIDATE_DATASET,data/Lband_GPS,same Y/Z as GPSA_2
+GPSA_2,3145,-265,-1295,PANEL_3,FIXED,SOURCE_EXPLICIT,CANDIDATE_DATASET,data/Lband_GPS,same Y/Z as GPSA_1
+KAA_1,5965,-1100,850,PANEL_1,GIMBAL,SOURCE_EXPLICIT,CANDIDATE_DATASET,data/Kaband_DLS,gimbal-steered; see steering_constraints.csv
+KAA_2,5965,1285,530,PANEL_5,GIMBAL,SOURCE_EXPLICIT,CANDIDATE_DATASET,data/Kaband_DLS,gimbal-steered; see steering_constraints.csv
+ISL,6375,-595,-805,PANEL_3,FIXED,SOURCE_EXPLICIT,PENDING,,X beyond the end cap is an intentional protrusion; no pattern data
+SAR_ANT,3250,0,800,PANEL_1,FIXED,SOURCE_EXPLICIT,PENDING,,lies exactly on the Panel #1 supporting plane; no pattern data

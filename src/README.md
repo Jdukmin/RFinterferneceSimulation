@@ -23,6 +23,8 @@ blocks, no `import`), so the same code runs under MATLAB R2019b+ and Octave 6+.
 | **`+nonlinear`** *(Phase 4)* | `InterfererAggregator`, `CompressionAnalyzer`, `BlockingAnalyzer`, `IntermodulationAnalyzer`, `NonlinearSusceptibilityAnalyzer` |
 | **`+geometry`** *(Phase 5 adds)* | `SpacecraftStructure`, `BoxGeometry`/`PanelGeometry`, `LineOfSight`, `AntennaToStructureFOV` (activated), structure enums |
 | **`+installed`** *(Phase 5)* | `InstalledPatternSelector`, `PatternComparison`, `InstalledPatternPolicy`/`PatternSourceUsed`/`InstallationValidity`/`GeometryRisk` |
+| **`+geometry`** *(Phase 6/7 add)* | `DiskGeometry` (P6), `ConvexPolygonGeometry` — exact convex planar polygon (P7) |
+| **`+spacecraft`** *(Phase 7)* | `SpacecraftDataReader`, `PrismHull`, `SimplifiedSpacecraftBuilder`, `GimbalSteeringDomain` — simplified mission hull + antenna installation baseline from `data/spacecraft/` (leaf consumer; no pattern, no EM) |
 
 ## `+spectrum` / `+receiver` (Phase 3 — linear RF coexistence)
 

@@ -221,3 +221,14 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
 - **AR-409 (SHALL)** Geometry risk is a screening heuristic, separate from physical margins. *(§25)*
 - **AR-410 (SHALL)** Geometry/installed analysis parses no pattern files beyond the reused Phase-2
   importer and depends on no receiver-physics/HFSS/CST. *(§50)*
+
+## Phase 7 — Simplified mission spacecraft baseline
+
+- **AR-430 (SHALL)** Side-panel outward normal of edge `(dY,dZ)` (CCW section) = `[0; dZ; −dY]/‖·‖`;
+  supporting distance = `n·v`; signed offset of a point = `n·p − d` (`>0` outside). *(SR-431)*
+- **AR-431 (SHALL)** Fixed-mount DCM: `x_A = n`, `z_A = +X_B` component ⊥ n (fallback `+Z_B`),
+  `y_A = z_A × x_A`, `R_BA = [x_A y_A z_A]`. *(SR-434)*
+- **AR-432 (SHALL)** Steering-domain membership: `‖u‖ = 1 ± 1e-9` (else error) and
+  `atan2d(‖n×u‖, n·u) ≤ maxOffAxis_deg + 1e-9°`; HEMISPHERE ⇔ `maxOffAxis_deg = 90`. *(SR-435)*
+- **AR-433 (SHALL)** Convex-polygon ray test: plane intersection `t ≥ 0`, inclusion by edge
+  half-planes, boundary inclusive within `1e-12·max(1,|v|)`. *(SR-432)*

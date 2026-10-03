@@ -293,3 +293,33 @@ geometry provides installation-risk evidence; it never manufactures electromagne
   introduced; full-wave/measured-S21 adapters remain reserved (Phase 6). *(§45, §46, §50)*
 - **SR-420 (SHALL)** Structure geometry shall carry provenance; synthetic test geometry shall not be
   presented as flight configuration. *(§31, §32)*
+
+## 17. Simplified Mission Spacecraft Geometry & Antenna Installation Baseline (Phase 7)
+
+Normative detail: ICD `mission_spacecraft.md`, `spacecraft_geometry.md` §2. **Central rule
+unchanged: geometry is installation evidence only.**
+
+- **SR-430 (SHALL)** The simplified spacecraft hull and antenna installation baseline shall be held
+  as repository **source data** (SSOT) with source units (mm) preserved and a single documented
+  conversion to canonical metres; derived quantities shall be computed, not stored.
+- **SR-431 (SHALL)** The hull shall be the exact six-vertex **irregular** hexagonal cross-section
+  extruded along `+X_B` from `X=0` to `X=6 m`; it shall not be replaced by a regular hexagon, scaled
+  to an envelope, or re-interpreted from drawings.
+- **SR-432 (SHALL)** Side panels #1–#6 shall reuse the existing `PanelGeometry`; end caps #7/#8
+  shall be represented by an **exact convex planar polygon** primitive whose boundary is the same
+  six vertices (no regular polygon, rectangle, disk, extra vertex, or approximation).
+- **SR-433 (SHALL)** Antenna installation reference points shall be used exactly as supplied
+  (never snapped/projected onto the hull); each antenna shall carry an explicit panel assignment
+  with assignment provenance.
+- **SR-434 (SHALL)** Fixed antennas shall have nominal boresight = assigned panel outward normal,
+  expressed as a proper `R_BA` with `+X_A` = boresight and a deterministic roll.
+- **SR-435 (SHALL)** Gimbal-steered antennas (KAA) shall not be reduced to one fixed boresight: the
+  installation holds the gimbal reference orientation and a **separate** steering-domain object
+  holds the allowed boresight set (simplified outward hemisphere), with a deterministic sweep hook.
+  The steering assumption shall be replaceable by data without changing `AntennaInstallation`.
+- **SR-436 (SHALL)** The baseline shall attach to the existing `Scenario` and FOV/LOS analyzers
+  without a separate physics engine and without changing Phase-1..6 contracts.
+- **SR-437 (SHALL)** The baseline shall not load, synthesise, or relabel antenna patterns; pattern
+  linkage shall be explicit (`CANDIDATE_DATASET`/`PENDING`/`UNSUPPORTED`).
+- **SR-438 (SHALL)** Dataset inconsistencies (vertex count, LONG/SHORT alternation, normal or
+  design-parameter mismatch, dangling references) shall be rejected, never repaired.

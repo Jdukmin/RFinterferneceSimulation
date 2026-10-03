@@ -1,0 +1,12 @@
+# simplified_spacecraft_v1 -- hull cross-section vertices in the body Y-Z plane (SSOT)
+# provenance: SOURCE_EXPLICIT (user-provided RFC/RFI analysis baseline; NOT CAD)
+# units: mm (source). The reader converts to canonical metres (m = mm / 1000).
+# Order is significant: consecutive vertices (wrapping) form the six side-panel edges,
+# counter-clockwise in (Y,Z). Exactly 6 vertices; an irregular (non-regular) hexagon.
+vertex_id,y_mm,z_mm
+V12,-783.188191,800.000000
+V23,-1084.414419,278.260870
+V34,-301.226227,-1078.260870
+V45,301.226227,-1078.260870
+V56,1084.414419,278.260870
+V61,783.188191,800.000000

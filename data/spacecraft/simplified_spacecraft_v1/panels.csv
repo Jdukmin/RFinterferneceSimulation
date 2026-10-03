@@ -1,0 +1,14 @@
+# simplified_spacecraft_v1 -- panel definitions
+# SIDE panels reference a hull edge (vertex_from -> vertex_to); END_CAP panels reference
+# x_min_mm / x_max_mm and reuse ALL six cross-section vertices (exact irregular hexagon).
+# n_x/n_y/n_z = canonical outward unit normal (body frame B) as stated in the baseline;
+# the builder derives each normal from the vertices and cross-checks it against this value.
+panel_id,kind,size_class,vertex_from,vertex_to,face_x_ref,n_x,n_y,n_z
+PANEL_1,SIDE,LONG,V61,V12,,0,0,1
+PANEL_2,SIDE,SHORT,V12,V23,,0,-0.866025404,0.5
+PANEL_3,SIDE,LONG,V23,V34,,0,-0.866025404,-0.5
+PANEL_4,SIDE,SHORT,V34,V45,,0,0,-1
+PANEL_5,SIDE,LONG,V45,V56,,0,0.866025404,-0.5
+PANEL_6,SIDE,SHORT,V56,V61,,0,0.866025404,0.5
+PANEL_7,END_CAP,END,,,x_max_mm,1,0,0
+PANEL_8,END_CAP,END,,,x_min_mm,-1,0,0

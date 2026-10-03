@@ -75,6 +75,32 @@ Phase-5 adds:
 +scenario/   (extends) Scenario: structures + installedPatterns registries, activeConfigId
 ```
 
+Phase-7 adds:
+```
++geometry/   (extends) ConvexPolygonGeometry                                     [Phase 7]
+             (exact convex planar face; pure math, no file parsing)
++spacecraft/ SpacecraftDataReader, PrismHull, SimplifiedSpacecraftBuilder,       [Phase 7]
+             GimbalSteeringDomain                    (deps: util, geometry, antenna, scenario)
+data/spacecraft/simplified_spacecraft_v1/   hull + installation + steering CSV (SSOT, mm)
+```
+
+### Phase-7 mission spacecraft baseline flow
+
+```
+dataset CSV (mm) --> SpacecraftDataReader (only file parser; mm->m once)
+   --> PrismHull (exact 6-vertex section, derived metrics, cross-checks)
+   --> SimplifiedSpacecraftBuilder
+         Panel #1..#6 = existing PanelGeometry, Panel #7/#8 = ConvexPolygonGeometry
+         AntennaInstallation (position as given; R_BA = panel-normal mount)
+         GimbalSteeringDomain (KAA hemisphere metadata, separate from AntennaInstallation)
+   --> attachToScenario --> (UNCHANGED) LineOfSight / AntennaToStructureFOV / InstalledEnvironmentAnalyzer
+```
+
+- `+spacecraft` is a **leaf consumer**: no core package depends on it; it depends only downward.
+- It loads/synthesises **no pattern**, produces no gain/loss/S21/attenuation value, and changes
+  no existing contract (`AntennaInstallation` stays fixed; steering is separate metadata).
+- `+geometry` stays file-free; dataset parsing is confined to `SpacecraftDataReader`.
+
 ### Phase-2 pattern-data pipeline (dependency direction)
 
 ```

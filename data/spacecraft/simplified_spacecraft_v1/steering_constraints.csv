@@ -1,0 +1,10 @@
+# simplified_spacecraft_v1 -- gimbal steering domains (SIMPLIFIED ASSUMPTION)
+# HEMISPHERE: allowed commanded boresight u_B satisfies |u_B| = 1 and u_B . n_ref >= 0,
+#   i.e. off-axis angle from n_ref <= max_off_axis_deg (= 90).
+# n_ref = outward normal of the antenna's assigned panel (antenna_installations.csv).
+# This is an RFC/RFI screening assumption, NOT a hardware gimbal hard-stop / keep-out /
+# slew envelope. Replace with model CONE and a smaller max_off_axis_deg when real data exists.
+# Fields must not contain commas.
+antenna_id,steering_model,reference_axis,max_off_axis_deg,provenance,note
+KAA_1,HEMISPHERE,PANEL_OUTWARD_NORMAL,90,SIMPLIFIED_ASSUMPTION,outward hemisphere about the Panel #1 normal
+KAA_2,HEMISPHERE,PANEL_OUTWARD_NORMAL,90,SIMPLIFIED_ASSUMPTION,outward hemisphere about the Panel #5 normal

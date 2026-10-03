@@ -36,5 +36,10 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
   `user_manual.md`, `examples/quickstart.m`, and `examples/reference_cases/`. No paper fitting, no
   fabricated EM, no HFSS/CST introduced; full-wave/measured-S21 and TX/mixer/ADC effects remain a
   scoped, data-only future step (`reports/reference_validation/`).
+- **Phase 7 (complete):** simplified mission spacecraft geometry & antenna installation baseline —
+  the exact irregular-hexagon hull (`data/spacecraft/simplified_spacecraft_v1/`), an exact
+  `ConvexPolygonGeometry` end-cap primitive, 8 antenna installation points with panel-normal
+  boresights, and a separate KAA gimbal hemisphere steering domain, wired into the unchanged FOV/LOS
+  machinery (`icd/mission_spacecraft.md`). Geometry evidence only; no pattern is loaded or created.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.

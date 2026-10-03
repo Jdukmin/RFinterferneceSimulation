@@ -42,6 +42,15 @@ Concrete (deterministic, math-based; no CAD kernel — Task §8, §9):
   ray intersection; 8 vertices.
 - **`PanelGeometry(width_m, height_m)`** — flat rectangle in the S `XY` plane (`z=0`), normal
   `+Z_S`, spanning `[-w/2,w/2]×[-h/2,h/2]`; ray-plane + in-bounds test; 4 vertices.
+- **`ConvexPolygonGeometry(vertices2D_m)`** *(Phase 7)* — exact flat **convex polygon** in the S
+  `XY` plane (`z=0`), normal `+Z_S`, from a 2×N vertex list (N ≥ 3) kept **exactly** as given
+  (order and count; CW or CCW accepted, `isCCW` recorded). Rejected unless finite, vertices unique,
+  **strictly convex** (no collinear/reflex vertex) and simple (exterior angles sum to 360°).
+  Ray-plane + edge-half-plane inclusion test (boundary inclusive, tolerance `1e-12·max(1,|v|)`);
+  `verticesLocal()` = the N exact vertices (so `VERTEX_SAMPLED` footprints sample the true
+  corners); also `area`, `perimeter`, `edgeLengths`, `centroid`, `containsPoint`. Used for faces
+  that are neither rectangles nor disks (e.g. the irregular hexagonal end caps of
+  `mission_spacecraft.md`) — never a regular-polygon / bounding-disk / triangulated stand-in.
 
 Ray tolerance: intersections with `tHit ≤ tolEps` (default `1e-9 · max(1, |o|)`) or grazing hits
 within tolerance are reported per the documented policy (§5). A `MESH`/`EXTERNAL_GEOMETRY` adapter
