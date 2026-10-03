@@ -230,3 +230,7 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
   convex, simple.
 - **DR-434 (SHALL)** `GimbalSteeringDomain` fields `antennaId`, `referenceAxis_B`,
   `steeringModel` ∈ {HEMISPHERE, CONE}, `maxOffAxis_deg`, `provenance`.
+- **DR-435 (SHALL)** `analysis_cases.csv`, `antenna_functions.csv`, `pattern_bindings.csv` per ICD
+  `mission_spacecraft.md` §9; pattern frequency/band/fidelity/polarization each carry provenance.
+- **DR-436 (SHALL)** `PatternFidelity` adds `DATASHEET_ENVELOPE_2D_CUT` for datasheet-envelope cuts;
+  the ISL CST surrogate cuts (`data/Xband_ISL`) are `SIMULATED_2D_CUT`.

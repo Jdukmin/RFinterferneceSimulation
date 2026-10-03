@@ -1,0 +1,11 @@
+# simplified_spacecraft_v1 -- RFC/RFI analysis cases (SBA variant x GPS band = 6 cases)
+# sba_variant applies to both SBA_NADIR and SBA_ZENITH (TC and TM functions);
+# gps_band applies to both GPSA_1 and GPSA_2. ISL/KAA bindings are the same in every case.
+# SAR_ANT is excluded from these cases (closed-network analysis). Fields must not contain commas.
+case_id,sba_variant,gps_band,note
+CASE_SBA1_L1,SBA1,L1,
+CASE_SBA1_L2,SBA1,L2,L2 uses the 1207 MHz proxy pattern
+CASE_SBA1_L5,SBA1,L5,
+CASE_SBA4_L1,SBA4,L1,
+CASE_SBA4_L2,SBA4,L2,L2 uses the 1207 MHz proxy pattern
+CASE_SBA4_L5,SBA4,L5,

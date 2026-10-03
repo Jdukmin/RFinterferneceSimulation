@@ -323,3 +323,9 @@ unchanged: geometry is installation evidence only.**
   linkage shall be explicit (`CANDIDATE_DATASET`/`PENDING`/`UNSUPPORTED`).
 - **SR-438 (SHALL)** Dataset inconsistencies (vertex count, LONG/SHORT alternation, normal or
   design-parameter mismatch, dangling references) shall be rejected, never repaired.
+- **SR-439 (SHALL)** The baseline shall define the RFC/RFI analysis cases as data: SBA variant
+  {SBA1, SBA4} × GPS band {L1, L2, L5} (6 cases), with ISL and KAA bindings common to all cases and
+  SAR excluded (closed-network analysis). Each case shall build a scenario through the existing
+  Phase-2 pattern pipeline and Phase-1 `Scenario`, one `Antenna` per RF function.
+- **SR-440 (SHALL)** Case building shall not invent RF system data (TX power, bandwidth,
+  receiver criteria) and shall warn about candidate (unconfirmed) and deferred bindings.

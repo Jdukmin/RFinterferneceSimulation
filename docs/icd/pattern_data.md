@@ -106,7 +106,9 @@ against the actual coordinate vector.
 ## 4. `patterndata.PatternFidelity` (explicit; §22)
 
 `MEASURED_2D_CUT`, `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`,
-`SYNTHETIC_TEST`. Stored explicitly on each cut; **never** inferred from filename (§22). When a
+`SYNTHETIC_TEST`, and *(Phase 7)* `DATASHEET_ENVELOPE_2D_CUT` — a 2D cut derived from a published
+datasheet pattern **envelope** (digitized / interpolated / mirrored), which is neither raw measured
+nor simulated data; it counts as a 2D cut (`is2DCut`). Stored explicitly on each cut; **never** inferred from filename (§22). When a
 3D antenna pattern is assembled from 2D cuts, the resulting Phase-1 `AntennaPattern` provenance is
 `APPROX_FROM_CUTS` regardless of the cuts' fidelity (§21) — a 2D cut is never relabeled as true 3D.
 

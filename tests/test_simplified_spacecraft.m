@@ -238,8 +238,12 @@ function test_simplified_spacecraft(h)
     sarInst = sc.installations('SAR_ANT');
     fov = rfscreen.geometry.AntennaToStructureFOV.analyze('SAR_ANT', sarInst.position_m, sarInst.R_BA, p7, struct());
     h.eqStr('FOV without pattern is GEOMETRY_ONLY', fov.validity, 'GEOMETRY_ONLY');
-    h.isTrue('ISL / SAR pattern PENDING', strcmp(RC.ISL.patternStatus, 'PENDING') && ...
-        strcmp(RC.SAR_ANT.patternStatus, 'PENDING') && isempty(RC.ISL.patternDataset));
+    h.isTrue('ISL bound to data/Xband_ISL', strcmp(RC.ISL.patternStatus, 'BOUND') && ...
+        strcmp(RC.ISL.patternDataset, 'data/Xband_ISL'));
+    h.isTrue('SAR deferred to closed network, no dataset', ...
+        strcmp(RC.SAR_ANT.patternStatus, 'DEFERRED_CLOSED_NETWORK') && isempty(RC.SAR_ANT.patternDataset));
+    h.isTrue('SBA / GPSA case-dependent', strcmp(RC.SBA_NADIR.patternStatus, 'CASE_DEPENDENT') && ...
+        strcmp(RC.GPSA_1.patternStatus, 'CASE_DEPENDENT'));
 
     banned = {'gain','loss','s21','attenuation','reflection','diffraction','scatter','isolation'};
     h.isFalse('model has no EM field', anyContains(fieldnames(m), banned));

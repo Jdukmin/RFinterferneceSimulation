@@ -81,8 +81,14 @@ Phase-7 adds:
              (exact convex planar face; pure math, no file parsing)
 +spacecraft/ SpacecraftDataReader, PrismHull, SimplifiedSpacecraftBuilder,       [Phase 7]
              GimbalSteeringDomain                    (deps: util, geometry, antenna, scenario)
-data/spacecraft/simplified_spacecraft_v1/   hull + installation + steering CSV (SSOT, mm)
++mission/    MissionCaseBuilder   (deps: util, spacecraft, patterndata, antenna, scenario, geometry) [Phase 7b]
+data/spacecraft/simplified_spacecraft_v1/   hull + installation + steering + case/binding CSV (SSOT)
+data/Xband_ISL/                              CST ISL_C4_CUP_R14P7 screening cuts (10.3/10.4/10.5 GHz)
 ```
+
+`+mission` is the top-level case orchestrator: case tables → existing `CsvPatternImporter` /
+`CutPatternAssembler` → `Scenario` (antennas per RF function, patterns, structures,
+installations). Nothing depends on it; it creates no RF systems and no EM values.
 
 ### Phase-7 mission spacecraft baseline flow
 

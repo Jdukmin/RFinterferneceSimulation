@@ -19,6 +19,7 @@ screening** (structure FOV, LOS blockage, installation evidence). Consumed by
 | `panels.csv` | Panel #1–#8: side edge / end-cap reference, LONG/SHORT class, canonical outward normals | `SOURCE_EXPLICIT` |
 | `antenna_installations.csv` | 8 antenna installation reference points (mm), panel assignment, mount type, pattern linkage status | per row |
 | `steering_constraints.csv` | KAA gimbal steering domains (hemisphere) | `SIMPLIFIED_ASSUMPTION` |
+| `analysis_cases.csv`, `antenna_functions.csv`, `pattern_bindings.csv` | the 6 RFC/RFI analysis cases and their pattern bindings (see below) | per row |
 
 CSV rules: `#` lines are comments, first remaining line is the header, fields contain no commas.
 
@@ -112,19 +113,28 @@ allowed commanded boresight set is the outward **hemisphere** `|u_B| = 1, u_B·n
 hard-stop, keep-out zone or slew envelope. When real limits are available, change the row in
 `steering_constraints.csv` to `CONE` with a smaller `max_off_axis_deg`; no code change is needed.
 
-## Pattern linkage (not resolved here)
+## Pattern linkage and analysis cases
 
-The geometry builder loads **no** pattern. `pattern_status` records what is known:
+The geometry builder loads **no** pattern. Patterns are bound per analysis case by
+`rfscreen.mission.MissionCaseBuilder` from three tables:
 
-| Antenna | Status | Candidate dataset | Open item |
-|---------|--------|-------------------|-----------|
-| SBA_NADIR / SBA_ZENITH | `CANDIDATE_DATASET` | `data/Sband_TMTC` | SBA1 vs SBA4 variant, TM/TC cut binding |
-| GPSA_1 / GPSA_2 | `CANDIDATE_DATASET` | `data/Lband_GPS` | L1/L2/L5 cut binding |
-| KAA_1 / KAA_2 | `CANDIDATE_DATASET` | `data/Kaband_DLS` | confirm KAA ↔ DLS reflector equivalence |
-| ISL | `PENDING` | — | no pattern data in the repository |
-| SAR_ANT | `PENDING` | — | no pattern data in the repository |
+| File | Content |
+|------|---------|
+| `analysis_cases.csv` | 6 cases = SBA variant {SBA1, SBA4} × GPS band {L1, L2, L5} |
+| `antenna_functions.csv` | one RF function per row (S-band mounts host a TC receive and a TM transmit function), role, pattern selector, binding status |
+| `pattern_bindings.csv` | pattern key → dataset files, tag frequency, operating band, cut fidelity, polarization (each with provenance) |
 
-No synthetic pattern is substituted for a pending one, and no dataset is relabelled as mission data.
+| Antenna | Status | Dataset | Note |
+|---------|--------|---------|------|
+| SBA_NADIR / SBA_ZENITH | `CASE_DEPENDENT` | `data/Sband_TMTC` | SBA1 and SBA4 analysed as separate cases; TC (2000–2120 MHz, RX) and TM (2200–2300 MHz, TX) |
+| GPSA_1 / GPSA_2 | `CASE_DEPENDENT` | `data/Lband_GPS` | L1 (1575 MHz plot, 1563–1588), L2 (**1207 MHz proxy**), L5 (1176 MHz plot, 1164–1189) as separate cases |
+| ISL | `BOUND` | `data/Xband_ISL` | CST `ISL_C4_CUP_R14P7`, 10.4 GHz centre cut (10.3/10.5 edge cuts available) |
+| KAA_1 / KAA_2 | `CANDIDATE_DATASET` | `data/Kaband_DLS` | used in every case with a warning; KAA ↔ DLS reflector equivalence still to be confirmed |
+| SAR_ANT | `DEFERRED_CLOSED_NETWORK` | — | RF analysis later in the closed network; geometry only here |
+
+GNSS band windows follow the CST worker's monitor windows (`cst/specs/lband_gnss.yaml`) and are
+tagged `ASSUMED`; the 1207 MHz L2 entry is a single-frequency **proxy**, not GPS L2 1227.60 MHz data.
+No synthetic pattern is substituted for a missing one, and no dataset is relabelled as mission data.
 
 ## Assumptions / TBD
 
@@ -132,4 +142,6 @@ No synthetic pattern is substituted for a pending one, and no dataset is relabel
 2. Long/Short ratio fixed at the nominal 2.6 (range 2.5–2.7 not swept).
 3. SBA assignments near corners are inferred from the simplified geometry.
 4. KAA steering domain = full outward hemisphere (placeholder for real gimbal limits).
-5. Pattern bindings above are open; geometry-only FOV results carry `validity = GEOMETRY_ONLY`.
+5. KAA pattern binding is a candidate; SAR RF analysis is deferred to the closed network.
+6. No RF transmitter/receiver data (power, bandwidth, link frequencies, receiver criteria) are in
+   this dataset; pairwise RF screening needs them.

@@ -62,6 +62,10 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > separate KAA gimbal hemisphere steering domain, then feeds the **unchanged** FOV/LOS machinery.
 > Not CAD; geometry evidence only; no pattern loaded or synthesised. See
 > `docs/icd/mission_spacecraft.md`, `examples/simplified_spacecraft_geometry.m`.
+> **Phase 7b:** the six analysis cases (SBA1/SBA4 × GPS L1/L2/L5) are defined as data and built by
+> `rfscreen.mission.MissionCaseBuilder` (per-function antennas + patterns through the existing
+> Phase-2 pipeline); ISL uses the CST `ISL_C4_CUP_R14P7` 10.4 GHz pattern (`data/Xband_ISL`); SAR
+> RF analysis is deferred to the closed network. See `examples/mission_cases.m`.
 >
 > HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
 > (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI

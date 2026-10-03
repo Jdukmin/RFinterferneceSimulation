@@ -560,3 +560,32 @@ GNU Octave 9.2.0: **PASS — 915 assertions, 38 files** (`tests/run_all_tests.m`
 pre-existing assertions pass unchanged, +25 `test_convex_polygon`, +262
 `test_simplified_spacecraft`. `examples/simplified_spacecraft_geometry.m` executes. MATLAB: **NOT
 RUN** (unavailable in this environment; not claimed).
+
+## P7b — Analysis cases & ISL pattern binding
+
+Owner decisions (2026-10-04): SBA analysed separately for **SBA1** and **SBA4**; GPSA separately for
+**L1**, **L2**, **L5** → **6 cases**; ISL uses the CST surrogate prepared by the CST worker
+(`ISL_C4_CUP_R14P7`, 10.4 GHz); SAR is analysed later in the closed network.
+
+| Req | Code / data | Test |
+|-----|-------------|------|
+| SR-439, DR-435 (6 cases as data; one Antenna per RF function) | `analysis_cases.csv`, `antenna_functions.csv`, `pattern_bindings.csv`, `mission/MissionCaseBuilder` | test_mission_cases (VR-439, VR-441) |
+| SR-440 (no invented RF systems; warnings) | `MissionCaseBuilder.buildCase` | test_mission_cases (VR-441, VR-442) |
+| DR-436 (fidelity labels) | `patterndata/PatternFidelity.DATASHEET_ENVELOPE_2D_CUT`; ISL `SIMULATED_2D_CUT` | test_mission_cases |
+| ISL dataset | `data/Xband_ISL/` (byte-identical copy of `cst/exports/isl/screening_1deg/`) | test_mission_cases (VR-440) |
+
+Canonical decisions:
+1. **Function-level antennas.** An S-band mount hosts `*_TC` (RX, TC pattern, 2000–2120 MHz) and
+   `*_TM` (TX, TM pattern, 2200–2300 MHz) functions sharing one `AntennaInstallation`.
+2. **GPS L2 = 1207 MHz proxy** (as labelled in the datasheet plot), band entered as a single point;
+   L1/L5 windows follow the CST worker's ASSUMED monitor windows.
+3. **ISL** uses the 10.4 GHz centre cuts; 10.3/10.5 GHz cuts are kept as `ISL_10P3`/`ISL_10P5` for
+   sensitivity. The CST complex `.ffs` and raw results stay in the uncommitted `cst/` workspace (no
+   complex-field importer exists).
+4. **KAA** keeps the Ka-band DLS pattern as a **candidate** (warned in every case).
+5. `+mission` is a new top-level package so `+spacecraft` remains pattern-free (VR-437).
+6. No `RFTransmitter`/`RFReceiver` is created: power/bandwidth/receiver data are not available.
+
+Verification: GNU Octave 9.2.0 — **1089/1089 assertions, 39 files** (+172 `test_mission_cases`, +2
+net in `test_simplified_spacecraft`); `examples/mission_cases.m` builds all 6 cases (2° grid).
+MATLAB: NOT RUN.

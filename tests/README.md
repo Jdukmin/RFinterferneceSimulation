@@ -69,13 +69,15 @@ cd tests; ok = run_all_tests();
 | `test_convex_polygon` | exact convex polygon metrics, ray hit/edge/miss/parallel/behind, CW input, invalid polygons |
 | `test_simplified_spacecraft` | 6-vertex irregular section + SSOT numbers, panel structures, end-cap ray equivalence, exact antenna positions, assignments/offsets, fixed boresights, KAA hemisphere boundary (0/89.999/90 PASS, >90 FAIL), scenario/LOS/FOV, geometry-only invariants, corrupted-dataset rejection |
 
-Note: these two files use the real repository dataset `data/spacecraft/simplified_spacecraft_v1/`
+| `test_mission_cases` | 6-case catalogue, ISL dataset rows/boresight, per-case functions/patterns/bands/roles, SAR excluded, no RF systems invented, pattern cache, boresight = source CSV, variants/bands differ, pattern-aware FOV leaves gain unchanged, `+mission` boundaries |
+
+Note: these files use the real repository datasets `data/spacecraft/simplified_spacecraft_v1/`
 (analysis baseline, `USER_DEFINED` provenance), not `SYNTHETIC_TEST` fixtures.
 
 ## Status
 
-**915 assertions across 38 files, all passing** under GNU Octave 9.2.0 (Phase 7): the 628
-assertions of Phases 1–6 unchanged, plus 25 (`test_convex_polygon`) and 262
-(`test_simplified_spacecraft`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
+**1089 assertions across 39 files, all passing** under GNU Octave 9.2.0 (Phase 7b): the 628
+assertions of Phases 1–6 unchanged, plus 25 (`test_convex_polygon`), 264
+(`test_simplified_spacecraft`) and 172 (`test_mission_cases`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
 (Phase 6) under Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not
 claimed.

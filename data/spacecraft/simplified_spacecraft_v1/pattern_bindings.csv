@@ -1,0 +1,19 @@
+# simplified_spacecraft_v1 -- pattern datasets usable by the analysis cases
+# Every file: CSV theta,gain; theta 0..359 deg ([0,360)); boresight +Z; dBi.
+# pattern_freq_mhz = frequency the single-frequency cut pair is tagged with (patterns are reused
+#   across the antenna band as frequency-independent, per ICD antenna.md 3.4).
+# band_min_mhz / band_max_mhz = operating band given to the Antenna record using this pattern.
+# fidelity = explicit cut fidelity (patterndata.PatternFidelity); the assembled 3D pattern is always
+#   APPROX_FROM_CUTS. Fields must not contain commas.
+pattern_key,dataset_dir,xz_file,yz_file,pattern_freq_mhz,band_min_mhz,band_max_mhz,freq_provenance,fidelity,polarization,polarization_provenance,note
+SBA1_TC,data/Sband_TMTC,SBA1_TC_XZ.csv,SBA1_TC_YZ.csv,2060,2000,2120,DATASET_README_TC_BAND,DATASHEET_ENVELOPE_2D_CUT,UNKNOWN,NOT_STATED,SBA1 TC/RX envelope (XZ=YZ)
+SBA1_TM,data/Sband_TMTC,SBA1_TM_XZ.csv,SBA1_TM_YZ.csv,2250,2200,2300,DATASET_README_TM_BAND,DATASHEET_ENVELOPE_2D_CUT,UNKNOWN,NOT_STATED,SBA1 TM/TX envelope (XZ=YZ)
+SBA4_TC,data/Sband_TMTC,SBA4_TC_XZ.csv,SBA4_TC_YZ.csv,2060,2000,2120,DATASET_README_TC_BAND,DATASHEET_ENVELOPE_2D_CUT,UNKNOWN,NOT_STATED,SBA4 TC/RX envelope (XZ=YZ)
+SBA4_TM,data/Sband_TMTC,SBA4_TM_XZ.csv,SBA4_TM_YZ.csv,2250,2200,2300,DATASET_README_TM_BAND,DATASHEET_ENVELOPE_2D_CUT,UNKNOWN,NOT_STATED,SBA4 TM/TX envelope (XZ=YZ)
+GPS_L1,data/Lband_GPS,Extended_GNSS_PEC_L1_1575MHz_XZ.csv,Extended_GNSS_PEC_L1_1575MHz_YZ.csv,1575,1563,1588,PLOT_LABEL_AND_CST_MONITOR_WINDOW_ASSUMED,DATASHEET_ENVELOPE_2D_CUT,RHCP,ASSUMED_GNSS_RHCP,L1/E1 1575 MHz plot
+GPS_L2,data/Lband_GPS,Extended_GNSS_PEC_L2_proxy_1207MHz_XZ.csv,Extended_GNSS_PEC_L2_proxy_1207MHz_YZ.csv,1207,1207,1207,PLOT_LABEL_POINT_PROXY,DATASHEET_ENVELOPE_2D_CUT,RHCP,ASSUMED_GNSS_RHCP,L2 screening PROXY from the 1207 MHz plot (not GPS L2 1227.60 MHz data)
+GPS_L5,data/Lband_GPS,Extended_GNSS_PEC_L5_1176MHz_XZ.csv,Extended_GNSS_PEC_L5_1176MHz_YZ.csv,1176,1164,1189,PLOT_LABEL_AND_CST_MONITOR_WINDOW_ASSUMED,DATASHEET_ENVELOPE_2D_CUT,RHCP,ASSUMED_GNSS_RHCP,L5/E5a 1176 MHz plot
+ISL_10P4,data/Xband_ISL,f10.4_XZ.csv,f10.4_YZ.csv,10400,10300,10500,OWNER_CENTER_AND_ASSUMED_EDGES,SIMULATED_2D_CUT,RHCP,ASSUMED_ISL_A2,CST ISL_C4_CUP_R14P7 centre; 0-60 deg CST and elsewhere max(CST; conservative envelope)
+ISL_10P3,data/Xband_ISL,f10.3_XZ.csv,f10.3_YZ.csv,10300,10300,10500,OWNER_CENTER_AND_ASSUMED_EDGES,SIMULATED_2D_CUT,RHCP,ASSUMED_ISL_A2,CST band-edge cut (sensitivity only)
+ISL_10P5,data/Xband_ISL,f10.5_XZ.csv,f10.5_YZ.csv,10500,10300,10500,OWNER_CENTER_AND_ASSUMED_EDGES,SIMULATED_2D_CUT,RHCP,ASSUMED_ISL_A2,CST band-edge cut (sensitivity only)
+KA_DLS,data/Kaband_DLS,KARMA7_FG_KaBand_XZ.csv,KARMA7_FG_KaBand_YZ.csv,26250,25500,27000,DATASHEET_BAND_CENTER_TAG,DATASHEET_ENVELOPE_2D_CUT,UNKNOWN,DATASHEET_RHCP_OR_LHCP,KAA <-> Ka-band DLS reflector equivalence not yet confirmed

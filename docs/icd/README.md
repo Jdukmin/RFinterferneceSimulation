@@ -67,7 +67,7 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **LobeClass**: `MAIN`, `SIDE`, `BACK`
 - **ResultValidity**: `VALID_PATTERN_SCREENING`, `APPROXIMATE`, `OUTSIDE_PATTERN_DOMAIN`, `FAR_FIELD_NOT_VERIFIED`, `MISSING_RECEIVER_DATA`, `REQUIRES_FULL_WAVE_VERIFICATION`
 - **RiskLevel**: `NA`, `OK`, `LOW`, `WARN`, `HIGH`
-- **PatternFidelity** *(Phase 2)*: `MEASURED_2D_CUT`, `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`
+- **PatternFidelity** *(Phase 2; Phase 7 adds `DATASHEET_ENVELOPE_2D_CUT`)*: `MEASURED_2D_CUT`, `SIMULATED_2D_CUT`, `MEASURED_3D`, `SIMULATED_3D`, `APPROX_FROM_CUTS`, `SYNTHETIC_TEST`, `DATASHEET_ENVELOPE_2D_CUT`
 - **SamplingType** *(Phase 2)*: `UNIFORM`, `NON_UNIFORM`, `INVALID`
 - **ValidationStatus** *(Phase 2)*: `VALID`, `VALID_WITH_WARNINGS`, `INVALID`
 - **SpectrumProvenance** *(Phase 3)*: `IDEAL_MODEL`, `DATASHEET`, `MEASURED`, `SIMULATED`, `SYNTHETIC_TEST`
@@ -90,5 +90,6 @@ Phase-1 code represents enumerations as classes exposing `Constant` `char` value
 - **GeometryRisk** *(Phase 5)*: `NA`, `LOW`, `MODERATE`, `HIGH`
 - **Steering model** *(Phase 7, `GimbalSteeringDomain.steeringModel`)*: `HEMISPHERE`, `CONE`
 - **Mount type** *(Phase 7 dataset)*: `FIXED`, `GIMBAL`
-- **Pattern linkage status** *(Phase 7 dataset)*: `CANDIDATE_DATASET`, `PENDING`, `UNSUPPORTED`
+- **Pattern linkage status** *(Phase 7 dataset)*: `CASE_DEPENDENT`, `BOUND`, `CANDIDATE_DATASET`, `DEFERRED_CLOSED_NETWORK`, `PENDING`, `UNSUPPORTED`
+- **Function binding status** *(Phase 7 dataset)*: `CASE_DEPENDENT`, `BOUND`, `CANDIDATE`, `DEFERRED_CLOSED_NETWORK`
 - **Assignment provenance** *(Phase 7 dataset)*: `SOURCE_EXPLICIT`, `INFERRED_FROM_SIMPLIFIED_GEOMETRY`

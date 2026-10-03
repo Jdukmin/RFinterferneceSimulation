@@ -2,8 +2,8 @@
 
 Normative interface for loading the **simplified spacecraft baseline** (hull + antenna
 installation registry + gimbal steering metadata) from a repository dataset and attaching it to
-the existing Phase-5 geometry/FOV/LOS machinery. Requirements: SR-430…SR-438, DR-430…DR-434,
-VR-430…VR-438.
+the existing Phase-5 geometry/FOV/LOS machinery, and for building the per-case RFC/RFI scenarios
+(§9). Requirements: SR-430…SR-440, DR-430…DR-436, VR-430…VR-442.
 
 Builds on Phase-1..6 **without changing** any existing contract (`AntennaInstallation`,
 `SpacecraftStructure`, `Scenario`, FOV/LOS analyzers). **Central rule (unchanged): geometry
@@ -31,7 +31,10 @@ package depends on it. Dataset: `data/spacecraft/simplified_spacecraft_v1/` (REA
 | `hull_cross_section.csv` | `vertex_id,y_mm,z_mm` | exactly 6 vertices, CCW in (Y,Z) |
 | `hull_parameters.csv` | `key,value,unit,provenance,note` | `x_min_mm`, `x_max_mm` define geometry; `d_long_mm`, `d_short_mm`, `nominal_long_short_ratio` are **cross-checks only**; envelope rows are reference only; `consistency_tol_mm`; `geometry_provenance` |
 | `panels.csv` | `panel_id,kind,size_class,vertex_from,vertex_to,face_x_ref,n_x,n_y,n_z` | `SIDE` (hull edge) or `END_CAP` (`x_min_mm`/`x_max_mm`); tabulated canonical normals cross-checked |
-| `antenna_installations.csv` | `antenna_id,x_mm,y_mm,z_mm,panel_id,mount_type,assignment_provenance,pattern_status,pattern_dataset,note` | `mount_type` ∈ {`FIXED`,`GIMBAL`}; `pattern_status` ∈ {`CANDIDATE_DATASET`,`PENDING`,`UNSUPPORTED`} |
+| `antenna_installations.csv` | `antenna_id,x_mm,y_mm,z_mm,panel_id,mount_type,assignment_provenance,pattern_status,pattern_dataset,note` | `mount_type` ∈ {`FIXED`,`GIMBAL`}; `pattern_status` ∈ {`CASE_DEPENDENT`,`BOUND`,`CANDIDATE_DATASET`,`DEFERRED_CLOSED_NETWORK`,`PENDING`,`UNSUPPORTED`} (installation-level summary) |
+| `pattern_bindings.csv` | `pattern_key,dataset_dir,xz_file,yz_file,pattern_freq_mhz,band_min_mhz,band_max_mhz,freq_provenance,fidelity,polarization,polarization_provenance,note` | §9 |
+| `antenna_functions.csv` | `function_id,installation_id,role,role_provenance,pattern_selector,binding_status,note` | §9 |
+| `analysis_cases.csv` | `case_id,sba_variant,gps_band,note` | §9 |
 | `steering_constraints.csv` | `antenna_id,steering_model,reference_axis,max_off_axis_deg,provenance,note` | one row per `GIMBAL` antenna; `reference_axis = PANEL_OUTWARD_NORMAL` |
 
 CSV format (`spacecraft.SpacecraftDataReader.readTable`): `#`/`%` comment and blank lines
@@ -148,3 +151,43 @@ keep-out or slew envelope. Narrowing it is a data change (`CONE`, smaller `max_o
   gain or coupling.
 - Pending pattern data stays `PENDING`; a candidate dataset is never promoted to the mission
   pattern by this layer.
+
+## 9. Analysis cases — `mission.MissionCaseBuilder` (Phase 7b)
+
+Orchestration package `src/+rfscreen/+mission/` (deps: `util`, `spacecraft`, `patterndata`,
+`antenna`, `scenario`, `geometry`); no package depends on it. `+spacecraft` stays pattern-free.
+
+**Cases** (`analysis_cases.csv`): SBA variant {`SBA1`,`SBA4`} × GPS band {`L1`,`L2`,`L5`} = 6
+cases. The SBA variant applies to both SBA mounts (TC and TM functions); the GPS band to both GPSA
+mounts. ISL and KAA are identical in every case. SAR_ANT is **not instantiated** (RF analysis is
+done later in the closed network); its installation and panel geometry remain.
+
+**Functions** (`antenna_functions.csv`): one `antenna.Antenna` per RF function, referencing the
+mount by `installationId` (an installation may host several functions):
+
+| Function | Mount | Role | Pattern selector | Binding status |
+|----------|-------|------|------------------|----------------|
+| SBA_NADIR_TC / SBA_ZENITH_TC | SBA_NADIR / SBA_ZENITH | RX | `<variant>_TC` | `CASE_DEPENDENT` |
+| SBA_NADIR_TM / SBA_ZENITH_TM | SBA_NADIR / SBA_ZENITH | TX | `<variant>_TM` | `CASE_DEPENDENT` |
+| GPSA_1 / GPSA_2 | GPSA_1 / GPSA_2 | RX | `GPS_<band>` | `CASE_DEPENDENT` |
+| KAA_1 / KAA_2 | KAA_1 / KAA_2 | TX | `KA_DLS` | `CANDIDATE` (warned) |
+| ISL | ISL | TXRX | `ISL_10P4` | `BOUND` |
+| SAR_ANT | SAR_ANT | — | `NONE` | `DEFERRED_CLOSED_NETWORK` |
+
+**Patterns** (`pattern_bindings.csv`): XZ/YZ CSV cuts (`[0,360)`, boresight `+Z`) imported with
+the **existing** `CsvPatternImporter` (explicit fidelity and frequency) and assembled with the
+existing `CutPatternAssembler` (provenance `APPROX_FROM_CUTS`; default 2° grid). Each pattern is a
+single-frequency pattern tagged at `pattern_freq_mhz` and reused across `band_min…band_max` as
+frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
+
+| API | Meaning |
+|-----|---------|
+| `listCases(datasetDir)` | case struct array |
+| `buildCase(caseId, opts)` | struct: `caseId`, `sbaVariant`, `gpsBand`, `scenario` (structures + installations + antennas + patterns), `model`, `functions` (per function: key, band, frequency, fidelity, source files, `included`), `patternCache`, `warnings`. `opts.patternCache` (shared `containers.Map`) avoids re-assembly across cases; `opts.azStep_deg`/`elStep_deg` |
+| `structureFov(c, lobePolicy)` | pattern-aware `AntennaToStructureFOV` for every included function × panel at the reference orientation (rows: off-boresight, angular radius, distance, centre lobe, occupied lobes, centre-ray hit, validity) |
+| `assemblePattern(binding, opts)`, `readBindings(path)` | pattern assembly / binding table |
+
+**Not created:** no `RFTransmitter`/`RFReceiver` — TX power, bandwidth, centre frequency per link
+and receiver data are not in the dataset and are never invented; register them on `c.scenario`
+to run the existing pairwise / coexistence / nonlinear analyzers. KAA FOV uses the gimbal
+reference orientation; steering sweeps use `GimbalSteeringDomain` (§7).

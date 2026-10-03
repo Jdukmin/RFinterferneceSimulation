@@ -225,4 +225,12 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
 - **VR-437 (SHALL)** Scenario attachment; LOS/FOV through unchanged analyzers; no pattern or EM
   quantity created; `+spacecraft` free of pattern/EM identifiers; no core package depends on it;
   corrupted datasets rejected. *(test_simplified_spacecraft)*
-- **VR-438 (SHALL)** All pre-existing assertions (628) still pass unchanged.
+- **VR-438 (SHALL)** All pre-existing assertions (628 before Phase 7) still pass unchanged.
+- **VR-439 (SHALL)** Case catalogue: exactly the 6 SBA×GPS combinations, unique ids, unknown case
+  rejected. *(test_mission_cases)*
+- **VR-440 (SHALL)** ISL dataset: 6 cuts × 360 rows (0…359°), 10.4 GHz boresight 10.020177967 dBi.
+- **VR-441 (SHALL)** Each case validates; 9 RF functions (SAR excluded, its geometry kept); pattern
+  set and per-function pattern/band/role as defined; no TX/RX invented; warnings for SAR/KAA; 9
+  distinct patterns over the 6 cases; assembled boresight = source CSV θ=0; SBA1≠SBA4, L1≠L2≠L5.
+- **VR-442 (SHALL)** Pattern-aware structure FOV (72 rows, `FOV_WITH_PATTERN`) leaves gains
+  unchanged; `+mission` creates no RF systems or EM-loss values; no package depends on `+mission`.

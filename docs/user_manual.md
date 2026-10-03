@@ -258,6 +258,25 @@ s   = kaa.steeredInstallation(sc.installations('KAA_1'), U(:, 10));   % installa
   antennas and patterns yourself once the binding is confirmed.
 - Full walk-through: `examples/simplified_spacecraft_geometry.m`. Contract: `docs/icd/mission_spacecraft.md`.
 
+### 9.2 The six analysis cases (SBA1/SBA4 × GPS L1/L2/L5)
+
+```matlab
+MB    = rfscreen.mission.MissionCaseBuilder;
+cases = MB.listCases();                                   % CASE_SBA1_L1 ... CASE_SBA4_L5
+opts  = struct('patternCache', containers.Map('KeyType','char','ValueType','any'));
+c     = MB.buildCase('CASE_SBA4_L5', opts);               % scenario: panels, mounts, 9 antennas, patterns
+rows  = MB.structureFov(c);                               % pattern-aware panel FOV per RF function
+c.warnings                                                % KAA candidate, SAR deferred, no RF systems
+```
+
+- S-band mounts carry two functions (`*_TC` receive, `*_TM` transmit) with the case's SBA variant;
+  both GPSA use the case's GPS band (L2 = 1207 MHz proxy); ISL uses the CST 10.4 GHz pattern
+  (`data/Xband_ISL`); KAA uses the Ka-band DLS pattern as a candidate; SAR is geometry-only.
+- No transmitters/receivers are created. Add `RFTransmitter`/`RFReceiver` (power, bandwidth,
+  frequency, receiver data) to `c.scenario` to run the pairwise / coexistence analyzers.
+- Pattern assembly takes ~15 s per pattern in Octave at the default 2° grid; pass the same
+  `patternCache` to every case (9 distinct patterns in total). Example: `examples/mission_cases.m`.
+
 Geometry gives **evidence** (does it enter the FOV, is the LOS blocked, how far). It never produces
 a gain, loss, isolation, or scattering value — that boundary is enforced in the architecture.
 

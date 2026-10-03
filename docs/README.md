@@ -41,5 +41,7 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
   `ConvexPolygonGeometry` end-cap primitive, 8 antenna installation points with panel-normal
   boresights, and a separate KAA gimbal hemisphere steering domain, wired into the unchanged FOV/LOS
   machinery (`icd/mission_spacecraft.md`). Geometry evidence only; no pattern is loaded or created.
+  Phase 7b adds the six analysis cases (SBA1/SBA4 × GPS L1/L2/L5) via `+mission`, the CST ISL
+  pattern (`data/Xband_ISL`), and defers SAR RF analysis to the closed network.
 
 Canonical units, frames, and conventions are fixed in `icd/` and must not be silently overridden.
