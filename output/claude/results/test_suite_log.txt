@@ -1,4 +1,4 @@
-Running 47 test files...
+Running 48 test files...
   ran test_coordinate
   ran test_geometry
   ran test_pattern
@@ -46,8 +46,9 @@ Running 47 test files...
   ran test_ka_nearfield
   ran test_rfi_psd
   ran test_kaa_victimband
+  ran test_stc_lband_rescaling
 
 ================ TEST SUMMARY ================
-Passed: 1619   Failed: 0   Total: 1619
+Passed: 1647   Failed: 0   Total: 1647
 =============================================
 ALL_OK=1

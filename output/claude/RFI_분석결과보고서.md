@@ -7,6 +7,18 @@
 
 ## 1. Executive Summary
 
+- **S-TC TX filter design (Task 1, 별도 보고서 [S-TC_TX_억제요구_결과보고서.md](S-TC_TX_억제요구_결과보고서.md)):** 이 행들만 ITU RR AP3 / SM.329 source(5 W → −49.02 dBm/Hz, 안테나 포트)를 입력해 계산했다. 아래 나머지 pair의 "규격 미입력" 서술은 그 밖의 TX에 해당한다.
+
+  | S-TC TX (legacy id: S_TM_TX) victim | Effective source [dBm/Hz] | Victim PSD [dBm/Hz] | Limit [dBm/Hz] | Required suppression [dB] | First PASS | Design target | Confidence |
+  |---|---|---|---|---|---|---|---|
+  | GPS L1 | −49.02 | −130.00 | −178 | 48.00 | 60 dB | 60 dB | 시뮬레이션 |
+  | GPS L2 | −59.02 (−10 dB rescaling) | −107.55 | −178 | 70.45 | 80 dB | 90 dB | ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling |
+  | GPS L5 | −59.02 (−10 dB rescaling) | −107.13 | −178 | 70.87 | 80 dB | 90 dB | ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling |
+  | S-TM RX (legacy id: S_TC_RX) | −49.02 | −118.11 | −177 | 58.89 | 60 dB | 70 dB | 시뮬레이션 |
+  | ISL RX | −49.02 | −137.74 | −177 | 39.26 | 40 dB | 50 dB | 시뮬레이션 |
+
+  억제 조건: 요구량은 0 dB 추가 필터 기준 총 요구량 max(0, PSD − limit)이다. First PASS는 0/40/60/70/80 dB screening 중 처음 margin ≥ 0인 값이다. Design target은 요구량 + 10 dB reserve를 10 dB 단위로 올린 계획값이다. owner baseline −58 dBm/Hz를 쓰면 L2/L5 요구량은 +1.02 dB이며 first PASS는 바뀌지 않는다. SAR RX와 동일 포트 경로는 미판정이다.
+
 - **판정 범위:** 피간섭원 대역 결합 계산은 34개 TX→RX 조합에서 끝났다(conducted 16, Ka radiated 18).
   - 송신기 불요방사 규격이 없어 PSD 적합 판정은 **0개 조합에서 수행**했다. 모두 최종 판정 보류다.
   - 수신기 블로킹 판정도 수신기 데이터가 없어 보류다.

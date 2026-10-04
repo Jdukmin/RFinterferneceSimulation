@@ -1,0 +1,23 @@
+S-TC TX run 2026-10-04 20:58:47 (GNU Octave 9.2.0); analysis base commit 41ff2ee718311adf1e5bc86af22c1ba144a57901, working tree DIRTY (4 uncommitted input/code paths)
+S-TC TX (legacy id S_TM_TX) carrier 36.9897 dBm; ITU source rows 6; filter scenarios FILTER_0DB FILTER_40DB FILTER_60DB FILTER_70DB FILTER_80DB
+L2: unreliable CST RealizedGain peak -11.30 dBi kept unused; envelope peak 5.98 dBi (L1@1.563 L1@1.57542 L1@1.588 L2@1.2276) + -10 dB -> -4.02 dBi
+L5: unreliable CST RealizedGain peak -12.20 dBi kept unused; envelope peak 5.98 dBi (L1@1.563 L1@1.57542 L1@1.588 L2@1.2276) + -10 dB -> -4.02 dBi
+S_TM_TX@SBA_NADIR>GPS_L1_RX@GPSA_1     L1   CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C -105.43 dB, PSD  -154.45 vs -178 -> req  23.55 dB, first pass 40 dB
+S_TM_TX@SBA_NADIR>GPS_L1_RX@GPSA_2     L1   CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C -103.59 dB, PSD  -152.61 vs -178 -> req  25.39 dB, first pass 40 dB
+S_TM_TX@SBA_NADIR>GPS_L2_RX@GPSA_1     L2   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -71.70 dB, PSD  -130.72 vs -178 -> req  47.28 dB, first pass 60 dB
+S_TM_TX@SBA_NADIR>GPS_L2_RX@GPSA_2     L2   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -70.79 dB, PSD  -129.81 vs -178 -> req  48.19 dB, first pass 60 dB
+S_TM_TX@SBA_NADIR>GPS_L5_RX@GPSA_1     L5   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -68.94 dB, PSD  -127.96 vs -178 -> req  50.04 dB, first pass 60 dB
+S_TM_TX@SBA_NADIR>GPS_L5_RX@GPSA_2     L5   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -68.27 dB, PSD  -127.29 vs -178 -> req  50.71 dB, first pass 60 dB
+S_TM_TX@SBA_NADIR>S_TC_RX@SBA_ZENITH   S_TC CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -69.09 dB, PSD  -118.11 vs -177 -> req  58.89 dB, first pass 60 dB
+S_TM_TX@SBA_NADIR>ISL_X_RX@ISL         ISL  CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -88.81 dB, PSD  -137.83 vs -177 -> req  39.17 dB, first pass 40 dB
+S_TM_TX@SBA_NADIR>SAR_X_RX@SAR_ANT     SAR  CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C     NaN dB, PSD      NaN vs -175 -> req    NaN dB, first pass NOT_EVALUATED
+S_TM_TX@SBA_ZENITH>GPS_L1_RX@GPSA_1    L1   CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -80.98 dB, PSD  -130.00 vs -178 -> req  48.00 dB, first pass 60 dB
+S_TM_TX@SBA_ZENITH>GPS_L1_RX@GPSA_2    L1   CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -86.09 dB, PSD  -135.11 vs -178 -> req  42.89 dB, first pass 60 dB
+S_TM_TX@SBA_ZENITH>GPS_L2_RX@GPSA_1    L2   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -48.53 dB, PSD  -107.55 vs -178 -> req  70.45 dB, first pass 80 dB
+S_TM_TX@SBA_ZENITH>GPS_L2_RX@GPSA_2    L2   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -53.32 dB, PSD  -112.34 vs -178 -> req  65.66 dB, first pass 70 dB
+S_TM_TX@SBA_ZENITH>GPS_L5_RX@GPSA_1    L5   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -48.11 dB, PSD  -107.13 vs -178 -> req  70.87 dB, first pass 80 dB
+S_TM_TX@SBA_ZENITH>GPS_L5_RX@GPSA_2    L5   PORT_MISMATCH_RESCALED_LBAND   src -49.02 -10 -> -59.02 dBm/Hz, C  -52.88 dB, PSD  -111.90 vs -178 -> req  66.10 dB, first pass 70 dB
+S_TM_TX@SBA_ZENITH>S_TC_RX@SBA_NADIR   S_TC CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -69.09 dB, PSD  -118.11 vs -177 -> req  58.89 dB, first pass 60 dB
+S_TM_TX@SBA_ZENITH>ISL_X_RX@ISL        ISL  CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C  -88.72 dB, PSD  -137.74 vs -177 -> req  39.26 dB, first pass 40 dB
+S_TM_TX@SBA_ZENITH>SAR_X_RX@SAR_ANT    SAR  CST_REALIZED_GAIN              src -49.02 +0 -> -49.02 dBm/Hz, C     NaN dB, PSD      NaN vs -175 -> req    NaN dB, first pass NOT_EVALUATED
+Rows: design 18, pair summary 90, PSD 1890, unreliable-kept 2
