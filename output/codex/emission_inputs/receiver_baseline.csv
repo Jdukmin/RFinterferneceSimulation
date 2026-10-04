@@ -1,0 +1,16 @@
+# rfi_psd -- victim receiver PSD criterion baseline (owner steering 2026-10-04)
+# 1st-stage EMC/RFI criterion: PSD_victim_port(f) <= allowable PSD over the WHOLE tuning / allocated band
+#   allowable PSD = kT0 + NF + (I/N)max with kT0 = -174 dBm/Hz (290 K convention; exact -173.98)
+# 2nd-stage receiver performance: I_rx = int PSD |H|^2 df over integration_bw_hz around channel_fc_mhz
+#   (rx_filter_model IDEAL_RECT = assumption). The tuning range is NEVER used as a noise bandwidth.
+# tuning band = frequency span of the victim-band evaluation; GPS spans are the computed CST monitor
+#   ranges of data/antenna_port_response_cst (no extrapolation beyond the computed monitors).
+# desired_signal_reference_dbm is a signal reference, NOT an interference threshold. Empty = unknown.
+# Fields must not contain commas.
+receiver,victim_band,tuning_lo_mhz,tuning_hi_mhz,tuning_prov,channel_fc_mhz,integration_bw_hz,integration_bw_prov,rx_filter_model,nf_db,nf_prov,i_n_max_db,desired_signal_reference_dbm,desired_prov,note
+S_TC_RX,S_TC,2025,2110,ENGINEERING_BASELINE (S-band uplink allocation; receiver tunable),2050,5529.6,ENGINEERING_BASELINE (4096 bps RRC alpha 0.35 -> 1.35 x 4096 Hz),IDEAL_RECT,3,ENGINEERING_ASSUMPTION,-6,,UNKNOWN,rf_systems.csv still lists 128 kbps / 200 kHz for the power-based screening: CONFLICT kept visible (PSD criterion is BW independent)
+GPS_L1_RX,L1,1563,1588,ENGINEERING_BASELINE (CST L1 monitor span 1563-1588 MHz),1575.42,20460000,ASSUMPTION (20.46 MHz = GPS signal main-lobe width from rf_systems.csv; receiver integration BW not confirmed),IDEAL_RECT,2,ENGINEERING_ASSUMPTION,-6,-130,ENGINEERING_REFERENCE (owner: ~-130 dBm desired signal),same PSD criterion for L1/L2/L5 (engineering baseline)
+GPS_L2_RX,L2,1217.37,1237.83,ENGINEERING_BASELINE (CST L2 monitor span),1227.6,20460000,ASSUMPTION (20.46 MHz signal main lobe; receiver integration BW not confirmed),IDEAL_RECT,2,ENGINEERING_ASSUMPTION,-6,-130,ENGINEERING_REFERENCE (owner: ~-130 dBm desired signal),same PSD criterion for L1/L2/L5 (engineering baseline)
+GPS_L5_RX,L5,1164,1189,ENGINEERING_BASELINE (CST L5 monitor span),1176.45,20460000,ASSUMPTION (20.46 MHz signal main lobe; receiver integration BW not confirmed),IDEAL_RECT,2,ENGINEERING_ASSUMPTION,-6,-130,ENGINEERING_REFERENCE (owner: ~-130 dBm desired signal),same PSD criterion for L1/L2/L5 (engineering baseline)
+ISL_X_RX,ISL,10550,10650,PROVISIONAL (owner ISL band 10.55-10.65 GHz),10600,20000000,PROVISIONAL (rf_systems.csv bw 20 MHz),IDEAL_RECT,3,ENGINEERING_ASSUMPTION,-6,,UNKNOWN,
+SAR_X_RX,SAR,9387.5,9912.5,ENGINEERING_ASSUMPTION (rf_systems.csv SAR 9650 +/- 262.5 MHz),9650,525000000,ENGINEERING_ASSUMPTION (rf_systems.csv),IDEAL_RECT,5,ENGINEERING_ASSUMPTION,-6,,UNKNOWN,SAR antenna pattern not bound (DEFERRED_CLOSED_NETWORK): criterion only

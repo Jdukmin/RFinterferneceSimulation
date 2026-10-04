@@ -1,0 +1,10 @@
+# rfi_psd -- external / user REFERENCE scenarios run through the same victim-band PSD engine.
+# Same columns as tx_emission_masks.csv plus:
+#   scenario_id               reference case id
+#   rx_receiver               receiver_baseline.csv receiver whose allowable PSD is used
+#   coupling_override_db      coupling to apply instead of a CST pair (0 = the level is already the
+#                             victim-band PSD at the victim port before the TX filter)
+# These rows are NOT mission sources and are never mixed into the mission results.
+# Fields must not contain commas.
+scenario_id,rx_receiver,coupling_override_db,tx_system,victim_band,frequency_hz,frequency_lo_hz,frequency_hi_hz,emission_type,level,unit,reference_bandwidth_hz,reference_plane,carrier_frequency_hz,filter_state,standard_or_source,provenance,assumption_class
+REF_S_TO_L_OTHER_SAT,GPS_L1_RX,0,REF_S_TX,L1,,1563000000,1588000000,BROADBAND_PSD,-120,dBm/Hz,,FILTER_INPUT,2250000000,PRE_FILTER,other-satellite S-to-L example (owner reference),owner steering 2026-10-04: -120 dBm/Hz pre-filter / 60 dB filter / -180 dBm/Hz,REFERENCE_CROSSCHECK

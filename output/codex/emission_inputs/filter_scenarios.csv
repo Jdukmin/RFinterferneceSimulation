@@ -1,0 +1,12 @@
+# rfi_psd -- filter attenuation scenarios L_filter(f) [dB] for the victim-band PSD path
+# kind FLAT : one row, frequency_hz empty, attenuation for every frequency
+# kind TABLE: one row per frequency point (dB-linear interpolation, NaN outside the table)
+# The FILTER_*DB set is a SCREENING_FILTER_SCENARIO sweep - NOT a design value.
+# Add frequency-dependent filter tables (e.g. a TX BPF datasheet) as TABLE rows with their provenance.
+# Fields must not contain commas.
+filter_scenario_id,kind,frequency_hz,attenuation_db,provenance
+FILTER_0DB,FLAT,,0,SCREENING_FILTER_SCENARIO
+FILTER_40DB,FLAT,,40,SCREENING_FILTER_SCENARIO
+FILTER_60DB,FLAT,,60,SCREENING_FILTER_SCENARIO
+FILTER_70DB,FLAT,,70,SCREENING_FILTER_SCENARIO
+FILTER_80DB,FLAT,,80,SCREENING_FILTER_SCENARIO
