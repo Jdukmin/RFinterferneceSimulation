@@ -34,7 +34,7 @@ function test_mission_cases(h)
     built = cell(1, 6);
     expFuncs = sort({'SBA_NADIR_TC','SBA_NADIR_TM','SBA_ZENITH_TC','SBA_ZENITH_TM','GPSA_1','GPSA_2', ...
         'KAA_1','KAA_2','ISL'});
-    gpsBand_Hz = struct('L1', [1563 1588] * 1e6, 'L2', [1207 1227.6] * 1e6, 'L5', [1164 1189] * 1e6);
+    gpsBand_Hz = struct('L1', [1563 1588] * 1e6, 'L2', [1217.37 1237.83] * 1e6, 'L5', [1164 1189] * 1e6);
     for i = 1:numel(cases)
         cs = cases(i);
         c = MB.buildCase(cs.caseId, opts);

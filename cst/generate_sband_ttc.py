@@ -6,10 +6,11 @@ from cst_com import ROOT,new_project,save,monitor,run
 from cst_com_common import add_to_history,method
 from cst_geometry import cylinder,segment,port,validate,swept_wire
 
-def build(v,path,solve=False,mesh_lines_per_wavelength=None,mesh_arm_step=None):
+def build(v,path,solve=False,mesh_lines_per_wavelength=None,mesh_arm_step=None,
+          frequency_range=(2.0,2.3),monitor_frequencies=None):
     path=Path(path).resolve()
     if path.exists():raise FileExistsError(f'Refusing overwrite: {path}')
-    app,p=new_project(2.0,2.3)
+    app,p=new_project(*frequency_range)
     for k,val in v.items():method(p,'StoreParameter',k,str(val))
     r=v['helix_diameter']/2;h=v['helix_height'];n=v['turns'];gap=v['feed_gap'];w=v['wire_radius']
     base=v['base_depth'];g=v['groove_depth']
@@ -33,7 +34,7 @@ def build(v,path,solve=False,mesh_lines_per_wavelength=None,mesh_arm_step=None):
         endangle=phase+2*math.pi*n
         segment(p,f'{name}_termination',(r*math.cos(endangle),r*math.sin(endangle),top),(0,0,top),w)
         port(p,arm+1,(x,y,0),(x,y,gap))
-    for f in [2.0,2.06,2.12,2.2,2.25,2.3]:monitor(p,f)
+    for f in ([2.0,2.06,2.12,2.2,2.25,2.3] if monitor_frequencies is None else monitor_frequencies):monitor(p,f)
     if mesh_lines_per_wavelength is not None:
         # Exact Mesh syntax from installed ADS Converter 1.bas, lines 4255-4260.
         add_to_history(p,'Controlled wavelength mesh refinement',

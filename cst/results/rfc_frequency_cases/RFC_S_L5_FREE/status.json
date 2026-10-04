@@ -1,0 +1,24 @@
+{
+  "case": "RFC_S_L5_FREE",
+  "family": "S",
+  "band": "L5",
+  "monitor_frequencies_ghz": [
+    1.164,
+    1.17645,
+    1.189
+  ],
+  "geometry_changed": false,
+  "installation": null,
+  "solver": "Time Domain",
+  "edition": "CST Studio Suite 2026 Learning Edition",
+  "status": "SUPERSEDED_BY_GROUPED_SOLVE",
+  "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+  "frequency_limitations": "L2 is GPS 1.22760 GHz surrogate; no measured L2 reference; band widths provisional where not supplied",
+  "mesh_convergence": "NOT_ESTABLISHED",
+  "angular_sampling": "independent 1-degree XZ/YZ cuts",
+  "rf_usage_roles": [
+    "TX",
+    "RX"
+  ],
+  "replacement_case": "RFC_S_LOW_FREE"
+}

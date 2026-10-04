@@ -1,0 +1,281 @@
+{
+  "case": "RFC_S_S_TM_SBA_NADIR_R3",
+  "family": "S",
+  "band": "S_TM",
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "geometry_changed": false,
+  "installation": "SBA_NADIR",
+  "solver": "Time Domain",
+  "edition": "CST Studio Suite 2026 Learning Edition",
+  "status": "MESH_LIMIT",
+  "provenance": "CST_LEARNING_LOCAL_SCATTERING_APPROX",
+  "frequency_limitations": "L2 is GPS 1.22760 GHz surrogate; no measured L2 reference; band widths provisional where not supplied",
+  "mesh_convergence": "NOT_ESTABLISHED",
+  "angular_sampling": "independent 1-degree XZ/YZ cuts",
+  "parameters": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "solve_range_ghz": [
+    2.1900000000000004,
+    2.3099999999999996
+  ],
+  "local_geometry": {
+    "installation": "SBA_NADIR",
+    "position_mm": [
+      255,
+      870,
+      1030
+    ],
+    "boresight": [
+      0.0,
+      0.8660254037844386,
+      0.5
+    ],
+    "local_to_body_rotation": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.5,
+        0.8660254037844386
+      ],
+      [
+        0.0,
+        -0.8660254037844386,
+        0.5
+      ]
+    ],
+    "frequency_ghz": 2.25,
+    "radius_lambda": 3,
+    "radius_mm": 399.7232773333334,
+    "x_extent_mm": [
+      0.0,
+      654.7232773333334
+    ],
+    "facets": [
+      {
+        "panel": 1,
+        "points_local_mm": [
+          [
+            -255.0,
+            155.77993837042087,
+            -190.1812319424826
+          ],
+          [
+            399.7232773333334,
+            155.77993837042087,
+            -190.1812319424826
+          ],
+          [
+            399.7232773333334,
+            -0.6757957962458154,
+            -461.1705126546392
+          ],
+          [
+            -255.0,
+            -0.6757957962458154,
+            -461.1705126546392
+          ]
+        ]
+      },
+      {
+        "panel": 6,
+        "points_local_mm": [
+          [
+            -255.0,
+            351.75949822059795,
+            -190.18123170365703
+          ],
+          [
+            399.7232773333334,
+            351.75949822059795,
+            -190.18123170365703
+          ],
+          [
+            399.7232773333334,
+            155.77993837042087,
+            -190.1812319424826
+          ],
+          [
+            -255.0,
+            155.77993837042087,
+            -190.1812319424826
+          ]
+        ]
+      },
+      {
+        "panel": 8,
+        "points_local_mm": [
+          [
+            -255.0,
+            351.7594982205979,
+            -190.18123170365715
+          ],
+          [
+            -255.0,
+            155.77993837042087,
+            -190.1812319424826
+          ],
+          [
+            -255.0,
+            -0.6757957962458154,
+            -461.1705126546392
+          ],
+          [
+            -255.0,
+            146.30887398797248,
+            -546.032151321306
+          ]
+        ]
+      }
+    ],
+    "structure_distances": [
+      {
+        "panel": 1,
+        "plane_distance_mm": 230.0,
+        "finite_facet_distance_mm": 245.83793479008173,
+        "nearest_longitudinal_edge_distance_mm": 245.83793479008173
+      },
+      {
+        "panel": 2,
+        "plane_distance_mm": 1316.7029693924,
+        "finite_facet_distance_mm": 1669.110899509632,
+        "nearest_longitudinal_edge_distance_mm": 1669.110899509632
+      },
+      {
+        "panel": 3,
+        "plane_distance_mm": 2068.4421013316232,
+        "finite_facet_distance_mm": 2068.4421013316232,
+        "nearest_longitudinal_edge_distance_mm": 2094.002731795798
+      },
+      {
+        "panel": 4,
+        "plane_distance_mm": 2108.26087,
+        "finite_facet_distance_mm": 2183.6363023236754,
+        "nearest_longitudinal_edge_distance_mm": 2183.6363023236754
+      },
+      {
+        "panel": 5,
+        "plane_distance_mm": 561.5578988666734,
+        "finite_facet_distance_mm": 781.7194270633578,
+        "nearest_longitudinal_edge_distance_mm": 781.7194270633578
+      },
+      {
+        "panel": 6,
+        "plane_distance_mm": 190.1812321323199,
+        "finite_facet_distance_mm": 245.83793479008173,
+        "nearest_longitudinal_edge_distance_mm": 245.83793479008173
+      },
+      {
+        "panel": 8,
+        "plane_distance_mm": 255.0,
+        "finite_facet_distance_mm": 354.20515267546926
+      }
+    ],
+    "included_panels": [
+      1,
+      6,
+      8
+    ],
+    "excluded_structures": "front cap; facets outside crop; unknown brackets/cables/radomes",
+    "crop_definition": "YZ square +/-R at reference; true side facets and rear cap only; artificial forward/YZ edges"
+  },
+  "mesh_attempts": [
+    {
+      "mesh_cells": 620658,
+      "mesh_line_counts": [
+        88,
+        83,
+        88
+      ],
+      "bounding_box_mm": [
+        [
+          -289.06732477272726,
+          433.79060210572726
+        ],
+        [
+          -66.56732477272728,
+          385.82682299372726
+        ],
+        [
+          -580.0994760937273,
+          94.76732477272728
+        ]
+      ],
+      "min_mesh_step_mm": 1.1999999999999993,
+      "max_mesh_step_mm": 15.607286974113777,
+      "steps_per_wavelength": 8
+    },
+    {
+      "mesh_cells": 377720,
+      "mesh_line_counts": [
+        77,
+        71,
+        72
+      ],
+      "bounding_box_mm": [
+        [
+          -289.06732477272726,
+          433.79060210572726
+        ],
+        [
+          -66.56732477272728,
+          385.82682299372726
+        ],
+        [
+          -580.0994760937273,
+          94.76732477272728
+        ]
+      ],
+      "min_mesh_step_mm": 1.1999999999999993,
+      "max_mesh_step_mm": 21.424283679316517,
+      "steps_per_wavelength": 6
+    },
+    {
+      "mesh_cells": 171808,
+      "mesh_line_counts": [
+        60,
+        53,
+        57
+      ],
+      "bounding_box_mm": [
+        [
+          -289.06732477272726,
+          433.79060210572726
+        ],
+        [
+          -66.56732477272728,
+          385.82682299372726
+        ],
+        [
+          -580.0994760937273,
+          94.76732477272728
+        ]
+      ],
+      "min_mesh_step_mm": 1.1999999999999993,
+      "max_mesh_step_mm": 31.104421479327684,
+      "steps_per_wavelength": 4,
+      "ratio_limit": 10
+    }
+  ],
+  "rf_usage_roles": [
+    "TX",
+    "RX"
+  ]
+}

@@ -270,7 +270,7 @@ c.warnings                                                % KAA candidate, SAR d
 ```
 
 - S-band mounts carry two functions (`*_TC` receive, `*_TM` transmit) with the case's SBA variant;
-  both GPSA use the case's GPS band (L2 = 1207 MHz proxy); ISL uses the CST 10.6 GHz pattern (owner band)
+  both GPSA use the case's GPS band (L2 = CST pattern at 1227.6 MHz); ISL uses the CST 10.6 GHz pattern (owner band)
   (`data/Xband_ISL`); KAA uses the Ka-band DLS pattern as a candidate; SAR is geometry-only.
 - The RF baseline (`rf_systems.csv`) registers `RFTransmitter` (with rectangular spectrum) and
   `RFReceiver` (filter + NF + `I_N_MAX` = −6 dB) objects; `c.rfSystems` lists them with noise and

@@ -703,3 +703,13 @@ Phase audit (anything left to compute with the current code?): the remaining ite
 installed patterns / S21 (CST, deferred by the owner), receiver P1dB / IIP3 / blocking (none public), a transmitter /
 receiver nonlinearity model (for the frequency products), measured/final GNSS C/N0 criterion. The deterministic
 frequency-product check found no in-band product. No further analysis is possible without those inputs.
+
+## P8c — actual L2 pattern and Git policy (2026-10-04, later)
+
+- The CST workstream registered an owner-authorised GPS L2 pattern at the actual 1227.6 MHz (unchanged GPSA geometry;
+  `data/Lband_GPS_CST_L2/`, binding `GPS_L2`); the 1207 MHz proxy remains as `GPS_L2_PROXY_1207` (comparison). The
+  L2 level table was regenerated: zenith TM → GPSA_1 at L2 is −13.4 dBm (required rejection 91.5 dB; proxy: −13.1 / 91.8).
+- Finalized-pattern inventory and Git policy: `docs/reports/rfi_handoff/finalized_pattern_inventory.json`. Superseded
+  CST solver workspaces (`cst/projects/RFC_*`, `ISL_FIXED_10G6`) are git-ignored and kept locally; curated data, results,
+  `*.geometry.json`, freeze manifest and reports stay tracked; already tracked files are not removed from the index.
+- Verification: Octave 9.2.0 1425/1425 assertions; MATLAB NOT RUN.

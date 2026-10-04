@@ -1,0 +1,169 @@
+{
+  "case": "RFC_S_S_TM_FREE",
+  "family": "S",
+  "band": "S_TM",
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "geometry_changed": false,
+  "installation": null,
+  "solver": "Time Domain",
+  "edition": "CST Studio Suite 2026 Learning Edition",
+  "status": "SOLVED",
+  "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+  "frequency_limitations": "L2 is GPS 1.22760 GHz surrogate; no measured L2 reference; band widths provisional where not supplied",
+  "mesh_convergence": "NOT_ESTABLISHED",
+  "angular_sampling": "independent 1-degree XZ/YZ cuts",
+  "parameters": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "solve_range_ghz": [
+    2.1900000000000004,
+    2.3099999999999996
+  ],
+  "mesh_attempts": [
+    {
+      "mesh_cells": 71632,
+      "mesh_line_counts": [
+        45,
+        45,
+        38
+      ],
+      "bounding_box_mm": [
+        [
+          -66.56732477272728,
+          66.56732477272728
+        ],
+        [
+          -66.56732477272728,
+          66.56732477272728
+        ],
+        [
+          -66.06732477272728,
+          94.76732477272728
+        ]
+      ],
+      "min_mesh_step_mm": 1.1826283654011078,
+      "max_mesh_step_mm": 10.52528036605554,
+      "steps_per_wavelength": 8
+    }
+  ],
+  "solver_runtime_s": 133.56200000000536,
+  "actual_solver_log": {
+    "mesh_cells": [
+      71632
+    ],
+    "warnings": [
+      "The current settings will probably lead to a very long simulation time."
+    ],
+    "errors": [],
+    "successful_excitations": 4
+  },
+  "patterns": {
+    "f2.2_XZ": {
+      "accepted_power_fraction": 0.6890431829986563,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 5.071945533103999,
+      "peak_realized_gain_dbi": 1.1529386117138631,
+      "gain_beam": {
+        "hpbw_deg": 183.5862274559214,
+        "left_deg": -91.79423220733426,
+        "right_deg": 91.79199524858716,
+        "peak_angle_deg": -34.0,
+        "peak_dbi": 2.770474207581781,
+        "boresight_dbi": 2.7308437657849085
+      }
+    },
+    "f2.2_YZ": {
+      "accepted_power_fraction": 0.6890431829986563,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 5.071945533103999,
+      "peak_realized_gain_dbi": 1.1527109307281287,
+      "gain_beam": {
+        "hpbw_deg": 183.60566355838193,
+        "left_deg": -91.80474478899139,
+        "right_deg": 91.80091876939053,
+        "peak_angle_deg": 34.0,
+        "peak_dbi": 2.770246526596047,
+        "boresight_dbi": 2.7308437657849085
+      }
+    },
+    "f2.25_XZ": {
+      "accepted_power_fraction": 0.647649918300299,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 4.529621363507213,
+      "peak_realized_gain_dbi": 0.7593007869276208,
+      "gain_beam": {
+        "hpbw_deg": 187.10346814055492,
+        "left_deg": -93.55222654531016,
+        "right_deg": 93.55124159524478,
+        "peak_angle_deg": -41.0,
+        "peak_dbi": 2.6458976361626045,
+        "boresight_dbi": 2.5181291571961437
+      }
+    },
+    "f2.25_YZ": {
+      "accepted_power_fraction": 0.647649918300299,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 4.529621363507213,
+      "peak_realized_gain_dbi": 0.7590020707918131,
+      "gain_beam": {
+        "hpbw_deg": 187.12586433371155,
+        "left_deg": -93.56431362132254,
+        "right_deg": 93.56155071238902,
+        "peak_angle_deg": 41.0,
+        "peak_dbi": 2.645598920026797,
+        "boresight_dbi": 2.5181291571961437
+      }
+    },
+    "f2.3_XZ": {
+      "accepted_power_fraction": 0.6050085724436336,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 4.033584220486262,
+      "peak_realized_gain_dbi": 0.36342268800109756,
+      "gain_beam": {
+        "hpbw_deg": 190.24753673914825,
+        "left_deg": -95.12348303378894,
+        "right_deg": 95.12405370535929,
+        "peak_angle_deg": -46.0,
+        "peak_dbi": 2.545807405301354,
+        "boresight_dbi": 2.300268411303454
+      }
+    },
+    "f2.3_YZ": {
+      "accepted_power_fraction": 0.6050085724436336,
+      "normalization_reliable": true,
+      "s_matrix_passivity_excess": 0,
+      "active_return_loss_min_db": 4.033584220486262,
+      "peak_realized_gain_dbi": 0.3630473218421637,
+      "gain_beam": {
+        "hpbw_deg": 190.2720047961813,
+        "left_deg": -95.13663716240822,
+        "right_deg": 95.1353676337731,
+        "peak_angle_deg": 46.0,
+        "peak_dbi": 2.5454320391424208,
+        "boresight_dbi": 2.300268411303454
+      }
+    }
+  },
+  "rf_usage_roles": [
+    "TX",
+    "RX"
+  ]
+}

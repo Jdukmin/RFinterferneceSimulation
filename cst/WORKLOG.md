@@ -100,3 +100,23 @@ Leaf: air-loaded rectangular patch on a 28.106 mm PEC cell, h 2.5 mm, W 17 mm. L
 Principal-plane cross-pol is a symmetry null (numerically ~300 dB) and is not a meaningful XPD figure. Array example (NON-CST, coupling neglected): HPBW az 1.026/1.007/0.988 deg, el 6.30/6.18/6.07 deg, first sidelobes about -15 dB (Taylor + leaf), aperture gain 37.6-38.0 dBi (isolated-leaf cross-check 38.6-38.8). Exports `exports/sar/`: leaf native broadband .ffs (LEAF_DIFF, unclipped); array_example 1-degree cuts (front max(model, -10 dBi floor), back peak-40 dB ASSUMED - isolated-leaf F/B x coherent AF would give an artificial 22 dBi backlobe) and raw 0.01-degree 0-20 deg main-beam cuts. Mesh validation disabled.
 
 All five stages (S, L, ISL, Ka, SAR) have a disposition.
+
+## Installed-pattern scope update (2026-10-04)
+
+Owner labels the existing original/free-space pattern as **1**. The next stage, **2**, is installed pattern with actual nearby spacecraft structure for RFC/RFI. The final required frequency span is **1–27 GHz**; S-band TM/TC local scattering is the first validation stage, not the final scope limit. Clarification is pending on every antenna across the full interval versus all antenna operating bands within it. Preserve existing original projects and datasets.
+
+Follow the attached local-scattering prompt: CST Learning Edition Time Domain, actual SSOT facets and unchanged installation reference points, rear panel 8 included, matched free/installed normalization, actual cells below 100k before solving, R3/R4/R5 and mesh convergence, and provenance CST_LEARNING_LOCAL_SCATTERING_APPROX. Earlier original-stage mesh-verification exemptions do not establish convergence for this new installed stage. Never reuse a single S-band scattering correction over 1–27 GHz.
+
+Verified S-band original Model.log: SBAND_MATCHING_WIRE15, 79,376 cells, four completed excitations. Installed simulation/export/import verification remains pending. Detailed status and frequency-source limitations: `docs/reports/cst_learning_installed_sband.md`.
+
+### Owner clarification: operating-band installed calculations
+
+Owner clarified that each antenna should be calculated in its own operating bands within the overall 1–27 GHz envelope. Use existing port excitations; a separate EM scan is not part of the installed-pattern task. The pending full-range-versus-operating-band question above is resolved in favor of operating bands. The report now records S TC/TM, GNSS L1/L5 plus the 1.207 GHz proxy, ISL and Ka bands, and the deferred SAR example. Assumed bandwidth windows remain labelled; the 1.207 GHz proxy must not be relabelled as genuine GPS L2. Ka feed-only and SAR leaf-only ports do not establish complete reflector/array installed results.
+
+### Latest owner-approved execution (2026-10-04)
+
+Scope subsequently expanded: retain geometry and port excitation; evaluate each existing antenna at each interferer band (8 bands), not just its own operating band. No separate EM scan. Installed models only S/L where actual mesh budget permits; ISL/Ka free-space; SAR source pattern deferred but evaluate other antennas in 8.9–10.4 GHz. ISL owner band 10.55–10.65 GHz; L2 first point 1.22760 GHz on the fixed L geometry (not the measured-source 1.207 GHz proxy).
+
+Actual ISL_FIXED_10G6: 29,988 cells, four successful excitations, 50 s, no logged warnings/errors. At 10.6 GHz: accepted-power RHCP peak 10.142 dBi, HPBW 58.527 deg, active RL min 7.157 dB; vs original 10.4, +0.122 dB / -0.979 deg / +1.515 dB. Existing assumed-template gates pass; no mesh-convergence claim. New frequency-tagged dataset files added with old files preserved; active binding ISL_10P6.
+
+New S_TM FREE actual run: 71,632 cells, four excitations, 133.6 s. SBA_NADIR installed R3 true panels 1/6/8: 620,658 cells at 8 steps/wave, 377,720 at 6, 171,808 at 4 with ratio 10. GPSA_1 L1 R3 true panels 3/4: 528,656 at 8, 333,822 at 6. Over-limit installed solvers not started. Geometry invariants pass 3 Python tests. Frequency-response batch outputs and live statuses: results/rfc_frequency_cases. Current execution report: docs/reports/cst_rfc_frequency_execution.md.

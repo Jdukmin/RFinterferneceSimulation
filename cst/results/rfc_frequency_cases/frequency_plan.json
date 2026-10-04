@@ -1,0 +1,78 @@
+{
+  "bands_ghz": {
+    "S_TM": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "S_TC": [
+      2.0,
+      2.06,
+      2.12
+    ],
+    "L1": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "L2": [
+      1.21737,
+      1.2276,
+      1.23783
+    ],
+    "L5": [
+      1.164,
+      1.17645,
+      1.189
+    ],
+    "ISL": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "SAR": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "KA": [
+      25.5,
+      26.25,
+      27.0
+    ]
+  },
+  "frequency_scope": "each existing antenna at each interferer band",
+  "installed_families": [
+    "S",
+    "L"
+  ],
+  "free_only": [
+    "ISL",
+    "KA",
+    "SAR when data available"
+  ],
+  "ka_limitation": "Existing full Ka free pattern only 25.5-27; CST ports are feed-only, not full reflector",
+  "sar_limitation": "No SAR source pattern; existing other antennas can be evaluated in SAR 8.9-10.4",
+  "l2": "1.22760 GHz on fixed L geometry; +/-10.23 MHz existing assumed receiver window; not the 1.207 GHz datasheet proxy",
+  "rf_usage_roles": {
+    "S": [
+      "TX",
+      "RX"
+    ],
+    "L": [
+      "RX"
+    ],
+    "ISL": [
+      "TX",
+      "RX"
+    ],
+    "KA": [
+      "TX"
+    ]
+  },
+  "excluded_role_jobs": [
+    "KA_RX",
+    "L_TX"
+  ],
+  "owner_role_correction": "ISL has RX; only KA has no RX; L has no TX"
+}

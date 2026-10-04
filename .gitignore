@@ -1,7 +1,64 @@
-# Octave/MATLAB
+# ---------------------------------------------------------------------------
+# RFInterferenceSimulation .gitignore
+# Policy: ignore regenerable / machine-generated noise only. Evidence is kept:
+# Curated pattern data, provenance, exports, results and docs are kept.
+# New RFC/ISL CST binary workspaces below are local; historical tracked projects remain.
+# ---------------------------------------------------------------------------
+
+# --- MATLAB / Octave ---
 octave-workspace
+octave-core
 *.asv
+*.autosave
 *.mex*
-# OS / editor
+*.m~
+slprj/
+.matlab_history
+
+# --- Python (CST automation scripts) ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+
+# --- CST Studio: machine-generated, regenerable per run (changes on every open/solve) ---
+cst/**/Temp/
+cst/**/ModelCache/
+cst/**/Meshfill/
+*.lok
+*.lck
+*.sconf.bak
+~$*
+
+# --- Large CST training/surrogate model working copy (kept out of git) ---
+SURROGATE_TRAINING_MODEL/
+
+# --- Local CST frequency/installed workspaces (2026-10-04) ---
+# Keep data/** and cst/results/**: analysis cuts, status and normalization evidence.
+# Keep cst/projects/*.geometry.json: reproducible fixed antenna parameters.
+# .gitignore does not untrack historical files; no index removal is requested here.
+/cst/projects/RFC_*.cst
+/cst/projects/RFC_*/
+/cst/projects/ISL_FIXED_10G6.cst
+/cst/projects/ISL_FIXED_10G6/
+
+# --- Editors / OS ---
 .DS_Store
+Thumbs.db
+desktop.ini
 *~
+*.swp
+*.swo
+*.bak
+*.tmp
+.idea/
+# keep the shared VS Code settings (.vscode/settings.json), ignore personal state
+.vscode/*
+!.vscode/settings.json
+
+# --- Claude Code local state ---
+.claude/settings.local.json
+.claude/*.local.*

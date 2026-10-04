@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "solids": {
+    "RECONSTRUCTION:base_floor": {
+      "volume_mm3": 39819.6868842506,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center": {
+      "volume_mm3": 9047.790123190356,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1": {
+      "volume_mm3": 5277.876614945944,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 9817.454757168656,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1": {
+      "volume_mm3": 461.1127559563954,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2": {
+      "volume_mm3": 461.11239546115894,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination": {
+      "volume_mm3": 63.61721663246007,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3": {
+      "volume_mm3": 461.11275595698766,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4": {
+      "volume_mm3": 461.11239545495806,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination": {
+      "volume_mm3": 63.617216632460064,
+      "material": "PEC"
+    }
+  },
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\RFC_S_S_TC_FREE.cst",
+  "status": "GEOMETRY_CREATED_SOLVER_NOT_RUN",
+  "mesh_lines_per_wavelength": null,
+  "mesh_arm_step_mm": null
+}

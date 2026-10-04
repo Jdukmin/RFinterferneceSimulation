@@ -1,0 +1,92 @@
+{
+  "f2.2_XZ": {
+    "accepted_power_fraction": 0.6890431829986563,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 5.071945533103999,
+    "peak_realized_gain_dbi": 1.1529386117138631,
+    "gain_beam": {
+      "hpbw_deg": 183.5862274559214,
+      "left_deg": -91.79423220733426,
+      "right_deg": 91.79199524858716,
+      "peak_angle_deg": -34.0,
+      "peak_dbi": 2.770474207581781,
+      "boresight_dbi": 2.7308437657849085
+    }
+  },
+  "f2.2_YZ": {
+    "accepted_power_fraction": 0.6890431829986563,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 5.071945533103999,
+    "peak_realized_gain_dbi": 1.1527109307281287,
+    "gain_beam": {
+      "hpbw_deg": 183.60566355838193,
+      "left_deg": -91.80474478899139,
+      "right_deg": 91.80091876939053,
+      "peak_angle_deg": 34.0,
+      "peak_dbi": 2.770246526596047,
+      "boresight_dbi": 2.7308437657849085
+    }
+  },
+  "f2.25_XZ": {
+    "accepted_power_fraction": 0.647649918300299,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 4.529621363507213,
+    "peak_realized_gain_dbi": 0.7593007869276208,
+    "gain_beam": {
+      "hpbw_deg": 187.10346814055492,
+      "left_deg": -93.55222654531016,
+      "right_deg": 93.55124159524478,
+      "peak_angle_deg": -41.0,
+      "peak_dbi": 2.6458976361626045,
+      "boresight_dbi": 2.5181291571961437
+    }
+  },
+  "f2.25_YZ": {
+    "accepted_power_fraction": 0.647649918300299,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 4.529621363507213,
+    "peak_realized_gain_dbi": 0.7590020707918131,
+    "gain_beam": {
+      "hpbw_deg": 187.12586433371155,
+      "left_deg": -93.56431362132254,
+      "right_deg": 93.56155071238902,
+      "peak_angle_deg": 41.0,
+      "peak_dbi": 2.645598920026797,
+      "boresight_dbi": 2.5181291571961437
+    }
+  },
+  "f2.3_XZ": {
+    "accepted_power_fraction": 0.6050085724436336,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 4.033584220486262,
+    "peak_realized_gain_dbi": 0.36342268800109756,
+    "gain_beam": {
+      "hpbw_deg": 190.24753673914825,
+      "left_deg": -95.12348303378894,
+      "right_deg": 95.12405370535929,
+      "peak_angle_deg": -46.0,
+      "peak_dbi": 2.545807405301354,
+      "boresight_dbi": 2.300268411303454
+    }
+  },
+  "f2.3_YZ": {
+    "accepted_power_fraction": 0.6050085724436336,
+    "normalization_reliable": true,
+    "s_matrix_passivity_excess": 0,
+    "active_return_loss_min_db": 4.033584220486262,
+    "peak_realized_gain_dbi": 0.3630473218421637,
+    "gain_beam": {
+      "hpbw_deg": 190.2720047961813,
+      "left_deg": -95.13663716240822,
+      "right_deg": 95.1353676337731,
+      "peak_angle_deg": 46.0,
+      "peak_dbi": 2.5454320391424208,
+      "boresight_dbi": 2.300268411303454
+    }
+  }
+}

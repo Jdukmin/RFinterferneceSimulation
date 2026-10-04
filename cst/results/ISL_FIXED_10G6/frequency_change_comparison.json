@@ -1,0 +1,74 @@
+{
+  "geometry_changed": false,
+  "operating_band_ghz": [
+    10.55,
+    10.65
+  ],
+  "baseline_frequency_ghz": 10.4,
+  "comparisons": {
+    "f10.4_XZ": {
+      "peak_dbi": -0.0015323036799212986,
+      "boresight_dbi": -0.0015323036799212986,
+      "hpbw_deg": 0.009135400821364215,
+      "active_return_loss_min_db": -0.015562574423641173,
+      "coverage_rms_difference_db": 0.0013658694867442235,
+      "coverage_max_abs_difference_db": 0.0032958730426564387
+    },
+    "f10.4_YZ": {
+      "peak_dbi": -0.0015323036799212986,
+      "boresight_dbi": -0.0015323036799212986,
+      "hpbw_deg": 0.00911473764244164,
+      "active_return_loss_min_db": -0.015562574423641173,
+      "coverage_rms_difference_db": 0.0013623448591692806,
+      "coverage_max_abs_difference_db": 0.0032359159230641588
+    },
+    "f10.55_XZ": {
+      "peak_dbi": 0.09139383290356129,
+      "boresight_dbi": 0.09139383290356129,
+      "hpbw_deg": -0.73351422113398,
+      "active_return_loss_min_db": 1.1166685853363445,
+      "coverage_rms_difference_db": 0.11263742852134624,
+      "coverage_max_abs_difference_db": 0.2831251068747145
+    },
+    "f10.55_YZ": {
+      "peak_dbi": 0.09139383290356129,
+      "boresight_dbi": 0.09139383290356129,
+      "hpbw_deg": -0.733541061825747,
+      "active_return_loss_min_db": 1.1166685853363445,
+      "coverage_rms_difference_db": 0.11264217505382286,
+      "coverage_max_abs_difference_db": 0.28297375335176245
+    },
+    "f10.6_XZ": {
+      "peak_dbi": 0.12226576608673945,
+      "boresight_dbi": 0.12226576608673945,
+      "hpbw_deg": -0.9788201821739264,
+      "active_return_loss_min_db": 1.5151464659457758,
+      "coverage_rms_difference_db": 0.15201147454745853,
+      "coverage_max_abs_difference_db": 0.3819866434741206
+    },
+    "f10.6_YZ": {
+      "peak_dbi": 0.12226576608673945,
+      "boresight_dbi": 0.12226576608673945,
+      "hpbw_deg": -0.9788492813835319,
+      "active_return_loss_min_db": 1.5151464659457758,
+      "coverage_rms_difference_db": 0.15201675238846,
+      "coverage_max_abs_difference_db": 0.38179755875504373
+    },
+    "f10.65_XZ": {
+      "peak_dbi": 0.15287519903865565,
+      "boresight_dbi": 0.15287519903865565,
+      "hpbw_deg": -1.223115258452978,
+      "active_return_loss_min_db": 1.9145971487309854,
+      "coverage_rms_difference_db": 0.19215014964229948,
+      "coverage_max_abs_difference_db": 0.482738634830266
+    },
+    "f10.65_YZ": {
+      "peak_dbi": 0.15287519903865565,
+      "boresight_dbi": 0.15287519903865565,
+      "hpbw_deg": -1.2231467394930675,
+      "active_return_loss_min_db": 1.9145971487309854,
+      "coverage_rms_difference_db": 0.19215595210302283,
+      "coverage_max_abs_difference_db": 0.4825116019338851
+    }
+  }
+}

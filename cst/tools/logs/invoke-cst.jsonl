@@ -207,3 +207,18 @@
 {"utc":"2026-10-03T13:46:05.5998339Z","step":"save","status":"OK","project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\SAR_LEAF_C_DUALFEED.cst"}
 {"utc":"2026-10-03T13:46:05.7585895Z","step":"export_sparameters","status":"OK","out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\SAR_LEAF_C_DUALFEED\\s_parameters.csv","ports":2,"points":1001}
 {"utc":"2026-10-03T13:46:05.7605945Z","step":"job","status":"DONE","job":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\SAR_LEAF_C_DUALFEED\\job.json"}
+{"utc":"2026-10-04T00:49:15.3974478Z","step":"connect","status":"OK","mode":"GetActiveObject"}
+{"utc":"2026-10-04T00:49:15.5189083Z","step":"Status","status":"ERROR","error":"Method invocation failed because [System.Int32] does not contain a method named \u0027Solid\u0027.","dialogs":[]}
+{"utc":"2026-10-04T02:11:35.2012705Z","step":"job","status":"START","label":"ISL_FIXED_10G6","steps":10,"job":"cst/tools/commands/ISL_FIXED_10G6/job.json"}
+{"utc":"2026-10-04T02:11:35.2494303Z","step":"connect","status":"OK","mode":"GetActiveObject"}
+{"utc":"2026-10-04T02:11:38.4536071Z","step":"new_project","status":"OK"}
+{"utc":"2026-10-04T02:11:38.6303615Z","step":"history","status":"OK","blocks":2,"sha256":"7DE7277229914EBCDD9651774377A1923AD6F94ABCFB628CC6B4FE449497B716","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_FIXED_10G6\\..\\..\\templates\\units_solver_frequency.vba"}
+{"utc":"2026-10-04T02:11:38.7205505Z","step":"history","status":"OK","blocks":2,"sha256":"5853DDEF93A599038AEF1B13544A96F1B16BBCCF028FFCF44BA87D7F6BD0EE1A","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_FIXED_10G6\\..\\..\\templates\\boundaries_open.vba"}
+{"utc":"2026-10-04T02:11:39.7474021Z","step":"history","status":"OK","blocks":25,"sha256":"9CC8116A3086CE92FEFBCD1CA446E0B6452D6F23C39352AB806EAD7093012581","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_FIXED_10G6\\history.vba"}
+{"utc":"2026-10-04T02:11:39.8075712Z","step":"history","status":"OK","blocks":2,"sha256":"424CE435983E3F400CED54537B9023330448BBBF62FE5BC708D0DF89F4626079","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_FIXED_10G6\\..\\..\\templates\\mesh_resource_hex.vba"}
+{"utc":"2026-10-04T02:11:41.1216581Z","step":"history","status":"OK","blocks":1,"sha256":"B46B2A6F9BCEDF7F642DC7163DA9A9C8EB22AA86FECA93FF9BC81A5CEE39DA09","file":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\tools\\commands\\ISL_FIXED_10G6\\..\\..\\templates\\view_structure.vba"}
+{"utc":"2026-10-04T02:11:42.0109365Z","step":"save_as","status":"OK","project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_FIXED_10G6.cst"}
+{"utc":"2026-10-04T02:12:31.8164792Z","step":"solve","status":"OK","log":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_FIXED_10G6\\Result\\Model.log","seconds":50,"successful_excitations":4,"exists":true,"errors":[],"mesh_cells":[29988,29988,29988,29988],"warnings":[],"start_returned":"1"}
+{"utc":"2026-10-04T02:12:32.5976851Z","step":"save","status":"OK","project":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\ISL_FIXED_10G6.cst"}
+{"utc":"2026-10-04T02:12:32.9274593Z","step":"export_sparameters","status":"OK","out":"C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\results\\ISL_FIXED_10G6\\s_parameters.csv","ports":4,"points":1001}
+{"utc":"2026-10-04T02:12:32.9294697Z","step":"job","status":"DONE","job":"cst/tools/commands/ISL_FIXED_10G6/job.json"}

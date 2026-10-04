@@ -4,7 +4,7 @@ repository_evidence:
   numeric_target: NONE  # repository_ssot.json xband_isl.status = NO_REPOSITORY_NUMERIC_TARGET_FOUND
   coverage_note: 'Owner: 10.4 GHz, 3 dB beamwidth about 60 deg, overall beamwidth about 120 deg'
 user_requirements:   # owner statement 2026-10-03
-  center_frequency_ghz: 10.4
+  center_frequency_ghz: 10.6
   hpbw_3db_deg: 60
   coverage_beamwidth_deg: 120   # overall beam/coverage width, not the 3 dB width
 superseded:
@@ -12,9 +12,9 @@ superseded:
 assumptions:
   - id: ISL-A1
     item: frequency band
-    value: {fmin_ghz: 10.3, f0_ghz: 10.4, fmax_ghz: 10.5}
-    tag: ASSUMPTION
-    reason: Owner gave the 10.4 GHz center only; +/-1 % monitors check robustness.
+    value: {fmin_ghz: 10.55, f0_ghz: 10.6, fmax_ghz: 10.65}
+    tag: OWNER_EXPLICIT
+    reason: Owner updated operating band on 2026-10-04; retain accepted geometry unchanged. Original 10.3/10.4/10.5 results remain historical.
   - id: ISL-A2
     item: polarization
     value: RHCP (IEEE), CST e^(+jwt) cp_plus

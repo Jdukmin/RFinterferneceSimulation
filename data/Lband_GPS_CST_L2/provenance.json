@@ -1,0 +1,61 @@
+{
+  "edition": "CST Studio Suite 2026 Learning Edition",
+  "parameters": {
+    "outer_diameter": 200,
+    "maximum_overall_height": 87,
+    "cup_inner_diameter": 160,
+    "cup_wall_thickness": 2,
+    "cup_depth": 45,
+    "lower_patch_diameter": 140,
+    "upper_patch_diameter": 123.0,
+    "patch_to_ground_height": 12,
+    "patch_spacing": 12,
+    "patch_thickness": 1,
+    "feed_radius": 35,
+    "feed_probe_radius": 1.5,
+    "choke1_inner_radius": 82,
+    "choke1_outer_radius": 91,
+    "choke2_inner_radius": 93,
+    "choke2_outer_radius": 98,
+    "choke_depth": 63.7
+  },
+  "monitor_frequencies_ghz": [
+    1.164,
+    1.17645,
+    1.189,
+    1.21737,
+    1.2276,
+    1.23783,
+    1.563,
+    1.57542,
+    1.588,
+    2.0,
+    2.06,
+    2.12,
+    2.2,
+    2.25,
+    2.3
+  ],
+  "solver_runtime_s": 60.062000000005355,
+  "actual_solver_log": {
+    "mesh_cells": [
+      65000
+    ],
+    "warnings": [],
+    "errors": [],
+    "successful_excitations": 4
+  },
+  "frequency_ghz": 1.2276,
+  "band_ghz": [
+    1.21737,
+    1.23783
+  ],
+  "band_provenance": "Existing assumed 20.46 MHz receiver filter window; center GPS carrier",
+  "quantity": "ACCEPTED_POWER_INTENDED_RHCP_GAIN",
+  "source_case": "RFC_L_LOW_FREE",
+  "source_definition": "Unchanged LBAND_GNSS_FINAL_COMPROMISE numeric geometry",
+  "installed": false,
+  "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+  "limitations": "Surrogate at genuine GPS L2 carrier; not measured L2 pattern; mesh convergence not established; active matching diagnostic only",
+  "owner_instruction": "Use unchanged antenna geometry and change frequency for L2"
+}

@@ -1,0 +1,91 @@
+{
+  "active_roles": {
+    "S": [
+      "TX",
+      "RX"
+    ],
+    "L": [
+      "RX"
+    ],
+    "ISL": [
+      "TX",
+      "RX"
+    ],
+    "KA": [
+      "TX"
+    ]
+  },
+  "excluded_jobs": [
+    "KA_RX at all evaluation bands",
+    "L_TX at all evaluation bands"
+  ],
+  "current_solver": "NONE_RUNNING",
+  "next_installed_jobs": [
+    {
+      "installation": "SBA_NADIR",
+      "family": "S",
+      "roles": [
+        "TX",
+        "RX"
+      ],
+      "geometry": "fixed original antenna plus smaller actual PEC patch",
+      "status": "STOPPED_BY_OWNER",
+      "extent_convergence": "NOT_ESTABLISHED",
+      "mesh_cells": 99330,
+      "previous_status": "SOLVED"
+    },
+    {
+      "installation": "SBA_ZENITH",
+      "family": "S",
+      "roles": [
+        "TX",
+        "RX"
+      ],
+      "geometry": "fixed original antenna plus smaller actual PEC patch",
+      "status": "STOPPED_BY_OWNER",
+      "extent_convergence": "NOT_ESTABLISHED",
+      "mesh_cells": 98670,
+      "previous_status": "SOLVED"
+    },
+    {
+      "installation": "GPSA_1",
+      "family": "L",
+      "roles": [
+        "RX"
+      ],
+      "geometry": "fixed original antenna plus smaller actual PEC patch",
+      "status": "STOPPED_BY_OWNER",
+      "extent_convergence": "NOT_ESTABLISHED",
+      "mesh_cells": 133920,
+      "previous_status": "MESH_LIMIT"
+    },
+    {
+      "installation": "GPSA_2",
+      "family": "L",
+      "roles": [
+        "RX"
+      ],
+      "geometry": "fixed original antenna plus smaller actual PEC patch",
+      "status": "STOPPED_BY_OWNER",
+      "extent_convergence": "NOT_ESTABLISHED",
+      "mesh_cells": 133920,
+      "previous_status": "MESH_LIMIT"
+    }
+  ],
+  "completed_fixed_geometry_responders": {
+    "S": "S_TC/S_TM/L1/L2/L5/SAR/ISL",
+    "L": "S_TC/S_TM/L1/L2/L5; RX use only",
+    "ISL": "all eight evaluation bands; TX/RX use"
+  },
+  "mesh_limited_response_jobs": [
+    "S at KA",
+    "L at SAR/ISL/KA"
+  ],
+  "free_reference_only": {
+    "KA": "TX only; current 25.5-27 GHz reflector free-space source",
+    "SAR": "source pattern missing; other receiver/source antenna responses in 8.9-10.4 GHz retained"
+  },
+  "note": "Port-driven pattern extraction for a receive-only reciprocal antenna does not register an RF transmitter. Reuse calculated responses; do not duplicate TX/RX CST solves for identical geometry/ports.",
+  "installed_work_status": "STOPPED_BY_OWNER",
+  "stop_reason": "Owner requested stop after reviewing limited structure extent"
+}

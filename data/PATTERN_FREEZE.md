@@ -10,6 +10,7 @@ re-interpolation, envelope changes) is to be done for these antennas.
 |-------|---------------|-----------|-------|
 | `S_BAND_SBA1_SBA4` | SBA TC/TM, variants SBA1 and SBA4 | `data/Sband_TMTC/` | 8 CSV |
 | `L_BAND_GNSS` | GPSA L1 / L2(1207 MHz proxy) / L5 | `data/Lband_GPS/` | 6 CSV |
+| `L_BAND_GNSS_CST_L2` | Owner-requested unchanged GNSS surrogate at actual L2 1227.60 MHz | `data/Lband_GPS_CST_L2/` | 2 CSV + provenance JSON |
 | `X_BAND_ISL_CST` | ISL, CST `ISL_C4_CUP_R14P7`, 10.3/10.4/10.5 GHz **and** (added 2026-10-04) 10.55/10.6/10.65 GHz | `data/Xband_ISL/` | 12 CSV + 12 regions JSON |
 | `KA_BAND_KAA_CST` | KAA, CST feed + reflector aperture integration, 25.5/26.25/27 GHz | `data/Kaband_KAA_CST/` | 6 CSV + 6 regions JSON + validation JSON |
 | `KA_BAND_LEGACY_UNBOUND` | legacy Ka cuts, **bound to no antenna** | `data/Kaband_DLS/` | 2 CSV |
@@ -31,6 +32,13 @@ a frozen directory, or a pattern bound in `pattern_bindings.csv` is not in the m
   not a baseline pattern.
 
 ## Unfreezing (explicit procedure only)
+
+Owner amendment 2026-10-04: calculate L2 with the existing unchanged antenna
+geometry and a changed frequency. The new L2 CST dataset above is registered
+separately; the original 1207 MHz proxy files remain byte-identical. This
+amendment authorizes the new source, not retuning or replacing the frozen
+originals. Separate interferer-frequency responses are in
+`data/antenna_port_response_cst/` and are not the original frozen patterns.
 
 1. Written owner approval stating the reason (e.g. measured data, a design change).
 2. Change the dataset, update its README provenance, regenerate the manifest, and record the

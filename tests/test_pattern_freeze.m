@@ -4,7 +4,7 @@ function test_pattern_freeze(h)
     h.setGroup('pattern_freeze');
     repoRoot = fileparts(fileparts(mfilename('fullpath')));
     T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(repoRoot, 'data', 'pattern_freeze_manifest.csv'));
-    h.isTrue('manifest has 53 files', T.nRows == 53);
+    h.isTrue('manifest has 56 files', T.nRows == 56);
     nBad = 0; badList = {};
     for r = 1:T.nRows
         p = fullfile(repoRoot, strrep(T.path{r}, '/', filesep));
@@ -19,7 +19,7 @@ function test_pattern_freeze(h)
     h.ok(['frozen files unchanged: ' strjoin(badList, '; ')], nBad == 0);
 
     % no file added to / removed from a frozen directory
-    dirs = {'Sband_TMTC', 'Lband_GPS', 'Xband_ISL', 'Kaband_KAA_CST', 'Kaband_DLS'};
+    dirs = {'Sband_TMTC', 'Lband_GPS', 'Lband_GPS_CST_L2', 'Xband_ISL', 'Kaband_KAA_CST', 'Kaband_DLS'};
     listed = T.path; nExtra = 0; extra = {};
     for i = 1:numel(dirs)
         items = dir(fullfile(repoRoot, 'data', dirs{i}));

@@ -1,0 +1,143 @@
+{
+  "case": "RFC_S_KA_FREE",
+  "family": "S",
+  "band": "KA",
+  "monitor_frequencies_ghz": [
+    25.5,
+    26.25,
+    27.0
+  ],
+  "geometry_changed": false,
+  "installation": null,
+  "solver": "Time Domain",
+  "edition": "CST Studio Suite 2026 Learning Edition",
+  "status": "MESH_LIMIT",
+  "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+  "frequency_limitations": "L2 center GPS 1.22760 GHz; +/-10.23 MHz from existing assumed 20.46 MHz receiver filter; no measured L2 reference; other provisional windows labelled",
+  "mesh_convergence": "NOT_ESTABLISHED",
+  "angular_sampling": "independent 1-degree XZ/YZ cuts",
+  "parameters": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "solve_range_ghz": [
+    25.49,
+    27.01
+  ],
+  "mesh_attempts": [
+    {
+      "mesh_cells": 1516320,
+      "mesh_line_counts": [
+        109,
+        109,
+        131
+      ],
+      "bounding_box_mm": [
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -34.93914174509804,
+          63.63914174509805
+        ]
+      ],
+      "min_mesh_step_mm": 0.4999999999999929,
+      "max_mesh_step_mm": 1.2981516971916847,
+      "steps_per_wavelength": 8
+    },
+    {
+      "mesh_cells": 754392,
+      "mesh_line_counts": [
+        87,
+        87,
+        103
+      ],
+      "bounding_box_mm": [
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -34.93914174509804,
+          63.63914174509805
+        ]
+      ],
+      "min_mesh_step_mm": 0.6,
+      "max_mesh_step_mm": 1.7542641546081121,
+      "steps_per_wavelength": 6
+    },
+    {
+      "mesh_cells": 445824,
+      "mesh_line_counts": [
+        73,
+        73,
+        87
+      ],
+      "bounding_box_mm": [
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -34.93914174509804,
+          63.63914174509805
+        ]
+      ],
+      "min_mesh_step_mm": 0.5999999999999999,
+      "max_mesh_step_mm": 2.12757652286737,
+      "steps_per_wavelength": 5,
+      "ratio_limit": 10
+    },
+    {
+      "mesh_cells": 255600,
+      "mesh_line_counts": [
+        61,
+        61,
+        72
+      ],
+      "bounding_box_mm": [
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -35.43914174509804,
+          35.43914174509804
+        ],
+        [
+          -34.93914174509804,
+          63.63914174509805
+        ]
+      ],
+      "min_mesh_step_mm": 0.7398416735564627,
+      "max_mesh_step_mm": 2.759969183304902,
+      "steps_per_wavelength": 4,
+      "ratio_limit": 10
+    }
+  ],
+  "rf_usage_roles": [
+    "TX",
+    "RX"
+  ]
+}

@@ -55,11 +55,13 @@ Findings:
    | GPS band | Grx toward the TM [dBi] | S21 [dB] | Received level [dBm] | Required rejection [dB] |
    |---|---|---|---|---|
    | L1 (1575.42 MHz) | −6.2 | −51.1 | −14.2 | 90.7 |
-   | L2 (1227.6 MHz, 1207 MHz pattern) | −5.1 | −50.0 | −13.1 | 91.8 |
+   | L2 (1227.6 MHz, actual-frequency CST pattern) | −5.4 | −50.4 | −13.4 | 91.5 |
    | L5 (1176.45 MHz) | −5.3 | −50.3 | −13.3 | 91.6 |
 
-   So the exposure is within ≈ 1.1 dB across the three GNSS bands (the pattern differences); SBA4 is ≈ 0.3 dB lower.
-   The L2 level carries the 1207-vs-1227.6 MHz proxy uncertainty. Beamwidth-dependent installed effects for
+   So the exposure is within ≈ 0.9 dB across the three GNSS bands (the pattern differences); SBA4 is ≈ 0.3 dB lower.
+   The L2 pattern is the unchanged GPSA geometry simulated at the actual 1227.6 MHz (`data/Lband_GPS_CST_L2/`,
+   owner amendment; simulated, not measured); the older 1207 MHz proxy is kept as `GPS_L2_PROXY_1207` for
+   comparison only (it gave −13.1 dBm / 91.8 dB). Beamwidth-dependent installed effects for
    these bands are being extracted by the CST workstream and are not in these numbers.
 7. **ISL moved to the owner band** (centre 10.6 GHz, both TX and RX; pattern `ISL_10P6`): ISL-related rows use the
    10.6 GHz pattern; the S-band → ISL and Ka → ISL levels change by < 0.2 dB against the earlier 10.4 GHz run.
@@ -70,6 +72,6 @@ Findings:
 
 ## Caveats
 
-Frozen free-space patterns (datasheet envelopes; L2 = 1207 MHz proxy; ISL/Ka surrogates); no polarization
+Frozen free-space patterns (datasheet envelopes; L2 = CST pattern at 1227.6 MHz; ISL/Ka surrogates); no polarization
 mismatch, no installed effect, no scattering; single frequency pattern reused across the band; GNSS
 criterion is thermal I/N (temporary).

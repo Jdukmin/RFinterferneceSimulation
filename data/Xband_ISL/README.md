@@ -1,5 +1,14 @@
 # X-band ISL antenna pattern (1 deg) — CST surrogate `ISL_C4_CUP_R14P7`
 
+Current active binding (owner update 2026-10-04): **10.55–10.65 GHz**, center
+**10.6 GHz**, files `f10.55_*`, `f10.6_*`, `f10.65_*`. The antenna geometry is
+unchanged. Actual `ISL_FIXED_10G6` calculation used 29,988 cells, four successful
+excitations and 50 s. At 10.6 GHz the accepted-power RHCP peak is 10.142 dBi,
+XZ HPBW 58.527 degrees and minimum active return loss 7.157 dB. The earlier
+10.3/10.4/10.5 files and their history below are preserved. New-band evidence
+is in `cst/results/ISL_FIXED_10G6/`; no manufacturer or mesh-convergence claim
+is added.
+
 Scalar RFC/RFI screening cuts for the inter-satellite-link (ISL) antenna, copied **byte-identical**
 from the CST reconstruction workspace `cst/exports/isl/screening_1deg/` (2026-10-04). The `cst/`
 workspace (projects, raw results, native far-field source) is maintained separately and is **not**
