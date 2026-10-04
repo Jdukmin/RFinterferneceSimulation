@@ -1,5 +1,9 @@
 # Octave RFI 결과와 재현
 
+최신 설계 결과는 [결과보고서.md](결과보고서.md)와 [main_design_results.csv](main_design_results.csv)다. 실제 역할은 **S-TC TX**(`S_TM_TX`), **S-TM RX**(`S_TC_RX`)로 표시하고, legacy ID는 조회 키로 유지한다. 이전 `source_set=PRIMARY`는 ECSS/ITU 혼합 분석이며, 최신 설계 보완은 모든 TX에 ITU RR Appendix 3 / SM.329 source를 적용한 별도 결과다.
+
+기존 독립 coupling 결과에서 추가 억제 요구만 재현하려면 `python output/codex/complete_suppression_design.py`를 실행한다. CST/Octave 재실행 없이 168개 primary pair, 76개 조건부 bound, 1,220개 filter scenario를 만든다. [all_pair_required_suppression.csv](all_pair_required_suppression.csv)에 primary의 미판정 사유를 남기고 [conditional_bound_required_suppression.csv](conditional_bound_required_suppression.csv)는 조건부 가정을 별도로 보존한다. 전체 분석의 마지막 `summarize_emission_analysis.py`도 이 보완 단계를 자동으로 호출한다.
+
 ## 현재 독립 규격 분석
 
 현재 [결과보고서.md](결과보고서.md)는 freeze `8469e8903da83b6ebed014aae311f90855c31715`에서 독립 수행한 규격 기반 victim-band PSD 보고서다. [emission_inputs/tx_emission_masks.csv](emission_inputs/tx_emission_masks.csv)가 worker 독립 source 입력이며 공유 `data/`를 변경하지 않았다. 보고서 작성은 [공통 guide](../../docs/REPORTING_GUIDE.md)를 따른다.

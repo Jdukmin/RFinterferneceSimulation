@@ -168,4 +168,7 @@ Freeze 대역폭을 necessary/occupied bandwidth의 임시 proxy로 사용했다
     for target in re.findall(r'\]\(([^)]+)\)',report):
         if not target.startswith('https:'):assert (OUT/target).exists(),target
     print(json.dumps(txsummary,indent=2));print(json.dumps(v,indent=2))
-if __name__=='__main__':main()
+if __name__=='__main__':
+    main()
+    from complete_suppression_design import main as complete_design
+    complete_design()

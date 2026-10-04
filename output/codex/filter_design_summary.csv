@@ -1,0 +1,5 @@
+tx,scope,worst_victim,required_additional_suppression_db,first_passing_scenario,recommended_design_target_db,unresolved_primary_pair_count,confidence
+S-TC TX,SIMULATED,S-TM RX @ SBA_ZENITH / S (2025–2110 MHz),58.88653590672037,FILTER_60DB,70,40,SIMULATED
+S-TC TX,BOUNDED,GPS L5 RX @ GPSA_1 / L5,91.61344092453982,ABOVE_80DB_SEPARATE_DESIGN,110,40,BOUNDED CONDITIONAL: enclosing-current-volume and finite-modal-cutoff assumptions
+ISL TX,SIMULATED,S-TM RX @ SBA_ZENITH / S (2025–2110 MHz),33.70192025932039,FILTER_40DB,50,0,SIMULATED
+Ka DLS TX,BOUNDED,S-TM RX @ SBA_NADIR / S (2025–2110 MHz),93.96454923503845,ABOVE_80DB_SEPARATE_DESIGN,110,72,BOUNDED CONDITIONAL: enclosing-current-volume and finite-modal-cutoff assumptions
