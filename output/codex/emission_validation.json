@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "worker analysis numeric consistency; not spacecraft RFI qualification",
+  "freeze_sha": "8469e8903da83b6ebed014aae311f90855c31715",
+  "scenario_rows": 2340,
+  "primary_pair_rows": 132,
+  "primary_evaluated_pair_rows": 56,
+  "primary_unknown_pair_rows": 76,
+  "shared_input_hashes_unchanged": true,
+  "scenarios": [
+    0,
+    40,
+    60,
+    70,
+    80
+  ],
+  "reference_margin_db": 2,
+  "max_sweep_refinement_db": 0.0,
+  "engine_test": "test_rfi_psd executed in Octave; see emission_execution.log",
+  "python_checks": [
+    "source+coupling-filter=port",
+    "margin=limit-port",
+    "scenario margin shift",
+    "PASS/FAIL sign",
+    "freeze shared hashes"
+  ]
+}

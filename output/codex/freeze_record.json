@@ -1,0 +1,24 @@
+{
+  "freeze_sha": "8469e8903da83b6ebed014aae311f90855c31715",
+  "analysis_head": "8469e8903da83b6ebed014aae311f90855c31715",
+  "branch": "codex/rfi-emission-8469e89",
+  "initial_analysis_worktree_clean": true,
+  "initial_analysis_worktree_status": "",
+  "original_workspace_head": "8469e8903da83b6ebed014aae311f90855c31715",
+  "original_workspace_clean": false,
+  "original_workspace_status": [
+    " M .gitignore",
+    "?? cst/build_spacecraft_ka_model.py",
+    "?? docs/guides/",
+    "?? output/codex/spacecraft_ka_model/"
+  ],
+  "isolation": "new clean worktree created directly at freeze; start status observed before creating standards directory",
+  "other_worker_results_read": false,
+  "shared_code_modified": false,
+  "antenna_gain_caps_dbi": [
+    0,
+    20,
+    40
+  ],
+  "gain_caps_class": "ENGINEERING_ASSUMPTION; not a guaranteed physical or regulatory EIRP bound"
+}

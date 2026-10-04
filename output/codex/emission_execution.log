@@ -1,0 +1,12 @@
+GNU Octave 9.2.0
+CASE_SBA1_L1 complete; scenario rows=350
+CASE_SBA1_L2 complete; scenario rows=760
+CASE_SBA1_L5 complete; scenario rows=1170
+CASE_SBA4_L1 complete; scenario rows=1520
+CASE_SBA4_L2 complete; scenario rows=1930
+CASE_SBA4_L5 complete; scenario rows=2340
+
+================ TEST SUMMARY ================
+Passed: 76   Failed: 0   Total: 76
+=============================================
+Reference -120 -> -180 dBm/Hz; +2 dB verified in unchanged-engine tests.
