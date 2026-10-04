@@ -50,3 +50,6 @@ Canonical units, frames, and conventions are fixed in `icd/` and must not be sil
   on tabulated S21(f) (`icd/coupling.md` §6–7); installed-geometry EM sweep **plan**
   (`reports/em_sweep/`); explicit `SCREENING_ALL_TX` vs provisional nominal modes; receiver
   nonlinear data search (`notes/receiver_nonlinear_data_search_2026-10-04.md`, none public).
+- **Phase 8 (complete):** free-space X-band/Ka policy, per-pair received-level (S21) report, local facet export
+  for L/S installed-pattern work, installed-pattern hook, configurable terminology (provisional)
+  (`reports/rfc_levels/`, `reports/installed_local/`, `notes/kari_terminology_status_2026-10-04.md`).

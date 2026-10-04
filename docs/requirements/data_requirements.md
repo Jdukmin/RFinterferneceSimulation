@@ -252,3 +252,11 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
   §10, §12; `rf_systems.csv` gains `frontend_prov` (§11).
 - **DR-443 (SHALL)** `CouplingValidity` adds `S21_UNAVAILABLE`; `CouplingModel.newContext` adds
   `txAntennaId`, `rxAntennaId`, `band_Hz` (additive).
+
+## Phase 8
+
+- **DR-444 (SHALL)** `rfc_terms.csv`: `term_key, ko, en, status, source, note`.
+- **DR-445 (SHALL)** `installed_patterns.csv`: `function_id, config_id, xz_file, yz_file, frequency_mhz,
+  installed_source, provenance_tag, status, note`; only `ACCEPTED` rows are loaded.
+- **DR-446 (SHALL)** `antenna_functions.csv` adds `max_dimension_m`, `max_dimension_prov`.
+- **DR-447 (SHALL)** `CouplingValidity` adds `FREE_SPACE_ASSUMED`; `PairResult` adds `couplingValidity`.

@@ -105,6 +105,7 @@ classdef PairwiseAnalyzer
             pr.couplingMetric_dB = cres.metric_dB;
             pr.couplingMetricName = cres.metricName;
             pr.isPhysicalCoupling = cres.isPhysicalCoupling;
+            pr.couplingValidity = cres.validity;
             pr.warnings = [pr.warnings, cres.warnings];
 
             % ---- Interference screening metric (referenced to RX antenna port) ----
@@ -162,6 +163,8 @@ classdef PairwiseAnalyzer
                 pr.warnings{end+1} = 'no tabulated installed S21 for this pair/frequency';
             elseif strcmp(cres.validity, rfscreen.coupling.CouplingValidity.FULL_WAVE_COUPLING)
                 pr.validity = RV.APPROXIMATE;
+            elseif strcmp(cres.validity, rfscreen.coupling.CouplingValidity.FREE_SPACE_ASSUMED)
+                pr.validity = RV.FAR_FIELD_NOT_VERIFIED;
             elseif farFieldRequestedNotVerified
                 pr.validity = RV.FAR_FIELD_NOT_VERIFIED;
             else

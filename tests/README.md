@@ -79,12 +79,18 @@ cd tests; ok = run_all_tests();
 | `test_em_sweep_plan` | grids, analytic cell estimate, feasibility threshold, 8 local + 28 pair models, determinism, CSV export, planning-only guard |
 | `test_mission_cases` (extended) | operating modes, receiver front-end data path |
 
+**Phase 8:**
+| File | Covers |
+|------|--------|
+| `test_local_facets` | clipping, finite-facet / edge / plane distances, CST local frame, unsnapped point, radius monotonicity, export |
+| `test_rfc_levels` | free-space assumption, preferred coupling, per-pair level table identities and flags, installed-pattern hook (incl. end to end), provisional terminology, CSV |
+
 Note: these files use the real repository datasets `data/spacecraft/simplified_spacecraft_v1/`
 (analysis baseline, `USER_DEFINED` provenance), not `SYNTHETIC_TEST` fixtures.
 
 ## Status
 
-**1321 assertions across 43 files, all passing** under GNU Octave 9.2.0 (Phase 7d; the earlier 1142 = Phase 7c): the 628
+**1413 assertions across 46 files, all passing** under GNU Octave 9.2.0 (Phase 8; Phase 7d = 1321): the 628
 assertions of Phases 1–6 unchanged, plus 25 (`test_convex_polygon`), 264
 (`test_simplified_spacecraft`) and 225 (`test_mission_cases`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
 (Phase 6) under Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not

@@ -27,6 +27,7 @@ classdef PairResult
         couplingModelType = ''
         couplingMetric_dB = NaN
         couplingMetricName = ''
+        couplingValidity = ''       % CouplingValidity of the coupling result (Phase 7; '' if not computed)
         isPhysicalCoupling = false
         % --- interference decision (screening) ---
         interferenceType = ''

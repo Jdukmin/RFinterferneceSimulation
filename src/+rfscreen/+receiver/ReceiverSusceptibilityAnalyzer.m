@@ -128,6 +128,7 @@ classdef ReceiverSusceptibilityAnalyzer
                 case 'FULL_WAVE_COUPLING'; c = 0.95;
                 case 'MEASURED_COUPLING';  c = 0.90;
                 case 'FAR_FIELD_VALID';    c = 0.70;
+                case 'FREE_SPACE_ASSUMED'; c = 0.50;
                 case 'PATTERN_ONLY';       c = 0.30;
                 case 'FAR_FIELD_INVALID_OR_UNKNOWN'; c = 0.20;
                 otherwise;                 c = 0.50;

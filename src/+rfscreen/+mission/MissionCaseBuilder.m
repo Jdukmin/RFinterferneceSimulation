@@ -55,7 +55,8 @@ classdef MissionCaseBuilder
 
             funcs = struct('functionId', {}, 'installationId', {}, 'role', {}, 'patternKey', {}, ...
                 'bindingStatus', {}, 'included', {}, 'frequency_Hz', {}, 'band_Hz', {}, ...
-                'fidelity', {}, 'patternSourceFiles', {}, 'note', {});
+                'fidelity', {}, 'patternSourceFiles', {}, 'note', {}, 'patternSource', {}, 'installedTag', {});
+            instRows = MB.readInstalled(fullfile(dsDir, 'installed_patterns.csv'), dsDir);
             warnings = {};
             for r = 1:F.nRows
                 fid = F.function_id{r};
@@ -66,7 +67,7 @@ classdef MissionCaseBuilder
                 f = struct('functionId', fid, 'installationId', F.installation_id{r}, 'role', F.role{r}, ...
                     'patternKey', key, 'bindingStatus', F.binding_status{r}, 'included', ~isempty(key), ...
                     'frequency_Hz', NaN, 'band_Hz', [NaN NaN], 'fidelity', '', 'patternSourceFiles', {{}}, ...
-                    'note', F.note{r});
+                    'note', F.note{r}, 'patternSource', 'FREE_SPACE', 'installedTag', '');
                 if isempty(key)
                     warnings{end+1} = sprintf('%s not instantiated (%s): geometry only', fid, F.binding_status{r}); %#ok<AGROW>
                     funcs(end+1) = f; %#ok<AGROW>
@@ -79,11 +80,23 @@ classdef MissionCaseBuilder
                 if ~cache.isKey(key)
                     cache(key) = MB.assemblePattern(b, opts);
                 end
-                if ~sc.patterns.isKey(key)
+                useKey = key;
+                ii = find(strcmp({instRows.functionId}, fid), 1);
+                if ~isempty(ii)
+                    ir = instRows(ii);
+                    useKey = ['INSTALLED_' fid];
+                    if ~sc.patterns.isKey(useKey)
+                        sc.addPattern(useKey, MB.assembleInstalled(ir, b, opts));
+                    end
+                    f.patternSource = 'INSTALLED'; f.installedTag = ir.provenanceTag;
+                    warnings{end+1} = sprintf('%s uses an INSTALLED pattern (%s, %s)', fid, ir.installedSource, ir.provenanceTag); %#ok<AGROW>
+                elseif ~sc.patterns.isKey(key)
                     sc.addPattern(key, cache(key));
                 end
+                md = str2double(F.max_dimension_m{r});     % empty -> NaN (unknown)
+                if ~isfinite(md); md = []; end
                 sc.addAntenna(rfscreen.antenna.Antenna(fid, fid, F.role{r}, b.bandMin_Hz, b.bandMax_Hz, ...
-                    b.polarization, key, F.installation_id{r}));
+                    b.polarization, useKey, F.installation_id{r}, md));
                 f.frequency_Hz = b.frequency_Hz; f.band_Hz = [b.bandMin_Hz b.bandMax_Hz];
                 f.fidelity = b.fidelity; f.patternSourceFiles = {b.xzPath, b.yzPath};
                 if strcmp(F.binding_status{r}, 'CANDIDATE')
@@ -280,6 +293,44 @@ classdef MissionCaseBuilder
                         'centerRayHits', r.centerRayHits, 'validity', r.validity); %#ok<AGROW>
                 end
             end
+        end
+
+        function rows = readInstalled(filePath, dsDir)
+            %READINSTALLED ACCEPTED rows of installed_patterns.csv (repo-root relative file paths).
+            rows = struct('functionId', {}, 'configId', {}, 'xzPath', {}, 'yzPath', {}, 'frequency_Hz', {}, ...
+                'installedSource', {}, 'provenanceTag', {});
+            if exist(filePath, 'file') ~= 2; return; end
+            R = rfscreen.spacecraft.SpacecraftDataReader;
+            T = R.readTable(filePath);
+            repo = fileparts(fileparts(fileparts(dsDir)));
+            for r = 1:T.nRows
+                if ~strcmp(T.status{r}, 'ACCEPTED'); continue; end
+                src = rfscreen.util.Validate.member(T.installed_source{r}, rfscreen.antenna.InstalledPatternSource.values(), ...
+                    [T.function_id{r} ' installed_source']);
+                rows(end+1) = struct('functionId', T.function_id{r}, 'configId', T.config_id{r}, ...
+                    'xzPath', rfscreen.mission.MissionCaseBuilder.resolvePath(repo, T.xz_file{r}), ...
+                    'yzPath', rfscreen.mission.MissionCaseBuilder.resolvePath(repo, T.yz_file{r}), ...
+                    'frequency_Hz', 1e6 * R.num(T, 'frequency_mhz', r, T.function_id{r}), ...
+                    'installedSource', src, 'provenanceTag', T.provenance_tag{r}); %#ok<AGROW>
+            end
+        end
+
+        function p = resolvePath(repo, f)
+            %RESOLVEPATH Repository-root relative path, or an absolute path used as given.
+            if ~isempty(regexp(f, '^([A-Za-z]:[\/]|/)', 'once'))
+                p = strrep(f, '/', filesep);
+            else
+                p = fullfile(repo, strrep(f, '/', filesep));
+            end
+        end
+
+        function p = assembleInstalled(ir, b, opts)
+            %ASSEMBLEINSTALLED InstalledPattern from the installed 1-degree cuts (2D cuts -> APPROX_FROM_CUTS).
+            bb = b; bb.key = ['INSTALLED_' ir.functionId]; bb.xzPath = ir.xzPath; bb.yzPath = ir.yzPath;
+            bb.frequency_Hz = ir.frequency_Hz;
+            fs = rfscreen.mission.MissionCaseBuilder.assemblePattern(bb, opts);
+            p = rfscreen.antenna.InstalledPattern(['INSTALLED_' ir.functionId], 'APPROX_FROM_CUTS', fs.grid, ...
+                ir.installedSource, struct('polarization', fs.polarization));
         end
 
         function p = assemblePattern(b, opts)

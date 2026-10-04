@@ -7,11 +7,13 @@ classdef CouplingValidity
         MEASURED_COUPLING            = 'MEASURED_COUPLING'
         FULL_WAVE_COUPLING           = 'FULL_WAVE_COUPLING'
         S21_UNAVAILABLE              = 'S21_UNAVAILABLE'   % no tabulated S21 for the pair/frequency (Phase 7)
+        FREE_SPACE_ASSUMED           = 'FREE_SPACE_ASSUMED' % Friis applied by explicit owner decision; far-field NOT verified (Phase 7)
     end
     methods (Static)
         function v = values()
             v = {'PATTERN_ONLY', 'FAR_FIELD_VALID', 'FAR_FIELD_INVALID_OR_UNKNOWN', ...
-                 'MEASURED_COUPLING', 'FULL_WAVE_COUPLING', 'S21_UNAVAILABLE'};
+                 'MEASURED_COUPLING', 'FULL_WAVE_COUPLING', 'S21_UNAVAILABLE', ...
+                 'FREE_SPACE_ASSUMED'};
         end
         function tf = isValid(x)
             tf = ischar(x) && any(strcmp(x, rfscreen.coupling.CouplingValidity.values()));

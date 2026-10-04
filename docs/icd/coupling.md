@@ -138,3 +138,18 @@ validity is `APPROXIMATE` (S21 present) or `REQUIRES_FULL_WAVE_VERIFICATION` (no
 confidence for `FULL_WAVE_COUPLING` is 0.95 (unchanged table). Interference power =
 `txPower + absoluteTransfer + spectralFactor` with the S21 averaged over the same overlap band the
 spectral factor refers to. Free-space patterns are never edited to include installation effects.
+
+## 8. Free-space assumption and per-pair preference (Phase 8)
+
+- `FarFieldCouplingModel(minWavelengths, struct('assumeFreeSpace', true))`: where the far-field guard
+  fails (aperture dimension unknown or distance < 2D²/λ) it still applies `FSPL = 20·log10(4πd/λ)`, but
+  returns `validity = FREE_SPACE_ASSUMED` (new `CouplingValidity`), `isPhysicalCoupling = true`, and an
+  explicit warning ("far-field NOT verified, level is an estimate"). **Never** `FAR_FIELD_VALID`. The
+  default (`assumeFreeSpace = false`) is unchanged (guarded, `FAR_FIELD_INVALID_OR_UNKNOWN`, no FSPL). With
+  no finite distance/frequency nothing is applied.
+- `PreferredCouplingModel(primary, fallback)`: uses `primary` (e.g. `CstCouplingModel`) unless it reports
+  `S21_UNAVAILABLE`, then `fallback` (e.g. the free-space model); the fallback result keeps its own
+  `modelType`/`validity` and gains a warning. Used for "installed where available, free space otherwise".
+- `PairResult.couplingValidity` (new, additive) carries the coupling validity; `AbsoluteTransfer.fromPair`
+  reports `FREE_SPACE_ASSUMED` for such rows; pair validity is `FAR_FIELD_NOT_VERIFIED`; Phase-3
+  confidence for `FREE_SPACE_ASSUMED` is 0.50 (below verified far field, 0.70).

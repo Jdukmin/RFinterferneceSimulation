@@ -26,6 +26,8 @@ blocks, no `import`), so the same code runs under MATLAB R2019b+ and Octave 6+.
 | **`+geometry`** *(Phase 6/7 add)* | `DiskGeometry` (P6), `ConvexPolygonGeometry` — exact convex planar polygon (P7) |
 | **`+spacecraft`** *(Phase 7)* | `SpacecraftDataReader`, `PrismHull`, `SimplifiedSpacecraftBuilder`, `GimbalSteeringDomain` — simplified mission hull + antenna installation baseline from `data/spacecraft/` (leaf consumer; no pattern, no EM) |
 | **`+coupling`** *(Phase 7d adds)* | `CstS21Table`, `CstCouplingModel` (tabulated installed S21 → `absoluteTransfer_dB`), `AbsoluteTransfer` |
+| **`+coupling`** *(Phase 8 adds)* | `PreferredCouplingModel`; `FarFieldCouplingModel` option `assumeFreeSpace` (`FREE_SPACE_ASSUMED`) |
+| **`+mission`** *(Phase 8 adds)* | `RfcLevelReport` (per-pair S21 / received level / required rejection), `LocalFacetExporter` (cropped local facets in the CST frame) |
 | **`+couplingdata`** *(Phase 7d)* | `CstS21Importer` — CSV / Touchstone (`.sNp`) → `CstS21Table` (the only S21 file parser) |
 | **`+mission`** *(Phase 7b)* | `MissionCaseBuilder` — the 6 RFC/RFI analysis cases (SBA1/SBA4 × GPS L1/L2/L5) as scenarios: per-function antennas + patterns via the existing Phase-2 pipeline, plus the RF baseline (`RFTransmitter`/`RFReceiver` from `rf_systems.csv`; unknown P1dB/IIP3 stay NaN) |
 

@@ -354,3 +354,23 @@ unchanged: geometry is installation evidence only.**
   operating mode); nominal operating modes shall be separate, provisional until confirmed.
 - **SR-449 (SHALL)** Receiver P1dB/IIP3 shall be applied only from sourced data with mandatory
   provenance; unknown values stay NaN and no criterion shall be invented.
+
+## 19. Coupling policy, level report and local installed-pattern input (Phase 8)
+
+- **SR-450 (SHALL)** X-band (ISL), Ka and SAR couplings shall use free space; L/S shall use an installed
+  pattern or S21 where accepted data exist and otherwise the free-space result, explicitly flagged.
+- **SR-451 (SHALL)** A free-space propagation applied where the far-field condition is unverified shall be
+  an explicit option, report `FREE_SPACE_ASSUMED` (never `FAR_FIELD_VALID`), and carry a warning; the
+  guarded default shall be unchanged.
+- **SR-452 (SHALL)** A per-pair level table shall report geometry, the S21 (`Gtx + Grx − FSPL` or tabulated),
+  the received level at the victim antenna port, the in-band interference power, the allowable level,
+  I/N, margin and the required out-of-band rejection, with far-field and installed-effect flags.
+- **SR-453 (SHALL)** Report terminology shall be configuration; terms not confirmed against a reference
+  paper shall be marked provisional.
+- **SR-454 (SHALL)** Accepted installed patterns shall be loadable as `InstalledPattern` without altering
+  the frozen free-space patterns.
+- **SR-455 (SHALL)** A local (per-antenna) crop of the actual hull facets in the antenna-local frame shall be
+  exportable, with support-plane and finite-facet distances reported separately and the reference point
+  never snapped.
+- **SR-456 (SHALL)** LOS blockage shall remain geometry evidence: a blocked pair keeps its free-space level
+  labelled as an upper bound, never a computed loss.

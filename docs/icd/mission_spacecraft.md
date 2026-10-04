@@ -3,7 +3,7 @@
 Normative interface for loading the **simplified spacecraft baseline** (hull + antenna
 installation registry + gimbal steering metadata) from a repository dataset and attaching it to
 the existing Phase-5 geometry/FOV/LOS machinery, and for building the per-case RFC/RFI scenarios
-(§9). Requirements: SR-430…SR-449, DR-430…DR-443, VR-430…VR-452.
+(§9). Requirements: SR-430…SR-456, DR-430…DR-447, VR-430…VR-461.
 
 Builds on Phase-1..6 **without changing** any existing contract (`AntennaInstallation`,
 `SpacecraftStructure`, `Scenario`, FOV/LOS analyzers). **Central rule (unchanged): geometry
@@ -241,3 +241,36 @@ transponder, the GNSS receiver or an ISL receiver
 coarse 1–27 GHz grid, dense grids across each actual band, LOCAL (per antenna) and PAIRWISE
 (antenna pair) partition with lower-bound hex-cell feasibility for the Learning Edition. Planning
 only — no solver run, no coupling value.
+
+## 13. Level report, coupling policy, terminology, installed hook, local facets (Phase 8)
+
+**Coupling policy (owner, 2026-10-04).** X-band (ISL), Ka and SAR: free space. L- and S-band: installed
+pattern / S21 where available (none accepted yet) else free space, flagged
+`FREE_SPACE_INSTALLATION_EFFECT_UNKNOWN`. The policy band is decided by the interferer (coupling)
+frequency (< 3 GHz = L/S).
+
+**`mission.RfcLevelReport`.** `couplingModel([s21Tables])` = free-space-assumed far-field model
+(preferred-composed with `CstCouplingModel` when tables are given); `build(case, model)` → one row per
+active interferer → victim pair (same-mount pairs omitted): geometry (distance, LOS, blocking panels),
+`txGain/rxGain`, `coupling`, `couplingValidity`, `farFieldVerified`, `fspl_dB`, `s21_dB` (= Gtx + Grx −
+FSPL or the tabulated S21), `txPower_dBm`, **`receivedLevel_dBm`** (= P_tx + S21 at the victim antenna
+port), `spectralFactor_dB`, `inBandInterference_dBm`, `noise_dBm`, `allowable_dBm` (kTB + NF + I/N_max),
+`iOverN_dB`, `margin_dB`, **`requiredRejection_dB`** (= received level − allowable level), `installedEffect`
+(`INSTALLED_S21` | `INSTALLED_PATTERN` | `FREE_SPACE_BY_DECISION` | `FREE_SPACE_INSTALLATION_EFFECT_UNKNOWN`).
+`writeCsv` adds a terminology comment line.
+
+**`rfc_terms.csv`.** Report labels (`term_key, ko, en, status, source`). Status `PROVISIONAL_STANDARD_EMC`
+until confirmed against the KARI papers; `KARI_PAPER_ATTESTED` only for quoted phrases
+(`docs/notes/kari_terminology_status_2026-10-04.md`).
+
+**Antenna dimensions.** `antenna_functions.csv: max_dimension_m, max_dimension_prov` feed the far-field
+check (GPSA 0.200 m datasheet; KAA 0.22 m; SBA 0.065 m and ISL 0.030 m are CST **surrogate** sizes).
+
+**`installed_patterns.csv`** (empty): ACCEPTED rows → `antenna.InstalledPattern` registered as
+`INSTALLED_<function>` (2D cuts → `APPROX_FROM_CUTS`, source from `installed_source`); the free-space files
+stay untouched; `c.functions(k).patternSource` = `FREE_SPACE` | `INSTALLED`. Paths are repo-relative or absolute.
+
+**`mission.LocalFacetExporter`.** `export(model, antennaId, R)` → the SSOT panels clipped (Sutherland–Hodgman)
+to a box of half-size R around the **unsnapped** reference point, in the CST local frame (`+X_L = +X_B`,
+`+Z_L` = boresight, `+Y_L = Z×X`); per facet: cropped/full area, outward normal, **support-plane signed
+distance** and **minimum distance to the finite facet / its edges** reported separately. Geometry only.

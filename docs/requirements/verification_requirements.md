@@ -261,3 +261,20 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
 - **VR-451 (SHALL)** Plan is planning-only (no solver call, no coupling model construction).
 - **VR-452 (SHALL)** Pattern freeze: all 41 manifest files unchanged, no unlisted file in frozen
   directories, all bound patterns frozen, legacy Ka bound to nothing. *(test_pattern_freeze)*
+
+## 18. Phase 8 verification
+
+- **VR-453 (SHALL)** Local facets: clipping primitives, finite-facet vs edge vs plane distances, frame
+  orthonormality and boresight, unsnapped reference point, rear panel inclusion, radius monotonicity.
+  *(test_local_facets)*
+- **VR-454 (SHALL)** SBA_NADIR plane distance 190.181 mm vs facet distance 245.8 mm; rear panel 255 mm.
+- **VR-455 (SHALL)** SAR_ANT on its plane: distances 0.
+- **VR-456 (SHALL)** Free-space assumption: default unchanged, assumed result analytic/explicit/never
+  FAR_FIELD_VALID, true far field unchanged, nothing without a distance. *(test_rfc_levels)*
+- **VR-457 (SHALL)** Preferred model: S21 where present, announced fallback otherwise.
+- **VR-458 (SHALL)** Level table: 22 pairs for CASE_SBA1_L1; `S21 = Gtx + Grx − FSPL`; received level =
+  P_tx + S21; far-field flag; installed-effect flags; required rejection; Ka rows FREE_SPACE_ASSUMED.
+- **VR-459 (SHALL)** Installed hook: ACCEPTED rows only, absolute/relative paths, `InstalledPattern` class,
+  frozen pattern untouched, end-to-end flag `INSTALLED_PATTERN`.
+- **VR-460 (SHALL)** Terminology: provisional status, attested phrases marked as such, CSV header carries terms.
+- **VR-461 (SHALL)** All 1321 assertions of Phase 7d still pass unchanged.

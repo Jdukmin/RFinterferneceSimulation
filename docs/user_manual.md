@@ -289,6 +289,11 @@ c.warnings                                                % KAA candidate, SAR d
   `NonlinearSusceptibilityAnalyzer.analyze(sc, rxId, cfg, struct('couplingModel', model))`). The S21
   is the absolute transfer (it already includes both antennas); a missing pair or frequency gives
   `S21_UNAVAILABLE`. Which S21 solves are feasible: `docs/reports/em_sweep/`.
+- **Level report:** `RL = rfscreen.mission.RfcLevelReport; rows = RL.build(c, RL.couplingModel());` gives, per
+  interferer → victim pair, the S21, the received level at the victim antenna port, the in-band interference
+  power and the required out-of-band rejection (`examples/rfc_level_report.m`; results in
+  `docs/reports/rfc_levels/`). X-band/Ka use free space; rows where the far field is not verified say
+  `FREE_SPACE_ASSUMED`.
 - Pattern assembly takes ~15 s per pattern in Octave at the default 2° grid; pass the same
   `patternCache` to every case (9 distinct patterns in total). Example: `examples/mission_cases.m`.
 

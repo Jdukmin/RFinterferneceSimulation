@@ -15,6 +15,9 @@ classdef AbsoluteTransfer
                     a.isAbsolute = true;
                     a.absoluteTransfer_dB = pr.txGain_dBi + pr.rxGain_dBi - pr.couplingMetric_dB;
                     a.couplingValidity = 'FAR_FIELD_VALID';
+                    if isprop(pr, 'couplingValidity') && strcmp(pr.couplingValidity, 'FREE_SPACE_ASSUMED')
+                        a.couplingValidity = 'FREE_SPACE_ASSUMED';
+                    end
                 else
                     a.couplingValidity = 'FAR_FIELD_INVALID_OR_UNKNOWN';
                 end

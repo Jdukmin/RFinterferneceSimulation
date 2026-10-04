@@ -653,3 +653,31 @@ Decisions:
 Pre-existing behaviour noticed (not changed): the Phase-1 pair validity is `MISSING_RECEIVER_DATA`
 for an in-band pair whose receiver has no legacy `interferenceThreshold_dBm`, even when a Phase-3
 `I_N_MAX` criterion exists; the Phase-3 susceptibility result is the authoritative one.
+
+---
+
+# Phase 8 — free-space X/Ka policy, per-pair received levels, local installed-pattern input
+
+Owner instruction (2026-10-04): X-band and Ka use free space; for L and S obtain installed patterns as far
+as possible (locally around each antenna, not the whole vehicle); then run the tool, adopt the terminology of
+Dr. Im Won-gyu's KARI papers, and determine each received level (S21).
+Verification: GNU Octave 9.2.0, **1413/1413 assertions, 46 files** (1321 earlier assertions unchanged); MATLAB NOT RUN.
+
+| Item | Req | Code / data | Test |
+|------|-----|-------------|------|
+| X/Ka free space; flags | SR-450/451/456 | `FarFieldCouplingModel(assumeFreeSpace)`, `CouplingValidity.FREE_SPACE_ASSUMED`, `PreferredCouplingModel`, `PairResult.couplingValidity`, `AbsoluteTransfer` | test_rfc_levels (VR-456/457) |
+| Per-pair level table | SR-452 | `mission/RfcLevelReport`, `examples/rfc_level_report.m`, `docs/reports/rfc_levels/` | test_rfc_levels (VR-458) |
+| Terminology | SR-453 | `rfc_terms.csv`, `docs/notes/kari_terminology_status_2026-10-04.md` | test_rfc_levels (VR-460) |
+| Installed hook | SR-454 | `installed_patterns.csv`, `MissionCaseBuilder.readInstalled/assembleInstalled` | test_rfc_levels (VR-459) |
+| Local facets | SR-455 | `mission/LocalFacetExporter`, `docs/reports/installed_local/` | test_local_facets (VR-453…455) |
+
+Decisions and open items:
+1. **Installed patterns were not produced.** A CST application is live on this PC and the CST workstream
+   owns the installed S-band stage; no second automation session was started. The planning result shows the
+   Learning Edition limits (≈ 0.7 m local box at S-band, accepted helix alone 79 k cells). The deliverable is
+   the exact local geometry input and a tested path that applies accepted results.
+2. **Terminology is provisional.** The three KARI papers could not be retrieved; only the phrases
+   "안테나간 RF 간섭" and "FOV 간섭" are attested. Labels live in data (`rfc_terms.csv`).
+3. **Free space is an upper bound for BLOCKED pairs and an estimate for every Ka pair (far field never
+   verified).** SBA_ZENITH → GPSA_1/2 grazes the hull and is the first candidate for an installed study.
+4. Antenna max dimensions for SBA/ISL are CST surrogate sizes, not product dimensions.

@@ -119,6 +119,11 @@ S21 flow: `Touchstone/CSV -> CstS21Importer -> CstS21Table -> CstCouplingModel(c
 Phase-3/4 maths; the S21 replaces `Gtx+Grx−FSPL`, it is never added to it). `+couplingdata`
 mirrors `+patterndata`: importers live outside the core so `+coupling` stays file-free.
 
+Phase 8 adds (`+coupling`: `PreferredCouplingModel`, `FREE_SPACE_ASSUMED`; `+mission`: `RfcLevelReport`,
+`LocalFacetExporter`): `case -> RfcLevelReport(couplingModel) -> existing InterferenceAnalyzer /
+RfCoexistenceAnalyzer -> per-pair S21, received level, required rejection`. Free space is the fallback of a
+`PreferredCouplingModel` whose primary is the (optional) tabulated installed S21.
+
 ### Phase-2 pattern-data pipeline (dependency direction)
 
 ```

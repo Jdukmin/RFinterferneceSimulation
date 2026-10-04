@@ -74,6 +74,13 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > limited to ≈ 2.2 GHz locally); explicit `SCREENING_ALL_TX` vs provisional nominal modes; no public
 > receiver P1dB/IIP3 found (data path ready). See `docs/traceability.md` Phase 7d.
 >
+> **Phase 8.** X-band and Ka use free space (explicit `FREE_SPACE_ASSUMED` where the far field is not
+> verified); per-pair received levels (S21 = Gtx + Grx − FSPL) with required out-of-band rejection are
+> produced for the six cases × modes (`docs/reports/rfc_levels/`); cropped local facets of the L/S antennas
+> are exported as the input of a local installed-pattern model (`docs/reports/installed_local/`; installed
+> patterns themselves are **not** produced yet); report terminology is configurable and still provisional
+> (`docs/notes/kari_terminology_status_2026-10-04.md`).
+>
 > HFSS/CST/measured-S21 coupling import and full-wave scattering, **transmitter** nonlinearities
 > (HPA/IMD/spurious/harmonics), receiver **mixer spur** tables, and **ADC saturation** plus any UI
 > remain **deferred** (a scoped, data-only external-EM ingestion boundary is the recommended — not
