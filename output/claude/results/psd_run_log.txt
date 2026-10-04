@@ -1,0 +1,11 @@
+RFI blocker / victim-band PSD / receiver run 2026-10-04 16:24:39 (GNU Octave 9.2.0)
+Repository HEAD: 5a9332ab9ae621d7b391c837107982ab2b6c9b5c
+Inputs: 6 receiver baselines, 0 TX emission-mask rows, 0 TX chain-loss rows
+A. OOB blocker rows: 150 (blocker port powers copied unchanged from pair_results.csv)
+Reference S->L: filter  0 dB -> -120.0 dBm/Hz, margin -58.0 dB (FAIL); I = -46.9 dBm in 20.46 MHz, I/N = 52.0 dB
+Reference S->L: filter 60 dB -> -180.0 dBm/Hz, margin +2.0 dB (PASS); I = -106.9 dBm in 20.46 MHz, I/N = -8.0 dB
+B. victim-band pairs COUPLING_INPUT_MISSING                                                           16
+B. victim-band pairs EMISSION_MASK_MISSING_COUPLING_EVALUATED                                         56
+B. victim-band pairs KA_EMISSION_REQUIRES_RADIATED_EIRP_PSD_OR_CONDUCTED_PSD_PLUS_KAA_LOWBAND_RESPONSE 60
+B. victim-band pairs NOT_EVALUATED                                                                    18
+Rows: PSD 2472, pair summary 150, integrated 58, receiver baseline 6

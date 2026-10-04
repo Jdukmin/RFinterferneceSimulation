@@ -1,4 +1,4 @@
-interferer,victim,distance_m,los,victim_or_tx_gain_dbi,coupling_excl_sar_gain_db,assumed_sar_gain_dbi,power_dbm,received_dbm,required_rejection_db,allowable_dbm,status,note
+interferer,victim,distance_m,los,victim_or_tx_gain_dbi,coupling_excl_sar_gain_db,assumed_sar_gain_dbi,power_dbm,received_dbm,screening_suppression_to_inband_limit_db,allowable_dbm,status,note
 SAR_TX(hyp),S_TC_RX@SBA_NADIR,3.1273,CLEAR,-2.9949,-65.0197,-10.0000,63.9794,-11.0403,112.9246,-123.9649,ASSUMPTION_SENSITIVITY,SAR pattern not bound: SAR gain toward victim is an assumed parameter; victim SAR-band RealizedGain is CST data
 SAR_TX(hyp),S_TC_RX@SBA_NADIR,3.1273,CLEAR,-2.9949,-65.0197,-10.0000,66.9897,-8.0300,115.9349,-123.9649,ASSUMPTION_SENSITIVITY,SAR pattern not bound: SAR gain toward victim is an assumed parameter; victim SAR-band RealizedGain is CST data
 SAR_TX(hyp),S_TC_RX@SBA_NADIR,3.1273,CLEAR,-2.9949,-65.0197,0.0000,63.9794,-1.0403,122.9246,-123.9649,ASSUMPTION_SENSITIVITY,SAR pattern not bound: SAR gain toward victim is an assumed parameter; victim SAR-band RealizedGain is CST data

@@ -1,6 +1,6 @@
 # RFI 간섭 해석 — 분석근거 (패턴·케이스·수식·검증)
 
-작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 저장소 `main` @ `4493d4d` + Ka 근거리 갱신(§10).
+작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 저장소 `main` @ `5a9332a` + Ka 근거리(§10) + blocker / victim-band PSD / 수신기 3단 분리(§11).
 CST 신규 계산·형상 변경·설치 작업은 하지 않았다. 기존 CST 출력과 저장소 데이터만 읽었다.
 결과 수치는 `RFI_분석결과보고서.md`, 기계 판독 근거는 `results/` 아래 CSV에 있다.
 
@@ -107,11 +107,11 @@ A·B 공통으로 **CST 자유공간 RealizedGain**을 쓴다. 피간섭원의 �
 ```
 S21(f_k) = G_tx(f_k, θ_tx, φ_tx) + G_rx(f_k, θ_rx, φ_rx) − FSPL(f_k, d)        [dB]
 FSPL(f,d) = 20·log10(4π d f / c)
-수신 레벨  P_rx = P_tx + 10·log10( mean_k 10^(S21(f_k)/10) )                  [dBm, 피간섭원 안테나 포트]
+blocker    P_blk = P_tx + 10·log10( mean_k 10^(S21(f_k)/10) )                 [dBm, 피간섭원 안테나 포트, TX 반송파 대역]
 대역 내 간섭 P_I = P_tx + 10·log10(B_overlap/B_tx) + 10·log10(mean over overlap 10^(S21/10))   (중첩 없으면 −∞)
 허용 레벨  P_allow = kTB + NF + (I/N)_max          (B = 수신 필터 대역, I/N = −6 dB, rf_systems)
-필요 제거도 = P_rx − P_allow                           (대역 밖 기본파를 수신단이 걸러야 할 양)
-집계      P_agg = 10·log10( Σ_i 10^(P_rx,i/10) )          (활성 TX만, 선형 합)
+진단값     screening_suppression_to_inband_limit = P_blk − P_allow   (요구사항 아님, §11.5)
+집계      P_agg = 10·log10( Σ_i 10^(P_blk,i/10) )          (활성 TX만, 선형 합)
 ```
 
 - **P_tx:** 송신 안테나 입력단 기준 전력이다. RealizedGain(입사 전력 기준)과 맞는 기준이다.
@@ -129,10 +129,14 @@ FSPL(f,d) = 20·log10(4π d f / c)
 
 | 상태 | 의미 |
 |---|---|
-| `EVALUATED_OOB_LEVEL` | 대역 밖 pair. 수신 레벨과 필요 제거도를 계산했다. 블로킹·스퓨리어스는 판정하지 않았다(P1dB/IIP3/emission mask 없음) |
+| `EVALUATED_OOB_LEVEL` | 대역 밖 pair. blocker 포트 전력을 계산했다. 블로킹은 판정하지 않았다(`PORT_EXPOSURE_EVALUATED_BLOCKING_UNKNOWN`) |
 | `EVALUATED_OOB_LEVEL_ESTIMATE` | 위와 같고, 근거리장이라 Friis 추정치다 |
 | `EVALUATED_OOB_LEVEL_NEAR_FIELD` | Ka: 반사판 aperture 근거리 직접장으로 포트 레벨을 계산했다 (`DIRECT_REFLECTOR_FIELD_ONLY`, `STRUCTURE_SCATTERING_NOT_MODELED`) |
-| `PORT_COUPLING_EVALUATED_RECEIVER_BLOCKING_UNKNOWN` | Ka: 포트 결합은 평가했고, 수신기 BPF/블로킹/P1dB/IIP3가 없어 수신기 판정은 하지 않았다 |
+| `PORT_EXPOSURE_EVALUATED_BLOCKING_UNKNOWN` | blocker 포트 전력은 평가했고, 수신기 BPF/블로킹/P1dB/IIP3가 없어 블로킹 판정은 하지 않았다(Ka 포함 전 경로 공통; Ka 1차 갱신 때의 `PORT_COUPLING_EVALUATED_RECEIVER_BLOCKING_UNKNOWN`을 대체) |
+| `EMISSION_MASK_MISSING_COUPLING_EVALUATED` | victim-band PSD 경로: 피간섭원 주파수의 C_EM은 계산했고 TX emission mask가 없어 포트 PSD는 미평가 |
+| `COUPLING_INPUT_MISSING` | victim-band PSD 경로: 송신 또는 수신 안테나의 피간섭원 대역 CST 응답이 없거나 정규화 불안정 |
+| `KA_EMISSION_REQUIRES_RADIATED_EIRP_PSD_OR_CONDUCTED_PSD_PLUS_KAA_LOWBAND_RESPONSE` | Ka victim-band 경로: KAA의 S/L/X 대역 응답이 없고 Ka 패턴을 재사용하지 않음. G_rx − FSPL만 계산 |
+| `TX_CHAIN_LOSS_MISSING`, `MASK_NOT_DEFINED_AT_FREQUENCY` | mask는 있으나 기준면 하류 손실이 없거나, 해당 주파수에 mask가 정의되지 않음 |
 | `PORT_COUPLING_NOT_EVALUATED` | Ka: 피간섭원 Ka 응답이 없어 포트 결합 자체를 평가하지 않았다 |
 | `ASSUMPTION_ONLY` | 결과가 아닌 참고값(예: 누락 피간섭원 0 dBi). 별도 파일·열에만 둔다 |
 | `EVALUATED_IN_BAND` | 대역 내 중첩 pair(이번 기준에는 없음) |
@@ -170,6 +174,7 @@ PASS/FAIL은 대역 내 pair에서만 내는데, 해당 pair가 없다. 대역 �
 ```
 octave-cli --no-gui --norc --eval "run('output/claude/run_ka_nearfield_analysis.m')"   # 먼저 실행 (ka_*.csv)
 octave-cli --no-gui --norc --eval "run('output/claude/run_rfi_analysis.m')"
+octave-cli --no-gui --norc --eval "run('output/claude/run_psd_analysis.m')"          # blocker / PSD / 수신기 3단 (pair_results.csv 사용)
 octave-cli --no-gui --norc --eval "run('output/claude/make_figures.m')"
 ```
 
@@ -256,3 +261,94 @@ P_port   = S · λ²/(4π) · G_rx(f, 도래방향)       (피간섭원 국소 �
 | 누락 응답 negative | S/L(MESH_LIMIT), SAR(NO_PATTERN_BOUND) INPUT_MISSING, 평가 시 오류, 컷 없음 |
 | 대역 내 이득 오사용 방지 | S_TC 응답 거부, Ka 밖 주파수 거부, feed monitor 외 주파수 거부 |
 | routing | S/ISL → free-space, KAA → near field, 원거리·검증 → far-field, 수신기·스퓨리어스 상태 |
+
+## 11. RFI 3단 분리 — fundamental blocker / victim-band PSD / 수신기 적분
+
+KARI reference 구조를 그대로 따른다: `TX spectrum → antenna / installed EM coupling → RX 기준면의 전력 또는 PSD → 수신기 감수성 → 유효 간섭 / margin`. 안테나 결합 자체를 수신기 rejection이라 부르지 않는다.
+
+### 11.1 세 경로
+
+| 경로 | 무엇 | 단위 | 주파수 | 결과 파일 |
+|---|---|---|---|---|
+| A. `FUNDAMENTAL_OOB_BLOCKER` | TX 반송파 → TX 안테나 @ f_TX → 결합 → 피간섭원 안테나 @ f_TX → 포트 blocker 전력 | dBm | TX 운용대역 | `oob_blocking_results.csv` |
+| B. `VICTIM_BAND_EMISSION_PSD` | TX 불요 방사(mask) → TX 체인 감쇠 → C_EM @ f_victim → 포트 PSD vs 허용 PSD | dBm/Hz | 피간섭원 tuning 대역 전체 | `victim_band_psd_results.csv`, `psd_pair_summary.csv` |
+| C. 수신기 적분 (2차) | I_rx = ∫ PSD_port \|H_rx\|² df (실제 채널·대역폭) → I/N, C/N0, J/S | dBm, dB | 선택 채널 | `receiver_integrated_results.csv` |
+
+- A의 blocker 수치는 이전 결과와 **동일**하다(pair_results.csv에서 그대로 복사).
+- A의 최종 판정에는 수신기 프리셀렉터/BPF rejection @ f_TX, 블로킹 한계, P1dB, 감도저하, IIP3가 필요하다. 없으면 `PORT_EXPOSURE_EVALUATED_BLOCKING_UNKNOWN`.
+- B는 A의 결합을 쓰지 않는다. 예: S-TM → GPS L1은 `S 안테나 @ 1.57542 GHz + GPS 안테나 @ 1.57542 GHz − FSPL @ 1.57542 GHz`.
+
+### 11.2 Victim-band PSD 식 (`src/+rfscreen/+psd`)
+
+```
+PSD_TX(f)          = P_carrier + mask(f)              [dBm + dBc/Hz = dBm/Hz]   (또는 dBm/Hz로 직접)
+PSD_after_chain(f) = PSD_TX(f) − L_TXchain(f)         [dB 감쇠]
+C_EM(f)            = G_tx,realized(f) + G_rx,realized(f) − FSPL(f)   (f = 피간섭원 주파수)
+                   = S21(f)                            (port-to-port S21이 있으면; G/FSPL 중복 없음)
+PSD_port(f)        = PSD_after_chain(f) + C_EM(f)
+margin(f)          = PSD_allowable − PSD_port(f)       required_psd_suppression = PSD_port − PSD_allowable
+```
+
+- mask가 없을 때는 C_EM만 계산하고, 허용 PSD를 만족하는 **TX 안테나 포트 불요방사 한계** `PSD_allowable − C_EM(f)`를 파생 요구값으로 보고한다(결과가 아니라 입력 요구).
+- 감쇠(dB)와 반송파 상대값(dBc, dBc/Hz)은 별도 타입이다. 감쇠는 음수를 거부한다.
+
+### 11.3 기준면 (`EmissionSpec.chainTerms`)
+
+| reference_plane | 추가 적용 TX 체인 손실 | TX 안테나 이득 | 비고 |
+|---|---|---|---|
+| PA_OUTPUT, FILTER_INPUT | filter + post-filter | 포함(RealizedGain) | 손실 미상 → `TX_CHAIN_LOSS_MISSING` (0 dB로 두지 않음) |
+| FILTER_OUTPUT | post-filter만 | 포함 | |
+| ANTENNA_PORT | 없음 | 포함 | 상류 손실 재적용 금지 |
+| RADIATED_EIRP_PSD | 없음 | **불포함**: C = G_rx − FSPL | S21과 결합 시 오류(S21에 TX 안테나 포함) |
+
+- CST RealizedGain에 mismatch가 들어 있으므로 S11 손실을 따로 빼지 않는다.
+
+### 11.4 수신기 기준 (`data/rfi_psd/receiver_baseline.csv`)
+
+| 수신기 | tuning/평가 대역 | NF | 잡음 PSD | 허용 간섭 PSD | 적분 BW (2차) | desired signal |
+|---|---|---|---|---|---|---|
+| GPS L1 / L2 / L5 | 1563–1588 / 1217.37–1237.83 / 1164–1189 MHz (CST monitor 범위) | 2 dB | −172 dBm/Hz | **−178 dBm/Hz** | 20.46 MHz (**ASSUMPTION**: 신호 main-lobe 폭, 수신기 BW 미확정) | −130 dBm (별도 항목, 간섭 기준 아님) |
+| S-TC | 2025–2110 MHz (tuning 전체) | 3 dB | −171 dBm/Hz | **−177 dBm/Hz** | 5529.6 Hz (4096 bps × 1.35, RRC α 0.35, ENGINEERING_BASELINE) | 미상 |
+| ISL RX | 10.55–10.65 GHz | 3 dB | −171 | −177 | 20 MHz (PROVISIONAL) | 미상 |
+| SAR RX | 9.3875–9.9125 GHz | 5 dB | −169 | −175 | 525 MHz | 미상(패턴 없음) |
+
+- kT0 = −174 dBm/Hz(290 K 관례, 정확값 −173.98)로 둔다.
+- tuning 대역은 PSD mask 판정 영역이고, 잡음 대역폭으로 쓰지 않는다. 적분 BW는 2차 평가에만 쓴다.
+- GPS 평가 대역은 CST 응답이 계산된 monitor 범위로 제한했다(외삽 없음).
+- **S-TC 충돌:** `rf_systems.csv`는 128 kbps / 200 kHz를 갖고 있다(전력 기준 screening의 허용 −123.96 dBm). PSD 기준은 대역폭과 무관하다. 2차 적분 BW는 소유자 지시 4096 bps 기준 5.53 kHz로 두고 충돌을 그대로 표시했다.
+
+### 11.5 기존 "필요 제거도" 재분류
+
+- `required_rejection = received_level − allowable_power`는 최종 요구사항으로 쓰지 않는다.
+- 이름을 `screening_suppression_to_inband_limit_db`(진단값)로 바꿨다: `pair_results.csv`(A/B), `aggregate_by_victim.csv`, `sensitivity.csv`, `sar_assessment.csv`, `oob_blocking_results.csv`.
+- 의미: "TX 반송파 대역 blocker 총전력을 피간섭원 대역 내 열잡음 기준 수준까지 낮추기 위한 등가 억압량". 실제 OOB rejection 요구가 아니다.
+- 실제 대역 내 억압 요구는 B 경로의 `required_psd_suppression_db = PSD_port − PSD_allowable`이다.
+- `received_A/B_dbm` 열은 `oob_blocker_port_A/B_dbm`으로 바꿨다(값 동일).
+
+### 11.6 불요방사 유형
+
+| 유형 | 단위 | 평가 |
+|---|---|---|
+| broadband noise / spectral mask | dBc/Hz, dBm/Hz | B: PSD mask 비교 |
+| discrete spur | dBc, dBm (+ RBW) | 포트 전력 dBm. PSD mask에 넣지 않음 → C에서 채널 안이면 적분 간섭으로 |
+| harmonic | dBc, dBm | 포트 전력 dBm |
+| 수신기 적분 간섭 | dBm | C |
+
+### 11.7 입력 테이블 (신규 schema)
+
+| 파일 | 열 |
+|---|---|
+| `data/rfi_psd/tx_emission_masks.csv` | tx_system, reference_plane, carrier_frequency_hz, victim_band, frequency_hz, emission_type, level, unit, rbw_hz, filter_state, provenance — **현재 비어 있음**(mask 데이터 없음, 기본값 생성 안 함) |
+| `data/rfi_psd/tx_chain_losses.csv` | tx_system, victim_band, frequency_hz, filter_db, post_filter_db, provenance — 현재 비어 있음 |
+| `data/rfi_psd/receiver_baseline.csv` | receiver, victim_band, tuning_lo/hi_mhz, tuning_prov, channel_fc_mhz, integration_bw_hz, integration_bw_prov, rx_filter_model, nf_db, nf_prov, i_n_max_db, desired_signal_reference_dbm, desired_prov, note |
+
+### 11.8 Ka의 두 경로
+
+- Ka blocker: KAA aperture 근거리 → 피간섭원 안테나 @ Ka → 포트 전력(§10). S/L/SAR는 Ka 응답이 없어 INPUT_MISSING.
+- Ka victim-band 방사: TX 불요방사 @ S/L/X → TX 체인 → (KAA의 S/L/X 대역 응답 또는 radiated EIRP PSD) → 피간섭원 @ f_victim → PSD 비교.
+  - KAA feed/도파관/필터의 저주파 전달 특성이 지배적이므로 Ka 반사판 패턴을 S/L에 쓰지 않는다(외삽 금지).
+  - 현재 G_rx − FSPL(`coupling_rx_only_db`)만 계산했다. Radiated EIRP PSD 규격이 들어오면 바로 비교할 수 있다(파생 한계: `min_max_tx_eirp_psd_dbm_hz`).
+
+### 11.9 테스트 (`tests/test_rfi_psd.m`, 77 checks)
+
+dBc/Hz→dBm/Hz, 60 dB 필터, −120→−180 dBm/Hz reference(전 −58 FAIL / 후 +2 PASS), GPS −178·S-TC −177 기준, tuning 대역 전체 sweep, 적분 BW와 tuning 분리, blocker/PSD 경로 분리, 기준면 중복 방지(ANTENNA_PORT·FILTER_OUTPUT·PA_OUTPUT·EIRP·S21), CST victim-band 응답 사용, 공격자 대역 패턴 재사용 거부, spur/broadband 단위 구분, 빈 mask 테이블.

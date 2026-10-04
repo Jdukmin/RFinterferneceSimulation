@@ -1,0 +1,16 @@
+# rfi_psd -- TX unwanted emission in victim bands (SSOT for the victim-band PSD path)
+# One row per (tx_system template, victim band, frequency point, emission type).
+# emission_type / unit:
+#   BROADBAND_PSD  dBc/Hz (relative to the carrier power at reference_plane) | dBm/Hz
+#   DISCRETE_SPUR  dBc | dBm in rbw_hz (never forced into dBm/Hz)
+#   HARMONIC       dBc | dBm
+# reference_plane: PA_OUTPUT | FILTER_INPUT | FILTER_OUTPUT | ANTENNA_PORT | RADIATED_EIRP_PSD
+#   (decides which TX-chain loss / TX antenna gain still applies; never applied twice)
+# filter_state: PRE_FILTER | POST_FILTER | UNKNOWN. provenance: DATASHEET | MEASURED | SPEC | USER_INPUT.
+# Ka (KA_DLS_TX) S/L/X-band emission must be a conducted post-filter PSD or a radiated EIRP PSD
+#   (the KAA Ka-band reflector pattern is never re-used at S/L/X).
+# STATUS 2026-10-04: no TX emission mask / spur table is available for S_TM_TX, ISL_X_TX, KA_DLS_TX,
+#   SAR_X_TX. The table is intentionally empty; no mask is defaulted. Reference cross-check data
+#   (-120 dBm/Hz, 60 dB filter) lives in the tests, not here.
+# Fields must not contain commas.
+tx_system,reference_plane,carrier_frequency_hz,victim_band,frequency_hz,emission_type,level,unit,rbw_hz,filter_state,provenance

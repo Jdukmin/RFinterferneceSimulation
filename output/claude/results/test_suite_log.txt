@@ -1,4 +1,4 @@
-Running 45 test files...
+Running 46 test files...
   ran test_coordinate
   ran test_geometry
   ran test_pattern
@@ -44,8 +44,9 @@ Running 45 test files...
   ran test_local_facets
   ran test_rfc_levels
   ran test_ka_nearfield
+  ran test_rfi_psd
 
 ================ TEST SUMMARY ================
-Passed: 1512   Failed: 0   Total: 1512
+Passed: 1589   Failed: 0   Total: 1589
 =============================================
 ALL_OK=1

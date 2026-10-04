@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="276" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="white"/>
+<text x="10" y="24" font-size="15" font-weight="bold">Hypothetical SAR TX (SAR gain toward victim assumed 0 dBi): OOB blocker power at the victim port [dBm]</text>
+<line x1="330.0" y1="54" x2="330.0" y2="216" stroke="#ddd"/><text x="330.0" y="232" text-anchor="middle">-20</text>
+<line x1="533.3" y1="54" x2="533.3" y2="216" stroke="#ddd"/><text x="533.3" y="232" text-anchor="middle">-10</text>
+<line x1="736.7" y1="54" x2="736.7" y2="216" stroke="#ddd"/><text x="736.7" y="232" text-anchor="middle">0</text>
+<line x1="940.0" y1="54" x2="940.0" y2="216" stroke="#ddd"/><text x="940.0" y="232" text-anchor="middle">10</text>
+<text x="324" y="76" text-anchor="end">SAR (63.97 dBm) > S_TC_RX@SBA_NADIR</text>
+<rect x="715.5" y="64" width="21.2" height="10" fill="#1f5fa8"/>
+<text x="740.7" y="73" font-size="10">-1.0</text>
+<text x="324" y="102" text-anchor="end">SAR (66.98 dBm) > S_TC_RX@SBA_NADIR</text>
+<rect x="736.7" y="90" width="40.1" height="10" fill="#1f5fa8"/>
+<text x="780.7" y="99" font-size="10">2.0</text>
+<text x="324" y="128" text-anchor="end">SAR (63.97 dBm) > S_TC_RX@SBA_ZENITH</text>
+<rect x="693.1" y="116" width="43.6" height="10" fill="#1f5fa8"/>
+<text x="740.7" y="125" font-size="10">-2.1</text>
+<text x="324" y="154" text-anchor="end">SAR (66.98 dBm) > S_TC_RX@SBA_ZENITH</text>
+<rect x="736.7" y="142" width="17.6" height="10" fill="#1f5fa8"/>
+<text x="758.3" y="151" font-size="10">0.9</text>
+<text x="324" y="180" text-anchor="end">SAR (63.97 dBm) > ISL_X_RX</text>
+<rect x="402.8" y="168" width="333.9" height="10" fill="#1f5fa8"/>
+<text x="740.7" y="177" font-size="10">-16.4</text>
+<text x="324" y="206" text-anchor="end">SAR (66.98 dBm) > ISL_X_RX</text>
+<rect x="464.0" y="194" width="272.6" height="10" fill="#1f5fa8"/>
+<text x="740.7" y="203" font-size="10">-13.4</text>
+<text x="635" y="262" text-anchor="middle">dB (ASSUMPTION sensitivity; victim SAR-band RealizedGain from CST)</text>
+<rect x="560" y="34" width="12" height="10" fill="#1f5fa8"/><text x="576" y="44">SAR gain 0 dBi (assumed)</text>
+<rect x="770" y="34" width="12" height="10" fill="#e08a1e"/><text x="786" y="44"></text>
+</svg>
