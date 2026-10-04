@@ -1,6 +1,6 @@
 # RFI 간섭 해석 — 분석근거 (패턴·케이스·수식·검증)
 
-작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 저장소 `main` @ `5a9332a` + Ka 근거리(§10) + blocker / victim-band PSD / 수신기 3단 분리(§11).
+작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 고정 SHA는 적지 않는다: 실행 기준 commit·작업트리 상태는 `results/run_provenance.csv`, 저장 commit은 `git log -- output/claude`로 확인한다. 메인 RFI 경로는 victim-band PSD(§11–§12), Ka 근거리(§10)는 secondary blocker 보조 자료다.
 CST 신규 계산·형상 변경·설치 작업은 하지 않았다. 기존 CST 출력과 저장소 데이터만 읽었다.
 결과 수치는 `RFI_분석결과보고서.md`, 기계 판독 근거는 `results/` 아래 CSV에 있다.
 
@@ -338,8 +338,8 @@ margin(f)          = PSD_allowable − PSD_port(f)       required_psd_suppressio
 
 | 파일 | 열 |
 |---|---|
-| `data/rfi_psd/tx_emission_masks.csv` | tx_system, reference_plane, carrier_frequency_hz, victim_band, frequency_hz, emission_type, level, unit, rbw_hz, filter_state, provenance — **현재 비어 있음**(mask 데이터 없음, 기본값 생성 안 함) |
-| `data/rfi_psd/tx_chain_losses.csv` | tx_system, victim_band, frequency_hz, filter_db, post_filter_db, provenance — 현재 비어 있음 |
+| `data/rfi_psd/tx_emission_masks.csv` | §12.2 schema — **현재 비어 있음**(source 값 생성 안 함) |
+| `data/rfi_psd/tx_chain_losses.csv` | tx_system, victim_band, frequency_hz, post_filter_db, provenance — 현재 비어 있음(TX 필터는 §12.3 filter scenario) |
 | `data/rfi_psd/receiver_baseline.csv` | receiver, victim_band, tuning_lo/hi_mhz, tuning_prov, channel_fc_mhz, integration_bw_hz, integration_bw_prov, rx_filter_model, nf_db, nf_prov, i_n_max_db, desired_signal_reference_dbm, desired_prov, note |
 
 ### 11.8 Ka의 두 경로
@@ -352,3 +352,66 @@ margin(f)          = PSD_allowable − PSD_port(f)       required_psd_suppressio
 ### 11.9 테스트 (`tests/test_rfi_psd.m`, 77 checks)
 
 dBc/Hz→dBm/Hz, 60 dB 필터, −120→−180 dBm/Hz reference(전 −58 FAIL / 후 +2 PASS), GPS −178·S-TC −177 기준, tuning 대역 전체 sweep, 적분 BW와 tuning 분리, blocker/PSD 경로 분리, 기준면 중복 방지(ANTENNA_PORT·FILTER_OUTPUT·PA_OUTPUT·EIRP·S21), CST victim-band 응답 사용, 공격자 대역 패턴 재사용 거부, spur/broadband 단위 구분, 빈 mask 테이블.
+
+## 12. 메인 축 재정렬 — victim-band PSD primary, blocker secondary
+
+### 12.1 경로와 우선순위
+
+| 순위 | 경로 | 결과 |
+|---|---|---|
+| **PRIMARY** | `VICTIM_BAND_EMISSION_PSD`: TX compliant source emission → filter scenario → victim-band coupling → 포트 PSD → 허용 PSD → margin / required additional suppression | `psd_pair_summary.csv`, `victim_band_psd_results.csv`, `rfi_analysis_readiness.csv` |
+| SECONDARY | `SECONDARY_OOB_BLOCKER_ANALYSIS`: 기본파 blocker 포트 전력 | `oob_blocking_results.csv` (전부 `PORT_EXPOSURE_EVALUATED_BLOCKING_UNKNOWN`) |
+| 2차 수신기 | I_rx = ∫PSD\|H\|²df, I/N (C/N0, J/S는 수신기 모델 필요) | `receiver_integrated_results.csv` |
+| Appendix | Ka 근거리 aperture blocker | `ka_*.csv`, §10 |
+
+- 메인 경로는 **피간섭원 대역 응답만** 쓴다. 공격자 반송파의 피간섭원 응답(blocker 대역)이 mesh 한도로 없어도 막히지 않는다(예: ISL → GPS).
+- source emission이 없으면 결합과 최대 허용 TX PSD까지만 계산한다. PASS/FAIL은 내지 않는다(`EMISSION_SPEC_MISSING`).
+
+### 12.2 TX source emission schema (`data/rfi_psd/tx_emission_masks.csv`)
+
+| 열 | 내용 |
+|---|---|
+| tx_system, victim_band | 송신기 template (예: S_TM_TX, ISL_X_TX, KA_DLS_TX), 피간섭원 대역 key (S_TC, L1, L2, L5, ISL, SAR) |
+| frequency_hz / frequency_lo_hz, frequency_hi_hz | 점 또는 flat 범위 |
+| emission_type, level, unit, reference_bandwidth_hz | BROADBAND_PSD: dBm/Hz, dBc/Hz, 또는 RBW당 dBm/dBc(→ level − 10log10 RBW). DISCRETE_SPUR: dBm/dBc + RBW. HARMONIC: dBm/dBc |
+| reference_plane | PA_OUTPUT, FILTER_INPUT, FILTER_OUTPUT, ANTENNA_PORT (conducted), RADIATED_EIRP_PSD (절대 단위만) |
+| carrier_frequency_hz, filter_state | dBc 기준 반송파, PRE/POST_FILTER/UNKNOWN |
+| standard_or_source, provenance | 규격·문서·조항 / 측정 id |
+| assumption_class | REGULATORY_LIMIT, SUPPLIER_SPEC, MEASURED, ENGINEERING_ASSUMPTION (reference 전용 REFERENCE_CROSSCHECK) |
+
+- User/reference scenario는 `data/rfi_psd/reference_scenarios.csv`에 둔다. 열은 같고, scenario_id·rx_receiver·coupling_override_db가 추가된다. 같은 엔진으로 계산하며 mission 결과와 섞지 않는다.
+- 이번 단계에서는 어떤 규격(ITU/CCSDS/SFCG/vendor), RBW, broadband/spur 구분을 쓸지 정하지 않았다. 표는 비어 있다.
+
+### 12.3 Filter scenario (`data/rfi_psd/filter_scenarios.csv`, `rfscreen.psd.FilterScenario`)
+
+- `FLAT`(FILTER_0/40/60/70/80DB, `SCREENING_FILTER_SCENARIO`)과 `TABLE`(주파수별, dB 선형 보간, 외삽 없음)을 지원한다.
+- 모든 PSD 결과 행에 `filter_scenario_id`, `filter_attenuation_db`, `filter_provenance`를 남긴다.
+- 의미: PA_OUTPUT/FILTER_INPUT source에서는 TX 출력 필터, 그 외 기준면에서는 source에 포함된 것 외의 추가 외부 필터다.
+- post-filter 손실(`tx_chain_losses.csv`)이 미상이면 0 dB를 적용한다(보수적). `POST_FILTER_LOSS_UNKNOWN_0DB_CONSERVATIVE`로 표시한다.
+
+### 12.4 Radiated EIRP vs conducted source
+
+| source | 결합 | 필요한 응답 | 없을 때 |
+|---|---|---|---|
+| RADIATED_EIRP_PSD | `PSD_victim = EIRP_PSD − L_filter − FSPL + G_RX` (TX 이득 중복 적용 없음) | 피간섭원 안테나 @ f_victim | `COUPLING_INPUT_MISSING` |
+| conducted (PA_OUTPUT … ANTENNA_PORT) | `G_TX(f_v) + G_RX(f_v) − FSPL(f_v)` | TX와 피간섭원 안테나 @ f_victim | Ka: `KAA_VICTIM_BAND_RADIATION_RESPONSE_MISSING`, 그 외 `COUPLING_INPUT_MISSING` |
+
+- Ka 26 GHz 반사판 패턴은 S/L/X로 외삽하지 않는다.
+
+### 12.5 결과 schema
+
+- `psd_pair_summary.csv` (pair × filter scenario): coupling_conducted/radiated min·max, max_allowable_tx_psd_conducted_dbm_hz (+ dBc/Hz), max_allowable_tx_eirp_psd_dbm_hz, source_emission_status, source_emission_psd_dbm_hz, source_emission_reference_plane, source_spec_provenance, filter_scenario_id, filter_attenuation_db, filter_provenance, victim_port_psd_dbm_hz, allowable_psd_dbm_hz, psd_margin_db, required_additional_suppression_db, result_status, readiness_status.
+- `rfi_analysis_readiness.csv`: tx_system, rx_system, victim_band, victim_coupling_available, tx_emission_spec_available, tx_filter_data_available, radiated_eirp_psd_supported, blocker_path_available, readiness_status (`READY_FOR_PSD_ANALYSIS` / `EMISSION_SPEC_MISSING` / `COUPLING_INPUT_MISSING` / `KAA_RADIATED_PSD_OR_LOWBAND_RESPONSE_REQUIRED` / `NOT_APPLICABLE_SAME_PORT`), missing_inputs.
+- `oob_blocking_results.csv`: `analysis_class = SECONDARY_OOB_BLOCKER_ANALYSIS`. 진단 열은 `screening_suppression_to_inband_limit_db_DIAGNOSTIC_ONLY`다.
+- `run_provenance.csv`: 스크립트별 run_time, analysis_base_commit, working_tree.
+
+### 12.6 회귀 고정값 (`tests/test_rfi_psd.m`, 출력 파일과 독립적으로 CST 응답·형상에서 재계산)
+
+| 값 | 기대 | 결과 |
+|---|---|---|
+| S-TM@ZENITH → GPSA_1 blocker (2.25 GHz) | ≈ −21.3 dBm | −21.32 ± 0.05 |
+| S-TM → 반대편 S-TC blocker | ≈ −32.3 dBm | −32.29 ± 0.05 |
+| S-TM@ZENITH → GPS L1 C_EM | ≈ −81 dB | −81.38 ~ −80.98 |
+| S-TM → 반대편 S-TC C_EM | −69 ~ −70 dB | −70.23 ~ −69.09 |
+| S-TM → GPS L1 최대 허용 TX PSD | ≈ −97 dBm/Hz | −97.02 |
+| S-TM → 반대편 S-TC 최대 허용 TX PSD | ≈ −108 dBm/Hz | −107.91 |

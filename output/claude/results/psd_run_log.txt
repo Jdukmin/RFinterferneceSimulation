@@ -1,11 +1,13 @@
-RFI blocker / victim-band PSD / receiver run 2026-10-04 16:24:39 (GNU Octave 9.2.0)
-Repository HEAD: 5a9332ab9ae621d7b391c837107982ab2b6c9b5c
-Inputs: 6 receiver baselines, 0 TX emission-mask rows, 0 TX chain-loss rows
-A. OOB blocker rows: 150 (blocker port powers copied unchanged from pair_results.csv)
-Reference S->L: filter  0 dB -> -120.0 dBm/Hz, margin -58.0 dB (FAIL); I = -46.9 dBm in 20.46 MHz, I/N = 52.0 dB
-Reference S->L: filter 60 dB -> -180.0 dBm/Hz, margin +2.0 dB (PASS); I = -106.9 dBm in 20.46 MHz, I/N = -8.0 dB
-B. victim-band pairs COUPLING_INPUT_MISSING                                                           16
-B. victim-band pairs EMISSION_MASK_MISSING_COUPLING_EVALUATED                                         56
-B. victim-band pairs KA_EMISSION_REQUIRES_RADIATED_EIRP_PSD_OR_CONDUCTED_PSD_PLUS_KAA_LOWBAND_RESPONSE 60
-B. victim-band pairs NOT_EVALUATED                                                                    18
-Rows: PSD 2472, pair summary 150, integrated 58, receiver baseline 6
+RFI PSD-primary run 2026-10-04 17:03:07 (GNU Octave 9.2.0); analysis base commit 99ea0220982b38a09692b197b2ff475b1b203a0e, working tree DIRTY (15 uncommitted input/code paths)
+Inputs: 6 receivers, 0 mission source-emission rows, 1 reference rows, 5 filter scenarios (FILTER_0DB FILTER_40DB FILTER_60DB FILTER_70DB FILTER_80DB), 0 post-filter loss rows
+SECONDARY blocker rows: 150 (values copied unchanged from pair_results.csv; no PASS/FAIL)
+Reference REF_S_TO_L_OTHER_SAT FILTER_0DB: PSD -120.0 dBm/Hz vs -178 -> margin -58.0 dB (FAIL), required additional suppression 58.0 dB, I/N 52.0 dB
+Reference REF_S_TO_L_OTHER_SAT FILTER_40DB: PSD -160.0 dBm/Hz vs -178 -> margin -18.0 dB (FAIL), required additional suppression 18.0 dB, I/N 12.0 dB
+Reference REF_S_TO_L_OTHER_SAT FILTER_60DB: PSD -180.0 dBm/Hz vs -178 -> margin +2.0 dB (PASS), required additional suppression 0.0 dB, I/N -8.0 dB
+Reference REF_S_TO_L_OTHER_SAT FILTER_70DB: PSD -190.0 dBm/Hz vs -178 -> margin +12.0 dB (PASS), required additional suppression 0.0 dB, I/N -18.0 dB
+Reference REF_S_TO_L_OTHER_SAT FILTER_80DB: PSD -200.0 dBm/Hz vs -178 -> margin +22.0 dB (PASS), required additional suppression 0.0 dB, I/N -28.0 dB
+readiness COUPLING_INPUT_MISSING                           8 pairs
+readiness EMISSION_SPEC_MISSING                            16 pairs
+readiness KAA_RADIATED_PSD_OR_LOWBAND_RESPONSE_REQUIRED    18 pairs
+readiness NOT_APPLICABLE_SAME_PORT                         3 pairs
+Rows: PSD 13965, pair summary 665, readiness 45, integrated 137, blocker 150

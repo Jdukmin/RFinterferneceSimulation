@@ -1,17 +1,24 @@
 classdef EmissionMaskTable
-    %EMISSIONMASKTABLE Reader for tx_emission_masks.csv (TX unwanted emission in victim bands).
-    %   Columns: tx_system, reference_plane, carrier_frequency_hz, victim_band, frequency_hz,
-    %   emission_type, level, unit, rbw_hz, filter_state, provenance. '#' lines are comments.
-    %   An empty table is valid: no mask is ever defaulted or synthesised.
+    %EMISSIONMASKTABLE Reader for TX source-emission tables (tx_emission_masks.csv, reference_scenarios.csv).
+    %   Columns: rfscreen.psd.EmissionSpec.COLUMNS (extra columns are kept per row in .extra).
+    %   '#' lines are comments. An empty table is valid: no source is ever defaulted or synthesised.
     methods (Static)
-        function S = read(path)
+        function [S, extra] = read(path)
             T = rfscreen.spacecraft.SpacecraftDataReader.readTable(path);
-            S = {};
+            cols = rfscreen.psd.EmissionSpec.COLUMNS;
+            for c = 1:numel(cols)
+                if ~isfield(T, cols{c})
+                    error('rfscreen:psd:badEmissionTable', '%s: missing column %s.', path, cols{c});
+                end
+            end
+            S = cell(1, T.nRows); extra = cell(1, T.nRows); fn = fieldnames(T);
             for r = 1:T.nRows
-                S{end+1} = rfscreen.psd.EmissionSpec(T.tx_system{r}, T.reference_plane{r}, ...
-                    str2double(T.carrier_frequency_hz{r}), T.victim_band{r}, str2double(T.frequency_hz{r}), ...
-                    T.emission_type{r}, str2double(T.level{r}), T.unit{r}, str2double(T.rbw_hz{r}), ...
-                    T.filter_state{r}, T.provenance{r}); %#ok<AGROW>
+                s = struct(); e = struct();
+                for k = 1:numel(fn)
+                    if strcmp(fn{k}, 'nRows'); continue; end
+                    if any(strcmp(fn{k}, cols)); s.(fn{k}) = T.(fn{k}){r}; else; e.(fn{k}) = T.(fn{k}){r}; end
+                end
+                S{r} = rfscreen.psd.EmissionSpec(s); extra{r} = e;
             end
         end
 

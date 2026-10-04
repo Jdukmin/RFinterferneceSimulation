@@ -9,6 +9,7 @@ classdef OobBlockerPath
     %   historical diagnostic screening_suppression_to_inband_limit_db.
     properties (Constant)
         PATH = 'FUNDAMENTAL_OOB_BLOCKER'
+        CLASS = 'SECONDARY_OOB_BLOCKER_ANALYSIS'   % not the primary RFI requirement (victim-band PSD is)
         ST_UNKNOWN = 'PORT_EXPOSURE_EVALUATED_BLOCKING_UNKNOWN'
         ST_MISSING = 'INPUT_MISSING'
         DIAGNOSTIC = 'screening_suppression_to_inband_limit_db'

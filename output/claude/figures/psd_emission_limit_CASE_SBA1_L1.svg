@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="432" font-family="sans-serif" font-size="12">
 <rect width="100%" height="100%" fill="white"/>
-<text x="10" y="24" font-size="15" font-weight="bold">Victim-band path: max TX unwanted-emission PSD at the TX antenna port that meets the victim PSD criterion [dBm/Hz]</text>
+<text x="10" y="24" font-size="15" font-weight="bold">PRIMARY victim-band PSD: max allowable conducted TX emission PSD (FILTER_0DB) meeting the victim PSD criterion [dBm/Hz]</text>
 <line x1="330.0" y1="54" x2="330.0" y2="372" stroke="#ddd"/><text x="330.0" y="388" text-anchor="middle">-110</text>
 <line x1="431.7" y1="54" x2="431.7" y2="372" stroke="#ddd"/><text x="431.7" y="388" text-anchor="middle">-100</text>
 <line x1="533.3" y1="54" x2="533.3" y2="372" stroke="#ddd"/><text x="533.3" y="388" text-anchor="middle">-90</text>
@@ -44,7 +44,7 @@
 <text x="324" y="362" text-anchor="end">ISL_X > GPS_L1@GPSA_1</text>
 <rect x="881.0" y="350" width="567.4" height="10" fill="#1f5fa8"/>
 <text x="1452.3" y="359" font-size="10">-55.8</text>
-<text x="635" y="418" text-anchor="middle">dBm/Hz (= allowable PSD - C_EM(f) worst over the victim tuning band; derived limit, no TX mask available)</text>
+<text x="635" y="418" text-anchor="middle">dBm/Hz at the TX antenna port (= allowable PSD - C_EM(f), worst over the victim tuning band; no source emission yet)</text>
 <rect x="560" y="34" width="12" height="10" fill="#1f5fa8"/><text x="576" y="44">derived TX emission PSD limit</text>
 <rect x="770" y="34" width="12" height="10" fill="#e08a1e"/><text x="786" y="44"></text>
 </svg>

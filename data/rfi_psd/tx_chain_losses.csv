@@ -1,8 +1,7 @@
-# rfi_psd -- TX chain attenuation between the emission reference plane and the antenna port [dB]
-# filter_db: TX output filter / diplexer rejection at the victim frequency (attenuation, dB, >= 0)
-# post_filter_db: cable / waveguide / switch loss after the filter (dB, >= 0)
-# Empty = unknown (never defaulted to 0). Used only when the emission reference_plane is upstream
-#   of the antenna port (PA_OUTPUT / FILTER_INPUT -> filter + post; FILTER_OUTPUT -> post only).
-# STATUS 2026-10-04: no TX filter / diplexer rejection data in the inputs (table empty).
+# rfi_psd -- TX post-filter loss (cable / waveguide / switch) between a conducted source plane
+# (PA_OUTPUT / FILTER_INPUT / FILTER_OUTPUT) and the TX antenna port [dB, >= 0].
+# The TX output filter itself is a filter scenario (filter_scenarios.csv), not a row here.
+# Empty = unknown -> 0 dB applied (conservative) and flagged POST_FILTER_LOSS_UNKNOWN_0DB_CONSERVATIVE.
+# STATUS: empty.
 # Fields must not contain commas.
-tx_system,victim_band,frequency_hz,filter_db,post_filter_db,provenance
+tx_system,victim_band,frequency_hz,post_filter_db,provenance

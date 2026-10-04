@@ -2,15 +2,15 @@ Execution environment (RFI analysis, output/claude)
 - Interpreter : GNU Octave 9.2.0 (portable build, octave-cli.exe, Windows x86_64-w64-mingw32)
 - Location    : session scratchpad .../scratchpad/octave/octave-9.2.0-w64 (not part of the repository)
 - MATLAB      : NOT installed and NOT used. All numbers come from Octave runs.
-- Repository  : 4493d4d0c323571d9d82972e77083a74cd68fd6d (main) + Ka near-field (src/+rfscreen/+kaa) + blocker/PSD split (src/+rfscreen/+psd, data/rfi_psd);
-                data/ and cst/ (incl. the KAA reflector model and its validation) unchanged
+- Repository  : no fixed SHA here. Per-script analysis base commit (HEAD at run time) and working-tree state:
+                results/run_provenance.csv. The commit storing these results: git log -- output/claude/results
 - CST         : NOT run. Only existing CST outputs (data/antenna_port_response_cst, cst/results/rfc_frequency_cases,
                 cst/results/KA_FEED_C_OEWG, cst/results/KA_REFLECTOR_KA_FEED_C_OEWG, data/Kaband_KAA_CST) are read.
 - Commands (from the repository root):
     octave-cli --no-gui --norc --eval "run('output/claude/run_ka_nearfield_analysis.m')"   (first: writes ka_*.csv)
     octave-cli --no-gui --norc --eval "run('output/claude/run_rfi_analysis.m')"
-    octave-cli --no-gui --norc --eval "run('output/claude/run_psd_analysis.m')"   (blocker / victim-band PSD / receiver)
+    octave-cli --no-gui --norc --eval "run('output/claude/run_psd_analysis.m')"   (PRIMARY victim-band PSD / secondary blocker / receiver)
     octave-cli --no-gui --norc --eval "run('output/claude/make_figures.m')"
     cd tests && octave-cli --no-gui --norc --eval "ok = run_all_tests(); exit(double(~ok))"
-- Run time    : Ka near field ~3 min, analysis ~3 min, figures < 5 s, PSD < 1 min, test suite ~5 min (1589 checks)
+- Run time    : Ka near field ~3 min, analysis ~3 min, figures < 5 s, PSD < 1 min, test suite ~5 min (see test_suite_log.txt)
 - Figures     : SVG written directly by make_figures.m (octave-cli has no headless graphics toolkit here)

@@ -1,16 +1,20 @@
-# rfi_psd -- TX unwanted emission in victim bands (SSOT for the victim-band PSD path)
-# One row per (tx_system template, victim band, frequency point, emission type).
-# emission_type / unit:
-#   BROADBAND_PSD  dBc/Hz (relative to the carrier power at reference_plane) | dBm/Hz
-#   DISCRETE_SPUR  dBc | dBm in rbw_hz (never forced into dBm/Hz)
-#   HARMONIC       dBc | dBm
-# reference_plane: PA_OUTPUT | FILTER_INPUT | FILTER_OUTPUT | ANTENNA_PORT | RADIATED_EIRP_PSD
-#   (decides which TX-chain loss / TX antenna gain still applies; never applied twice)
-# filter_state: PRE_FILTER | POST_FILTER | UNKNOWN. provenance: DATASHEET | MEASURED | SPEC | USER_INPUT.
-# Ka (KA_DLS_TX) S/L/X-band emission must be a conducted post-filter PSD or a radiated EIRP PSD
-#   (the KAA Ka-band reflector pattern is never re-used at S/L/X).
-# STATUS 2026-10-04: no TX emission mask / spur table is available for S_TM_TX, ISL_X_TX, KA_DLS_TX,
-#   SAR_X_TX. The table is intentionally empty; no mask is defaulted. Reference cross-check data
-#   (-120 dBm/Hz, 60 dB filter) lives in the tests, not here.
+# rfi_psd -- TX SOURCE EMISSION in victim bands (PRIMARY input of the victim-band PSD path)
+# One row per (tx_system template, victim band, frequency point or range, emission type).
+# A row states a COMPLIANT emission level: regulatory limit, supplier spec, measurement or assumption.
+#   frequency_hz            point frequency, OR frequency_lo_hz..frequency_hi_hz flat range (leave the other empty)
+#   emission_type / unit    BROADBAND_PSD: dBm/Hz | dBc/Hz | dBm or dBc per reference_bandwidth_hz
+#                           DISCRETE_SPUR: dBm | dBc (+ reference_bandwidth_hz)   HARMONIC: dBm | dBc
+#   reference_plane         PA_OUTPUT | FILTER_INPUT | FILTER_OUTPUT | ANTENNA_PORT | RADIATED_EIRP_PSD
+#                           (conducted planes need the TX antenna response IN THE VICTIM BAND;
+#                            RADIATED_EIRP_PSD needs only the victim antenna response; absolute units only)
+#   carrier_frequency_hz    carrier the dBc values refer to (carrier power = rf_systems.csv tx_power_dbm)
+#   filter_state            PRE_FILTER | POST_FILTER | UNKNOWN
+#   standard_or_source      e.g. ITU-R SM.329 category / CCSDS 401 / SFCG REC / supplier document id
+#   provenance              document + clause / measurement id
+#   assumption_class        REGULATORY_LIMIT | SUPPLIER_SPEC | MEASURED | ENGINEERING_ASSUMPTION
+# Ka (KA_DLS_TX): use RADIATED_EIRP_PSD, or a conducted plane only together with a computed KAA
+#   victim-band radiation response (the 26 GHz reflector pattern is never extrapolated to S/L/X).
+# STATUS: intentionally EMPTY. Which OOB/spurious standard, RBW and broadband-vs-spur split to apply
+#   is left to the independent follow-up analyses; nothing is defaulted here.
 # Fields must not contain commas.
-tx_system,reference_plane,carrier_frequency_hz,victim_band,frequency_hz,emission_type,level,unit,rbw_hz,filter_state,provenance
+tx_system,victim_band,frequency_hz,frequency_lo_hz,frequency_hi_hz,emission_type,level,unit,reference_bandwidth_hz,reference_plane,carrier_frequency_hz,filter_state,standard_or_source,provenance,assumption_class

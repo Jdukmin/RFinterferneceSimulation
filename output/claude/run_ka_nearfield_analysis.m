@@ -50,8 +50,8 @@ outDir = fullfile(here, 'results'); if exist(outDir, 'dir') ~= 7; mkdir(outDir);
 logf = fopen(fullfile(outDir, 'ka_nearfield_run_log.txt'), 'w');
 logm(logf, 'KAA aperture near-field RFI run %s', datestr(now, 'yyyy-mm-dd HH:MM:SS'));
 logm(logf, 'Environment: GNU Octave %s on %s (MATLAB not used)', OCTAVE_VERSION, computer());
-[~, gitHead] = system(sprintf('git -C "%s" rev-parse HEAD', repo));
-logm(logf, 'Repository HEAD: %s', strtrim(gitHead));
+pv = rfi_provenance(repo, outDir, 'run_ka_nearfield_analysis.m', 'Ka near-field (appendix; secondary blocker)');
+logm(logf, 'Analysis base commit (HEAD at run time; results are committed on top of it): %s, working tree %s', pv.analysis_base_commit, pv.working_tree);
 t0 = tic;
 
 A = rfscreen.kaa.CstLocalFrameAdapter; S = rfscreen.kaa.ApertureNearFieldSolver;

@@ -1,0 +1,4 @@
+script,run_time,analysis_base_commit,working_tree,note
+run_ka_nearfield_analysis.m,2026-10-04 16:57:21,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),Ka near-field (appendix; secondary blocker)
+run_rfi_analysis.m,2026-10-04 17:00:08,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),pair results / secondary blocker inputs
+run_psd_analysis.m,2026-10-04 17:03:07,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),primary victim-band PSD / secondary blocker / receiver
