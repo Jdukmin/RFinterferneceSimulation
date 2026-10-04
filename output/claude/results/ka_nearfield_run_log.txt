@@ -1,0 +1,26 @@
+KAA aperture near-field RFI run 2026-10-04 16:00:08
+Environment: GNU Octave 9.2.0 on x86_64-w64-mingw32 (MATLAB not used)
+Repository HEAD: 4493d4d0c323571d9d82972e77083a74cd68fd6d
+KAA source: KAA_KA_FEED_C_OEWG_EQUIV_PARABOLOID, D=220 mm, Fe=151.11 mm, Ds=44 mm, status KA_DATASHEET_ANCHOR_PASS, files cst/results/KA_REFLECTOR_KA_FEED_C_OEWG/reflector_validation.json | cst/results/KA_FEED_C_OEWG/feed_pattern.json | cst/ka_reflector_po.py | cst/ka_reflector_eval.py
+R_ff = 2D^2/lambda: 8.23 / 8.48 / 8.72 m
+Validation: 256 rows; MATLAB FF vs Python CSV max |diff| = 0.0095 dB (main lobe 0.0000 dB)
+  R =   0.2 R_ff : max |NF-FF| all 31.6417 dB, main lobe 1.3228 dB
+  R =   1.0 R_ff : max |NF-FF| all 18.4575 dB, main lobe 0.0516 dB
+  R =  10.0 R_ff : max |NF-FF| all 2.2939 dB, main lobe 0.0005 dB
+  R = 100.0 R_ff : max |NF-FF| all 0.0301 dB, main lobe 0.0000 dB
+  convergence FAIL rows: 0
+KAA_1>SBA_NADIR    d=6.043 m LOS CLEAR    nominal th= 88.29 S=  -1.68 dBm/m2 | worst th=  0.00 (u off-ref 88.3) S=  54.37 | P_port nom/worst NaN / NaN dBm  [14 s]
+KAA_1>SBA_ZENITH   d=6.107 m LOS BLOCKED  nominal th=110.01 S=  -5.97 dBm/m2 | worst th= 20.62 (u off-ref 89.4) S=  17.60 | P_port nom/worst NaN / NaN dBm  [15 s]
+KAA_1>GPSA_1       d=4.546 m LOS BLOCKED  nominal th=118.16 S=  -6.31 dBm/m2 | worst th= 28.16 (u off-ref 90.0) S=  16.79 | P_port nom/worst NaN / NaN dBm  [12 s]
+KAA_1>GPSA_2       d=3.640 m LOS BLOCKED  nominal th=126.10 S=  -5.65 dBm/m2 | worst th= 45.31 (u off-ref 80.8) S=  12.97 | P_port nom/worst NaN / NaN dBm  [14 s]
+KAA_1>SAR_ANT      d=2.930 m LOS CLEAR    nominal th= 90.98 S=   4.18 dBm/m2 | worst th=  0.98 (u off-ref 90.0) S=  59.22 | P_port nom/worst NaN / NaN dBm  [14 s]
+KAA_1>ISL          d=1.778 m LOS CLEAR    nominal th=158.54 S=  -5.00 dBm/m2 | worst th= 72.92 (u off-ref 85.6) S=  11.89 | P_port nom/worst -63.4462 / -46.7902 dBm  [13 s]
+KAA_2>SBA_NADIR    d=5.747 m LOS CLEAR    nominal th= 96.09 S=  -2.15 dBm/m2 | worst th=  6.09 (u off-ref 90.0) S=  34.91 | P_port nom/worst NaN / NaN dBm  [13 s]
+KAA_2>SBA_ZENITH   d=6.247 m LOS BLOCKED  nominal th= 96.31 S=  -2.89 dBm/m2 | worst th=  6.31 (u off-ref 90.0) S=  32.61 | P_port nom/worst NaN / NaN dBm  [13 s]
+KAA_2>GPSA_1       d=4.593 m LOS BLOCKED  nominal th= 95.37 S=  -0.14 dBm/m2 | worst th=  5.37 (u off-ref 90.0) S=  39.84 | P_port nom/worst NaN / NaN dBm  [14 s]
+KAA_2>GPSA_2       d=3.699 m LOS BLOCKED  nominal th= 96.67 S=   1.62 dBm/m2 | worst th=  6.67 (u off-ref 90.0) S=  35.04 | P_port nom/worst NaN / NaN dBm  [13 s]
+KAA_2>SAR_ANT      d=3.016 m LOS BLOCKED  nominal th=114.44 S=  -4.63 dBm/m2 | worst th= 26.98 (u off-ref 87.5) S=  22.13 | P_port nom/worst NaN / NaN dBm  [15 s]
+KAA_2>ISL          d=2.342 m LOS CLEAR    nominal th=114.22 S=  -2.65 dBm/m2 | worst th= 27.12 (u off-ref 87.1) S=  23.77 | P_port nom/worst -63.2484 / -37.1884 dBm  [15 s]
+KAA_1 fundamental pairs: evaluated 1, INPUT_MISSING 9 (spur pairs: all INPUT_MISSING)
+KAA_2 fundamental pairs: evaluated 1, INPUT_MISSING 9 (spur pairs: all INPUT_MISSING)
+Rows: pairs 40, gimbal 36, validation 296, availability 34, assumption-only 30; run 185 s

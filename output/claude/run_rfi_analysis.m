@@ -5,6 +5,9 @@
 %   * frozen reference free-space patterns              : data/... via pattern_bindings.csv
 %   * CST fixed-geometry free-space port responses       : data/antenna_port_response_cst
 %   * CST provisional local installed S cuts (sensitivity only): cst/results/rfc_frequency_cases
+%   * Ka source routing: KAA TX -> REFLECTOR_APERTURE_NEAR_FIELD (src/+rfscreen/+kaa, validated KAA
+%     aperture); S/ISL TX keep the free-space pattern (Friis) path unchanged. The frozen Ka export
+%     stays as the far-field reference (variant B). Gimbal screening: run_ka_nearfield_analysis.m
 % No CST run, no geometry change, no frozen-file change. Run in Octave from any directory:
 %   octave-cli --eval "run('output/claude/run_rfi_analysis.m')"
 % =============================================================================================
@@ -80,6 +83,14 @@ end
 function R = local_frame(n)
     xB = [1; 0; 0]; z = n(:) / norm(n); y = cross(z, xB);
     R = [xB, y, z];   % columns = local axes in body: +X_L = +X_B, +Y_L = Z x X, +Z_L = boresight
+end
+
+function T = readCsvSimple(path)
+    % Plain CSV (no quoting, no comments) -> struct of cellstr columns + nRows.
+    L = strsplit(strrep(fileread(path), char(13), ''), char(10)); L = L(~cellfun(@isempty, strtrim(L)));
+    h = regexp(L{1}, ',', 'split'); T = struct('nRows', numel(L) - 1);
+    V = cellfun(@(x) regexp(x, ',', 'split'), L(2:end), 'UniformOutput', false);
+    for j = 1:numel(h); T.(h{j}) = cellfun(@(v) v{j}, V, 'UniformOutput', false); end
 end
 
 function v = fspl(f, d)
@@ -169,6 +180,17 @@ logm(logf, 'Source availability written (%d rows).', numel(avail));
 
 FROZ.ISL = frozen_set(B, {'ISL_10P55', 'ISL_10P6', 'ISL_10P65'});
 FROZ.KA = frozen_set(B, {'KAA_KA_25P5', 'KAA_KA_26P25', 'KAA_KA_27P0'});
+% Ka source model routing (KAA TX only): reflector-aperture near field at the CST feed monitors
+KA = struct('model', rfscreen.kaa.ReflectorApertureModel.fromRepository(repo), 'F', [25.5e9 26.25e9 27e9]);
+for fam = {'S', 'L', 'ISL'}; KA.resp.(fam{1}) = rfscreen.kaa.KaVictimResponse.fromRepository(repo, fam{1}); end
+KA.cache = containers.Map();
+gwPath = fullfile(outDir, 'ka_gimbal_worstcase.csv');
+if exist(gwPath, 'file') ~= 2
+    error('rfi:kaFirst', 'run output/claude/run_ka_nearfield_analysis.m first (writes %s)', gwPath);
+end
+KA.gw = readCsvSimple(gwPath); KA.asm = readCsvSimple(fullfile(outDir, 'ka_assumption_only_sensitivity.csv'));
+logm(logf, 'Ka routing: KAA TX -> %s (%s; %s), victim gain = Ka OOB response only', ...
+    rfscreen.kaa.KaRfiPath.NEAR_FIELD, rfscreen.kaa.ApertureNearFieldSolver.FIELD_SCOPE, rfscreen.kaa.ApertureNearFieldSolver.STRUCTURE_FLAG);
 INST.SBA_NADIR = raw_set(repo, 'RFC_S_LOW_SBA_NADIR_R1P75', [2.0 2.06 2.12 2.2 2.25 2.3]);
 INST.SBA_ZENITH = raw_set(repo, 'RFC_S_LOW_SBA_ZENITH_R1P75', [2.0 2.06 2.12 2.2 2.25 2.3]);
 INST.FREE = raw_set(repo, 'RFC_S_LOW_FREE_M4R10', [2.0 2.06 2.12 2.2 2.25 2.3]);
@@ -257,6 +279,17 @@ for ci = 1:numel(cases)
             dmax = max(dims(ta.installationId), dims(ra.installationId)); lam = 299792458 / txHi;
             rff = max(2 * dmax ^ 2 / lam, 5 * lam);
             ff = 'FAR_FIELD_OK'; if dist < rff; ff = 'NEAR_FIELD_FRIIS_ESTIMATE'; end
+            kq = [];
+            if strcmp(tband, 'KA')                % KAA TX: aperture near field (nominal gimbal reference)
+                kkey = [ta.installationId '>' ra.installationId];
+                if ~KA.cache.isKey(kkey)
+                    KA.cache(kkey) = rfi_ka_point(KA.model, KA.F, tx.power_dBm, tm.p, ...
+                        rfscreen.kaa.CstLocalFrameAdapter.fixedMount(tm.n), rm.p, rfscreen.kaa.CstLocalFrameAdapter.fixedMount(rm.n), KA.resp.(rfam));
+                end
+                kq = KA.cache(kkey);
+                ff = 'NEAR_FIELD_APERTURE_INTEGRATION';
+                if ~KA.resp.(rfam).isAvailable(); rxStatus = 'INPUT_MISSING'; end
+            end
             if strcmp(rxStatus, 'OK')
                 recA = tx.power_dBm + lin(s21A); recB = tx.power_dBm + lin(s21B);
                 inbA = -Inf;
@@ -278,27 +311,43 @@ for ci = 1:numel(cases)
                 end
                 if strcmp(ff, 'NEAR_FIELD_FRIIS_ESTIMATE'); status = [status '_ESTIMATE']; end
                 miss = '';
+                if ~isempty(kq)                    % Ka: replace the Friis A value by the near-field port power
+                    recA = kq.P_port_band_dBm; reqA = recA - rx.allowableInterference_dBm;
+                    gA = repmat(10 * log10(mean(10 .^ (kq.Geq_dBi / 10))), 1, nSamples);
+                    s21A = repmat(recA - tx.power_dBm, 1, nSamples);
+                    status = 'EVALUATED_OOB_LEVEL_NEAR_FIELD';
+                    verdict = [rfscreen.kaa.KaRfiPath.RX_UNKNOWN ' (' rfscreen.kaa.KaRfiPath.FUNDAMENTAL ')'];
+                end
             else
                 recA = NaN; recB = NaN; inbA = NaN; reqA = NaN; reqB = NaN; mar = NaN;
                 status = rxStatus; verdict = 'NOT_EVALUATED';
                 miss = sprintf('no reliable %s RealizedGain of the %s antenna in the %s band (CST %s)', 'free-space', rfam, tband, ...
                     'MESH_LIMIT / not computed');
+                if ~isempty(kq); miss = KA.resp.(rfam).reason; verdict = rfscreen.kaa.KaRfiPath.RX_NOT_REACHED; end
             end
             txSrcA = 'CST'; txQA = 'RealizedGain'; txCaseA = ''; if ~isempty(tcst); txCaseA = tcst.cstCase; else; txSrcA = 'FROZEN'; txQA = tfroz.quantity; end
             rxCase = ''; if ~isempty(rset); rxCase = rset.cstCase; end
+            cmeth = 'FRIIS_FREE_SPACE_PATTERN (no polarization/blockage loss applied)';
+            if ~isempty(kq)
+                txSrcA = 'KAA_APERTURE_NEAR_FIELD'; txQA = 'Geq = 4 pi d^2 S / P (accepted-power basis; 3-monitor mean)';
+                txCaseA = 'KA_FEED_C_OEWG + KA_REFLECTOR_KA_FEED_C_OEWG';
+                cmeth = [rfscreen.kaa.KaRfiPath.NEAR_FIELD '; ' rfscreen.kaa.ApertureNearFieldSolver.FIELD_SCOPE '; ' ...
+                    rfscreen.kaa.ApertureNearFieldSolver.STRUCTURE_FLAG '; B = frozen-export Friis reference'];
+            end
             pairRows{end+1} = [base, {dist, los.status, strjoin(los.blockingStructureIds, ';'), ...
                 acosd(max(-1, min(1, dT(3)))), mod(atan2d(dT(2), dT(1)), 360), acosd(max(-1, min(1, dR(3)))), mod(atan2d(dR(2), dR(1)), 360), ...
                 lin(gA), txSrcA, txQA, lin(gB), lin(gR), [rfam '/' tband], 'RealizedGain', rxCase, ...
                 fspl(tx.fc_Hz, dist), lin(s21A), lin(s21B), recA, recB, inbA, ...
                 rx.allowableInterference_dBm, rx.noise_dBm, reqA, reqB, ff, rff, ...
-                'FRIIS_FREE_SPACE_PATTERN (no polarization/blockage loss applied)', status, verdict, miss}]; %#ok<AGROW>
+                cmeth, status, verdict, miss}]; %#ok<AGROW>
             % per-monitor band rows (exact CST monitors of the TX evaluation band)
             mons = []; if ~isempty(tcst); mons = tcst.freqs; elseif ~isempty(tfroz); mons = tfroz.freqs; end
             if strcmp(tband, 'S_TM'); mons = [2.2e9 2.25e9 2.3e9]; end
             for fm = mons
                 gb = rfi_eval_set(tfroz, fm, dT);
-                % Ka: no CST RealizedGain -> A uses the frozen pattern (same rule as pair rows)
+                % Ka: A = aperture near-field equivalent gain Geq at the same monitor (same rule as pair rows)
                 if ~isempty(tcst); ga = rfi_eval_set(tcst, fm, dT); else; ga = gb; end
+                if ~isempty(kq); ga = kq.Geq_dBi(abs(KA.F - fm) < 1); end
                 gr = NaN; if strcmp(rxStatus, 'OK'); gr = rfi_eval_set(rset, fm, dR); end
                 bandRows{end+1} = {cs.caseId, pairId, tband, fm / 1e9, ga, gb, gr, fspl(fm, dist), ga + gr - fspl(fm, dist), ...
                     gb + gr - fspl(fm, dist), txCaseA, rxCase, rxStatus}; %#ok<AGROW>
@@ -327,22 +376,30 @@ for ci = 1:numel(cases)
             % sensitivities ------------------------------------------------------------------
             if ~strcmp(rxStatus, 'OK')
                 for gass = [-10 0 5]
-                    s21 = lin(gA + gass - L);
+                    s21 = lin(gA + gass - L); basis = 'ASSUMPTION (not computed data)';
+                    if ~isempty(kq)            % Ka: near-field power density x assumed victim gain
+                        s21 = 10 * log10(mean(10 .^ ((kq.Pref0_dBm + gass - tx.power_dBm) / 10)));
+                        basis = 'ASSUMPTION_ONLY (victim Ka response missing; aperture near-field S x lambda^2/4pi x assumed gain; not a result)';
+                    end
                     sensRows{end+1} = {'MISSING_RX_BAND_RESPONSE_BOUND', cs.caseId, pairId, sprintf('assumed victim gain %+d dBi', gass), ...
-                        tx.power_dBm + s21, tx.power_dBm + s21 - rx.allowableInterference_dBm, s21, 'ASSUMPTION (not computed data)'}; %#ok<AGROW>
+                        tx.power_dBm + s21, tx.power_dBm + s21 - rx.allowableInterference_dBm, s21, basis}; %#ok<AGROW>
                 end
             end
-            if strncmp(ta.installationId, 'KAA', 3)
-                dom = model.steering(ta.installationId);
-                if dom.isAllowed(u)
-                    gpk = rfi_eval_set(FROZ.KA, tx.fc_Hz, [0; 0; 1]);
-                    if strcmp(rxStatus, 'OK'); s21 = lin(gpk + gR - L); rv = tx.power_dBm + s21; rq = rv - rx.allowableInterference_dBm;
-                    else; s21 = NaN; rv = NaN; rq = NaN; end
-                    sensRows{end+1} = {'KAA_STEERED_AT_VICTIM_WORST_CASE', cs.caseId, pairId, sprintf('Gtx=%.2f dBi (main beam, direction inside hemisphere)', gpk), ...
-                        rv, rq, s21, 'STEERING ASSUMPTION (hemisphere domain, not a hardware limit)'}; %#ok<AGROW>
-                else
-                    sensRows{end+1} = {'KAA_STEERED_AT_VICTIM_WORST_CASE', cs.caseId, pairId, 'victim direction outside the hemisphere: main beam cannot point at it', ...
-                        NaN, NaN, NaN, 'STEERING ASSUMPTION'}; %#ok<AGROW>
+            if strncmp(ta.installationId, 'KAA', 3)        % near-field gimbal screening (run_ka_nearfield_analysis.m)
+                gi = find(strcmp(KA.gw.case_id, ['KA_NF_' ta.installationId '>' ra.installationId]) & ...
+                    strcmp(KA.gw.gimbal_state, rfscreen.kaa.KaGimbalScreening.WORST));
+                ai = find(strcmp(KA.asm.case_id, ['KA_NF_' ta.installationId '>' ra.installationId]) & ...
+                    strcmp(KA.asm.gimbal_state, rfscreen.kaa.KaGimbalScreening.WORST));
+                desc = sprintf('max-coupling steering theta_ap=%s deg, boresight %s off-ref %s deg (allowed=%s)', KA.gw.aperture_theta_deg{gi}, ...
+                    KA.gw.boresight_B{gi}, KA.gw.off_axis_from_reference_deg{gi}, KA.gw.allowed_in_domain{gi});
+                rv = str2double(KA.gw.P_port_band_dBm{gi});
+                sensRows{end+1} = {'KAA_GIMBAL_MAX_COUPLING_NEAR_FIELD', cs.caseId, pairId, desc, rv, rv - rx.allowableInterference_dBm, ...
+                    rv - tx.power_dBm, 'REFLECTOR_APERTURE_NEAR_FIELD; HEMISPHERE steering ASSUMPTION; DIRECT_REFLECTOR_FIELD_ONLY (ka_gimbal_worstcase.csv)'}; %#ok<AGROW>
+                if ~isempty(ai)
+                    p0 = str2double(KA.asm.P_ref0dBi_band_dBm{ai});
+                    sensRows{end+1} = {'KAA_GIMBAL_MAX_COUPLING_ASSUMPTION_ONLY', cs.caseId, pairId, [desc '; assumed victim gain 0 dBi'], ...
+                        p0, p0 - rx.allowableInterference_dBm, p0 - tx.power_dBm, ...
+                        'ASSUMPTION_ONLY (victim Ka response missing; not a result)'}; %#ok<AGROW>
                 end
             end
             if strcmp(tband, 'S_TM') && strcmp(rxStatus, 'OK') && strcmp(cs.caseId, 'CASE_SBA1_L1')
@@ -422,7 +479,16 @@ for it = 1:numel(txList)
     t = ctx.rfSystems(strcmp({ctx.rfSystems.systemId}, txList{it}));
     tsys = ctx.scenario.transmitters(txList{it}); tan = ctx.scenario.antennas(tsys.antennaId); tm = mounts(tan.installationId);
     d = sm.p - tm.p; dist = norm(d); dT = tm.R' * (d / dist);
-    if strncmp(t.systemId, 'S_TM', 4); ts = CST.S.S_TM; elseif strncmp(t.systemId, 'ISL', 3); ts = CST.ISL.ISL; else; ts = FROZ.KA; end
+    if strncmp(t.systemId, 'KA', 2)          % KAA TX -> SAR RX: near field; SAR Ka response missing (no 0 dBi result)
+        q = rfi_ka_point(KA.model, KA.F, t.power_dBm, tm.p, rfscreen.kaa.CstLocalFrameAdapter.fixedMount(tm.n), sm.p, ...
+            rfscreen.kaa.CstLocalFrameAdapter.fixedMount(sm.n), rfscreen.kaa.KaVictimResponse.fromRepository(repo, 'SAR'));
+        sarRows{end+1} = {t.systemId, 'SAR_X_RX', dist, '', 10 * log10(mean(10 .^ (q.Geq_dBi / 10))), NaN, NaN, t.power_dBm, ...
+            NaN, NaN, NaN, 'INPUT_MISSING (KA_FUNDAMENTAL_OOB_BLOCKING)', sprintf(['REFLECTOR_APERTURE_NEAR_FIELD: S = %.2f dBm/m2 at the SAR mount ' ...
+            '(3-monitor mean; DIRECT_REFLECTOR_FIELD_ONLY); SAR antenna Ka response NO_PATTERN_BOUND -> port power not evaluated; ' ...
+            'see ka_nearfield_pair_results.csv'], q.S_band_dBmpm2)}; %#ok<AGROW>
+        continue;
+    end
+    if strncmp(t.systemId, 'S_TM', 4); ts = CST.S.S_TM; else; ts = CST.ISL.ISL; end
     g = rfi_eval_set(ts, t.fc_Hz, dT);
     sarRows{end+1} = {t.systemId, 'SAR_X_RX(hyp)', dist, '', g, g - fspl(t.fc_Hz, dist), NaN, t.power_dBm, ...
         t.power_dBm + g - fspl(t.fc_Hz, dist), NaN, NaN, 'PARTIAL_INTERFERER_SIDE_ONLY', ...

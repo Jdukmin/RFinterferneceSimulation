@@ -1,7 +1,8 @@
-RFI analysis run 2026-10-04 14:02:11
+RFI analysis run 2026-10-04 16:03:13
 Environment: GNU Octave 9.2.0 on x86_64-w64-mingw32 (MATLAB not used)
-Repository HEAD: 7f0db4755efc1de265cc0c3f60eec235222ba0c6
+Repository HEAD: 4493d4d0c323571d9d82972e77083a74cd68fd6d
 Source availability written (40 rows).
+Ka routing: KAA TX -> REFLECTOR_APERTURE_NEAR_FIELD (DIRECT_REFLECTOR_FIELD_ONLY; STRUCTURE_SCATTERING_NOT_MODELED), victim gain = Ka OOB response only
 Cut-direction check: max |eval-cut| = 5.33e-15 dB
 Peak table cross-check: 120 cuts, max |cut max - table| = 0.00e+00 dB
 CASE_SBA1_L1: 5 TX x 5 RX evaluated
@@ -11,4 +12,4 @@ CASE_SBA4_L1: 5 TX x 5 RX evaluated
 CASE_SBA4_L2: 5 TX x 5 RX evaluated
 CASE_SBA4_L5: 5 TX x 5 RX evaluated
 Engine cross-check: 132 pairs, max |evaluator - engine| S21 = 0.158 dB, mean 0.007 dB
-Rows: pairs 150, band 396, aggregates 78, sensitivity 248, SAR 25, usage 396
+Rows: pairs 150, band 396, aggregates 78, sensitivity 296, SAR 25, usage 396

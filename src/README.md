@@ -29,6 +29,7 @@ blocks, no `import`), so the same code runs under MATLAB R2019b+ and Octave 6+.
 | **`+coupling`** *(Phase 8 adds)* | `PreferredCouplingModel`; `FarFieldCouplingModel` option `assumeFreeSpace` (`FREE_SPACE_ASSUMED`) |
 | **`+mission`** *(Phase 8 adds)* | `RfcLevelReport` (per-pair S21 / received level / required rejection), `LocalFacetExporter` (cropped local facets in the CST frame) |
 | **`+couplingdata`** *(Phase 7d)* | `CstS21Importer` — CSV / Touchstone (`.sNp`) → `CstS21Table` (the only S21 file parser) |
+| **`+kaa`** *(Ka RFI)* | `ReflectorApertureModel` (validated KAA feed + equivalent-paraboloid aperture, re-used), `ApertureNearFieldSolver` (`REFLECTOR_APERTURE_NEAR_FIELD`: direct reflector field at 3D points; structure scattering not modelled), `CstLocalFrameAdapter` (explicit CST-local/aperture <-> repository antenna frame), `KaVictimResponse` (victim Ka out-of-band response only; missing -> INPUT_MISSING), `KaRfiPath` (routing; fundamental vs spur paths), `KaGimbalScreening` |
 | **`+mission`** *(Phase 7b)* | `MissionCaseBuilder` — the 6 RFC/RFI analysis cases (SBA1/SBA4 × GPS L1/L2/L5) as scenarios: per-function antennas + patterns via the existing Phase-2 pipeline, plus the RF baseline (`RFTransmitter`/`RFReceiver` from `rf_systems.csv`; unknown P1dB/IIP3 stay NaN) |
 
 ## `+spectrum` / `+receiver` (Phase 3 — linear RF coexistence)

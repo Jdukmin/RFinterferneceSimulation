@@ -1,6 +1,6 @@
 # RFI 간섭 해석 — 분석근거 (패턴·케이스·수식·검증)
 
-작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 저장소 `main` @ `7f0db47`.
+작성 2026-10-04. 실행 환경 **GNU Octave 9.2.0** (MATLAB 미사용). 저장소 `main` @ `4493d4d` + Ka 근거리 갱신(§10).
 CST 신규 계산·형상 변경·설치 작업은 하지 않았다. 기존 CST 출력과 저장소 데이터만 읽었다.
 결과 수치는 `RFI_분석결과보고서.md`, 기계 판독 근거는 `results/` 아래 CSV에 있다.
 
@@ -51,7 +51,7 @@ Ka RX와 L TX는 만들지 않았다. SAR는 패턴이 결합되지 않아 가�
 |---|---|---|
 | S_TM_TX@SBA_NADIR / @SBA_ZENITH (2.2487–2.2513 GHz) | CST `RFC_S_LOW_FREE`, `S/S_TM` **RealizedGain**, monitor 2.2/2.25/2.3 GHz. SBA1·SBA4 공통(형상 1개) | 동결 `SBA1_TM` (SBA1 케이스) / `SBA4_TM` (SBA4 케이스), `data/Sband_TMTC/SBAx_TM_{XZ,YZ}.csv` (datasheet 포락선) |
 | ISL_X_TX (10.59–10.61 GHz) | CST `RFC_ISL_HIGH_FREE`, `ISL/ISL` RealizedGain, 10.55/10.6/10.65 GHz | 동결 `ISL_10P55/10P6/10P65` (`data/Xband_ISL/f10.*`) |
-| KA_DLS_TX@KAA_1 / @KAA_2 (25.5–27.0 GHz) | **동결** `KAA_KA_25P5/26P25/27P0` (`data/Kaband_KAA_CST/`) — Ka 전체 반사판의 CST RealizedGain은 없음. feed-only 결과로 대체하지 않음 | A와 동일 |
+| KA_DLS_TX@KAA_1 / @KAA_2 (25.5–27.0 GHz) | **반사판 aperture 근거리 직접장** (`REFLECTOR_APERTURE_NEAR_FIELD`, §10): CST feed `KA_FEED_C_OEWG` + 검증된 등가 포물면 aperture, 25.5/26.25/27 GHz. 등가이득 Geq = 4πd²S/P | 동결 `KAA_KA_25P5/26P25/27P0` (`data/Kaband_KAA_CST/`) + Friis (원거리 참고값) |
 
 ### 3.2 피간섭원(RX) 측 응답 — 간섭원 주파수에서
 
@@ -62,6 +62,7 @@ A·B 공통으로 **CST 자유공간 RealizedGain**을 쓴다. 피간섭원의 �
 | S_TC_RX@SBA_NADIR/ZENITH (S 안테나) | `RFC_S_LOW_FREE` `S/S_TM` | `RFC_S_HIGH_FREE` `S/ISL` | **없음** (`RFC_S_KA_FREE` MESH_LIMIT 255,600) → INPUT_MISSING |
 | GPS_Lx_RX@GPSA_1/2 (L 안테나, L1/L2/L5 케이스 공통) | `RFC_L_LOW_FREE` `L/S_TM` | **없음** (`RFC_L_HIGH_FREE` MESH_LIMIT 212,940) | **없음** (`RFC_L_KA_FREE` MESH_LIMIT 1,467,648) |
 | ISL_X_RX (ISL 안테나) | `RFC_ISL_LOW_FREE` `ISL/S_TM` | 같은 안테나(자기 포트) → NOT_EVALUATED | `RFC_ISL_KA_FREE` `ISL/KA` |
+| SAR_X_RX (SAR 안테나, Ka 경로만) | — | — | **없음** (NO_PATTERN_BOUND) → INPUT_MISSING |
 
 정규화 신뢰도:
 - 위에서 사용한 모든 컷은 `normalization_reliable = true`이다.
@@ -73,8 +74,8 @@ A·B 공통으로 **CST 자유공간 RealizedGain**을 쓴다. 피간섭원의 �
 |---|---|
 | 기존 엔진 대조(변형 E) | 양 끝 동결 패턴. S_TC → `SBAx_TC`, GPS → `GPS_L1` / `GPS_L2`(CST 1227.6 MHz) / `GPS_L5`, ISL → `ISL_10P6`, 단일 주파수 재사용(엔진 방식) |
 | S 잠정 설치 ΔG | `RFC_S_LOW_SBA_NADIR_R1P75`, `RFC_S_LOW_SBA_ZENITH_R1P75` − `RFC_S_LOW_FREE_M4R10`. 원시 열 `realized_gain_dbi`(legacy `gain` 열은 사용 안 함), 2.2/2.25/2.3 GHz. 기본 결과에 섞지 않음 |
-| 누락 응답 경계값 | 피간섭원 이득 가정 −10 / 0 / +5 dBi (ASSUMPTION) |
-| KAA 조향 최악 | 동결 Ka 패턴의 주빔(26.25 GHz 보어사이트 32.63 dBi). 반구 조향 가정 내에서만 |
+| 누락 응답 경계값 | 피간섭원 이득 가정 −10 / 0 / +5 dBi (ASSUMPTION). Ka는 근거리 전력밀도 기반 `ASSUMPTION_ONLY` |
+| KAA 조향 최악 | 근거리 직접장 짐벌 screening(§10.6). 반구 조향 가정 내에서만 |
 | SAR 가정 | 피간섭원의 SAR 대역 RealizedGain은 CST(`S/SAR`, `ISL/SAR`, `RFC_*_HIGH_FREE`)를 쓴다. SAR 쪽 이득 −10/0/+10 dBi와 전력 63.98/66.99 dBm은 가정이다 |
 
 ## 4. 좌표 변환 (CST 교차검증용)
@@ -121,7 +122,8 @@ FSPL(f,d) = 20·log10(4π d f / c)
 - **주파수 보간:** 한 대역의 계산된 저/중/고 monitor 사이에서만 dB 선형 보간한다. 미계산 구간은 메우지 않는다(`code/rfi_eval_set.m`).
 - **원거리장 판정:** `R_ff = max(2·D_max²/λ, 5λ)`(λ는 송신 대역 상단 기준, D는 `max_dimension_m`)이다.
   - 만족하면 `FAR_FIELD_OK`이다.
-  - 만족하지 못하면 `NEAR_FIELD_FRIIS_ESTIMATE`이고, 해당 값은 추정치다. 모든 Ka pair가 여기에 해당한다(R_ff ≈ 8.7 m > 거리).
+  - 만족하지 못하면 `NEAR_FIELD_FRIIS_ESTIMATE`이고, 해당 값은 추정치다.
+  - **Ka pair는 Friis를 쓰지 않는다.** 모든 KAA–피간섭원 거리(1.8–6.2 m)가 R_ff(8.2–8.7 m)보다 짧아 `NEAR_FIELD_APERTURE_INTEGRATION`(§10)으로 계산한다. 수신 레벨은 `P_port = S·λ²/(4π)·G_rx`의 3-monitor 선형 평균이다.
 
 ## 6. 상태 코드
 
@@ -129,6 +131,10 @@ FSPL(f,d) = 20·log10(4π d f / c)
 |---|---|
 | `EVALUATED_OOB_LEVEL` | 대역 밖 pair. 수신 레벨과 필요 제거도를 계산했다. 블로킹·스퓨리어스는 판정하지 않았다(P1dB/IIP3/emission mask 없음) |
 | `EVALUATED_OOB_LEVEL_ESTIMATE` | 위와 같고, 근거리장이라 Friis 추정치다 |
+| `EVALUATED_OOB_LEVEL_NEAR_FIELD` | Ka: 반사판 aperture 근거리 직접장으로 포트 레벨을 계산했다 (`DIRECT_REFLECTOR_FIELD_ONLY`, `STRUCTURE_SCATTERING_NOT_MODELED`) |
+| `PORT_COUPLING_EVALUATED_RECEIVER_BLOCKING_UNKNOWN` | Ka: 포트 결합은 평가했고, 수신기 BPF/블로킹/P1dB/IIP3가 없어 수신기 판정은 하지 않았다 |
+| `PORT_COUPLING_NOT_EVALUATED` | Ka: 피간섭원 Ka 응답이 없어 포트 결합 자체를 평가하지 않았다 |
+| `ASSUMPTION_ONLY` | 결과가 아닌 참고값(예: 누락 피간섭원 0 dBi). 별도 파일·열에만 둔다 |
 | `EVALUATED_IN_BAND` | 대역 내 중첩 pair(이번 기준에는 없음) |
 | `INPUT_MISSING` | 피간섭원 안테나의 간섭원 대역 응답이 없다(CST MESH_LIMIT). `sensitivity.csv`에 경계값만 있다 |
 | `NOT_EVALUATED` | 같은 안테나 포트(다이플렉서/T-R 격리, 송신 잡음 입력 없음) |
@@ -152,13 +158,101 @@ PASS/FAIL은 대역 내 pair에서만 내는데, 해당 pair가 없다. 대역 �
 | 기존 엔진(MissionCaseBuilder + RfcLevelReport) 대조: 동결 패턴 양 끝, fc 단일 주파수 | 132 pair, 최대 0.158 dB, 평균 0.007 dB (엔진 2° 격자 보간 차이) | `results/engine_crosscheck.csv` |
 | 순·역방향 대칭(같은 주파수·같은 CST 응답) | S_TM NADIR→TC ZENITH = ZENITH→TC NADIR = −69.28 dB | `pair_results.csv` |
 | A 변형의 케이스 독립성 | 6개 케이스에서 같은 물리 pair의 A값이 모두 동일(형상 1개, GPS 응답은 2.25 GHz에서 같은 안테나) | 스크립트 점검 |
-| 동결 원본 불변 | `git status` 상 `data/`, `src/`, `tests/` 변경 없음. 동결 테스트 포함 전체 1425/1425 통과 | `results/test_suite_log.txt` |
+| 동결 원본 불변 | `data/`, `cst/` 변경 없음(KAA 반사판 모델·검증 포함). `src/`는 `+kaa` 패키지 추가만, 기존 파일 무변경. 동결 테스트 포함 전체 1512/1512 통과(기존 1425 + Ka 87) | `results/test_suite_log.txt` |
+| Ka 근거리 → 원거리 수렴 | 10·R_ff 이상 null 제외 FAIL 0행; 100·R_ff 최대 4e-4 dB | `results/ka_nearfield_validation.csv` |
+| Ka 원거리 재현(MATLAB vs Python 반사판 CSV) | 최대 0.0095 dB, 주빔 0.0000 dB | 같은 파일 |
+| 비-Ka 결과 불변 | 이전(`4493d4d`) 대비 S/L/ISL 행 무변경 | `results/previous_run_manifest.csv` |
 
 ## 9. 재현
 
 저장소 루트에서 다음을 실행한다(환경: `results/environment.txt`, 로그: `results/run_log.txt`).
 
 ```
+octave-cli --no-gui --norc --eval "run('output/claude/run_ka_nearfield_analysis.m')"   # 먼저 실행 (ka_*.csv)
 octave-cli --no-gui --norc --eval "run('output/claude/run_rfi_analysis.m')"
 octave-cli --no-gui --norc --eval "run('output/claude/make_figures.m')"
 ```
+
+`run_rfi_analysis.m`은 짐벌 최악값을 `results/ka_gimbal_worstcase.csv`에서 읽으므로 Ka 스크립트를 먼저 실행해야 한다(없으면 오류로 멈춤).
+
+## 10. Ka KAA source model — 반사판 aperture 근거리 직접장
+
+### 10.1 왜 바꿨나
+
+- 이전 Ka 경로는 동결 패턴 + `Gtx + Grx − FSPL`(Friis)이었다.
+- 그런데 KAA–피간섭원 거리(1.78–6.25 m)가 모두 2D²/λ(D = 0.22 m: 8.23 / 8.48 / 8.72 m)보다 짧다. 원거리 패턴의 전제가 성립하지 않는다.
+- 그래서 반사판 aperture 장을 피간섭원 위치까지 직접 적분한다.
+
+### 10.2 재사용한 KAA 모델 (재생성 없음)
+
+| 항목 | 값 / 파일 |
+|---|---|
+| feed | CST full-wave `KA_FEED_C_OEWG`(`cst/results/KA_FEED_C_OEWG/feed_pattern.json`), RHCP, 네 반쪽 컷 선형 평균(= `ka_reflector_eval.py feed_interp`) |
+| 반사판 | `cst/results/KA_REFLECTOR_KA_FEED_C_OEWG/reflector_validation.json`: D = 220 mm, θ_f = 40°, Fe = 151.11 mm, Ds = 44 mm, `KA_DATASHEET_ANCHOR_PASS` |
+| aperture 장 | `ka_reflector_po.py`와 동일: ρ ∈ [Ds/2, D/2](부반사판 차폐), ψ = 2·atan(ρ/2Fe), r' = Fe/cos²(ψ/2), a(ρ) = √Gf(ψ)/r', 위상 = 등광로 GO(feed 위상오차 무시) |
+| 이득 기준 | accepted-power(spillover 손실 포함). TX 전력 48.45 dBm을 accepted power로 둔다(기존 Ka 경로와 같은 기준) |
+| 대조 | `data/Kaband_KAA_CST/ka_final_validation.json`의 D/Fe/Ds와 일치(테스트) |
+
+### 10.3 Solver (`src/+rfscreen/+kaa/ApertureNearFieldSolver.m`)
+
+```
+Ea(ρ,φ)  = √(2ηP/4π) · a(ρ,φ)                          (∫|Ea|²/2η dA = P·∫Gf sinψ dψ dφ/4π)
+E(r)     = √(2ηP/4π) · (jk/2π) · Σ_i a_i dA_i · Q_i · e^{−jkR_i}/R_i
+Q_i      = ½[1 + cosχ_i (1 + 1/(jkR_i))],  cosχ_i = z/R_i,  R_i = |r − r'_i|
+S        = |E|²/(2η)       Geq = 4πd²S/P       (d = aperture 중심–관측점 거리)
+P_port   = S · λ²/(4π) · G_rx(f, 도래방향)       (피간섭원 국소 평면파 입사)
+```
+
+- 포함: 실제 진폭 taper, aperture 위상, 부반사판 차폐, 요소별 구면 위상, 1/R, 25.5/26.25/27 GHz.
+- 적분: ρ 400점(사다리꼴) × φ 720점(주기 규칙). 임의 3D 관측점을 받는다.
+- 원거리 극한은 `ka_reflector_po.py`의 `G(θ) = (k/2π)²|∫…|²((1+cosθ)/2)²`와 정확히 같다.
+- 범위: `DIRECT_REFLECTOR_FIELD_ONLY`, `STRUCTURE_SCATTERING_NOT_MODELED`. feed spillover·부반사판·스트럿·선체 산란은 없다. 그래서 상한이라고 부르지 않는다.
+- 근거리 파면 방향(위상 기울기)을 진단값으로 계산한다. ISL 수신 위치에서 기하 방향과 1.0–1.9° 차이다.
+
+### 10.4 좌표계 (`CstLocalFrameAdapter`)
+
+| 프레임 | 정의 |
+|---|---|
+| B (body) | 저장소 기준. 설치 위치는 B, m |
+| A (repository antenna) | +X_A = 보어사이트, +Z_A = +X_B의 보어사이트 수직 성분, +Y_A = Z_A × X_A (`sideMountR_BA`, `GimbalSteeringDomain.steeredR_BA`) |
+| L (CST local = KAA aperture) | +Z_L = 보어사이트, +X_L = +X_B(직교화), +Y_L = Z_L × X_L (CST `status.json local_to_body_rotation`) |
+
+- 명시적 변환: `v_A = M_AL v_L`, `M_AL = [0 0 1; 0 −1 0; 1 0 0]`(det = +1), `R_BL = R_BA · M_AL`.
+- 일반 `CutPatternAssembler.canonicalToAntenna()`(`[0 0 1; 1 0 0; 0 1 0]`)는 **쓰지 않는다.** 이 함수는 CST XZ 면을 X_A–Y_A 면으로 보내 비대칭 source에서 평면이 뒤바뀐다. 테스트에서 15° 기울인 합성 aperture로 이 차이(>15 dB)를 고정했다.
+- 계산 순서: 짐벌 지향 u_B → `steeredR_BA(u_B)` → `R_BL` → 피간섭원 위치를 `r_L = R_BLᵀ(p_victim − p_KAA)`로 aperture frame에 넣는다.
+- 확인값: KAA_1 `R_BL = I`(Panel #1 +Z), KAA_2 `R_BL = [[1,0,0],[0,−0.5,0.866],[0,−0.866,−0.5]]`. 짐벌 기준 지향 = 고정 장착 frame = `run_rfi_analysis.m local_frame`.
+
+### 10.5 피간섭원 Ka 응답과 경로 분리
+
+- `KaVictimResponse`는 `data/antenna_port_response_cst/provenance.json`의 `band = KA` RealizedGain만 읽는다.
+  - S·L: `RFC_S_KA_FREE` / `RFC_L_KA_FREE` status.json이 MESH_LIMIT이다 → `INPUT_MISSING`(사유에 최소 mesh cell 수 기록).
+  - SAR: 패턴 자체가 없음 → `INPUT_MISSING (NO_PATTERN_BOUND)`.
+  - ISL: `RFC_ISL_KA_FREE` → `AVAILABLE`.
+- 누락 응답은 컷을 갖지 않는다. 이득 평가를 요청하면 오류(`victimResponseMissing`)를 낸다. 0 dBi나 가정 제거도로 채우지 않는다.
+- Ka 기본파 경로에 S_TC 등 **자기 운용대역 응답**을 넣으면 오류(`inBandGainForbidden`)를 낸다. 25.5–27 GHz 밖 주파수도 거부한다.
+- `KA_SPUR_INBAND`은 별도 행이다. 피간섭원 대역 내 이득을 쓰는 경로이지만 KAA emission mask가 없어 `INPUT_MISSING`이다.
+- 수신기 단계: BPF/블로킹/P1dB/IIP3가 없으면 `PORT_COUPLING_EVALUATED_RECEIVER_BLOCKING_UNKNOWN`. PASS/FAIL은 내지 않는다.
+
+### 10.6 짐벌 screening (`KaGimbalScreening`)
+
+- aperture가 축대칭이고 중심이 고정이므로 결합은 거리 d와 θ = ∠(u, v)만의 함수다(v = 피간섭원 방향).
+- 반구(기준축 n, 90°)에서 도달 가능한 θ: [max(0, α−90°), min(180°, α+90°)], α = ∠(n, v). u는 (v, n) 평면에서 v → n 쪽으로 θ만큼 돌린 방향이다.
+- 탐색: 0.25° 간격(축소 표본 160×360) → 최대 주변 ±0.25°를 0.01° 간격(전체 표본 400×720)으로 정밀화. 지표는 피간섭원 이득을 넣은 대역 평균 포트 전력, 응답이 없으면 대역 평균 전력밀도다.
+- 상태 3개: 공칭(기준축), 피간섭원 지향(불가하면 최근접 허용 경계), 최대 결합. 각 상태의 `allowed_in_domain`을 기록했다.
+- 회귀: 3D brute-force(6° 격자, `sampleDirections`)가 1-D 최대를 넘지 않는다.
+- 가정: 반구는 단순화 가정이다. hard-stop·keep-out·기구 shadowing·pivot offset은 정의되지 않았다.
+
+### 10.7 테스트 (`tests/test_ka_nearfield.m`, 87 checks)
+
+| 범주 | 내용 |
+|---|---|
+| aperture 정규화 | aperture 전력 = feed 환형 전력(3주파수), 균일 개구 지향성 = 4πA/λ², 전력 선형성, P_port 식 |
+| 원거리 수렴 | 26.25 GHz, 0–30°, 10·R_ff ≤ 0.05 dB, 100·R_ff ≤ 1e-3 dB, Python CSV ≤ 0.01 dB, 1.78 m 보어사이트는 원거리보다 0.5 dB 이상 낮음 |
+| 대칭 | ±X, ±Y, XZ = YZ (0.8/4/25/120°) |
+| 주파수 scaling | 균일 개구 이득 ∝ f², R_ff ∝ f, 검증 모델 보어사이트 32.28→32.98 dBi |
+| KAA_1/KAA_2 좌표 | R_BL 확인값, CST local_frame 일치, 짐벌 기준 = 고정 장착, 거리 보존 |
+| 짐벌 회전 | 피간섭원 지향 시 θ_ap = 0, +Y_B 지향 frame, 반구 밖 거부, worst ≥ nominal/directed, brute-force 상한 |
+| 비대칭 합성 frame 회귀 | 15° 기울인 aperture: body 빔 방향 일치, canonical 매핑과 >10°·>15 dB 차이, X 거울대칭 아님 |
+| 누락 응답 negative | S/L(MESH_LIMIT), SAR(NO_PATTERN_BOUND) INPUT_MISSING, 평가 시 오류, 컷 없음 |
+| 대역 내 이득 오사용 방지 | S_TC 응답 거부, Ka 밖 주파수 거부, feed monitor 외 주파수 거부 |
+| routing | S/ISL → free-space, KAA → near field, 원거리·검증 → far-field, 수신기·스퓨리어스 상태 |
