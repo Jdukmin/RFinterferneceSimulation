@@ -1,0 +1,16 @@
+item,status,evidence
+CLASSIFICATION,GAIN_BOUND_ONLY,FULL_REFLECTOR_VICTIM_BAND_AVAILABLE / EQUIVALENT_REFLECTOR_MODEL_AVAILABLE / FEED_ONLY_AVAILABLE all not met at L/S/X; see rows below
+KAA_REFLECTOR_GEOMETRY_IN_CST_SOLVER,GEOMETRY_ONLY_NOT_SOLVED,AnalyticalFace paraboloid D=220 mm exists only in cst/projects/SPACECRAFT_KA_MODEL_ONLY_V2.cst (separate untracked workspace; no ports/mesh/solver); no reflector is solved anywhere
+KAA_CST_SOLVER_MODEL,FEED_ONLY,KA_FEED_C_OEWG open-ended circular waveguide; CST monitors 25.5/26.25/27 GHz only
+KAA_REFLECTOR_STAGE,NON_CST_EQUIVALENT_PARABOLOID_KA_ONLY,NON_CST_PYTHON; D=220 mm Fe=151.1 mm Ds=44 mm; anchors KA_DATASHEET_ANCHOR_PASS; needs the Ka feed pattern -> defined only at the CST feed monitors
+KAA_FEED_PATTERN_AT_VICTIM_BANDS,INPUT_MISSING,feed_pattern.json holds 25.5/26.25/27 GHz only; the 26 GHz pattern/aperture illumination is NOT extrapolated to L/S/X
+VICTIM_BAND_EXCITATION_DEFINITION,UNDEFINED,how unwanted energy at f_victim reaches the radiating structure (feed throat / flange / port impedance) is exactly the WR-42 / feed-chain behaviour excluded by instruction; without an excitation definition a full-wave KAA solve has no source
+ACTUAL_CASSEGRAIN_CAD,INPUT_MISSING,feed horn / subreflector / struts / WR-42 chain / hinge CAD not in the repository (equivalent paraboloid only)
+LEARNING_EDITION_MESH,ESTIMATE_ONLY_NOT_DEMONSTRATED,limit 100000 cells; uniform-hex estimate of the bare PEC reflector (lambda_hi/10; lambda_lo/4 padding) in feasibility rows; CST Mesh.Update was attempted in this task and did not return (aborted after 420 s) -> no solver-verified cell count
+MESH_ESTIMATE_ISL,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,ISL X-band 10.55-10.65 GHz: ~91728 cells at lambda/10; ~12348 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+MESH_ESTIMATE_SAR,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,SAR X-band ~9.65 GHz: ~74892 cells at lambda/10; ~9600 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+MESH_ESTIMATE_S_TC,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,S-band RX 2.025-2.110 GHz: ~3087 cells at lambda/10; ~484 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+MESH_ESTIMATE_L1,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,GPS L1 1.575 GHz: ~2023 cells at lambda/10; ~324 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+MESH_ESTIMATE_L2,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,GPS L2 1.228 GHz: ~1350 cells at lambda/10; ~192 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+MESH_ESTIMATE_L5,BARE_REFLECTOR_BELOW_LIMIT_FEED_AND_HULL_NOT_INCLUDED,GPS L5 1.176 GHz: ~1176 cells at lambda/10; ~147 at lambda/5 (reflector surface only; lower bound; feed/subreflector/hull add cells)
+FULL_REFLECTOR_VICTIM_BAND_REQUIRES,NEXT_INPUT,real Cassegrain CAD + feed-throat excitation definition at f_victim + a solver beyond the Learning Edition 100k-cell limit (or the licensed T/I/asymptotic solver) -> Tier 1; or a victim-band feed pattern (measured/CST) for the Tier-2 equivalent paraboloid

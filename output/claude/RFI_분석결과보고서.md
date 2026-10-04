@@ -27,6 +27,7 @@
   3. 수신기 블로킹·P1dB·프리셀렉터 데이터
 - **필터 scenario:** 0/40/60/70/80 dB screening 감쇠와 주파수별 table을 넣어 sweep할 수 있다. 0/40/60/70/80 dB는 설계값이 아니다.
 - **Secondary:** 기본파 대역 밖 blocker 노출은 유지했지만 1차 요구사항이 아니다. 대표값은 S-TM@ZENITH → GPSA_1 −21.3 dBm @ 2.25 GHz, S-TM → 반대편 S-TC −32.3 dBm @ 2.25 GHz다(블로킹 판정 보류).
+- **KAA 저주파 방사응답 후속:** KAA의 victim band 방사응답은 계산할 수 없어(`GAIN_BOUND_ONLY`) 최대 이득 상한으로 닫았고, ITU 불요방사 source와 결합한 요구 추가 억제량을 별도 보고서 [KAA_저주파_방사응답_결과보고서.md](KAA_저주파_방사응답_결과보고서.md)에 정리했다. 이 보고서의 수치는 바꾸지 않았다.
 
 ## 2. 주요 RFI 결과 / 요구 억제도 / margin
 
