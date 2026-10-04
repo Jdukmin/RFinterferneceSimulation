@@ -1,5 +1,9 @@
 # Octave RFI 결과와 재현
 
+Task 1에서 S-TC TX → GPS L2/L5 primary는 `PORT_MISMATCH_RESCALED_LBAND` engineering route로 전환했다. [Owner 정책](emission_inputs/owner_port_mismatch_policy.json)의 −10 dB만 적용하며, ITU −49.0206 dBm/Hz에서 effective source는 −59.0206 dBm/Hz다. 기존 accepted-power gain envelope 9.03 dBi와 정상 GPS receive RealizedGain을 결합한다. L1에는 추가 mismatch 감쇠를 넣지 않는다.
+
+[Task 1 요약](task1_lband_summary.csv), [설치/case별 24개 경로](task1_lband_pair_results.csv), [120개 filter scenario](task1_lband_filter_scenarios.csv), [원본 CST normalization 근거](task1_cst_normalization_evidence.csv), [검증](task1_validation.json)을 참조한다. `victim_band_scenarios.csv`의 이전 UNKNOWN과 `conditional_bound_required_suppression.csv`의 mismatch 미적용 결과는 과거 분석/sensitivity로 유지하며, 최신 primary 결과는 `all_pair_required_suppression.csv`다.
+
 최신 설계 결과는 [결과보고서.md](결과보고서.md)와 [main_design_results.csv](main_design_results.csv)다. 실제 역할은 **S-TC TX**(`S_TM_TX`), **S-TM RX**(`S_TC_RX`)로 표시하고, legacy ID는 조회 키로 유지한다. 이전 `source_set=PRIMARY`는 ECSS/ITU 혼합 분석이며, 최신 설계 보완은 모든 TX에 ITU RR Appendix 3 / SM.329 source를 적용한 별도 결과다.
 
 기존 독립 coupling 결과에서 추가 억제 요구만 재현하려면 `python output/codex/complete_suppression_design.py`를 실행한다. CST/Octave 재실행 없이 168개 primary pair, 76개 조건부 bound, 1,220개 filter scenario를 만든다. [all_pair_required_suppression.csv](all_pair_required_suppression.csv)에 primary의 미판정 사유를 남기고 [conditional_bound_required_suppression.csv](conditional_bound_required_suppression.csv)는 조건부 가정을 별도로 보존한다. 전체 분석의 마지막 `summarize_emission_analysis.py`도 이 보완 단계를 자동으로 호출한다.
