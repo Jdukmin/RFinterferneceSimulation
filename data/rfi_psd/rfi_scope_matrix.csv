@@ -1,0 +1,15 @@
+# rfi_psd -- PRIMARY RFI scope (owner decision Task 2 2026-10-04). Role names are actual roles; legacy ids kept for code/CSV keys.
+#   S-TC TX = legacy S_TM_TX; S-TM RX = legacy S_TC_RX (band key S_TC). ISL and SAR are VICTIM ONLY.
+# Fields must not contain commas.
+attacker,attacker_legacy_id,victim,victim_legacy_id,victim_band,scope,route,note
+S-TC TX,S_TM_TX,GPS RX,GPS_L1_RX/GPS_L2_RX/GPS_L5_RX,L1;L2;L5,PRIMARY,ITU source + CST (L1) / PORT_MISMATCH_RESCALED_LBAND (L2/L5),Task 1
+S-TC TX,S_TM_TX,S-TM RX,S_TC_RX,S_TC,PRIMARY,ITU source + CST RealizedGain,opposite SBA only (same port: diplexer data missing)
+S-TC TX,S_TM_TX,ISL RX,ISL_X_RX,ISL,PRIMARY,ITU source + CST RealizedGain,
+S-TC TX,S_TM_TX,SAR RX,SAR_X_RX,SAR,PRIMARY_VICTIM_ONLY,harmonic check + ITU generic spurious route,harmonic and generic spurious never merged
+Ka DLS TX,KA_DLS_TX,GPS RX,GPS_L1_RX/GPS_L2_RX/GPS_L5_RX,L1;L2;L5,PRIMARY,KA_MAX_EIRP_WAVEGUIDE_CUTOFF,
+Ka DLS TX,KA_DLS_TX,S-TM RX,S_TC_RX,S_TC,PRIMARY,KA_MAX_EIRP_WAVEGUIDE_CUTOFF,
+Ka DLS TX,KA_DLS_TX,ISL RX,ISL_X_RX,ISL,PRIMARY,KA_MAX_EIRP_WAVEGUIDE_CUTOFF,
+Ka DLS TX,KA_DLS_TX,SAR RX,SAR_X_RX,SAR,PRIMARY_IF_NEEDED,KA_MAX_EIRP_WAVEGUIDE_CUTOFF,SAR absolute peak gain unknown
+ISL TX,ISL_X_TX,ALL,-,-,EXCLUDED,-,ISL is victim only
+SAR TX,SAR_X_TX,ALL,-,-,EXCLUDED,-,SAR is victim only
+Ka DLS TX,KA_DLS_TX,ALL,-,L/S/X,LEGACY_SENSITIVITY,KAA GAIN_BOUND_ONLY (Tier 3 ceiling),removed from primary

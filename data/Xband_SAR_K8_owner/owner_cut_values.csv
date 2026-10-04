@@ -1,0 +1,33 @@
+# K8 SAR receive pattern -- OWNER-EXTRACTED values from the closed-network K8_SAR_Pattern.mat (S.Azimuth/Elevation.Co/Cx)
+# Source vectors: 1601 points, -80..+80 deg, 0.1 deg step; symmetric. Only the owner-provided summary values below are stored
+#   (NOT_FULL_1601_POINT_EXPORT). co_db = Co-pol dB relative to the Co peak (peak complex-field magnitude 248.7072, phase 0 deg;
+#   a field magnitude, NOT an absolute gain -> SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN).
+# Cx: -120 dB re Co peak at boresight / Co peak (XPD 120 dB) in both cuts -> CROSS_POL_NEGLIGIBLE_FOR_CURRENT_SCREENING;
+#   kept here, never normalised to its own peak.
+# Provenance: OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT; reconstruction by src/+rfscreen/+psd/SarOwnerPattern.m (ENGINEERING_RECONSTRUCTION).
+# Fields must not contain commas.
+cut,kind,angle_deg,co_db,cx_db_re_co_peak,note
+AZIMUTH,HALF_POWER,0.121147,-3,,HPBW 0.242294 deg (owner exact 3-dB points +/-0.121147)
+AZIMUTH,FIRST_NULL,0.3,-39.083,,first null +/-0.3 deg
+AZIMUTH,MAX_SIDELOBE,0.4,-13.565,,maximum sidelobe +/-0.4 deg
+AZIMUTH,SAMPLE,0,0,-120,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,1,-21.237,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,2,-29.277,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,5,-40.505,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,10,-40.708,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,20,-62.63,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,30,-51.82,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,45,-58.161,,owner sampled Co (symmetric)
+AZIMUTH,SAMPLE,60,-69.313,,owner sampled Co (symmetric)
+ELEVATION,HALF_POWER,0.556111,-3,,HPBW 1.112222 deg (owner exact 3-dB points +/-0.556111)
+ELEVATION,FIRST_NULL,1.3,-31.241,,first null +/-1.3 deg
+ELEVATION,MAX_SIDELOBE,1.8,-13.27,,maximum sidelobe +/-1.8 deg
+ELEVATION,SAMPLE,0,0,-120,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,1,-12.195,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,2,-14.224,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,5,-38.056,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,10,-36.11,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,20,-34.674,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,30,-40.453,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,45,-62.59,,owner sampled Co (symmetric)
+ELEVATION,SAMPLE,60,-58.396,,owner sampled Co (symmetric)

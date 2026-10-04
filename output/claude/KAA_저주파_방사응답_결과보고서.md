@@ -1,5 +1,7 @@
 # KAA victim-band 방사응답과 ITU 불요방사 결합 결과보고서 (screening)
 
+> **상태: legacy sensitivity (Task 2).** owner 결정으로 Ka primary route는 "최대 EIRP + 도파관 below-cutoff"로 바뀌었다([RFI_Task2_범위단순화_결과보고서.md](RFI_Task2_범위단순화_결과보고서.md)). 이 보고서의 최대 이득 상한 결과는 primary에서 제외하고 비교용으로만 유지한다.
+
 **결론.** KAA의 L/S/X victim band 방사응답은 **현재 입력으로 계산할 수 없다**. 분류는 `GAIN_BOUND_ONLY`이며, 이 주파수들은 안테나 크기에서 얻은 **최대 이득 상한(Tier 3, `ENGINEERING_BOUND`, `NOT_MEASURED`, `NOT_CST_VALIDATED`)** 으로 닫았다.
 - **의미:** ITU 규격을 만족하는 송신기라도 KAA 방사만 고려하면(WR-42 cutoff·급전선·필터 감쇠 0 dB) 모든 평가 victim에서 허용 PSD를 크게 초과한다. 추가로 필요한 억제량은 GPS L1 59.0~63.9 dB, L2 79.0~86.1 dB, L5 81.1~86.6 dB, S-band 84.6~89.2 dB, ISL X-band 86.1~87.2 dB다(Tier 3 상한 기준, 자유공간).
 - **이 값들은 상한 기준의 보수적 요구량이다.** 실제 KAA 이득이 아니며, 실제 응답이 상한보다 낮으면 요구량도 같은 dB만큼 줄어든다. 최종 필터 규격으로 쓰지 않는다.
