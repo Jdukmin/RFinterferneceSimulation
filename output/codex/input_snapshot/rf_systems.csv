@@ -1,0 +1,43 @@
+# simplified_spacecraft_v1 -- RF system baseline (1st RFC/RFI baseline, owner-specified 2026-10-04)
+# One row per RF function instance. template_id = the system ID of the baseline table; a template
+# applies to every function that shares it (e.g. both SBA mounts). All instances are REGISTERED;
+# select the active subset with Scenario.activeTxIds / activeRxIds (no operating mode is assumed).
+# kind TX : power_dBm referenced to the TX antenna input port; occupied band = fc +/- bw/2
+#           (rectangular PSD, IDEAL_MODEL).
+# kind RX : RFReceiver = ideal bandpass filter [fc - bw/2, fc + bw/2] + NF noise model (290 K)
+#           + I_N_MAX criterion (i_n_max_db). Allowable interference = kTB + NF + I/N.
+#           p1dB_in_dbm / iip3_in_dbm EMPTY = unknown -> NaN (never defaulted; the nonlinear
+#           analyzers report MISSING_P1DB / MISSING_IIP3 and no ReceiverFrontEnd is created).
+# tx_power_screen_dbm: worst-case screening power (used when powerMode = SCREENING); empty = same
+#           as tx_power_dbm.
+# *_prov tags: PUBLIC_STANDARD (published ICD/allocation), ENGINEERING_ASSUMPTION (our baseline,
+#           not a vendor spec), PROVISIONAL (to be replaced when the design is selected),
+#           SCREENING_ASSUMPTION (conservative upper bound, not a published spec).
+# binding_status DEFERRED_CLOSED_NETWORK: stored for the closed-network run; NOT instantiated here
+#           (antenna not in scope; no matching pattern in this repository).
+# requires_pattern_key: system is registered only when its function is bound to this pattern key in
+#           the case (the GPS L1 / L2 / L5 receivers belong to the L1 / L2 / L5 cases). Empty = always.
+# frontend_prov: REQUIRED when p1dB_in_dbm or iip3_in_dbm is given (DATASHEET | MEASURED | SIMULATED |
+#           USER_INPUT | SYNTHETIC_TEST); a ReceiverFrontEnd is then created at the LNA_INPUT plane.
+#           Compression/blocking/IM3 criteria are NOT created from these columns (no backoff or
+#           blocking allowance is assumed): the nonlinear analyzers keep reporting MISSING_*_CRITERION.
+#           Searched 2026-10-04: no public P1dB/IIP3/blocking data for the S-band transponder, the GNSS
+#           receiver or an X-band ISL receiver (docs/notes/receiver_nonlinear_data_search_2026-10-04.md).
+# Fields must not contain commas.
+system_id,function_id,kind,template_id,fc_mhz,bw_mhz,tx_power_dbm,tx_power_screen_dbm,nf_db,i_n_max_db,p1db_in_dbm,iip3_in_dbm,polarization,fc_prov,bw_prov,power_prov,nf_prov,criterion_prov,binding_status,note,requires_pattern_key,frontend_prov
+S_TM_TX@SBA_NADIR,SBA_NADIR_TM,TX,S_TM_TX,2250,2.7,36.9897,,,,,,UNKNOWN,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,,CASE_DEPENDENT,5 W; 2 Mbps BPSK with RRC alpha 0.35 assumed; downlink 2200-2290 MHz allocation,,
+S_TM_TX@SBA_ZENITH,SBA_ZENITH_TM,TX,S_TM_TX,2250,2.7,36.9897,,,,,,UNKNOWN,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,,CASE_DEPENDENT,same template as S_TM_TX@SBA_NADIR,,
+S_TC_RX@SBA_NADIR,SBA_NADIR_TC,RX,S_TC_RX,2050,0.2,,,3,-6,,,UNKNOWN,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,128 kbps BPSK RRC alpha 0.35 occupies ~173 kHz -> 200 kHz filter; NF 3 dB is NOT a vendor spec; uplink 2025-2110 MHz allocation,,
+S_TC_RX@SBA_ZENITH,SBA_ZENITH_TC,RX,S_TC_RX,2050,0.2,,,3,-6,,,UNKNOWN,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,same template as S_TC_RX@SBA_NADIR,,
+GPS_L1_RX@GPSA_1,GPSA_1,RX,GPS_L1_RX,1575.42,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,PUBLIC_STANDARD,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,GPS L1 C/A; 20.46 MHz bandwidth per GPS ICD; receiver family Beyond Gravity PODRIX (vendor jammer threshold not public); thermal-noise I/N is a TEMPORARY criterion - final GNSS acceptance should use C/N0 / J/S (tracking >= ~30 dB-Hz),GPS_L1,
+GPS_L1_RX@GPSA_2,GPSA_2,RX,GPS_L1_RX,1575.42,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,PUBLIC_STANDARD,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,same template as GPS_L1_RX@GPSA_1,GPS_L1,
+GPS_L2_RX@GPSA_1,GPSA_1,RX,GPS_L2_RX,1227.6,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,GPS L2 receiver on the unchanged GPSA antenna; same front-end baseline as L1 (NF 2 dB; 20.46 MHz filter; I/N <= -6 dB) because no band-specific value exists; centre = GPS ICD carrier; the pattern is the frozen L2 screening proxy (1207 MHz plot); thermal I/N is a TEMPORARY criterion,GPS_L2,
+GPS_L2_RX@GPSA_2,GPSA_2,RX,GPS_L2_RX,1227.6,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,same template as GPS_L2_RX@GPSA_1,GPS_L2,
+GPS_L5_RX@GPSA_1,GPSA_1,RX,GPS_L5_RX,1176.45,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,GPS L5 receiver on the unchanged GPSA antenna; same front-end baseline as L1 (NF 2 dB; 20.46 MHz filter; I/N <= -6 dB) because no band-specific value exists; centre = GPS ICD carrier; the pattern is the frozen L5/E5a 1176 MHz pattern; thermal I/N is a TEMPORARY criterion,GPS_L5,
+GPS_L5_RX@GPSA_2,GPSA_2,RX,GPS_L5_RX,1176.45,20.46,,,2,-6,,,RHCP,PUBLIC_STANDARD,ENGINEERING_ASSUMPTION,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,CASE_DEPENDENT,same template as GPS_L5_RX@GPSA_1,GPS_L5,
+KA_DLS_TX@KAA_1,KAA_1,TX,KA_DLS_TX,26250,1500,48.4510,,,,,,RHCP,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,,BOUND,70 W; baseline occupies the full 25.5-27.0 GHz EESS allocation (1500 MHz); modulation and data rate are NOT RFC inputs (see docs/notes/ka_downlink_datarate_open_issue.md),,
+KA_DLS_TX@KAA_2,KAA_2,TX,KA_DLS_TX,26250,1500,48.4510,,,,,,RHCP,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,,,BOUND,same template as KA_DLS_TX@KAA_1,,
+ISL_X_TX,ISL,TX,ISL_X_TX,10600,20,30,,,,,,RHCP,PROVISIONAL,PROVISIONAL,ENGINEERING_ASSUMPTION,,,BOUND,1 W; frequency and bandwidth PROVISIONAL (replace bandwidth first when the ISL modem / data rate is selected); owner band 10.55-10.65 GHz; fixed-geometry CST pattern at 10.6 GHz; occupied bandwidth still provisional,,
+ISL_X_RX,ISL,RX,ISL_X_RX,10600,20,,,3,-6,,,RHCP,PROVISIONAL,PROVISIONAL,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,BOUND,NF 3 dB assumption; centre moved to the owner band 10.6 GHz to match ISL_X_TX (was 10.475 GHz),,
+SAR_X_TX,SAR_ANT,TX,SAR_X_TX,9650,525,63.9794,66.9897,,,,,UNKNOWN,ENGINEERING_ASSUMPTION,PUBLIC_REPORTED,SCREENING_ASSUMPTION,,,DEFERRED_CLOSED_NETWORK,F-Scan TX bandwidth 525 MHz (effective 220 MHz) from the SAR paper; power NOT published: 2.5 kW nominal / 5 kW screening are inferred from comparable X-SARs (KOMPSAT-5 ~1.7 kW; TerraSAR-X ~2.0-2.3 kW; NEXTSat-2 ~2.5 kW); 9.65 GHz is an assumed X-SAR reference; full-band 1.5 GHz stress case is a separate run,,
+SAR_X_RX,SAR_ANT,RX,SAR_X_RX,9650,525,,,5,-6,,,UNKNOWN,ENGINEERING_ASSUMPTION,PUBLIC_REPORTED,,ENGINEERING_ASSUMPTION,ENGINEERING_ASSUMPTION,DEFERRED_CLOSED_NETWORK,NF 5 dB TerraSAR-X-class proxy,,

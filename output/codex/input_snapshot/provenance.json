@@ -1,0 +1,6283 @@
+{
+  "cases": [
+    {
+      "case": "RFC_ISL_KA_FREE",
+      "family": "ISL",
+      "band": "KA",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 48.14100000000326,
+      "mesh_cells": [
+        72000
+      ]
+    },
+    {
+      "case": "RFC_L_KA_FREE",
+      "family": "L",
+      "band": "KA",
+      "status": "MESH_LIMIT",
+      "installation": null,
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 1467648
+    },
+    {
+      "case": "RFC_L_L1_GPSA_1_R3",
+      "family": "L",
+      "band": "L1",
+      "status": "MESH_LIMIT",
+      "installation": "GPSA_1",
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 333822
+    },
+    {
+      "case": "RFC_S_KA_FREE",
+      "family": "S",
+      "band": "KA",
+      "status": "MESH_LIMIT",
+      "installation": null,
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 255600
+    },
+    {
+      "case": "RFC_S_L1_FREE",
+      "family": "S",
+      "band": "L1",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 337.85899999999674,
+      "mesh_cells": [
+        84640
+      ]
+    },
+    {
+      "case": "RFC_S_L2_FREE",
+      "family": "S",
+      "band": "L2",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 698.5780000000086,
+      "mesh_cells": [
+        99072
+      ]
+    },
+    {
+      "case": "RFC_S_L5_FREE",
+      "family": "S",
+      "band": "L5",
+      "status": "SUPERSEDED_BY_GROUPED_SOLVE",
+      "installation": null,
+      "solver_runtime_s": null,
+      "mesh_cells": []
+    },
+    {
+      "case": "RFC_S_S_TC_FREE",
+      "family": "S",
+      "band": "S_TC",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 118.625,
+      "mesh_cells": [
+        75504
+      ]
+    },
+    {
+      "case": "RFC_S_S_TM_FREE",
+      "family": "S",
+      "band": "S_TM",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 133.56200000000536,
+      "mesh_cells": [
+        71632
+      ]
+    },
+    {
+      "case": "RFC_S_S_TM_SBA_NADIR_R3",
+      "family": "S",
+      "band": "S_TM",
+      "status": "MESH_LIMIT",
+      "installation": "SBA_NADIR",
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 171808
+    },
+    {
+      "case": "RFC_ISL_HIGH_FREE",
+      "family": "ISL",
+      "band": "HIGH",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 26.812999999994645,
+      "mesh_cells": [
+        31752
+      ]
+    },
+    {
+      "case": "RFC_ISL_LOW_FREE",
+      "family": "ISL",
+      "band": "LOW",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 39.78100000000268,
+      "mesh_cells": [
+        56144
+      ]
+    },
+    {
+      "case": "RFC_L_HIGH_FREE",
+      "family": "L",
+      "band": "HIGH",
+      "status": "MESH_LIMIT",
+      "installation": null,
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 212940
+    },
+    {
+      "case": "RFC_L_LOW_FREE",
+      "family": "L",
+      "band": "LOW",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 60.062000000005355,
+      "mesh_cells": [
+        65000
+      ]
+    },
+    {
+      "case": "RFC_S_HIGH_FREE",
+      "family": "S",
+      "band": "HIGH",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 34.98399999999674,
+      "mesh_cells": [
+        72000
+      ]
+    },
+    {
+      "case": "RFC_S_LOW_FREE",
+      "family": "S",
+      "band": "LOW",
+      "status": "SOLVED",
+      "installation": null,
+      "solver_runtime_s": 35.9369999999908,
+      "mesh_cells": [
+        99072
+      ]
+    },
+    {
+      "case": "RFC_S_LOW_SBA_NADIR_R1P75",
+      "family": "S",
+      "band": "LOW",
+      "status": "SOLVING",
+      "installation": "SBA_NADIR",
+      "solver_runtime_s": null,
+      "mesh_cells": [],
+      "preflight_cells": 99330
+    }
+  ],
+  "cuts": [
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f25.5_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 25500000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.28092357962980974,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f26.25_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 26250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40742455083396945,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/KA/f27_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "KA",
+      "frequency_hz": 27000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.47658589630656933,
+      "source_case": "RFC_ISL_KA_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.563_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.09572104925473268,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.57542_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10293289861298027,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L1/f1.588_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1097392732015674,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.012543459181164618,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.017441323174447354,
+      "source_case": "RFC_S_L2_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.017441323174447354,
+      "source_case": "RFC_S_L2_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.012543459181164618,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.017441323174447354,
+      "source_case": "RFC_S_L2_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.2276_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.017441323174447354,
+      "source_case": "RFC_S_L2_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6785838300632816,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.06_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7256826881458129,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TC/f2.12_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7263847748227057,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6859918901798883,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.25_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.6549180725088235,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/S_TM/f2.3_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.619667886753429,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f8.9_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.2183630183867259,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f9.65_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.41130968836837356,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/SAR/f10.4_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.738952174845063,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.55_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7996879618013772,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.6_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8168726048714829,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/ISL/f10.65_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.832287835311022,
+      "source_case": "RFC_ISL_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.164_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.0895441938395543e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.17645_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.1849013906782844e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L5/f1.189_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.282286861710059e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.21737_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.529644226556549e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.2276_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.6226703522258532e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L2/f1.23783_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 2.7111932815460094e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.563_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.208787237067416e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.57542_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.474844256116775e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/L1/f1.588_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 7.716149438807829e-05,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0002187500118403518,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.06_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00025181557076225936,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TC/f2.12_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00028895867606681946,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00034618593361679384,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.25_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.0003869488138457111,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/ISL/S_TM/f2.3_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "ISL",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.00043189041458280286,
+      "source_case": "RFC_ISL_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.164_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.39355704878989906,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.17645_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.40077927078400855,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L5/f1.189_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5537218088882139,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.21737_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5800820959288017,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.2276_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1227600000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.5288514278415192,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L2/f1.23783_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.4059231059463779,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.563_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1563000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.01363082119944925,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.57542_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1575420000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.014571534512355377,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/L1/f1.588_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "L1",
+      "frequency_hz": 1588000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.013940454874983965,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2000000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.026316518997805405,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.06_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2060000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.03310033629364628,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TC/f2.12_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TC",
+      "frequency_hz": 2120000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.04442021545341279,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.2_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2200000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.07359670823461129,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.25_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2250000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.10891684488937803,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/L/S_TM/f2.3_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "RX"
+      ],
+      "family": "L",
+      "band": "S_TM",
+      "frequency_hz": 2300000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.1715607837217452,
+      "source_case": "RFC_L_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f8.9_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 8900000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.9537056341844724,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f9.65_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 9650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7988527262358114,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/SAR/f10.4_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "SAR",
+      "frequency_hz": 10400000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.7818932353075848,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.55_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10550000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8219168952836793,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.6_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10600000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.827004736850392,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_Gain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_IntendedCPGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_Gain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "Gain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/ISL/f10.65_IntendedCPGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "ISL",
+      "frequency_hz": 10650000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "IntendedCPGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": true,
+      "accepted_power_fraction": 0.8300608327361505,
+      "source_case": "RFC_S_HIGH_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.164_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": -0.004488599881958599,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.164_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1164000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": -0.004488599881958599,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.17645_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": -0.002832994974970804,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.17645_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1176450000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": -0.002832994974970804,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.189_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 2.6109378868710564e-05,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L5/f1.189_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L5",
+      "frequency_hz": 1189000000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 2.6109378868710564e-05,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.21737_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.008982785731643905,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.21737_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1217370000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.008982785731643905,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.23783_RealizedGain_XZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "XZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.0160629665893679,
+      "source_case": "RFC_S_LOW_FREE"
+    },
+    {
+      "path": "data/antenna_port_response_cst/S/L2/f1.23783_RealizedGain_YZ.csv",
+      "rf_usage_roles": [
+        "TX",
+        "RX"
+      ],
+      "family": "S",
+      "band": "L2",
+      "frequency_hz": 1237830000.0,
+      "plane": "YZ",
+      "boresight": "+Z",
+      "quantity": "RealizedGain",
+      "free_space": true,
+      "provenance": "CST_FIXED_GEOMETRY_PORT_RESPONSE",
+      "normalization_reliable": false,
+      "accepted_power_fraction": 0.0160629665893679,
+      "source_case": "RFC_S_LOW_FREE"
+    }
+  ],
+  "bands_ghz": {
+    "S_TM": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "S_TC": [
+      2.0,
+      2.06,
+      2.12
+    ],
+    "L1": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "L2": [
+      1.21737,
+      1.2276,
+      1.23783
+    ],
+    "L5": [
+      1.164,
+      1.17645,
+      1.189
+    ],
+    "ISL": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "SAR": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "KA": [
+      25.5,
+      26.25,
+      27.0
+    ]
+  },
+  "rf_usage_roles": {
+    "S": [
+      "TX",
+      "RX"
+    ],
+    "L": [
+      "RX"
+    ],
+    "ISL": [
+      "TX",
+      "RX"
+    ],
+    "KA": [
+      "TX"
+    ]
+  },
+  "excluded_role_jobs": [
+    "KA_RX",
+    "L_TX"
+  ],
+  "scope": "S/L/ISL fixed surrogate responses at interferer frequencies",
+  "excluded": "Full Ka out-of-band reflector response; SAR source pattern; no fabricated installed results",
+  "source_limitations": "Not manufacturer-certified antenna response; no mesh/frequency convergence claim",
+  "sba_variants": "One frozen S CST geometry shared; SBA1/SBA4 reference distinction preserved separately",
+  "angular_limitations": "Two actual independent cuts; no complete 3D installed pattern inferred",
+  "normalization": "Gain accepted-power total; IntendedCPGain accepted-power intended circular sense; RealizedGain incident-power total"
+}

@@ -1,0 +1,12 @@
+# simplified_spacecraft_v1 -- installed (on-spacecraft) patterns for RF functions (L and S band)
+# One row per function. EMPTY NOW: no installed pattern has been produced or accepted yet; every
+# function then uses its frozen free-space pattern and the report flags
+# FREE_SPACE_INSTALLATION_EFFECT_UNKNOWN. Add a row only for an ACCEPTED installed pattern; the
+# free-space files are never edited (see data/PATTERN_FREEZE.md).
+# xz_file / yz_file: 1-degree theta,gain cuts (dBi) in the same source convention as the free-space
+#   cuts (boresight +Z, [0,360)), paths relative to the repository root.
+# installed_source: MEASURED | HFSS | CST | OTHER_SOLVER | APPROXIMATE (antenna.InstalledPatternSource).
+# provenance_tag: free text, e.g. CST_LEARNING_LOCAL_SCATTERING_APPROX.
+# status: ACCEPTED rows are loaded; anything else is listed but ignored.
+# Fields must not contain commas.
+function_id,config_id,xz_file,yz_file,frequency_mhz,installed_source,provenance_tag,status,note

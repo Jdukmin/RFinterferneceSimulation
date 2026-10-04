@@ -1,0 +1,17 @@
+# simplified_spacecraft_v1 -- hull extrusion + design parameters
+# Only x_min_mm / x_max_mm define geometry (with hull_cross_section.csv). The design
+# parameters below are cross-checked against the vertices by the builder (never used
+# to regenerate them). Envelope rows are reference context only and are NOT modelled.
+# Fields must not contain commas.
+key,value,unit,provenance,note
+x_min_mm,0,mm,SOURCE_EXPLICIT,Panel #8 aft face (X = 0)
+x_max_mm,6000,mm,SOURCE_EXPLICIT,Panel #7 forward face (X = 6000 mm) = side-panel extrusion length
+d_long_mm,800.000000,mm,SOURCE_EXPLICIT,centre-axis normal distance of Panel #1/#3/#5 supporting planes
+d_short_mm,1078.260870,mm,SOURCE_DERIVED,centre-axis normal distance of Panel #2/#4/#6 (from ratio 2.6)
+nominal_long_short_ratio,2.6,-,SOURCE_EXPLICIT,nominal Long/Short width ratio (baseline SSOT)
+ratio_range_min,2.5,-,DESIGN_ESTIMATE,plausible lower bound of the Long/Short ratio (not modelled)
+ratio_range_max,2.7,-,DESIGN_ESTIMATE,plausible upper bound of the Long/Short ratio (not modelled)
+panel_envelope_max_diameter_mm,2500,mm,REFERENCE_ENVELOPE,actual panel envelope upper bound (hull is NOT scaled to it)
+component_envelope_diameter_mm,2700,mm,REFERENCE_ENVELOPE,envelope incl. component protrusions (hull is NOT scaled to it)
+consistency_tol_mm,0.001,mm,TOOL_TOLERANCE,tolerance for vertex vs design-parameter cross-checks
+geometry_provenance,USER_DEFINED,-,TOOL_METADATA,GeometryProvenance assigned to the built SpacecraftStructure objects

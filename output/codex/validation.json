@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "octave_version": "GNU Octave 9.2.0",
+  "pairs": 252,
+  "frequency_sample_rows": 8448,
+  "evaluated_pairs": 132,
+  "missing_pairs": 120,
+  "frozen_hashes_verified": 56,
+  "equations_checked": "S21=Gtx+Grx-FSPL; Prx=Ptx+S21; linear receiver aggregate; source-cut reconstruction",
+  "max_source_gain_crosscheck_error_db": 1.8382628752533492e-10,
+  "max_integration_refinement_delta_db": 5.55649108911e-06,
+  "role_checks": "ISL_RX retained; no KA_RX or L_TX; same-installation paths excluded",
+  "unit_tests": "Octave 57 assertions passed; see octave_tests.log"
+}

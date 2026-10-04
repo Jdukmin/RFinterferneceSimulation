@@ -1,0 +1,22 @@
+# simplified_spacecraft_v1 -- terminology used in RFC/RFI level reports
+# Labels are configuration, not logic: reports read them from here, so adopting the terms of a
+# reference paper is a data change. status:
+#   OWNER_CONFIRMED = fixed by the project owner (the KARI papers' own wording was not retrievable).
+#   PROVISIONAL_STANDARD_EMC = common Korean EMC terminology, NOT yet confirmed against the KARI
+#       (Im Won-gyu et al.) papers. The full texts of those papers could not be retrieved by the
+#       tooling (see docs/notes/kari_terminology_status_2026-10-04.md).
+#   KARI_PAPER_ATTESTED = quoted from the paper text (source column).
+# Fields must not contain commas.
+term_key,ko,en,status,source,note
+interferer,간섭원,interference source (interferer),OWNER_CONFIRMED,owner instruction 2026-10-04,term fixed by the project owner
+victim,피간섭원,interfered receiver (victim),OWNER_CONFIRMED,owner instruction 2026-10-04,term fixed by the project owner
+interferer_antenna,간섭 안테나,interfering antenna,PROVISIONAL_STANDARD_EMC,,
+victim_antenna,피간섭 안테나,interfered antenna,PROVISIONAL_STANDARD_EMC,,
+inter_antenna_rf_interference,안테나간 RF 간섭,RF interference between antennas,KARI_PAPER_ATTESTED,SASE 2025 spring (as quoted in docs/reference.md R5/RC-KARI-03: "이들 안테나간 RF 간섭 분석을 기초로"),only this phrase is attested
+structure_fov_interference,위성 구조체의 FOV 간섭,satellite structure FOV interference,KARI_PAPER_ATTESTED,KSAS 2015 spring pp.832-835 (title),title wording
+coupling,결합(커플링),coupling,PROVISIONAL_STANDARD_EMC,,
+transfer_s21,전달 특성 S21,port-to-port transfer S21,PROVISIONAL_STANDARD_EMC,,
+received_level,수신 레벨,received level at the victim antenna port,PROVISIONAL_STANDARD_EMC,,total power of the interferer at the victim antenna port
+in_band_interference,대역 내 간섭 전력,in-band interference power at the receiver RF input,PROVISIONAL_STANDARD_EMC,,
+allowable_interference,허용 간섭 레벨,allowable interference level,PROVISIONAL_STANDARD_EMC,,kTB + NF + I/N_max
+margin,마진,margin (allowable - actual),PROVISIONAL_STANDARD_EMC,,
