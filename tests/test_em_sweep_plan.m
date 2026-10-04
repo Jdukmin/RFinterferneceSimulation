@@ -32,7 +32,7 @@ function test_em_sweep_plan(h)
     % ---- dense bands from the RF baseline ----
     B = EP.bands();
     ids = {B.bandId};
-    h.isTrue('one band per RF template', isequal(sort(ids), sort({'S_TM_TX','S_TC_RX','GPS_L1_RX','KA_DLS_TX','ISL_X_TX','ISL_X_RX','SAR_X_TX','SAR_X_RX'})));
+    h.isTrue('one band per RF template', isequal(sort(ids), sort({'S_TM_TX','S_TC_RX','GPS_L1_RX','GPS_L2_RX','GPS_L5_RX','KA_DLS_TX','ISL_X_TX','ISL_X_RX','SAR_X_TX','SAR_X_RX'})));
     ka = B(strcmp(ids, 'KA_DLS_TX'));
     h.eqTol('Ka dense band 25.50-27.00 GHz', [ka.lo_Hz ka.hi_Hz], [25.5e9 27.0e9], 1);
     h.eqTol('Ka dense step 37.5 MHz', ka.step_Hz, 37.5e6, 1);
@@ -48,7 +48,7 @@ function test_em_sweep_plan(h)
     plan = EP.build();
     h.eqTol('8 local models (one per mount)', numel(plan.local), 8, 0);
     h.eqTol('28 pairwise models (8 choose 2)', numel(plan.pairs), 28, 0);
-    h.eqTol('feasibility rows = (28 + 8) x 8 bands', numel(plan.feasibility), (28 + 8) * 8, 0);
+    h.eqTol('feasibility rows = (28 + 8) x 10 bands', numel(plan.feasibility), (28 + 8) * 10, 0);
     h.isFalse('whole vehicle cannot be meshed at 1 GHz', plan.vehicle.maxFeasibleFrequency_Hz > 0);
     h.isTrue('vehicle cells at 27 GHz far above the limit', plan.vehicle.cellsAtCoarseMax > 1e9);
 
@@ -92,9 +92,9 @@ function test_em_sweep_plan(h)
     T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(tmp, 'pair_models.csv'));
     h.eqTol('pair_models.csv rows', T.nRows, 28, 0);
     T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(tmp, 'band_feasibility.csv'));
-    h.eqTol('band_feasibility.csv rows', T.nRows, 288, 0);
+    h.eqTol('band_feasibility.csv rows', T.nRows, 360, 0);
     T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(tmp, 'sweep_grids.csv'));
-    h.eqTol('sweep_grids.csv rows = coarse + 8 dense', T.nRows, 9, 0);
+    h.eqTol('sweep_grids.csv rows = coarse + 10 dense', T.nRows, 11, 0);
     delete(fullfile(tmp, '*.csv')); rmdir(tmp);
 
     % boundary: planning only, no solver, no coupling value

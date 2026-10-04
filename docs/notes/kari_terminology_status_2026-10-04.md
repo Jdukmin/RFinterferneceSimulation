@@ -1,7 +1,10 @@
 # KARI (Im Won-gyu et al.) terminology — status (2026-10-04)
 
+**Update (owner, 2026-10-04): the terms are fixed as 간섭원 (interferer) and 피간섭원 (victim)** — `OWNER_CONFIRMED` in
+`rfc_terms.csv`. The rest of this note records why the papers' own wording is not used.
+
 **Request:** adopt the terminology of the KARI papers of Dr. Im Won-gyu (임원규) for *interferer* and
-*victim* (간섭원 / 피간섭원 equivalents). **Status: not confirmed.** The tooling could not retrieve the
+*victim* (간섭원 / 피간섭원 equivalents). **Status of the papers' wording: not confirmed.** The tooling could not retrieve the
 text of those papers, so no term has been attributed to them beyond what is already recorded.
 
 ## What is attested (quoted in this repository from the full texts read in earlier phases)

@@ -1,6 +1,6 @@
 %MISSION_CASES Build and screen the six RFC/RFI analysis cases of the simplified spacecraft.
 %   Cases: SBA variant {SBA1, SBA4} x GPS band {L1, L2(1207 MHz proxy), L5}; ISL (CST
-%   ISL_C4_CUP_R14P7, 10.4 GHz) and KAA (Ka-band DLS, candidate binding) are the same in every
+%   CST ISL geometry, 10.6 GHz owner band) and KAA (Ka-band DLS, candidate binding) are the same in every
 %   case; SAR_ANT is geometry-only here (RF analysis later in the closed network).
 %   Output per case: pattern binding + structure-FOV lobe occupancy of each RF function
 %   (geometry + pattern evidence only; no gain loss / S21 / attenuation value is produced),

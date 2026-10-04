@@ -138,7 +138,9 @@ function test_rfc_levels(h)
     T = RL.readTerms();
     h.eqStr('interferer term', T.interferer.ko, '간섭원');
     h.eqStr('victim term', T.victim.ko, '피간섭원');
-    h.eqStr('not yet confirmed against the KARI papers', T.interferer.status, 'PROVISIONAL_STANDARD_EMC');
+    h.eqStr('interferer term confirmed by the owner', T.interferer.status, 'OWNER_CONFIRMED');
+    h.eqStr('victim term confirmed by the owner', T.victim.status, 'OWNER_CONFIRMED');
+    h.eqStr('other terms stay provisional', T.received_level.status, 'PROVISIONAL_STANDARD_EMC');
     h.eqStr('the attested KARI phrase is recorded as such', T.inter_antenna_rf_interference.status, 'KARI_PAPER_ATTESTED');
 
     % ---- export ----

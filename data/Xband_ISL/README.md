@@ -23,6 +23,7 @@ part of this commit; the paths below refer to it.
 | `f10.4_XZ.csv`, `f10.4_YZ.csv` | 10.4 GHz | **centre — baseline RFC pattern** (0° = 10.02 dBi) |
 | `f10.3_XZ.csv`, `f10.3_YZ.csv` | 10.3 GHz | band edge (ASSUMED ±1 % monitor) |
 | `f10.5_XZ.csv`, `f10.5_YZ.csv` | 10.5 GHz | band edge (ASSUMED ±1 % monitor) |
+| `f10.55_*`, `f10.6_*`, `f10.65_*` (XZ/YZ + regions) | 10.55 / **10.6** / 10.65 GHz | **owner operating band** (added 2026-10-04 by the CST workstream, `ISL_FIXED_10G6`; see `data/PATTERN_FREEZE.md` amendment); the ISL baseline uses the 10.6 GHz cut |
 | `*.regions.json` | — | per-angle region (`VALIDATED_MAIN`, `UNVALIDATED_SIDELOBE`, `BACKLOBE`), raw CST gain, conservative reference, exported gain |
 
 CSV schema `theta,gain`: theta in degrees, 360 rows `0…359` (`[0,360)`), gain in dBi; source

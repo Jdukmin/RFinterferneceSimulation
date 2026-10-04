@@ -244,7 +244,7 @@ Normative detail: ICD `spacecraft_geometry.md`, `installed_environment.md`.
 
 - **DR-439 (SHALL)** `rf_systems.csv` Ka rows: `bw_mhz = 1500`, `fc_mhz = 26250`.
 - **DR-440 (SHALL)** `data/pattern_freeze_manifest.csv` (path, SHA-256 and byte count of the
-  CR-stripped content, group, status) covering `Sband_TMTC`, `Lband_GPS`, `Xband_ISL`,
+  CR-stripped content, group, status) covering `Sband_TMTC`, `Lband_GPS`, `Xband_ISL` (incl. the 10.55/10.6/10.65 GHz cuts),
   `Kaband_KAA_CST` (frozen) and `Kaband_DLS` (frozen, unbound).
 - **DR-441 (SHALL)** S21 inputs: Touchstone `.sNp` (DB/MA/RI) or CSV (`frequency_*`, `s21_db`
   [, `phase_deg`]) with explicit port ↔ antenna mapping.

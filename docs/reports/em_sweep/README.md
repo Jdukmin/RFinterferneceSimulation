@@ -11,8 +11,8 @@ the Learning Edition; its results are imported as `coupling.CstS21Table` and use
 
 - **Coarse:** 1–27 GHz every 100 MHz (261 points) — the coarse S21(f) export grid.
 - **Dense:** 41 points across each actual band, both edges included: S TM TX (2.2487–2.2513 GHz),
-  S TC RX (2.0499–2.0501), GPS L1 RX (1.5652–1.5857), Ka TX (25.50–27.00), ISL TX/RX
-  (10.465–10.485), and SAR TX/RX (9.3875–9.9125, **deferred**: closed network).
+  S TC RX (2.0499–2.0501), GPS L1 / L2 / L5 RX (1.5652–1.5857 / 1.2174–1.2378 / 1.1662–1.1867), Ka TX (25.50–27.00),
+  ISL TX/RX (10.59–10.61, owner band centre 10.6 GHz), and SAR TX/RX (9.3875–9.9125, **deferred**: closed network).
 
 ## Partition (`local_models.csv`, `pair_models.csv`, `band_feasibility.csv`)
 
@@ -38,7 +38,7 @@ only possible (fine features such as probe gaps add cells; the accepted ISL mode
   the Learning Edition even for one antenna plus 35 cm of hull.
 - **Pairs:** feasible up to 0.0–3.1 GHz (median 1.1 GHz); 12 of 28 pairs have no feasible
   frequency ≥ 1 GHz. Only the GPSA_1–GPSA_2 pair (1.1 m, clear LOS) reaches 3.1 GHz.
-- **Pair × dense-band:** 32 of 216 (non-deferred) combinations are within the limit.
+- **Pair × dense-band:** 70 of 288 (non-deferred) combinations are within the limit (earlier: 32 of 216, before the L2/L5 bands were added and the ISL band moved to 10.6 GHz).
 
 Consequence: installed-geometry coupling for the X-band and Ka bands needs a method other than
 Learning-Edition full-wave (an asymptotic/PO/ray solver or a licensed solver); the S-band and

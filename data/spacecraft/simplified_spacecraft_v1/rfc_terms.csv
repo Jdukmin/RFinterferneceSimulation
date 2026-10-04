@@ -1,14 +1,15 @@
 # simplified_spacecraft_v1 -- terminology used in RFC/RFI level reports
 # Labels are configuration, not logic: reports read them from here, so adopting the terms of a
 # reference paper is a data change. status:
+#   OWNER_CONFIRMED = fixed by the project owner (the KARI papers' own wording was not retrievable).
 #   PROVISIONAL_STANDARD_EMC = common Korean EMC terminology, NOT yet confirmed against the KARI
 #       (Im Won-gyu et al.) papers. The full texts of those papers could not be retrieved by the
 #       tooling (see docs/notes/kari_terminology_status_2026-10-04.md).
 #   KARI_PAPER_ATTESTED = quoted from the paper text (source column).
 # Fields must not contain commas.
 term_key,ko,en,status,source,note
-interferer,간섭원,interference source (interferer),PROVISIONAL_STANDARD_EMC,,replace with the paper's term when available
-victim,피간섭원,interfered receiver (victim),PROVISIONAL_STANDARD_EMC,,replace with the paper's term when available
+interferer,간섭원,interference source (interferer),OWNER_CONFIRMED,owner instruction 2026-10-04,term fixed by the project owner
+victim,피간섭원,interfered receiver (victim),OWNER_CONFIRMED,owner instruction 2026-10-04,term fixed by the project owner
 interferer_antenna,간섭 안테나,interfering antenna,PROVISIONAL_STANDARD_EMC,,
 victim_antenna,피간섭 안테나,interfered antenna,PROVISIONAL_STANDARD_EMC,,
 inter_antenna_rf_interference,안테나간 RF 간섭,RF interference between antennas,KARI_PAPER_ATTESTED,SASE 2025 spring (as quoted in docs/reference.md R5/RC-KARI-03: "이들 안테나간 RF 간섭 분석을 기초로"),only this phrase is attested

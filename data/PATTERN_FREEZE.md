@@ -10,7 +10,7 @@ re-interpolation, envelope changes) is to be done for these antennas.
 |-------|---------------|-----------|-------|
 | `S_BAND_SBA1_SBA4` | SBA TC/TM, variants SBA1 and SBA4 | `data/Sband_TMTC/` | 8 CSV |
 | `L_BAND_GNSS` | GPSA L1 / L2(1207 MHz proxy) / L5 | `data/Lband_GPS/` | 6 CSV |
-| `X_BAND_ISL_CST` | ISL, CST `ISL_C4_CUP_R14P7`, 10.3/10.4/10.5 GHz | `data/Xband_ISL/` | 6 CSV + 6 regions JSON |
+| `X_BAND_ISL_CST` | ISL, CST `ISL_C4_CUP_R14P7`, 10.3/10.4/10.5 GHz **and** (added 2026-10-04) 10.55/10.6/10.65 GHz | `data/Xband_ISL/` | 12 CSV + 12 regions JSON |
 | `KA_BAND_KAA_CST` | KAA, CST feed + reflector aperture integration, 25.5/26.25/27 GHz | `data/Kaband_KAA_CST/` | 6 CSV + 6 regions JSON + validation JSON |
 | `KA_BAND_LEGACY_UNBOUND` | legacy Ka cuts, **bound to no antenna** | `data/Kaband_DLS/` | 2 CSV |
 
@@ -39,3 +39,11 @@ a frozen directory, or a pattern bound in `pattern_bindings.csv` is not in the m
 
 Anything else touching these files is a defect, not a task. The CST workspace (`cst/`) is bound by
 the same rule for the antennas above: see `cst/PATTERN_FREEZE.md`.
+
+## Amendment 2026-10-04 (ISL owner operating band)
+
+After the freeze, six ISL files for the **owner operating band 10.55–10.65 GHz** (`f10.55`, `f10.6`, `f10.65`,
+XZ/YZ, CSV + regions JSON; bindings `ISL_10P55/10P6/10P65`; CST `ISL_FIXED_10G6`, fixed geometry) were added to
+`data/Xband_ISL/` by the CST workstream, and the ISL transmit/receive baseline moved to 10.6 GHz. The change is
+**additive** (the earlier 10.3/10.4/10.5 GHz files are byte-identical) and the manifest now lists the new files.
+The owner confirmed (2026-10-04) that this change is intended; it is accepted as an approved extension of the freeze.

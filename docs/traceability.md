@@ -681,3 +681,25 @@ Decisions and open items:
 3. **Free space is an upper bound for BLOCKED pairs and an estimate for every Ka pair (far field never
    verified).** SBA_ZENITH → GPSA_1/2 grazes the hull and is the first candidate for an installed study.
 4. Antenna max dimensions for SBA/ISL are CST surrogate sizes, not product dimensions.
+
+## P8b — L2/L5 victims, ISL owner band, terminology confirmed (2026-10-04, later)
+
+Owner: interferer / victim = **간섭원 / 피간섭원** (confirmed); the GPS antenna geometry is unchanged and the L2 / L5 band
+influence is analysed with the existing code (another workstream is extracting L2/L5 beamwidths with CST); the ISL band
+change (10.55–10.65 GHz, centre 10.6 GHz) found in the working tree is **intended** and accepted.
+
+| Change | Where | Test |
+|--------|-------|------|
+| GPS L2 (1227.6 MHz) and L5 (1176.45 MHz) receivers, same front end as L1 | `rf_systems.csv`, `pattern_bindings.csv` (L2 antenna band to 1227.6), `operating_modes.csv` | test_mission_cases (5 RX in every case; GPS receivers match the case band) |
+| ISL TX **and RX** at 10.6 GHz, pattern `ISL_10P6` | `rf_systems.csv`, `pattern_bindings.csv`, `antenna_functions.csv` | test_mission_cases |
+| Freeze extended additively to the ISL 10.55 / 10.6 / 10.65 GHz cuts (53 files) | `data/pattern_freeze_manifest.csv`, `data/PATTERN_FREEZE.md` amendment | test_pattern_freeze |
+| 간섭원 / 피간섭원 OWNER_CONFIRMED | `rfc_terms.csv` | test_rfc_levels |
+
+Verification: GNU Octave 9.2.0 — **1425/1425 assertions, 46 files**; the 1413 of Phase 8 unchanged in meaning (expectations
+for the new bands/ISL updated). MATLAB NOT RUN. Reports regenerated: `docs/reports/rfc_levels/` (252 rows),
+`docs/reports/em_sweep/`.
+
+Phase audit (anything left to compute with the current code?): the remaining items need data not available now —
+installed patterns / S21 (CST, deferred by the owner), receiver P1dB / IIP3 / blocking (none public), a transmitter /
+receiver nonlinearity model (for the frequency products), measured/final GNSS C/N0 criterion. The deterministic
+frequency-product check found no in-band product. No further analysis is possible without those inputs.

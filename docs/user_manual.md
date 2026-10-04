@@ -270,13 +270,13 @@ c.warnings                                                % KAA candidate, SAR d
 ```
 
 - S-band mounts carry two functions (`*_TC` receive, `*_TM` transmit) with the case's SBA variant;
-  both GPSA use the case's GPS band (L2 = 1207 MHz proxy); ISL uses the CST 10.4 GHz pattern
+  both GPSA use the case's GPS band (L2 = 1207 MHz proxy); ISL uses the CST 10.6 GHz pattern (owner band)
   (`data/Xband_ISL`); KAA uses the Ka-band DLS pattern as a candidate; SAR is geometry-only.
 - The RF baseline (`rf_systems.csv`) registers `RFTransmitter` (with rectangular spectrum) and
   `RFReceiver` (filter + NF + `I_N_MAX` = −6 dB) objects; `c.rfSystems` lists them with noise and
   allowable-interference levels. SAR RF values are stored but not registered (closed network);
   `opts.powerMode = 'SCREENING'` selects the 5 kW SAR power. The GPS receiver baseline exists for
-  L1 only. P1dB/IIP3 are unknown, so nonlinear analyses are withheld. Then run
+  L1 / L2 / L5 per case band (same front-end baseline). P1dB/IIP3 are unknown, so nonlinear analyses are withheld. Then run
   `rfscreen.interference.RfCoexistenceAnalyzer.analyze(c.scenario)`; with pattern-only coupling the
   result is relative screening (`ABSOLUTE_COUPLING_UNAVAILABLE`).
 - **Operating mode:** the default is `SCREENING_ALL_TX` (every registered TX at once — a stress

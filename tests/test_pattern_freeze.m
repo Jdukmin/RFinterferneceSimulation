@@ -4,7 +4,7 @@ function test_pattern_freeze(h)
     h.setGroup('pattern_freeze');
     repoRoot = fileparts(fileparts(mfilename('fullpath')));
     T = rfscreen.spacecraft.SpacecraftDataReader.readTable(fullfile(repoRoot, 'data', 'pattern_freeze_manifest.csv'));
-    h.isTrue('manifest has 41 files', T.nRows == 41);
+    h.isTrue('manifest has 53 files', T.nRows == 53);
     nBad = 0; badList = {};
     for r = 1:T.nRows
         p = fullfile(repoRoot, strrep(T.path{r}, '/', filesep));

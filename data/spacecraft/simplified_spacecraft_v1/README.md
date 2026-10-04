@@ -129,7 +129,7 @@ The geometry builder loads **no** pattern. Patterns are bound per analysis case 
 |---------|--------|---------|------|
 | SBA_NADIR / SBA_ZENITH | `CASE_DEPENDENT` | `data/Sband_TMTC` | SBA1 and SBA4 analysed as separate cases; TC (2000–2120 MHz, RX) and TM (2200–2300 MHz, TX) |
 | GPSA_1 / GPSA_2 | `CASE_DEPENDENT` | `data/Lband_GPS` | L1 (1575 MHz plot, 1563–1588), L2 (**1207 MHz proxy**), L5 (1176 MHz plot, 1164–1189) as separate cases |
-| ISL | `BOUND` | `data/Xband_ISL` | CST `ISL_C4_CUP_R14P7`, 10.4 GHz centre cut (10.3/10.5 edge cuts available) |
+| ISL | `BOUND` | `data/Xband_ISL` | CST ISL geometry, 10.6 GHz cut of the owner band 10.55–10.65 GHz (10.3/10.4/10.5 GHz cuts remain available) |
 | KAA_1 / KAA_2 | `BOUND` | `data/Kaband_KAA_CST` | CST feed + Python reflector aperture integration (D 220 mm), datasheet anchors pass; replaces the legacy `data/Kaband_DLS` cuts |
 | SAR_ANT | `DEFERRED_CLOSED_NETWORK` | — | RF analysis later in the closed network; geometry only here |
 
@@ -147,7 +147,9 @@ No synthetic pattern is substituted for a missing one, and no dataset is relabel
    0-1 deg is model-validated. SAR RF analysis is deferred to the closed network.
 6. RF baseline (`rf_systems.csv`) is mostly **engineering assumption** (NF, bandwidths, powers,
    I/N = -6 dB); only the GPS L1 centre/bandwidth are published-standard values. ISL frequency and
-   bandwidth are provisional. P1dB/IIP3 unknown (NaN). GPS receiver baseline exists for L1 only.
+   bandwidth are provisional (owner band 10.55-10.65 GHz, centre 10.6 GHz). P1dB/IIP3 unknown (NaN). The GPS L1 / L2 / L5
+   receivers share one front-end baseline (NF 2 dB; 20.46 MHz; I/N <= -6 dB) on the unchanged GPSA antennas; only the
+   centre frequency and the frozen pattern differ per case band (L2 = 1227.6 MHz carrier with the 1207 MHz proxy pattern).
 7. SAR power is not published: 2.5 kW nominal / 5 kW screening are inferred from comparable X-band
    SARs; the CST SAR example (8 GHz) does not match the 9.65 GHz reference.
 

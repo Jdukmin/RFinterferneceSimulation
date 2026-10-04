@@ -64,7 +64,7 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > `docs/icd/mission_spacecraft.md`, `examples/simplified_spacecraft_geometry.m`.
 > **Phase 7b:** the six analysis cases (SBA1/SBA4 × GPS L1/L2/L5) are defined as data and built by
 > `rfscreen.mission.MissionCaseBuilder` (per-function antennas + patterns through the existing
-> Phase-2 pipeline); ISL uses the CST `ISL_C4_CUP_R14P7` 10.4 GHz pattern (`data/Xband_ISL`); SAR
+> Phase-2 pipeline); ISL uses the CST 10.6 GHz pattern of the owner band 10.55–10.65 GHz (`data/Xband_ISL`); SAR
 > RF analysis is deferred to the closed network. See `examples/mission_cases.m`.
 >
 > **Phase 7d.** Ka baseline corrected to the full 1500 MHz allocation; free-space patterns

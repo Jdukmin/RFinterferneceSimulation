@@ -171,7 +171,7 @@ mount by `installationId` (an installation may host several functions):
 | SBA_NADIR_TM / SBA_ZENITH_TM | SBA_NADIR / SBA_ZENITH | TX | `<variant>_TM` | `CASE_DEPENDENT` |
 | GPSA_1 / GPSA_2 | GPSA_1 / GPSA_2 | RX | `GPS_<band>` | `CASE_DEPENDENT` |
 | KAA_1 / KAA_2 | KAA_1 / KAA_2 | TX | `KAA_KA_26P25` (CST feed + reflector aperture integration, `data/Kaband_KAA_CST`) | `BOUND` |
-| ISL | ISL | TXRX | `ISL_10P4` | `BOUND` |
+| ISL | ISL | TXRX | `ISL_10P6` (owner band 10.55–10.65 GHz) | `BOUND` |
 | SAR_ANT | SAR_ANT | — | `NONE` | `DEFERRED_CLOSED_NETWORK` |
 
 **Patterns** (`pattern_bindings.csv`): XZ/YZ CSV cuts (`[0,360)`, boresight `+Z`) imported with
@@ -196,9 +196,9 @@ frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
 |----------|-------------|----|----|----------|-------------------|
 | `S_TM_TX` | SBA_NADIR_TM, SBA_ZENITH_TM | 2.250 GHz | 2.7 MHz | 5 W = 36.99 dBm | — |
 | `S_TC_RX` | SBA_NADIR_TC, SBA_ZENITH_TC | 2.050 GHz | 0.2 MHz | — | NF 3 dB, I/N ≤ −6 dB (≈ −124 dBm) |
-| `GPS_L1_RX` | GPSA_1, GPSA_2 (L1 case only) | 1.57542 GHz | 20.46 MHz | — | NF 2 dB, I/N ≤ −6 dB (≈ −105 dBm) |
+| `GPS_L1_RX` / `GPS_L2_RX` / `GPS_L5_RX` | GPSA_1, GPSA_2 (in the L1 / L2 / L5 case) | 1.57542 / 1.2276 / 1.17645 GHz | 20.46 MHz | — | NF 2 dB, I/N ≤ −6 dB (≈ −105 dBm) |
 | `KA_DLS_TX` | KAA_1, KAA_2 | 26.25 GHz | 1.5 GHz (25.50–27.00 GHz, full EESS allocation) | 70 W = 48.45 dBm | — |
-| `ISL_X_TX/RX` | ISL | 10.475 GHz (provisional) | 20 MHz (provisional) | 1 W = 30 dBm | NF 3 dB, I/N ≤ −6 dB (≈ −104 dBm) |
+| `ISL_X_TX/RX` | ISL | 10.6 GHz (owner band 10.55–10.65 GHz) | 20 MHz (provisional) | 1 W = 30 dBm | NF 3 dB, I/N ≤ −6 dB (≈ −104 dBm) |
 | `SAR_X_TX/RX` | SAR_ANT — **deferred, not registered** | 9.65 GHz | 525 MHz | 2.5 kW nominal (63.98 dBm) / 5 kW screening (66.99 dBm) | NF 5 dB (≈ −87.8 dBm) |
 
 - TX: `RFTransmitter` (power at the antenna input port) + `RectangularSpectrum` (`IDEAL_MODEL`).
@@ -206,8 +206,8 @@ frequency-independent (antenna ICD §3.4). Antenna band = the binding's band.
   + `InterferenceCriterion('I_N_MAX', −6)`; **no** `interferenceThreshold_dBm`. P1dB/IIP3 are
   unknown → no `ReceiverFrontEnd` is created (nonlinear analyzers report `MISSING_P1DB/IIP3`).
 - `requires_pattern_key`: a system is registered only if its function is bound to that pattern in
-  the case. The GPS receiver baseline exists for **L1 only**, so L2/L5 cases have no GPS receiver
-  (warned) until their baselines are provided.
+  the case. The GPS receivers of the L1 / L2 / L5 baselines (same front end, band-specific centre) belong to the
+  matching case; the receivers of the other bands are not registered in it.
 - `opts.powerMode = 'SCREENING'` switches SAR TX to `tx_power_screen_dbm`; other TX unchanged.
 - All instances (both SBA, both KAA, both GPSA) are registered; no operating mode is assumed —
   select with `activeTxIds` / `activeRxIds`.

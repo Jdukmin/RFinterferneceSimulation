@@ -259,7 +259,7 @@ Synthetic (`SYNTHETIC_TEST`), deterministic geometry/pattern fixtures.
   threshold property, 8 local + 28 pair models, feasibility consistency, determinism, CSV export.
   *(test_em_sweep_plan)*
 - **VR-451 (SHALL)** Plan is planning-only (no solver call, no coupling model construction).
-- **VR-452 (SHALL)** Pattern freeze: all 41 manifest files unchanged, no unlisted file in frozen
+- **VR-452 (SHALL)** Pattern freeze: all 53 manifest files unchanged, no unlisted file in frozen
   directories, all bound patterns frozen, legacy Ka bound to nothing. *(test_pattern_freeze)*
 
 ## 18. Phase 8 verification
