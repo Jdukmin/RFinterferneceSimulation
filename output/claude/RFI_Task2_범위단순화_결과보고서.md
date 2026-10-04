@@ -3,11 +3,21 @@
 ## 1. Executive Summary
 
 **Primary 범위는 S-TC TX와 Ka DLS TX 두 attacker로 줄었다.** ISL과 SAR는 victim으로만 다룬다.
-- **S-TC TX:** 추가 억제 요구는 GPS L2/L5 70.45/70.87 dB(80 dB scenario)가 최대이고, 이어서 S-TM RX 58.89 dB, GPS L1 48.00 dB, ISL RX 39.26 dB다.
-- **Ka DLS TX:** 최대 EIRP 49.451 dBW에 ITU −60 dBc/4 kHz를 적용하면, 도파관 cutoff를 인정하지 않은 상태에서 76.8~106.5 dB가 필요하다.
-- **Ka 도파관 판단:** 데이터시트 기준인 WR-42의 below-cutoff 구간이 약 30~54 mm면 모든 Ka 경로가 닫힌다. 그러나 **유효 길이가 저장소에 확정되어 있지 않아 primary에서는 0 mm를 인정**했다. 따라서 Ka 수치는 최종 필터 요구가 아니라 "확인해야 할 도파관 길이"로 읽어야 한다.
-- **SAR:** S-TC 고조파는 SAR 대역과 겹치지 않는다(`NO_HARMONIC_OVERLAP`). 일반 spurious route는 SAR 절대 peak gain이 미확정이라 G_peak를 포함한 식으로 제시한다.
-- 추가 CST 시뮬레이션은 하지 않았다. SAR 패턴은 owner 제공 값으로 재구성했다.
+
+**S-TC TX(legacy id: S_TM_TX):**
+- 일반 spurious 기준으로 GPS L2/L5(70.45/70.87 dB, 80 dB scenario)와 SAR RX(63.36 dB, 70 dB scenario)가 가장 큰 추가 억제를 요구한다.
+- 고조파는 SAR 대역과 겹치지 않는다(`NO_HARMONIC_OVERLAP`).
+
+**Ka DLS TX:**
+- 경로는 최대 EIRP 49.451 dBW → WR-42 below-cutoff 50 mm(owner 가정)다.
+- GPS와 S-TM RX는 추가 억제가 필요 없다(margin +20.9 dB 이상).
+- ISL RX는 6.58 dB, SAR RX는 8.08 dB가 남는다(40 dB scenario 통과).
+- ISL과 SAR는 cutoff에 가까워 도파관 감쇠가 작기 때문이다.
+
+**입력과 확정 조건:**
+- 이번 판의 Ka 도파관과 SAR 절대 이득은 owner 입력이다: WR-42, 유효 길이 50 mm, SAR peak 52 dBi, ±80° 밖 −50 dB.
+- 모두 공학 가정·추정이며 측정이나 full-wave 검증값이 아니다.
+- 추가 CST 시뮬레이션은 하지 않았다.
 
 | Attacker | Victim | Band | Source PSD/EIRP | Coupling | Victim PSD | Limit | Required suppression | First PASS | Design target | Confidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -17,156 +27,164 @@
 | S-TC TX (legacy id: S_TM_TX) | S-TM RX | S (2025–2110 MHz) | −49.02 | −69.09 | −118.11 | −177.00 | 58.89 | 60 dB | 70 dB | 시뮬레이션 |
 | S-TC TX (legacy id: S_TM_TX) | ISL RX | X (10.55–10.65 GHz) | −49.02 | −88.72 | −137.74 | −177.00 | 39.26 | 40 dB | 50 dB | 시뮬레이션 |
 | S-TC TX (legacy id: S_TM_TX) | SAR RX (harmonic) | SAR X | — | — | — | — | 해당 없음 | — | — | NO_HARMONIC_OVERLAP |
-| S-TC TX (legacy id: S_TM_TX) | SAR RX (generic spurious) | SAR X (9387.5–9912.5 MHz) | −49.02 | −99.29 + G_peak | −148.31 + G_peak | −175.00 | 26.69 + G_peak | G_peak 의존 | G_peak 의존 | SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN |
-| Ka DLS TX | GPS RX | L1 | −16.57 (EIRP) | −79.62 | −96.19 | −178.00 | 81.81 | 없음 (80 dB 초과) | 도파관 길이 확인 | ENGINEERING_BOUND; cutoff 0 mm 인정 |
-| Ka DLS TX | GPS RX | L2 | −16.57 (EIRP) | −55.64 | −72.21 | −178.00 | 105.79 | 없음 (80 dB 초과) | 도파관 길이 확인 | ENGINEERING_BOUND; cutoff 0 mm 인정 |
-| Ka DLS TX | GPS RX | L5 | −16.57 (EIRP) | −54.92 | −71.49 | −178.00 | 106.51 | 없음 (80 dB 초과) | 도파관 길이 확인 | ENGINEERING_BOUND; cutoff 0 mm 인정 |
-| Ka DLS TX | S-TM RX | S (2025–2110 MHz) | −16.57 (EIRP) | −55.43 | −72.00 | −177.00 | 105.00 | 없음 (80 dB 초과) | 도파관 길이 확인 | ENGINEERING_BOUND; cutoff 0 mm 인정 |
-| Ka DLS TX | ISL RX | X (10.55–10.65 GHz) | −16.57 (EIRP) | −70.42 | −86.99 | −177.00 | 90.01 | 없음 (80 dB 초과) | 도파관 길이 확인 | ENGINEERING_BOUND; cutoff 0 mm 인정 |
-| Ka DLS TX | SAR RX | SAR X | −16.57 (EIRP) | −95.91 + G_peak | −112.48 + G_peak | −175.00 | 62.52 + G_peak | G_peak 의존 | G_peak 의존 | SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN |
+| S-TC TX (legacy id: S_TM_TX) | SAR RX (generic spurious) | SAR X (9387.5–9912.5 MHz) | −49.02 | −62.62 | −111.64 | −175.00 | 63.36 | 70 dB | 80 dB | ENGINEERING_ESTIMATE (SAR 52 dBi, ±80° 밖 −50 dB) |
+| Ka DLS TX | GPS RX | L1 | −16.57 (EIRP) − 127.1 (cutoff) | −79.62 | −223.29 | −178.00 | 0 (margin +45.29) | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | GPS RX | L2 | −16.57 − 127.4 | −55.64 | −199.62 | −178.00 | 0 (margin +21.62) | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | GPS RX | L5 | −16.57 − 127.4 | −54.92 | −198.93 | −178.00 | 0 (margin +20.93) | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | S-TM RX | S (2025–2110 MHz) | −16.57 − 126.4 | −55.43 | −198.49 | −177.00 | 0 (margin +21.49) | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | ISL RX | X (10.55–10.65 GHz) | −16.57 − 83.4 | −70.42 | −170.42 | −177.00 | 6.58 | 40 dB | 20 dB | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | SAR RX | SAR X | −16.57 − 90.6 | −59.24 | −166.92 | −175.00 | 8.08 | 40 dB | 20 dB | ENGINEERING_BOUND + SAR ENGINEERING_ESTIMATE |
 
-단위: Source·Victim PSD·Limit은 dBm/Hz, Coupling·Required는 dB다. 각 행은 해당 victim의 설치·KAA 조합 중 대표 worst다.
+**읽는 법:**
+- **단위:** Source·Victim PSD·Limit은 dBm/Hz, Coupling·Required는 dB다. 각 행은 설치·KAA 조합 중 대표 worst다.
 - **S-TC source:** 안테나 포트의 ITU conducted PSD다. Coupling은 G_TX + G_RX − FSPL이다.
-- **Ka source:** 최대 EIRP 기준 불요방사 EIRP PSD다. Coupling은 G_RX − FSPL이며 TX 이득을 다시 더하지 않았다.
-- G_peak는 SAR 절대 peak gain [dBi]이고 미확정이다.
+- **Ka source:** 불요방사 EIRP PSD에서 도파관 below-cutoff 감쇠를 뺀 값이다(victim 대역 내 최소 감쇠). Coupling은 G_RX − FSPL이며 TX 이득을 다시 더하지 않았다. SAR coupling에는 SAR 이득 +2 dBi가 들어 있다.
 
 **억제 조건:**
-- **Required suppression:** 0 dB 추가 필터 기준 총 요구량 max(0, PSD − limit)이고, victim 대역 전체 최댓값이다.
-- **First PASS:** 0/40/60/70/80 dB screening 중 처음 margin ≥ 0이 되는 값이다.
-- **Design target:** 요구량에 10 dB reserve를 더해 10 dB 단위로 올린 계획값이며 규격이 아니다.
-- **Ka cutoff:** 도파관 below-cutoff 감쇠는 필터 scenario와 별개 항(`WAVEGUIDE_BELOW_CUTOFF_BOUND`)이다. Ka 행에서는 0 dB로 두었고(유효 길이 미확정) 4절에서 길이별로 제시한다.
+- **Required suppression:** 0 dB 추가 필터 기준 총 요구량 max(0, PSD − limit)이며 victim 대역 전체 최댓값이다.
+- **First PASS:** 0/40/60/70/80 dB screening 중 처음 margin ≥ 0인 값이다.
+- **Design target:** 요구량 + 10 dB reserve를 10 dB 단위로 올린 계획값이다. 요구량이 0이면 "불필요"다. 규격이 아니다.
+- **Ka cutoff:** 도파관 감쇠(`WAVEGUIDE_BELOW_CUTOFF_BOUND`)는 필터 scenario와 별개 항이며, owner 가정 50 mm를 primary로 인정했다.
 
 ## 2. 분석 범위 (역할 matrix)
 
 | Attacker | GPS | S-TM RX | ISL RX | SAR RX |
 | --- | --- | --- | --- | --- |
 | S-TC TX (legacy id: S_TM_TX) | 분석 (Task 1) | 분석 | 분석 | victim-only 분석 (고조파 판정 + 일반 spurious) |
-| Ka DLS TX | cutoff route | cutoff route | cutoff route | cutoff route (G_peak 미확정) |
+| Ka DLS TX | cutoff route | cutoff route | cutoff route | cutoff route |
 | ISL TX | 제외 | 제외 | 제외 | 제외 |
 | SAR TX | 제외 | 제외 | 제외 | 제외 |
 
-- 이전 판의 ISL TX attacker 결과와 KAA 저주파 최대 이득 상한(`GAIN_BOUND_ONLY`) 결과는 primary에서 뺐다. 추적성을 위해 legacy/sensitivity로만 남긴다.
-- 역할명은 실제 역할로 쓴다. S-TC TX = legacy `S_TM_TX`, S-TM RX = legacy `S_TC_RX`(대역 키 `S_TC`). 범위 SSOT: `data/rfi_psd/rfi_scope_matrix.csv`.
+- 이전 판의 ISL TX attacker 결과와 KAA 저주파 최대 이득 상한(`GAIN_BOUND_ONLY`) 결과는 primary에서 뺐고, legacy/sensitivity로만 남긴다.
+- 역할명 대응: S-TC TX = legacy `S_TM_TX`, S-TM RX = legacy `S_TC_RX`(대역 키 `S_TC`). 범위 SSOT: `data/rfi_psd/rfi_scope_matrix.csv`.
 
 ## 3. SAR victim 패턴과 S-TC → SAR
 
-### 3.1 재구성 패턴 요약
+### 3.1 재구성 패턴과 owner 절대값
 
-owner가 폐쇄망 `K8_SAR_Pattern.mat`에서 추출한 값만 저장했다(`OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT`, `ENGINEERING_RECONSTRUCTION`, `NOT_FULL_1601_POINT_EXPORT`). 1601점 원본은 반출하지 않았다.
+owner가 폐쇄망 `K8_SAR_Pattern.mat`에서 추출한 값만 저장했다(`OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT`, `ENGINEERING_RECONSTRUCTION`, `NOT_FULL_1601_POINT_EXPORT`).
 
-| Cut | HPBW [deg] | First null | Max sidelobe | 표본 이후 외곽 hold |
-| --- | --- | --- | --- | --- |
-| Azimuth | 0.242294 | ±0.3°, −39.083 dB | −13.565 dB @ ±0.4° | −40.708 dB |
-| Elevation | 1.112221 (owner 값, 3-dB 점 ±0.556111°) | ±1.3°, −31.241 dB | −13.270 dB @ ±1.8° | −34.674 dB |
+| Cut | HPBW [deg] | First null | Max sidelobe | 60~80° hold | ±80° 밖 / 후방 |
+| --- | --- | --- | --- | --- | --- |
+| Azimuth | 0.242294 | ±0.3°, −39.083 dB | −13.565 dB @ ±0.4° | −40.708 dB | −50 dB (owner ceiling) |
+| Elevation | 1.112221 (3-dB 점 ±0.556111°) | ±1.3°, −31.241 dB | −13.270 dB @ ±1.8° | −34.674 dB | −50 dB (owner ceiling) |
 
-- **주빔:** 0 ~ 3 dB 지점은 −3(θ/θ₃)² dB로 두어 HPBW 지점에서 정확히 −3 dB가 되게 했다. 3 dB 지점 ~ first null 구간은 −3 dB로 유지했다. null로 내려가지 않게 한 보수 처리다.
-- **부엽 구간:** null 이후는 max sidelobe와 owner 표본을 마디로 삼았다. 인접 마디 사이에서는 **높은 값**을 썼다(upper envelope). 모든 owner 표본 지점에서 envelope − 표본 ≥ 0 dB를 확인했다.
-- **60° 이후·후방(가정):** owner 데이터는 ±80°까지만 있다. 60° 이후와 후방은 ≥10° 표본의 최댓값으로 유지했다. 방향 이득은 두 cut 중 큰 값(회전 envelope)을 써서 az/el 축 배정과 무관하다.
-- **Cross-pol:** Cx는 Co peak 대비 −120 dB(XPD 120 dB)라 `CROSS_POL_NEGLIGIBLE_FOR_CURRENT_SCREENING`으로 기록하고 Co-pol을 primary로 썼다. Cx를 자기 peak로 재정규화하지 않았다.
-- **절대 이득:** 248.7072는 복소 field 크기라 dBi가 아니다. 저장소에 확정된 SAR peak gain이 없다. 기존 X-band SAR 사양은 8 GHz 예시 surrogate라 해당하지 않는다. 따라서 `SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN`이고, 0 dBi를 쓰지 않았다.
+**재구성 규칙:**
+- 주빔은 HPBW 지점에서 정확히 −3 dB가 되게 했고, 3 dB 지점 ~ first null 구간은 −3 dB로 유지했다(null로 내려가지 않음).
+- 부엽은 인접 마디 중 높은 값을 썼다(upper envelope). 모든 owner 표본에서 envelope ≥ 표본임을 확인했다.
+- 60~80°(owner 범위 내 표본 이후)는 ≥10° 표본의 최댓값으로 유지했다.
+- ±80° 밖과 후방은 owner ceiling **peak 대비 −50 dB**(conservative envelope)를 쓴다.
+- 방향 이득은 두 cut의 큰 값이다.
+
+**SAR 절대 이득과 cross-pol:**
+- **절대 peak gain 52 dBi:** owner의 HPBW 기반 공학 추정이다. 교차 확인으로 41253/(0.242294 × 1.112221)를 계산하면 효율 100 %에서 51.9 dBi다.
+- **후방 절대 ceiling:** 52 − 50 = **+2 dBi**로 owner 값과 일치함을 확인했다.
+- 248.7072는 복소 field 크기이며 이 계산에 쓰지 않았다.
+- Cx는 Co peak 대비 −120 dB라 `CROSS_POL_NEGLIGIBLE_FOR_CURRENT_SCREENING`으로 기록했다.
 
 ### 3.2 고조파 판정 (harmonic)
 
-S-TC TX 점유대역 2248.65–2251.35 MHz의 정수 고조파 1~10차를 SAR 대역 9387.5–9912.5 MHz와 비교했다. 4차는 8994.6–9005.4 MHz, 5차는 11243.2–11256.8 MHz로 **겹침이 없다(`NO_HARMONIC_OVERLAP`)**. S-band 할당 2200–2290 MHz 전체로 넓혀도 겹치지 않는다(4차 8800–9160 MHz, 5차 11000–11450 MHz). 고조파 기준의 S-TC → SAR 요구는 없다.
+S-TC TX 점유대역 2248.65–2251.35 MHz의 정수 고조파 1~10차는 SAR 대역 9387.5–9912.5 MHz와 **겹치지 않는다(`NO_HARMONIC_OVERLAP`)**. 4차는 8994.6–9005.4 MHz, 5차는 11243.2–11256.8 MHz다. S-band 할당 2200–2290 MHz 전체로 넓혀도 겹치지 않는다(4차 8800–9160, 5차 11000–11450 MHz). 고조파 기준 요구는 없다.
 
 ### 3.3 일반 spurious route (harmonic과 별개)
 
-경로는 ITU spurious source(−49.02 dBm/Hz) → S 안테나 SAR 대역 RealizedGain(CST) → FSPL → SAR 방향 이득(정규화 패턴 + G_peak)이다.
+경로는 ITU spurious source(−49.02 dBm/Hz) → S 안테나 SAR 대역 RealizedGain(CST) → FSPL → SAR 방향 이득이다.
 
-| TX 설치 | 거리 [m] | SAR 기준 off-axis | 정규화 이득 [dB] | G_peak 제외 victim PSD [dBm/Hz] | Required [dB] |
-| --- | --- | --- | --- | --- | --- |
-| SBA_NADIR | 3.127 | 85.8° (owner 범위 밖, 외곽 hold) | −34.67 | −148.31 | 26.69 + G_peak |
-| SBA_ZENITH | 3.662 | 123.9° (후방, 외곽 hold) | −34.67 | −148.85 | 26.15 + G_peak |
+| TX 설치 | 거리 [m] | SAR 기준 off-axis | SAR 이득 [dBi] | Victim PSD [dBm/Hz] | 0/40/60/70/80 dB margin [dB] | Required [dB] | First PASS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SBA_NADIR (LOS CLEAR) | 3.127 | 85.8° | +2 (−50 dB ceiling) | −111.64 | −63.36 / −23.36 / −3.36 / +6.64 / +16.64 | 63.36 | 70 dB |
+| SBA_ZENITH (LOS BLOCKED) | 3.662 | 123.9° | +2 (−50 dB ceiling) | −112.18 | −62.82 / −22.82 / −2.82 / +7.18 / +17.18 | 62.82 | 70 dB |
 
-- **G_peak에 따른 통과 조건:** 추가 필터 F에서 통과하려면 G_peak ≤ F − 26.69 dBi여야 한다. 0/40/60/70/80 dB에서 각각 −26.69/13.31/33.31/43.31/53.31 dBi 이하다.
-- **판정 보류:** G_peak가 확정되면 최종 판정한다. 두 방향 모두 owner 패턴 범위(±80°)를 벗어나 외곽 hold 가정에 의존한다.
+- S 안테나 두 위치 모두 SAR boresight 기준 80° 밖이다. 그래서 결과는 owner ceiling(+2 dBi)이 정한다. design target은 80 dB다.
+- 이전 판의 외곽 hold(−34.67 dB)보다 15.3 dB 낮은 ceiling이다.
+- 60 dB scenario에서 2.8~3.4 dB 차이로 초과한다.
 
 ## 4. Ka DLS TX: 최대 EIRP + 도파관 below-cutoff route
 
 ### 4.1 Source와 도파관 입력
 
-- **EIRP:** 70 W = 18.451 dBW에 high-gain 기준 31 dBi를 더해 **최대 EIRP 49.451 dBW**(79.451 dBm)다. 불요방사는 기존과 같은 ITU RR AP3 / SM.329 −60 dBc/4 kHz를 이 EIRP에 적용해 **비감쇠 EIRP PSD −16.57 dBm/Hz**다. 31 dBi를 victim 주파수에도 그대로 쓰므로 보수적 screening 값이다.
-- **도파관 형식:** 저장소 근거는 벤더 데이터시트(`cst/specs/kaband_dls.yaml`, confidence A)의 "rf_interface: WR-42 (WR-34 optional)"이다. 비행 선택은 확정되지 않았다. WR-42는 데이터시트 기준이면서 cutoff가 낮아 감쇠가 작은 **보수적 선택**이라 primary로 썼고, WR-34는 민감도로 제시한다. CST feed surrogate(원형 r = 4.4 mm)는 하드웨어가 아니라 쓰지 않았다.
-- **유효 below-cutoff 길이:** 저장소에 확정값이 없다(**INPUT_MISSING**). 그래서 primary는 0 mm를 인정했다. 5/10/20 mm는 예시 민감도다. 데이터시트 전체 높이 < 92.2 mm는 도파관 길이가 아니다.
-- **근거 유형:** `WAVEGUIDE_BELOW_CUTOFF_BOUND`; `ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED`. 이상적 균일 도파관만 가정했고 flange·천이·불연속 누설과 도파관 이후 발생원은 포함하지 않았다. 필터 감쇠로 부르지 않는다.
+| 항목 | 입력값 | 성격 |
+| --- | --- | --- |
+| Ka TX power / reference gain | 70 W = 18.451 dBW / 31 dBi | owner baseline |
+| 최대 EIRP | 49.451 dBW (79.451 dBm) | derived |
+| 불요방사 EIRP PSD (비감쇠) | −16.57 dBm/Hz (ITU −60 dBc/4 kHz 적용) | derived, 규격 상대레벨 |
+| Waveguide | WR-42 | owner assumption (데이터시트 "WR-42 (WR-34 optional)") |
+| Broad wall a | 10.668 mm | geometry |
+| TE10 cutoff | 14.051 GHz | derived (c/2a) |
+| Effective below-cutoff length | 50 mm | conservative engineering assumption (owner) |
 
-### 4.2 Victim band별 cutoff 감쇠
+- **근거 유형:** `WAVEGUIDE_BELOW_CUTOFF_BOUND`; `ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED`.
+- **가정 범위:** 이상적 균일 도파관만 가정했다. flange·천이·불연속 누설과 도파관 이후 발생원은 포함하지 않았다.
+- **이득 가정:** 31 dBi를 victim 주파수에도 그대로 적용한 보수적 screening이다.
 
-TE10 cutoff는 f_c = c/2a, 감쇠상수는 α = 8.686·(2πf_c/c)·√(1−(f/f_c)²) [dB/m]다. victim 채널 중심 기준 값이다.
+### 4.2 Victim band별 cutoff 감쇠 (WR-42, 50 mm)
 
-| Victim | f [GHz] | WR-42: a / f_c / f/f_c | WR-42 α [dB/mm] | WR-42 감쇠 5/10/20 mm [dB] | WR-34 α [dB/mm] (f_c 17.357 GHz) |
+감쇠상수는 α = 8.686·(2πf_c/c)·√(1−(f/f_c)²) [dB/m]다. 채널 중심 기준 값이다.
+
+| Victim | f [GHz] | f/f_c | α [dB/mm] | 50 mm 감쇠 [dB] | 감쇠 후 EIRP PSD [dBm/Hz] | WR-34 50 mm 감쇠 [dB] (민감도) |
+| --- | --- | --- | --- | --- | --- | --- |
+| GPS L1 | 1.5754 | 0.112 | 2.542 | 127.1 | −143.66 | 157.3 |
+| GPS L2 | 1.2276 | 0.087 | 2.548 | 127.4 | −143.97 | 157.6 |
+| GPS L5 | 1.1765 | 0.084 | 2.549 | 127.4 | −144.01 | 157.6 |
+| S-TM RX | 2.050 | 0.146 | 2.531 | 126.5 | −143.10 | 156.9 |
+| ISL RX | 10.600 | 0.754 | 1.679 | 84.0 | −100.52 | 125.1 |
+| SAR RX | 9.650 | 0.687 | 1.859 | 93.0 | −109.53 | 131.3 |
+
+### 4.3 Victim PSD와 요구 억제량 (WR-42, 50 mm)
+
+| Victim | Victim PSD [dBm/Hz] | Margin at 0 dB [dB] | Required [dB] | First PASS | 경로를 닫는 길이 [mm] |
 | --- | --- | --- | --- | --- | --- |
-| GPS L1 | 1.5754 | 10.668 mm / 14.051 GHz / 0.112 | 2.542 | 12.7 / 25.4 / 50.8 | 3.147 |
-| GPS L2 | 1.2276 | 〃 / 0.087 | 2.548 | 12.7 / 25.5 / 51.0 | 3.152 |
-| GPS L5 | 1.1765 | 〃 / 0.084 | 2.549 | 12.7 / 25.5 / 51.0 | 3.153 |
-| S-TM RX | 2.050 | 〃 / 0.146 | 2.531 | 12.7 / 25.3 / 50.6 | 3.138 |
-| ISL RX | 10.600 | 〃 / 0.754 | 1.679 | 8.4 / 16.8 / 33.6 | 2.502 |
-| SAR RX | 9.650 | 〃 / 0.687 | 1.859 | 9.3 / 18.6 / 37.2 | 2.626 |
+| GPS L1 | −228.24 ~ −223.29 | +45.29 ~ +50.24 | 0 | 0 dB | 30.2 ~ 32.2 |
+| GPS L2 | −206.71 ~ −199.62 | +21.62 ~ +28.71 | 0 | 0 dB | 38.7 ~ 41.5 |
+| GPS L5 | −204.39 ~ −198.93 | +20.93 ~ +26.39 | 0 | 0 dB | 39.6 ~ 41.8 |
+| S-TM RX | −203.07 ~ −198.49 | +21.49 ~ +26.07 | 0 | 0 dB | 39.7 ~ 41.5 |
+| ISL RX | −171.45 ~ −170.42 | −5.55 ~ −6.58 | 5.55 ~ 6.58 | 40 dB | 53.3 ~ 53.9 |
+| SAR RX | −167.17 ~ −166.92 | −7.83 ~ −8.08 | 7.83 ~ 8.08 | 40 dB | 54.3 ~ 54.5 |
 
-모든 victim이 cutoff 아래다. 저주파(L/S)는 mm당 약 2.5 dB로 거의 일정하다. ISL/SAR는 cutoff에 가까워 감쇠가 작다(ISL 1.68 dB/mm).
-
-### 4.3 Victim PSD와 요구 억제량 (WR-42)
-
-| Victim | Victim PSD, cutoff 0 mm [dBm/Hz] | Required, 0 mm [dB] | Required, 20 mm 민감도 [dB] | 경로를 닫는 below-cutoff 길이 [mm] (WR-34) |
-| --- | --- | --- | --- | --- |
-| GPS L1 | −101.17 ~ −96.19 | 76.83 ~ 81.81 | 26.0 ~ 31.0 | 30.2 ~ 32.2 (24.4 ~ 26.0) |
-| GPS L2 | −79.29 ~ −72.21 | 98.71 ~ 105.79 | 47.7 ~ 54.8 | 38.7 ~ 41.5 (31.3 ~ 33.6) |
-| GPS L5 | −76.94 ~ −71.49 | 101.06 ~ 106.51 | 50.1 ~ 55.5 | 39.6 ~ 41.8 (32.1 ~ 33.8) |
-| S-TM RX | −76.63 ~ −72.00 | 100.37 ~ 105.00 | 49.8 ~ 54.4 | 39.7 ~ 41.5 (32.0 ~ 33.5) |
-| ISL RX | −88.02 ~ −86.99 | 88.98 ~ 90.01 | 55.6 ~ 56.6 | 53.3 ~ 53.9 (35.7 ~ 36.1) |
-| SAR RX | −112.73 ~ −112.48 (+ G_peak) | 62.52 + G_peak (최대) | — | G_peak 확정 후 |
-
-- **범위:** 각 칸은 KAA_1/2 × 해당 victim 설치의 최소~최대다.
-- **도파관 길이가 결정 변수다.** 확정 길이가 표의 "닫는 길이" 이상이면 해당 경로의 추가 억제는 불필요하다. 짧으면 부족분을 필터가 맡는다. WR-42 기준으로 ISL이 가장 긴 54 mm를 요구한다. ISL은 cutoff에 가까워 감쇠상수가 작기 때문이다.
-- **근거리 주의:** X-band에서 KAA–ISL 거리(1.8~2.3 m)는 반사판 원거리 거리(약 3.4 m)보다 짧아 자유공간 식이 엄밀하지 않다.
-- **가림 미반영:** GPS 경로는 hull 가림 상태이지만 가림 감쇠는 인정하지 않았다.
+- **범위:** 각 칸은 KAA_1/2 × victim 설치의 최소~최대다. 감쇠는 대역 내 최소값(대역 상단)을 적용했다.
+- **ISL·SAR:** 50 mm는 닫는 길이(53~55 mm)보다 짧아 6~8 dB가 남는다.
+- **WR-34 민감도:** 같은 50 mm라면 모든 Ka 경로가 통과한다(ISL margin +34.7 dB, SAR +31.0 dB). 도파관 형식이 결과를 크게 바꾼다.
+- **근거리 주의:** KAA–ISL 거리(1.8~2.3 m)와 KAA–SAR 거리(2.9~3.0 m)는 X-band 반사판 원거리 거리(3.1~3.4 m)보다 짧아 자유공간 식이 엄밀하지 않다.
+- **가림 미반영:** GPS 경로의 hull 가림은 감쇠로 인정하지 않았다.
 
 ### 4.4 이전 KAA `GAIN_BOUND_ONLY` 결과와 차이
 
-| Victim | 이전 Tier 3 상한 route [dB] | 새 route, cutoff 0 mm [dB] | 차이 [dB] | 새 route, WR-42 20 mm [dB] |
-| --- | --- | --- | --- | --- |
-| GPS L1 | 59.0 ~ 63.9 | 76.8 ~ 81.8 | +17.9 | 26.0 ~ 31.0 |
-| GPS L2 | 79.0 ~ 86.1 | 98.7 ~ 105.8 | +19.6 | 47.7 ~ 54.8 |
-| GPS L5 | 81.1 ~ 86.6 | 101.1 ~ 106.5 | +19.9 | 50.1 ~ 55.5 |
-| S-TM RX | 84.6 ~ 89.2 | 100.4 ~ 105.0 | +15.8 | 49.8 ~ 54.4 |
-| ISL RX | 86.1 ~ 87.2 | 89.0 ~ 90.0 | +2.9 | 55.6 ~ 56.6 |
+| Victim | 이전 Tier 3 상한 route [dB] | 새 route, cutoff 0 mm [dB] | 새 route, WR-42 50 mm [dB] |
+| --- | --- | --- | --- |
+| GPS L1 | 59.0 ~ 63.9 | 76.8 ~ 81.8 | 0 |
+| GPS L2 | 79.0 ~ 86.1 | 98.7 ~ 105.8 | 0 |
+| GPS L5 | 81.1 ~ 86.6 | 101.1 ~ 106.5 | 0 |
+| S-TM RX | 84.6 ~ 89.2 | 100.4 ~ 105.0 | 0 |
+| ISL RX | 86.1 ~ 87.2 | 89.0 ~ 90.0 | 5.6 ~ 6.6 |
+| SAR RX | 산출 불가 (SAR 응답 없음) | 98.5 ~ 98.7 (G_SAR +2 dBi) | 7.8 ~ 8.1 |
 
-- **차이의 원인:** 새 route는 TX 이득으로 31 dBi를 쓰는데, 이전 상한은 안테나 크기 기반 11~28 dBi였다. 차이는 정확히 31 dBi − 이전 상한이다.
-- **도파관 감쇠의 효과:** 새 route는 cutoff 감쇠를 별도 항으로 넣는다. 20 mm만 인정해도 이전 결과보다 약 30~35 dB 낮아진다.
+- **cutoff 0 mm에서 새 route가 높은 이유:** TX 이득이 31 dBi로 이전 상한(11~28 dBi)보다 크기 때문이다(+2.9~19.9 dB).
+- **50 mm cutoff를 인정하면:** L/S 경로는 모두 닫히고 X-band만 6~8 dB가 남는다.
 - **이전 결과의 지위:** legacy sensitivity로 유지한다([KAA_저주파_방사응답_결과보고서.md](KAA_저주파_방사응답_결과보고서.md)).
 
 ## 5. S-TC TX → ISL RX
 
-S 안테나 ISL 대역 RealizedGain과 ISL 수신 RealizedGain(둘 다 CST 시뮬레이션 데이터)을 썼다. Task 1 계산을 그대로 사용했다.
+S 안테나 ISL 대역 RealizedGain과 ISL 수신 RealizedGain(둘 다 CST 시뮬레이션 데이터)을 썼다(Task 1 계산).
 
 | TX 설치 | Victim PSD [dBm/Hz] | Allowable [dBm/Hz] | Margin at 0 dB [dB] | Required [dB] | 0/40/60/70/80 dB margin [dB] | First PASS |
 | --- | --- | --- | --- | --- | --- | --- |
 | SBA_NADIR | −137.83 | −177.00 | −39.17 | 39.17 | −39.17 / +0.83 / +20.83 / +30.83 / +40.83 | 40 dB |
 | SBA_ZENITH | −137.74 | −177.00 | −39.26 | 39.26 | −39.26 / +0.74 / +20.74 / +30.74 / +40.74 | 40 dB |
 
-40 dB 통과 여유는 0.7~0.8 dB로 얇다. design target은 50 dB다.
-
 ## 6. 입력 누락 및 분석 한계
 
-- **필요 입력:**
-  - Ka 도파관 형식(WR-42/WR-34) 확정과 **유효 below-cutoff 길이**
-  - SAR 절대 peak gain [dBi]
-  - SAR 후방·±80° 밖 패턴(현재 외곽 hold 가정)
-  - L2/L5 S11(Task 1 rescaling 확정)
-  - 동일 포트 isolation
-  - 실제 BPF table
-- **한계:**
-  - cutoff 감쇠는 full-wave 검증이 아니다.
-  - Ka 31 dBi를 victim 주파수에 그대로 적용한 것은 보수적 가정이다.
-  - 자유공간 직접 결합이며 산란·가림은 미모델이다. X-band Ka 근거리 조건은 4.3절 참조.
+- **owner 입력(가정·추정):** WR-42 형식, 유효 길이 50 mm, SAR peak 52 dBi, ±80° 밖 −50 dB. 실측이나 full-wave 검증이 들어오면 교체한다.
+- **ISL·SAR 판정의 민감도:** Ka의 ISL·SAR 판정은 도파관 길이에 민감하다. 4~5 mm만 길어도 경로가 닫힌다(ISL 53.9 mm, SAR 54.5 mm).
+- **그 밖의 필요 입력:** L2/L5 S11(Task 1 rescaling 확정), 동일 포트 isolation, 실제 BPF table.
+- **한계:** 자유공간 직접 결합이며 산란·가림은 미모델이다. X-band Ka 근거리 조건은 4.3절 참조.
 
 ## Appendix. 파일과 출처
 
 | 파일 | 내용 |
 | --- | --- |
 | `data/rfi_psd/rfi_scope_matrix.csv` | primary 범위 SSOT |
-| `data/Xband_SAR_K8_owner/owner_cut_values.csv`, `sar_envelope_0p1deg.csv` | owner 추출 값 / 0.1° envelope |
-| `data/rfi_psd/ka_waveguide_cutoff.csv` | WR-42/WR-34 입력, 길이 INPUT_MISSING |
+| `data/Xband_SAR_K8_owner/owner_cut_values.csv`, `owner_absolute_inputs.csv`, `sar_envelope_0p1deg.csv` | owner 추출 값 / owner 절대값(52 dBi, −50 dB, +2 dBi) / 0.1° envelope |
+| `data/rfi_psd/ka_waveguide_cutoff.csv` | WR-42 50 mm owner 가정, WR-34 민감도 |
 | `output/claude/results/task2_*.csv` | SAR 요약, 고조파, S-TC→SAR, Ka cutoff 표·pair |
 | `output/claude/run_task2_scope_analysis.m`, `src/+rfscreen/+psd/{WaveguideCutoff,SarOwnerPattern}.m` | 실행 / 모델 |
 

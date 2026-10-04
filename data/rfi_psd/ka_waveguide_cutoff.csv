@@ -1,11 +1,9 @@
 # rfi_psd -- Ka DLS (KAA) waveguide below-cutoff bound inputs (route WAVEGUIDE_BELOW_CUTOFF_BOUND; ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED)
-# Repository evidence: cst/specs/kaband_dls.yaml (vendor datasheet 1399728/01-22, confidence A): "rf_interface: WR-42 (WR-34 optional)".
-#   The flight option is NOT fixed by the repository. WR-42 is the datasheet baseline AND the conservative choice (lower TE10 cutoff ->
-#   less attenuation at every victim frequency); WR-34 is reported as sensitivity only. The CST feed surrogate (circular r = 4.4 mm,
-#   TE11 cutoff 19.97 GHz) is not hardware and is not used.
-# effective_length_mm: NO confirmed effective below-cutoff length exists -> empty (INPUT_MISSING); primary credits 0 mm and reports the
-#   length that would close each path; sensitivity_lengths_mm are illustrations only.
+# OWNER decision 2026-10-04: Ka waveguide WR-42 (owner assumption; datasheet cst/specs/kaband_dls.yaml lists "WR-42 (WR-34 optional)");
+#   broad wall a = 10.668 mm (geometry) -> TE10 cutoff ~14.05 GHz (derived); effective below-cutoff length 50 mm
+#   (conservative engineering assumption). WR-34 (same 50 mm) is a sensitivity row only.
+# The CST feed surrogate (circular r = 4.4 mm) is not hardware and is not used.
 # Fields must not contain commas.
-waveguide,role,broad_wall_a_mm,effective_length_mm,sensitivity_lengths_mm,provenance
-WR-42,PRIMARY_DATASHEET_BASELINE_CONSERVATIVE,10.668,,5;10;20,cst/specs/kaband_dls.yaml rf_interface WR-42 (EIA WR-42 a = 0.420 in)
-WR-34,SENSITIVITY_DATASHEET_OPTION,8.636,,5;10;20,cst/specs/kaband_dls.yaml rf_interface WR-34 optional (EIA WR-34 a = 0.340 in)
+waveguide,role,broad_wall_a_mm,effective_length_mm,length_status,sensitivity_lengths_mm,provenance
+WR-42,PRIMARY_OWNER_ASSUMPTION,10.668,50,OWNER_CONSERVATIVE_ENGINEERING_ASSUMPTION,5;10;20,owner decision 2026-10-04 (EIA WR-42 a = 0.420 in)
+WR-34,SENSITIVITY_DATASHEET_OPTION,8.636,50,SENSITIVITY_SAME_LENGTH,5;10;20,cst/specs/kaband_dls.yaml rf_interface WR-34 optional (EIA WR-34 a = 0.340 in)

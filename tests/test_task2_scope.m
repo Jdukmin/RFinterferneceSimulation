@@ -19,8 +19,10 @@ function test_task2_scope(h)
         all(W.alphaDbPerM([1.176 1.575 2.05 9.65 10.6] * 1e9, a42) < W.alphaDbPerM([1.176 1.575 2.05 9.65 10.6] * 1e9, a34)));
     h.throws('negative length refused', @() W.totalDb(f, a42, -1), 'rfscreen:psd:negativeLength');
     WG = SD.readTable(fullfile(repo, 'data', 'rfi_psd', 'ka_waveguide_cutoff.csv'));
-    h.isTrue('no confirmed effective length (INPUT_MISSING, not invented)', all(cellfun(@isempty, WG.effective_length_mm)));
-    h.eqStr('WR-42 is the primary (datasheet baseline + conservative)', WG.role{strcmp(WG.waveguide, 'WR-42')}, 'PRIMARY_DATASHEET_BASELINE_CONSERVATIVE');
+    i42 = strcmp(WG.waveguide, 'WR-42');
+    h.eqStr('WR-42 is the primary (owner assumption)', WG.role{i42}, 'PRIMARY_OWNER_ASSUMPTION');
+    h.isTrue('WR-42 effective length 50 mm = owner conservative engineering assumption', strcmp(WG.effective_length_mm{i42}, '50') && ...
+        strcmp(WG.length_status{i42}, 'OWNER_CONSERVATIVE_ENGINEERING_ASSUMPTION'));
 
     % ---- SAR owner envelope ----
     SP = rfscreen.psd.SarOwnerPattern.fromFile(fullfile(repo, 'data', 'Xband_SAR_K8_owner', 'owner_cut_values.csv'));
@@ -37,7 +39,16 @@ function test_task2_scope(h)
     h.eqTol('upper envelope between samples (az 20-30 deg uses the higher -51.82)', SP.cutGain('AZIMUTH', 25), -51.82, 1e-9);
     h.eqTol('outer hold elevation (max sample >= 10 deg)', SP.cutGain('ELEVATION', 120), -34.674, 1e-9);
     h.eqTol('direction gain = max of the cuts', SP.directionGain(100), max(SP.cutGain('AZIMUTH', 100), SP.cutGain('ELEVATION', 100)), 0);
-    h.eqStr('absolute peak gain unknown (no 0 dBi)', SP.PEAK_STATUS, 'SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN');
+    SP2 = SP.withOutsideCeiling(-50);
+    h.eqTol('owner ceiling -50 dB beyond +/-80 deg', SP2.directionGain([85 124 180]), [-50 -50 -50], 0);
+    h.eqTol('outer hold still applies 60-80 deg (owner range)', SP2.directionGain(70), -34.674, 1e-9);
+    h.eqTol('ceiling does not change the owner-range envelope', SP2.directionGain(0:0.1:80), SP.directionGain(0:0.1:80), 0);
+    h.throws('positive ceiling refused', @() SP.withOutsideCeiling(3), 'rfscreen:psd:badSarCeiling');
+    OA = SD.readTable(fullfile(repo, 'data', 'Xband_SAR_K8_owner', 'owner_absolute_inputs.csv'));
+    v = @(k) str2double(OA.value{strcmp(OA.item, k)});
+    h.eqTol('SAR peak gain 52 dBi (owner HPBW estimate)', v('SAR_PEAK_GAIN'), 52, 0);
+    h.eqTol('back absolute ceiling = peak + outside ceiling = +2 dBi', v('SAR_PEAK_GAIN') + v('OUTSIDE_80_CEILING'), v('BACK_ABSOLUTE_CEILING'), 0);
+    h.eqTol('HPBW cross-check 41253/(HPBW_az HPBW_el) ~ 51.9 dBi', 10 * log10(41253 / (0.242294 * 1.112221)), 51.85, 0.01);
 
     % ---- scope ----
     S = SD.readTable(fullfile(repo, 'data', 'rfi_psd', 'rfi_scope_matrix.csv'));
@@ -53,14 +64,18 @@ function test_task2_scope(h)
         K = rdcsv(fullfile(rd, 'task2_ka_cutoff_pairs.csv'));
         h.isTrue('Ka max EIRP 49.451 dBW', all(abs(str2double(K.max_eirp_dbw) - 49.451) < 1e-3));
         h.isTrue('Ka unattenuated EIRP PSD -16.5696 dBm/Hz', all(abs(str2double(K.unattenuated_eirp_psd_dbm_hz) + 16.5696) < 1e-3));
-        h.isTrue('no cutoff credited without a confirmed length', all(str2double(K.cutoff_attenuation_credited_db) == 0));
-        sar = strcmp(K.victim_band, 'SAR');
-        h.isTrue('Ka -> SAR: no absolute required suppression (peak gain unknown)', all(strcmp(K.required_additional_suppression_db(sar), 'NaN')) && ...
-            all(~strcmp(K.sar_required_minus_peak_gain_db(sar), 'NaN')));
-        r20 = str2double(K.required_with_20mm_db(~sar)); r0 = str2double(K.required_additional_suppression_db(~sar));
-        h.isTrue('20 mm sensitivity lowers the requirement', all(r20 < r0));
+        w42 = strcmp(K.waveguide, 'WR-42');
+        h.isTrue('WR-42 50 mm credited = alpha x 50 mm', all(abs(str2double(K.cutoff_attenuation_credited_db(w42)) - ...
+            50 * str2double(K.alpha_min_db_per_mm(w42))) < 0.01));
+        r20 = str2double(K.required_with_20mm_db); r50 = str2double(K.required_additional_suppression_db);
+        h.isTrue('50 mm credit never needs more than the 20 mm sensitivity', all(r50 <= r20 + 1e-9));
+        h.isTrue('Ka -> SAR now quantified with the owner peak gain', all(isfinite(str2double(K.required_additional_suppression_db(strcmp(K.victim_band, 'SAR'))))));
+        z = r50 == 0; dt = str2double(K.design_target_db);
+        h.isTrue('no design target when no additional suppression is required', all(dt(z) == 0) && all(dt(~z) >= r50(~z) + 10));
         X = rdcsv(fullfile(rd, 'task2_stc_sar_spurious.csv'));
         h.isTrue('S-TC -> SAR labelled generic spurious, not harmonic', all(~cellfun(@isempty, strfind(X.route, 'GENERIC_ITU_SPURIOUS'))));
+        h.isTrue('S-TC -> SAR uses +2 dBi (outside +/-80 deg ceiling)', all(abs(str2double(X.sar_gain_toward_tx_dbi) - 2) < 1e-9));
+        h.eqTol('S-TC -> SAR worst required suppression [dB]', max(str2double(X.required_additional_suppression_db)), 63.36, 0.01);
     end
 end
 

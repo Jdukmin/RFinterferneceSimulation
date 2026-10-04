@@ -83,10 +83,17 @@ for i = 1:S.nRows; logm(logf, 'scope %-10s -> %-8s %-8s %s', S.attacker{i}, S.vi
 % =========================== (B) SAR pattern ===========================
 sarDir = fullfile(repo, 'data', 'Xband_SAR_K8_owner');
 SP = rfscreen.psd.SarOwnerPattern.fromFile(fullfile(sarDir, 'owner_cut_values.csv'));
+OA = SD.readTable(fullfile(sarDir, 'owner_absolute_inputs.csv')); oa = @(k) str2double(OA.value{strcmp(OA.item, k)});
+Gpk = oa('SAR_PEAK_GAIN'); SP = SP.withOutsideCeiling(oa('OUTSIDE_80_CEILING'));
+if abs(Gpk + oa('OUTSIDE_80_CEILING') - oa('BACK_ABSOLUTE_CEILING')) > 1e-9
+    error('SAR owner inputs inconsistent: peak + outside ceiling ~= back absolute ceiling');
+end
+logm(logf, 'SAR owner inputs: peak gain %.1f dBi (%s), outside +/-80 deg ceiling %.1f dB re peak = %.1f dBi; HPBW cross-check %.2f dBi', ...
+    Gpk, OA.nature{strcmp(OA.item, 'SAR_PEAK_GAIN')}, oa('OUTSIDE_80_CEILING'), oa('BACK_ABSOLUTE_CEILING'), 10 * log10(41253 / (0.242294 * 1.112221)));
 th = 0:0.1:180; gaz = SP.cutGain('AZIMUTH', th); gel = SP.cutGain('ELEVATION', th); gd = SP.directionGain(th);
 envRows = cell(1, numel(th));
 for i = 1:numel(th)
-    reg = 'OWNER_RANGE'; if th(i) > SP.DATA_RANGE_DEG; reg = 'OUTSIDE_OWNER_RANGE_OUTER_HOLD_ASSUMPTION'; end
+    reg = 'OWNER_RANGE'; if th(i) > SP.DATA_RANGE_DEG; reg = 'OUTSIDE_OWNER_RANGE_OWNER_CEILING'; end
     envRows{i} = {th(i), gaz(i), gel(i), gd(i), reg};
 end
 writeTable(fullfile(sarDir, 'sar_envelope_0p1deg.csv'), {'theta_deg', 'azimuth_co_envelope_db', 'elevation_co_envelope_db', ...
@@ -95,14 +102,14 @@ sumRows = {};
 for c = SP.cuts
     smp = SP.cutGain(c.name, c.sampleDeg);
     sumRows{end+1} = {c.name, 2 * c.theta3, SP.cutGain(c.name, c.theta3), c.thetaNull, c.gNull, SP.cutGain(c.name, c.thetaNull), ...
-        c.thetaSl, c.gSl, SP.cutGain(c.name, c.thetaSl), min(smp - c.sampleDb), c.outerHold, -120, SP.XPOL, SP.PEAK_STATUS, SP.PROVENANCE}; %#ok<AGROW>
+        c.thetaSl, c.gSl, SP.cutGain(c.name, c.thetaSl), min(smp - c.sampleDb), c.outerHold, SP.outsideCeiling_dB, Gpk, -120, SP.XPOL, 'OWNER_HPBW_ENGINEERING_ESTIMATE', SP.PROVENANCE}; %#ok<AGROW>
     logm(logf, 'SAR %-9s HPBW %.6f deg (env %.3f dB at 3-dB point), null %.1f deg %.3f dB (env %.3f), sidelobe %.3f @ %.1f, env-sample min %.3f dB, outer hold %.3f dB', ...
         c.name, 2 * c.theta3, SP.cutGain(c.name, c.theta3), c.thetaNull, c.gNull, SP.cutGain(c.name, c.thetaNull), c.gSl, c.thetaSl, ...
         min(smp - c.sampleDb), c.outerHold);
 end
 writeTable(fullfile(outDir, 'task2_sar_pattern_summary.csv'), {'cut', 'hpbw_deg', 'envelope_at_3db_point_db', 'first_null_deg', ...
     'owner_first_null_db', 'envelope_at_first_null_db', 'max_sidelobe_deg', 'owner_max_sidelobe_db', 'envelope_at_sidelobe_db', ...
-    'min_envelope_minus_owner_sample_db', 'outer_hold_db', 'cx_re_co_peak_db', 'cross_pol', 'absolute_peak_gain', 'provenance'}, sumRows);
+    'min_envelope_minus_owner_sample_db', 'outer_hold_60_to_80deg_db', 'outside_80deg_ceiling_db', 'peak_gain_dbi', 'cx_re_co_peak_db', 'cross_pol', 'peak_gain_basis', 'provenance'}, sumRows);
 
 % =========================== (C) harmonic overlap ===========================
 bS = RB.lookup(B, 'SAR_X_RX'); sar = [bS.tuning_lo_Hz bS.tuning_hi_Hz];
@@ -144,22 +151,21 @@ for tm = {'SBA_NADIR', 'SBA_ZENITH'}
     dT = A.bodyToLocal(Rbl(tm{1}), u); dR = A.bodyToLocal(Rbl('SAR_ANT'), -u);
     thS = acosd(max(-1, min(1, dR(3) / norm(dR)))); gn = SP.directionGain(thS);
     gtx = arrayfun(@(f) rS.gainAt('SAR', f, dT), fS); fspl = P.fspl(fS, dist);
-    psdX = srcS + gtx - fspl + gn;                                % victim PSD WITHOUT the unknown SAR peak gain
-    x = nmax(psdX); reqMinusG = x - bS.allowable_psd_dBmHz;
-    gmax = arrayfun(@(F) bS.allowable_psd_dBmHz - (x - F), att);  % largest SAR peak gain that passes each scenario
+    psdX = srcS + gtx - fspl + gn + Gpk;                          % victim PSD with the owner SAR peak gain
+    x = nmax(psdX); req = max(0, x - bS.allowable_psd_dBmHz); mg = bS.allowable_psd_dBmHz - x;
     los = rfscreen.geometry.LineOfSight.segment(tm{1}, 'SAR_ANT', pos(tm{1}), pos('SAR_ANT'), model.structures);
     sarRows{end+1} = {['S_TM_TX@' tm{1} '>SAR_X_RX@SAR_ANT'], 'S-TC TX (legacy id S_TM_TX)', tm{1}, 'SAR RX', 'GENERIC_ITU_SPURIOUS (not harmonic)', ...
-        srcS, nmax(gtx), nmin(fspl), dist, thS, ifelse(thS > SP.DATA_RANGE_DEG, 'OUTSIDE_OWNER_RANGE_OUTER_HOLD', 'OWNER_RANGE'), gn, x, ...
-        bS.allowable_psd_dBmHz, reqMinusG, gmax(1), gmax(2), gmax(3), gmax(4), gmax(5), los.status, SP.PEAK_STATUS, ...
-        sprintf('CST %s S/SAR RealizedGain', rS.cstCase)}; %#ok<AGROW>
-    logm(logf, 'S-TC@%-10s -> SAR: d=%.3f m, SAR off-axis %.1f deg (norm %.2f dB), G_tx %.2f dBi, PSD_excl_peak %.2f dBm/Hz -> required = %.2f + G_peak dB', ...
-        tm{1}, dist, thS, gn, nmax(gtx), x, reqMinusG);
+        srcS, nmax(gtx), nmin(fspl), dist, thS, ifelse(thS > SP.DATA_RANGE_DEG, 'OUTSIDE_OWNER_RANGE_OWNER_CEILING', 'OWNER_RANGE'), gn, Gpk, gn + Gpk, ...
+        nmax(gtx - fspl) + gn + Gpk, x, bS.allowable_psd_dBmHz, mg, mg + 40, mg + 60, mg + 70, mg + 80, req, firstPass(att, req), ...
+        (req > 0) * ceil((req + 10) / 10 - 1e-9) * 10, los.status, 'SAR peak 52 dBi OWNER HPBW ENGINEERING ESTIMATE', sprintf('CST %s S/SAR RealizedGain', rS.cstCase)}; %#ok<AGROW>
+    logm(logf, 'S-TC@%-10s -> SAR: d=%.3f m, SAR off-axis %.1f deg (norm %.2f dB -> %.2f dBi), G_tx %.2f dBi, PSD %.2f dBm/Hz -> required %.2f dB, first pass %s', ...
+        tm{1}, dist, thS, gn, gn + Gpk, nmax(gtx), x, req, firstPass(att, req));
 end
 writeTable(fullfile(outDir, 'task2_stc_sar_spurious.csv'), {'pair', 'attacker', 'tx_mount', 'victim', 'route', 'itu_source_psd_dbm_hz', ...
     'tx_gain_max_dbi', 'fspl_min_db', 'distance_m', 'sar_off_axis_deg', 'sar_pattern_region', 'sar_normalised_gain_db', ...
-    'victim_psd_excluding_sar_peak_gain_dbm_hz', 'allowable_psd_dbm_hz', 'required_suppression_minus_sar_peak_gain_db', ...
-    'max_sar_peak_gain_pass_0db_dbi', 'max_sar_peak_gain_pass_40db_dbi', 'max_sar_peak_gain_pass_60db_dbi', ...
-    'max_sar_peak_gain_pass_70db_dbi', 'max_sar_peak_gain_pass_80db_dbi', 'los', 'sar_peak_gain_status', 'tx_response_source'}, sarRows);
+    'sar_peak_gain_dbi', 'sar_gain_toward_tx_dbi', 'coupling_max_db', 'victim_psd_max_dbm_hz', 'allowable_psd_dbm_hz', 'margin_0db_db', ...
+    'margin_40db_db', 'margin_60db_db', 'margin_70db_db', 'margin_80db_db', 'required_additional_suppression_db', 'first_passing_scenario', ...
+    'design_target_db', 'los', 'sar_peak_gain_basis', 'tx_response_source'}, sarRows);
 
 % =========================== (E) S-TC TX -> ISL RX (Task 1 results) ===========================
 D1 = readCsv(fullfile(outDir, 'stc_filter_design.csv')); isl = find(strcmp(D1.victim_band, 'ISL'));
@@ -181,7 +187,7 @@ vname = struct('L1', 'GPS L1 RX', 'L2', 'GPS L2 RX', 'L5', 'GPS L5 RX', 'S_TC', 
 tabRows = {}; kaRows = {};
 for w = 1:WG.nRows
     a = str2double(WG.broad_wall_a_mm{w}) / 1e3; fc = W.cutoffTE10(a); Lsens = str2double(strsplit(WG.sensitivity_lengths_mm{w}, ';')) / 1e3;
-    Lconf = str2double(WG.effective_length_mm{w}) / 1e3; lenStat = ifelse(isnan(Lconf), 'INPUT_MISSING (0 mm credited)', 'CONFIRMED');
+    Lconf = str2double(WG.effective_length_mm{w}) / 1e3; lenStat = ifelse(isnan(Lconf), 'INPUT_MISSING (0 mm credited)', WG.length_status{w});
     if isnan(Lconf); Lc = 0; else; Lc = Lconf; end
     for vbk = {'L1', 'L2', 'L5', 'S_TC', 'ISL', 'SAR'}
         vb = vbk{1}; rt = victims{find(strcmp(victims(:, 4), vb), 1), 1}; b = RB.lookup(B, rt); f0 = b.channel_fc_Hz;
@@ -194,8 +200,8 @@ for w = 1:WG.nRows
             rt = victims{q, 1}; rm = victims{q, 2}; rfam = victims{q, 3}; vb = victims{q, 4}; b = RB.lookup(B, rt); f = RB.tuningSweep(b, nF);
             d = pos(rm) - pos(ka{1}); dist = norm(d); u = d / dist; dR = A.bodyToLocal(Rbl(rm), -u); fspl = P.fspl(f, dist);
             if strcmp(rfam, 'SAR')
-                thS = acosd(max(-1, min(1, dR(3) / norm(dR)))); grx = SP.directionGain(thS) * ones(1, nF);
-                rxSrc = sprintf('SAR owner envelope %.2f dB at %.1f deg + G_peak (UNKNOWN)', grx(1), thS);
+                thS = acosd(max(-1, min(1, dR(3) / norm(dR)))); grx = (SP.directionGain(thS) + Gpk) * ones(1, nF);
+                rxSrc = sprintf('SAR owner envelope %.2f dB at %.1f deg + peak %.0f dBi (owner HPBW estimate)', grx(1) - Gpk, thS, Gpk);
             else
                 rk = [rfam '/' vb]; if ~resp.isKey(rk); resp(rk) = getR(rfam, vb); end
                 rr = resp(rk); grx = arrayfun(@(x) rr.gainAt(vb, x, dR), f); rxSrc = sprintf('CST %s %s/%s RealizedGain', rr.cstCase, rfam, vb);
@@ -206,12 +212,12 @@ for w = 1:WG.nRows
             req0 = max(0, nmax(psd0 - b.allowable_psd_dBmHz)); reqC = max(0, nmax(psdC - b.allowable_psd_dBmHz));
             Lreq = nmax((psd0 - b.allowable_psd_dBmHz) ./ alf);           % mm of below-cutoff guide that closes the path
             reqS = arrayfun(@(L) max(0, nmax(psd0 - alf * L * 1e3 - b.allowable_psd_dBmHz)), Lsens);
-            isSar = strcmp(rfam, 'SAR');
+            isSar = false;
             kaRows{end+1} = {WG.waveguide{w}, WG.role{w}, [ka{1} '>' rt '@' rm], 'Ka DLS TX', ka{1}, vname.(vb), rm, vb, dist, eirp_dBW, eirpPsd, ...
                 nmin(alf), lenStat, Lc * 1e3, nmin(alf) * Lc * 1e3, nmax(grx), nmin(fspl), nmax(grx - fspl), nmax(psdC), b.allowable_psd_dBmHz, ...
                 ifelse(isSar, NaN, -nmax(psdC - b.allowable_psd_dBmHz)), ifelse(isSar, NaN, reqC), ifelse(isSar, 'NOT_EVALUATED', firstPass(att, reqC)), ...
                 ifelse(isSar, NaN, max(0, Lreq)), ifelse(isSar, NaN, reqS(1)), ifelse(isSar, NaN, reqS(2)), ifelse(isSar, NaN, reqS(3)), ...
-                ifelse(isSar, nmax(psdC) - b.allowable_psd_dBmHz, NaN), rxSrc, [W.PROVENANCE ';' W.TAGS]}; %#ok<AGROW>
+                firstPass(att, req0), (reqC > 0) * ceil((reqC + 10) / 10 - 1e-9) * 10, rxSrc, [W.PROVENANCE ';' W.TAGS]}; %#ok<AGROW>
         end
     end
 end
@@ -223,7 +229,7 @@ writeTable(fullfile(outDir, 'task2_ka_cutoff_pairs.csv'), {'waveguide', 'role', 
     'distance_m', 'max_eirp_dbw', 'unattenuated_eirp_psd_dbm_hz', 'alpha_min_db_per_mm', 'effective_length_status', 'effective_length_credited_mm', ...
     'cutoff_attenuation_credited_db', 'victim_gain_max_dbi', 'fspl_min_db', 'coupling_max_db', 'victim_psd_max_dbm_hz', 'allowable_psd_dbm_hz', ...
     'margin_db', 'required_additional_suppression_db', 'first_passing_scenario', 'below_cutoff_length_to_close_mm', ...
-    'required_with_5mm_db', 'required_with_10mm_db', 'required_with_20mm_db', 'sar_required_minus_peak_gain_db', 'victim_response_source', 'provenance'}, kaRows);
+    'required_with_5mm_db', 'required_with_10mm_db', 'required_with_20mm_db', 'first_passing_scenario_without_cutoff', 'design_target_db', 'victim_response_source', 'provenance'}, kaRows);
 logm(logf, 'Rows: SAR envelope %d, harmonics %d, S-TC->SAR %d, Ka table %d, Ka pairs %d', numel(envRows), numel(hRows), numel(sarRows), ...
     numel(tabRows), numel(kaRows));
 fclose(logf);

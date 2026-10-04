@@ -8,12 +8,15 @@ classdef SarOwnerPattern
     %     theta3 < theta <= theta_null: -3 dB hold                      (no dip into the null; conservative)
     %     theta_null < theta          : knots (theta_null: G_sl), (theta_sl: G_sl), samples beyond the null;
     %                                   between adjacent knots the HIGHER value (never below a sample)
-    %     beyond the last sample      : OUTER HOLD = max of the samples at |theta| >= 10 deg (ASSUMPTION; the
-    %                                   owner data end at +/-80 deg, back hemisphere unknown)
+    %     last sample < theta <= 80   : OUTER HOLD = max of the samples at |theta| >= 10 deg (ASSUMPTION)
+    %     theta > 80 deg (outside the owner data, incl. back hemisphere): owner CEILING relative to the Co
+    %                                   peak (owner_absolute_inputs.csv OUTSIDE_80_CEILING, -50 dB); without it
+    %                                   the outer hold continues
     %   Direction gain: rotational upper envelope max(G_az(theta), G_el(theta)) of the total off-axis angle
     %   (conservative; independent of the az/el axis assignment). Co-pol is primary; Cx (~-120 dB re Co peak)
     %   kept in provenance as CROSS_POL_NEGLIGIBLE_FOR_CURRENT_SCREENING and never self-normalised.
-    %   Absolute peak gain: SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN (248.7072 is a complex-field magnitude, not dBi).
+    %   Absolute peak gain: 248.7072 is a complex-field magnitude, not dBi. The absolute peak gain comes only from
+    %   owner_absolute_inputs.csv (SAR_PEAK_GAIN, HPBW-based engineering estimate); absent -> SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN.
     properties (Constant)
         PROVENANCE = 'OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT;ENGINEERING_RECONSTRUCTION;NOT_FULL_1601_POINT_EXPORT'
         PEAK_STATUS = 'SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN'
@@ -23,6 +26,7 @@ classdef SarOwnerPattern
     end
     properties (SetAccess = private)
         cuts        % struct array: name, theta3, thetaNull, gNull, thetaSl, gSl, sampleDeg, sampleDb, outerHold
+        outsideCeiling_dB = NaN     % owner ceiling beyond +/-80 deg [dB re Co peak]; NaN = outer hold continues
     end
     methods (Static)
         function p = fromFile(path)
@@ -44,6 +48,11 @@ classdef SarOwnerPattern
         end
     end
     methods
+        function p = withOutsideCeiling(p, ceiling_dB)
+            if ~(isscalar(ceiling_dB) && ceiling_dB <= 0); error('rfscreen:psd:badSarCeiling', 'ceiling must be <= 0 dB re peak.'); end
+            p.outsideCeiling_dB = ceiling_dB;
+        end
+
         function g = cutGain(p, name, theta_deg)
             %CUTGAIN Upper-envelope normalised Co-pol gain [dB] of one cut at |theta| [deg] (0..180).
             c = p.cuts(strcmp({p.cuts.name}, name));
@@ -54,7 +63,8 @@ classdef SarOwnerPattern
             [kA, o] = sort(kA); kV = kV(o);
             for i = 1:numel(th)
                 t = th(i);
-                if t <= c.theta3; g(i) = -3 * (t / c.theta3) ^ 2;
+                if t > p.DATA_RANGE_DEG && ~isnan(p.outsideCeiling_dB); g(i) = p.outsideCeiling_dB;
+                elseif t <= c.theta3; g(i) = -3 * (t / c.theta3) ^ 2;
                 elseif t <= c.thetaNull; g(i) = -3;
                 elseif t > kA(end); g(i) = c.outerHold;
                 else

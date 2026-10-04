@@ -1,10 +1,10 @@
 # RFI 간섭 해석 결과보고서 — 단순화 위성체 baseline
 
 **결론.** Primary RFI 범위는 **S-TC TX와 Ka DLS TX**이며, ISL과 SAR는 victim으로만 다룬다(owner 결정, Task 2).
-- **S-TC TX(legacy id: S_TM_TX):** ITU 불요방사 source 기준으로 GPS L2/L5에 70.45/70.87 dB의 추가 억제가 필요하다(80 dB scenario 통과). S-TC TX 전체로는 이 경로가 지배적이다.
-- **Ka DLS TX:** 최대 EIRP 49.451 dBW 기준이며, 도파관 cutoff를 인정하지 않으면 76.8~106.5 dB가 필요하다. 데이터시트 기준 WR-42의 below-cutoff 구간이 약 30~54 mm면 경로가 닫힌다. 다만 **유효 길이가 미확정이라 Ka 최종 요구는 보류**다.
-- **SAR:** SAR 경로는 고조파 겹침이 없다. 일반 spurious는 SAR 절대 peak gain(미확정)에 따라 결정된다.
-- 판정 기준은 victim 포트 PSD [dBm/Hz]이며 허용치는 GPS −178, S-TM/ISL −177, SAR −175 dBm/Hz다(공학 가정).
+- **S-TC TX(legacy id: S_TM_TX):** ITU 불요방사 source 기준으로 GPS L2/L5가 70.45/70.87 dB(80 dB scenario)를 요구해 가장 크다. SAR RX는 63.36 dB(70 dB scenario)다. 고조파는 SAR 대역과 겹치지 않는다.
+- **Ka DLS TX:** 최대 EIRP 49.451 dBW에 WR-42 below-cutoff 50 mm(owner 가정)를 적용했다. GPS와 S-TM RX는 추가 억제가 필요 없다. ISL RX 6.58 dB, SAR RX 8.08 dB가 남고 둘 다 40 dB scenario에서 통과한다.
+- **판정 기준:** victim 포트 PSD [dBm/Hz]이며 허용치는 GPS −178, S-TM/ISL −177, SAR −175 dBm/Hz다(공학 가정).
+- **owner 입력:** WR-42, 유효 길이 50 mm, SAR peak 52 dBi, ±80° 밖 −50 dB는 공학 가정·추정이다. 측정이나 full-wave 검증값이 아니다.
 
 ## 1. Executive Summary
 
@@ -15,33 +15,35 @@
 | S-TC TX (legacy id: S_TM_TX) | GPS RX | L5 | −59.02 (−10 dB rescaling) | −107.13 | −178 | 70.87 | 80 dB | 90 dB | ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling |
 | S-TC TX (legacy id: S_TM_TX) | S-TM RX (legacy id: S_TC_RX) | S (2025–2110 MHz) | −49.02 | −118.11 | −177 | 58.89 | 60 dB | 70 dB | 시뮬레이션 |
 | S-TC TX (legacy id: S_TM_TX) | ISL RX | X (10.55–10.65 GHz) | −49.02 | −137.74 | −177 | 39.26 | 40 dB | 50 dB | 시뮬레이션 |
-| S-TC TX (legacy id: S_TM_TX) | SAR RX | SAR X | 고조파: NO_HARMONIC_OVERLAP / 일반 spurious: −49.02 | −148.31 + G_peak | −175 | 26.69 + G_peak | G_peak 의존 | G_peak 의존 | SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN |
-| Ka DLS TX | GPS RX | L1 / L2 / L5 | −16.57 (EIRP PSD) | −96.19 / −72.21 / −71.49 | −178 | 81.81 / 105.79 / 106.51 (cutoff 0 mm) | 없음 (80 dB 초과) | WR-42 30~42 mm 확인 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
-| Ka DLS TX | S-TM RX | S (2025–2110 MHz) | −16.57 (EIRP PSD) | −72.00 | −177 | 105.00 (cutoff 0 mm) | 없음 (80 dB 초과) | WR-42 40~42 mm 확인 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
-| Ka DLS TX | ISL RX | X (10.55–10.65 GHz) | −16.57 (EIRP PSD) | −86.99 | −177 | 90.01 (cutoff 0 mm) | 없음 (80 dB 초과) | WR-42 54 mm 확인 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
-| Ka DLS TX | SAR RX | SAR X | −16.57 (EIRP PSD) | −112.48 + G_peak | −175 | 62.52 + G_peak | G_peak 의존 | G_peak 의존 | SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN |
+| S-TC TX (legacy id: S_TM_TX) | SAR RX (harmonic) | SAR X | — | — | — | 해당 없음 | — | — | NO_HARMONIC_OVERLAP |
+| S-TC TX (legacy id: S_TM_TX) | SAR RX (generic spurious) | SAR X (9387.5–9912.5 MHz) | −49.02 | −111.64 | −175 | 63.36 | 70 dB | 80 dB | ENGINEERING_ESTIMATE (SAR 52 dBi, ±80° 밖 −50 dB) |
+| Ka DLS TX | GPS RX | L1 / L2 / L5 | −16.57 (EIRP PSD), cutoff −127 dB | −223.29 / −199.62 / −198.93 | −178 | 0 / 0 / 0 | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | S-TM RX | S (2025–2110 MHz) | −16.57, cutoff −126 dB | −198.49 | −177 | 0 | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | ISL RX | X (10.55–10.65 GHz) | −16.57, cutoff −83.4 dB | −170.42 | −177 | 6.58 | 40 dB | 20 dB | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | SAR RX | SAR X | −16.57, cutoff −90.6 dB | −166.92 | −175 | 8.08 | 40 dB | 20 dB | ENGINEERING_BOUND + SAR ENGINEERING_ESTIMATE |
 
 단위: PSD·Limit은 dBm/Hz, Required는 dB다. 각 행은 victim별 대표 worst다.
 
 **억제 조건:**
 - **Required suppression:** 0 dB 추가 필터 기준 총 요구량 max(0, PSD − limit)이다.
 - **First PASS:** 0/40/60/70/80 dB screening 중 처음 margin ≥ 0인 값이다.
-- **Design target:** 요구량 + 10 dB reserve를 10 dB 단위로 올린 계획값이며, 필터 규격이 아니다.
-- **Ka:** 도파관 below-cutoff 감쇠는 필터와 별개 항(`WAVEGUIDE_BELOW_CUTOFF_BOUND`)이다. 유효 길이가 확정되지 않아 0 mm만 인정했다. Ka의 "Design target" 칸은 경로를 닫는 WR-42 below-cutoff 길이다.
+- **Design target:** 요구량 + 10 dB reserve를 10 dB 단위로 올린 계획값이다. 요구량이 0이면 "불필요"다. 필터 규격이 아니다.
+- **Ka 도파관:** below-cutoff 감쇠는 필터와 별개 항(`WAVEGUIDE_BELOW_CUTOFF_BOUND`)이다. WR-42 50 mm에서 victim 대역 내 최소 감쇠를 적용했다.
+- **Ka ISL·SAR의 길이 민감도:** 경로를 닫는 길이는 53.9 / 54.5 mm라 4~5 mm만 더 길면 추가 억제가 필요 없다. WR-34 50 mm였다면 모든 Ka 경로가 통과한다.
 
 - **범위 matrix:**
   - S-TC TX → GPS / S-TM / ISL / SAR(victim-only)
   - Ka DLS TX → GPS / S-TM / ISL / SAR(cutoff route)
   - ISL TX와 SAR TX attacker는 **제외**한다.
   - KAA 저주파 최대 이득 상한은 legacy sensitivity로 내렸다.
-- **SAR victim 패턴:** owner가 `K8_SAR_Pattern.mat`에서 추출한 값으로 재구성했다(HPBW az 0.242294° / el 1.112221°, upper envelope, 1601점 원본 미반출). 절대 peak gain은 미확정이며 0 dBi를 쓰지 않았다.
+- **SAR victim 패턴:** owner가 `K8_SAR_Pattern.mat`에서 추출한 값으로 재구성했다(HPBW az 0.242294° / el 1.112221°, upper envelope, 1601점 원본 미반출). peak 52 dBi(HPBW 기반 추정)와 ±80° 밖·후방 −50 dB(+2 dBi) ceiling은 owner 입력이다.
 - **상세 보고서:**
   - S-TC TX: [S-TC_TX_억제요구_결과보고서.md](S-TC_TX_억제요구_결과보고서.md)
   - 범위·SAR·Ka cutoff: [RFI_Task2_범위단순화_결과보고서.md](RFI_Task2_범위단순화_결과보고서.md)
   - legacy KAA 상한: [KAA_저주파_방사응답_결과보고서.md](KAA_저주파_방사응답_결과보고서.md)
 - **최종 판정에 필요한 입력:**
-  1. Ka 도파관 형식과 유효 below-cutoff 길이
-  2. SAR 절대 peak gain
+  1. Ka 도파관 형식·유효 길이 실측(현재 owner 가정 WR-42 / 50 mm)
+  2. SAR 실제 peak gain과 후방 패턴(현재 owner 추정 52 dBi / −50 dB)
   3. S 안테나 L2/L5 S11
   4. 실제 TX BPF table과 동일 포트 isolation
   5. 수신기 블로킹·P1dB 데이터
