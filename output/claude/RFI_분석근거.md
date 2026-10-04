@@ -415,3 +415,18 @@ dBc/Hz→dBm/Hz, 60 dB 필터, −120→−180 dBm/Hz reference(전 −58 FAIL /
 | S-TM → 반대편 S-TC C_EM | −69 ~ −70 dB | −70.23 ~ −69.09 |
 | S-TM → GPS L1 최대 허용 TX PSD | ≈ −97 dBm/Hz | −97.02 |
 | S-TM → 반대편 S-TC 최대 허용 TX PSD | ≈ −108 dBm/Hz | −107.91 |
+
+## 13. 송신기 불요방사 규격 적용 (Claude 독립 분석, freeze point 8469e89)
+
+- **source(규격, 1차):** RR Appendix 3 (Rev.WRC-12) Table I 우주국을 쓴다.
+  - 감쇠 A = min(43 + 10 log P[W], 60) dBc, 4 kHz 기준 대역폭(AP3 §8, note 10), 안테나 전송선 기준.
+  - 광대역 등가 PSD = P − A − 10 log10(4000) [dBm/Hz]이다. S-TM·ISL −49.02, Ka −47.57 dBm/Hz.
+- **감도:** ECSS-E-ST-50-05C Table 5-6 −60 dBc/4 kHz.
+- **이산 스퍼:** RR AP3 단일 성분(4 kHz)과 CCSDS 401 rec. 2.4.16(단일 스퍼 총전력 −60 dBc). PSD로 변환하지 않고 채널 적분 허용 전력과 비교한다.
+- **영역:** AP3 Annex 1 Table 1로 경계를 정했다. 모든 피간섭원 대역이 spurious 영역이다(`results/oob_spurious/domain_and_harmonic_check.csv`).
+- **결합:** 피간섭원 주파수의 CST RealizedGain을 쓴다. TX 안테나의 해당 대역 응답이 없으면(KAA S/L/X, S 안테나 L2/L5 정규화 불안정) G_TX 대신 Harrington 최대 지향성 D = (ka)² + 2ka를 쓴다(물리 상한, 완전 정합·최악 지향).
+  - a: KAA 119 mm, S 53 mm
+  - 26 GHz 패턴은 재사용하지 않는다.
+- **Ka 조건부 감도:** WR-42(f_c 14.05 GHz) 구간 길이 2λc의 evanescent 감쇠 109.15·√(1 − (f/f_c)²) dB. 근거는 SM.329-13 recommends 2.5이며, KAA 실제 구간 길이는 미확인이다.
+- **필터:** `data/rfi_psd/filter_scenarios.csv`(0/40/60/70/80 dB)를 추가 외부 필터로 적용한다. 최소 추가 억제량 = max_f(포트 PSD − 허용 PSD).
+- **코드:** `output/claude/run_oob_spurious_analysis.m`(공유 엔진 `src/+rfscreen/+psd` 사용, 변경 없음), 검증 `output/claude/validate_oob_spurious.m`. 입력은 `output/claude/inputs/tx_emission_sources_claude.csv`.
