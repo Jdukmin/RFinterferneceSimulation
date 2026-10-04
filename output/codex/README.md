@@ -1,5 +1,9 @@
 # Octave RFI 결과와 재현
 
+최신 primary는 Task 2 scope다. **Attacker: S-TC TX / Ka DLS TX; victim-only: ISL / SAR.** [보고서](결과보고서.md), [현재 primary pair](all_pair_required_suppression.csv), [현재 scenario](design_filter_scenarios.csv), [Task 2 검증](task2_validation.json)을 먼저 읽는다. `complete_suppression_design.py`는 Task 1 재현 후 `task2_scope_analysis.py`를 자동 호출한다. 아래 inclusive Task 1 분석은 [legacy_task1](legacy_task1/all_pair_required_suppression.csv)에 보존했으며 ISL attacker와 KAA low-frequency gain envelope는 primary가 아니다.
+
+SAR는 [Owner anchors](sar_owner_pattern_anchors.csv), [engineering envelope](sar_reference_envelope.csv), [그림](sar_reference_envelope.png)으로 제공한다. MAT이나 원본 1601-point vector를 사용하지 않았다. Absolute gain은 미확정이며 reconstruction은 normalized cuts다. WR-42는 owner 후속 입력으로 선택했으며 effective length는 미확정이다. Ka PSD는 기존 ITU 60 dBc/4 kHz envelope + owner31dBi reference이며 actual cutoff attenuation credit은 0 dB로 보류한다. [dB/mm](ka_cutoff_band_results.csv), [길이 요구식](ka_cutoff_pair_requirements.csv)에 확정 가능 범위를 분리했다.
+
 Task 1에서 S-TC TX → GPS L2/L5 primary는 `PORT_MISMATCH_RESCALED_LBAND` engineering route로 전환했다. [Owner 정책](emission_inputs/owner_port_mismatch_policy.json)의 −10 dB만 적용하며, ITU −49.0206 dBm/Hz에서 effective source는 −59.0206 dBm/Hz다. 기존 accepted-power gain envelope 9.03 dBi와 정상 GPS receive RealizedGain을 결합한다. L1에는 추가 mismatch 감쇠를 넣지 않는다.
 
 [Task 1 요약](task1_lband_summary.csv), [설치/case별 24개 경로](task1_lband_pair_results.csv), [120개 filter scenario](task1_lband_filter_scenarios.csv), [원본 CST normalization 근거](task1_cst_normalization_evidence.csv), [검증](task1_validation.json)을 참조한다. `victim_band_scenarios.csv`의 이전 UNKNOWN과 `conditional_bound_required_suppression.csv`의 mismatch 미적용 결과는 과거 분석/sensitivity로 유지하며, 최신 primary 결과는 `all_pair_required_suppression.csv`다.

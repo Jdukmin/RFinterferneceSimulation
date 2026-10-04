@@ -18,7 +18,7 @@ def actual(id):
     t,*loc=id.split('@');v=ROLE.get(t,t.replace('_RX',' RX').replace('_',' '))
     return v+(' @ '+loc[0] if loc else '')
 def fnum(x):return float(x)
-def fmt(x):return f'{float(x):.2f}' if str(x) not in ['UNKNOWN','nan','NaN',''] and math.isfinite(float(x)) else '미판정'
+def fmt(x):return f'{float(x):.2f}' if str(x) not in ['None','UNKNOWN','nan','NaN',''] and math.isfinite(float(x)) else '미판정'
 def first(s):return next((f'FILTER_{a}DB' for a in SCENARIOS if a+1e-9>=s),'ABOVE_80DB_SEPARATE_DESIGN')
 def cls(s):return next((f'{a} dB class' for a in SCENARIOS if a+1e-9>=s),'80 dB 초과 / 별도 설계')
 def passdesc(s):return next((f'{a} dB' for a in SCENARIOS if a+1e-9>=s),'없음 (80 dB 초과)')
@@ -309,5 +309,7 @@ Finite-mode 조건에서의 상한이며 크기만으로 모든 가능한 안테
     (OUT/'suppression_design_validation.json').write_text(json.dumps(checks,indent=2)+'\n',encoding='utf-8')
     for p in re.findall(r'\]\(([^)]+)\)',report):
         if not p.startswith('https:'):assert (OUT/p).exists(),p
-    print(json.dumps(summary,indent=2));print(json.dumps(checks,indent=2))
+    print('Task 1 legacy regeneration checks passed; final primary scope follows Task 2.')
+    from task2_scope_analysis import main as complete_task2
+    complete_task2()
 if __name__=='__main__':main()

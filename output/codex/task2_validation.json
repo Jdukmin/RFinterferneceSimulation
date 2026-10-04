@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scope": "engineering reconstruction and bookkeeping; not full-wave qualification",
+  "primary_attackers": [
+    "S-TC TX",
+    "Ka DLS TX"
+  ],
+  "victim_only": [
+    "ISL",
+    "SAR"
+  ],
+  "primary_pair_rows": 144,
+  "scenario_rows": 720,
+  "sar_generated_grid_rows": 914,
+  "original_mat_read": false,
+  "original_1601_point_vectors_exported": false,
+  "harmonic_status": "NO_HARMONIC_OVERLAP",
+  "sar_absolute_gain": "UNKNOWN",
+  "ka_actual_waveguide": "WR-42",
+  "ka_te10_cutoff_hz": 14051015091.863516,
+  "ka_effective_length": "UNKNOWN",
+  "ka_power_dbw": 18.45098040014257,
+  "ka_total_eirp_reference_dbw": 49.45098040014257,
+  "ka_total_eirp_arbitrarily_divided_into_psd": false,
+  "ka_spectral_limit": "ITU RR AP3 / SM329 space stations 60dBc/4kHz at70W; broadband-equivalent only",
+  "ka_source_eirp_psd_dbm_hz": -16.569619513137056,
+  "additional_cst_run": false,
+  "octave_rerun": false,
+  "freeze_shared_hashes_unchanged": true,
+  "checks": [
+    "SAR owner anchors/HPBW/nulls/sample preservation",
+    "symmetry",
+    "side interpolation adjacent upper envelope",
+    "out-of-domain handling and unsampled tail ceiling",
+    "Co referenced Cx floor; no absolute gain invented",
+    "harmonic order and occupied/tuning band overlap",
+    "TE10 alpha dB factor / synthetic fixture / above-cutoff and missing-input cases",
+    "ISL and GPS L1/L2/L5 regression and victim-only attacker exclusion",
+    "Ka gain-bound excluded from primary",
+    "WR42 dimensions/cutoff and all Ka PSD/margin/required identities",
+    "all scenario PASS/FAIL signs",
+    "total EIRP not silently turned into PSD"
+  ]
+}
