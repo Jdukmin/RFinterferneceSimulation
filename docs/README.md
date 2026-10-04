@@ -4,6 +4,7 @@ Normative documentation for the Spacecraft RF Coexistence & Antenna Interference
 
 | Path | Purpose |
 |------|---------|
+| `REPORTING_GUIDE.md` | Claude/Codex common reporting rules (SSOT) |
 | `user_manual.md` | **Top-down user manual (start here)** — problem, non-goals, conventions, runnable workflows (Phase 6) |
 | `reference.md` | Mandatory reference review + binding architecture implications (R1–R14, incl. KARI reference cases) |
 | `architecture.md` | Package/dependency structure (enforced by architecture-boundary tests) |

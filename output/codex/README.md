@@ -1,5 +1,7 @@
 # Octave RFI 결과와 재현
 
+보고서 생성/수정 시 [공통 reporting guide](../../docs/REPORTING_GUIDE.md)를 반드시 따른다. 현재 결과보고서는 기존 산출물을 유지한 가독성 개정본이다. 기존 `build_report.py` 템플릿은 개정 전 구조이므로 재사용 전에 guide에 맞게 수정해야 한다. 이 스크립트는 검증·snapshot·manifest도 갱신하므로 문서 편집만을 위해 실행하지 않는다.
+
 이 폴더가 요청된 분석 결과의 루트다. `결과보고서.md`와 `분석근거.md`를 먼저 읽는다. CSV는 UTF-8이며 NaN은 미확보, −Inf dBm은 정확한 0 W의 이상 모델 결과다.
 
 ## 실행 환경
