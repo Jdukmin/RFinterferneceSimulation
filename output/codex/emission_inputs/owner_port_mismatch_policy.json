@@ -1,0 +1,17 @@
+{
+  "task": "Task 1 — S-TC TX → GPS L2/L5 Port-Mismatch Rescaling",
+  "actual_tx_role": "S-TC TX",
+  "legacy_tx_id": "S_TM_TX",
+  "applied_victim_bands": ["L2", "L5"],
+  "port_mismatch_rescaling_db": -10.0,
+  "provenance_class": "OWNER_ENGINEERING_BOUND",
+  "provenance": "Owner Task 1 decision: L1-referenced fixed 10 dB port-mismatch attenuation; not a CST measurement or ITU limit",
+  "confidence": "ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling",
+  "result_route": "PORT_MISMATCH_RESCALED_LBAND",
+  "l1_policy": "UNCHANGED_VALIDATED_CST_REALIZED_GAIN_NO_EXTRA_MISMATCH",
+  "owner_approximate_effective_source_dbm_hz": -58.0,
+  "effective_source_reference_plane": "POST_MISMATCH_ACCEPTED_POWER_EQUIVALENT_NOT_EIRP",
+  "tx_radiation_model": "Existing conditional finite-mode gain envelope retained: N=max(1,ceil(2*pi*f*a/c)); gain=10log10(N^2+2N); a=sqrt(3)*D/2; D=0.065 m freeze surrogate",
+  "tx_radiation_model_assumptions": "Passive unity radiation efficiency; current extent <= D on each axis; no higher-order/superdirective modes; free-space propagation; not measured or universally guaranteed",
+  "unreliable_cst_value_policy": "CST_VALUE_PRESENT_BUT_NORMALIZATION_UNRELIABLE; archival evidence only; never used to evaluate primary L2/L5"
+}
