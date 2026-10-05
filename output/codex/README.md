@@ -1,3 +1,7 @@
+<!-- latest-owner-primary -->
+
+현재 primary는 [결과보고서](결과보고서.md), [전체 pair](all_pair_required_suppression.csv), [Ka 요구량](ka_cutoff_pair_requirements.csv), [S→SAR 결과](stc_sar_spurious_results.csv), [최신 검증](latest_owner_validation.json)이다. WR-42 50 mm, SAR peak52/rear+2/NF4/−176 및 L2/L5 rescaling-only 정책을 적용한다. `python output/codex/complete_suppression_design.py`는 과거 Task1/2를 재생성한 뒤 최신 정책을 마지막으로 적용한다. 아래의 과거 unknown·zero-credit·행 개수·분석 scope와 task1/task2 validation은 당시 입력의 역사적 기록이다. 최신 full suite는 `python output/codex/run_latest_owner_tests.py`로 실행하며 공유 src/data/tests를 수정하지 않는다.
+
 # Octave RFI 결과와 재현
 
 최신 primary는 Task 2 scope다. **Attacker: S-TC TX / Ka DLS TX; victim-only: ISL / SAR.** [보고서](결과보고서.md), [현재 primary pair](all_pair_required_suppression.csv), [현재 scenario](design_filter_scenarios.csv), [Task 2 검증](task2_validation.json)을 먼저 읽는다. `complete_suppression_design.py`는 Task 1 재현 후 `task2_scope_analysis.py`를 자동 호출한다. 아래 inclusive Task 1 분석은 [legacy_task1](legacy_task1/all_pair_required_suppression.csv)에 보존했으며 ISL attacker와 KAA low-frequency gain envelope는 primary가 아니다.

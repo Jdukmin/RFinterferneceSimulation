@@ -1,0 +1,5 @@
+location,legacy_status,latest_disposition
+latest_owner_analysis.py / primary S-TC and Ka branches,SAR_ABSOLUTE_PEAK_GAIN_UNKNOWN / OUTSIDE_OWNER_PATTERN_DOMAIN,Resolved by owner52dBi / -50dB rear / NF4; SAR_RX active numeric primary
+complete_suppression_design.py / historical Task1 emit SAR,SAR_VICTIM_ANTENNA_RESPONSE_MISSING,Historical intermediate only; overwritten by latest_owner_analysis; shared src unchanged
+src/+rfscreen/+kaa/KaVictimResponse.m,SAR response at 25.5-27GHz missing,Different frequency: fundamental Ka blocker response; not SAR9.3875-9.9125GHz victim route; retained
+run_rfi_octave.m / historical sar_response,SAR_PATTERN_MISSING_NO_ABSOLUTE_RFI,Historical SAR transmitter response diagnostic; not current primary; SAR_TX excluded
