@@ -2,4 +2,4 @@ script,run_time,analysis_base_commit,working_tree,note
 run_ka_nearfield_analysis.m,2026-10-04 16:57:21,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),Ka near-field (appendix; secondary blocker)
 run_rfi_analysis.m,2026-10-04 17:00:08,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),pair results / secondary blocker inputs
 run_psd_analysis.m,2026-10-04 17:03:07,99ea0220982b38a09692b197b2ff475b1b203a0e,DIRTY (15 uncommitted input/code paths),primary victim-band PSD / secondary blocker / receiver
-run_oob_spurious_analysis.m,2026-10-04 17:23:52,8469e8903da83b6ebed014aae311f90855c31715,DIRTY (1 uncommitted input/code paths),Claude OOB/spurious standard analysis (freeze 8469e89)
+run_oob_spurious_analysis.m,2026-10-05 05:20:46,08c2594d85bf7331d9b699c917d475efad259486,DIRTY (1 uncommitted input/code paths),Claude OOB/spurious PSD analysis incl. SAR RX victim and Ka WR-42 owner route

@@ -152,6 +152,7 @@ PASS/FAIL은 대역 내 pair에서만 내는데, 해당 pair가 없다. 대역 �
 - **가정인 부분:** SAR 안테나 이득(피간섭원 방향)은 −10/0/+10 dBi로 가정했다. 결과는 가정 민감도다(`results/sar_assessment.csv`).
 - **GPS:** L 안테나의 SAR 대역 응답이 없어 INPUT_MISSING이다.
 - **SAR가 피간섭원일 때:** 간섭원 측(이득 + FSPL)만 계산했다. SAR 이득과 SAR 수신 기준이 없어 판정하지 않았다.
+- **2026-10-05 갱신(대체):** owner가 SAR 수신 패턴(52 dBi, HPBW, null·부엽, ±80° 밖 −50 dB / +2 dBi 상한)과 수신 기준(NF 4 dB, I/N −6 dB, −176 dBm/Hz)을 제공했다. SAR RX를 불요방사 PSD 경로의 피간섭원으로 평가한다(§14). 위 가정 민감도는 freeze-point 기록으로만 남긴다.
 
 ## 8. 검증 기록
 
@@ -430,3 +431,20 @@ dBc/Hz→dBm/Hz, 60 dB 필터, −120→−180 dBm/Hz reference(전 −58 FAIL /
 - **Ka 조건부 감도:** WR-42(f_c 14.05 GHz) 구간 길이 2λc의 evanescent 감쇠 109.15·√(1 − (f/f_c)²) dB. 근거는 SM.329-13 recommends 2.5이며, KAA 실제 구간 길이는 미확인이다.
 - **필터:** `data/rfi_psd/filter_scenarios.csv`(0/40/60/70/80 dB)를 추가 외부 필터로 적용한다. 최소 추가 억제량 = max_f(포트 PSD − 허용 PSD).
 - **코드:** `output/claude/run_oob_spurious_analysis.m`(공유 엔진 `src/+rfscreen/+psd` 사용, 변경 없음), 검증 `output/claude/validate_oob_spurious.m`. 입력은 `output/claude/inputs/tx_emission_sources_claude.csv`.
+
+## 14. SAR RX 피간섭원 포함과 Ka WR-42 체인 (2026-10-05, owner 공학 입력)
+
+- **정책:** SAR TX는 간섭원에서 제외하고, SAR RX는 피간섭원에 포함한다. 간섭원 범위는 S-TC TX(저장소 `S_TM_TX`)와 Ka DLS TX다.
+- **제거한 skip:** `run_oob_spurious_analysis.m` 고조파 루프의 `SAR_X_RX` `continue`. SAR 쌍(S NADIR/ZENITH, KAA_1/2 → SAR_ANT)은 명시적으로 추가했다(`pair_results.csv`에 SAR가 없기 때문).
+- **SAR 수신 이득:** CST 국부 좌표(+Z_L = PANEL_1 법선 = 보어사이트, +X_L = +X_B = 방위축 가정)에서 입사 극각 θ를 구한다.
+  - θ > 80°: G = min(52 − 50, +2) = +2 dBi
+  - θ ≤ 80°: G = 52 + max_cut[max(−12(θ/HPBW)², 최대 부엽 준위)] (보수 포락선)
+  - 현재 형상: 85.8°(S NADIR), 123.9°(S ZENITH), 89.0°(KAA_1), 95.1°(KAA_2) → 모두 +2 dBi
+- **SAR 허용 PSD:** −174 + 4 − 6 = −176 dBm/Hz. 공유 `receiver_baseline.csv`는 그대로 두고 스크립트 안에서 대체한다.
+- **S-TC → SAR 고조파:** n·[f_c − B_N/2, f_c + B_N/2], n = 1–6. 공칭(2.25 GHz, 2.7 MHz)과 할당 전체(2200–2290 MHz) 모두 겹침이 없다. 고조파 비중첩과 별개로 일반 불요방사 PSD를 SAR 대역 21점에서 평가한다.
+- **Ka 체인:** victim PSD = −47.57 dBm/Hz(송신기 출력, conducted) − A_WG(f) + 31 dBi + G_RX(f) − FSPL(f).
+  - A_WG = 8.685889638 · √((π/a)² − (2πf/c)²) · 0.05 [dB], a = 10.668 mm
+  - 이전의 Harrington 상한 + 2λ_c 조건부 감도는 이 체인으로 대체했다. Harrington 이득은 `SENS_KA_HARRINGTON_GAIN` 참고값으로만 남긴다.
+- **기준면:** 경우 1(한도가 WR-42 상류에서 정의) → 감쇠 적용. 경우 2(안테나 출력/EIRP에서 정의) → 감쇠를 다시 적용하면 이중 적용. 경우 2는 `SENS_KA_SOURCE_AT_ANTENNA_OUTPUT`으로 계산한다(결과보고서 §3.3).
+- **검증:** `validate_oob_spurious.m` 50 checks. SAR skip 제거, SAR 4쌍 존재, SAR TX 간섭원 없음, −176 dBm/Hz, +2 dBi, victim PSD = source − WG + C, C = G_TX + G_RX − FSPL, 고조파 비중첩, WR-42 감쇠 재계산(L/S 126–128 dB, SAR ≈ 90.6 dB, ISL ≈ 83.4 dB), Ka source −47.57 / EIRP −16.57 dBm/Hz를 확인한다.
+

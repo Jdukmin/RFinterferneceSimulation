@@ -1,0 +1,3 @@
+tx_system,rx_system,frequency_hz,tx_power_dbm,tx_gain_dbi,fspl_db,sar_rx_gain_dbi_assumed,sar_off_boresight_deg,power_at_sar_port_dbm,note
+S_TM_TX@SBA_NADIR,SAR_X_RX@SAR_ANT,2250000000.0000,36.9897,-4.6300,49.3947,2.0000,85.7823,-15.0350,SECONDARY_OOB_BLOCKER: SAR antenna response at 2.25 GHz unknown -> owner +2 dBi rear ceiling ASSUMED; SAR RX preselector/blocking data missing -> no verdict
+S_TM_TX@SBA_ZENITH,SAR_X_RX@SAR_ANT,2250000000.0000,36.9897,-9.7196,50.7665,2.0000,123.8503,-21.4964,SECONDARY_OOB_BLOCKER: SAR antenna response at 2.25 GHz unknown -> owner +2 dBi rear ceiling ASSUMED; SAR RX preselector/blocking data missing -> no verdict

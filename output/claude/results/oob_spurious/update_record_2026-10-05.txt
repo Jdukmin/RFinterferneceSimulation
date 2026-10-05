@@ -1,0 +1,10 @@
+Claude worker -- update record (SAR RX victim + Ka WR-42 owner route + RF/RFI terminology), 2026-10-05
+base                    : origin/main 08c2594 (PR #5 merge) on branch ccr-126706a5-w6hitj
+runtime                 : GNU Octave 8.4.0 (earlier runs: 9.2.0). The unchanged script reproduced every earlier CSV
+                          bit-identically under 8.4.0 before any edit (only run_log/run_provenance timestamps changed).
+owner inputs            : output/claude/inputs/owner_engineering_inputs_claude.csv (transcribed from the owner task message)
+other-worker content    : output/codex role-mapping files were READ to confirm the owner role naming (S-TC TX = legacy S_TM_TX;
+                          S-TM RX = legacy S_TC_RX). No Codex number, pattern sample, model or result was used in this analysis.
+shared code / data      : src/, data/, tests/ unchanged. SAR criterion (NF 4 dB) applied inside the Claude script.
+earlier results         : pair_results.csv / sar_assessment.csv / source_availability.csv (freeze-point framework run) kept as
+                          historical records; for SAR see sar_status_update.csv.

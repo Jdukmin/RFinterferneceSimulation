@@ -1,7 +1,55 @@
-Claude OOB/spurious RFI run 2026-10-04 17:23:52 (GNU Octave 9.2.0); analysis base commit 8469e8903da83b6ebed014aae311f90855c31715, working tree DIRTY (1 uncommitted input/code paths)
-Sources: 28 rows (PRIMARY_RR_AP3 SENS_ECSS_50_05C); filter scenarios FILTER_0DB FILTER_40DB FILTER_60DB FILTER_70DB FILTER_80DB
-TX S_TM_TX    CST_EVALUATED  worst S_TC_RX@SBA_ZENITH (S_TC)          req   58.9 dB -> >=60 dB
-TX S_TM_TX    BOUNDED        worst GPS_L5_RX@GPSA_1 (L5)              req   89.0 dB -> >80 dB / separate design required
-TX ISL_X_TX   CST_EVALUATED  worst S_TC_RX@SBA_ZENITH (S_TC)          req   33.7 dB -> >=40 dB
-TX KA_DLS_TX  BOUNDED        worst S_TC_RX@SBA_NADIR (S_TC)           req   89.8 dB -> >80 dB / separate design required
-Rows: freq 10710, pair summary 105, spur 84, derivation 12
+Claude OOB/spurious RFI run 2026-10-05 05:20:46 (GNU Octave 8.4.0); analysis base commit 08c2594d85bf7331d9b699c917d475efad259486, working tree DIRTY (1 uncommitted input/code paths)
+Sources: 32 rows (PRIMARY_RR_AP3 SENS_ECSS_50_05C); filter scenarios FILTER_0DB FILTER_40DB FILTER_60DB FILTER_70DB FILTER_80DB
+S-TC -> SAR integer harmonic check: 0 overlapping orders (4th 8.9946-9.0054 GHz, 5th 11.2432-11.2568 GHz) -> NO_HARMONIC_OVERLAP
+WR-42 50 mm below-cutoff attenuation L1   1.5630-1.5880 GHz: 127.07-127.10 dB
+WR-42 50 mm below-cutoff attenuation L2   1.2174-1.2378 GHz: 127.40-127.41 dB
+WR-42 50 mm below-cutoff attenuation L5   1.1640-1.1890 GHz: 127.44-127.45 dB
+WR-42 50 mm below-cutoff attenuation S_TM 2.0250-2.1100 GHz: 126.44-126.56 dB
+WR-42 50 mm below-cutoff attenuation ISL  10.5500-10.6500 GHz: 83.43-84.47 dB
+WR-42 50 mm below-cutoff attenuation SAR  9.3875-9.9125 GHz: 90.64-95.16 dB
+TX S_TM_TX    CST_SIMULATED_GAIN                   worst S_TC_RX@SBA_ZENITH (S_TC)          req   58.9 dB -> >=60 dB
+TX S_TM_TX    CST_TX_GAIN_OWNER_SAR_RX_ENVELOPE    worst SAR_X_RX@SAR_ANT (SAR)             req   64.4 dB -> >=70 dB
+TX S_TM_TX    HARRINGTON_MAX_DIRECTIVITY_TX        worst GPS_L5_RX@GPSA_1 (L5)              req   89.0 dB -> >80 dB / separate design required
+TX ISL_X_TX   CST_SIMULATED_GAIN                   worst S_TC_RX@SBA_ZENITH (S_TC)          req   33.7 dB -> >=40 dB
+TX KA_DLS_TX  OWNER_31DBI_GAIN_REFERENCE_WR42_50MM worst SAR_X_RX@SAR_ANT (SAR)             req    9.1 dB -> >=40 dB
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L1 RX @ GPSA_1   src  -47.57 WG  127.10 C   -50.21 victim  -224.88 allow -178.0 margin   46.88 req   0.00
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L1 RX @ GPSA_2   src  -47.57 WG  127.10 C   -48.62 victim  -223.29 allow -178.0 margin   45.29 req   0.00
+PRIMARY Ka DLS TX @ KAA_1      -> ISL RX               src  -47.57 WG   83.43 C   -40.45 victim  -171.45 allow -177.0 margin   -5.55 req   5.55
+PRIMARY Ka DLS TX @ KAA_1      -> S-TM RX @ SBA_NADIR  src  -47.57 WG  126.44 C   -28.29 victim  -202.31 allow -177.0 margin   25.31 req   0.00
+PRIMARY Ka DLS TX @ KAA_1      -> S-TM RX @ SBA_ZENITH src  -47.57 WG  126.44 C   -29.06 victim  -203.07 allow -177.0 margin   26.07 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L1 RX @ GPSA_1   src  -47.57 WG  127.07 C   -53.60 victim  -228.24 allow -178.0 margin   50.24 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L1 RX @ GPSA_2   src  -47.57 WG  127.07 C   -52.31 victim  -226.96 allow -178.0 margin   48.96 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> ISL RX               src  -47.57 WG   83.43 C   -39.42 victim  -170.42 allow -177.0 margin   -6.58 req   6.58
+PRIMARY Ka DLS TX @ KAA_2      -> S-TM RX @ SBA_NADIR  src  -47.57 WG  126.44 C   -24.47 victim  -198.49 allow -177.0 margin   21.49 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> S-TM RX @ SBA_ZENITH src  -47.57 WG  126.44 C   -28.39 victim  -202.40 allow -177.0 margin   25.40 req   0.00
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L1 RX @ GPSA_1   src  -49.02 WG     NaN C  -105.43 victim  -154.45 allow -178.0 margin  -23.55 req  23.55
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L1 RX @ GPSA_2   src  -49.02 WG     NaN C  -103.59 victim  -152.61 allow -178.0 margin  -25.39 req  25.39
+PRIMARY S-TC TX @ SBA_NADIR    -> ISL RX               src  -49.02 WG     NaN C   -88.81 victim  -137.83 allow -177.0 margin  -39.17 req  39.17
+PRIMARY S-TC TX @ SBA_NADIR    -> S-TM RX @ SBA_ZENITH src  -49.02 WG     NaN C   -69.09 victim  -118.11 allow -177.0 margin  -58.89 req  58.89
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L1 RX @ GPSA_1   src  -49.02 WG     NaN C   -80.98 victim  -130.00 allow -178.0 margin  -48.00 req  48.00
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L1 RX @ GPSA_2   src  -49.02 WG     NaN C   -86.09 victim  -135.11 allow -178.0 margin  -42.89 req  42.89
+PRIMARY S-TC TX @ SBA_ZENITH   -> ISL RX               src  -49.02 WG     NaN C   -88.72 victim  -137.74 allow -177.0 margin  -39.26 req  39.26
+PRIMARY S-TC TX @ SBA_ZENITH   -> S-TM RX @ SBA_NADIR  src  -49.02 WG     NaN C   -69.09 victim  -118.11 allow -177.0 margin  -58.89 req  58.89
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L2 RX @ GPSA_1   src  -47.57 WG  127.41 C   -26.32 victim  -201.31 allow -178.0 margin   23.31 req   0.00
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L2 RX @ GPSA_2   src  -47.57 WG  127.41 C   -24.64 victim  -199.62 allow -178.0 margin   21.62 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L2 RX @ GPSA_1   src  -47.57 WG  127.41 C   -31.72 victim  -206.71 allow -178.0 margin   28.71 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L2 RX @ GPSA_2   src  -47.57 WG  127.41 C   -31.72 victim  -206.71 allow -178.0 margin   28.71 req   0.00
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L2 RX @ GPSA_1   src  -49.02 WG     NaN C   -56.20 victim  -105.22 allow -178.0 margin  -72.78 req  72.78
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L2 RX @ GPSA_2   src  -49.02 WG     NaN C   -55.61 victim  -104.63 allow -178.0 margin  -73.37 req  73.37
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L2 RX @ GPSA_1   src  -49.02 WG     NaN C   -40.24 victim   -89.26 allow -178.0 margin  -88.74 req  88.74
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L2 RX @ GPSA_2   src  -49.02 WG     NaN C   -44.91 victim   -93.94 allow -178.0 margin  -84.06 req  84.06
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L5 RX @ GPSA_1   src  -47.57 WG  127.45 C   -25.70 victim  -200.71 allow -178.0 margin   22.71 req   0.00
+PRIMARY Ka DLS TX @ KAA_1      -> GPS L5 RX @ GPSA_2   src  -47.57 WG  127.45 C   -23.92 victim  -198.93 allow -178.0 margin   20.93 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L5 RX @ GPSA_1   src  -47.57 WG  127.45 C   -29.37 victim  -204.39 allow -178.0 margin   26.39 req   0.00
+PRIMARY Ka DLS TX @ KAA_2      -> GPS L5 RX @ GPSA_2   src  -47.57 WG  127.45 C   -29.12 victim  -204.13 allow -178.0 margin   26.13 req   0.00
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L5 RX @ GPSA_1   src  -49.02 WG     NaN C   -53.65 victim  -102.67 allow -178.0 margin  -75.33 req  75.33
+PRIMARY S-TC TX @ SBA_NADIR    -> GPS L5 RX @ GPSA_2   src  -49.02 WG     NaN C   -53.30 victim  -102.32 allow -178.0 margin  -75.68 req  75.68
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L5 RX @ GPSA_1   src  -49.02 WG     NaN C   -39.96 victim   -88.98 allow -178.0 margin  -89.02 req  89.02
+PRIMARY S-TC TX @ SBA_ZENITH   -> GPS L5 RX @ GPSA_2   src  -49.02 WG     NaN C   -44.61 victim   -93.63 allow -178.0 margin  -84.37 req  84.37
+PRIMARY S-TC TX @ SBA_NADIR    -> SAR RX               src  -49.02 WG     NaN C   -62.62 victim  -111.64 allow -176.0 margin  -64.36 req  64.36
+PRIMARY S-TC TX @ SBA_ZENITH   -> SAR RX               src  -49.02 WG     NaN C   -63.16 victim  -112.18 allow -176.0 margin  -63.82 req  63.82
+PRIMARY Ka DLS TX @ KAA_1      -> SAR RX               src  -47.57 WG   90.64 C   -28.71 victim  -166.92 allow -176.0 margin   -9.08 req   9.08
+PRIMARY Ka DLS TX @ KAA_2      -> SAR RX               src  -47.57 WG   90.64 C   -28.96 victim  -167.17 allow -176.0 margin   -8.83 req   8.83
+SECONDARY S-TC@SBA_NADIR fundamental at SAR RX port: -15.04 dBm (G_tx -4.63 dBi, FSPL 49.39 dB, G_SAR 2.0 dBi assumed)
+SECONDARY S-TC@SBA_ZENITH fundamental at SAR RX port: -21.50 dBm (G_tx -9.72 dBi, FSPL 50.77 dB, G_SAR 2.0 dBi assumed)
+Rows: freq 13860, pair summary 135, primary 38, spur 92, derivation 12

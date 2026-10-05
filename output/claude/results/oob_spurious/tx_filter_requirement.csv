@@ -1,5 +1,6 @@
-tx_system,coupling_basis,worst_victim,required_additional_suppression_db,margin_0db,screening_filter_class,n_pairs,first_passing_scenario
-S_TM_TX,CST_EVALUATED,S_TC_RX@SBA_ZENITH (S_TC),58.8878,-58.8878,>=60 dB,8.0000,FILTER_60DB
-S_TM_TX,BOUNDED,GPS_L5_RX@GPSA_1 (L5),89.0160,-89.0160,>80 dB / separate design required,8.0000,NONE_UP_TO_80DB
-ISL_X_TX,CST_EVALUATED,S_TC_RX@SBA_ZENITH (S_TC),33.7016,-33.7016,>=40 dB,8.0000,FILTER_40DB
-KA_DLS_TX,BOUNDED,S_TC_RX@SBA_NADIR (S_TC),89.7980,-89.7980,>80 dB / separate design required,18.0000,NONE_UP_TO_80DB
+tx_system,coupling_basis,worst_victim,required_additional_suppression_db,margin_0db,filter_class,n_pairs,first_passing_scenario
+S_TM_TX,CST_SIMULATED_GAIN,S_TC_RX@SBA_ZENITH (S_TC),58.8878,-58.8878,>=60 dB,8.0000,FILTER_60DB
+S_TM_TX,CST_TX_GAIN_OWNER_SAR_RX_ENVELOPE,SAR_X_RX@SAR_ANT (SAR),64.3634,-64.3634,>=70 dB,2.0000,FILTER_70DB
+S_TM_TX,HARRINGTON_MAX_DIRECTIVITY_TX,GPS_L5_RX@GPSA_1 (L5),89.0160,-89.0160,>80 dB / separate design required,8.0000,NONE_UP_TO_80DB
+ISL_X_TX,CST_SIMULATED_GAIN,S_TC_RX@SBA_ZENITH (S_TC),33.7016,-33.7016,>=40 dB,8.0000,FILTER_40DB
+KA_DLS_TX,OWNER_31DBI_GAIN_REFERENCE_WR42_50MM,SAR_X_RX@SAR_ANT (SAR),9.0778,-9.0778,>=40 dB,20.0000,FILTER_40DB

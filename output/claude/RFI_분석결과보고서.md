@@ -1,259 +1,269 @@
-# RFI 간섭 해석 결과보고서 — 송신기 불요방사 규격 적용 (Claude 독립 분석)
+# RFI 간섭 해석 결과보고서 — 불요방사 전력밀도 기반 피간섭원 평가 (Claude 독립 분석)
 
-**결론.** 국제 규제 한도(ITU 전파규칙 부록 3)에 **딱 맞게 준수하는 송신기**가 내는 불요방사를 피간섭원 수신 대역에서 평가했다.
-- **추가 외부 필터가 없으면 42개 TX→피간섭원 조합 모두가 수신기 PSD 기준을 넘는다**(1차 규격 기준). 이 중 16개는 CST 결합, 26개는 물리 상한 결합으로 계산했다.
-- 가장 큰 요구는 다음과 같다(피간섭원 포트, 허용 PSD 대비).
+**결론.** ITU 전파규칙 부록 3(RR AP3) 한도를 그대로 내는 송신기를 가정하고, 불요방사(spurious emission)가 각 피간섭원 수신 포트에 만드는 전력밀도(victim input PSD)를 허용 간섭 전력밀도(allowable interference PSD)와 비교했다. 이번 갱신에서 **SAR 수신기(SAR RX)를 피간섭원으로 포함**했고, Ka DLS는 S-TC와 같은 물리 체인(source PSD → 도파관 감쇠 → 경로 결합 → victim PSD)으로 다시 정리했다.
 
-  | 송신기 | 지배 피간섭원 | 최소 추가 억제량 | 범주 | 근거 |
-  |---|---|---|---|---|
-  | S-TM | 반대편 S-TC | **58.9 dB** | 60 dB 필터부터 충족(여유 1.1 dB) | CST 결합 |
-  | ISL | S-TC | **33.7 dB** | 40 dB부터 충족 | CST 결합 |
-  | Ka | S-TC | 물리 상한 기준 **89.8 dB** | 80 dB로도 부족 | 상한 결합 |
-
-- Ka의 결과는 KAA가 S/L/X 대역에서 낼 수 있는 최대 지향성(물리 상한)을 가정한 값이다. KAA의 WR-42 도파관 급전이 차단 주파수 아래 대역을 실제로 막아 준다면 L/S 대역은 필터 없이도 기준을 충족한다(조건부).
+- **S-TC 송신기(2.25 GHz, 5 W)는 외부 필터가 필요하다.** CST 결합으로 평가한 경로 중 최악은 **SAR RX로, 요구 추가 억제량(required additional suppression)이 64.4 dB**다. 그 다음은 반대편 S-TM RX(58.9 dB)다.
+  - S-TC의 정수배 고조파(integer harmonic)는 SAR 대역과 겹치지 않는다. 그러나 이것은 **고조파 경로가 없다는 뜻일 뿐, 광대역 불요방사 간섭이 없다는 뜻은 아니다.** 64.4 dB는 고조파가 아닌 일반 불요방사(generic spurious)에서 나온다.
+  - GPS L2/L5는 89.0 dB까지 요구된다. 다만 S 안테나의 L2/L5 CST 응답을 쓸 수 없어서 송신 안테나 이득에 물리적 최대 지향성(Harrington limit)을 넣은 상한값이다.
+- **Ka DLS 송신기(70 W)는 owner 설계 가정에서 L/S 대역 피간섭원에 대해 외부 필터가 필요 없다(margin +20.9 ~ +50.2 dB).** SAR RX와 ISL RX에는 각각 **9.1 dB와 6.6 dB**의 추가 억제가 필요하다. Ka의 최악 피간섭원은 SAR RX다.
+  - 이 결과는 WR-42 도파관 50 mm의 차단주파수 이하 감쇠(below-cutoff waveguide attenuation; L/S 126–127 dB, SAR 90.6 dB, ISL 83.4 dB)를 적용한 값이다.
+  - 이 감쇠는 **불요방사 한도가 도파관 상류(송신기 출력)에서 정의될 때만** 적용할 수 있다. 한도가 안테나 출력이나 EIRP로 정의되어 있다면 같은 감쇠를 다시 빼는 것은 이중 적용(double counting)이고, 그 경우 요구 억제량은 82–107 dB가 된다(§3.3).
 
 판정 범위:
-- 1차 판정은 **TX 불요방사 억제 요구**(송신 측 필터)이며, 수신기의 blocker rejection과는 별개다.
-- 수신기 블로킹·위성 구조 산란은 포함하지 않았다.
-- 기준은 freeze point의 engineering baseline이다(GPS −178 dBm/Hz, S-TC·ISL −177 dBm/Hz).
+- 1차 판정은 **TX 불요방사 억제 요구**(송신 측 필터)다. 수신기 blocker rejection, 구조 산란, 근거리 효과는 포함하지 않았다.
+- 허용 PSD는 GPS −178, S-TM·ISL −177 dBm/Hz(engineering baseline), SAR **−176 dBm/Hz**(owner 입력: NF 4 dB, I/N −6 dB)다.
+- 분석 범위의 간섭원은 owner 지정에 따라 **S-TC TX와 Ka DLS TX**다. SAR TX는 간섭원에서 제외했고, ISL TX는 이전 결과를 참고로만 유지했다(§5).
 
 ## 1. Executive Summary
 
-- **적용 규격(1차):** ITU 전파규칙 부록 3(RR AP3, Rev. WRC-12) Table I "우주국(space stations)" 한도다.
-  - 감쇠 = 43 + 10 log P 또는 60 dBc 중 **덜 엄격한 값**, 4 kHz 기준 대역폭, 안테나 전송선 공급전력 기준(conducted).
-  - 모든 피간섭원 대역은 각 송신기 중심에서 AP3 Annex 1 경계보다 멀다. 따라서 **spurious 영역**이고, OOB 마스크(SFCG 21-2, SM.1541)는 적용되지 않는다.
-- **source PSD(산출):** 4 kHz당 한도를 잡음형 방사로 가정한 광대역 등가값이다.
-  - S-TM(5 W): −13.0 dBm/4 kHz → **−49.0 dBm/Hz**
-  - ISL(1 W): −13.0 dBm/4 kHz → **−49.0 dBm/Hz**
-  - Ka(70 W): −11.55 dBm/4 kHz → **−47.6 dBm/Hz**
-  - 이산 스퍼는 dBm/Hz로 바꾸지 않고 별도로 검토했다(§9).
-- **결과(필터 0 dB):**
-  - **S-TM:** margin −23.5 ~ −58.9 dB. 최악은 반대편 S-TC, 다음은 GPSA_1 L1(−48.0 dB).
-  - **ISL:** margin −6.8 ~ −33.7 dB. 최악은 S-TC.
-  - **Ka:** 상한 결합 기준 −59.6 ~ −89.8 dB.
-- **최소 추가 억제량과 screening 필터 범주:**
-  - S-TM ≥ 60 dB
-  - ISL ≥ 40 dB
-  - Ka는 상한 기준으로 > 80 dB여서 별도 설계 검토가 필요하다. 1순위 확인 항목은 KAA 도파관 급전 구간의 차단 특성이다.
-- **미확정으로 결론이 바뀔 수 있는 입력:**
-  1. 실제 송신기 불요방사 사양(공급사 규격)
-  2. KAA의 S/L/X 대역 방사 응답 또는 도파관 구간 길이
-  3. S 안테나의 L2/L5 응답(현재 정규화 불안정으로 상한만 계산)
-  4. 실제 필터 감쇠 table
-- **감도(ECSS-E-ST-50-05C, −60 dBc/4 kHz):** 송신기가 ECSS로 조달되면 S-TM은 10 dB, ISL은 17 dB 완화된다.
-  - S-TM → S-TC는 여전히 48.9 dB가 필요해 60 dB 필터 범주가 유지된다.
-  - ISL → GPS L1만 필터 없이 기준을 충족한다.
-- **Secondary blocker:** 기존 값(S-TM@ZENITH → GPSA_1 −21.3 dBm, S-TM → 반대편 S-TC −32.3 dBm)은 유지했고, 블로킹 판정은 보류다. 필터 요구는 여기서 도출하지 않았다.
+- **불요방사원 전력밀도(spurious emission PSD, 규격 기반 산출):** RR AP3 Table I 우주국 한도, 4 kHz 기준 대역폭, 잡음형 광대역 방사 가정.
+  - S-TC 5 W: 43 + 10 log 5 = 49.99 dBc → **−49.02 dBm/Hz** (안테나 입력 포트, conducted)
+  - Ka DLS 70 W: 60 dBc → **−47.57 dBm/Hz** (송신기 출력 = WR-42 입력, conducted). 31 dBi 기준 이득을 더한 **불요방사 EIRP 전력밀도(spurious EIRP spectral density)는 −16.57 dBm/Hz**다. 이 값은 도파관 감쇠를 포함하지 않는다.
+- **주요 결과(필터 0 dB, 대역 내 최악 주파수):**
 
-## 2. 적용한 OOB/spurious 규격
+  | 간섭원 → 최악 피간섭원 | Victim PSD [dBm/Hz] | 허용 PSD [dBm/Hz] | Margin [dB] | 요구 추가 억제량 [dB] | 결합 근거 |
+  |---|---|---|---|---|---|
+  | S-TC → SAR RX | −111.6 | −176 | −64.4 | **64.4** | CST(S 안테나) + owner SAR 패턴 |
+  | S-TC → 반대편 S-TM RX | −118.1 | −177 | −58.9 | 58.9 | CST |
+  | S-TC → GPS L2/L5 | −89.0 | −178 | −89.0 | 89.0 | 송신 이득 상한(Harrington) |
+  | Ka DLS → SAR RX | −166.9 | −176 | −9.1 | **9.1** | 31 dBi + WR-42 50 mm + owner SAR 패턴 |
+  | Ka DLS → ISL RX | −170.4 | −177 | −6.6 | 6.6 | 31 dBi + WR-42 50 mm + CST |
+  | Ka DLS → GPS / S-TM | −198.5 이하 | −177 / −178 | +20.9 이상 | 0 | 31 dBi + WR-42 50 mm + CST |
 
-**결과.** 세 송신기 모두 피간섭원 대역이 spurious 영역이다. 1차 규격은 RR AP3이다. ECSS는 감도 분석에, CCSDS 2.4.16은 이산 스퍼 검토에 썼다.
+- **최종 worst-case 피간섭원:**
+  - CST·owner 입력으로 평가한 경로에서는 **SAR RX**가 두 간섭원 모두의 최악이다(S-TC 64.4 dB, Ka 9.1 dB).
+  - 수치상 가장 큰 요구량은 S-TC → GPS L5 89.0 dB다. 이 값은 S 안테나의 L2/L5 이득을 물리 상한으로 둔 값이므로, S 안테나 L2/L5 응답이 확보되면 낮아질 수 있다.
+- **SAR 수신 이득:** 네 간섭원 위치(S NADIR/ZENITH, KAA_1/2) 모두 SAR 보어사이트 기준 85.8–123.9°로 ±80° 밖이다. 따라서 owner 후방 상한 **G_SAR = +2 dBi**(52 dBi − 50 dB)를 적용했다.
+- **필터 요구(송신 측):** S-TC는 **≥ 70 dB 필터 감쇠**가 필요하다(SAR 64.4 dB 기준; GPS L2/L5 상한 경로는 별도 확인 필요). Ka는 owner 설계 가정에서 **≥ 10 dB**면 SAR·ISL을 포함해 모든 피간섭원이 기준을 충족한다. 단 기준면 확인이 전제다(§3.3).
+- **결론을 바꿀 수 있는 미확정 입력:**
+  1. Ka 송신기 불요방사 사양이 정의되는 기준면(송신기 출력 vs 안테나 출력)과 WR-42 50 mm 구간의 우회 경로 유무
+  2. S 안테나의 L2/L5 대역 응답
+  3. 실제 송신기 불요방사 사양과 필터 데이터
 
-**A. 적용 규격**
+## 2. 주요 RFI 결과 — 통합 결과표
 
-| TX | 규격 | 영역 (AP3 Annex 1 경계) | 한도 | 기준 대역폭 | 기준면 |
-|---|---|---|---|---|---|
-| S-TM 2.25 GHz, 5 W | RR AP3 Table I 우주국 | spurious (경계 ±6.75 MHz = 2.5 B_N, B_N 2.7 MHz; 피간섭원 최소 이격 140 MHz) | 43 + 10 log 5 = 49.99 dBc → −13.0 dBm | 4 kHz | 안테나 전송선(conducted) |
-| ISL 10.6 GHz, 1 W | RR AP3 Table I 우주국 | spurious (경계 ±50 MHz; 최소 이격 8.3 GHz) | 43.0 dBc → −13.0 dBm | 4 kHz | 안테나 전송선 |
-| Ka 25.5–27 GHz, 70 W | RR AP3 Table I 우주국 | spurious (경계 ±2.75 GHz = 1.5 B_N + 500 MHz; 최소 이격 15.6 GHz) | 61.45 dBc > 60 dBc → **60 dBc** → −11.55 dBm | 4 kHz | 안테나 전송선 (방사 경로는 §4 상한) |
-| (감도) 전 TX | ECSS-E-ST-50-05C Table 5-6 | spurious (±2.5 × 점유대역폭 밖) | −60 dBc | 4 kHz | 송신기 출력 |
-| (이산 스퍼) 전 TX | CCSDS 401 rec. 2.4.16 | 단일 스펙트럼선 | 단일 스퍼 총전력 ≤ −60 dBc | 없음(선 전체 전력) | 송신기 출력 |
+**결과.** 모든 대역을 같은 PSD 체계로 정리했다. S-TC는 GPS L2/L5, SAR, S-TM, GPS L1, ISL 순으로 큰 억제가 필요하다. Ka는 SAR와 ISL만 추가 억제가 필요하다.
 
-**규격 후보 비교**(근거 유형: 규격 = spec):
-
-| 규격 | 적용 대상 | 피간섭원 대역에서의 적용성 | 보수성(RFI 관점) | 채택 |
-|---|---|---|---|---|
-| RR AP3 (Rev. WRC-12) / ITU-R SM.329-13 Category A | 모든 우주국 (국제 규제, 우주업무는 설계 한도) | 직접 적용 (spurious) | 허용 방사가 가장 큼 = 가장 보수적 | **1차** |
-| ECSS-E-ST-50-05C Rev.2 (2011) Table 5-6 | ECSS 조달 위성 | 적용 (spurious) | S·ISL은 AP3보다 10·17 dB 낮은 방사 | 감도 |
-| CCSDS 401.0-B-32 rec. 2.4.16 | CCSDS 준수 원격측정 송신기 | 이산 스펙트럼선 | 이산선에만 해당, PSD 아님 | 이산 스퍼 검토 |
-| SFCG Rec. 21-2 (CCSDS 413.0-G-3 경유) | Category A SRS/EESS 하향링크 2.2/8/26 GHz | **OOB 영역 마스크**(±약 5 Rs, 하한 peak PSD 대비 −60 dB) | 피간섭원 대역에 미도달 | 미채택 |
-| ITU-R SM.1541 / SM.1539 | OOB 영역 / 경계 | 피간섭원 대역은 spurious | — | 미채택 |
-| SM.329 Category B/C/D | 지상 장비 국가 등급 | 우주국 항목 없음 | — | 미채택 |
-| 공급사 datasheet | 특정 제품 | 제품 미선정 | — | 미채택(입력되면 AP3 대체) |
-
-- 고조파: 송신 주파수의 2–20배 중 피간섭원 대역에 들어가는 차수는 없다(`domain_and_harmonic_check.csv`). AP3 한도는 고조파를 포함한 모든 spurious 성분에 같이 적용된다.
-- AP3 §12(같은 위성의 다른 트랜스폰더 대역 면제)는 피간섭원이 수신기이므로 해당하지 않는다.
-
-## 3. 규격별 source PSD 산출
-
-**결과.** 규격 한도(4 kHz당 전력)를 광대역 등가 PSD로 바꾸면 S-TM·ISL −49.0 dBm/Hz, Ka −47.6 dBm/Hz다. 이산 스퍼는 별도로 유지한다.
-
-변환(산출):
+계산식(산출):
 ```
-감쇠 A [dB]          = min(43 + 10 log P[W], 60)          (AP3: "whichever is less stringent")
-4 kHz당 한도 [dBm]   = P[dBm] − A
-광대역 등가 PSD      = 4 kHz당 한도 − 10 log10(4000) = 4 kHz당 한도 − 36.02 dB   [dBm/Hz]
+Victim PSD [dBm/Hz]   = Source PSD − WG attenuation + Coupling
+Coupling [dB]         = G_TX(f_v) + G_RX(f_v) − FSPL(f_v, d)          (피간섭원 주파수 f_v에서 평가)
+Margin [dB]           = Allowable PSD − Victim PSD                     (양수 = 여유, 음수 = 초과)
+Required suppression  = max(0, −Margin)                                 (송신 측 추가 필터 감쇠)
 ```
+- S-TC의 G_TX는 피간섭원 주파수에서의 S 안테나 CST RealizedGain(시뮬레이션 데이터)이다. Ka의 G_TX는 owner 기준 이득 31 dBi다.
+- G_RX는 피간섭원 안테나의 자기 대역 CST RealizedGain이다. SAR는 owner 재구성 패턴(+2 dBi)을 쓴다.
+- WG attenuation은 Ka에만 있으며, 송신기 출력과 방사 개구 사이의 WR-42 50 mm 구간 감쇠다.
 
-**B. Source emission (피간섭원 대역 전체에서 평탄)**
+**표 A. 불요방사 PSD 결과 (1차 RR AP3, 필터 0 dB, 대역 내 최악 주파수)**
 
-| TX | 피간섭원 대역 | 최악 준수 source PSD [dBm/Hz] | 이산 스퍼 한도 [dBm] | 근거 |
-|---|---|---|---|---|
-| S-TM (36.99 dBm) | L1, L2, L5, S-TC, ISL | **−49.0** (ECSS 감도 −59.0) | −13.0 (AP3/4 kHz), −23.0 (CCSDS) | RR AP3 Table I + §8; SM.329-13 Annex 4 Table 8 |
-| ISL (30.0 dBm) | L1, L2, L5, S-TC | **−49.0** (ECSS −66.0) | −13.0 (AP3), −30.0 (CCSDS) | 같음 |
-| Ka (48.45 dBm) | L1, L2, L5, S-TC, ISL | **−47.6** (ECSS 동일) | −11.55 (AP3), −11.55 (CCSDS) | 같음 (P > 50 W: 10 log P − 30 dBm) |
+| Interferer | Victim | Source PSD [dBm/Hz] | WG attenuation [dB] | Coupling [dB] | Victim PSD [dBm/Hz] | Allowable PSD [dBm/Hz] | Margin [dB] | Required suppression [dB] |
+|---|---|---|---|---|---|---|---|---|
+| S-TC TX @ ZENITH | GPS L5 RX @ GPSA_1 | −49.02 | — | −39.96 ¹ | −88.98 | −178 | −89.02 | **89.0** ¹ |
+| S-TC TX @ ZENITH | GPS L2 RX @ GPSA_1 | −49.02 | — | −40.24 ¹ | −89.26 | −178 | −88.74 | 88.7 ¹ |
+| S-TC TX @ NADIR | GPS L5 / L2 RX (양 GPSA) | −49.02 | — | −56.20 ~ −53.30 ¹ | −105.22 ~ −102.32 | −178 | −75.68 ~ −72.78 | 75.7 ¹ |
+| S-TC TX @ NADIR | **SAR RX** | −49.02 | — | −62.62 | −111.64 | **−176** | −64.36 | **64.4** |
+| S-TC TX @ ZENITH | **SAR RX** | −49.02 | — | −63.16 | −112.18 | **−176** | −63.82 | 63.8 |
+| S-TC TX (양 방향) | 반대편 S-TM RX | −49.02 | — | −69.09 | −118.11 | −177 | −58.89 | 58.9 |
+| S-TC TX @ ZENITH | GPS L1 RX @ GPSA_1 / GPSA_2 | −49.02 | — | −80.98 / −86.09 | −130.00 / −135.11 | −178 | −48.00 / −42.89 | 48.0 |
+| S-TC TX @ NADIR / ZENITH | ISL RX | −49.02 | — | −88.81 / −88.72 | −137.83 / −137.74 | −177 | −39.17 / −39.26 | 39.3 |
+| S-TC TX @ NADIR | GPS L1 RX @ GPSA_1 / GPSA_2 | −49.02 | — | −105.43 / −103.59 | −154.45 / −152.61 | −178 | −23.55 / −25.39 | 25.4 |
+| Ka DLS TX @ KAA_1 / KAA_2 | **SAR RX** | −47.57 ² | 90.64 | −28.71 / −28.96 | −166.92 / −167.17 | **−176** | −9.08 / −8.83 | **9.1** ³ |
+| Ka DLS TX @ KAA_2 / KAA_1 | ISL RX | −47.57 ² | 83.43 | −39.42 / −40.45 | −170.42 / −171.45 | −177 | −6.58 / −5.55 | 6.6 ³ |
+| Ka DLS TX @ KAA_2 / KAA_1 | S-TM RX (최악 SBA_NADIR) | −47.57 ² | 126.44 | −24.47 / −28.29 | −198.49 / −202.31 | −177 | +21.49 / +25.31 | 0 ³ |
+| Ka DLS TX @ KAA_1 | GPS L5 / L2 RX @ GPSA_2 | −47.57 ² | 127.45 / 127.41 | −23.92 / −24.64 | −198.93 / −199.62 | −178 | +20.93 / +21.62 | 0 ³ |
+| Ka DLS TX @ KAA_1 | GPS L1 RX @ GPSA_2 | −47.57 ² | 127.10 | −48.62 | −223.29 | −178 | +45.29 | 0 ³ |
+
+¹ S 안테나의 L2/L5 CST RealizedGain은 정규화가 불안정해 쓰지 않았다. 대신 S 안테나를 감싸는 구(a = 53 mm)의 Harrington 최대 지향성(6.4–6.6 dBi)을 송신 이득으로 넣었다. 따라서 이 행은 **안테나 이득 상한에 따른 보수값**이다.
+² Ka source PSD는 송신기 출력(WR-42 입력) 기준의 conducted 값이다. 31 dBi 기준 이득은 Coupling 열에 들어 있다.
+³ Owner 설계 가정(한도가 WR-42 상류에서 정의, 유효 길이 50 mm)이다. 한도가 안테나 출력에서 정의된다면 WR-42 감쇠를 적용할 수 없다(§3.3, 각주 표 C).
 
 해석:
-- 광대역 등가 PSD는 "4 kHz마다 한도까지 채운 잡음형 방사"를 뜻한다. 규격을 지키면서 가능한 최악이다.
-- 같은 한도를 하나의 이산 스퍼로 쓰면 −13 dBm 단일 톤이 된다. 이 톤은 수신 채널에 들어올 때만 의미가 있으므로 PSD mask가 아니라 2차 수신기 적분에서 다룬다(§9).
-- 기준면은 안테나 전송선 공급전력이다. 송신기와 안테나 사이 급전선 손실은 0 dB로 두었다(보수적).
-- 계산에 넣은 입력: `output/claude/inputs/tx_emission_sources_claude.csv`. 공유 `data/rfi_psd/tx_emission_masks.csv`는 freeze 상태 그대로(비어 있음) 두었다.
+- **SAR RX가 S-TC의 새 지배 경로다.** S-TC → SAR의 경로 결합(−62.6 dB)은 S-TM 경로(−69.1 dB)보다 6.5 dB 크다. SAR 기준(−176 dBm/Hz)은 S-TM 기준보다 1 dB 완화되어 있지만, 결합 차이가 더 크다. 따라서 64.4 dB > 58.9 dB다.
+- 고조파 비중첩은 S-TC → SAR 결론에 영향을 주지 않는다. 계산에 쓴 것은 SAR 대역 전체에 걸친 광대역 불요방사 PSD다.
+- **Ka의 L/S 피간섭원은 도파관 감쇠(126–127 dB)가 지배한다.** 31 dBi를 L/S에 적용해도 margin이 +20 dB 이상이다. 차단주파수 14.05 GHz에 가까운 SAR(9.39–9.91 GHz)·ISL(10.55–10.65 GHz)만 감쇠가 83–91 dB로 줄어 초과가 남는다.
+- 전체 주파수별 결과: `results/oob_spurious/victim_psd_results.csv`. 쌍별 요약(최악 주파수 기준): `primary_psd_results.csv`.
 
-## 4. Victim-band PSD 결과
+## 3. 대역별 상세 — S-TC → SAR, Ka WR-42, 기준면
 
-**결과.** 필터 0 dB에서 CST로 평가된 S-TM·ISL 조합은 모두 기준을 넘는다. Ka와 S-TM → GPS L2/L5는 송신 안테나 응답이 없어 물리 상한으로 계산했고, 상한 기준으로도 크게 넘는다.
+### 3.1 S-TC → SAR: 고조파와 일반 불요방사를 분리
 
-결합 계산(산출, CST 시뮬레이션 데이터 기반):
-- `피간섭원 포트 PSD = source PSD − 필터 감쇠 + C`, `margin = 허용 PSD − 피간섭원 포트 PSD`(양수 여유, 음수 초과)
-- C는 피간섭원 주파수에서 구한다.
-  - **CST:** C = G_TX(f_v) + G_RX(f_v) − FSPL(f_v)
-  - **상한:** TX 안테나의 해당 대역 응답이 없으면 G_TX 대신 그 안테나를 감싸는 구의 Harrington 최대 지향성 D = (ka)² + 2ka를 쓴다(완전 정합, 최악 지향).
-    - KAA: a = 119 mm(직경 220 mm, 높이 ≤ 92.2 mm) → L1 13.7 dBi, S-TC 15.8 dBi, ISL 28.8 dBi
-    - S 안테나: a = 53 mm → L2/L5 약 6.5 dBi
-  - 26 GHz KAA 패턴은 사용하지 않았다.
+**A. 정수배 고조파 (integer harmonic overlap): 없음**
 
-**C. RFI 결과 (1차 RR AP3, 필터 0 dB, 대역 내 최악 주파수)**
+| 차수 | 고조파 대역 (점유대역 2.7 MHz 기준) | SAR 대역 9.3875–9.9125 GHz와의 관계 |
+|---|---|---|
+| 4차 | 8.9946–9.0054 GHz | 382 MHz 아래, 겹침 없음 |
+| 5차 | 11.2433–11.2568 GHz | 1.33 GHz 위, 겹침 없음 |
+| 1–6차 전체 | — | **NO_HARMONIC_OVERLAP** |
 
-| TX → 피간섭원 | source PSD [dBm/Hz] | 결합 [dB] | 피간섭원 PSD [dBm/Hz] | 기준 [dBm/Hz] | margin [dB] |
-|---|---|---|---|---|---|
-| S-TM → 반대편 S-TC (양 방향 동일) | −49.0 | −69.1 (CST) | −118.1 | −177 | **−58.9** |
-| S-TM@ZENITH → GPSA_1 / GPSA_2 (L1) | −49.0 | −81.0 / −86.1 (CST) | −130.0 / −135.1 | −178 | −48.0 / −42.9 |
-| S-TM@NADIR → GPSA_1 / GPSA_2 (L1) | −49.0 | −105.4 / −103.6 (CST) | −154.5 / −152.6 | −178 | −23.5 / −25.4 |
-| S-TM@NADIR / ZENITH → ISL | −49.0 | −88.8 / −88.7 (CST) | −137.8 / −137.7 | −177 | −39.2 / −39.3 |
-| S-TM → GPS L2 / L5 | −49.0 | −56.2 ~ −40.0 (상한) | −105.2 ~ −89.0 | −178 | −72.8 ~ −89.0 (상한) |
-| ISL → GPSA_1 / GPSA_2 (L1) | −49.0 | −122.2 / −119.7 (CST) | −171.2 / −168.7 | −178 | −6.8 / −9.3 |
-| ISL → GPSA_1 / GPSA_2 (L2·L5) | −49.0 | −103.3 ~ −100.7 (CST) | −152.3 ~ −149.7 | −178 | −25.7 ~ −28.3 |
-| ISL → S-TC@NADIR / ZENITH | −49.0 | −97.7 / −94.3 (CST) | −146.7 / −143.3 | −177 | −30.3 / −33.7 |
-| Ka → GPS L1 | −47.6 | −70.9 ~ −66.0 (상한) | −118.4 ~ −113.6 | −178 | −59.6 ~ −64.4 (상한) |
-| Ka → GPS L2 / L5 | −47.6 | −50.9 ~ −43.3 (상한) | −98.4 ~ −90.9 | −178 | −79.6 ~ −87.1 (상한) |
-| Ka → S-TC | −47.6 | −44.2 ~ −39.6 (상한) | −91.8 ~ −87.2 | −177 | −85.2 ~ −89.8 (상한) |
-| Ka → ISL | −47.6 | −42.6 / −41.6 (상한) | −90.2 / −89.2 | −177 | −86.8 / −87.8 (상한) |
+- S 하향링크 할당 전체(2200–2290 MHz)로 넓혀도 4차는 8.80–9.16 GHz이며 SAR 하한보다 227.5 MHz 아래다. 따라서 겹치지 않는다(`stc_sar_harmonic_check.csv`).
+- **이 결론은 고조파 경로가 없다는 뜻이며, S-TC → SAR 분석을 끝내는 근거가 아니다.**
+
+**B. 일반 불요방사 (generic spurious emission): 64.4 dB 억제 필요**
+
+| 단계 | S-TC @ NADIR | S-TC @ ZENITH | 근거 유형 |
+|---|---|---|---|
+| S-TC 불요방사 PSD @ SAR 대역 | −49.02 dBm/Hz | −49.02 dBm/Hz | 규격(RR AP3) → 산출 |
+| S 안테나 이득 @ 9.3875 GHz, SAR 방향 | −2.81 dBi | −1.99 dBi | CST 시뮬레이션 데이터 |
+| 거리 / 자유공간 손실(FSPL) | 3.127 m / 61.80 dB | 3.662 m / 63.17 dB | 산출 |
+| SAR 입사각(보어사이트 기준) | 85.8° (±80° 밖) | 123.9° (후방) | 산출(형상) |
+| SAR 수신 이득 | **+2 dBi**(후방 상한) | **+2 dBi**(후방 상한) | owner 공학 입력 |
+| 경로 결합(Coupling) | −62.62 dB | −63.16 dB | 산출 |
+| Victim PSD (SAR 수신 포트) | −111.64 dBm/Hz | −112.18 dBm/Hz | 산출 |
+| 허용 PSD (NF 4 dB, I/N −6 dB) | −176 dBm/Hz | −176 dBm/Hz | owner 입력 |
+| Margin / 요구 추가 억제량 | −64.36 / **64.4 dB** | −63.82 / 63.8 dB | 산출 |
+
+- 최악 주파수는 SAR 대역 하단(9.3875 GHz)이다. S 안테나 이득이 대역 하단에서 가장 크기 때문이다.
+- S-TC @ ZENITH → SAR는 위성 구조물로 가시선이 막혀 있다. 하지만 자유공간 결합에서 차폐 감쇠를 빼지 않았다(보수 방향).
+- ECSS-E-ST-50-05C(−60 dBc/4 kHz)로 조달된 송신기라면 요구량은 54.4 dB다.
+
+### 3.2 Ka DLS: WR-42 50 mm 차단주파수 이하 감쇠
+
+**결과.** WR-42(a = 10.668 mm, TE10 차단주파수 f_c = c/2a = 14.051 GHz) 50 mm 구간의 감쇠는 L/S 126.4–127.5 dB, SAR 90.6–95.2 dB, ISL 83.4–84.5 dB다. 각 대역의 상단 주파수가 최소 감쇠(최악)다.
+
+```
+α(f) = √((π/a)² − (2πf/c)²)   [Np/m]        (TE10, f < f_c)
+A(f) = 8.685889638 · α(f) · 0.05   [dB]      (L = 50 mm, owner 입력)
+```
+
+| 피간섭원 대역 | 주파수 [GHz] | f_hi / f_c | 감쇠 A [dB] (최악 = 상단) |
+|---|---|---|---|
+| GPS L5 | 1.164–1.189 | 0.085 | 127.45–127.44 |
+| GPS L2 | 1.2174–1.2378 | 0.088 | 127.41–127.40 |
+| GPS L1 | 1.563–1.588 | 0.113 | 127.10–127.07 |
+| S-TM | 2.025–2.110 | 0.150 | 126.56–126.44 |
+| SAR | 9.3875–9.9125 | 0.705 | 95.16–**90.64** |
+| ISL | 10.55–10.65 | 0.758 | 84.47–**83.43** |
+
+- 50 mm는 ITU-R SM.329-13 recommends 2.5의 조건(도파관 길이 ≥ 2λ_c = 42.7 mm)을 만족한다. 이 조항은 이런 일체형 안테나에 대해 0.7 f_c 아래 불요방사 측정을 요구하지 않는다.
+- 감쇠는 기본 모드(TE10)만 계산했다. 고차 모드는 차단주파수가 더 높아 더 크게 감쇠하므로, TE10 값이 가장 작은(보수적) 감쇠다.
+- 31 dBi 기준 이득은 L/S 대역에서 보수적이다. KAA 크기(직경 220 mm)의 물리적 최대 지향성은 L/S 13.7–15.8 dBi, SAR·ISL 약 28 dBi다. 이 상한을 쓰면 Ka → SAR 6.3 dB, Ka → ISL 4.4 dB로 줄어든다(`ka_reference_plane_comparison.csv`, 참고값).
+
+### 3.3 기준면 검토 — AP3 한도와 WR-42 감쇠의 연결
+
+**결론.** RR AP3의 불요방사 한도는 기본적으로 **안테나 전송선에 공급되는 전력**(송신기 출력, conducted)에 정의된다. KAA의 WR-42 구간이 그 기준면보다 하류에 있는 안테나 일부라면 감쇠를 적용할 수 있다. 반대로 한도나 공급사 사양이 안테나 출력에서 정의되었다면 감쇠를 다시 적용할 수 없다.
+
+| 경우 | 불요방사 정의 위치 | WR-42 감쇠 적용 | Ka 요구 억제량 (최악) |
+|---|---|---|---|
+| **1. 도파관 상류** (owner 설계 가정, 표 A) | 송신기(SSPA) 출력 플랜지 = 안테나 전송선 입력. AP3 기본 정의와 같다 | **적용 가능.** 불요방사가 WR-42 below-cutoff 구간을 지나야 방사된다 | SAR 9.1 dB, ISL 6.6 dB, L/S 0 dB |
+| **2. 안테나 출력/EIRP** | 안테나 급전 출력 또는 방사 EIRP(AP3 e.i.r.p. 방법, 공급사 안테나 단 측정) | **적용 불가.** 측정값에 이미 WR-42 감쇠가 포함되어 있어 다시 빼면 이중 적용이 된다 | SAR 100.2 dB, ISL 90.0 dB, S-TM 105.0 dB, GPS L1/L2/L5 81.8 / 105.8 / 106.5 dB |
 
 해석:
-- **S-TM → 반대편 S-TC가 지배 경로다.** 같은 형식 S 안테나 사이 S-TC 대역 결합(−69 dB)이 크고, S-TC 기준이 엄격하다.
-- ISL의 L1 경로는 결합이 −120 dB 수준으로 작아 초과가 10 dB 이내다.
-- **Ka 상한의 의미와 한계:**
-  - 상한은 "KAA가 저주파에서 크기 한계만큼 이득을 낼 수 있다"는 가정이다.
-  - 실제로 KAA는 WR-42 도파관(차단 14.05 GHz)으로 급전된다(datasheet). L/S 대역은 차단 주파수의 0.7배 아래라 전파되지 않는다.
-  - ITU-R SM.329-13 recommends 2.5도 "길이가 차단 파장의 2배 이상인 도파관 구간을 가진 일체형 안테나는 차단 주파수의 0.7배 아래 spurious 측정을 요구하지 않는다"고 명시한다.
-  - 이 조건(WR-42 길이 ≥ 2λc = 42.7 mm)이 확인되면 추가 감쇠는 L/S 약 108 dB, ISL 약 72 dB다(산출, 조건부).
-  - 그 경우 Ka → L/S margin은 +18 ~ +49 dB(필터 불필요), Ka → ISL은 −15.6 / −16.6 dB(40 dB 필터로 충족)가 된다.
-  - 이 조건은 **미확정**이며, 1차 결과는 상한값이다.
-- 상세: `results/oob_spurious/pair_margin_summary.csv`(pair × variant), `victim_psd_results.csv`(주파수별).
+- AP3는 e.i.r.p. 방법을 "안테나가 spurious 영역에서 큰 감쇠를 주도록 설계된 경우"에 쓰도록 한다. 따라서 공급사가 EIRP로 불요방사를 제시한다면 그 값에는 도파관 감쇠가 이미 들어 있다고 봐야 한다. 이 경우 −16.57 dBm/Hz(31 dBi 포함 EIRP 한도)는 규제 상한이다. 여기에 WR-42 감쇠를 추가로 빼면 victim PSD를 83–127 dB 과소평가한다.
+- 경우 1이 성립하려면 다음 세 가지를 확인해야 한다.
+  1. Ka 송신기 불요방사 사양의 측정 기준면이 WR-42 입력(송신기 출력) 쪽이다.
+  2. 50 mm 유효 구간 뒤에 동축 변환·스트립선로 등 차단주파수가 없는 구간이 없다.
+  3. 플랜지 틈새, 바이어스·제어 선로, SSPA 함체 직접 방사처럼 도파관을 우회하는 누설 경로가 따로 관리된다.
+- 표 A와 §1의 Ka 결과는 owner 설계 가정(경우 1)을 보여 준다. 경우 2의 수치는 비교용(provenance)이다. 기준면이 확인되기 전까지 Ka 결론은 "경우 1이면 ≥ 10 dB 필터로 충분, 경우 2이면 ≥ 107 dB 억제 필요"의 범위로 읽어야 한다.
 
-## 5. TX별 최소 추가 필터 억제량
+## 4. Receiver criterion
 
-**결과.** 송신 측 불요방사 억제 요구(RX blocker rejection 아님)는 S-TM ≥ 60 dB, ISL ≥ 40 dB다. Ka는 상한 기준 > 80 dB이며 도파관 조건 확인이 먼저다.
+**결과.** 1차 판정은 각 수신기 tuning 대역 전체의 PSD 기준(허용 간섭 PSD = kT₀ + NF + I/N)이다. SAR는 owner 입력으로 갱신했다.
 
-**E. TX별 설계 요약 (1차, 최악 피간섭원 기준)**
+| 수신기 | 판정 대역 | NF [dB] | I/N [dB] | 허용 간섭 PSD [dBm/Hz] | 근거 유형 |
+|---|---|---|---|---|---|
+| GPS L1 / L2 / L5 | 1563–1588 / 1217.37–1237.83 / 1164–1189 MHz | 2 | −6 | −178 | 가정(engineering baseline) |
+| S-TM | 2025–2110 MHz | 3 | −6 | −177 | 가정 |
+| ISL | 10.55–10.65 GHz | 3 | −6 | −177 | 가정·잠정 |
+| **SAR** | 9.3875–9.9125 GHz | **4** | −6 | **−176** | **owner 공학 입력**(이전 NF 5 dB 대리값 −175 대체) |
 
-| TX | 최악 피간섭원 | 필요 추가 억제량 [dB] | 권장 screening 필터 범주 | 근거 |
+- kT₀ = −174 dBm/Hz(290 K 관례)다. SAR: −174 + 4 − 6 = −176 dBm/Hz.
+- 공유 `data/rfi_psd/receiver_baseline.csv`의 SAR 행(NF 5 dB)은 바꾸지 않았다. owner 값은 Claude 입력 파일에서 적용했다.
+
+**SAR 수신 패턴(owner 재구성, ENGINEERING_RECONSTRUCTION):**
+- 최대 이득 52 dBi, 방위 HPBW 0.242294°, 고각 HPBW 1.112221°
+- 첫 null: 방위 ±0.3°(−39.083 dB), 고각 ±1.3°(−31.241 dB)
+- 최대 부엽: 방위 −13.565 dB @ ±0.4°, 고각 −13.270 dB @ ±1.8°
+- ±80° 밖과 후방: −50 dB(최대 이득 대비), 절대 상한 +2 dBi
+- ±80° 안에서는 주엽 −12(θ/HPBW)²을 최대 부엽 준위로 바닥 처리한 보수 포락선을 쓴다. 두 주단면 중 덜 감쇠된 값을 적용한다. 현재 형상에서는 모든 입사각이 ±80° 밖이라 이 영역이 결과에 쓰이지 않았다.
+- 교차편파 −120 dB floor는 이번 RFI 분석에서 무시했다(공편파 포락선 사용). 근거는 provenance에 남겼다.
+
+## 5. Filter / suppression requirement
+
+**결과.** 송신 측 불요방사 억제 요구(RX blocker rejection 아님)는 S-TC ≥ 70 dB, Ka ≥ 10 dB(owner 설계 가정)다.
+
+| 송신기 | 지배 피간섭원 | 요구 추가 억제량 [dB] | 필터 감쇠 시나리오(0/40/60/70/80 dB) 중 첫 충족 | 근거 |
 |---|---|---|---|---|
-| S-TM | 반대편 S-TC (2025–2110 MHz) | **58.9** | **≥ 60 dB** (여유 1.1 dB, 실설계는 70 dB 범주 권장) | CST |
-| S-TM (GPS L2/L5) | GPSA_1 L5 | 89.0 (상한) | > 80 dB 상한 — S 안테나 L2/L5 응답 확보 후 재평가 | 상한 |
-| ISL | S-TC@ZENITH | **33.7** | **≥ 40 dB** | CST |
-| Ka | S-TC@NADIR (KAA_2) | 89.8 (상한) | **> 80 dB / 별도 설계 검토**. WR-42 ≥ 2λc 확인 시 ISL 경로만 ≥ 40 dB | 상한 |
+| S-TC | SAR RX | **64.4** | 70 dB | CST + owner SAR 패턴 |
+| S-TC | 반대편 S-TM RX | 58.9 | 60 dB(여유 1.1 dB) | CST |
+| S-TC | GPS L2/L5 | 89.0 | 80 dB로 부족 | 송신 이득 상한¹ |
+| Ka DLS | SAR RX | **9.1** | 40 dB | 31 dBi + WR-42 50 mm(경우 1) |
+| Ka DLS | ISL RX | 6.6 | 40 dB | 31 dBi + WR-42 50 mm(경우 1) |
+| (참고) ISL TX | S-TM RX | 33.7 | 40 dB | CST(이전 결과, owner 범위에서 간섭원 아님) |
 
-- S-TM에 60 dB 필터를 쓰면 여유가 1.1 dB뿐이다. 결합의 CST 모델 불확도와 설치 영향을 고려하면 70 dB 범주가 안전하다(판단).
-- ECSS 감도에서는 S-TM 48.9 dB(60 dB 범주 유지), ISL 16.7 dB(40 dB 범주 유지)다.
+- 요구 추가 억제량은 피간섭원 대역 전체에서 max(victim PSD − 허용 PSD)다. 필터 감쇠 시나리오(0/40/60/70/80 dB)는 판단을 돕는 단계값이며, 설계값은 요구 추가 억제량 열이다.
+- S-TC 필터는 SAR 대역(9.39–9.91 GHz)에서 ≥ 64.4 dB, S-TM 대역(2.025–2.11 GHz)에서 ≥ 58.9 dB를 동시에 만족해야 한다. 2.25 GHz 필터의 고주파 재통과 대역(spurious passband)이 9–10 GHz에 생기지 않는지 확인해야 한다.
+- ECSS 조달 송신기라면 S-TC 요구량은 SAR 54.4 dB, S-TM 48.9 dB다(60 dB 범주).
+- 상세: `results/oob_spurious/tx_filter_requirement.csv`, `pair_margin_summary.csv`(열 `minimum_required_additional_suppression_db`, `first_passing_scenario`).
 
-## 6. 0/40/60/70/80 dB scenario 결과
+## 6. 입력 누락 및 분석 한계
 
-**결과.** S-TM은 60 dB, ISL은 40 dB에서 모든 CST 평가 조합이 기준을 충족한다. Ka 상한 조합 18개 중 80 dB 이하에서 충족하는 것은 GPS L1 4개(60 dB 1개, 70 dB 3개)와 KAA_2 → GPS L2 2개(80 dB)다. 나머지 12개는 80 dB로도 부족하다.
+1. **Ka 불요방사 기준면(미확정):** 결과를 가장 크게 바꾸는 입력이다(§3.3). 경우 1과 경우 2의 요구량 차이는 82–107 dB다.
+2. **SAR 패턴(owner 재구성):** 원본 1601점 MAT 파일은 읽지 않았다. owner가 추출한 주요 값(최대 이득, HPBW, null, 부엽, 후방 포락선)만 썼다.
+   - 최대 이득 52 dBi는 HPBW에서 추정한 값이다(OWNER_ENGINEERING_ESTIMATE_FROM_HPBW).
+   - 방위면을 비행축(+X_B)으로 가정했다. 모든 입사각이 ±80° 밖이라 이 가정은 결과에 영향을 주지 않는다.
+   - SAR 패턴은 대역 내 주파수 독립으로 가정했다.
+3. **S 안테나 L2/L5 응답(미확정):** S-TC → GPS L2/L5는 송신 이득 상한값이다.
+4. **모델 가정:** 자유공간 결합(구조 산란·차폐 없음, 두 컷 근사), 급전 손실 0 dB, 편파 손실 없음, 잡음형 광대역 불요방사. 모두 보수 방향이다.
+5. **실제 송신기 사양·필터 데이터(미확정):** AP3는 법적 상한이다. 공급사 사양이 들어오면 같은 체인에서 source PSD를 바꾼다.
 
-**D. 필터 요구 (1차)**
+## 7. Secondary blocker analysis
 
-| TX → 피간섭원 | 0 dB margin [dB] | 필요 추가 억제량 [dB] | 처음 충족하는 scenario | 40 / 60 / 70 / 80 dB |
-|---|---|---|---|---|
-| S-TM → 반대편 S-TC | −58.9 | 58.9 | 60 dB | 초과 / 충족 / 충족 / 충족 |
-| S-TM@ZENITH → GPSA_1 / GPSA_2 (L1) | −48.0 / −42.9 | 48.0 / 42.9 | 60 dB | 초과 / 충족 / 충족 / 충족 |
-| S-TM@NADIR → GPS L1 | −23.5 / −25.4 | 25.4 | 40 dB | 충족 ×4 |
-| S-TM → ISL | −39.3 | 39.3 | 40 dB (여유 0.7) | 충족 ×4 |
-| S-TM@NADIR → GPS L2/L5 (상한) | −72.8 ~ −75.7 | 75.7 | 80 dB | 초과 / 초과 / 초과 / 충족 |
-| S-TM@ZENITH → GPS L2/L5 (상한) | −84.1 ~ −89.0 | 89.0 | 없음 (80 dB 초과) | 초과 ×4 |
-| ISL → GPS L1 | −6.8 / −9.3 | 9.3 | 40 dB | 충족 ×4 |
-| ISL → GPS L2/L5 | −25.7 ~ −28.3 | 28.3 | 40 dB | 충족 ×4 |
-| ISL → S-TC | −30.3 / −33.7 | 33.7 | 40 dB | 충족 ×4 |
-| Ka → GPS L1 (상한) | −59.6 ~ −64.4 | 64.4 | 60 dB (KAA_2 → GPSA_1) ~ 70 dB | 초과 / 일부 충족 / 충족 / 충족 |
-| Ka → GPS L2/L5 (상한) | −79.6 ~ −87.1 | 87.1 | 80 dB (KAA_2 → L2만) / 나머지 없음 | 대부분 초과 |
-| Ka → S-TC, ISL (상한) | −85.2 ~ −89.8 | 89.8 | 없음 | 초과 ×4 |
+**결과.** 기본파(fundamental)에 의한 수신기 노출은 별도로 계산했다. 수신기 블로킹 데이터가 없어 판정은 보류다.
 
-- "처음 충족하는 scenario"는 정의된 screening 감쇠(0/40/60/70/80 dB) 중 최소값이다. 실제 필요량은 "필요 추가 억제량" 열이다.
-- 전체 표: `results/oob_spurious/pair_margin_summary.csv`. 열 `minimum_required_additional_suppression_db`, `first_passing_scenario`, `FILTER_40DB` … `FILTER_80DB`.
+- **S-TC 2.25 GHz 기본파 → SAR RX 포트:** −15.0 dBm(NADIR), −21.5 dBm(ZENITH)이다.
+  - S 안테나 이득 −4.6 / −9.7 dBi, FSPL 49.4 / 50.8 dB를 썼다.
+  - SAR 안테나의 2.25 GHz 응답이 없어서 +2 dBi 후방 상한을 대역 밖에도 적용했다. 이 부분은 가정이다.
+  - SAR 프리셀렉터와 블로킹 한도가 없어 판정을 보류한다(`sar_secondary_fundamental_exposure.csv`).
+- **이산 스퍼(discrete spur, 채널 안에 떨어질 때만):** AP3 단일 성분 −13 dBm 톤이 SAR 포트에서 −75.6 dBm이다. SAR 525 MHz 적분 허용 −88.8 dBm보다 13.2 dB 높다(`discrete_spur_check.csv`).
+- **기존 blocker 값 유지:** S-TC@ZENITH → GPSA_1 −21.3 dBm, S-TC → 반대편 S-TM −32.3 dBm @ 2.25 GHz(`results/oob_blocking_results.csv`).
+- Ka 기본파(25.5–27 GHz)의 SAR 포트 노출은 owner SAR 패턴이 SAR 대역만 다루므로 이번에도 계산하지 않았다.
 
-## 7. Receiver criterion
+## Appendix A. 용어 정리 (이전 표현 → 이번 보고서)
 
-**결과.** freeze point 기준을 그대로 썼다. 1차 판정은 수신 tuning 대역 전체의 PSD mask다.
+| 이전 내부 표현 | 이번 보고서 용어 | 위치 |
+|---|---|---|
+| gain bound / Harrington bound / BOUNDED | 안테나 이득 상한(Harrington maximum directivity) | 표 A 각주 ¹ |
+| SENS_KAA_WR42_2LC, conditional bound, zero cutoff credit | 도파관 차단주파수 이하 감쇠(below-cutoff waveguide attenuation), 기준면 경우 1/2 | §3.2, §3.3 |
+| bound route / route name / coupling route | 경로 결합(path coupling) 근거 | CSV `coupling_basis`, `coupling_route` |
+| screening filter class | 필터 감쇠 시나리오, 요구 추가 억제량(required additional suppression) | §5 |
+| source PSD (규격 기반) | 불요방사 전력밀도(spurious emission PSD) / 불요방사 EIRP 전력밀도(spurious EIRP spectral density) | §1 |
+| port PSD | 피간섭원 입력 전력밀도(victim input PSD) | 표 A |
+| allowable PSD | 허용 간섭 전력밀도(allowable interference PSD) | §4 |
 
-| 수신기 | 판정 대역 | 허용 간섭 PSD [dBm/Hz] | 근거 유형 |
-|---|---|---|---|
-| GPS L1 / L2 / L5 | 1563–1588 / 1217.37–1237.83 / 1164–1189 MHz | −178 | 가정(engineering baseline): NF 2 dB, I/N −6 dB |
-| S-TC | 2025–2110 MHz | −177 | 가정: NF 3 dB, I/N −6 dB |
-| ISL | 10.55–10.65 GHz | −177 | 가정·잠정 |
+- CSV enum 대응: `coupling_basis` = `CST_SIMULATED_GAIN`, `CST_TX_GAIN_OWNER_SAR_RX_ENVELOPE`, `HARRINGTON_MAX_DIRECTIVITY_TX`, `OWNER_31DBI_GAIN_REFERENCE_WR42_50MM`.
+- `variant` = `PRIMARY_RR_AP3`, `SENS_ECSS_50_05C`, `SENS_KA_SOURCE_AT_ANTENNA_OUTPUT`(경우 2), `SENS_KA_HARRINGTON_GAIN`(31 dBi 대신 물리 상한 이득).
+- 역할명 대응: owner의 **S-TC TX**(2.25 GHz) = 저장소 `S_TM_TX`, owner의 **S-TM RX**(2025–2110 MHz) = 저장소 `S_TC_RX`. CSV의 system ID는 저장소 이름을 유지한다.
 
-- 채널 적분(2차)은 이산 스퍼 검토(§9)에만 썼다.
-- 적분 대역폭: S-TC 5.53 kHz(engineering baseline), GPS 20.46 MHz(가정), ISL 20 MHz(잠정).
+## Appendix B. SAR 피간섭원 제외 로직 제거와 상태 갱신
 
-## 8. 입력·모델 한계
+- **제거한 로직:** `output/claude/run_oob_spurious_analysis.m`의 고조파/영역 확인 루프에 있던 `if strcmp(b.receiver, 'SAR_X_RX'); continue; end`를 지웠다.
+- **새로 추가한 평가:** 쌍 목록이 `pair_results.csv`(SAR_ANT가 분석 케이스에서 빠진 freeze-point 결과)에서만 왔기 때문에 SAR RX가 빠져 있었다. 이번에 S-TC ×2와 Ka ×2 → SAR RX 쌍을 명시적으로 추가했다.
+- **SAR TX:** 간섭원으로 넣지 않았다(owner 정책).
+- **추가 검색 결과(제외/skip 성격 로직):**
+  - `run_rfi_analysis.m`: SAR 패턴 가용성 `NO_PATTERN_BOUND`, SAR 피간섭원 `PARTIAL_INTERFERER_SIDE_ONLY`가 있다. freeze-point 기록이며, SAR 결과는 이번 파일들이 대체한다.
+  - `src/+rfscreen/+kaa/KaVictimResponse.m`: SAR의 Ka 대역 응답이 `NO_PATTERN_BOUND`로 되어 있다. Ka 기본파 경로이며, owner 패턴이 SAR 대역만 다루므로 유지했다. 공유 엔진은 수정하지 않았다.
+  - `data/spacecraft/.../rf_systems.csv`, `analysis_cases.csv`: `DEFERRED_CLOSED_NETWORK`는 CST 패턴 결합 상태다. 저장소에 SAR 패턴 파일이 없으므로 유지했다.
+- 상태 전환 전체: `results/oob_spurious/sar_status_update.csv`.
 
-**결과.** 결론을 바꿀 수 있는 미확정 입력은 다섯 가지다. 0이나 임의 이득으로 대체하지 않았다.
-
-1. **실제 송신기 사양(미확정):** AP3는 법적 상한이다. 실제 S/X/Ka 송신기는 보통 이보다 낮다. 공급사 spurious 사양(RBW·기준면 포함)이 오면 같은 엔진에서 1차 source를 바꾼다.
-2. **KAA 저주파 방사(미확정):** KAA의 S/L/X 응답이나 WR-42 구간 길이가 없다. Ka 결과는 물리 상한이고, 도파관 조건이 확인되면 결론이 "필터 불필요(L/S)"로 바뀔 수 있다.
-3. **S 안테나 L2/L5 응답(미확정):** CST 정규화가 불안정해 쓰지 않았다. S-TM → GPS L2/L5는 상한값(최대 89 dB 요구)이다.
-4. **필터(미확정):** screening 감쇠만 있다. 실제 필터 table을 넣으면 주파수별로 계산된다.
-5. **모델 한계(가정):**
-   - 결합은 자유공간 CST 시뮬레이션 데이터다(두 컷 근사, 구조 산란 없음).
-   - 급전선 손실 0 dB, 편파 손실 없음(모두 보수 방향).
-   - 광대역 등가 PSD는 잡음형 spurious 가정이다.
-   - 수신기 기준은 engineering baseline이다.
-
-## 9. Secondary: 이산 스퍼 및 blocker
-
-**이산 스퍼(2차, 수신 채널 내에 떨어질 때만):**
-- 규격 한도의 단일 톤을 최대 결합으로 피간섭원 포트에 놓고, 채널 적분 허용 전력과 비교했다(`discrete_spur_check.csv`).
-- S-TM → 반대편 S-TC:
-  - AP3 톤 −82.1 dBm vs 허용 −139.6 dBm(5.53 kHz) → **−57.5 dB**
-  - CCSDS 2.4.16 톤 −92.1 dBm → −47.5 dB
-- S-TM@ZENITH → GPSA_1: AP3 −10.9 dB, CCSDS −0.9 dB(20.46 MHz 가정 기준).
-- 톤의 주파수는 규격에서 정해지지 않으므로 이 결과는 "채널에 들어오면"이라는 조건부 위험이다. 필터 요구는 광대역 PSD 결과(§5)로 정했다.
-
-**기본파 대역 밖 blocker(`SECONDARY_OOB_BLOCKER_ANALYSIS`):**
-- 기존 값을 유지했다: S-TM@ZENITH → GPSA_1 **−21.3 dBm** @ 2.25 GHz, S-TM → 반대편 S-TC **−32.3 dBm** @ 2.25 GHz.
-- 수신기 프리셀렉터·블로킹·P1dB가 없어 최종 판정 보류다.
-- 이번 필터 요구는 이 결과에서 도출하지 않았다. 상세: `results/oob_blocking_results.csv`.
-
-## Appendix A. 규격 근거 (1차 출처 원문 확인)
-
-| 문서 | 판 | 조항 | 확인 내용 |
-|---|---|---|---|
-| ITU Radio Regulations Vol.2, Appendix 3 | Edition 2020, AP3 Rev. WRC-12 | §8 | "The reference bandwidth of all space service spurious domain emissions should be 4 kHz." |
-| 〃 | 〃 | Table I, note 10, P·dBc 정의 | "Space services (space stations): 43 + 10 log (P), or 60 dBc, whichever is less stringent". P = 안테나 전송선 평균전력. dBc = 무변조 반송파 대비 |
-| 〃 | 〃 | §2, §10, §11, Example 2 | 안테나 외 부분의 방사는 안테나에 한도 전력을 공급한 효과 이하. e.i.r.p. 방법은 안테나가 spurious 영역에서 큰 감쇠를 주도록 설계된 경우 사용. 고조파 포함. 20 W 예 → −43 dBW/4 kHz |
-| 〃 | 〃 | Annex 1 Table 1 | 경계 2.5 B_N. wideband: 1–3 GHz B_N > 50 MHz, 10–15 GHz B_N > 250 MHz, > 26 GHz B_N > 500 MHz에서 1.5 B_N + (50/250/500) MHz |
-| Rec. ITU-R SM.329-13 | 09/2024 | recommends 4.1, Table 2 notes (2)(3), Annex 4 Table 8, recommends 2.5, Annex 1 §1.1.2 | 4 kHz(space); 절대값 −13 dBm(P ≤ 50 W) / 10 log P − 30 dBm(P > 50 W); 도파관 ≥ 2λc 일체형 안테나는 0.7 f_c 아래 측정 불요; 설계대역 밖 안테나 특성 미지 |
-| ECSS-E-ST-50-05C | Rev.2 2011-10-04 (Rev.1 2009-03-06 동일) | 5.5.1.1a, Table 5-6 | "−60 dBc, measured in a reference bandwidth of 4 kHz", 반송파 100–40 500 MHz |
-| CCSDS 401.0-B-32 | Blue Book Oct 2021, rec. 2.4.16 B-2 (Oct 2004) | 2.4.16 | "the total power contained in any single spurious emission shall not exceed −60 dBc" |
-| CCSDS 413.0-G-3 | Feb 2018 | §2.2, Annex B | SFCG 21-2R4 mask: Category A 2200–2290 / 8025–8400 / 8450–8500 MHz, 25.5–27 GHz(Rs ≥ 10 Ms/s, 2020 이후). mask floor −60 dB(peak PSD 대비) |
-
-- 출처 URL: [RR 2020 Vol.2](https://eclass.uoa.gr/modules/document/file.php/LAW835/RR-2020-00013-Vol.II-EA5.pdf), [SM.329-13](https://www.itu.int/dms_pubrec/itu-r/rec/sm/R-REC-SM.329-13-202409-I!!PDF-E.pdf), [ECSS-E-ST-50-05C Rev.1](https://ecss.nl/wp-content/uploads/standards/ecss-e/ECSS-E-ST-50-05C_Rev.16March2009.pdf), [ECSS-E-ST-50-05C Rev.2](https://everyspec.com/ESA/download.php?spec=ECSS-E-ST-50-05C_REV-2.048184.pdf), [CCSDS 401.0-B-32](https://ccsds.org/Pubs/401x0b32.pdf), [CCSDS 413.0-G-3](https://ccsds.org/Pubs/413x0g3e1.pdf).
-- 규격 비교 전체: `results/oob_spurious/standards_survey.csv`.
-
-## Appendix B. 산출물·재현·provenance
+## Appendix C. 산출물·재현·provenance
 
 - **결과**(`output/claude/results/oob_spurious/`):
-  - `standards_survey.csv`, `source_emission_derivation.csv`, `domain_and_harmonic_check.csv`
-  - `pair_margin_summary.csv`(1차·ECSS·WR-42 조건부 variant), `victim_psd_results.csv`
-  - `tx_filter_requirement.csv`, `discrete_spur_check.csv`
-  - `validation_log.txt`, `test_suite_log.txt`, `freeze_record.txt`, `run_log.txt`
-- **입력:** `output/claude/inputs/tx_emission_sources_claude.csv`(worker 독립 사본). 공유 엔진(`src/+rfscreen/+psd`)과 공유 데이터는 변경하지 않았다.
-- **재현**(저장소 루트):
+  - 1차: `primary_psd_results.csv`(표 A 형식), `pair_margin_summary.csv`, `victim_psd_results.csv`(주파수별), `tx_filter_requirement.csv`
+  - SAR: `stc_sar_harmonic_check.csv`, `sar_victim_geometry.csv`, `sar_secondary_fundamental_exposure.csv`, `sar_status_update.csv`
+  - Ka: `ka_wr42_below_cutoff_attenuation.csv`, `ka_reference_plane_comparison.csv`
+  - 공통: `source_emission_derivation.csv`, `domain_and_harmonic_check.csv`, `discrete_spur_check.csv`, `standards_survey.csv`
+  - 기록: `validation_log.txt`, `test_suite_log.txt`, `run_log.txt`, `update_record_2026-10-05.txt`, `freeze_record.txt`(이전 분석)
+- **입력:**
+  - `output/claude/inputs/tx_emission_sources_claude.csv`: SAR 대역 행 추가
+  - `output/claude/inputs/owner_engineering_inputs_claude.csv`: SAR 패턴·NF·허용 PSD와 Ka 70 W·31 dBi·WR-42·50 mm. 근거 유형은 `OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT`, `ENGINEERING_RECONSTRUCTION`, `OWNER_ENGINEERING_ESTIMATE_FROM_HPBW`, `OWNER_ENGINEERING_REAR_ENVELOPE`이다.
+- **재현**(저장소 루트, GNU Octave):
   ```
   octave-cli --no-gui --norc --eval "run('output/claude/run_oob_spurious_analysis.m')"
   octave-cli --no-gui --norc --eval "run('output/claude/validate_oob_spurious.m')"
   ```
 - **provenance:**
-  - freeze point `8469e89`에서 만든 독립 branch에서 분석했다. 시작 시 작업트리는 clean이었다(`freeze_record.txt`).
-  - 실행 기준 commit은 `results/run_provenance.csv`, 저장 commit은 `git log -- output/claude`로 확인한다.
-  - 다른 worker의 결과는 읽지 않았다.
-- 프레임워크 정리판(freeze point 시점)의 내용은 `RFI_분석근거.md` §11–§12와 기존 `results/*.csv`에 그대로 있다.
+  - 실행 기준 commit은 `results/run_provenance.csv`에 있다.
+  - 이번 실행 환경은 GNU Octave 8.4.0이다(이전 9.2.0). 수정 전 스크립트를 8.4.0에서 다시 돌려 모든 기존 CSV가 비트 단위로 같게 재현되는 것을 먼저 확인했다.
+  - 다른 worker 산출물은 owner 역할명 대응(S-TC = `S_TM_TX`)을 확인하는 데만 읽었다. 수치·모델·패턴 표본은 쓰지 않았다(`update_record_2026-10-05.txt`).
+- 규격 원문 근거(RR AP3 Table I·§8·Annex 1, SM.329-13 recommends 2.5·Table 8, ECSS-E-ST-50-05C Table 5-6, CCSDS 401 2.4.16)는 이전 판과 같다. 상세는 `standards_survey.csv`와 `RFI_분석근거.md` §13–§14에 있다.
