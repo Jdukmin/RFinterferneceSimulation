@@ -1,0 +1,7 @@
+Claude OOB/spurious RFI run 2026-10-04 17:23:52 (GNU Octave 9.2.0); analysis base commit 8469e8903da83b6ebed014aae311f90855c31715, working tree DIRTY (1 uncommitted input/code paths)
+Sources: 28 rows (PRIMARY_RR_AP3 SENS_ECSS_50_05C); filter scenarios FILTER_0DB FILTER_40DB FILTER_60DB FILTER_70DB FILTER_80DB
+TX S_TM_TX    CST_EVALUATED  worst S_TC_RX@SBA_ZENITH (S_TC)          req   58.9 dB -> >=60 dB
+TX S_TM_TX    BOUNDED        worst GPS_L5_RX@GPSA_1 (L5)              req   89.0 dB -> >80 dB / separate design required
+TX ISL_X_TX   CST_EVALUATED  worst S_TC_RX@SBA_ZENITH (S_TC)          req   33.7 dB -> >=40 dB
+TX KA_DLS_TX  BOUNDED        worst S_TC_RX@SBA_NADIR (S_TC)           req   89.8 dB -> >80 dB / separate design required
+Rows: freq 10710, pair summary 105, spur 84, derivation 12
