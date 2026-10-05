@@ -1,0 +1,34 @@
+# Claude worker input -- owner engineering inputs for the SAR-victim and Ka DLS spurious-PSD update (2026-10-05).
+# Values transcribed from the owner task message. The original 1601-point SAR pattern MAT file was NOT read by
+# this worker: the SAR receive pattern is an ENGINEERING_RECONSTRUCTION from the owner-extracted anchors below.
+# Role mapping (owner naming -> legacy repository IDs): S-TC TX (2.25 GHz) = S_TM_TX; S-TM RX (2025-2110 MHz) = S_TC_RX.
+# Fields must not contain commas.
+key,value,unit,provenance,note
+sar_peak_gain,52,dBi,OWNER_ENGINEERING_ESTIMATE_FROM_HPBW,absolute peak receive gain of the SAR antenna
+sar_az_hpbw,0.242294,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,azimuth half-power beamwidth
+sar_el_hpbw,1.112221,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,elevation half-power beamwidth
+sar_az_first_null_angle,0.3,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,+/- angle
+sar_az_first_null_level,-39.083,dB,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,relative to peak
+sar_el_first_null_angle,1.3,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,+/- angle
+sar_el_first_null_level,-31.241,dB,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,relative to peak
+sar_az_max_sidelobe_angle,0.4,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,+/- angle
+sar_az_max_sidelobe_level,-13.565,dB,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,relative to peak
+sar_el_max_sidelobe_angle,1.8,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,+/- angle
+sar_el_max_sidelobe_level,-13.270,dB,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,relative to peak
+sar_pattern_domain_limit,80,deg,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,original vectors cover -80..+80 deg
+sar_rear_envelope,-50,dB,OWNER_ENGINEERING_REAR_ENVELOPE,relative to peak outside +/-80 deg and in the rear hemisphere
+sar_rear_gain_ceiling,2,dBi,OWNER_ENGINEERING_REAR_ENVELOPE,absolute gain ceiling outside +/-80 deg (= 52 - 50)
+sar_cross_pol_floor,-120,dB,OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT,ignored in the current RFI analysis (co-pol envelope used); kept for provenance
+sar_rx_nf,4,dB,OWNER_ENGINEERING_INPUT,SAR receiver noise figure (replaces the NF 5 dB proxy of receiver_baseline.csv)
+sar_rx_i_n_max,-6,dB,OWNER_ENGINEERING_INPUT,protection criterion
+sar_rx_allowable_psd,-176,dBm/Hz,OWNER_ENGINEERING_INPUT,= -174 + 4 - 6
+sar_band_lo,9387.5,MHz,ENGINEERING_ASSUMPTION,rf_systems.csv SAR 9650 +/- 262.5 MHz
+sar_band_hi,9912.5,MHz,ENGINEERING_ASSUMPTION,rf_systems.csv SAR 9650 +/- 262.5 MHz
+sar_azimuth_axis,+X_B,-,ENGINEERING_ASSUMPTION,azimuth (narrow-beam) plane taken along the flight axis +X_B; boresight = PANEL_1 normal +Z_B
+ka_tx_power,70,W,OWNER_ENGINEERING_INPUT,Ka DLS transmitter output (48.451 dBm)
+ka_antenna_gain_reference,31,dBi,OWNER_ENGINEERING_INPUT,KAA gain reference applied at every victim frequency (conservative design assumption; not a measured off-band gain)
+ka_waveguide_type,WR-42,-,OWNER_ENGINEERING_INPUT,rectangular waveguide feed section of the KAA
+ka_waveguide_broad_wall,10.668,mm,OWNER_ENGINEERING_INPUT,WR-42 a dimension (TE10 cut-off c/2a = 14.051 GHz)
+ka_waveguide_below_cutoff_length,50,mm,OWNER_ENGINEERING_INPUT,effective below-cutoff length of the WR-42 section
+ka_spurious_conducted_psd,-47.57,dBm/Hz,DERIVED,RR AP3 60 dBc / 4 kHz at 70 W: 48.451 - 60 - 36.021 (TX output / waveguide input plane)
+ka_spurious_eirp_psd,-16.57,dBm/Hz,DERIVED,conducted PSD + 31 dBi (antenna-output / EIRP plane; WR-42 attenuation NOT included)
