@@ -333,5 +333,7 @@ Ka는 owner 지정 WR-42 / 70 W / 31 dBi reference를 사용한다. TE10 cutoff�
     for link in re.findall(r'\]\(([^)]+)\)',report):
         if not link.startswith('https:'):assert (OUT/link).exists(),link
     print(json.dumps(tests,ensure_ascii=True,indent=2))
+    from latest_owner_analysis import main as apply_latest_owner
+    apply_latest_owner()
 
 if __name__=='__main__':main()

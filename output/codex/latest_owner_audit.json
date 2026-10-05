@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "repeated_regeneration_byte_identical": true,
+  "primary_pair_rows": 144,
+  "scenario_rows": 720,
+  "sar_numeric_primary_rows": 24,
+  "ka_victim_bands": [
+    "L1",
+    "L2",
+    "L5",
+    "S_TC",
+    "ISL",
+    "SAR"
+  ],
+  "forbidden_ka_internal_terms_absent_from_primary_report": true,
+  "shared_src_data_tests_changed": false,
+  "full_test_passed": 1588,
+  "full_test_failed": 0,
+  "additional_cst_simulation": false
+}
