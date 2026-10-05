@@ -1,0 +1,123 @@
+{
+  "completion_status": "INCOMPLETE_INPUT_MISSING",
+  "base_commit": "e797a7f9b04bdd90ec3867cbd112b1623b7a4700",
+  "branch": "codex/closed-network-cst-preparation",
+  "initial_worktree_clean": true,
+  "planned_projects": 24,
+  "saved_and_reopened_projects": 18,
+  "missing_projects": [
+    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_STM.cst",
+    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_L1.cst",
+    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_SAR.cst",
+    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_ISL.cst",
+    "cst/projects/closed_network/sar/RFC_SAR_ORIGINAL.cst",
+    "cst/projects/closed_network/sar/RFC_INSTALLED_SAR.cst"
+  ],
+  "rfi_pair_families": 10,
+  "comparison_rows": 74,
+  "whole_spacecraft_panels": 8,
+  "coordinate_roundtrip_validated": true,
+  "native_source_hashes_unchanged": true,
+  "native_ports_materials_volumes_verified": true,
+  "solver_started": false,
+  "rf_results_generated": false,
+  "checks": [
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_STM.cst",
+      "sha256": "0a12f662f4d7a78c1dbcf2ba10c9aa248e0a8faadc4d1049415e71dc68e0cac9",
+      "mesh_cells": 117500
+    },
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_L1.cst",
+      "sha256": "37e16cf131f478145f4d36e666b2b971b299d34ec9e161f264183959bf60c4ec",
+      "mesh_cells": 212400
+    },
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_SAR.cst",
+      "sha256": "98d755f3c2703edfbff62532ba077f8b9080e5b1d75e6e07c4bd9f002c1cc3cd",
+      "mesh_cells": 26100
+    },
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_ISL.cst",
+      "sha256": "9f3a4e199c031fefd390fa88852144f98d4cdccbd71d62d0c112c513c7adffdf",
+      "mesh_cells": 21168
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_SBA_TM_ORIGINAL.cst",
+      "sha256": "38c2fac30c00683780ecfae4009a5aa5a2e6020ebf6f319331e4323ff41f48ac",
+      "mesh_cells": 79376
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
+      "sha256": "b8b2c20b68f4d123463d5324014d1b906ff56cb455abef4ae864ca51dfd5ea51",
+      "mesh_cells": 55678740
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
+      "sha256": "b6c83e48acdc7961d18eb182f035e3b2ea8e0748f05672b1d37355ff6cb8a92d",
+      "mesh_cells": 55522584
+    },
+    {
+      "project_file": "cst/projects/closed_network/gps/RFC_GPS_L1_ORIGINAL.cst",
+      "sha256": "290c735ffad9d47b1eca4ddd07b77b355fdf2e5c3866dde281ec18b53e099765",
+      "mesh_cells": 52900
+    },
+    {
+      "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
+      "sha256": "3402ffc81e0d31a5c1f17e486d49a623074aebd64cb42d693820c661199edcf9",
+      "mesh_cells": 10886400
+    },
+    {
+      "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA2.cst",
+      "sha256": "eb941809287c6ec4d5d086d69413be28b2a44aa3676e6e6cabd235adee41b9eb",
+      "mesh_cells": 10886400
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_ISL_ORIGINAL.cst",
+      "sha256": "9121ac312ed3b8fc6b1a7f1749404fd2ec49f3843d3fc7b5032a413aea394774",
+      "mesh_cells": 28224
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_INSTALLED_ISL_RX.cst",
+      "sha256": "4904f9d0f1aeb1a1b350a8d21ac31a8865616a583581ad40d528b95b93349c7c",
+      "mesh_cells": 2269049730
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_SAR.cst",
+      "sha256": "fdfdc5aab5f6f42cb5609b303bfb2790638ee3feecd0423c2a477a4bba6db328",
+      "mesh_cells": 31752
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_STM.cst",
+      "sha256": "0c721fe239cb10b2b29b1282d961466a4b25c69e2575623fc86bd1a63a295f96",
+      "mesh_cells": 100352
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_L1.cst",
+      "sha256": "458f32442b0da20f6f850d3c0f9d7785e3bd46ba4e341f3c62918fe0cc70448c",
+      "mesh_cells": 159744
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_ISL.cst",
+      "sha256": "5dd33acaae5e28a81e79f56217ba82e1221d680aedec1467c29a55c3a6cbbc48",
+      "mesh_cells": 307200
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_SAR.cst",
+      "sha256": "3d03cbce56637d4dd8eb7eb327be6f37b98c726f8178f52fb0494caf3fe687d5",
+      "mesh_cells": 303104
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_L1.cst",
+      "sha256": "b3e819f5fb625d4c943f7984c7575c7b19519dd7acaff3c321faa8cc5b4e9f7c",
+      "mesh_cells": 90988
+    }
+  ],
+  "tests": {
+    "native_cst_standalone_reopen": "PASS_18",
+    "matlab_adapter_octave_9_2": "PASS_SYNTHETIC_FIXTURES",
+    "raw_registration": "PASS_4_SYNTHETIC_TESTS",
+    "synthetic_end_to_end_driver": "PASS_4_COMPARISON_CONFIGURATIONS",
+    "full_rfi_execution": "NOT_RUN_NO_SOLVER_RESULTS"
+  }
+}

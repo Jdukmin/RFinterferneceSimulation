@@ -1,0 +1,66 @@
+{
+  "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_STM.cst",
+  "source_project": "cst/projects/KA_FEED_C_OEWG.cst",
+  "source_sha256": "4a72d46bc2bcf6017edf8f57be349d9458683bf77671aafc0d34246160d98e58",
+  "project_sha256": "0a12f662f4d7a78c1dbcf2ba10c9aa248e0a8faadc4d1049415e71dc68e0cac9",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "verified_monitor_names": [
+    "farfield (f=2.2)",
+    "farfield (f=2.25)",
+    "farfield (f=2.3)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    51,
+    51,
+    48
+  ],
+  "mesh_cells": 117500,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.014007091522216797,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve"
+}

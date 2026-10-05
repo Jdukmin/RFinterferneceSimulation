@@ -1,0 +1,70 @@
+{
+  "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_L1.cst",
+  "source_project": "cst/projects/ISL_C4_CUP_R14P7.cst",
+  "source_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
+  "project_sha256": "458f32442b0da20f6f850d3c0f9d7785e3bd46ba4e341f3c62918fe0cc70448c",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:ground_floor": {
+      "volume_mm3": 535.6260651150144,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:rim": {
+      "volume_mm3": 223.67679294882862,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:patch": {
+      "volume_mm3": 53.01501408465134,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 0.5529995186121875,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 0.552999318087041,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 0.5529995186121875,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 0.5529993180870415,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "monitor_frequencies_ghz": [
+    1.563,
+    1.57542,
+    1.588
+  ],
+  "verified_monitor_names": [
+    "farfield (f=1.563)",
+    "farfield (f=1.57542)",
+    "farfield (f=1.588)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    65,
+    65,
+    40
+  ],
+  "mesh_cells": 159744,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.01904296875,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve"
+}

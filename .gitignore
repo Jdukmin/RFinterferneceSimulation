@@ -62,3 +62,6 @@ desktop.ini
 # --- Claude Code local state ---
 .claude/settings.local.json
 .claude/*.local.*
+
+# Closed-network .cst documents and evidence tracked; derived sidecar workspaces regenerable.
+/cst/projects/closed_network/**/RFC_*/
