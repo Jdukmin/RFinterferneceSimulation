@@ -1,109 +1,140 @@
 # 폐쇄망 CST 실행 매뉴얼
 
-현재 **18개 프로젝트 저장·메쉬 확인 완료 / 24개 계획**이다. KAA reflector 4개와 SAR 2개는 확정 CST/CAD 원본이 없어 준비 미완료다. 이 문서를 전체 준비 완료 증빙으로 사용하지 않는다. 모든 저장 프로젝트는 solver를 실행하지 않았다.
+**분석용 CST 22/22개를 저장하고 단독 재열기 검증을 완료했다.** 별도 공통 geometry source 1개는 분석 case 수에 포함하지 않는다. Solver는 실행하지 않았다. SAR는 신규 CST 없이 기존 engineering receive-pattern baseline을 사용한다. 10개 RFI 경로의 입력 계획은 모두 연결되어 있으며 실제 수치 분석은 폐쇄망 CST RAW 결과를 가져온 뒤 수행한다.
 
-## A. 목적과 10개 경로
+## A. 목적과 범위
 
-1. KAA → SBA_TM (STM)
-2. KAA → L1 (L1)
-3. KAA → SAR (SAR)
-4. KAA → ISL_RX (ISL)
-5. ISL_TX → SAR (SAR)
-6. ISL_TX → SBA_TM (STM)
-7. ISL_TX → L1 (L1)
-8. SBA_TC → ISL_RX (ISL)
-9. SBA_TC → SAR (SAR)
-10. SBA_TC → L1 (L1)
+Victim operating frequency에서 attacker radiation과 victim receive pattern을 결합한다. 정상 Ka 반송파 blocker는 이번 범위가 아니다.
 
-KAA는 attacker only다. 정상 Ka 반송파 blocker는 이번 범위에서 제외한다. Victim operating frequency에서 attacker와 receiver 패턴을 결합한다.
+1. KAA → SBA_TM
+2. KAA → L1
+3. KAA → SAR
+4. KAA → ISL_RX
+5. ISL_TX → SAR
+6. ISL_TX → SBA_TM
+7. ISL_TX → L1
+8. SBA_TC → ISL_RX
+9. SBA_TC → SAR
+10. SBA_TC → L1
 
-## B. 프로젝트 inventory
+## B. Project inventory
 
-| Project filename | Antenna | Configuration | Victim band | Frequencies (GHz) | Port | Polarization | Geometry source | Spacecraft | Solver status |
-|---|---|---|---|---|---|---|---|---|---|
-| RFC_KAA_FEED_ONLY_STM.cst | KAA | FEED_ONLY | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
-| RFC_KAA_WITH_REFLECTOR_STM.cst | KAA | FEED_WITH_REFLECTOR | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | INPUT_MISSING |
-| RFC_KAA_FEED_ONLY_L1.cst | KAA | FEED_ONLY | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
-| RFC_KAA_WITH_REFLECTOR_L1.cst | KAA | FEED_WITH_REFLECTOR | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | INPUT_MISSING |
-| RFC_KAA_FEED_ONLY_SAR.cst | KAA | FEED_ONLY | SAR | 8.9 / 9.65 / 10.4 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
-| RFC_KAA_WITH_REFLECTOR_SAR.cst | KAA | FEED_WITH_REFLECTOR | SAR | 8.9 / 9.65 / 10.4 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | INPUT_MISSING |
-| RFC_KAA_FEED_ONLY_ISL.cst | KAA | FEED_ONLY | ISL | 10.55 / 10.6 / 10.65 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
-| RFC_KAA_WITH_REFLECTOR_ISL.cst | KAA | FEED_WITH_REFLECTOR | ISL | 10.55 / 10.6 / 10.65 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/KA_FEED_C_OEWG.cst | NONE | INPUT_MISSING |
-| RFC_SBA_TM_ORIGINAL.cst | SBA | ORIGINAL | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
-| RFC_INSTALLED_SBA_TM_NADIR.cst | SBA | INSTALLED | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | FULL_SSOT_8_PANELS | READY_NOT_SOLVED |
-| RFC_INSTALLED_SBA_TM_ZENITH.cst | SBA | INSTALLED | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | FULL_SSOT_8_PANELS | READY_NOT_SOLVED |
-| RFC_GPS_L1_ORIGINAL.cst | GPS | ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | NONE | READY_NOT_SOLVED |
-| RFC_INSTALLED_GPS_L1_GPSA1.cst | GPS | INSTALLED | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | FULL_SSOT_8_PANELS | READY_NOT_SOLVED |
-| RFC_INSTALLED_GPS_L1_GPSA2.cst | GPS | INSTALLED | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | FULL_SSOT_8_PANELS | READY_NOT_SOLVED |
-| RFC_ISL_ORIGINAL.cst | ISL | ORIGINAL | ISL | 10.55 / 10.6 / 10.65 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
-| RFC_INSTALLED_ISL_RX.cst | ISL | INSTALLED | ISL | 10.55 / 10.6 / 10.65 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/ISL_C4_CUP_R14P7.cst | FULL_SSOT_8_PANELS | READY_NOT_SOLVED |
-| RFC_SAR_ORIGINAL.cst | SAR | ORIGINAL | SAR | 8.9 / 9.65 / 10.4 | 미확보 | 원본 phase 유지; CP sense 확인 | 미확보 | NONE | INPUT_MISSING |
-| RFC_INSTALLED_SAR.cst | SAR | INSTALLED | SAR | 8.9 / 9.65 / 10.4 | 미확보 | 원본 phase 유지; CP sense 확인 | 미확보 | FULL_SSOT_8_PANELS | INPUT_MISSING |
-| RFC_ISL_TX_ORIGINAL_SAR.cst | ISL | ATTACKER_ORIGINAL | SAR | 8.9 / 9.65 / 10.4 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
-| RFC_ISL_TX_ORIGINAL_STM.cst | ISL | ATTACKER_ORIGINAL | STM | 2.2 / 2.25 / 2.3 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
-| RFC_ISL_TX_ORIGINAL_L1.cst | ISL | ATTACKER_ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
-| RFC_SBA_TC_ORIGINAL_ISL.cst | SBA | ATTACKER_ORIGINAL | ISL | 10.55 / 10.6 / 10.65 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
-| RFC_SBA_TC_ORIGINAL_SAR.cst | SBA | ATTACKER_ORIGINAL | SAR | 8.9 / 9.65 / 10.4 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
-| RFC_SBA_TC_ORIGINAL_L1.cst | SBA | ATTACKER_ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native discrete ports | 원본 phase 유지; CP sense 확인 | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
+[Inventory CSV](closed_network_cst_project_inventory.csv)는 분석 프로젝트 22개를 각각 한 행으로 관리한다. [전체 파일 목록](closed_network_generated_projects.md)에 저장 경로를 기록했다. CSV에는 antenna/configuration/band, edge/center frequency, geometry source, installation identity, 4-port 검증, monitor 검증, 저장 solver와 선택 정책, 출력 directory가 있다. 모든 분석 프로젝트 상태는 `READY_NOT_SOLVED`다. 이는 저장·설정 검증 상태이며 정식 라이선스·메모리·수렴 검증을 의미하지 않는다.
 
-[전체 경로·출력 위치 CSV](closed_network_cst_project_inventory.csv)와 [preflight 검증](closed_network_preparation_validation.json)을 함께 사용한다. INPUT_MISSING 행은 .cst가 존재하지 않는다. README/계획 파일을 CST project로 세지 않는다.
+| 구성 | 개수 | Geometry / port / polarization | Spacecraft geometry |
+|---|---:|---|---|
+| KAA feed-only, 4 bands | 4 | KA_FEED_C_OEWG 원본; native 4-port CP phase 유지 | 없음 |
+| KAA feed+reflector, 4 bands | 4 | 동일 feed + 공통 KARMA engineering surrogate; native 4-port CP phase 유지 | 없음; spacecraft-installed로 부르지 않음 |
+| SBA TM Original + Installed NADIR/ZENITH | 3 | SBAND_MATCHING_WIRE15; 원본 4-port phase 유지 | Installed 두 건에 전체 SSOT bus hull |
+| GPS L1 Original + Installed GPSA1/GPSA2 | 3 | LBAND_GNSS_FINAL_COMPROMISE; 원본 4-port phase 유지 | Installed 두 건에 전체 SSOT bus hull |
+| ISL Original + Installed RX | 2 | ISL_C4_CUP_R14P7; 원본 4-port phase 유지 | Installed에 전체 SSOT bus hull |
+| ISL TX off-band SAR/STM/L1 | 3 | ISL 원본 geometry와 4-port phase 유지 | 없음 |
+| SBA TC off-band ISL/SAR/L1 | 3 | SBA 원본 geometry와 4-port phase 유지 | 없음 |
 
-## C. 실행 순서
+| Victim band | Range (GHz) | Far-field monitors (GHz) |
+|---|---|---|
+| S-TM | 2.200–2.300 | 2.200 / 2.250 / 2.300 |
+| GPS L1 | 1.563–1.588 | 1.563 / 1.57542 / 1.588 |
+| SAR | 8.900–10.400 | 8.900 / 9.650 / 10.400 |
+| ISL | 10.550–10.650 | 10.550 / 10.600 / 10.650 |
 
-1. KAA STM feed-only → reflector; L1 feed-only → reflector; SAR feed-only → reflector; ISL feed-only → reflector. Reflector 원본 확보·검증 후 해당 네 행을 생성해야 한다.
-2. Victim Original SBA TM / GPS L1 / ISL을 실행한다. 기존 frozen reference와 섞지 않는 비교 원본이다.
-3. SBA TM installed NADIR와 ZENITH를 각각 실행한다.
-4. GPS L1 installed GPSA1와 GPSA2를 각각 실행한다.
-5. ISL RX installed를 실행한다.
-6. SAR authoritative Original과 Installed를 실행한다. 현재 full K8 원본 미확보이므로 실행할 수 없다. SAR leaf를 전체 수신 안테나로 대체하지 않는다.
-7. 추가 attacker off-band ISL_TX @ SAR/STM/L1, SBA_TC @ ISL/SAR/L1을 실행한다. 기존 geometry를 그대로 사용하며 raw pattern을 얻는다.
+SAR operating-band 평가는 기존 9.3875–9.9125 GHz를 사용하며 그 범위를 포함하는 세 monitor로 attacker response를 얻는다. `RFC_SAR_ORIGINAL.cst`와 `RFC_INSTALLED_SAR.cst`는 요구 목록에서 제거했다. SAR baseline은 Owner peak 52 dBi, rear +2 dBi, NF4/I-N−6 기준 −176 dBm/Hz다.
 
-## D. 각 프로젝트 실행과 export
+## C. KAA 공통 surrogate와 provenance
 
-프로젝트를 열고 solver를 실행하는 데 Python은 필요 없다. 아래 자동 export/검증 스크립트를 쓰려면 폐쇄망 Windows에 Python 3.10 이상, `numpy`, `pywin32`와 CST COM 등록이 필요하다. 인터넷 접속 없이 설치할 wheel 및 Python 설치본을 사전에 승인된 경로로 준비한다. CST 버전이 다르면 프로젝트를 사본으로 열어 호환성·포트·메쉬를 다시 확인한다.
+공통 source는 `cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst`다. 네 `RFC_KAA_WITH_REFLECTOR_*`는 이 source를 복제하고 range/monitor만 변경했다. 원본 KA_FEED_C_OEWG geometry/material/ports/local frame과 0/−90/−180/−270° phase는 유지했다. `.geometry.json`의 surface hash 및 네 `.preflight.json`의 source/geometry hash로 동일성을 확인한다.
 
-1. 해당 .cst를 연다. 원본 파일을 여는 것이 아니라 closed_network 하위 사본을 연다.
-2. geometry를 확인한다. Installed의 FULL_SPACECRAFT에는 PANEL_1…PANEL_8 전부 있어야 한다. Antenna native geometry·material·port·reference plane은 원본과 같아야 한다.
-3. native 4-port excitation을 확인한다. S는 0/90/180/270°, GPS·ISL·KAA는 0/−90/−180/−270°를 coherent far-field combination에 사용한다. 포트별 solver를 실행한 뒤 기존 위상을 결합한다.
-4. range와 edge/center 3개 monitor를 확인한다. 이전 operating-band monitor는 제거해 unrelated frequency를 계산하지 않는다.
-5. Mesh Update와 mesh quality/셀 수/RAM을 확인한다. 전체 형상을 자르거나 Learning Edition 100k 제한에 맞추지 않는다.
-6. 정식 라이선스에서 Time Domain solver를 시작한다. 오늘은 이 단계를 수행하지 않았다.
-7. solver log에서 모든 port excitations 완료, 에너지 잔류량, mesh convergence, S-matrix passivity와 accepted power를 확인한다. Accuracy 설정만으로 convergence 완료라고 보지 않는다.
-8. 결과 검증 후 아래 exporter로 RAW XZ/YZ, realized gain, accepted-power gain, complex Eθ/Eφ와 CP±를 출력한다.
+공개 확정값은 220 mm antenna diameter, 25.5–27 GHz, system gain 31 dBi, RHCP/LHCP/dual RF system이다. [Kongsberg 제품 페이지](https://www.kongsberg.com/what-we-do/space/space-mechanisms/apm/karma-7-fg/)와 [2022/09 datasheet, pp.1–2](https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/3.-space/2.-space-mechanisms/apm/karma-7-fg-product-data-sheet.pdf), [공개 사진](https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/3.-space/2.-space-mechanisms/apm/karma-7-fg_865x865.jpg?width=750)을 출처로 둔다. 사진의 기구 전체 envelope는 RF reflector optical prescription이 아니다. 31 dBi는 system reference이며 CST 패턴을 이 값에 맞춰 rescale하지 않는다.
+
+Fe=151.111258 mm, θf=40°, secondary/obstruction diameter=44 mm는 기존 `cst/results/KA_REFLECTOR_KA_FEED_C_OEWG/reflector_validation.json`과 `ka_reflector_po.py`/`ka_reflector_eval.py`의 equivalent aperture 모델에서 가져온 **engineering seed**다. Vendor specification으로 표시하지 않는다. 기존 seed의 PASS는 NON_CST_PYTHON aperture 모델에만 해당하며 새 CAD의 full-wave validation이 아니다.
+
+이번 surrogate는 다음 추가 가정을 명시했다.
+
+- PEC zero-thickness paraboloid: diameter 220 mm, focal proxy Fe, vertex z=−80 mm.
+- Native feed mouth z=20 mm를 phase-centre proxy로 사용한다. Feed는 이동·회전하지 않았다.
+- Forward feed를 main reflector로 향하게 하는 convex hyperbolic secondary: diameter 44 mm, vertex z=60 mm, 두 focus는 feed proxy와 main paraboloid focus다. 실제 KARMA secondary 형상·축 위치를 주장하지 않는다.
+- 64 azimuth sectors, main 8 radial rings, secondary 4 radial rings로 1,408개 sheet triangle을 만들었다. Main rim chord sag는 약 0.133 mm다. 폐쇄망 mesh/convergence에서 이 faceting의 영향을 확인한다.
+- Gimbal/strut/radome/cable/material loss는 발명하지 않았다. Tuning·optimization·solver는 수행하지 않았다.
+
+`OWNER_AUTHORIZED_ENGINEERING_SURROGATE; NOT_VENDOR_CAD; NOT_FULL_WAVE_VALIDATED`를 provenance로 유지한다. CST 결과는 이 surrogate의 결과이며 제품 인증값으로 해석하지 않는다.
+
+## D. Full SSOT bus hull audit
+
+`FULL_SSOT_BUS_HULL_8_PANELS`는 현재 SSOT의 전체 simplified bus hull을 뜻한다. **물리적으로 완전한 satellite CAD가 아니다.** [외부 구조물 audit JSON](closed_network_external_structure_audit.json)을 함께 읽는다.
+
+`SimplifiedSpacecraftBuilder`가 구조물 instance로 생성하는 것은 panels.csv의 SIDE 6개와 END_CAP 2개다. 8개 모두 포함했으며 정의된 구조물의 삭제/crop은 없다. Antenna installation/steering table은 좌표 metadata다. Generic `StructureType.SOLAR_ARRAY/PAYLOAD/...` enum이 존재한다는 사실은 실제 geometry instance가 있다는 뜻이 아니다. Standalone antenna library geometry도 released spacecraft assembly CAD와 구분한다. Passive antenna bodies, solar arrays, payload bodies, brackets, cables, gimbal hardware는 현재 SSOT assembly에 정의되지 않았다. 실제 위성에 없다는 뜻이 아니다.
+
+Active installed antenna/ports의 native local frame을 보존하고 전체 bus hull을 rigid transform으로 옮겼다. `p_B=R_BL*p_L+installation_position_B`의 roundtrip으로 실제 SSOT 설치 위치/방향을 확인했다. Native component label `FULL_SPACECRAFT`는 역사적 container 이름이며 CAD fidelity 표현이 아니다.
+
+## E. 폐쇄망 실행 순서
+
+1. KAA feed-only STM → reflector STM → feed-only L1 → reflector L1 → feed-only SAR → reflector SAR → feed-only ISL → reflector ISL.
+2. Victim Original SBA TM / GPS L1 / ISL.
+3. Installed SBA TM NADIR와 ZENITH; GPS L1 GPSA1와 GPSA2; ISL RX. 각 identity를 별도로 실행한다.
+4. ISL TX off-band SAR/STM/L1, SBA TC off-band ISL/SAR/L1.
+5. SAR CST 실행 단계는 없다. 기존 receive baseline을 MATLAB에서 연결한다.
+
+Project open → native geometry/material/port와 phase 확인 → range/monitor 확인 → 아래 solver 선택 → mesh quality/cells/RAM 확인 → solver run → convergence/passivity/normalization 확인 → independent far-field export → filename/directory 확인 순서로 진행한다. 오늘은 solver run 이후 단계가 수행되지 않았다.
+
+## F. Solver 선택과 자원 검토
+
+저장된 native default는 HF Time Domain이다. **이 default를 모든 case의 강제 선택으로 사용하지 않는다.** 특히 ISL Installed의 기존 hex plan은 2,269,049,730 cells이므로 그대로 Start를 누르지 않는다. 128 bytes/cell의 단순 계획식만으로도 약 270.5 GiB이며 실제 CST RAM 보증값이 아니다.
+
+[공식 CST solver 설명](https://www.3ds.com/products/simulia/cst-studio-suite/electromagnetic-simulation-solvers)은 IE의 MoM/MLFMM 및 TD/FD/IE/Asymptotic Hybrid 연계를 설명한다. [공식 system modeling 설명](https://www.3ds.com/products/simulia/cst-studio-suite/electromagnetic-systems-modeling)은 feed far-field source와 reflector IE/Asymptotic 연계를 설명한다. 폐쇄망 정식 라이선스에서 다음 순서로 결정한다.
+
+1. 설치 모델, 특히 ISL은 **Integral Equation/MLFMM** surface mesh를 먼저 검토한다. Discrete ports 4개, dielectric/material, closed/thin PEC sheet 지원, 모든 port excitation과 impedance/reference plane 보존 여부를 확인한다. Triangle 수·unknown 수·memory estimate를 기록한다.
+2. IE가 local feed/material/port를 직접 지원하지 않으면 **Hybrid**를 검토한다. Native antenna subsystem은 TD/FD full-wave로, 큰 bus scattering은 IE/MLFMM으로 연결한다. Ports/phase를 유지하고 Huygens/current/far-field transfer quantity와 power normalization/reference plane을 기록한다. 형상 삭제로 대체하지 않는다.
+3. **Asymptotic/PO/SBR**은 electrically large bus scattering의 보조 또는 Hybrid component로만 검토한다. L-band의 220 mm reflector와 below-cutoff feed 등 electrically small/resonant 부분을 Asymptotic만으로 계산하지 않는다. Near-field/source validity도 확인한다.
+4. TD/FD가 적절한 compact original/feed 모델은 그 solver를 유지할 수 있다. Installed 모델은 해당 hardware에서 가능한 자원 추정과 mesh convergence를 확인한 뒤 선택한다. 형상/port/material을 변경하지 않는다.
+5. Solver 변경 후 monitor 3개와 모든 port excitation, CP combination, raw gain quantity를 다시 확인한다. 선택 solver, licensed CST version, mesh type/size, RAM, convergence evidence를 `solver_selection.json` 및 export provenance에 남긴다. 설정 화면을 확인하는 동안 Start를 누르지 않는다.
+
+오늘 임시 사본에서 `ChangeSolverType "HF Integral Equation"` macro token을 시험했으나 현재 설치에서 invalid solver type 오류로 거절되었다. 사본의 변경을 저장하지 않았고 본 프로젝트 hash는 유지했다. 이 실패는 정식 CST의 IE 기능 부재를 증명하지 않으며 잘못된 token인지 edition 제약인지를 확정하지 않는다. 이 token을 폐쇄망 명령으로 사용하지 말고 해당 버전 GUI에서 solver를 선택한다. 정식 라이선스의 IE/Hybrid mesh 및 convergence는 아직 검증하지 않았다.
+
+## G. RAW export와 실패 처리
+
+SBA phase는 0/90/180/270°, GPS/ISL/KAA는 0/−90/−180/−270°를 유지한다. 모든 port 결과를 계산한 뒤 coherent combination을 수행한다. 확인된 CP sense만 RHCP/LHCP로 이름 붙인다.
+
+Windows Python 3.10+, numpy, pywin32와 CST COM 등록을 사용할 수 있는 경우:
 
 ```powershell
-python cst/export_closed_network_patterns.py cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_STM.cst --convergence-accepted
+python cst/export_closed_network_patterns.py cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_STM.cst --convergence-accepted
 ```
 
-이 명령은 Solver.Start를 호출하지 않는다. CombineResults.Run은 이미 계산된 port 결과의 후처리다. `--convergence-accepted`는 사용자가 solver/mesh 검증을 실제 완료한 경우에만 지정한다.
+이 명령은 Solver.Start를 호출하지 않는다. CombineResults.Run은 완료된 결과의 후처리다. `--convergence-accepted`는 mesh/solver 수렴을 실제 확인한 후에만 지정한다. Exporter는 native all-port S-matrix/combined far-field tree를 전제로 한다. IE/Hybrid에서 result tree가 달라지면 GUI RAW export 또는 해당 tree adapter를 먼저 검증한다. 기존 TD 결과로 대체하지 않는다.
 
-9. RAW filename은 **f<GHz 소수점 6자리>_XZ.csv / _YZ.csv**다. 예: f2.200000_XZ.csv, f1.575420_YZ.csv. 기존 간략 소수점 이름과 혼동하지 않는다. 각 frequency를 독립 export한다. Full 3D는 CST Farfield 3D ASCII export로 추가 보존하며 metadata에 quantity·좌표계·단위를 기록한다. CP±의 RHCP/LHCP 대응은 CST의 관찰 방향 convention을 확인하고 지정한다.
-10. inventory의 expected_output_directory로 복사한다. RAW CSV, raw_s_matrix.npz, provenance.json, solver/convergence log를 함께 보존한다. accepted normalization이 불안정하면 export는 보존하되 registration을 거절한다.
+각 frequency마다 `f<GHz 소수점 6자리>_XZ.csv`, `_YZ.csv`를 보존한다. 예: f2.200000_XZ.csv, f1.575420_YZ.csv. RAW realized gain linear/dBi, accepted-power gain, complex Eθ/Eφ, CP±와 raw_s_matrix.npz를 남긴다. CP± handedness는 CST convention 확인 후 지정한다. Full 3D ASCII도 가능한 경우 별도 보존하며 quantity/frame/unit을 기록한다. 폴더별 README에 모든 expected filename이 있다.
 
-RAW output에는 gain floor/clipping을 적용하지 않는다. 실제 linear zero는 −Inf로 보존되고 import 단계에서 검토 대상으로 거절된다. 원본을 finite 값으로 대체하지 않는다.
+Gain floor/clipping은 금지한다. 실제 linear zero는 −Inf로 남기며 finite 값으로 바꾸지 않는다. Export는 solver log, convergence/mesh evidence, normalization, source/reference plane, selected solver와 함께 inventory의 expected_output_directory로 복사한다.
 
-## E. 실패 기록
+Mesh/solver/port/convergence/passivity/normalization 실패는 FAILED 또는 INPUT_MISSING으로 기록한다. 0 dB·과거 패턴으로 대체하지 않는다. Accepted-power normalization이 불안정하면 RAW는 유지하지만 primary registration을 거절한다.
 
-Mesh failure / solver failure / port excitation failure / convergence failure / passivity issue / normalization issue를 project ID, CST version, solver log, mesh cells, frequency, port와 함께 기록한다. 실패 시 status=FAILED 또는 INPUT_MISSING으로 유지하고 0 dB·기존 free-space pattern으로 대체하지 않는다.
+## H. 검증 증거
 
-## F. Full spacecraft 좌표와 메쉬
+[단독 재열기 검증](closed_network_reopen_validation.json), [준비 완전성 검사](closed_network_completeness.json), 각 `.preflight.json`이 프로젝트 hash, mesh count, native ports/material/geometry 및 전체 bus hull 좌표 증거를 남긴다. 실제 solver 결과와 실제 RF/RFI 수치는 아직 없다.
 
-8개 완전한 side/end-cap SSOT outer surfaces를 사용한다. 일부 panel crop은 없다. 기존 antenna local geometry/port를 전혀 이동시키지 않기 위해 **CST global solver frame을 원본 antenna local frame으로 유지**하고 전체 spacecraft를 동일한 rigid coordinate transform으로 옮겼다. 이것은 crop이나 설치 위치 변경이 아니다. 각 preflight.json에 실제 body 설치 위치, R_BL, 모든 body/local panel vertices를 남겼다. `p_B = R_BL p_L + installation_position_B`로 복원하면 원래 spacecraft 좌표와 일치한다. Body +X/+Y/+Z와 CST +Z boresight를 혼동하지 않는다.
+## Appendix ? per-project inventory
 
-KAA gimbal 위치와 SAR 위치를 포함한 모든 SSOT installation coordinate는 full_spacecraft_geometry.json에 들어 있다. SimplifiedSpacecraftBuilder가 실제 구조물로 정의한 것은 8개 outer panel이다. Gimbal bracket, 실제 reflector CAD, SAR array CAD와 cable/radome는 저장소에 없어 금속 형상으로 invent하지 않았다. Outer panels는 기존 CST facet 모델의 PEC sheet 처리이며 임의 두께를 넣지 않았다.
-
-- RFC_INSTALLED_SBA_TM_NADIR.cst: 55,678,740 cells; 128 bytes/cell 단순 계획값 6.6 GiB.
-- RFC_INSTALLED_SBA_TM_ZENITH.cst: 55,522,584 cells; 128 bytes/cell 단순 계획값 6.6 GiB.
-- RFC_INSTALLED_GPS_L1_GPSA1.cst: 10,886,400 cells; 128 bytes/cell 단순 계획값 1.3 GiB.
-- RFC_INSTALLED_GPS_L1_GPSA2.cst: 10,886,400 cells; 128 bytes/cell 단순 계획값 1.3 GiB.
-- RFC_INSTALLED_ISL_RX.cst: 2,269,049,730 cells; 128 bytes/cell 단순 계획값 270.5 GiB.
-
-128 bytes/cell은 실제 CST RAM 보증값이 아닌 대략적 계획 산식이다. ISL 약 22.69억 cells는 정식 라이선스에서도 큰 자원이 필요하다. 폐쇄망의 hardware/RAM에 맞는 mesh 계획과 convergence 검증이 필수이며 형상을 삭제해서 해결하지 않는다.
-
-## G. 미확보 원본과 완료 조건
-
-KAA validated reflector 기록은 D=220 mm, Fe=151.111258 mm, Ds=44 mm의 NON_CST_PYTHON aperture 모델이다. Actual reflector surfaces·feed relative placement·material·subreflector CAD를 확정하지 않는다. 이 값만으로 새 reflector CST를 구성하지 않았다. SAR 원본은 단일소자 SAR_LEAF_C_DUALFEED 예제만 있으며 K8 전체 antenna가 아니다. Owner가 authoritative geometry를 지정해야 누락 6개 project를 완성할 수 있다. 전체 completeness는 현재 INCOMPLETE_INPUT_MISSING이다.
-
-## 검증 기록
-
-18개 저장 프로젝트를 sidecar 없이 독립 폴더에서 다시 열어 원본 4-port endpoint, 재질/체적, 3개 monitor 및 installed 전체 8개 panel을 확인했다. `closed_network_reopen_validation.json`과 `closed_network_completeness.json`에 증거를 남겼다. Octave 9.2에서 합성 fixture로 native CST 좌표 변환과 FreeSpacePattern/InstalledPattern class 구분을 검증했으며 실제 RFI 계산은 실행하지 않았다.
+| Project filename | Antenna | Configuration | Victim band | Frequencies GHz | Ports | Polarization | Geometry source | Spacecraft | Solver status |
+|---|---|---|---|---|---|---|---|---|---|
+| RFC_KAA_FEED_ONLY_STM.cst | KAA | FEED_ONLY | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_WITH_REFLECTOR_STM.cst | KAA | FEED_WITH_REFLECTOR | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_FEED_ONLY_L1.cst | KAA | FEED_ONLY | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_WITH_REFLECTOR_L1.cst | KAA | FEED_WITH_REFLECTOR | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_FEED_ONLY_SAR.cst | KAA | FEED_ONLY | SAR | 8.9 / 9.65 / 10.4 | 4 native ports | Native CP phase; verify sense | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_WITH_REFLECTOR_SAR.cst | KAA | FEED_WITH_REFLECTOR | SAR | 8.9 / 9.65 / 10.4 | 4 native ports | Native CP phase; verify sense | cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_FEED_ONLY_ISL.cst | KAA | FEED_ONLY | ISL | 10.55 / 10.6 / 10.65 | 4 native ports | Native CP phase; verify sense | cst/projects/KA_FEED_C_OEWG.cst | NONE | READY_NOT_SOLVED |
+| RFC_KAA_WITH_REFLECTOR_ISL.cst | KAA | FEED_WITH_REFLECTOR | ISL | 10.55 / 10.6 / 10.65 | 4 native ports | Native CP phase; verify sense | cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst | NONE | READY_NOT_SOLVED |
+| RFC_SBA_TM_ORIGINAL.cst | SBA | ORIGINAL | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
+| RFC_INSTALLED_SBA_TM_NADIR.cst | SBA | INSTALLED | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | FULL_SSOT_BUS_HULL_8_PANELS | READY_NOT_SOLVED |
+| RFC_INSTALLED_SBA_TM_ZENITH.cst | SBA | INSTALLED | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | FULL_SSOT_BUS_HULL_8_PANELS | READY_NOT_SOLVED |
+| RFC_GPS_L1_ORIGINAL.cst | GPS | ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | NONE | READY_NOT_SOLVED |
+| RFC_INSTALLED_GPS_L1_GPSA1.cst | GPS | INSTALLED | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | FULL_SSOT_BUS_HULL_8_PANELS | READY_NOT_SOLVED |
+| RFC_INSTALLED_GPS_L1_GPSA2.cst | GPS | INSTALLED | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst | FULL_SSOT_BUS_HULL_8_PANELS | READY_NOT_SOLVED |
+| RFC_ISL_ORIGINAL.cst | ISL | ORIGINAL | ISL | 10.55 / 10.6 / 10.65 | 4 native ports | Native CP phase; verify sense | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
+| RFC_INSTALLED_ISL_RX.cst | ISL | INSTALLED | ISL | 10.55 / 10.6 / 10.65 | 4 native ports | Native CP phase; verify sense | cst/projects/ISL_C4_CUP_R14P7.cst | FULL_SSOT_BUS_HULL_8_PANELS | READY_NOT_SOLVED |
+| RFC_ISL_TX_ORIGINAL_SAR.cst | ISL | ATTACKER_ORIGINAL | SAR | 8.9 / 9.65 / 10.4 | 4 native ports | Native CP phase; verify sense | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
+| RFC_ISL_TX_ORIGINAL_STM.cst | ISL | ATTACKER_ORIGINAL | STM | 2.2 / 2.25 / 2.3 | 4 native ports | Native CP phase; verify sense | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
+| RFC_ISL_TX_ORIGINAL_L1.cst | ISL | ATTACKER_ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/ISL_C4_CUP_R14P7.cst | NONE | READY_NOT_SOLVED |
+| RFC_SBA_TC_ORIGINAL_ISL.cst | SBA | ATTACKER_ORIGINAL | ISL | 10.55 / 10.6 / 10.65 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
+| RFC_SBA_TC_ORIGINAL_SAR.cst | SBA | ATTACKER_ORIGINAL | SAR | 8.9 / 9.65 / 10.4 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |
+| RFC_SBA_TC_ORIGINAL_L1.cst | SBA | ATTACKER_ORIGINAL | L1 | 1.563 / 1.57542 / 1.588 | 4 native ports | Native CP phase; verify sense | cst/projects/SBAND_MATCHING_WIRE15.cst | NONE | READY_NOT_SOLVED |

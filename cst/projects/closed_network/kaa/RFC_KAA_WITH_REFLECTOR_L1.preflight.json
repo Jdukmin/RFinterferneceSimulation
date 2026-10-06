@@ -1,0 +1,5702 @@
+{
+  "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_L1.cst",
+  "source_project": "cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst",
+  "source_sha256": "173fec2a6f9520e083278c9b3e7243fae204d0b5f53f73e1b013ae1c03071f96",
+  "project_sha256": "bfaf539d21a6b82f0b625776ff90d08e23adff4e59f67dc424a37878fb7e3e4a",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_0_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_1_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_2_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_3_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_4_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_5_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_6_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:MAIN_7_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_0_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_1_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_2_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_0_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_0_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_1_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_1_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_2_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_2_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_3_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_3_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_4_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_4_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_5_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_5_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_6_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_6_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_7_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_7_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_8_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_8_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_9_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_9_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_10_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_10_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_11_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_11_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_12_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_12_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_13_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_13_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_14_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_14_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_15_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_15_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_16_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_16_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_17_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_17_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_18_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_18_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_19_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_19_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_20_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_20_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_21_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_21_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_22_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_22_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_23_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_23_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_24_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_24_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_25_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_25_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_26_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_26_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_27_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_27_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_28_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_28_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_29_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_29_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_30_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_30_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_31_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_31_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_32_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_32_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_33_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_33_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_34_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_34_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_35_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_35_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_36_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_36_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_37_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_37_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_38_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_38_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_39_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_39_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_40_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_40_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_41_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_41_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_42_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_42_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_43_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_43_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_44_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_44_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_45_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_45_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_46_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_46_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_47_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_47_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_48_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_48_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_49_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_49_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_50_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_50_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_51_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_51_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_52_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_52_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_53_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_53_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_54_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_54_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_55_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_55_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_56_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_56_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_57_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_57_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_58_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_58_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_59_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_59_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_60_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_60_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_61_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_61_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_62_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_62_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_63_a": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    },
+    "KARMA7_SURROGATE:SECONDARY_3_63_b": {
+      "volume_mm3": 0.0,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "monitor_frequencies_ghz": [
+    1.563,
+    1.57542,
+    1.588
+  ],
+  "verified_monitor_names": [
+    "farfield (f=1.563)",
+    "farfield (f=1.57542)",
+    "farfield (f=1.588)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    53,
+    53,
+    35
+  ],
+  "mesh_cells": 91936,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.010959625244140625,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE",
+  "surrogate_surface_geometry_sha256": "81ea91d26239729787e48b24d1b64f2adb96b9707a2c0f54b5ce046fa468b90e",
+  "geometry_provenance": "OWNER_AUTHORIZED_KARMA7_FG_ENGINEERING_SURROGATE; NOT_VENDOR_CAD"
+}

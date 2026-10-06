@@ -66,5 +66,7 @@
   "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.0037851333618164062,
   "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
   "installed_geometry": null,
-  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve"
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE"
 }

@@ -18,14 +18,16 @@ function rows = run_closed_network_rfi(validateOnly)
         if registry.isKey(r.tx_dataset) && registry.isKey(r.rx_dataset)
             status='INPUTS_AVAILABLE';
             if ~validateOnly
-                tx=load(r.tx_dataset);rx=load(r.rx_dataset);it=inst(r.tx_installation);ir=inst(r.rx_installation);
+                tx=load(r.tx_dataset);sar=strcmp(r.rx_dataset,'SAR_ENGINEERING_RECEIVE_BASELINE');
+                if ~sar;rx=load(r.rx_dataset);end
+                it=inst(r.tx_installation);ir=inst(r.rx_installation);
                 u=ir.position_body_mm(:)-it.position_body_mm(:);distance=norm(u)/1000;u=u/norm(u);
                 dT=rfscreen.kaa.CstLocalFrameAdapter.localToAntenna()*(it.nominal_R_BL.'*u);
                 dR=rfscreen.kaa.CstLocalFrameAdapter.localToAntenna()*(ir.nominal_R_BL.'*(-u));
                 f=linspace(r.f_low_ghz*1e9,r.f_high_ghz*1e9,161);result=zeros(numel(f),8);
                 for j=1:numel(f)
                     gt=tx.evaluate(f(j),atan2d(dT(2),dT(1)),asind(dT(3)),policy);
-                    gr=rx.evaluate(f(j),atan2d(dR(2),dR(1)),asind(dR(3)),policy);
+                    if sar;gr=cn_sar_gain(repo,dR);else;gr=rx.evaluate(f(j),atan2d(dR(2),dR(1)),asind(dR(3)),policy);end
                     loss=rfscreen.psd.PsdMath.fspl(f(j),distance);coupling=gt+gr-loss;
                     port=rfscreen.psd.PsdMath.victimPortPsd(r.source_psd_dbm_hz,0,coupling);
                     margin=rfscreen.psd.PsdMath.margin(r.allowable_psd_dbm_hz,port);
@@ -35,7 +37,10 @@ function rows = run_closed_network_rfi(validateOnly)
                 [~,j]=max(result(:,5));vals=result(j,:);status='ANTENNA_PORT_PSD_EVALUATED';
             end
         end
-        rows(end+1,:)={r.pair_id,r.pair,r.tx_installation,r.rx_installation,r.tx_configuration,r.rx_configuration,r.tx_dataset,r.rx_dataset,status,vals(1),vals(2),vals(3),vals(4),vals(5),r.allowable_psd_dbm_hz,vals(6),vals(7),vals(8),'RX_CHAIN_INPUT_MISSING','PRIOR_WORKER_SOURCE_BASELINE; DOMAIN_APPLICABILITY_REQUIRES_REVIEW','APPROX_FROM_CUTS; FAR_FIELD_FSPL_MODEL'};
+        source='SYNTHETIC_TEST_SOURCE';if isfield(r,'source_provenance');source=r.source_provenance;end
+        fidelity='APPROX_FROM_CUTS; FAR_FIELD_FSPL_MODEL';
+        if strcmp(r.rx_dataset,'SAR_ENGINEERING_RECEIVE_BASELINE');fidelity='TX_CST_CUTS; RX_OWNER_ENGINEERING_SAR; FAR_FIELD_FSPL_MODEL';end
+        rows(end+1,:)={r.pair_id,r.pair,r.tx_installation,r.rx_installation,r.tx_configuration,r.rx_configuration,r.tx_dataset,r.rx_dataset,status,vals(1),vals(2),vals(3),vals(4),vals(5),r.allowable_psd_dbm_hz,vals(6),vals(7),vals(8),'RX_CHAIN_INPUT_MISSING',source,fidelity};
     end
     if ~validateOnly
         out=fullfile(repo,'output/closed_network');if exist(out,'dir')~=7;mkdir(out);end
@@ -70,7 +75,10 @@ end
 function writecsv(path,headers,rows)
     fid=fopen(path,'w');assert(fid>=0);cleanup=onCleanup(@()fclose(fid));fprintf(fid,'%s\n',strjoin(headers,','));
     for k=1:size(rows,1)
-        values=rows(k,:);for j=1:numel(values);if isnumeric(values{j});values{j}=sprintf('%.12g',values{j});end;end
+        values=rows(k,:);for j=1:numel(values)
+            if isnumeric(values{j});values{j}=sprintf('%.12g',values{j});end
+            if ~isempty(regexp(values{j},'[,"\r\n]','once'));values{j}=['"' strrep(values{j},'"','""') '"'];end
+        end
         fprintf(fid,'%s\n',strjoin(values,','));
     end
 end

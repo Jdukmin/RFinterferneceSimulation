@@ -23,5 +23,15 @@ for r in rows:
    files.append(dict(path=str((dataset/'registered'/name).as_posix()),raw_sha256=hashlib.sha256((folder/name).read_bytes()).hexdigest()))
  registry.append(dict(dataset_id=Path(r['project_file']).stem.replace('RFC_',''),configuration_id='CN_'+Path(r['project_file']).stem.replace('RFC_',''),pattern_class='InstalledPattern' if r['configuration']=='INSTALLED' else 'FreeSpacePattern',
   installation_id=r['installation_identity'],directory=dataset.as_posix(),frequencies_ghz=[float(r[k]) for k in ['f_low_ghz','f_center_ghz','f_high_ghz']],files=files,frame='CST_LOCAL_PRESERVED',gain_quantity='RealizedGain'))
+owner=ROOT/'output/codex/emission_inputs/latest_owner_policy.json'
+anchors=ROOT/'output/codex/sar_owner_pattern_anchors.csv'
+policy=json.loads(owner.read_text(encoding='utf-8'))
+assert policy['sar_absolute_peak_gain_dbi']==52 and policy['sar_rear_relative_peak_db']==-50 and policy['sar_allowable_psd_dbm_hz']==-176
+registry.append(dict(dataset_id='SAR_ENGINEERING_RECEIVE_BASELINE',configuration_id='CN_SAR_ENGINEERING_RECEIVE_BASELINE',pattern_class='EngineeringReceiveBaseline',
+ installation_id='SAR_ANT',directory='output/codex',frequencies_ghz=[9.65],frequency_span_ghz=[9.3875,9.9125],
+ frequency_model='OWNER_ENGINEERING_RECEIVE_BASELINE_HELD_CONSTANT_OVER_SAR_TUNING_BAND; NOT_THREE_CST_MONITORS',
+ frame='REPOSITORY_ANTENNA_X_BORESIGHT',gain_quantity='OwnerEngineeringGain',gain_unit='dBi',
+ peak_gain_dbi=52,rear_gain_dbi=2,allowable_psd_dbm_hz=-176,provenance='OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT; ENGINEERING_RECONSTRUCTION; OWNER_ENGINEERING_REAR_ENVELOPE',
+ source_hashes={str(p.relative_to(ROOT)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in [owner,anchors]}))
 (ROOT/'data/closed_network_patterns/registry.json').write_text(json.dumps(registry,indent=2)+'\n',encoding='utf-8')
-print('Registered accepted datasets:',len(registry))
+print('Registered datasets:',len(registry),'(accepted CST:',len(registry)-1,'; SAR engineering baseline: 1)')

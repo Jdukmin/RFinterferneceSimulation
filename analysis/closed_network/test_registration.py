@@ -15,6 +15,10 @@ class RegistrationTests(unittest.TestCase):
   self.meta=dict(project_file=self.row['project_file'],status='SOLVED_ACCEPTED',gain_quantity='RealizedGain',gain_unit='dBi',convergence_accepted=True,
    frame='CST_LOCAL_PRESERVED',monitors=[dict(frequency_ghz=f,normalization_reliable=True) for f in [1,2,3]])
   self.save_meta()
+  owner=self.root/'output/codex/emission_inputs';owner.mkdir(parents=True)
+  original=SCRIPT.parents[2]/'output/codex'
+  shutil.copy2(original/'emission_inputs/latest_owner_policy.json',owner)
+  shutil.copy2(original/'sar_owner_pattern_anchors.csv',owner.parent)
   for freq in [1,2,3]:
    for plane in ['XZ','YZ']:
     with (self.dataset/f'f{freq:.6f}_{plane}.csv').open('w',newline='') as f:
@@ -24,8 +28,10 @@ class RegistrationTests(unittest.TestCase):
  def test_accepted_dataset_and_raw_unchanged(self):
   before={p.name:p.read_bytes() for p in self.dataset.glob('*.csv')}
   result=self.run_script();self.assertEqual(result.returncode,0,result.stderr)
-  entries=json.loads((self.dataset.parent/'registry.json').read_text());self.assertEqual(len(entries),1)
+  entries=json.loads((self.dataset.parent/'registry.json').read_text());self.assertEqual(len(entries),2)
   self.assertEqual(entries[0]['pattern_class'],'InstalledPattern');self.assertEqual(len(entries[0]['files']),6)
+  self.assertEqual(entries[1]['pattern_class'],'EngineeringReceiveBaseline');self.assertEqual(entries[1]['rear_gain_dbi'],2)
+  self.assertEqual(entries[1]['frequencies_ghz'],[9.65]);self.assertEqual(entries[1]['frequency_span_ghz'],[9.3875,9.9125])
   self.assertEqual(before,{p.name:p.read_bytes() for p in self.dataset.glob('*.csv')})
  def test_unreliable_normalization_rejected(self):
   self.meta['monitors'][0]['normalization_reliable']=False;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)

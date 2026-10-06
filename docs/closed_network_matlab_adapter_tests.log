@@ -1,3 +1,5 @@
+Pair families: 10; comparison rows: 67; input-ready rows: 0
+PASS: 10 families / 67 comparisons; native CST frame; distinct installed/original types; SAR 52/+2 dBi baseline.
 warning: autoload: 'audiodevinfo.oct' is not an absolute filename
 warning: called from
     C:\Users\ykyk1\AppData\Local\Temp\claude\C--Users-ykyk1-source-repos-RFInterferenceSimulation\7c30d0c5-d552-4d3f-9867-67d16bd1fce6\scratchpad\octave\octave-9.2.0-w64\mingw64\lib\octave\9.2.0\oct\x86_64-w64-mingw32\PKG_ADD at line 5 column 1
@@ -161,6 +163,3 @@ warning: called from
 warning: autoload: 'gzip.oct' is not an absolute filename
 warning: called from
     C:\Users\ykyk1\AppData\Local\Temp\claude\C--Users-ykyk1-source-repos-RFInterferenceSimulation\7c30d0c5-d552-4d3f-9867-67d16bd1fce6\scratchpad\octave\octave-9.2.0-w64\mingw64\lib\octave\9.2.0\oct\x86_64-w64-mingw32\PKG_ADD at line 45 column 1
-
-Exact pair families: 10; comparison rows: 74; input-ready rows: 0
-PASS: 10 families / 74 missing-input comparisons; native CST frame; distinct installed/original pattern types.

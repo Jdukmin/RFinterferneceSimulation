@@ -1,0 +1,37 @@
+{
+  "classification": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "complete_satellite_cad": false,
+  "cropped": false,
+  "defined_structure_instances": [
+    "PANEL_1",
+    "PANEL_2",
+    "PANEL_3",
+    "PANEL_4",
+    "PANEL_5",
+    "PANEL_6",
+    "PANEL_7",
+    "PANEL_8"
+  ],
+  "included_structure_instances": [
+    "PANEL_1",
+    "PANEL_2",
+    "PANEL_3",
+    "PANEL_4",
+    "PANEL_5",
+    "PANEL_6",
+    "PANEL_7",
+    "PANEL_8"
+  ],
+  "omitted_defined_structure_instances": [],
+  "finding": "SimplifiedSpacecraftBuilder creates SpacecraftStructure instances exclusively from panels.csv (6 SIDE + 2 END_CAP); installation and steering records are coordinate metadata, not outer metal CAD.",
+  "library_geometry_vs_assembly": "Standalone S/GPS/ISL/KAA antenna geometry libraries exist; they are not a released spacecraft external-assembly CAD. Active installed antenna is retained. Passive antenna bodies/struts/gimbals/SAR array are not defined as structure instances by this SSOT.",
+  "surrogate_status": "KARMA reflector is newly owner-authorized analysis surrogate, not an added released bus-structure instance.",
+  "unmodelled": "Solar arrays, booms, payload bodies, radomes, cable routing, passive antenna assemblies and gimbal hardware: no physical assembly geometry in this SSOT; not claimed absent on the actual satellite.",
+  "source_hashes": {
+    "data/spacecraft/simplified_spacecraft_v1/panels.csv": "1313e1e2494767da8fb4e6031a4bc4b788216757c6ce07240f9d4432771fe77a",
+    "data/spacecraft/simplified_spacecraft_v1/antenna_installations.csv": "f8182fab5a437805ed3fa4f0dcd09ceefdd1ba24f12d035329933301d8f0612c",
+    "data/spacecraft/simplified_spacecraft_v1/README.md": "881e0d520700e2a3738df414f499fab8966beff59b1696324bbfe0d4ffa1d328",
+    "src/+rfscreen/+spacecraft/SimplifiedSpacecraftBuilder.m": "402e59c9d80d465f902caf8f1a0874695c4d32bd0db6e307f1b0c9eaec5219db",
+    "src/+rfscreen/+geometry/StructureType.m": "cce94d57d0a45d792b800c2fcf734203303ef2a87357c0319082ff50d18642f7"
+  }
+}

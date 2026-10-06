@@ -27,7 +27,7 @@ function test_closed_network_driver()
             rc='ORIGINAL';if ir==2;rc='INSTALLED';end
             manifest(k)=struct('pair_id','TEST_ONLY','pair','SYNTHETIC','tx_installation','TEST_TX','rx_installation','TEST_RX', ...
                 'tx_configuration',tc,'rx_configuration',rc,'tx_dataset',ids{it},'rx_dataset',ids{ir+2}, ...
-                'f_low_ghz',1,'f_high_ghz',1,'source_psd_dbm_hz',-100,'allowable_psd_dbm_hz',-177);
+                'f_low_ghz',1,'f_high_ghz',1,'source_psd_dbm_hz',-100,'allowable_psd_dbm_hz',-177,'source_provenance','SYNTHETIC,CSV_QUOTING_TEST');
         end
     end
     writejson(fullfile(target,'rfi_plan.json'),manifest);
@@ -41,6 +41,8 @@ function test_closed_network_driver()
     original=fileread(fullfile(fixture,'output/closed_network/original_installed_comparison.csv'));
     reflector=fileread(fullfile(fixture,'output/closed_network/feed_reflector_comparison.csv'));
     assert(numel(strfind(original,'TEST_ONLY'))==2);assert(numel(strfind(reflector,'TEST_ONLY'))==2);
+    primary=fileread(fullfile(fixture,'output/closed_network/rfi_ten_pairs.csv'));
+    assert(~isempty(strfind(primary,'"SYNTHETIC,CSV_QUOTING_TEST"')));
     fprintf('PASS: synthetic PSD/reference-plane arithmetic; required suppression; installed +5 dB; reflector +3 dB; comparison CSVs.\n');
 end
 function writejson(file,value)

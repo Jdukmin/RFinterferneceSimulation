@@ -1,22 +1,58 @@
 {
-  "status": "PASS_FOR_AVAILABLE_PROJECTS",
-  "overall_completion": "INCOMPLETE_INPUT_MISSING",
-  "saved_projects_verified": 18,
-  "planned_projects": 24,
+  "status": "PASS_FOR_PREPARED_PROJECTS",
+  "overall_completion": "COMPLETE",
+  "saved_projects_verified": 22,
+  "planned_projects": 22,
   "exact_rfi_pair_families": 10,
-  "comparison_matrix_rows": 74,
-  "missing_projects": [
-    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_STM.cst",
-    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_L1.cst",
-    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_SAR.cst",
-    "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_ISL.cst",
-    "cst/projects/closed_network/sar/RFC_SAR_ORIGINAL.cst",
-    "cst/projects/closed_network/sar/RFC_INSTALLED_SAR.cst"
-  ],
+  "comparison_matrix_rows": 67,
+  "missing_projects": [],
   "solver_started": false,
   "records": [
     {
       "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_STM.cst",
+      "standalone_cst_reopen": true,
+      "native_port_endpoints_identical": true,
+      "native_port_endpoints_mm": [
+        [
+          4.4,
+          0.0,
+          4.4,
+          3.9,
+          0.0,
+          4.4
+        ],
+        [
+          2.69422295812e-16,
+          4.4,
+          4.4,
+          2.38806125834e-16,
+          3.9,
+          4.4
+        ],
+        [
+          -4.4,
+          5.38844591625e-16,
+          4.4,
+          -3.9,
+          4.77612251667e-16,
+          4.4
+        ],
+        [
+          -8.08266887437e-16,
+          -4.4,
+          4.4,
+          -7.16418377501e-16,
+          -3.9,
+          4.4
+        ]
+      ],
+      "native_material_and_solid_volumes_identical": true,
+      "full_panels": 0,
+      "monitor_count": 3,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_STM.cst",
       "standalone_cst_reopen": true,
       "native_port_endpoints_identical": true,
       "native_port_endpoints_mm": [
@@ -102,6 +138,49 @@
       "solver_started": false
     },
     {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_L1.cst",
+      "standalone_cst_reopen": true,
+      "native_port_endpoints_identical": true,
+      "native_port_endpoints_mm": [
+        [
+          4.4,
+          0.0,
+          4.4,
+          3.9,
+          0.0,
+          4.4
+        ],
+        [
+          2.69422295812e-16,
+          4.4,
+          4.4,
+          2.38806125834e-16,
+          3.9,
+          4.4
+        ],
+        [
+          -4.4,
+          5.38844591625e-16,
+          4.4,
+          -3.9,
+          4.77612251667e-16,
+          4.4
+        ],
+        [
+          -8.08266887437e-16,
+          -4.4,
+          4.4,
+          -7.16418377501e-16,
+          -3.9,
+          4.4
+        ]
+      ],
+      "native_material_and_solid_volumes_identical": true,
+      "full_panels": 0,
+      "monitor_count": 3,
+      "solver_started": false
+    },
+    {
       "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_SAR.cst",
       "standalone_cst_reopen": true,
       "native_port_endpoints_identical": true,
@@ -145,7 +224,93 @@
       "solver_started": false
     },
     {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_SAR.cst",
+      "standalone_cst_reopen": true,
+      "native_port_endpoints_identical": true,
+      "native_port_endpoints_mm": [
+        [
+          4.4,
+          0.0,
+          4.4,
+          3.9,
+          0.0,
+          4.4
+        ],
+        [
+          2.69422295812e-16,
+          4.4,
+          4.4,
+          2.38806125834e-16,
+          3.9,
+          4.4
+        ],
+        [
+          -4.4,
+          5.38844591625e-16,
+          4.4,
+          -3.9,
+          4.77612251667e-16,
+          4.4
+        ],
+        [
+          -8.08266887437e-16,
+          -4.4,
+          4.4,
+          -7.16418377501e-16,
+          -3.9,
+          4.4
+        ]
+      ],
+      "native_material_and_solid_volumes_identical": true,
+      "full_panels": 0,
+      "monitor_count": 3,
+      "solver_started": false
+    },
+    {
       "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_ISL.cst",
+      "standalone_cst_reopen": true,
+      "native_port_endpoints_identical": true,
+      "native_port_endpoints_mm": [
+        [
+          4.4,
+          0.0,
+          4.4,
+          3.9,
+          0.0,
+          4.4
+        ],
+        [
+          2.69422295812e-16,
+          4.4,
+          4.4,
+          2.38806125834e-16,
+          3.9,
+          4.4
+        ],
+        [
+          -4.4,
+          5.38844591625e-16,
+          4.4,
+          -3.9,
+          4.77612251667e-16,
+          4.4
+        ],
+        [
+          -8.08266887437e-16,
+          -4.4,
+          4.4,
+          -7.16418377501e-16,
+          -3.9,
+          4.4
+        ]
+      ],
+      "native_material_and_solid_volumes_identical": true,
+      "full_panels": 0,
+      "monitor_count": 3,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_ISL.cst",
       "standalone_cst_reopen": true,
       "native_port_endpoints_identical": true,
       "native_port_endpoints_mm": [

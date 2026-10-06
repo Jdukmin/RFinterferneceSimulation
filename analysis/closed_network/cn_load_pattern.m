@@ -13,12 +13,14 @@ function p = cn_load_pattern(repo, entry)
             assert(numel(cuts{j}.theta_deg)==360 && all(isfinite(cuts{j}.gain_dBi)));
         end
         % Use the EXISTING CST-local adapter, not the generic cut assembler's different roll map.
-        for ie=1:numel(el)
-            for ia=1:numel(az)
-                dA=[cosd(el(ie))*cosd(az(ia));cosd(el(ie))*sind(az(ia));sind(el(ie))];dL=M.'*dA;
-                G(ie,ia,k)=rfscreen.kaa.KaVictimResponse.cutGain(cuts{1}.gain_dBi,cuts{2}.gain_dBi,dL);
-            end
-        end
+        [A,E]=meshgrid(az,el);dL=M.'*[cosd(E(:)).'.*cosd(A(:)).';cosd(E(:)).'.*sind(A(:)).';sind(E(:)).'];
+        th=acosd(max(-1,min(1,dL(3,:))));ph=mod(atan2d(dL(2,:),dL(1,:)),360);
+        xz=cuts{1}.gain_dBi(:).';yz=cuts{2}.gain_dBi(:).';
+        sample=@(c,t)interp1(0:360,[c,c(1)],mod(t,360),'linear');
+        v=[sample(xz,th);sample(yz,th);sample(xz,360-th);sample(yz,360-th)];
+        sector=floor(ph/90)+1;w=(ph-90*(sector-1))/90;n=1:numel(ph);
+        q=(1-w).*v(sub2ind(size(v),sector,n))+w.*v(sub2ind(size(v),mod(sector,4)+1,n));
+        G(:,:,k)=reshape(q,numel(el),numel(az));
     end
     grid=rfscreen.antenna.PatternGrid(az,el,fq,G);opts=struct('confidence',NaN,'polarization','UNKNOWN');
     if strcmp(entry.pattern_class,'InstalledPattern')

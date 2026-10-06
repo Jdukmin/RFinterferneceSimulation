@@ -16,19 +16,17 @@ def inventory():
  rows=[]
  def add(family,name,config,band,installation=None,source=None,missing=''):
   rows.append(dict(project_file=f'cst/projects/closed_network/{family.lower()}/{name}.cst',antenna=family,configuration=config,victim_band=band,
-   f_low_ghz=BANDS[band][0],f_center_ghz=BANDS[band][1],f_high_ghz=BANDS[band][2],spacecraft_geometry='FULL_SSOT_8_PANELS' if installation else 'NONE',
+   f_low_ghz=BANDS[band][0],f_center_ghz=BANDS[band][1],f_high_ghz=BANDS[band][2],spacecraft_geometry='FULL_SSOT_BUS_HULL_8_PANELS' if installation else 'NONE',
    port_status='PENDING',monitor_status='PENDING',solver_status='INPUT_MISSING' if missing else 'NOT_GENERATED',expected_output_directory='data/closed_network_patterns/'+name.replace('RFC_',''),
    installation_identity=installation or '',source_project=source or ('cst/projects/'+BASE[family]+'.cst' if BASE[family] else ''),missing_input=missing))
  for band in BANDS:
   add('KAA','RFC_KAA_FEED_ONLY_'+band,'FEED_ONLY',band)
-  add('KAA','RFC_KAA_WITH_REFLECTOR_'+band,'FEED_WITH_REFLECTOR',band,missing='CONFIRMED_REFLECTOR_CST_CAD_GEOMETRY_NOT_IN_MAIN; analytic aperture model is not CAD')
+  add('KAA','RFC_KAA_WITH_REFLECTOR_'+band,'FEED_WITH_REFLECTOR',band,source='cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst')
  for family,band,identities in [('SBA','STM',['SBA_NADIR','SBA_ZENITH']),('GPS','L1',['GPSA_1','GPSA_2']),('ISL','ISL',['ISL'])]:
   add(family,'RFC_'+('SBA_TM' if family=='SBA' else 'GPS_L1' if family=='GPS' else 'ISL')+'_ORIGINAL','ORIGINAL',band)
   for identity in identities:
    suffix=identity.replace('SBA_','') if family=='SBA' else identity.replace('_','') if family=='GPS' else 'RX'
    add(family,'RFC_INSTALLED_'+('SBA_TM_' if family=='SBA' else 'GPS_L1_' if family=='GPS' else 'ISL_')+suffix,'INSTALLED',band,identity)
- for name,config,inst in [('RFC_SAR_ORIGINAL','ORIGINAL',None),('RFC_INSTALLED_SAR','INSTALLED','SAR_ANT')]:
-  add('SAR',name,config,'SAR',inst,missing='CONFIRMED_SAR_FULL_ANTENNA_CST_GEOMETRY_NOT_IN_MAIN; SAR leaf is not full K8 antenna')
  for family,bands in [('ISL',['SAR','STM','L1']),('SBA',['ISL','SAR','L1'])]:
   for band in bands:add(family,'RFC_'+('ISL_TX' if family=='ISL' else 'SBA_TC')+'_ORIGINAL_'+band,'ATTACKER_ORIGINAL',band)
  return rows
@@ -53,7 +51,7 @@ def geometry():
   assert np.linalg.norm(rotation.T@rotation-np.eye(3))<1e-8 and abs(np.linalg.det(rotation)-1)<1e-8
   installations.append(dict(installation_id=r['antenna_id'],position_body_mm=pos.tolist(),nominal_R_BL=rotation.tolist(),mount_type=r['mount_type'],panel_id=r['panel_id']))
  files=[ds+f for f in ['hull_parameters.csv','hull_cross_section.csv','panels.csv','antenna_installations.csv','steering_constraints.csv']]
- return dict(full_outer_panels=faces,installations=installations,cropped=False,source_hashes={f:sha(ROOT/f) for f in files},
+ return dict(model_class='FULL_SSOT_BUS_HULL_8_PANELS',mechanical_cad_fidelity='SIMPLIFIED_BUS_HULL_NOT_COMPLETE_SATELLITE_CAD',full_outer_panels=faces,installations=installations,cropped=False,source_hashes={f:sha(ROOT/f) for f in files},
   external_metal_geometry='Only eight outer panels are defined as structures by SimplifiedSpacecraftBuilder. Gimbal/antenna references included as coordinate metadata; no invented bracket/radome/reflector/SAR CAD.',
   material_provenance='PEC sheet treatment retained from existing CST installed-facet model; SSOT specifies outer surfaces but no wall thickness')
 
@@ -135,12 +133,22 @@ def main():
   else:
    try:record=prepare(row,app,g)
    except Exception as e:row['solver_status']='FAILED_PREPARATION';row['missing_input']=str(e);write_json(evidence,dict(solver_started=False,status='FAILED_PREPARATION',error=str(e)));raise
+  record['solver_selection_policy']='LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN'
+  record['preferred_solver_review']='IE_MLFMM_OR_HYBRID' if row['configuration']=='INSTALLED' else 'TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE'
+  if row['configuration']=='FEED_WITH_REFLECTOR':
+   common=(ROOT/row['source_project']).with_suffix('.geometry.json')
+   record['surrogate_surface_geometry_sha256']=json.loads(common.read_text())['surface_geometry_sha256']
+   record['geometry_provenance']='OWNER_AUTHORIZED_KARMA7_FG_ENGINEERING_SURROGATE; NOT_VENDOR_CAD'
+  write_json(evidence,record)
   row.update(port_status='NATIVE_PORTS_PRESERVED_4',monitor_status='VERIFIED_3_EDGE_CENTER',solver_status=record['solver_status']);records.append(record)
- columns=['project_file','antenna','configuration','victim_band','f_low_ghz','f_center_ghz','f_high_ghz','spacecraft_geometry','port_status','monitor_status','solver_status','expected_output_directory','installation_identity','source_project','missing_input']
+ for row in rows:
+  row['saved_solver']='HF Time Domain'
+  row['solver_selection_policy']='IE_MLFMM_OR_HYBRID_FIRST' if row['configuration']=='INSTALLED' else 'TD_FD_WITH_RESOURCE_REVIEW'
+ columns=['project_file','antenna','configuration','victim_band','f_low_ghz','f_center_ghz','f_high_ghz','spacecraft_geometry','port_status','monitor_status','solver_status','expected_output_directory','installation_identity','source_project','missing_input','saved_solver','solver_selection_policy']
  with (ROOT/'docs/closed_network_cst_project_inventory.csv').open('w',encoding='utf-8',newline='') as f:
   w=csv.DictWriter(f,fieldnames=columns);w.writeheader();w.writerows(rows)
  summary=dict(completion_status='INCOMPLETE_INPUT_MISSING' if any(r['solver_status']!='READY_NOT_SOLVED' for r in rows) else 'COMPLETE',planned_projects=len(rows),saved_projects=len(records),
-  missing_projects=[r for r in rows if r['solver_status']!='READY_NOT_SOLVED'],solver_started=False,full_hull_panels=8,crops_used=False,source_geometry_changed=False,records=records)
+  missing_projects=[r for r in rows if r['solver_status']!='READY_NOT_SOLVED'],solver_started=False,ssot_bus_hull_panels=8,complete_satellite_cad=False,crops_used=False,original_feed_geometry_changed=False,reflector_surrogate_created=True,records=records)
  write_json(ROOT/'docs/closed_network_preparation_validation.json',summary)
  print('Preparation:',summary['completion_status'],len(records),'saved /',len(rows),'planned',flush=True)
 if __name__=='__main__':main()

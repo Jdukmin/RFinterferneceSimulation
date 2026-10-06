@@ -335,5 +335,7 @@
     "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
     "antenna_or_ports_transformed": false
   },
-  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve"
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
 }

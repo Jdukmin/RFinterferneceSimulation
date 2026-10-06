@@ -36,7 +36,8 @@ def main():
    full_panels=8 if row['configuration']=='INSTALLED' else 0,monitor_count=3,solver_started=False))
   print('Verified',project.name,flush=True)
  plan=json.loads((ROOT/'analysis/closed_network/rfi_plan.json').read_text());assert len({r['pair_id'] for r in plan})==10
- summary=dict(status='PASS_FOR_AVAILABLE_PROJECTS',overall_completion='INCOMPLETE_INPUT_MISSING',saved_projects_verified=len(reports),planned_projects=len(rows),exact_rfi_pair_families=10,comparison_matrix_rows=len(plan),
+ assert sources['cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst']['ports']==sources['cst/projects/KA_FEED_C_OEWG.cst']['ports']
+ summary=dict(status='PASS_FOR_PREPARED_PROJECTS',overall_completion='COMPLETE' if len(reports)==len(rows) else 'INCOMPLETE_INPUT_MISSING',saved_projects_verified=len(reports),planned_projects=len(rows),exact_rfi_pair_families=10,comparison_matrix_rows=len(plan),
   missing_projects=[r['project_file'] for r in rows if r['solver_status']!='READY_NOT_SOLVED'],solver_started=False,records=reports)
  (ROOT/'docs/closed_network_reopen_validation.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
 if __name__=='__main__':main()

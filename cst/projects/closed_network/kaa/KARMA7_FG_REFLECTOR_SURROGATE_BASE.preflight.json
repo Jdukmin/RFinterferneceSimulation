@@ -1,0 +1,42 @@
+{
+  "project_file": "cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst",
+  "project_sha256": "173fec2a6f9520e083278c9b3e7243fae204d0b5f53f73e1b013ae1c03071f96",
+  "feed_sha256": "4a72d46bc2bcf6017edf8f57be349d9458683bf77671aafc0d34246160d98e58",
+  "surface_geometry_sha256": "81ea91d26239729787e48b24d1b64f2adb96b9707a2c0f54b5ce046fa468b90e",
+  "source_solids": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    }
+  },
+  "surrogate_surfaces": 1408,
+  "solver_started": false,
+  "status": "COMMON_GEOMETRY_SOURCE_NOT_ANALYSIS_CASE",
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "feed_geometry_unchanged": true
+}
