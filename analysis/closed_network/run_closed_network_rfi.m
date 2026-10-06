@@ -6,8 +6,11 @@ function rows = run_closed_network_rfi(validateOnly)
     regfile=fullfile(repo,'data/closed_network_patterns/registry.json');
     registry=containers.Map('KeyType','char','ValueType','any');
     if exist(regfile,'file')==2
-        entries=jsondecode(fileread(regfile));if iscell(entries);entries=[entries{:}];end
-        for k=1:numel(entries);registry(entries(k).dataset_id)=entries(k);end
+        entries=jsondecode(fileread(regfile));
+        for k=1:numel(entries)
+            if iscell(entries);entry=entries{k};else;entry=entries(k);end
+            registry(entry.dataset_id)=entry;
+        end
     end
     geom=jsondecode(fileread(fullfile(repo,'cst/closed_network/full_spacecraft_geometry.json')));
     installs=geom.installations;if iscell(installs);installs=[installs{:}];end

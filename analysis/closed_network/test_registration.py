@@ -36,6 +36,24 @@ class RegistrationTests(unittest.TestCase):
   self.assertEqual(entries[1]['pattern_class'],'EngineeringReceiveBaseline');self.assertEqual(entries[1]['rear_gain_dbi'],2)
   self.assertEqual(entries[1]['frequencies_ghz'],[9.65]);self.assertEqual(entries[1]['frequency_span_ghz'],[9.3875,9.9125])
   self.assertEqual(before,{p.name:p.read_bytes() for p in self.dataset.glob('*.csv')})
+ def configure_second_port_group_binding(self):
+  import hashlib
+  source=self.root/self.row['project_file'];source.write_bytes(b'SYNTHETIC_CST_FIXTURE_NOT_A_REAL_PROJECT')
+  digest=hashlib.sha256(source.read_bytes()).hexdigest()
+  binding=dict(dataset_id='SECOND_GROUP',project_file=self.row['project_file'],installation_id='TEST_ONLY',pattern_class='InstalledPattern',frequencies_ghz=[1,2,3],directory=self.row['expected_output_directory'],port_numbers=[5,6,7,8])
+  file=self.root/'cst/projects/closed_network/dataset_bindings.json';file.parent.mkdir(parents=True,exist_ok=True);file.write_text(json.dumps([binding]))
+  matrix=[[1,0,0],[0,1,0],[0,0,1]]
+  first=dict(installation_id='FIRST_GROUP',nominal_R_BL=[[1,0,0],[0,-1,0],[0,0,-1]])
+  second=dict(installation_id='TEST_ONLY',nominal_R_BL=matrix)
+  source.with_suffix('.preflight.json').write_text(json.dumps(dict(project_sha256=digest,installed_geometry=dict(installation=first),installation_groups=[dict(installation=first,port_numbers=[1,2,3,4]),dict(installation=second,port_numbers=[5,6,7,8])])))
+  self.meta.update(dataset_id='SECOND_GROUP',project_sha256=digest,installation_id='TEST_ONLY',active_port_numbers=[5,6,7,8]);self.save_meta()
+ def test_second_port_group_registered_as_installed(self):
+  self.configure_second_port_group_binding();result=self.run_script();self.assertEqual(result.returncode,0,result.stderr)
+  entry=json.loads((self.dataset.parent/'registry.json').read_text())[0];self.assertEqual(entry['dataset_id'],'SECOND_GROUP');self.assertEqual(entry['pattern_class'],'InstalledPattern');self.assertEqual(entry['installation_id'],'TEST_ONLY')
+ def test_wrong_active_port_group_rejected(self):
+  self.configure_second_port_group_binding();self.meta['active_port_numbers']=[1,2,3,4];self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
+ def test_stale_project_hash_rejected(self):
+  self.configure_second_port_group_binding();self.meta['project_sha256']='STALE';self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_unreliable_normalization_rejected(self):
   self.meta['monitors'][0]['normalization_reliable']=False;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_wrong_frequency_rejected(self):

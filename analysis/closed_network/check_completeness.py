@@ -4,6 +4,33 @@ from pathlib import Path
 import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+scope=ROOT/'cst/projects/closed_network'
+if (scope/'project_inventory.csv').exists():
+    rows=list(csv.DictReader((scope/'project_inventory.csv').open(encoding='utf-8')))
+    bindings={b['dataset_id']:b for b in json.loads((scope/'dataset_bindings.json').read_text())}
+    plan=json.loads((ROOT/'analysis/closed_network/rfi_plan.json').read_text())
+    proof=json.loads((scope/'validation.json').read_text());verified={r['project_file']:r for r in proof['records']}
+    assert len(rows)==22 and len(plan)==37 and len({r['pair_id'] for r in plan})==10
+    assert proof['status']=='PASS' and not proof['solver_started']
+    assert len(list(scope.glob('*/*.cst')))==23 # 22 cases plus common source
+    installed=0
+    for r in rows:
+        path=ROOT/r['project_file'];e=json.loads(path.with_suffix('.preflight.json').read_text())
+        assert sha(path)==e['project_sha256']==verified[r['project_file']]['sha256'] and not e['solver_started']
+        assert sha(ROOT/e['source_project'])==e['source_sha256']
+        if e.get('installed_geometry'):
+            installed+=1;assert len(e['installed_geometry']['panels'])==8 and e['installed_geometry']['global_solver_frame']=='SPACECRAFT_BODY_FIXED'
+        if r['antenna']=='KAA':assert not e.get('installed_geometry')
+    assert installed==11
+    for r in plan:
+        tx=bindings[r['tx_dataset']]
+        assert tx['pattern_class']==('FreeSpacePattern' if r['pair'].startswith('KAA') else 'InstalledPattern')
+        if tx['pattern_class']=='InstalledPattern':assert tx['installation_id']==r['tx_installation']
+        if r['rx_dataset']!='SAR_ENGINEERING_RECEIVE_BASELINE':
+            rx=bindings[r['rx_dataset']];assert rx['pattern_class']=='InstalledPattern' and rx['installation_id']==r['rx_installation']
+    assert not (ROOT/'output/closed_network/rfi_ten_pairs.csv').exists()
+    print('PASS 22/22 cases; SBA/ISL installed attackers; KAA standalone; GPS installed; SAR baseline; 10/10 families / 37 rows; no solver.')
+    raise SystemExit(0)
 rows = list(csv.DictReader((ROOT/'docs/closed_network_cst_project_inventory.csv').open(encoding='utf-8')))
 preflight = json.loads((ROOT/'docs/closed_network_preparation_validation.json').read_text())
 reopen = json.loads((ROOT/'docs/closed_network_reopen_validation.json').read_text())
