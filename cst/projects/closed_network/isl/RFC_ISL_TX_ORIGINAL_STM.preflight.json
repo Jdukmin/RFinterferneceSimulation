@@ -2,7 +2,7 @@
   "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_STM.cst",
   "source_project": "cst/projects/ISL_C4_CUP_R14P7.cst",
   "source_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
-  "project_sha256": "0c721fe239cb10b2b29b1282d961466a4b25c69e2575623fc86bd1a63a295f96",
+  "project_sha256": "618acabf55df332e6a76abe116a8e61452de4f778902e4aeacefdc7eb0e9192f",
   "solver_started": false,
   "solver_status": "READY_NOT_SOLVED",
   "source_solids": {
@@ -38,7 +38,7 @@
   "antenna_geometry_preserved_by_native_clone": true,
   "source_materials_and_volumes_unchanged": true,
   "ports": 4,
-  "port_geometry_preserved_by_no_port_edit": true,
+  "port_geometry_preserved_by_no_port_edit": false,
   "phases_deg": [
     0,
     -90,
@@ -58,15 +58,404 @@
   "solver": "HF Time Domain",
   "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
   "mesh_line_counts": [
-    57,
-    57,
-    33
+    421,
+    266,
+    263
   ],
-  "mesh_cells": 100352,
-  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.011962890625,
+  "mesh_cells": 29160600,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 3.4762144088745117,
   "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
-  "installed_geometry": null,
+  "installed_geometry": {
+    "installation": {
+      "installation_id": "ISL",
+      "position_body_mm": [
+        6375.0,
+        -595.0,
+        -805.0
+      ],
+      "nominal_R_BL": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_7",
+      "orientation_provenance": "OWNER_PLUS_X_END_FACE_OVERRIDE"
+    },
+    "panels": [
+      {
+        "panel_id": "PANEL_1",
+        "body_vertices_mm": [
+          [
+            0.0,
+            783.188191,
+            800.0
+          ],
+          [
+            6000.0,
+            783.188191,
+            800.0
+          ],
+          [
+            6000.0,
+            -783.188191,
+            800.0
+          ],
+          [
+            0.0,
+            -783.188191,
+            800.0
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "panel_id": "PANEL_2",
+        "body_vertices_mm": [
+          [
+            0.0,
+            -783.188191,
+            800.0
+          ],
+          [
+            6000.0,
+            -783.188191,
+            800.0
+          ],
+          [
+            6000.0,
+            -1084.414419,
+            278.26087
+          ],
+          [
+            0.0,
+            -1084.414419,
+            278.26087
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          -0.866025404,
+          0.5
+        ]
+      },
+      {
+        "panel_id": "PANEL_3",
+        "body_vertices_mm": [
+          [
+            0.0,
+            -1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            -1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            -301.226227,
+            -1078.26087
+          ],
+          [
+            0.0,
+            -301.226227,
+            -1078.26087
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          -0.866025404,
+          -0.5
+        ]
+      },
+      {
+        "panel_id": "PANEL_4",
+        "body_vertices_mm": [
+          [
+            0.0,
+            -301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            -301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            301.226227,
+            -1078.26087
+          ],
+          [
+            0.0,
+            301.226227,
+            -1078.26087
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      {
+        "panel_id": "PANEL_5",
+        "body_vertices_mm": [
+          [
+            0.0,
+            301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            1084.414419,
+            278.26087
+          ],
+          [
+            0.0,
+            1084.414419,
+            278.26087
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.866025404,
+          -0.5
+        ]
+      },
+      {
+        "panel_id": "PANEL_6",
+        "body_vertices_mm": [
+          [
+            0.0,
+            1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            783.188191,
+            800.0
+          ],
+          [
+            0.0,
+            783.188191,
+            800.0
+          ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.866025404,
+          0.5
+        ]
+      },
+      {
+        "panel_id": "PANEL_7",
+        "body_vertices_mm": [
+          [
+            6000.0,
+            -783.188191,
+            800.0
+          ],
+          [
+            6000.0,
+            -1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            -301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            301.226227,
+            -1078.26087
+          ],
+          [
+            6000.0,
+            1084.414419,
+            278.26087
+          ],
+          [
+            6000.0,
+            783.188191,
+            800.0
+          ]
+        ],
+        "outward_normal_body": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "panel_id": "PANEL_8",
+        "body_vertices_mm": [
+          [
+            0.0,
+            -783.188191,
+            800.0
+          ],
+          [
+            0.0,
+            -1084.414419,
+            278.26087
+          ],
+          [
+            0.0,
+            -301.226227,
+            -1078.26087
+          ],
+          [
+            0.0,
+            301.226227,
+            -1078.26087
+          ],
+          [
+            0.0,
+            1084.414419,
+            278.26087
+          ],
+          [
+            0.0,
+            783.188191,
+            800.0
+          ]
+        ],
+        "outward_normal_body": [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+    "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+    "antenna_or_ports_transformed": true
+  },
   "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
   "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE"
+  "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+  "installation_groups": [
+    {
+      "installation": {
+        "installation_id": "ISL",
+        "position_body_mm": [
+          6375.0,
+          -595.0,
+          -805.0
+        ],
+        "nominal_R_BL": [
+          [
+            0.0,
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ]
+        ],
+        "mount_type": "FIXED",
+        "panel_id": "PANEL_7",
+        "orientation_provenance": "OWNER_PLUS_X_END_FACE_OVERRIDE"
+      },
+      "port_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "phases_deg": [
+        0,
+        -90,
+        -180,
+        -270
+      ],
+      "port_endpoints_body_mm": [
+        [
+          6375.0,
+          -592.635,
+          -805.0,
+          6375.394,
+          -592.635,
+          -805.0
+        ],
+        [
+          6375.0,
+          -595.0,
+          -802.635,
+          6375.394,
+          -595.0,
+          -802.635
+        ],
+        [
+          6375.0,
+          -597.365,
+          -805.0,
+          6375.394,
+          -597.365,
+          -805.0
+        ],
+        [
+          6375.0,
+          -595.0,
+          -807.365,
+          6375.394,
+          -595.0,
+          -807.365
+        ]
+      ],
+      "source_port_impedances_ohm": [
+        50.0,
+        50.0,
+        50.0,
+        50.0
+      ],
+      "dataset_id": "INSTALLED_ISL_TX_STM",
+      "expected_output_directory": "data/closed_network_patterns/INSTALLED_ISL_TX_STM"
+    }
+  ],
+  "attacker_installed_update": "SBA_ISL_INSTALLED_22_PROJECT_SET",
+  "source_materials_preserved": true,
+  "rigid_solid_volume_relative_tolerance": 1e-05,
+  "solid_volume_max_relative_error": 1.5542526808912218e-06,
+  "port_relative_geometry_preserved_by_rigid_transform": true,
+  "antenna_instances": 1,
+  "inactive_port_termination": "MATCHED_50_OHM_ENGINEERING_ASSUMPTION; other installation not excited",
+  "saved_active_installation": "ISL",
+  "geometry_provenance": "NATIVE_ANTENNA_RIGID_INSTANCES_WITH_FULL_SSOT_BUS_HULL_8_PANELS; NOT_COMPLETE_SATELLITE_CAD"
 }

@@ -1,0 +1,477 @@
+[
+  {
+    "dataset_id": "KAA_FEED_ONLY_STM",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_STM.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/KAA_FEED_ONLY_STM",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_ONLY"
+  },
+  {
+    "dataset_id": "KAA_WITH_REFLECTOR_STM",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_STM.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/KAA_WITH_REFLECTOR_STM",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_WITH_REFLECTOR"
+  },
+  {
+    "dataset_id": "KAA_FEED_ONLY_L1",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_L1.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/KAA_FEED_ONLY_L1",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_ONLY"
+  },
+  {
+    "dataset_id": "KAA_WITH_REFLECTOR_L1",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_L1.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/KAA_WITH_REFLECTOR_L1",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_WITH_REFLECTOR"
+  },
+  {
+    "dataset_id": "KAA_FEED_ONLY_SAR",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_SAR.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "directory": "data/closed_network_patterns/KAA_FEED_ONLY_SAR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_ONLY"
+  },
+  {
+    "dataset_id": "KAA_WITH_REFLECTOR_SAR",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_SAR.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "directory": "data/closed_network_patterns/KAA_WITH_REFLECTOR_SAR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_WITH_REFLECTOR"
+  },
+  {
+    "dataset_id": "KAA_FEED_ONLY_ISL",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_ISL.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/KAA_FEED_ONLY_ISL",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_ONLY"
+  },
+  {
+    "dataset_id": "KAA_WITH_REFLECTOR_ISL",
+    "project_file": "cst/projects/closed_network/kaa/RFC_KAA_WITH_REFLECTOR_ISL.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/KAA_WITH_REFLECTOR_ISL",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "FEED_WITH_REFLECTOR"
+  },
+  {
+    "dataset_id": "SBA_TM_ORIGINAL",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TM_ORIGINAL.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/SBA_TM_ORIGINAL",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TM_NADIR",
+    "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
+    "installation_id": "SBA_NADIR",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TM_NADIR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "INSTALLED"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TM_ZENITH",
+    "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
+    "installation_id": "SBA_ZENITH",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TM_ZENITH",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "INSTALLED"
+  },
+  {
+    "dataset_id": "GPS_L1_ORIGINAL",
+    "project_file": "cst/projects/closed_network/gps/RFC_GPS_L1_ORIGINAL.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/GPS_L1_ORIGINAL",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_GPS_L1_GPSA1",
+    "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
+    "installation_id": "GPSA_1",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_GPS_L1_GPSA1",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "INSTALLED"
+  },
+  {
+    "dataset_id": "INSTALLED_GPS_L1_GPSA2",
+    "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA2.cst",
+    "installation_id": "GPSA_2",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_GPS_L1_GPSA2",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "INSTALLED"
+  },
+  {
+    "dataset_id": "ISL_ORIGINAL",
+    "project_file": "cst/projects/closed_network/isl/RFC_ISL_ORIGINAL.cst",
+    "installation_id": "",
+    "pattern_class": "FreeSpacePattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/ISL_ORIGINAL",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_ISL_RX",
+    "project_file": "cst/projects/closed_network/isl/RFC_INSTALLED_ISL_RX.cst",
+    "installation_id": "ISL",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_ISL_RX",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "INSTALLED"
+  },
+  {
+    "dataset_id": "INSTALLED_ISL_TX_SAR",
+    "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_SAR.cst",
+    "installation_id": "ISL",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_ISL_TX_SAR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_ISL_TX_STM",
+    "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_STM.cst",
+    "installation_id": "ISL",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      2.2,
+      2.25,
+      2.3
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_ISL_TX_STM",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_ISL_TX_L1",
+    "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_L1.cst",
+    "installation_id": "ISL",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_ISL_TX_L1",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_ISL_NADIR",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_ISL.cst",
+    "installation_id": "SBA_NADIR",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_ISL_NADIR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_ISL_ZENITH",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_ISL.cst",
+    "installation_id": "SBA_ZENITH",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      10.55,
+      10.6,
+      10.65
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_ISL_ZENITH",
+    "port_numbers": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_SAR_NADIR",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_SAR.cst",
+    "installation_id": "SBA_NADIR",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_SAR_NADIR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_SAR_ZENITH",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_SAR.cst",
+    "installation_id": "SBA_ZENITH",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      8.9,
+      9.65,
+      10.4
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_SAR_ZENITH",
+    "port_numbers": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_L1_NADIR",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_L1.cst",
+    "installation_id": "SBA_NADIR",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_L1_NADIR",
+    "port_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  },
+  {
+    "dataset_id": "INSTALLED_SBA_TC_L1_ZENITH",
+    "project_file": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_L1.cst",
+    "installation_id": "SBA_ZENITH",
+    "pattern_class": "InstalledPattern",
+    "frequencies_ghz": [
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "directory": "data/closed_network_patterns/INSTALLED_SBA_TC_L1_ZENITH",
+    "port_numbers": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "source_variant": "ATTACKER_ORIGINAL"
+  }
+]

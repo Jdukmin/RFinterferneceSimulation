@@ -1,7 +1,7 @@
 function test_closed_network_adapter()
 % Synthetic temporary fixtures only; never treated as mission antenna data.
     here=fileparts(mfilename('fullpath'));repo=fileparts(fileparts(here));addpath(fullfile(repo,'src'));
-    rows=run_closed_network_rfi(true);assert(size(rows,1)==67);assert(all(strcmp(rows(:,9),'INPUT_MISSING')));
+    rows=run_closed_network_rfi(true);assert(size(rows,1)==37);assert(all(strcmp(rows(:,9),'INPUT_MISSING')));
     temp=tempname();mkdir(temp);mkdir(fullfile(temp,'test'));mkdir(fullfile(temp,'test','registered'));
     cleanup=onCleanup(@()rmdir(temp,'s'));
     for plane={'XZ','YZ'}
@@ -23,5 +23,5 @@ function test_closed_network_adapter()
     assert(strcmp(p.installedSource,'CST'));
     assert(cn_sar_gain(repo,[1;0;0])==52);assert(cn_sar_gain(repo,[-1;0;0])==2);
     assert(cn_sar_gain(repo,[cosd(85);sind(85);0])==2);
-    fprintf('PASS: 10 families / 67 comparisons; native CST frame; distinct installed/original types; SAR 52/+2 dBi baseline.\n');
+    fprintf('PASS: 10 families / 37 combinations; native CST frame; distinct installed/original types; SAR 52/+2 dBi baseline.\n');
 end
