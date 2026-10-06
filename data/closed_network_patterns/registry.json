@@ -1,0 +1,28 @@
+[
+  {
+    "dataset_id": "SAR_ENGINEERING_RECEIVE_BASELINE",
+    "configuration_id": "CN_SAR_ENGINEERING_RECEIVE_BASELINE",
+    "pattern_class": "EngineeringReceiveBaseline",
+    "installation_id": "SAR_ANT",
+    "directory": "output/codex",
+    "frequencies_ghz": [
+      9.65
+    ],
+    "frequency_span_ghz": [
+      9.3875,
+      9.9125
+    ],
+    "frequency_model": "OWNER_ENGINEERING_RECEIVE_BASELINE_HELD_CONSTANT_OVER_SAR_TUNING_BAND; NOT_THREE_CST_MONITORS",
+    "frame": "REPOSITORY_ANTENNA_X_BORESIGHT",
+    "gain_quantity": "OwnerEngineeringGain",
+    "gain_unit": "dBi",
+    "peak_gain_dbi": 52,
+    "rear_gain_dbi": 2,
+    "allowable_psd_dbm_hz": -176,
+    "provenance": "OWNER_EXTRACTED_FROM_K8_SAR_PATTERN_MAT; ENGINEERING_RECONSTRUCTION; OWNER_ENGINEERING_REAR_ENVELOPE",
+    "source_hashes": {
+      "output/codex/emission_inputs/latest_owner_policy.json": "26a5f7401c42e6882eb0f3ccb8467809ddb6e48bd1ad03737af9fa71c3300f31",
+      "output/codex/sar_owner_pattern_anchors.csv": "95e6e4906f3fcde437b207a4456c1f3dd8fcddde5b1261f97c139040b6e63409"
+    }
+  }
+]

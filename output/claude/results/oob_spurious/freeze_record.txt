@@ -1,0 +1,9 @@
+Claude worker -- freeze record (OOB/spurious standard analysis)
+freeze_point_sha        : 8469e8903da83b6ebed014aae311f90855c31715 (origin/main at analysis start)
+branch                  : claude/oob-spurious-from-8469e89 (created from the freeze point)
+worktree                : separate git worktree (../RFI_claude_oob); shared checkout untouched
+start HEAD              : 8469e8903da83b6ebed014aae311f90855c31715
+start working tree      : CLEAN (git status --porcelain = 0 entries at worktree creation)
+inputs from other workers: none read (no output/codex content used; no commit after the freeze point used)
+shared code / data      : unchanged (src/, data/, tests/ not modified); worker inputs in output/claude/inputs/
+analysis runs           : results/run_provenance.csv (row run_oob_spurious_analysis.m)

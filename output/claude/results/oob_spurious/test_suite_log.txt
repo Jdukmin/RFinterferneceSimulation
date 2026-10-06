@@ -1,0 +1,52 @@
+# full suite run 2026-10-05, GNU Octave 8.4.0, working tree = this update (src/data/tests unchanged)
+Running 46 test files...
+  ran test_coordinate
+  ran test_geometry
+  ran test_pattern
+  ran test_pairwise
+  ran test_multisystem
+  ran test_invalid_inputs
+  ran test_invariants
+  ran test_architecture_boundary
+  ran test_pattern_import
+  ran test_pattern_duplicates
+  ran test_pattern_periodic
+  ran test_pattern_frame
+  ran test_pattern_validation
+  ran test_pattern_integration
+  ran test_pattern_architecture
+  ran test_spectrum
+  ran test_filter
+  ran test_spectral_coupling
+  ran test_noise
+  ran test_in_margin
+  ran test_susceptibility_validity
+  ran test_rf_coexistence_integration
+  ran test_phase3_architecture
+  ran test_compression
+  ran test_blocking
+  ran test_im3
+  ran test_nonlinear_validity
+  ran test_nonlinear_scenario
+  ran test_phase4_architecture
+  ran test_ray_intersection
+  ran test_structure_fov
+  ran test_los_blockage
+  ran test_installed_pattern
+  ran test_installed_environment_integration
+  ran test_phase5_architecture
+  ran test_phase6_audits
+  ran test_convex_polygon
+  ran test_simplified_spacecraft
+  ran test_mission_cases
+  ran test_pattern_freeze
+  ran test_cst_coupling
+  ran test_em_sweep_plan
+  ran test_local_facets
+  ran test_rfc_levels
+  ran test_ka_nearfield
+  ran test_rfi_psd
+
+================ TEST SUMMARY ================
+Passed: 1588   Failed: 0   Total: 1588
+=============================================

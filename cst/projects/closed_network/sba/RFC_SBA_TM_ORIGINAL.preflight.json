@@ -1,0 +1,92 @@
+{
+  "project_file": "cst/projects/closed_network/sba/RFC_SBA_TM_ORIGINAL.cst",
+  "source_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
+  "source_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
+  "project_sha256": "38c2fac30c00683780ecfae4009a5aa5a2e6020ebf6f319331e4323ff41f48ac",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:base_floor": {
+      "volume_mm3": 39819.6868842506,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center": {
+      "volume_mm3": 9047.790123190356,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1": {
+      "volume_mm3": 5277.876614945944,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 9817.454757168656,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1": {
+      "volume_mm3": 461.1127559563954,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2": {
+      "volume_mm3": 461.11239546115894,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination": {
+      "volume_mm3": 63.61721663246007,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3": {
+      "volume_mm3": 461.11275595698766,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4": {
+      "volume_mm3": 461.11239545495806,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination": {
+      "volume_mm3": 63.617216632460064,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "verified_monitor_names": [
+    "farfield (f=2.2)",
+    "farfield (f=2.25)",
+    "farfield (f=2.3)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    45,
+    45,
+    42
+  ],
+  "mesh_cells": 79376,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.009462356567382812,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE"
+}

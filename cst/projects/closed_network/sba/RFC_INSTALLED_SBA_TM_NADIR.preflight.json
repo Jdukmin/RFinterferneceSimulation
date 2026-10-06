@@ -1,0 +1,345 @@
+{
+  "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
+  "source_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
+  "source_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
+  "project_sha256": "b8b2c20b68f4d123463d5324014d1b906ff56cb455abef4ae864ca51dfd5ea51",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:base_floor": {
+      "volume_mm3": 39819.6868842506,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center": {
+      "volume_mm3": 9047.790123190356,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1": {
+      "volume_mm3": 5277.876614945944,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 9817.454757168656,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1": {
+      "volume_mm3": 461.1127559563954,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2": {
+      "volume_mm3": 461.11239546115894,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination": {
+      "volume_mm3": 63.61721663246007,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3": {
+      "volume_mm3": 461.11275595698766,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4": {
+      "volume_mm3": 461.11239545495806,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination": {
+      "volume_mm3": 63.617216632460064,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "verified_monitor_names": [
+    "farfield (f=2.2)",
+    "farfield (f=2.25)",
+    "farfield (f=2.3)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    508,
+    324,
+    341
+  ],
+  "mesh_cells": 55678740,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 6.637423038482666,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": {
+    "installation": {
+      "installation_id": "SBA_NADIR",
+      "position_body_mm": [
+        255.0,
+        870.0,
+        1030.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4999999999066592,
+          0.866025403838329
+        ],
+        [
+          0.0,
+          -0.866025403838329,
+          0.4999999999066592
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_6"
+    },
+    "panels": [
+      {
+        "panel_id": "PANEL_1",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            155.77993839091874,
+            -190.18123192569254
+          ],
+          [
+            5745.0,
+            155.77993839091874,
+            -190.18123192569254
+          ],
+          [
+            5745.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ],
+          [
+            -255.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_2",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ],
+          [
+            5745.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ],
+          [
+            5745.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ],
+          [
+            -255.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_3",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ],
+          [
+            5745.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ],
+          [
+            5745.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ],
+          [
+            -255.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_4",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ],
+          [
+            5745.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ],
+          [
+            5745.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ],
+          [
+            -255.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_5",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ],
+          [
+            5745.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ],
+          [
+            5745.0,
+            758.2323931193105,
+            -190.1812311265964
+          ],
+          [
+            -255.0,
+            758.2323931193105,
+            -190.1812311265964
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_6",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            758.2323931193105,
+            -190.1812311265964
+          ],
+          [
+            5745.0,
+            758.2323931193105,
+            -190.1812311265964
+          ],
+          [
+            5745.0,
+            155.77993839091874,
+            -190.18123192569254
+          ],
+          [
+            -255.0,
+            155.77993839091874,
+            -190.18123192569254
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_7",
+        "local_vertices_mm": [
+          [
+            5745.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ],
+          [
+            5745.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ],
+          [
+            5745.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ],
+          [
+            5745.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ],
+          [
+            5745.0,
+            758.2323931193105,
+            -190.1812311265964
+          ],
+          [
+            5745.0,
+            155.77993839091874,
+            -190.18123192569254
+          ]
+        ]
+      },
+      {
+        "panel_id": "PANEL_8",
+        "local_vertices_mm": [
+          [
+            -255.0,
+            -627.4082524628744,
+            -1546.7029707100633
+          ],
+          [
+            -255.0,
+            -326.1820256782493,
+            -2068.44210141176
+          ],
+          [
+            -255.0,
+            1240.1943579476201,
+            -2068.4421010269307
+          ],
+          [
+            -255.0,
+            1541.4205848913869,
+            -1546.7029712581884
+          ],
+          [
+            -255.0,
+            758.2323931193105,
+            -190.1812311265964
+          ],
+          [
+            -255.0,
+            155.77993839091874,
+            -190.18123192569254
+          ]
+        ]
+      }
+    ],
+    "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
+    "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
+    "antenna_or_ports_transformed": false
+  },
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+}

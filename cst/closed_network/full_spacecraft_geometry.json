@@ -1,0 +1,470 @@
+{
+  "model_class": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "mechanical_cad_fidelity": "SIMPLIFIED_BUS_HULL_NOT_COMPLETE_SATELLITE_CAD",
+  "full_outer_panels": [
+    {
+      "panel_id": "PANEL_1",
+      "body_vertices_mm": [
+        [
+          0.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_2",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_3",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_4",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_5",
+      "body_vertices_mm": [
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_6",
+      "body_vertices_mm": [
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_7",
+      "body_vertices_mm": [
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_8",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    }
+  ],
+  "installations": [
+    {
+      "installation_id": "SBA_NADIR",
+      "position_body_mm": [
+        255.0,
+        870.0,
+        1030.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4999999999066592,
+          0.866025403838329
+        ],
+        [
+          0.0,
+          -0.866025403838329,
+          0.4999999999066592
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_6"
+    },
+    {
+      "installation_id": "SBA_ZENITH",
+      "position_body_mm": [
+        255.0,
+        -530.0,
+        -1240.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_4"
+    },
+    {
+      "installation_id": "GPSA_1",
+      "position_body_mm": [
+        2045.0,
+        -265.0,
+        -1295.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          -0.866025403838329
+        ],
+        [
+          0.0,
+          0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_3"
+    },
+    {
+      "installation_id": "GPSA_2",
+      "position_body_mm": [
+        3145.0,
+        -265.0,
+        -1295.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          -0.866025403838329
+        ],
+        [
+          0.0,
+          0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_3"
+    },
+    {
+      "installation_id": "KAA_1",
+      "position_body_mm": [
+        5965.0,
+        -1100.0,
+        850.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "mount_type": "GIMBAL",
+      "panel_id": "PANEL_1"
+    },
+    {
+      "installation_id": "KAA_2",
+      "position_body_mm": [
+        5965.0,
+        1285.0,
+        530.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          0.866025403838329
+        ],
+        [
+          0.0,
+          -0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "mount_type": "GIMBAL",
+      "panel_id": "PANEL_5"
+    },
+    {
+      "installation_id": "ISL",
+      "position_body_mm": [
+        6375.0,
+        -595.0,
+        -805.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          -0.866025403838329
+        ],
+        [
+          0.0,
+          0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_3"
+    },
+    {
+      "installation_id": "SAR_ANT",
+      "position_body_mm": [
+        3250.0,
+        0.0,
+        800.0
+      ],
+      "nominal_R_BL": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_1"
+    }
+  ],
+  "cropped": false,
+  "source_hashes": {
+    "data/spacecraft/simplified_spacecraft_v1/hull_parameters.csv": "66dc307e9439632e50be8a5ad728593a4146d9d4efa3824ae1c8d0639020b5d3",
+    "data/spacecraft/simplified_spacecraft_v1/hull_cross_section.csv": "85d20353ce4a2e88bc8dcc783105d3178a2233425289488e578f0a59ac37be9d",
+    "data/spacecraft/simplified_spacecraft_v1/panels.csv": "1313e1e2494767da8fb4e6031a4bc4b788216757c6ce07240f9d4432771fe77a",
+    "data/spacecraft/simplified_spacecraft_v1/antenna_installations.csv": "f8182fab5a437805ed3fa4f0dcd09ceefdd1ba24f12d035329933301d8f0612c",
+    "data/spacecraft/simplified_spacecraft_v1/steering_constraints.csv": "dd29d50de2c5cdd5b9e72cf8cfff8efd9672aae20a2a31af427e963e53c7e69a"
+  },
+  "external_metal_geometry": "Only eight outer panels are defined as structures by SimplifiedSpacecraftBuilder. Gimbal/antenna references included as coordinate metadata; no invented bracket/radome/reflector/SAR CAD.",
+  "material_provenance": "PEC sheet treatment retained from existing CST installed-facet model; SSOT specifies outer surfaces but no wall thickness"
+}

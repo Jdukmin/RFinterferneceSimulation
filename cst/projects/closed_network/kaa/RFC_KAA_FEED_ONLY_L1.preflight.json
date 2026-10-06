@@ -1,0 +1,68 @@
+{
+  "project_file": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_L1.cst",
+  "source_project": "cst/projects/KA_FEED_C_OEWG.cst",
+  "source_sha256": "4a72d46bc2bcf6017edf8f57be349d9458683bf77671aafc0d34246160d98e58",
+  "project_sha256": "37e16cf131f478145f4d36e666b2b971b299d34ec9e161f264183959bf60c4ec",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "monitor_frequencies_ghz": [
+    1.563,
+    1.57542,
+    1.588
+  ],
+  "verified_monitor_names": [
+    "farfield (f=1.563)",
+    "farfield (f=1.57542)",
+    "farfield (f=1.588)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    61,
+    61,
+    60
+  ],
+  "mesh_cells": 212400,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.025320053100585938,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE"
+}
