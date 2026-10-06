@@ -1,0 +1,46 @@
+{
+  "case": "v30",
+  "dimensions_mm": [
+    130,
+    93,
+    6,
+    45,
+    12,
+    1.5
+  ],
+  "accepted_power_fraction": {
+    "1.17645": 0.744917076148397,
+    "1.2276": 0.8378639801133786,
+    "1.57542": 0.679016300710897
+  },
+  "minimum_fraction": 0.679016300710897,
+  "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+  "project": "output\\codex\\gps_matching_65\\v30\\GPS_TRIBAND_V30.cst",
+  "band_minima": {
+    "L1": {
+      "minimum_fraction": 0.6633463356195761,
+      "worst_frequency_ghz": 1.563,
+      "band_ghz": [
+        1.563,
+        1.588
+      ]
+    },
+    "L2": {
+      "minimum_fraction": 0.8179105592142158,
+      "worst_frequency_ghz": 1.21737,
+      "band_ghz": [
+        1.21737,
+        1.23783
+      ]
+    },
+    "L5": {
+      "minimum_fraction": 0.7376167532726983,
+      "worst_frequency_ghz": 1.1746000051498413,
+      "band_ghz": [
+        1.164,
+        1.189
+      ]
+    }
+  },
+  "minimum_band_fraction": 0.6633463356195761
+}

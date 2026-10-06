@@ -1,0 +1,233 @@
+{
+  "antenna": "lband_gnss",
+  "model_identity": "GPS_THREE_BAND_MATCHING_INDEPENDENT_CANDIDATE",
+  "status": "ENGINEERING_CANDIDATE_NOT_MEASURED_PRODUCT",
+  "frequency": {
+    "center_ghz": 1.17645,
+    "initial_solve_ghz": [
+      1.164,
+      1.588
+    ],
+    "initial_monitors_ghz": [
+      1.164,
+      1.17645,
+      1.189,
+      1.21737,
+      1.2276,
+      1.23783,
+      1.563,
+      1.57542,
+      1.588
+    ],
+    "bandwidth_provenance": "ASSUMED_L5_SCREENING_WINDOW_NOT_PRODUCT_BANDWIDTH",
+    "subsequent_reference_ghz": [
+      1.207,
+      1.57542
+    ],
+    "note": "1.207 GHz target is an E5b/L2 screening proxy, not GPS L2 1.22760 GHz.",
+    "final_common_solve_ghz": [
+      1.164,
+      1.588
+    ],
+    "final_common_monitors_ghz": [
+      1.164,
+      1.17645,
+      1.189,
+      1.207,
+      1.563,
+      1.57542,
+      1.588
+    ]
+  },
+  "topology": "circular conductive cup with lower driven and upper coupled circular patches, four quadrature feeds, two concentric exterior corrugations",
+  "dimensions": {
+    "outer_diameter": {
+      "value": 200,
+      "unit": "mm",
+      "confidence": "A",
+      "provenance": "PUBLIC_DATASHEET",
+      "fixed": true
+    },
+    "maximum_overall_height": {
+      "value": 87,
+      "unit": "mm",
+      "confidence": "A",
+      "provenance": "PUBLIC_DATASHEET",
+      "fixed": true
+    },
+    "cup_inner_diameter": {
+      "value": 160,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "cup_wall_thickness": {
+      "value": 2,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "cup_depth": {
+      "value": 45,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "lower_patch_diameter": {
+      "value": 130,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "INDEPENDENT_CST_MATCHING_OPTIMIZATION",
+      "tag": "CANDIDATE_GEOMETRY_PARAMETER"
+    },
+    "upper_patch_diameter": {
+      "value": 93,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "INDEPENDENT_CST_MATCHING_OPTIMIZATION",
+      "tag": "CANDIDATE_GEOMETRY_PARAMETER"
+    },
+    "patch_to_ground_height": {
+      "value": 12,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "patch_spacing": {
+      "value": 6,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "INDEPENDENT_CST_MATCHING_OPTIMIZATION",
+      "tag": "CANDIDATE_GEOMETRY_PARAMETER"
+    },
+    "patch_thickness": {
+      "value": 1,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "feed_radius": {
+      "value": 45,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "INDEPENDENT_CST_MATCHING_OPTIMIZATION",
+      "tag": "CANDIDATE_GEOMETRY_PARAMETER"
+    },
+    "feed_probe_radius": {
+      "value": 1.5,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "choke1_inner_radius": {
+      "value": 82,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "choke1_outer_radius": {
+      "value": 91,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "choke2_inner_radius": {
+      "value": 93,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "choke2_outer_radius": {
+      "value": 98,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "ASSUMED_GEOMETRY"
+    },
+    "choke_depth": {
+      "value": 63.7,
+      "unit": "mm",
+      "confidence": "C",
+      "provenance": "SURROGATE",
+      "tag": "DERIVED_INITIAL_GUESS"
+    }
+  },
+  "feed": {
+    "amplitudes": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "phases_deg": [
+      0,
+      -90,
+      -180,
+      -270
+    ],
+    "intended_hand": "IEEE_RHCP",
+    "note": "Determine actual CST hand; reverse phase sequence if required. Initial probe feed is a surrogate for the de-embedded product feed network."
+  },
+  "analysis_policy": {
+    "gain_basis": "ACCEPTED_POWER_RHCP_GAIN",
+    "matching": "MINIMUM_65_PERCENT_AT_GPS_L1_L2_L5",
+    "mesh_validation": "DISABLED_BY_USER",
+    "initial_resource_mesh": "Hex 8 cells per wavelength/model box; no convergence claim",
+    "phase_evidence": "Negative sequential phase yields dominant IEEE RHCP at boresight in extracted CST fields."
+  },
+  "material": "PEC with vacuum/air spacing; dielectric and radome omitted pending material evidence",
+  "boundary": "six expanded open boundaries; no symmetry",
+  "target": {
+    "primary": "data/Lband_GPS/Extended_GNSS_PEC_L5_1176MHz_XZ.csv",
+    "secondary": "data/Lband_GPS/Extended_GNSS_PEC_L5_1176MHz_YZ.csv",
+    "reference_peak_dbi": 7.8,
+    "coverage_deg": [
+      0,
+      90
+    ],
+    "provenance": "CONSERVATIVE_ENVELOPE",
+    "note": "Approximated source upper envelope at 10-degree spacing, interpolated to 1 degree. Missing lower bounds cannot establish source interval PASS.",
+    "acceptance": "rfc_acceptance.yaml"
+  },
+  "optimization": {
+    "pattern": [
+      "cup_inner_diameter",
+      "cup_depth",
+      "upper_patch_diameter",
+      "patch_spacing",
+      "choke_depth"
+    ],
+    "resonance": [
+      "lower_patch_diameter"
+    ],
+    "matching_diagnostic_only": [
+      "feed_radius",
+      "feed_probe_radius",
+      "patch_to_ground_height"
+    ],
+    "stop": "Geometry frozen by user-authorized common-band compromise. No further pattern/matching optimization or mesh validation."
+  },
+  "rationale": [
+    "Two stacked circular patches in a finite cup preserve rotational symmetry for four-feed CP; exterior corrugations control horizon/backside radiation.",
+    "Air-loaded circular TM11 cavity estimate gives diameter about 0.586 wavelength, approximately 149 mm at L5; 140 mm is only an initial fringe/cup-loaded estimate, not a published internal dimension.",
+    "Quarter-wave choke depth at L5 is approximately 63.7 mm; 60 mm is an initial candidate within the 87 mm envelope."
+  ],
+  "sources": [
+    {
+      "url": "https://www.beyondgravity.com/sites/default/files/media_document/2024-07/Antennas_for_GNSS_receivers_D-I-PRB-00029-SE_01-24.pdf",
+      "evidence": "Extended GNSS PEC external diameter 200 mm, height 87 mm, all GNSS bands and measured min/average/max envelope."
+    }
+  ],
+  "uncertainties": [
+    "Internal dimensions are confidence C; no photo scaling is claimed.",
+    "L5-first validation does not prove L1 or 1207 MHz performance.",
+    "Choke ring widths and depths, air loading, and feed implementation require EM validation."
+  ],
+  "final_evidence": {
+    "project": "projects/LBAND_GNSS_FINAL_COMPROMISE.cst",
+    "report": "exports/lband/lband_compromise_validation.json",
+    "nominal_pooled_mae_db": 0.8318205957401279,
+    "L1_limitation": "Nominal coverage MAE about 1.52 dB and EOC error about -5 dB; conservative scalar envelope exported separately from raw complex source.",
+    "mesh": "DISABLED_BY_USER",
+    "geometry_screenshot": "NOT_CAPTURED"
+  }
+}

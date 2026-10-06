@@ -1,0 +1,83 @@
+{
+  "status": "MEETS_65_PERCENT",
+  "candidate": "v30",
+  "parameters_mm": {
+    "outer_diameter": 200,
+    "maximum_overall_height": 87,
+    "cup_inner_diameter": 160,
+    "cup_wall_thickness": 2,
+    "cup_depth": 45,
+    "lower_patch_diameter": 130,
+    "upper_patch_diameter": 93,
+    "patch_to_ground_height": 12,
+    "patch_spacing": 6,
+    "patch_thickness": 1,
+    "feed_radius": 45,
+    "feed_probe_radius": 1.5,
+    "choke1_inner_radius": 82,
+    "choke1_outer_radius": 91,
+    "choke2_inner_radius": 93,
+    "choke2_outer_radius": 98,
+    "choke_depth": 63.7
+  },
+  "nominal_fraction": {
+    "1.17645": 0.7450177854058975,
+    "1.2276": 0.8382458393074104,
+    "1.57542": 0.6789764375346664
+  },
+  "baseline_nominal_fraction": {
+    "1.17645": 0.5285339801650533,
+    "1.2276": 0.5347577270438404,
+    "1.57542": 0.013437717704186261
+  },
+  "band_minima": {
+    "L1": {
+      "minimum_fraction": 0.6640339721477371,
+      "worst_frequency_ghz": 1.563,
+      "band_ghz": [
+        1.563,
+        1.588
+      ]
+    },
+    "L2": {
+      "minimum_fraction": 0.8180116567792227,
+      "worst_frequency_ghz": 1.21737,
+      "band_ghz": [
+        1.21737,
+        1.23783
+      ]
+    },
+    "L5": {
+      "minimum_fraction": 0.7365856843177028,
+      "worst_frequency_ghz": 1.1741759777069092,
+      "band_ghz": [
+        1.164,
+        1.189
+      ]
+    }
+  },
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "port_reference_impedance_ohm": 50,
+  "full_s_matrix": true,
+  "symmetry_reconstruction_used_for_final": false,
+  "passivity_excess_over_evaluation_samples": -0.003356830103451225,
+  "baseline_sha256": "1b004ba8a7259172ae8b104d3a1fb952ababa9fb3a98e9d47fd3a0ccf4db93a2",
+  "mesh_convergence": "NOT_VERIFIED; existing 8-cells/wavelength resource setting",
+  "solver": "CST 2026 local Learning Edition; Time Domain; all four ports; -40 dB termination",
+  "actual_product_matching": "NOT_MEASURED; engineering surrogate",
+  "cst2024_execution": "NOT_PERFORMED",
+  "mesh_cell_counts": [
+    62208,
+    62208,
+    62208,
+    62208
+  ],
+  "solver_error_present": false,
+  "solver_log_original_sha256": "1544e5b0b19c4fb86588247f537ff4abba3bb2337dca8b483559566cb3c8ae63",
+  "solver_log_copy_format": "Tabs expanded and trailing whitespace removed; messages and numeric values unchanged"
+}

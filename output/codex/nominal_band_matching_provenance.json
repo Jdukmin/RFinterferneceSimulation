@@ -1,0 +1,70 @@
+{
+  "inputs": {
+    "LBAND_GNSS_FINAL_COMPROMISE": {
+      "input_file": "cst/results/LBAND_GNSS_FINAL_COMPROMISE/s_matrix.npz",
+      "sha256": "1b004ba8a7259172ae8b104d3a1fb952ababa9fb3a98e9d47fd3a0ccf4db93a2",
+      "saved_frequency_range_ghz": [
+        1.1640000343322754,
+        1.5880000591278076
+      ],
+      "phases_deg": [
+        0,
+        -90,
+        -180,
+        -270
+      ]
+    },
+    "SBAND_MATCHING_WIRE15": {
+      "input_file": "cst/results/SBAND_MATCHING_WIRE15/s_matrix.npz",
+      "sha256": "01edbc28edda91e50c55827e84ca8125ecd816da5eec864fe298eee9ac8df539",
+      "saved_frequency_range_ghz": [
+        2.0,
+        2.299999952316284
+      ],
+      "phases_deg": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "ISL_C4_CUP_R14P7": {
+      "input_file": "cst/results/ISL_C4_CUP_R14P7/s_matrix.npz",
+      "sha256": "d0403c2df21d24f447ea89b1ec14bd8321c95238df3a9a084a17bb0c00983299",
+      "saved_frequency_range_ghz": [
+        10.199999809265137,
+        10.600000381469727
+      ],
+      "phases_deg": [
+        0,
+        -90,
+        -180,
+        -270
+      ]
+    },
+    "KA_FEED_C_OEWG": {
+      "input_file": "cst/results/KA_FEED_C_OEWG/s_matrix.npz",
+      "sha256": "611a71925992f25547627340141c76448130b64949b3135d96e72aa1b7cb1d70",
+      "saved_frequency_range_ghz": [
+        25.0,
+        27.5
+      ],
+      "phases_deg": [
+        0,
+        -90,
+        -180,
+        -270
+      ]
+    }
+  },
+  "solver_run": false,
+  "method": "Linear interpolation of complex S; b=S*a; eta=1-(b^H*b)/(a^H*a)",
+  "checks": "Stored active_gamma agreement, 4-port shape, frequency coverage, nominal passivity, power balance",
+  "scope": "Existing original/free-space results only; no installed or closed-network results",
+  "limitations": [
+    "GPS 1.207 GHz legacy proxy is not GPS L2; actual L2 evaluated at 1.22760 GHz from S only.",
+    "ISL saved sweep ends at approximately 10.60 GHz; 10.60-10.65 GHz unverified.",
+    "KAA results describe accepted feed only, not full reflector matching.",
+    "10 dB aggregate return loss is a comparison reference, not an approved project requirement."
+  ]
+}

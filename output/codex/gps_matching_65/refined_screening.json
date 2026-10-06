@@ -1,0 +1,232 @@
+[
+  {
+    "case": "v30",
+    "dimensions_mm": [
+      130,
+      93,
+      6,
+      45,
+      12,
+      1.5
+    ],
+    "accepted_power_fraction": {
+      "1.17645": 0.744917076148397,
+      "1.2276": 0.8378639801133786,
+      "1.57542": 0.679016300710897
+    },
+    "minimum_fraction": 0.679016300710897,
+    "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+    "project": "output\\codex\\gps_matching_65\\v30\\GPS_TRIBAND_V30.cst",
+    "band_minima": {
+      "L1": {
+        "minimum_fraction": 0.6633463356195761,
+        "worst_frequency_ghz": 1.563,
+        "band_ghz": [
+          1.563,
+          1.588
+        ]
+      },
+      "L2": {
+        "minimum_fraction": 0.8179105592142158,
+        "worst_frequency_ghz": 1.21737,
+        "band_ghz": [
+          1.21737,
+          1.23783
+        ]
+      },
+      "L5": {
+        "minimum_fraction": 0.7376167532726983,
+        "worst_frequency_ghz": 1.1746000051498413,
+        "band_ghz": [
+          1.164,
+          1.189
+        ]
+      }
+    },
+    "minimum_band_fraction": 0.6633463356195761
+  },
+  {
+    "case": "v31",
+    "dimensions_mm": [
+      130,
+      92,
+      6,
+      45,
+      12,
+      1.5
+    ],
+    "accepted_power_fraction": {
+      "1.17645": 0.7399059668237584,
+      "1.2276": 0.833477664290517,
+      "1.57542": 0.6327641300809413
+    },
+    "minimum_fraction": 0.6327641300809413,
+    "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+    "project": "output\\codex\\gps_matching_65\\v31\\GPS_TRIBAND_V31.cst",
+    "band_minima": {
+      "L1": {
+        "minimum_fraction": 0.6173903098711633,
+        "worst_frequency_ghz": 1.563,
+        "band_ghz": [
+          1.563,
+          1.588
+        ]
+      },
+      "L2": {
+        "minimum_fraction": 0.813151689638117,
+        "worst_frequency_ghz": 1.21737,
+        "band_ghz": [
+          1.21737,
+          1.23783
+        ]
+      },
+      "L5": {
+        "minimum_fraction": 0.7331626836347398,
+        "worst_frequency_ghz": 1.1746000051498413,
+        "band_ghz": [
+          1.164,
+          1.189
+        ]
+      }
+    },
+    "minimum_band_fraction": 0.6173903098711633
+  },
+  {
+    "case": "v32",
+    "dimensions_mm": [
+      130,
+      94,
+      6,
+      45,
+      12,
+      2.5
+    ],
+    "accepted_power_fraction": {
+      "1.17645": 0.6971135475850043,
+      "1.2276": 0.7599177656800888,
+      "1.57542": 0.796975071667824
+    },
+    "minimum_fraction": 0.6971135475850043,
+    "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+    "project": "output\\codex\\gps_matching_65\\v32\\GPS_TRIBAND_V32.cst",
+    "band_minima": {
+      "L1": {
+        "minimum_fraction": 0.7545804059531998,
+        "worst_frequency_ghz": 1.588,
+        "band_ghz": [
+          1.563,
+          1.588
+        ]
+      },
+      "L2": {
+        "minimum_fraction": 0.7462478887231004,
+        "worst_frequency_ghz": 1.21737,
+        "band_ghz": [
+          1.21737,
+          1.23783
+        ]
+      },
+      "L5": {
+        "minimum_fraction": 0.5853737385129882,
+        "worst_frequency_ghz": 1.164,
+        "band_ghz": [
+          1.164,
+          1.189
+        ]
+      }
+    },
+    "minimum_band_fraction": 0.5853737385129882
+  },
+  {
+    "case": "v33",
+    "dimensions_mm": [
+      130,
+      93,
+      6,
+      45,
+      12,
+      2.5
+    ],
+    "accepted_power_fraction": {
+      "1.17645": 0.6933224657263938,
+      "1.2276": 0.7548110871540982,
+      "1.57542": 0.7672375483301447
+    },
+    "minimum_fraction": 0.6933224657263938,
+    "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+    "project": "output\\codex\\gps_matching_65\\v33\\GPS_TRIBAND_V33.cst",
+    "band_minima": {
+      "L1": {
+        "minimum_fraction": 0.7545218349972903,
+        "worst_frequency_ghz": 1.563,
+        "band_ghz": [
+          1.563,
+          1.588
+        ]
+      },
+      "L2": {
+        "minimum_fraction": 0.7417881647425217,
+        "worst_frequency_ghz": 1.21737,
+        "band_ghz": [
+          1.21737,
+          1.23783
+        ]
+      },
+      "L5": {
+        "minimum_fraction": 0.5814758396977151,
+        "worst_frequency_ghz": 1.164,
+        "band_ghz": [
+          1.164,
+          1.189
+        ]
+      }
+    },
+    "minimum_band_fraction": 0.5814758396977151
+  },
+  {
+    "case": "v34",
+    "dimensions_mm": [
+      130,
+      92,
+      6,
+      45,
+      12,
+      3
+    ],
+    "accepted_power_fraction": {
+      "1.17645": 0.6747249788772484,
+      "1.2276": 0.7214034258879306,
+      "1.57542": 0.7537216958938777
+    },
+    "minimum_fraction": 0.6747249788772484,
+    "status": "ONE_PORT_C4_SYMMETRY_SCREEN_NOT_FINAL_VALIDATION",
+    "project": "output\\codex\\gps_matching_65\\v34\\GPS_TRIBAND_V34.cst",
+    "band_minima": {
+      "L1": {
+        "minimum_fraction": 0.7388441822553111,
+        "worst_frequency_ghz": 1.563,
+        "band_ghz": [
+          1.563,
+          1.588
+        ]
+      },
+      "L2": {
+        "minimum_fraction": 0.7088955891919301,
+        "worst_frequency_ghz": 1.21737,
+        "band_ghz": [
+          1.21737,
+          1.23783
+        ]
+      },
+      "L5": {
+        "minimum_fraction": 0.4998291382778771,
+        "worst_frequency_ghz": 1.164,
+        "band_ghz": [
+          1.164,
+          1.189
+        ]
+      }
+    },
+    "minimum_band_fraction": 0.4998291382778771
+  }
+]
