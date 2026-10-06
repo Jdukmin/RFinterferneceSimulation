@@ -1,0 +1,9 @@
+# K8 SAR absolute inputs -- OWNER decision 2026-10-04 (Task 2 follow-up). Not measured / not CST.
+# SAR_PEAK_GAIN: HPBW-based engineering estimate (cross-check: 41253 / (0.242294 x 1.112221) = 51.9 dBi at 100 % efficiency).
+# OUTSIDE_80_CEILING: normalised ceiling for |theta| > 80 deg (outside the owner data range incl. back hemisphere).
+# BACK_ABSOLUTE_CEILING: absolute ceiling for the same region (= SAR_PEAK_GAIN + OUTSIDE_80_CEILING; consistency checked).
+# Fields must not contain commas.
+item,value,unit,nature
+SAR_PEAK_GAIN,52,dBi,HPBW_BASED_ENGINEERING_ESTIMATE
+OUTSIDE_80_CEILING,-50,dB re peak,CONSERVATIVE_ENVELOPE
+BACK_ABSOLUTE_CEILING,2,dBi,CONSERVATIVE_ENVELOPE

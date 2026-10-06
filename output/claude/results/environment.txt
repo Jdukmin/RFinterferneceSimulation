@@ -10,6 +10,9 @@ Execution environment (RFI analysis, output/claude)
     octave-cli --no-gui --norc --eval "run('output/claude/run_ka_nearfield_analysis.m')"   (first: writes ka_*.csv)
     octave-cli --no-gui --norc --eval "run('output/claude/run_rfi_analysis.m')"
     octave-cli --no-gui --norc --eval "run('output/claude/run_psd_analysis.m')"   (PRIMARY victim-band PSD / secondary blocker / receiver)
+    octave-cli --no-gui --norc --eval "run('output/claude/run_kaa_victimband_analysis.m')"   (KAA victim-band Tier-3 bound -> victim-port PSD)
+    octave-cli --no-gui --norc --eval "run('output/claude/run_stc_lband_rescaling.m')"   (Task 1: S-TC TX incl. GPS L2/L5 port-mismatch rescaling)
+    octave-cli --no-gui --norc --eval "run('output/claude/run_task2_scope_analysis.m')"   (Task 2: scope / SAR victim / Ka waveguide cutoff; after Task 1)
     octave-cli --no-gui --norc --eval "run('output/claude/make_figures.m')"
     cd tests && octave-cli --no-gui --norc --eval "ok = run_all_tests(); exit(double(~ok))"
 - Run time    : Ka near field ~3 min, analysis ~3 min, figures < 5 s, PSD < 1 min, test suite ~5 min (see test_suite_log.txt)

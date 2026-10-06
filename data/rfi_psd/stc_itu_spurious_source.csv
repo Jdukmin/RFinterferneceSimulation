@@ -1,0 +1,15 @@
+# rfi_psd -- S-TC TX (legacy id S_TM_TX) ITU-compliant UNWANTED-EMISSION SOURCE at the antenna port (Claude worker, Task 1)
+# Same schema as tx_emission_masks.csv; read ONLY by output/claude/run_stc_lband_rescaling.m (shared tx_emission_masks.csv stays empty).
+# ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious limit: attenuation >= min(43 + 10 log10(P_W); 60) dB below the mean
+#   power at the antenna transmission line in a 4 kHz reference bandwidth. P = 5 W (rf_systems.csv 36.9897 dBm):
+#   43 + 6.9897 = 49.9897 dB (< 60) -> -49.9897 dBc / 4 kHz -> 36.9897 - 49.9897 - 36.0206 = -49.0206 dBm/Hz.
+#   4 kHz RBW and clause numbers follow the repository ITU convention (not re-verified against the ITU PDFs here).
+# Port-mismatch rescaling for L2/L5 is NOT part of this source: see tx_port_mismatch_rescaling.csv.
+# Fields must not contain commas.
+tx_system,victim_band,frequency_hz,frequency_lo_hz,frequency_hi_hz,emission_type,level,unit,reference_bandwidth_hz,reference_plane,carrier_frequency_hz,filter_state,standard_or_source,provenance,assumption_class
+S_TM_TX,L1,,1563000000.0,1588000000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+S_TM_TX,L2,,1217370000.0,1237830000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+S_TM_TX,L5,,1164000000.0,1189000000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+S_TM_TX,S_TC,,2025000000.0,2110000000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+S_TM_TX,ISL,,10550000000.0,10650000000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+S_TM_TX,SAR,,9387500000.0,9912500000.0,BROADBAND_PSD,-49.9897,dBc,4000,ANTENNA_PORT,2250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(5 W);60)=49.9897 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT

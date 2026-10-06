@@ -1,0 +1,10 @@
+# rfi_psd -- TX port-mismatch rescaling for victim bands where the CST RealizedGain normalization is unreliable [dB, <= 0]
+# route PORT_MISMATCH_RESCALED_LBAND: G_tx,eff = accepted-power Gain envelope (reliable L-band Gain cuts) + rescaling_db.
+# The unreliable RealizedGain cuts stay in data/antenna_port_response_cst (CST_VALUE_PRESENT_BUT_NORMALIZATION_UNRELIABLE), unused.
+# rescaling_db is an OWNER ENGINEERING BOUND (owner decision 2026-10-04: L1 worst-case port mismatch ~10 dB;
+#   CST L1 accepted-power fraction 0.0957/0.1029/0.1097 -> -10.19/-9.87/-9.60 dB). Not a CST value and not an ITU value.
+# envelope_bands: S-antenna Gain cuts with normalization_reliable = true used for the direction-wise envelope.
+# Fields must not contain commas.
+tx_system,victim_band,rescaling_db,envelope_family,envelope_bands,provenance,note
+S_TM_TX,L2,-10,S,L1;L2,OWNER_ENGINEERING_BOUND,S-TC TX (legacy id S_TM_TX); L1-referenced 10 dB port-mismatch rescaling
+S_TM_TX,L5,-10,S,L1;L2,OWNER_ENGINEERING_BOUND,S-TC TX (legacy id S_TM_TX); L1-referenced 10 dB port-mismatch rescaling; no L5 Gain cut -> L1/L2 envelope

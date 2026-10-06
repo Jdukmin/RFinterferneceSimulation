@@ -1,0 +1,20 @@
+# rfi_psd -- KAA (KA_DLS_TX) ITU-compliant UNWANTED-EMISSION SOURCE at the antenna input (Claude worker, KAA victim-band task)
+# Same schema as tx_emission_masks.csv, read ONLY by output/claude/run_kaa_victimband_analysis.m (the shared
+# tx_emission_masks.csv stays empty so the earlier PSD results are unchanged).
+# Source = ITU RR Appendix 3 / ITU-R SM.329-13 space-station SPURIOUS limit: attenuation >= min(43 + 10 log10(P_W); 60) dB below the
+#   mean power supplied to the antenna transmission line, in a 4 kHz reference bandwidth.
+#   P = 70 W (rf_systems.csv KA_DLS_TX tx_power 48.451 dBm) -> 43 + 18.451 = 61.451 -> min(61.451; 60) = 60 dB  ->  -60 dBc / 4 kHz.
+#   Reference bandwidth 4 kHz and the clause numbers follow the repository's existing ITU convention; they were NOT re-verified
+#   against the ITU PDFs in this task. Applicability to Ka (25.5-27 GHz) EESS downlink and national/contract adoption: unconfirmed.
+# Reference plane ANTENNA_PORT: the limit is conducted at the antenna input, so the KAA antenna-only radiation response at the
+#   victim frequency (kaa_victim_band_response.csv) must be added; it is a SEPARATE term and is never merged with this source.
+# NO WR-42 cutoff / feed / filter / diplexer / PA-internal attenuation is applied (0 dB, instruction); the level is flat over
+#   each victim band (broadband-equivalent envelope, not a pointwise guarantee).
+# Fields must not contain commas.
+tx_system,victim_band,frequency_hz,frequency_lo_hz,frequency_hi_hz,emission_type,level,unit,reference_bandwidth_hz,reference_plane,carrier_frequency_hz,filter_state,standard_or_source,provenance,assumption_class
+KA_DLS_TX,L1,,1563000000.0,1588000000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+KA_DLS_TX,L2,,1217370000.0,1237830000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+KA_DLS_TX,L5,,1164000000.0,1189000000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+KA_DLS_TX,S_TC,,2025000000.0,2110000000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+KA_DLS_TX,SAR,,9387500000.0,9912500000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT
+KA_DLS_TX,ISL,,10550000000.0,10650000000.0,BROADBAND_PSD,-60,dBc,4000,ANTENNA_PORT,26250000000,AS_DELIVERED_NO_ADDITIONAL_FILTER,ITU RR Appendix 3 / ITU-R SM.329-13 space-station spurious,min(43+10log10(70 W);60)=60 dB below mean power; 4 kHz; repository ITU convention (clause not re-verified),REGULATORY_LIMIT

@@ -1,6 +1,10 @@
 # RFI 간섭 해석 결과보고서 — 불요방사 전력밀도 기반 피간섭원 평가 (Claude 독립 분석)
 
-**결론.** ITU 전파규칙 부록 3(RR AP3) 한도를 그대로 내는 송신기를 가정하고, 불요방사(spurious emission)가 각 피간섭원 수신 포트에 만드는 전력밀도(victim input PSD)를 허용 간섭 전력밀도(allowable interference PSD)와 비교했다. 이번 갱신에서 **SAR 수신기(SAR RX)를 피간섭원으로 포함**했고, Ka DLS는 S-TC와 같은 물리 체인(source PSD → 도파관 감쇠 → 경로 결합 → victim PSD)으로 다시 정리했다.
+**결론.** Primary RFI 범위는 **S-TC TX와 Ka DLS TX**이며, ISL과 SAR는 victim으로만 다룬다(owner 결정, Task 2).
+- **S-TC TX(legacy id: S_TM_TX):** ITU 불요방사 source 기준으로 GPS L2/L5가 70.45/70.87 dB(80 dB scenario)를 요구해 가장 크다. SAR RX는 63.36 dB(70 dB scenario)다. 고조파는 SAR 대역과 겹치지 않는다.
+- **Ka DLS TX:** 최대 EIRP 49.451 dBW에 WR-42 below-cutoff 50 mm(owner 가정)를 적용했다. GPS와 S-TM RX는 추가 억제가 필요 없다. ISL RX 6.58 dB, SAR RX 8.08 dB가 남고 둘 다 40 dB scenario에서 통과한다.
+- **판정 기준:** victim 포트 PSD [dBm/Hz]이며 허용치는 GPS −178, S-TM/ISL −177, SAR −175 dBm/Hz다(공학 가정).
+- **owner 입력:** WR-42, 유효 길이 50 mm, SAR peak 52 dBi, ±80° 밖 −50 dB는 공학 가정·추정이다. 측정이나 full-wave 검증값이 아니다.
 
 - **S-TC 송신기(2.25 GHz, 5 W)는 외부 필터가 필요하다.** CST 결합으로 평가한 경로 중 최악은 **SAR RX로, 요구 추가 억제량(required additional suppression)이 64.4 dB**다. 그 다음은 반대편 S-TM RX(58.9 dB)다.
   - S-TC의 정수배 고조파(integer harmonic)는 SAR 대역과 겹치지 않는다. 그러나 이것은 **고조파 경로가 없다는 뜻일 뿐, 광대역 불요방사 간섭이 없다는 뜻은 아니다.** 64.4 dB는 고조파가 아닌 일반 불요방사(generic spurious)에서 나온다.
@@ -9,17 +13,65 @@
   - 이 결과는 WR-42 도파관 50 mm의 차단주파수 이하 감쇠(below-cutoff waveguide attenuation; L/S 126–127 dB, SAR 90.6 dB, ISL 83.4 dB)를 적용한 값이다.
   - 이 감쇠는 **불요방사 한도가 도파관 상류(송신기 출력)에서 정의될 때만** 적용할 수 있다. 한도가 안테나 출력이나 EIRP로 정의되어 있다면 같은 감쇠를 다시 빼는 것은 이중 적용(double counting)이고, 그 경우 요구 억제량은 82–107 dB가 된다(§3.3).
 
-판정 범위:
-- 1차 판정은 **TX 불요방사 억제 요구**(송신 측 필터)다. 수신기 blocker rejection, 구조 산란, 근거리 효과는 포함하지 않았다.
-- 허용 PSD는 GPS −178, S-TM·ISL −177 dBm/Hz(engineering baseline), SAR **−176 dBm/Hz**(owner 입력: NF 4 dB, I/N −6 dB)다.
-- 분석 범위의 간섭원은 owner 지정에 따라 **S-TC TX와 Ka DLS TX**다. SAR TX는 간섭원에서 제외했고, ISL TX는 이전 결과를 참고로만 유지했다(§5).
+| Attacker | Victim | Band | Source PSD/EIRP | Victim PSD | Limit | Required suppression | First PASS | Design target | Confidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| S-TC TX (legacy id: S_TM_TX) | GPS RX | L1 | −49.02 | −130.00 | −178 | 48.00 | 60 dB | 60 dB | 시뮬레이션 |
+| S-TC TX (legacy id: S_TM_TX) | GPS RX | L2 | −59.02 (−10 dB rescaling) | −107.55 | −178 | 70.45 | 80 dB | 90 dB | ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling |
+| S-TC TX (legacy id: S_TM_TX) | GPS RX | L5 | −59.02 (−10 dB rescaling) | −107.13 | −178 | 70.87 | 80 dB | 90 dB | ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling |
+| S-TC TX (legacy id: S_TM_TX) | S-TM RX (legacy id: S_TC_RX) | S (2025–2110 MHz) | −49.02 | −118.11 | −177 | 58.89 | 60 dB | 70 dB | 시뮬레이션 |
+| S-TC TX (legacy id: S_TM_TX) | ISL RX | X (10.55–10.65 GHz) | −49.02 | −137.74 | −177 | 39.26 | 40 dB | 50 dB | 시뮬레이션 |
+| S-TC TX (legacy id: S_TM_TX) | SAR RX (harmonic) | SAR X | — | — | — | 해당 없음 | — | — | NO_HARMONIC_OVERLAP |
+| S-TC TX (legacy id: S_TM_TX) | SAR RX (generic spurious) | SAR X (9387.5–9912.5 MHz) | −49.02 | −111.64 | −175 | 63.36 | 70 dB | 80 dB | ENGINEERING_ESTIMATE (SAR 52 dBi, ±80° 밖 −50 dB) |
+| Ka DLS TX | GPS RX | L1 / L2 / L5 | −16.57 (EIRP PSD), cutoff −127 dB | −223.29 / −199.62 / −198.93 | −178 | 0 / 0 / 0 | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | S-TM RX | S (2025–2110 MHz) | −16.57, cutoff −126 dB | −198.49 | −177 | 0 | 0 dB | 불필요 | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | ISL RX | X (10.55–10.65 GHz) | −16.57, cutoff −83.4 dB | −170.42 | −177 | 6.58 | 40 dB | 20 dB | ENGINEERING_BOUND; NOT_FULL_WAVE_VALIDATED |
+| Ka DLS TX | SAR RX | SAR X | −16.57, cutoff −90.6 dB | −166.92 | −175 | 8.08 | 40 dB | 20 dB | ENGINEERING_BOUND + SAR ENGINEERING_ESTIMATE |
+
+단위: PSD·Limit은 dBm/Hz, Required는 dB다. 각 행은 victim별 대표 worst다.
+
+**억제 조건:**
+- **Required suppression:** 0 dB 추가 필터 기준 총 요구량 max(0, PSD − limit)이다.
+- **First PASS:** 0/40/60/70/80 dB screening 중 처음 margin ≥ 0인 값이다.
+- **Design target:** 요구량 + 10 dB reserve를 10 dB 단위로 올린 계획값이다. 요구량이 0이면 "불필요"다. 필터 규격이 아니다.
+- **Ka 도파관:** below-cutoff 감쇠는 필터와 별개 항(`WAVEGUIDE_BELOW_CUTOFF_BOUND`)이다. WR-42 50 mm에서 victim 대역 내 최소 감쇠를 적용했다.
+- **Ka ISL·SAR의 길이 민감도:** 경로를 닫는 길이는 53.9 / 54.5 mm라 4~5 mm만 더 길면 추가 억제가 필요 없다. WR-34 50 mm였다면 모든 Ka 경로가 통과한다.
+
+- **범위 matrix:**
+  - S-TC TX → GPS / S-TM / ISL / SAR(victim-only)
+  - Ka DLS TX → GPS / S-TM / ISL / SAR(cutoff route)
+  - ISL TX와 SAR TX attacker는 **제외**한다.
+  - KAA 저주파 최대 이득 상한은 legacy sensitivity로 내렸다.
+- **SAR victim 패턴:** owner가 `K8_SAR_Pattern.mat`에서 추출한 값으로 재구성했다(HPBW az 0.242294° / el 1.112221°, upper envelope, 1601점 원본 미반출). peak 52 dBi(HPBW 기반 추정)와 ±80° 밖·후방 −50 dB(+2 dBi) ceiling은 owner 입력이다.
+- **상세 보고서:**
+  - S-TC TX: [S-TC_TX_억제요구_결과보고서.md](S-TC_TX_억제요구_결과보고서.md)
+  - 범위·SAR·Ka cutoff: [RFI_Task2_범위단순화_결과보고서.md](RFI_Task2_범위단순화_결과보고서.md)
+  - legacy KAA 상한: [KAA_저주파_방사응답_결과보고서.md](KAA_저주파_방사응답_결과보고서.md)
+- **최종 판정에 필요한 입력:**
+  1. Ka 도파관 형식·유효 길이 실측(현재 owner 가정 WR-42 / 50 mm)
+  2. SAR 실제 peak gain과 후방 패턴(현재 owner 추정 52 dBi / −50 dB)
+  3. S 안테나 L2/L5 S11
+  4. 실제 TX BPF table과 동일 포트 isolation
+  5. 수신기 블로킹·P1dB 데이터
+- **Secondary:** 기본파 blocker 노출은 7절에 유지했고, 1차 요구사항이 아니다.
+- **추가 CST 시뮬레이션은 하지 않았다.** 아래 3절 이하는 이전 판의 결합 계산 틀이다. 그중 ISL TX attacker 행은 이제 범위 밖이며 추적성을 위해서만 남겼다.
+
+## 2. 주요 RFI 결과 / 요구 억제도 / margin
+
+- **PSD margin과 요구 추가 억제량은 산출하지 않았다.** 송신기 불요방사 입력이 없기 때문이며(미확정), 0이나 임의 값으로 대체하지 않았다.
+- 정의(규격 입력 시 같은 엔진이 계산):
+  - margin = 허용 PSD − 피간섭원 포트 PSD. 양수는 여유, 음수는 초과다.
+  - 요구 추가 억제량 = max(0, 피간섭원 포트 PSD − 허용 PSD) [dB]
+- **계산 검증(reference, 산출):** 다른 위성 S → L 예를 같은 엔진으로 재현했다.
+
+  | 필터 감쇠 [dB] | 0 | 40 | 60 | 70 | 80 |
+  |---|---|---|---|---|---|
+  | 피간섭원 포트 PSD [dBm/Hz] | −120 | −160 | −180 | −190 | −200 |
+  | margin vs GPS −178 dBm/Hz [dB] | −58 (기준 초과) | −18 (기준 초과) | +2 (기준 충족) | +12 | +22 |
+  | 요구 추가 억제량 [dB] | 58 | 18 | 0 | 0 | 0 |
 
 ## 1. Executive Summary
 
-- **불요방사원 전력밀도(spurious emission PSD, 규격 기반 산출):** RR AP3 Table I 우주국 한도, 4 kHz 기준 대역폭, 잡음형 광대역 방사 가정.
-  - S-TC 5 W: 43 + 10 log 5 = 49.99 dBc → **−49.02 dBm/Hz** (안테나 입력 포트, conducted)
-  - Ka DLS 70 W: 60 dBc → **−47.57 dBm/Hz** (송신기 출력 = WR-42 입력, conducted). 31 dBi 기준 이득을 더한 **불요방사 EIRP 전력밀도(spurious EIRP spectral density)는 −16.57 dBm/Hz**다. 이 값은 도파관 감쇠를 포함하지 않는다.
-- **주요 결과(필터 0 dB, 대역 내 최악 주파수):**
+## 3. Victim-band PSD 결과 (이전 판 결합 계산 — ISL TX attacker 행은 범위 밖, 추적용)
 
   | 간섭원 → 최악 피간섭원 | Victim PSD [dBm/Hz] | 허용 PSD [dBm/Hz] | Margin [dB] | 요구 추가 억제량 [dB] | 결합 근거 |
   |---|---|---|---|---|---|
