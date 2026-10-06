@@ -1,0 +1,857 @@
+{
+  "units": "mm",
+  "base_antenna": "ISL_C4_CUP_R14P7",
+  "parameters": {
+    "ground_radius": 14.7,
+    "floor_thickness": 0.789,
+    "rim_height": 3.154,
+    "rim_thickness": 0.789,
+    "patch_diameter": 13.089,
+    "patch_height": 1.971,
+    "patch_thickness": 0.394,
+    "feed_radius": 2.365,
+    "probe_radius": 0.315,
+    "feed_gap": 0.394
+  },
+  "native_antenna_geometry_hash": "3bac11542023b54b25ad05d44a9e96aa05cba1c573110c44bb58cfe8c3c478c0",
+  "primitive_definitions": [
+    {
+      "name": "ground_floor",
+      "code": "With Cylinder\n .Reset\n .Name \"ground_floor\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-0.789\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "rim",
+      "code": "With Cylinder\n .Reset\n .Name \"rim\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"13.911\"\n .Axis \"z\"\n .Zrange \"0\", \"3.154\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "patch",
+      "code": "With Cylinder\n .Reset\n .Name \"patch\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"6.5445\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"1.971\", \"2.365\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"2.365\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"2.365\", \"0\", \"0\"\n .Point2 \"2.365\", \"0\", \"0.394\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"1.44814483999e-16\"\n .Ycenter \"2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"1.44814483999e-16\", \"2.365\", \"0\"\n .Point2 \"1.44814483999e-16\", \"2.365\", \"0.394\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-2.365\"\n .Ycenter \"2.89628967998e-16\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-2.365\", \"2.89628967998e-16\", \"0\"\n .Point2 \"-2.365\", \"2.89628967998e-16\", \"0.394\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-4.34443451998e-16\"\n .Ycenter \"-2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-4.34443451998e-16\", \"-2.365\", \"0\"\n .Point2 \"-4.34443451998e-16\", \"-2.365\", \"0.394\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    }
+  ],
+  "geometry_history": [
+    {
+      "name": "ground_floor",
+      "code": "With Cylinder\n .Reset\n .Name \"ground_floor\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-0.789\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "rim",
+      "code": "With Cylinder\n .Reset\n .Name \"rim\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"13.911\"\n .Axis \"z\"\n .Zrange \"0\", \"3.154\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "patch",
+      "code": "With Cylinder\n .Reset\n .Name \"patch\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"6.5445\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"1.971\", \"2.365\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"2.365\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"1.44814483999e-16\"\n .Ycenter \"2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-2.365\"\n .Ycenter \"2.89628967998e-16\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-4.34443451998e-16\"\n .Ycenter \"-2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_1",
+      "code": "Curve.NewCurve \"full_PANEL_1\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_1\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"0\", \"783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_1\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_1:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_2",
+      "code": "Curve.NewCurve \"full_PANEL_2\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_2\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_2\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_2:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_3",
+      "code": "Curve.NewCurve \"full_PANEL_3\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_3\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_3\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_3:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_4",
+      "code": "Curve.NewCurve \"full_PANEL_4\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_4\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_4\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_4:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_5",
+      "code": "Curve.NewCurve \"full_PANEL_5\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_5\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_5\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_5:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_6",
+      "code": "Curve.NewCurve \"full_PANEL_6\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_6\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_6\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_6:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_7",
+      "code": "Curve.NewCurve \"full_PANEL_7\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_7\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_7\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_7:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_8",
+      "code": "Curve.NewCurve \"full_PANEL_8\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_8\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_8\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_8:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-592.635\", \"-805\"\n .Point2 \"6375.394\", \"-592.635\", \"-805\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-595\", \"-802.635\"\n .Point2 \"6375.394\", \"-595\", \"-802.635\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-597.365\", \"-805\"\n .Point2 \"6375.394\", \"-597.365\", \"-805\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-595\", \"-807.365\"\n .Point2 \"6375.394\", \"-595\", \"-807.365\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    }
+  ],
+  "ports": [
+    {
+      "number": 1,
+      "point1_mm": [
+        6375.0,
+        -592.635,
+        -805.0
+      ],
+      "point2_mm": [
+        6375.394,
+        -592.635,
+        -805.0
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 2,
+      "point1_mm": [
+        6375.0,
+        -595.0,
+        -802.635
+      ],
+      "point2_mm": [
+        6375.394,
+        -595.0,
+        -802.635
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 3,
+      "point1_mm": [
+        6375.0,
+        -597.365,
+        -805.0
+      ],
+      "point2_mm": [
+        6375.394,
+        -597.365,
+        -805.0
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 4,
+      "point1_mm": [
+        6375.0,
+        -595.0,
+        -807.365
+      ],
+      "point2_mm": [
+        6375.394,
+        -595.0,
+        -807.365
+      ],
+      "impedance_ohm": 50
+    }
+  ],
+  "installation_frames": [
+    {
+      "installation_id": "ISL",
+      "position_body_mm": [
+        6375.0,
+        -595.0,
+        -805.0
+      ],
+      "nominal_R_BL": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "mount_type": "FIXED",
+      "panel_id": "PANEL_7",
+      "orientation_provenance": "OWNER_PLUS_X_END_FACE_OVERRIDE"
+    }
+  ],
+  "antenna_to_body_transform": "p_B=R_BL*p_L+position_body_mm",
+  "spacecraft_panels": [
+    {
+      "panel_id": "PANEL_1",
+      "body_vertices_mm": [
+        [
+          0.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_2",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        -0.866025404,
+        0.5
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_3",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        -0.866025404,
+        -0.5
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_4",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_5",
+      "body_vertices_mm": [
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.866025404,
+        -0.5
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_6",
+      "body_vertices_mm": [
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.866025404,
+        0.5
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_7",
+      "body_vertices_mm": [
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "outward_normal_body": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    },
+    {
+      "panel_id": "PANEL_8",
+      "body_vertices_mm": [
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          783.188191,
+          800.0
+        ]
+      ],
+      "outward_normal_body": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "material": "PEC",
+      "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
+    }
+  ],
+  "spacecraft_panel_count": 8,
+  "cropped": false,
+  "spacecraft_geometry": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "reflector": null,
+  "material_list": [
+    "PEC"
+  ],
+  "boolean_operations": "No additional Boolean union/subtraction; exact accepted separate solid topology and native rigid duplication preserved.",
+  "coordinate_system": "SPACECRAFT_BODY_FIXED",
+  "precision": "History literals rounded to 12 significant figures, as in accepted generators; these exact commands are the numeric construction SSOT.",
+  "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee",
+  "project_history": [
+    {
+      "name": "Units and global coordinates",
+      "code": "WCS.ActivateWCS \"global\"\nWith Units\n .Geometry \"mm\"\n .Frequency \"GHz\"\n .Time \"ns\"\nEnd With"
+    },
+    {
+      "name": "Accepted parameter ground_radius",
+      "code": "StoreParameterWithDescription \"ground_radius\", \"14.7\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter floor_thickness",
+      "code": "StoreParameterWithDescription \"floor_thickness\", \"0.789\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter rim_height",
+      "code": "StoreParameterWithDescription \"rim_height\", \"3.154\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter rim_thickness",
+      "code": "StoreParameterWithDescription \"rim_thickness\", \"0.789\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter patch_diameter",
+      "code": "StoreParameterWithDescription \"patch_diameter\", \"13.089\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter patch_height",
+      "code": "StoreParameterWithDescription \"patch_height\", \"1.971\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter patch_thickness",
+      "code": "StoreParameterWithDescription \"patch_thickness\", \"0.394\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter feed_radius",
+      "code": "StoreParameterWithDescription \"feed_radius\", \"2.365\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter probe_radius",
+      "code": "StoreParameterWithDescription \"probe_radius\", \"0.315\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter feed_gap",
+      "code": "StoreParameterWithDescription \"feed_gap\", \"0.394\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "cn_f_low",
+      "code": "StoreParameter \"cn_f_low\", \"1.563\""
+    },
+    {
+      "name": "cn_f_center",
+      "code": "StoreParameter \"cn_f_center\", \"1.57542\""
+    },
+    {
+      "name": "cn_f_high",
+      "code": "StoreParameter \"cn_f_high\", \"1.588\""
+    },
+    {
+      "name": "Case identity",
+      "code": "StoreParameterWithDescription \"cn_rebuild_version\", \"2024\", \"RFC_ISL_TX_ORIGINAL_L1_CST2024; native save after checks\""
+    },
+    {
+      "name": "Vacuum and open boundaries",
+      "code": "With Background\n .Type \"Normal\"\n .Epsilon \"1\"\n .Mu \"1\"\n .XminSpace \"0\"\n .XmaxSpace \"0\"\n .YminSpace \"0\"\n .YmaxSpace \"0\"\n .ZminSpace \"0\"\n .ZmaxSpace \"0\"\nEnd With\nWith Boundary\n .Xmin \"expanded open\"\n .Xmax \"expanded open\"\n .Ymin \"expanded open\"\n .Ymax \"expanded open\"\n .Zmin \"expanded open\"\n .Zmax \"expanded open\"\n .Xsymmetry \"none\"\n .Ysymmetry \"none\"\n .Zsymmetry \"none\"\nEnd With\nBoundary.MinimumDistanceReferenceFrequencyType \"CenterNMonitors\""
+    },
+    {
+      "name": "Initial solver configuration; manual resource review required",
+      "code": "ChangeSolverType \"HF Time Domain\"\nWith Solver\n .FrequencyRange \"1.563\", \"1.588\"\n .CalculationType \"TD-S\"\n .StimulationPort \"All\"\n .StimulationMode \"All\"\n .SteadyStateLimit \"-40\"\nEnd With"
+    },
+    {
+      "name": "ground_floor",
+      "code": "With Cylinder\n .Reset\n .Name \"ground_floor\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-0.789\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "rim",
+      "code": "With Cylinder\n .Reset\n .Name \"rim\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"14.7\"\n .InnerRadius \"13.911\"\n .Axis \"z\"\n .Zrange \"0\", \"3.154\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "patch",
+      "code": "With Cylinder\n .Reset\n .Name \"patch\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"6.5445\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"1.971\", \"2.365\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"2.365\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"1.44814483999e-16\"\n .Ycenter \"2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-2.365\"\n .Ycenter \"2.89628967998e-16\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.315\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0.394\", \"2.168\"\n .Xcenter \"-4.34443451998e-16\"\n .Ycenter \"-2.365\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:ground_floor\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:rim\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:patch\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"90\", \"0\", \"0\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation rotation",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .RotateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "First installation position",
+      "code": "With Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .Vector \"6375\", \"-595\", \"-805\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_1",
+      "code": "Curve.NewCurve \"full_PANEL_1\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_1\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"0\", \"783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_1\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_1:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_2",
+      "code": "Curve.NewCurve \"full_PANEL_2\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_2\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_2\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_2:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_3",
+      "code": "Curve.NewCurve \"full_PANEL_3\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_3\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_3\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_3:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_4",
+      "code": "Curve.NewCurve \"full_PANEL_4\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_4\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_4\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_4:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_5",
+      "code": "Curve.NewCurve \"full_PANEL_5\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_5\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_5\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_5:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_6",
+      "code": "Curve.NewCurve \"full_PANEL_6\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_6\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_6\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_6:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_7",
+      "code": "Curve.NewCurve \"full_PANEL_7\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_7\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Point \"6000\", \"-1084.414419\", \"278.26087\"\n .Point \"6000\", \"-301.226227\", \"-1078.26087\"\n .Point \"6000\", \"301.226227\", \"-1078.26087\"\n .Point \"6000\", \"1084.414419\", \"278.26087\"\n .Point \"6000\", \"783.188191\", \"800\"\n .Point \"6000\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_7\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_7:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Full SSOT outer panel PANEL_8",
+      "code": "Curve.NewCurve \"full_PANEL_8\"\nWith Polygon3D\n .Reset\n .Name \"outline\"\n .Curve \"full_PANEL_8\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Point \"0\", \"-1084.414419\", \"278.26087\"\n .Point \"0\", \"-301.226227\", \"-1078.26087\"\n .Point \"0\", \"301.226227\", \"-1078.26087\"\n .Point \"0\", \"1084.414419\", \"278.26087\"\n .Point \"0\", \"783.188191\", \"800\"\n .Point \"0\", \"-783.188191\", \"800\"\n .Create\nEnd With\nWith CoverCurve\n .Reset\n .Name \"PANEL_8\"\n .Component \"FULL_SPACECRAFT\"\n .Material \"PEC\"\n .Curve \"full_PANEL_8:outline\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-592.635\", \"-805\"\n .Point2 \"6375.394\", \"-592.635\", \"-805\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-595\", \"-802.635\"\n .Point2 \"6375.394\", \"-595\", \"-802.635\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-597.365\", \"-805\"\n .Point2 \"6375.394\", \"-597.365\", \"-805\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"6375\", \"-595\", \"-807.365\"\n .Point2 \"6375.394\", \"-595\", \"-807.365\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 1.563",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=1.563)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"1.563\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 1.57542",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=1.57542)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"1.57542\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 1.588",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=1.588)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"1.588\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Initial mesh; resource baseline, not convergence",
+      "code": "With Mesh\n .MergeThinPECLayerFixpoints \"True\"\n .RatioLimit \"5\"\nEnd With\nWith MeshSettings\n .SetMeshType \"Hex\"\n .Set \"StepsPerWaveNear\", \"8\"\n .Set \"StepsPerWaveFar\", \"8\"\n .Set \"StepsPerBoxNear\", \"8\"\n .Set \"StepsPerBoxFar\", \"8\"\nEnd With"
+    },
+    {
+      "name": "CP field-combination definition; no result calculation",
+      "code": "With CombineResults\n .Reset\n .SetMonitorType \"frequency\"\n .FarfieldsOnly \"True\"\n .EnableAutomaticLabeling \"False\"\n .SetLabel \"CN_DEFAULT_GROUP\"\n .SetPortModeValues \"1\", \"1\", \"1\", \"0\"\n .SetPortModeValues \"2\", \"1\", \"1\", \"-90\"\n .SetPortModeValues \"3\", \"1\", \"1\", \"-180\"\n .SetPortModeValues \"4\", \"1\", \"1\", \"-270\"\nEnd With"
+    },
+    {
+      "name": "Structure view",
+      "code": "ResetViewToStructure\nPlot.ZoomToStructure"
+    }
+  ]
+}

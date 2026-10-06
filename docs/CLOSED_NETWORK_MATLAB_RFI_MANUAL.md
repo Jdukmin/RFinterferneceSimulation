@@ -1,10 +1,14 @@
 # 폐쇄망 MATLAB RFI 실행 매뉴얼
 
-**22개 CST 분석 프로젝트와 기존 SAR engineering baseline으로 10개 pair를 실행하는 절차를 준비했다.** Original/Installed와 KAA Feed/Reflector 조합은 67개다. SAR에는 Installed CST가 없으므로 하나의 동일 engineering receive baseline을 사용한다. 실제 CST export는 아직 없으며 실제 위성 RFI 수치를 계산하지 않았다.
+**22개 CST 분석 프로젝트와 기존 SAR engineering baseline으로 10개 pair, 37개 primary 조합을 실행한다.** SBA/ISL 간섭원과 GPS/SBA/ISL 수신기는 installed pattern을 사용하며 KAA는 standalone feed/reflector를 비교한다. SAR에는 하나의 동일 engineering receive baseline을 사용한다. 실제 CST export는 아직 없으며 실제 위성 RFI 수치를 계산하지 않았다.
+
+CST 2024 폐쇄망에서는 [native rebuild 매뉴얼](CST2024_CLOSED_NETWORK_REBUILD_MANUAL.md)에 따라 22개 macro를 새 프로젝트에 실행하고 `*_CST2024.cst`로 저장·해석한다. CST 2026 binary를 직접 열지 않는다. 아래 RAW schema와 MATLAB dataset/config ID는 CST version과 무관하게 동일하다.
 
 ## STEP 1 — RAW 복사
 
-[CST inventory CSV](closed_network_cst_project_inventory.csv)의 expected_output_directory에 RAW를 넣는다. Dataset 이름은 `.cst` 이름에서 `RFC_`를 제외한 값이다. SBA installed NADIR/ZENITH, GPS installed GPSA1/GPSA2를 분리한다. 원본 frozen pattern과 정상 Ka-band 데이터를 덮어쓰지 않는다.
+`cst/projects/closed_network/dataset_bindings.json`의 directory/dataset_id/installation_id/port_numbers를 그대로 사용한다. `*_CST2024.cst`에서 export된 RAW를 `data/closed_network_patterns/...`에 넣는다. 파일명에서 dataset을 추측하지 않는다. SBA 간섭원 프로젝트 하나에는 NADIR/ZENITH 두 dataset이 있으며 active ports를 나누어 export한다. GPSA1/GPSA2도 분리한다. 원본 frozen pattern과 정상 Ka-band 데이터를 덮어쓰지 않는다.
+
+CST 2024 결과에는 native project hash, 실제 version·geometry 승인 기록, build package/source geometry hash를 남긴다. `export_patterns.py`의 `--build-package`와 `--native-validation`을 사용하면 이 provenance를 기존 RAW schema에 추가한다. 등록기는 2024 native hash를 검증하며 CST 2026 binary와 동일한 hash를 요구하지 않는다. 상세 명령과 승인 template은 위 rebuild 매뉴얼에 있다.
 
 각 frequency에 `f2.200000_XZ.csv` 형태의 6자리 GHz filename을 사용한다. RAW realized gain, accepted-power gain, complex fields, CP±, S-matrix, convergence/mesh 로그, source frame/reference plane과 solver selection evidence를 함께 보존한다. Gain clipping/floor를 적용하지 않는다.
 
@@ -58,7 +62,7 @@ input_status = run_closed_network_rfi(true); % availability만 점검, 결과 CS
 results = run_closed_network_rfi(false);    % 검증된 CST export 수입 후 실행
 ```
 
-`rfi_pairs.csv`는 정확히 다음 10개 family다. `rfi_plan.json`은 실제 installation/configuration 67개 조합을 담는다.
+`rfi_pairs.csv`는 정확히 다음 10개 family다. `rfi_plan.json`은 실제 installation/configuration 37개 조합을 담는다.
 
 1. KAA → SBA_TM
 2. KAA → L1
@@ -75,7 +79,7 @@ SBA 두 위치, GPS 두 위치, KAA 두 gimbal reference 위치를 모두 유지
 
 ## STEP 6 — 비교와 PSD 계산
 
-KAA→SBA/GPS/ISL은 Feed-only+Original, Reflector+Original, Feed-only+Installed, Reflector+Installed 네 조합이다. 비 KAA→SBA/GPS/ISL은 Victim Original/Installed 두 조합이다. SAR는 하나의 engineering baseline이며 victim installed comparison은 N/A다.
+KAA→SBA/GPS/ISL은 Feed-only+Installed, Reflector+Installed 두 조합이다. 비 KAA 경로도 attacker/victim installed를 사용한다. 단독 Original reference 세 개는 primary plan에 넣지 않는다. SAR는 하나의 engineering baseline이며 victim installed comparison은 N/A다.
 
 각 경로의 실제 설치 좌표/R_BL을 `full_spacecraft_geometry.json`에서 읽는다. `PatternInterpolationPolicy`는 frequency linear interpolation/out-of-range error다. Victim tuning band를 161개 frequency로 점검하고 가장 큰 victim PSD를 출력한다. Monitor 3개로는 좁은 resonance/spur가 보장되지 않는다. 필요하면 폐쇄망에서 frequency 수렴을 확인하고 데이터를 추가한다.
 
@@ -97,7 +101,7 @@ KAA→SBA/GPS/ISL은 Feed-only+Original, Reflector+Original, Feed-only+Installed
 
 `output/closed_network/rfi_ten_pairs.csv`에는 attacker/victim gain, FSPL/coupling, victim PSD, allowable PSD, margin, required suppression, worst frequency, source provenance/model fidelity와 chain status를 남긴다.
 
-`original_installed_comparison.csv`에는 30개 비교가 있다. SAR는 포함하지 않는다. `feed_reflector_comparison.csv`에는 동일 victim configuration을 유지한 22개 KAA 비교가 있다. Band-worst PSD끼리의 차이이며 worst frequency가 같은 것으로 가정하지 않는다.
+`original_installed_comparison.csv`는 현재 primary scope에서는 header만 존재한다. `feed_reflector_comparison.csv`에는 동일 victim installed configuration/SAR baseline을 유지한 12개 KAA 비교가 있다. Band-worst PSD끼리의 차이이며 worst frequency가 같은 것으로 가정하지 않는다.
 
 Original/Installed는 antenna installation effect, Feed/Reflector는 reflector effect다. Filter/preselector/NF/P1dB/IIP3/blocker tolerance의 RF-chain effect는 별도로 유지한다. 미확정 chain 입력은 RX_CHAIN_INPUT_MISSING으로 표시하고 임의 값을 넣지 않는다. 요구 추가 억제도는 TX unwanted-emission requirement이며 RX blocker rejection으로 부르지 않는다.
 

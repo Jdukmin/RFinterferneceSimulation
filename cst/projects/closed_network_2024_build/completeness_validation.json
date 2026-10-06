@@ -1,0 +1,206 @@
+{
+  "status": "PASS",
+  "planned_projects": 22,
+  "case_directories": 22,
+  "file_counts": {
+    "build_2024.vba": 22,
+    "build_manifest.json": 22,
+    "source_geometry.json": 22,
+    "validation_reference.json": 22,
+    "README.md": 22
+  },
+  "family_counts": {
+    "KAA": 8,
+    "SBA": 6,
+    "GPS": 3,
+    "ISL": 5
+  },
+  "kaa_feed_only": 4,
+  "kaa_with_reflector": 4,
+  "installed_full_8_panel_cases": 11,
+  "geometry_hash_consistency": "PASS",
+  "rfi_pairs": 10,
+  "rfi_pattern_bindings": 25,
+  "actual_cst2024_execution": false,
+  "classic_history_replay_actual_version": 2026,
+  "solver_started": false,
+  "source_projects_unchanged": true,
+  "records": [
+    {
+      "case_id": "RFC_KAA_FEED_ONLY_STM",
+      "objects": 6,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a"
+    },
+    {
+      "case_id": "RFC_KAA_WITH_REFLECTOR_STM",
+      "objects": 1414,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "1c390b288a79a4657a26a6a80c6d8edac26801c8418afedc310460323fe82c9f"
+    },
+    {
+      "case_id": "RFC_KAA_FEED_ONLY_L1",
+      "objects": 6,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a"
+    },
+    {
+      "case_id": "RFC_KAA_WITH_REFLECTOR_L1",
+      "objects": 1414,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "1c390b288a79a4657a26a6a80c6d8edac26801c8418afedc310460323fe82c9f"
+    },
+    {
+      "case_id": "RFC_KAA_FEED_ONLY_SAR",
+      "objects": 6,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a"
+    },
+    {
+      "case_id": "RFC_KAA_WITH_REFLECTOR_SAR",
+      "objects": 1414,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "1c390b288a79a4657a26a6a80c6d8edac26801c8418afedc310460323fe82c9f"
+    },
+    {
+      "case_id": "RFC_KAA_FEED_ONLY_ISL",
+      "objects": 6,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a"
+    },
+    {
+      "case_id": "RFC_KAA_WITH_REFLECTOR_ISL",
+      "objects": 1414,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "1c390b288a79a4657a26a6a80c6d8edac26801c8418afedc310460323fe82c9f"
+    },
+    {
+      "case_id": "RFC_SBA_TM_ORIGINAL",
+      "objects": 12,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "5cdc1cd74ee7a5db56111a32d14f6328c8a7c1c5b4fc5980bef927eaad322205"
+    },
+    {
+      "case_id": "RFC_INSTALLED_SBA_TM_NADIR",
+      "objects": 20,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "d7cedbd8b49daea204359db89708938d4817452bd49ed54dedc383d73864e7dd"
+    },
+    {
+      "case_id": "RFC_INSTALLED_SBA_TM_ZENITH",
+      "objects": 20,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "c680ebb2153e4389e75ecdbab759a4e89efdd4203744e64a791a1e342b73afa3"
+    },
+    {
+      "case_id": "RFC_SBA_TC_ORIGINAL_ISL",
+      "objects": 32,
+      "ports": 8,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "986d8095981692ed76a4188c0dbac403c2f1696836a19af05d36e268c16d877d"
+    },
+    {
+      "case_id": "RFC_SBA_TC_ORIGINAL_SAR",
+      "objects": 32,
+      "ports": 8,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "986d8095981692ed76a4188c0dbac403c2f1696836a19af05d36e268c16d877d"
+    },
+    {
+      "case_id": "RFC_SBA_TC_ORIGINAL_L1",
+      "objects": 32,
+      "ports": 8,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "986d8095981692ed76a4188c0dbac403c2f1696836a19af05d36e268c16d877d"
+    },
+    {
+      "case_id": "RFC_GPS_L1_ORIGINAL",
+      "objects": 11,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "0676471472ed7ba40516abec0cd8b98b108e2e618eb5c886693655784163dfc2"
+    },
+    {
+      "case_id": "RFC_INSTALLED_GPS_L1_GPSA1",
+      "objects": 19,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "9054facb8113cd8569070266d4fbb00d9484e2d6ef3a0a6fef6a00fdf276793b"
+    },
+    {
+      "case_id": "RFC_INSTALLED_GPS_L1_GPSA2",
+      "objects": 19,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "1f717e0650816ea9be81e0647c9883059246371da713c2dcfc1865e59d4da84f"
+    },
+    {
+      "case_id": "RFC_ISL_ORIGINAL",
+      "objects": 7,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 0,
+      "source_geometry_hash": "e7b4b06331d17ae5cc60f3d8cf9bba7221034228f394c43280d42f6b61a8d4b1"
+    },
+    {
+      "case_id": "RFC_INSTALLED_ISL_RX",
+      "objects": 15,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee"
+    },
+    {
+      "case_id": "RFC_ISL_TX_ORIGINAL_SAR",
+      "objects": 15,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee"
+    },
+    {
+      "case_id": "RFC_ISL_TX_ORIGINAL_STM",
+      "objects": 15,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee"
+    },
+    {
+      "case_id": "RFC_ISL_TX_ORIGINAL_L1",
+      "objects": 15,
+      "ports": 4,
+      "monitors": 3,
+      "panels": 8,
+      "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee"
+    }
+  ]
+}

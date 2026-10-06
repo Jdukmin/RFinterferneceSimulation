@@ -3,6 +3,8 @@ import sys,argparse,json,csv,math
 from pathlib import Path
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'analysis/closed_network'))
+from cst2024_provenance import verify_native_2024
 from fixed_body_geometry import ROOT,sha
 from cst_com_common import connect_cst,method,get_active_project
 from cst_results import s_matrix
@@ -51,14 +53,25 @@ def export_group(p,path,e,group,freq,s):
   frame='CST_LOCAL_PRESERVED',solver_frame='SPACECRAFT_BODY_FIXED' if group.get('installation') else 'CST_LOCAL_PRESERVED',gain_cut_resampled_in_antenna_local_frame=True,cut_direction_rotation_local_to_solver=R,
   complex_e_components_frame='SOLVER_GLOBAL_SPHERICAL_BASIS_AT_SAMPLED_DIRECTION',angle_convention='local theta 0..359; local +Z boresight; XZ phi0/180 YZ phi90/270',convergence_accepted=True,monitors=checks,
   phases_deg=group['phases_deg'],active_port_numbers=group['port_numbers'],inactive_ports='ZERO_INCIDENT_AMPLITUDE; MATCHED_50_OHM_ENGINEERING_ASSUMPTION',net_accepted_power_reference='Incident selected-group power minus outgoing power at ALL ports; diagnostic only; primary uses RAW CST RealizedGain',solver_started_by_exporter=False)
+ if e.get('cst2024_rebuild'):
+  meta.update(e['cst2024_rebuild'])
  (out/'provenance.json').write_text(json.dumps(meta,indent=2)+'\n',encoding='utf-8');print(group['dataset_id'],meta['status'],flush=True)
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('project_file');parser.add_argument('--installation-id');parser.add_argument('--convergence-accepted',action='store_true',required=True);args=parser.parse_args()
- path=Path(args.project_file).resolve();assert path.is_relative_to(CN);e=json.loads(path.with_suffix('.preflight.json').read_text());assert sha(path)==e['project_sha256']
+ parser=argparse.ArgumentParser();parser.add_argument('project_file');parser.add_argument('--installation-id');parser.add_argument('--convergence-accepted',action='store_true',required=True)
+ parser.add_argument('--build-package');parser.add_argument('--native-validation');args=parser.parse_args()
+ path=Path(args.project_file).resolve()
+ if args.build_package:
+  assert args.native_validation,'CST2024 native validation record required.'
+  manifest,record=verify_native_2024(ROOT,args.build_package,path,args.native_validation)
+  e=json.loads((ROOT/manifest['source_project']).with_suffix('.preflight.json').read_text())
+  e['cst2024_rebuild']=dict(cst_version=2024,build_package=str(Path(args.build_package).as_posix()),native_validation_file=str(Path(args.native_validation).as_posix()),binding_project_file=manifest['source_project'],source_geometry_hash=manifest['source_geometry_hash'])
+ else:
+  assert path.is_relative_to(CN);e=json.loads(path.with_suffix('.preflight.json').read_text());assert sha(path)==e['project_sha256']
  groups=e.get('installation_groups')
  if not groups:
-  bind=next(b for b in json.loads((CN/'dataset_bindings.json').read_text()) if b['project_file']==path.relative_to(ROOT).as_posix())
+  binding_project=e['cst2024_rebuild']['binding_project_file'] if e.get('cst2024_rebuild') else path.relative_to(ROOT).as_posix()
+  bind=next(b for b in json.loads((CN/'dataset_bindings.json').read_text()) if b['project_file']==binding_project)
   groups=[dict(installation=e['installed_geometry']['installation'] if e.get('installed_geometry') else None,port_numbers=list(range(1,5)),phases_deg=e['phases_deg'],dataset_id=bind['dataset_id'],expected_output_directory=bind['directory'])]
  if args.installation_id:groups=[g for g in groups if g.get('installation') and g['installation']['installation_id']==args.installation_id];assert groups
  app=connect_cst(False);p=method(app,'OpenFile',str(path));p=p or get_active_project(app);freq,s=s_matrix(p,e['ports'])

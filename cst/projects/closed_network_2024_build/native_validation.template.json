@@ -1,0 +1,31 @@
+{
+  "case_id": "REPLACE_FROM_MANIFEST",
+  "status": "NOT_VALIDATED",
+  "actual_cst_version": null,
+  "about_version_text": "RECORD_ACTUAL_ABOUT_VERSION_BUILD",
+  "reviewer": "",
+  "checked_at": "",
+  "native_project_file": "cst/projects/closed_network_2024_native/FAMILY/CASE_CST2024.cst",
+  "native_project_sha256": "HASH_ACTUAL_NATIVE_FILE_AFTER_SAVE",
+  "source_geometry_hash": "COPY_FROM_MANIFEST",
+  "build_vba_sha256": "COPY_FROM_MANIFEST",
+  "geometry_object_count": null,
+  "port_count": null,
+  "monitor_count": null,
+  "spacecraft_panel_count": null,
+  "checks": {
+    "geometry": false,
+    "bbox": false,
+    "materials": false,
+    "ports": false,
+    "phase": false,
+    "reference_plane": false,
+    "monitors": false,
+    "boundaries": false,
+    "installation_frames": false,
+    "all_ssot_panels": false,
+    "no_crop": false,
+    "native_2024_save": false
+  },
+  "note": "Do not mark accepted until actual CST2024 checks. Non-installed panel/frame checks mean confirmed NONE/identity. Recompute native hash after solver results are saved; retain geometry acceptance evidence."
+}

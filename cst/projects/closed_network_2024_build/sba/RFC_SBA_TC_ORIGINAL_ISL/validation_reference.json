@@ -1,0 +1,595 @@
+{
+  "geometry_object_count": 32,
+  "component_count": 2,
+  "material_count": 1,
+  "material_count_definition": "Distinct materials assigned to solids (intrinsic PEC); vacuum background separately defined.",
+  "port_count": 8,
+  "monitor_count": 3,
+  "bounding_box_mm": [
+    0.0,
+    6000.0,
+    -1084.414419,
+    1084.414419,
+    -1300.7,
+    1068.7412131320007
+  ],
+  "bounding_box_status": "EXTRACTED_FROM_CST2026_SOURCE_TEMP_COPY",
+  "key_dimensions_mm": {
+    "base_diameter": 65,
+    "base_depth": 32,
+    "helix_diameter": 18,
+    "helix_height": 52,
+    "turns": 0.5,
+    "wire_radius": 1.5,
+    "feed_gap": 1.2,
+    "groove_depth": 20,
+    "perturbation_amplitude": 0,
+    "segments_per_turn": 24
+  },
+  "antenna_reference_point": [
+    [
+      255.0,
+      870.0,
+      1030.0
+    ],
+    [
+      255.0,
+      -530.0,
+      -1240.0
+    ]
+  ],
+  "boresight": [
+    [
+      0.0,
+      0.866025403838329,
+      0.4999999999066592
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0
+    ]
+  ],
+  "orientation_matrix": [
+    [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.4999999999066592,
+        0.866025403838329
+      ],
+      [
+        0.0,
+        -0.866025403838329,
+        0.4999999999066592
+      ]
+    ],
+    [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    ]
+  ],
+  "spacecraft_panel_count": 8,
+  "spacecraft_geometry": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "cropped": false,
+  "project_frequency_range_ghz": [
+    10.55,
+    10.65
+  ],
+  "monitor_frequencies_ghz": [
+    10.55,
+    10.6,
+    10.65
+  ],
+  "source_project": "cst/projects/closed_network/sba/RFC_SBA_TC_ORIGINAL_ISL.cst",
+  "source_project_sha256": "7fb5c82edf3619884edf0ee56345e9a5306ef95d58dbee9343e366c99cbb119a",
+  "source_preflight_sha256": "28ed9ce70fefd7094ca133feca751a234930735fbff8211e378b476c77787e22",
+  "source_geometry_hash": "986d8095981692ed76a4188c0dbac403c2f1696836a19af05d36e268c16d877d",
+  "source_base_solid_volumes": {
+    "RECONSTRUCTION:base_floor": {
+      "volume_mm3": 39819.6868842506,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center": {
+      "volume_mm3": 9047.790123190356,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1": {
+      "volume_mm3": 5277.876614945944,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 9817.454757168656,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1": {
+      "volume_mm3": 461.1127559563954,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2": {
+      "volume_mm3": 461.11239546115894,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination": {
+      "volume_mm3": 63.61721663246007,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3": {
+      "volume_mm3": 461.11275595698766,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination": {
+      "volume_mm3": 63.61721663246006,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4": {
+      "volume_mm3": 461.11239545495806,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination": {
+      "volume_mm3": 63.617216632460064,
+      "material": "PEC"
+    }
+  },
+  "source_mesh_cells": 4714947600,
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "monitor_names": [
+    "farfield (f=10.55)",
+    "farfield (f=10.6)",
+    "farfield (f=10.65)"
+  ],
+  "bounding_box_definition": "Union of CST Solid.GetLooseBoundingBoxOfShape; conservative native CAD extents, not fitted dimensions.",
+  "base_antenna_solids": {
+    "RECONSTRUCTION:base_floor": {
+      "volume_mm3": 39819.699862543435,
+      "bbox_mm": [
+        222.5,
+        287.5,
+        826.0371870802122,
+        868.9294919201834,
+        985.8541743782462,
+        1048.145825626627
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center": {
+      "volume_mm3": 9047.7825779515,
+      "bbox_mm": [
+        243.0,
+        267.0,
+        846.6794919243537,
+        875.9999999988754,
+        1009.6076951558117,
+        1040.3923048460624
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1": {
+      "volume_mm3": 5277.876392303802,
+      "bbox_mm": [
+        233.0,
+        277.0,
+        841.6794919252908,
+        880.9999999979383,
+        1000.9474411174263,
+        1049.052558884448
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall": {
+      "volume_mm3": 9817.47428109638,
+      "bbox_mm": [
+        222.5,
+        287.5,
+        836.4294919262747,
+        886.2499999969543,
+        991.8541743771216,
+        1058.1458256247527
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1": {
+      "volume_mm3": 461.1139042984898,
+      "bbox_mm": [
+        244.46116115644512,
+        265.5091277107522,
+        870.3038457137721,
+        922.5827237417958,
+        1029.2464741552728,
+        1060.4035245526559
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination": {
+      "volume_mm3": 63.617232886860336,
+      "bbox_mm": [
+        246.0,
+        255.0,
+        919.7687039072418,
+        922.7687039072418,
+        1058.0999999944522,
+        1061.0999999944522
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2": {
+      "volume_mm3": 461.11305192600906,
+      "bbox_mm": [
+        244.37302325290764,
+        256.61019303863975,
+        874.7660607978592,
+        917.7954807550052,
+        1021.4734558021631,
+        1068.7412131320007
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination": {
+      "volume_mm3": 63.61718853813098,
+      "bbox_mm": [
+        253.5,
+        256.5,
+        915.4696658023273,
+        922.5677420129997,
+        1058.8499999945927,
+        1068.1442286288586
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3": {
+      "volume_mm3": 461.113182264813,
+      "bbox_mm": [
+        244.45184444097808,
+        265.53884796543895,
+        870.2341011295961,
+        921.336830556406,
+        1029.2867412097114,
+        1061.1393708059604
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination": {
+      "volume_mm3": 63.61723288686032,
+      "bbox_mm": [
+        255.0,
+        264.0,
+        919.7687039072418,
+        922.7687039072418,
+        1058.0999999944522,
+        1061.0999999944522
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4": {
+      "volume_mm3": 461.1126305207495,
+      "bbox_mm": [
+        253.3507123857897,
+        265.62496646176197,
+        865.7713622305259,
+        926.7325540733932,
+        1037.0588522886553,
+        1053.2032529943983
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination": {
+      "volume_mm3": 63.61718853813237,
+      "bbox_mm": [
+        253.5,
+        256.5,
+        919.969665801484,
+        927.0677420121563,
+        1051.0557713600458,
+        1060.3499999943117
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_floor_1": {
+      "volume_mm3": 39819.68688425061,
+      "bbox_mm": [
+        222.5,
+        287.5,
+        -562.5,
+        -497.5,
+        -1220.0,
+        -1208.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:base_center_1": {
+      "volume_mm3": 9047.783561486858,
+      "bbox_mm": [
+        243.0,
+        267.0,
+        -542.0,
+        -518.0,
+        -1240.0,
+        -1220.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:groove_wall_1_1": {
+      "volume_mm3": 5277.874701115765,
+      "bbox_mm": [
+        233.0,
+        277.0,
+        -552.0,
+        -508.0,
+        -1240.0,
+        -1220.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:outer_wall_1": {
+      "volume_mm3": 9817.466789806367,
+      "bbox_mm": [
+        222.5,
+        287.5,
+        -562.5,
+        -497.5,
+        -1240.0,
+        -1220.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_1": {
+      "volume_mm3": 461.1127559562015,
+      "bbox_mm": [
+        244.46116115644512,
+        265.5091277107522,
+        -540.6269979410619,
+        -528.3507113497144,
+        -1299.93684625344,
+        -1241.158732945554
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm1_termination_1": {
+      "volume_mm3": 63.61729737217112,
+      "bbox_mm": [
+        246.0,
+        255.0,
+        -531.5,
+        -528.5,
+        -1300.7,
+        -1297.7
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_1": {
+      "volume_mm3": 461.11239545903015,
+      "bbox_mm": [
+        244.37302325290764,
+        256.61019303863975,
+        -540.5481545895469,
+        -519.4611505012277,
+        -1299.9368293356342,
+        -1241.158732945554
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm2_termination_1": {
+      "volume_mm3": 63.617297372170626,
+      "bbox_mm": [
+        253.5,
+        256.5,
+        -530.0,
+        -521.0,
+        -1300.7,
+        -1297.7
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_1": {
+      "volume_mm3": 461.11275595709725,
+      "bbox_mm": [
+        244.45184444097808,
+        265.53884796543895,
+        -531.6492886505317,
+        -519.3730020708127,
+        -1299.93684625344,
+        -1241.158732945554
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm3_termination_1": {
+      "volume_mm3": 63.61729737217111,
+      "bbox_mm": [
+        255.0,
+        264.0,
+        -531.5,
+        -528.5,
+        -1300.7,
+        -1297.7
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_1": {
+      "volume_mm3": 461.1123954509104,
+      "bbox_mm": [
+        253.3507123857897,
+        265.62496646176197,
+        -540.5388494987734,
+        -519.4518454124276,
+        -1299.9368335797192,
+        -1241.1593641734676
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:arm4_termination_1": {
+      "volume_mm3": 63.617297372170626,
+      "bbox_mm": [
+        253.5,
+        256.5,
+        -539.0,
+        -530.0,
+        -1300.7,
+        -1297.7
+      ],
+      "material": "PEC"
+    }
+  },
+  "ports": [
+    {
+      "number": 1,
+      "endpoints_mm": [
+        264.0,
+        870.0,
+        1030.0,
+        264.0,
+        871.039230485,
+        1030.6
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 2,
+      "endpoints_mm": [
+        255.0,
+        874.499999999,
+        1022.20577137,
+        255.0,
+        875.539230484,
+        1022.80577137
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 3,
+      "endpoints_mm": [
+        246.0,
+        870.0,
+        1030.0,
+        246.0,
+        871.039230485,
+        1030.6
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 4,
+      "endpoints_mm": [
+        255.0,
+        865.500000001,
+        1037.79422863,
+        255.0,
+        866.539230485,
+        1038.39422863
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 5,
+      "endpoints_mm": [
+        264.0,
+        -530.0,
+        -1240.0,
+        264.0,
+        -530.0,
+        -1241.2
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 6,
+      "endpoints_mm": [
+        255.0,
+        -539.0,
+        -1240.0,
+        255.0,
+        -539.0,
+        -1241.2
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 7,
+      "endpoints_mm": [
+        246.0,
+        -530.0,
+        -1240.0,
+        246.0,
+        -530.0,
+        -1241.2
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 8,
+      "endpoints_mm": [
+        255.0,
+        -521.0,
+        -1240.0,
+        255.0,
+        -521.0,
+        -1241.2
+      ],
+      "impedance_ohm": 50.0
+    }
+  ],
+  "object_names": [
+    "RECONSTRUCTION:base_floor",
+    "RECONSTRUCTION:base_center",
+    "RECONSTRUCTION:groove_wall_1",
+    "RECONSTRUCTION:outer_wall",
+    "RECONSTRUCTION:arm1",
+    "RECONSTRUCTION:arm1_termination",
+    "RECONSTRUCTION:arm2",
+    "RECONSTRUCTION:arm2_termination",
+    "RECONSTRUCTION:arm3",
+    "RECONSTRUCTION:arm3_termination",
+    "RECONSTRUCTION:arm4",
+    "RECONSTRUCTION:arm4_termination",
+    "RECONSTRUCTION:base_floor_1",
+    "RECONSTRUCTION:base_center_1",
+    "RECONSTRUCTION:groove_wall_1_1",
+    "RECONSTRUCTION:outer_wall_1",
+    "RECONSTRUCTION:arm1_1",
+    "RECONSTRUCTION:arm1_termination_1",
+    "RECONSTRUCTION:arm2_1",
+    "RECONSTRUCTION:arm2_termination_1",
+    "RECONSTRUCTION:arm3_1",
+    "RECONSTRUCTION:arm3_termination_1",
+    "RECONSTRUCTION:arm4_1",
+    "RECONSTRUCTION:arm4_termination_1",
+    "FULL_SPACECRAFT:PANEL_1",
+    "FULL_SPACECRAFT:PANEL_2",
+    "FULL_SPACECRAFT:PANEL_3",
+    "FULL_SPACECRAFT:PANEL_4",
+    "FULL_SPACECRAFT:PANEL_5",
+    "FULL_SPACECRAFT:PANEL_6",
+    "FULL_SPACECRAFT:PANEL_7",
+    "FULL_SPACECRAFT:PANEL_8"
+  ],
+  "classic_history_replay_cst2026": "PASS",
+  "replay_comparison": {
+    "max_solid_volume_relative_error": 0.0,
+    "max_base_solid_bbox_difference_mm": 0.0,
+    "volume_relative_tolerance": 1e-05,
+    "bbox_absolute_tolerance_mm": 0.02,
+    "port_endpoint_tolerance_mm": 1e-07,
+    "elapsed_seconds": 5.67
+  }
+}

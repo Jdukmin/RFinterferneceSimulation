@@ -1,6 +1,7 @@
 """Validate RAW gain; create separate import views without changing originals."""
 import csv,json,math,hashlib
 from pathlib import Path
+from cst2024_provenance import verify_native_2024
 ROOT=Path(__file__).resolve().parents[2]
 binding_file=ROOT/'cst/projects/closed_network/dataset_bindings.json'
 if binding_file.exists():
@@ -13,7 +14,13 @@ for r in rows:
  dataset=Path(r['expected_output_directory']);folder=ROOT/dataset;provenance=folder/'provenance.json'
  if not provenance.is_file():continue
  meta=json.loads(provenance.read_text());assert meta['status']=='SOLVED_ACCEPTED' and meta['gain_quantity']=='RealizedGain' and meta['gain_unit']=='dBi' and meta['convergence_accepted']
- assert meta['project_file']==r['project_file'] and meta['frame']=='CST_LOCAL_PRESERVED'
+ is2024=meta.get('cst_version')==2024
+ if is2024:
+  manifest,native_record=verify_native_2024(ROOT,meta['build_package'],meta['project_file'],meta['native_validation_file'])
+  assert meta['binding_project_file']==r['project_file']==manifest['source_project']
+  assert meta['project_sha256']==native_record['native_project_sha256'] and meta['source_geometry_hash']==manifest['source_geometry_hash']
+ else:assert meta['project_file']==r['project_file']
+ assert meta['frame']=='CST_LOCAL_PRESERVED'
  if r['configuration']=='INSTALLED':
   evidence=json.loads((ROOT/r['project_file']).with_suffix('.preflight.json').read_text())
   assert meta['solver_frame']=='SPACECRAFT_BODY_FIXED' and meta['gain_cut_resampled_in_antenna_local_frame']
@@ -26,7 +33,7 @@ for r in rows:
  if 'dataset_id' in r:
   evidence=json.loads((ROOT/r['project_file']).with_suffix('.preflight.json').read_text())
   assert meta['dataset_id']==r['dataset_id'] and meta['installation_id']==r['installation_identity'] and meta['active_port_numbers']==r['port_numbers']
-  assert meta['project_sha256']==evidence['project_sha256']==hashlib.sha256((ROOT/r['project_file']).read_bytes()).hexdigest()
+  if not is2024:assert meta['project_sha256']==evidence['project_sha256']==hashlib.sha256((ROOT/r['project_file']).read_bytes()).hexdigest()
  imported=folder/'registered';imported.mkdir(exist_ok=True)
  files=[]
  for f in [float(r[k]) for k in ['f_low_ghz','f_center_ghz','f_high_ghz']]:

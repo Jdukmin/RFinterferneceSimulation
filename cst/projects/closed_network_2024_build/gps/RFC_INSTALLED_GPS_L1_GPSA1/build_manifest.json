@@ -1,0 +1,75 @@
+{
+  "case_id": "RFC_INSTALLED_GPS_L1_GPSA1",
+  "antenna": "GPS",
+  "configuration": "INSTALLED",
+  "source_project": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
+  "accepted_base_project": "cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst",
+  "accepted_base_sha256": "4ac3ecfddc6637322c8da6baaf113dc061ca12e70b6dc4c4f4d4a5b76b5f6c66",
+  "target_cst_version": 2024,
+  "frequency_low_ghz": 1.563,
+  "frequency_center_ghz": 1.57542,
+  "frequency_high_ghz": 1.588,
+  "monitor_frequencies_ghz": [
+    1.563,
+    1.57542,
+    1.588
+  ],
+  "port_count": 4,
+  "port_type": "DiscretePort SParameter; 50 ohm",
+  "excitation_amplitudes": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "excitation_phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "material_list": [
+    "PEC"
+  ],
+  "material_definition": "Intrinsic CST PEC; vacuum epsilon_r=mu_r=1.",
+  "boundary_type": "expanded open, all six faces; no symmetry; CenterNMonitors reference",
+  "solver_recommendation": "IE_MLFMM_OR_HYBRID_FIRST",
+  "initial_solver": "HF Time Domain; configuration only, never automatically run",
+  "installed_identity": "GPSA_1",
+  "spacecraft_geometry": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "spacecraft_panel_count": 8,
+  "cropped": false,
+  "expected_object_count": 19,
+  "expected_bbox_mm": [
+    0.0,
+    6000.0,
+    -1084.414419,
+    1084.414419,
+    -1404.1025403795986,
+    800.0
+  ],
+  "source_geometry_hash": "9054facb8113cd8569070266d4fbb00d9484e2d6ef3a0a6fef6a00fdf276793b",
+  "native_antenna_geometry_hash": "a5231adcd3cd79b496fe71c944846b08f6822cd7376517681cfd25d67fef7bbf",
+  "build_vba_sha256": "f73250db0e824d47f915c8546521204a381c65edf87e6b6da3d33dbe0dbea0a9",
+  "source_geometry_file_sha256": "43c788eb19b23843d925cd2339d8f1731d33a146da815c98f9307d906553b1dc",
+  "expected_native_filename": "RFC_INSTALLED_GPS_L1_GPSA1_CST2024.cst",
+  "expected_native_directory": "cst/projects/closed_network_2024_native/gps",
+  "dataset_ids": [
+    "INSTALLED_GPS_L1_GPSA1"
+  ],
+  "expected_output_directories": [
+    "data/closed_network_patterns/INSTALLED_GPS_L1_GPSA1"
+  ],
+  "status": "READY_FOR_CST2024_REBUILD",
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "notes": [
+    "Classic AddToHistory VBA only; no CST2026 binary or CST Python API dependency.",
+    "Geometry reconstruction uses exact accepted numeric recipes; no tuning.",
+    "Initial TD/hex setup is a editable baseline, not a mandate to solve installed cases with TD.",
+    "Select license-compatible solver and verify discrete ports before solve.",
+    "SBA attacker filenames retain ORIGINAL legacy name but contain installed NADIR/ZENITH groups.",
+    "No new reflector support geometry: no approved support dimensions exist in source; existing surrogate sheets are preserved."
+  ],
+  "classic_history_replay_cst2026": "PASS"
+}

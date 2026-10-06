@@ -1,0 +1,75 @@
+{
+  "case_id": "RFC_ISL_TX_ORIGINAL_SAR",
+  "antenna": "ISL",
+  "configuration": "ATTACKER_INSTALLED",
+  "source_project": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_SAR.cst",
+  "accepted_base_project": "cst/projects/ISL_C4_CUP_R14P7.cst",
+  "accepted_base_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
+  "target_cst_version": 2024,
+  "frequency_low_ghz": 8.9,
+  "frequency_center_ghz": 9.65,
+  "frequency_high_ghz": 10.4,
+  "monitor_frequencies_ghz": [
+    8.9,
+    9.65,
+    10.4
+  ],
+  "port_count": 4,
+  "port_type": "DiscretePort SParameter; 50 ohm",
+  "excitation_amplitudes": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "excitation_phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "material_list": [
+    "PEC"
+  ],
+  "material_definition": "Intrinsic CST PEC; vacuum epsilon_r=mu_r=1.",
+  "boundary_type": "expanded open, all six faces; no symmetry; CenterNMonitors reference",
+  "solver_recommendation": "IE_MLFMM_OR_HYBRID_FIRST",
+  "initial_solver": "HF Time Domain; configuration only, never automatically run",
+  "installed_identity": "ISL",
+  "spacecraft_geometry": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "spacecraft_panel_count": 8,
+  "cropped": false,
+  "expected_object_count": 15,
+  "expected_bbox_mm": [
+    0.0,
+    6378.154,
+    -1084.414419,
+    1084.414419,
+    -1078.26087,
+    800.0
+  ],
+  "source_geometry_hash": "84f2cd775abb030d7d1b89d604424a231fcdc83f98d6fd33ffb01442eba6ceee",
+  "native_antenna_geometry_hash": "3bac11542023b54b25ad05d44a9e96aa05cba1c573110c44bb58cfe8c3c478c0",
+  "build_vba_sha256": "dc93d11d34ec1bc45e84943a03c926ee1287ace15d1da83b7bd0730826006c39",
+  "source_geometry_file_sha256": "5b9fe92194b591b1e6bddd07dd1ccf7eadaa9efab0cc452657c74d1d8979317c",
+  "expected_native_filename": "RFC_ISL_TX_ORIGINAL_SAR_CST2024.cst",
+  "expected_native_directory": "cst/projects/closed_network_2024_native/isl",
+  "dataset_ids": [
+    "INSTALLED_ISL_TX_SAR"
+  ],
+  "expected_output_directories": [
+    "data/closed_network_patterns/INSTALLED_ISL_TX_SAR"
+  ],
+  "status": "READY_FOR_CST2024_REBUILD",
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "notes": [
+    "Classic AddToHistory VBA only; no CST2026 binary or CST Python API dependency.",
+    "Geometry reconstruction uses exact accepted numeric recipes; no tuning.",
+    "Initial TD/hex setup is a editable baseline, not a mandate to solve installed cases with TD.",
+    "Select license-compatible solver and verify discrete ports before solve.",
+    "SBA attacker filenames retain ORIGINAL legacy name but contain installed NADIR/ZENITH groups.",
+    "No new reflector support geometry: no approved support dimensions exist in source; existing surrogate sheets are preserved."
+  ],
+  "classic_history_replay_cst2026": "PASS"
+}

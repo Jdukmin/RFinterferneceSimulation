@@ -1,0 +1,254 @@
+{
+  "geometry_object_count": 6,
+  "component_count": 1,
+  "material_count": 1,
+  "material_count_definition": "Distinct materials assigned to solids (intrinsic PEC); vacuum background separately defined.",
+  "port_count": 4,
+  "monitor_count": 3,
+  "bounding_box_mm": [
+    -5.4,
+    5.4,
+    -5.4,
+    5.4,
+    -1.0,
+    20.0
+  ],
+  "bounding_box_status": "EXTRACTED_FROM_CST2026_SOURCE_TEMP_COPY",
+  "key_dimensions_mm": {
+    "wg_radius": 4.4,
+    "wall": 1.0,
+    "wg_length": 20.0,
+    "probe_z": 4.4,
+    "probe_radius": 0.5,
+    "probe_length": 2.2,
+    "feed_gap": 0.5,
+    "aperture_radius": 4.4,
+    "flare_length": 0.0,
+    "flare_steps": 0.0
+  },
+  "antenna_reference_point": [
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "boresight": [
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "orientation_matrix": [
+    [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  ],
+  "spacecraft_panel_count": 0,
+  "spacecraft_geometry": "NONE",
+  "cropped": false,
+  "project_frequency_range_ghz": [
+    8.9,
+    10.4
+  ],
+  "monitor_frequencies_ghz": [
+    8.9,
+    9.65,
+    10.4
+  ],
+  "source_project": "cst/projects/closed_network/kaa/RFC_KAA_FEED_ONLY_SAR.cst",
+  "source_project_sha256": "98d755f3c2703edfbff62532ba077f8b9080e5b1d75e6e07c4bd9f002c1cc3cd",
+  "source_preflight_sha256": "ef27b62adad786618a81e5f4424f82090b3b278744a7d28745752bc31e2229d5",
+  "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a",
+  "source_base_solid_volumes": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "material": "PEC"
+    }
+  },
+  "source_mesh_cells": 26100,
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "monitor_names": [
+    "farfield (f=8.9)",
+    "farfield (f=9.65)",
+    "farfield (f=10.4)"
+  ],
+  "bounding_box_definition": "Union of CST Solid.GetLooseBoundingBoxOfShape; conservative native CAD extents, not fitted dimensions.",
+  "base_antenna_solids": {
+    "RECONSTRUCTION:back_short": {
+      "volume_mm3": 91.6088417786784,
+      "bbox_mm": [
+        -5.4,
+        5.4,
+        -5.4,
+        5.4,
+        -1.0,
+        0.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:waveguide": {
+      "volume_mm3": 615.7519395574535,
+      "bbox_mm": [
+        -5.4,
+        5.4,
+        -5.4,
+        5.4,
+        0.0,
+        20.0
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 1.7278772125774844,
+      "bbox_mm": [
+        1.6999999999999997,
+        3.9,
+        -0.5,
+        0.5000000000000002,
+        3.9000000000000004,
+        4.9
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 1.7278772125774844,
+      "bbox_mm": [
+        -0.4999999999999998,
+        0.5000000000000003,
+        1.6999999999999997,
+        3.9,
+        3.9000000000000004,
+        4.9
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 1.727877212577484,
+      "bbox_mm": [
+        -3.9,
+        -1.6999999999999997,
+        -0.4999999999999998,
+        0.5000000000000004,
+        3.9000000000000004,
+        4.9
+      ],
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 1.7278772125774844,
+      "bbox_mm": [
+        -0.5000000000000007,
+        0.49999999999999944,
+        -3.9,
+        -1.6999999999999997,
+        3.9000000000000004,
+        4.9
+      ],
+      "material": "PEC"
+    }
+  },
+  "ports": [
+    {
+      "number": 1,
+      "endpoints_mm": [
+        4.4,
+        0.0,
+        4.4,
+        3.9,
+        0.0,
+        4.4
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 2,
+      "endpoints_mm": [
+        2.69422295812e-16,
+        4.4,
+        4.4,
+        2.38806125834e-16,
+        3.9,
+        4.4
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 3,
+      "endpoints_mm": [
+        -4.4,
+        5.38844591625e-16,
+        4.4,
+        -3.9,
+        4.77612251667e-16,
+        4.4
+      ],
+      "impedance_ohm": 50.0
+    },
+    {
+      "number": 4,
+      "endpoints_mm": [
+        -8.08266887437e-16,
+        -4.4,
+        4.4,
+        -7.16418377501e-16,
+        -3.9,
+        4.4
+      ],
+      "impedance_ohm": 50.0
+    }
+  ],
+  "object_names": [
+    "RECONSTRUCTION:back_short",
+    "RECONSTRUCTION:waveguide",
+    "RECONSTRUCTION:probe1",
+    "RECONSTRUCTION:probe2",
+    "RECONSTRUCTION:probe3",
+    "RECONSTRUCTION:probe4"
+  ],
+  "classic_history_replay_cst2026": "PASS",
+  "replay_comparison": {
+    "max_solid_volume_relative_error": 0.0,
+    "max_base_solid_bbox_difference_mm": 0.0,
+    "volume_relative_tolerance": 1e-05,
+    "bbox_absolute_tolerance_mm": 0.02,
+    "port_endpoint_tolerance_mm": 1e-07,
+    "elapsed_seconds": 3.3
+  }
+}

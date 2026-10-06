@@ -1,0 +1,75 @@
+{
+  "case_id": "RFC_INSTALLED_SBA_TM_ZENITH",
+  "antenna": "SBA",
+  "configuration": "INSTALLED",
+  "source_project": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
+  "accepted_base_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
+  "accepted_base_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
+  "target_cst_version": 2024,
+  "frequency_low_ghz": 2.2,
+  "frequency_center_ghz": 2.25,
+  "frequency_high_ghz": 2.3,
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "port_count": 4,
+  "port_type": "DiscretePort SParameter; 50 ohm",
+  "excitation_amplitudes": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "excitation_phases_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "material_list": [
+    "PEC"
+  ],
+  "material_definition": "Intrinsic CST PEC; vacuum epsilon_r=mu_r=1.",
+  "boundary_type": "expanded open, all six faces; no symmetry; CenterNMonitors reference",
+  "solver_recommendation": "IE_MLFMM_OR_HYBRID_FIRST",
+  "initial_solver": "HF Time Domain; configuration only, never automatically run",
+  "installed_identity": "SBA_ZENITH",
+  "spacecraft_geometry": "FULL_SSOT_BUS_HULL_8_PANELS",
+  "spacecraft_panel_count": 8,
+  "cropped": false,
+  "expected_object_count": 20,
+  "expected_bbox_mm": [
+    0.0,
+    6000.0,
+    -1084.414419,
+    1084.414419,
+    -1300.7,
+    800.0
+  ],
+  "source_geometry_hash": "c680ebb2153e4389e75ecdbab759a4e89efdd4203744e64a791a1e342b73afa3",
+  "native_antenna_geometry_hash": "e36ec7d7fed1d293c374eb0b240478534f1017cff7096062fbe6df11d403c522",
+  "build_vba_sha256": "57d9234d980c663f9f75210670624c3984db473e839750ee72d0b13e3191a792",
+  "source_geometry_file_sha256": "51380cb62054598108f3bd297bfac27411d06bd21f19ff1f14ab7bf39d1e16d3",
+  "expected_native_filename": "RFC_INSTALLED_SBA_TM_ZENITH_CST2024.cst",
+  "expected_native_directory": "cst/projects/closed_network_2024_native/sba",
+  "dataset_ids": [
+    "INSTALLED_SBA_TM_ZENITH"
+  ],
+  "expected_output_directories": [
+    "data/closed_network_patterns/INSTALLED_SBA_TM_ZENITH"
+  ],
+  "status": "READY_FOR_CST2024_REBUILD",
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "notes": [
+    "Classic AddToHistory VBA only; no CST2026 binary or CST Python API dependency.",
+    "Geometry reconstruction uses exact accepted numeric recipes; no tuning.",
+    "Initial TD/hex setup is a editable baseline, not a mandate to solve installed cases with TD.",
+    "Select license-compatible solver and verify discrete ports before solve.",
+    "SBA attacker filenames retain ORIGINAL legacy name but contain installed NADIR/ZENITH groups.",
+    "No new reflector support geometry: no approved support dimensions exist in source; existing surrogate sheets are preserved."
+  ],
+  "classic_history_replay_cst2026": "PASS"
+}

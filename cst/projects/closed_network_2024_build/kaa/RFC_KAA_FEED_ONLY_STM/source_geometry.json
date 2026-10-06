@@ -1,0 +1,307 @@
+{
+  "units": "mm",
+  "base_antenna": "KA_FEED_C_OEWG",
+  "parameters": {
+    "wg_radius": 4.4,
+    "wall": 1.0,
+    "wg_length": 20.0,
+    "probe_z": 4.4,
+    "probe_radius": 0.5,
+    "probe_length": 2.2,
+    "feed_gap": 0.5,
+    "aperture_radius": 4.4,
+    "flare_length": 0.0,
+    "flare_steps": 0.0
+  },
+  "native_antenna_geometry_hash": "b73d2b85e71e972cd1dfcc4df2d6603ab438bd0c4443483a3d09c11df9fadba2",
+  "primitive_definitions": [
+    {
+      "name": "back_short",
+      "code": "With Cylinder\n .Reset\n .Name \"back_short\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-1\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "waveguide",
+      "code": "With Cylinder\n .Reset\n .Name \"waveguide\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"4.4\"\n .Axis \"z\"\n .Zrange \"0\", \"20\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"180\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Vector \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"4.4\", \"0\", \"4.4\"\n .Point2 \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Vector \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"2.69422295812e-16\", \"4.4\", \"4.4\"\n .Point2 \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-7.01670929853e-15\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Vector \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-4.4\", \"5.38844591625e-16\", \"4.4\"\n .Point2 \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Vector \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-8.08266887437e-16\", \"-4.4\", \"4.4\"\n .Point2 \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    }
+  ],
+  "geometry_history": [
+    {
+      "name": "back_short",
+      "code": "With Cylinder\n .Reset\n .Name \"back_short\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-1\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "waveguide",
+      "code": "With Cylinder\n .Reset\n .Name \"waveguide\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"4.4\"\n .Axis \"z\"\n .Zrange \"0\", \"20\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"180\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Vector \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Vector \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-7.01670929853e-15\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Vector \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Vector \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"4.4\", \"0\", \"4.4\"\n .Point2 \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"2.69422295812e-16\", \"4.4\", \"4.4\"\n .Point2 \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-4.4\", \"5.38844591625e-16\", \"4.4\"\n .Point2 \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-8.08266887437e-16\", \"-4.4\", \"4.4\"\n .Point2 \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    }
+  ],
+  "ports": [
+    {
+      "number": 1,
+      "point1_mm": [
+        4.4,
+        0.0,
+        4.4
+      ],
+      "point2_mm": [
+        3.9,
+        0.0,
+        4.4
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 2,
+      "point1_mm": [
+        2.69422295812e-16,
+        4.4,
+        4.4
+      ],
+      "point2_mm": [
+        2.38806125834e-16,
+        3.9,
+        4.4
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 3,
+      "point1_mm": [
+        -4.4,
+        5.38844591625e-16,
+        4.4
+      ],
+      "point2_mm": [
+        -3.9,
+        4.77612251667e-16,
+        4.4
+      ],
+      "impedance_ohm": 50
+    },
+    {
+      "number": 4,
+      "point1_mm": [
+        -8.08266887437e-16,
+        -4.4,
+        4.4
+      ],
+      "point2_mm": [
+        -7.16418377501e-16,
+        -3.9,
+        4.4
+      ],
+      "impedance_ohm": 50
+    }
+  ],
+  "installation_frames": [],
+  "antenna_to_body_transform": "IDENTITY_NATIVE_PLUS_Z",
+  "spacecraft_panels": [],
+  "spacecraft_panel_count": 0,
+  "cropped": false,
+  "spacecraft_geometry": "NONE",
+  "reflector": null,
+  "material_list": [
+    "PEC"
+  ],
+  "boolean_operations": "No additional Boolean union/subtraction; exact accepted separate solid topology and native rigid duplication preserved.",
+  "coordinate_system": "NATIVE_ANTENNA_LOCAL_PLUS_Z",
+  "precision": "History literals rounded to 12 significant figures, as in accepted generators; these exact commands are the numeric construction SSOT.",
+  "source_geometry_hash": "2cb51cf426bad106449347e55794ad9237f047bfda3b976a1886cc461917464a",
+  "project_history": [
+    {
+      "name": "Units and global coordinates",
+      "code": "WCS.ActivateWCS \"global\"\nWith Units\n .Geometry \"mm\"\n .Frequency \"GHz\"\n .Time \"ns\"\nEnd With"
+    },
+    {
+      "name": "Accepted parameter wg_radius",
+      "code": "StoreParameterWithDescription \"wg_radius\", \"4.4\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter wall",
+      "code": "StoreParameterWithDescription \"wall\", \"1\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter wg_length",
+      "code": "StoreParameterWithDescription \"wg_length\", \"20\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter probe_z",
+      "code": "StoreParameterWithDescription \"probe_z\", \"4.4\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter probe_radius",
+      "code": "StoreParameterWithDescription \"probe_radius\", \"0.5\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter probe_length",
+      "code": "StoreParameterWithDescription \"probe_length\", \"2.2\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter feed_gap",
+      "code": "StoreParameterWithDescription \"feed_gap\", \"0.5\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter aperture_radius",
+      "code": "StoreParameterWithDescription \"aperture_radius\", \"4.4\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter flare_length",
+      "code": "StoreParameterWithDescription \"flare_length\", \"0\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "Accepted parameter flare_steps",
+      "code": "StoreParameterWithDescription \"flare_steps\", \"0\", \"Accepted numeric geometry; documentation parameter\""
+    },
+    {
+      "name": "cn_f_low",
+      "code": "StoreParameter \"cn_f_low\", \"2.2\""
+    },
+    {
+      "name": "cn_f_center",
+      "code": "StoreParameter \"cn_f_center\", \"2.25\""
+    },
+    {
+      "name": "cn_f_high",
+      "code": "StoreParameter \"cn_f_high\", \"2.3\""
+    },
+    {
+      "name": "Case identity",
+      "code": "StoreParameterWithDescription \"cn_rebuild_version\", \"2024\", \"RFC_KAA_FEED_ONLY_STM_CST2024; native save after checks\""
+    },
+    {
+      "name": "Vacuum and open boundaries",
+      "code": "With Background\n .Type \"Normal\"\n .Epsilon \"1\"\n .Mu \"1\"\n .XminSpace \"0\"\n .XmaxSpace \"0\"\n .YminSpace \"0\"\n .YmaxSpace \"0\"\n .ZminSpace \"0\"\n .ZmaxSpace \"0\"\nEnd With\nWith Boundary\n .Xmin \"expanded open\"\n .Xmax \"expanded open\"\n .Ymin \"expanded open\"\n .Ymax \"expanded open\"\n .Zmin \"expanded open\"\n .Zmax \"expanded open\"\n .Xsymmetry \"none\"\n .Ysymmetry \"none\"\n .Zsymmetry \"none\"\nEnd With\nBoundary.MinimumDistanceReferenceFrequencyType \"CenterNMonitors\""
+    },
+    {
+      "name": "Initial solver configuration; manual resource review required",
+      "code": "ChangeSolverType \"HF Time Domain\"\nWith Solver\n .FrequencyRange \"2.2\", \"2.3\"\n .CalculationType \"TD-S\"\n .StimulationPort \"All\"\n .StimulationMode \"All\"\n .SteadyStateLimit \"-40\"\nEnd With"
+    },
+    {
+      "name": "back_short",
+      "code": "With Cylinder\n .Reset\n .Name \"back_short\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"-1\", \"0\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "waveguide",
+      "code": "With Cylinder\n .Reset\n .Name \"waveguide\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"5.4\"\n .InnerRadius \"4.4\"\n .Axis \"z\"\n .Zrange \"0\", \"20\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With"
+    },
+    {
+      "name": "probe1",
+      "code": "With Cylinder\n .Reset\n .Name \"probe1\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"180\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe1\"\n .Vector \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe2",
+      "code": "With Cylinder\n .Reset\n .Name \"probe2\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe2\"\n .Vector \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe3",
+      "code": "With Cylinder\n .Reset\n .Name \"probe3\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"-7.01670929853e-15\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe3\"\n .Vector \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "probe4",
+      "code": "With Cylinder\n .Reset\n .Name \"probe4\"\n .Component \"RECONSTRUCTION\"\n .Material \"PEC\"\n .OuterRadius \"0.5\"\n .InnerRadius \"0\"\n .Axis \"z\"\n .Zrange \"0\", \"2.2\"\n .Xcenter \"0\"\n .Ycenter \"0\"\n .Segments \"0\"\n .Create\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"90\", \"0\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Origin \"Free\"\n .Center \"0\", \"0\", \"0\"\n .Angle \"0\", \"0\", \"90\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .RotateAdvanced\nEnd With\nWith Transform\n .Reset\n .Name \"RECONSTRUCTION:probe4\"\n .Vector \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .InvertPickedPoints \"False\"\n .MultipleObjects \"False\"\n .GroupObjects \"False\"\n .Repetitions \"1\"\n .MultipleSelection \"False\"\n .TranslateAdvanced\nEnd With\n"
+    },
+    {
+      "name": "Port 1",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"1\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"4.4\", \"0\", \"4.4\"\n .Point2 \"3.9\", \"0\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 2",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"2\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"2.69422295812e-16\", \"4.4\", \"4.4\"\n .Point2 \"2.38806125834e-16\", \"3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 3",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"3\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-4.4\", \"5.38844591625e-16\", \"4.4\"\n .Point2 \"-3.9\", \"4.77612251667e-16\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Port 4",
+      "code": "With DiscretePort\n .Reset\n .PortNumber \"4\"\n .Type \"SParameter\"\n .Impedance \"50\"\n .Voltage \"1\"\n .Current \"1\"\n .Point1 \"-8.08266887437e-16\", \"-4.4\", \"4.4\"\n .Point2 \"-7.16418377501e-16\", \"-3.9\", \"4.4\"\n .UsePickedPoints \"False\"\n .LocalCoordinates \"False\"\n .Monitor \"False\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 2.2",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=2.2)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"2.2\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 2.25",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=2.25)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"2.25\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Farfield 2.3",
+      "code": "With Monitor\n .Reset\n .Name \"farfield (f=2.3)\"\n .Domain \"Frequency\"\n .FieldType \"Farfield\"\n .Frequency \"2.3\"\n .Create\nEnd With"
+    },
+    {
+      "name": "Initial mesh; resource baseline, not convergence",
+      "code": "With Mesh\n .MergeThinPECLayerFixpoints \"True\"\n .RatioLimit \"5\"\nEnd With\nWith MeshSettings\n .SetMeshType \"Hex\"\n .Set \"StepsPerWaveNear\", \"8\"\n .Set \"StepsPerWaveFar\", \"8\"\n .Set \"StepsPerBoxNear\", \"8\"\n .Set \"StepsPerBoxFar\", \"8\"\nEnd With"
+    },
+    {
+      "name": "CP field-combination definition; no result calculation",
+      "code": "With CombineResults\n .Reset\n .SetMonitorType \"frequency\"\n .FarfieldsOnly \"True\"\n .EnableAutomaticLabeling \"False\"\n .SetLabel \"CN_DEFAULT_GROUP\"\n .SetPortModeValues \"1\", \"1\", \"1\", \"0\"\n .SetPortModeValues \"2\", \"1\", \"1\", \"-90\"\n .SetPortModeValues \"3\", \"1\", \"1\", \"-180\"\n .SetPortModeValues \"4\", \"1\", \"1\", \"-270\"\nEnd With"
+    },
+    {
+      "name": "Structure view",
+      "code": "ResetViewToStructure\nPlot.ZoomToStructure"
+    }
+  ]
+}

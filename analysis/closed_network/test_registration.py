@@ -7,6 +7,7 @@ class RegistrationTests(unittest.TestCase):
   self.temp=tempfile.TemporaryDirectory(prefix='codex_pattern_registration_');self.addCleanup(self.temp.cleanup)
   self.root=Path(self.temp.name);self.script=self.root/'analysis/closed_network'/SCRIPT.name
   self.script.parent.mkdir(parents=True);shutil.copy2(SCRIPT,self.script)
+  shutil.copy2(SCRIPT.with_name('cst2024_provenance.py'),self.script.parent)
   (self.root/'docs').mkdir();self.dataset=self.root/'data/closed_network_patterns/SYNTHETIC';self.dataset.mkdir(parents=True)
   self.row=dict(project_file='cst/projects/closed_network/test/RFC_SYNTHETIC.cst',expected_output_directory='data/closed_network_patterns/SYNTHETIC',
    configuration='INSTALLED',installation_identity='TEST_ONLY',f_low_ghz=1,f_center_ghz=2,f_high_ghz=3)
@@ -54,6 +55,28 @@ class RegistrationTests(unittest.TestCase):
   self.configure_second_port_group_binding();self.meta['active_port_numbers']=[1,2,3,4];self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_stale_project_hash_rejected(self):
   self.configure_second_port_group_binding();self.meta['project_sha256']='STALE';self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
+ def configure_native_2024(self):
+  import hashlib
+  self.configure_second_port_group_binding()
+  package=self.root/'cst/projects/closed_network_2024_build/sba/RFC_SYNTHETIC';package.mkdir(parents=True)
+  (package/'build_2024.vba').write_bytes(b'SYNTHETIC_MACRO_FIXTURE')
+  (package/'source_geometry.json').write_bytes(b'{}')
+  digest=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+  native=self.root/'cst/projects/closed_network_2024_native/sba/RFC_SYNTHETIC_CST2024.cst';native.parent.mkdir(parents=True);native.write_bytes(b'SYNTHETIC_NATIVE_2024_FIXTURE_NOT_CST')
+  manifest=dict(case_id='RFC_SYNTHETIC',source_project=self.row['project_file'],source_geometry_hash='TEST_GEOMETRY_HASH',build_vba_sha256=digest(package/'build_2024.vba'),source_geometry_file_sha256=digest(package/'source_geometry.json'),expected_native_filename=native.name,expected_object_count=20,port_count=8,spacecraft_panel_count=8)
+  (package/'build_manifest.json').write_text(json.dumps(manifest))
+  checks=['geometry','bbox','materials','ports','phase','reference_plane','monitors','boundaries','installation_frames','all_ssot_panels','no_crop','native_2024_save']
+  record=dict(case_id='RFC_SYNTHETIC',actual_cst_version=2024,status='GEOMETRY_ACCEPTED_CST2024',native_project_file=native.relative_to(self.root).as_posix(),native_project_sha256=digest(native),source_geometry_hash=manifest['source_geometry_hash'],build_vba_sha256=manifest['build_vba_sha256'],reviewer='SYNTHETIC_TEST_ONLY',checked_at='TEST_ONLY',about_version_text='SYNTHETIC_NOT_REAL_CST2024',checks={c:True for c in checks},geometry_object_count=20,port_count=8,monitor_count=3,spacecraft_panel_count=8)
+  self.native_validation=native.with_suffix('.native_validation.json');self.native_validation.write_text(json.dumps(record))
+  self.meta.update(cst_version=2024,project_file=native.relative_to(self.root).as_posix(),project_sha256=digest(native),binding_project_file=self.row['project_file'],build_package=package.relative_to(self.root).as_posix(),native_validation_file=self.native_validation.relative_to(self.root).as_posix(),source_geometry_hash=manifest['source_geometry_hash']);self.save_meta()
+ def test_native_2024_hash_distinct_from_2026_accepted(self):
+  self.configure_native_2024();result=self.run_script();self.assertEqual(result.returncode,0,result.stderr)
+ def test_wrong_native_2024_version_rejected(self):
+  self.configure_native_2024();record=json.loads(self.native_validation.read_text());record['actual_cst_version']=2026;self.native_validation.write_text(json.dumps(record));self.assertNotEqual(self.run_script().returncode,0)
+ def test_unapproved_native_geometry_rejected(self):
+  self.configure_native_2024();record=json.loads(self.native_validation.read_text());record['checks']['installation_frames']=False;self.native_validation.write_text(json.dumps(record));self.assertNotEqual(self.run_script().returncode,0)
+ def test_stale_native_project_hash_rejected(self):
+  self.configure_native_2024();record=json.loads(self.native_validation.read_text());record['native_project_sha256']='STALE';self.native_validation.write_text(json.dumps(record));self.assertNotEqual(self.run_script().returncode,0)
  def test_unreliable_normalization_rejected(self):
   self.meta['monitors'][0]['normalization_reliable']=False;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_wrong_frequency_rejected(self):

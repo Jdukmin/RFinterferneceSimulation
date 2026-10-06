@@ -1,0 +1,75 @@
+{
+  "case_id": "RFC_SBA_TM_ORIGINAL",
+  "antenna": "SBA",
+  "configuration": "ORIGINAL",
+  "source_project": "cst/projects/closed_network/sba/RFC_SBA_TM_ORIGINAL.cst",
+  "accepted_base_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
+  "accepted_base_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
+  "target_cst_version": 2024,
+  "frequency_low_ghz": 2.2,
+  "frequency_center_ghz": 2.25,
+  "frequency_high_ghz": 2.3,
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "port_count": 4,
+  "port_type": "DiscretePort SParameter; 50 ohm",
+  "excitation_amplitudes": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "excitation_phases_deg": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "material_list": [
+    "PEC"
+  ],
+  "material_definition": "Intrinsic CST PEC; vacuum epsilon_r=mu_r=1.",
+  "boundary_type": "expanded open, all six faces; no symmetry; CenterNMonitors reference",
+  "solver_recommendation": "TD_FD_WITH_RESOURCE_REVIEW",
+  "initial_solver": "HF Time Domain; configuration only, never automatically run",
+  "installed_identity": "",
+  "spacecraft_geometry": "NONE",
+  "spacecraft_panel_count": 0,
+  "cropped": false,
+  "expected_object_count": 12,
+  "expected_bbox_mm": [
+    -32.5,
+    32.5,
+    -32.5,
+    32.5,
+    -32.0,
+    60.7
+  ],
+  "source_geometry_hash": "5cdc1cd74ee7a5db56111a32d14f6328c8a7c1c5b4fc5980bef927eaad322205",
+  "native_antenna_geometry_hash": "e36ec7d7fed1d293c374eb0b240478534f1017cff7096062fbe6df11d403c522",
+  "build_vba_sha256": "ceb753b6d3a255ae876fb5d71b9f50c27694c6d6d9e0c544d696e53ac3b9c518",
+  "source_geometry_file_sha256": "6a6e973f0a80a0d5a9989a69b278398ce124c24a83987542594f029e4f9f89ee",
+  "expected_native_filename": "RFC_SBA_TM_ORIGINAL_CST2024.cst",
+  "expected_native_directory": "cst/projects/closed_network_2024_native/sba",
+  "dataset_ids": [
+    "SBA_TM_ORIGINAL"
+  ],
+  "expected_output_directories": [
+    "data/closed_network_patterns/SBA_TM_ORIGINAL"
+  ],
+  "status": "READY_FOR_CST2024_REBUILD",
+  "actual_cst2024_execution": false,
+  "solver_started": false,
+  "notes": [
+    "Classic AddToHistory VBA only; no CST2026 binary or CST Python API dependency.",
+    "Geometry reconstruction uses exact accepted numeric recipes; no tuning.",
+    "Initial TD/hex setup is a editable baseline, not a mandate to solve installed cases with TD.",
+    "Select license-compatible solver and verify discrete ports before solve.",
+    "SBA attacker filenames retain ORIGINAL legacy name but contain installed NADIR/ZENITH groups.",
+    "No new reflector support geometry: no approved support dimensions exist in source; existing surrogate sheets are preserved."
+  ],
+  "classic_history_replay_cst2026": "PASS"
+}
