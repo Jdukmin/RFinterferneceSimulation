@@ -1,0 +1,72 @@
+{
+  "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_STM.cst",
+  "source_project": "cst/projects/ISL_C4_CUP_R14P7.cst",
+  "source_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
+  "project_sha256": "0c721fe239cb10b2b29b1282d961466a4b25c69e2575623fc86bd1a63a295f96",
+  "solver_started": false,
+  "solver_status": "READY_NOT_SOLVED",
+  "source_solids": {
+    "RECONSTRUCTION:ground_floor": {
+      "volume_mm3": 535.6260651150144,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:rim": {
+      "volume_mm3": 223.67679294882862,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:patch": {
+      "volume_mm3": 53.01501408465134,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe1": {
+      "volume_mm3": 0.5529995186121875,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe2": {
+      "volume_mm3": 0.552999318087041,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe3": {
+      "volume_mm3": 0.5529995186121875,
+      "material": "PEC"
+    },
+    "RECONSTRUCTION:probe4": {
+      "volume_mm3": 0.5529993180870415,
+      "material": "PEC"
+    }
+  },
+  "antenna_geometry_preserved_by_native_clone": true,
+  "source_materials_and_volumes_unchanged": true,
+  "ports": 4,
+  "port_geometry_preserved_by_no_port_edit": true,
+  "phases_deg": [
+    0,
+    -90,
+    -180,
+    -270
+  ],
+  "monitor_frequencies_ghz": [
+    2.2,
+    2.25,
+    2.3
+  ],
+  "verified_monitor_names": [
+    "farfield (f=2.2)",
+    "farfield (f=2.25)",
+    "farfield (f=2.3)"
+  ],
+  "solver": "HF Time Domain",
+  "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
+  "mesh_line_counts": [
+    57,
+    57,
+    33
+  ],
+  "mesh_cells": 100352,
+  "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 0.011962890625,
+  "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
+  "installed_geometry": null,
+  "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
+  "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
+  "preferred_solver_review": "TD_OR_FD; IE_OR_HYBRID_IF_RESOURCES_REQUIRE"
+}
