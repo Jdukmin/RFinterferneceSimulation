@@ -1,6 +1,6 @@
 {
   "completion_status": "COMPLETE",
-  "base_commit": "e797a7f9b04bdd90ec3867cbd112b1623b7a4700",
+  "base_commit": "b5adc446736d4c61809e6fa537c7093f79647cd6",
   "branch": "codex/closed-network-cst-preparation",
   "initial_worktree_clean": true,
   "planned_projects": 22,
@@ -11,6 +11,13 @@
   "ssot_bus_hull_panels": 8,
   "complete_satellite_cad": false,
   "coordinate_roundtrip_validated": true,
+  "installed_solver_frame": "SPACECRAFT_BODY_FIXED",
+  "isl_mount_panel": "PANEL_7",
+  "isl_boresight_body": [
+    1,
+    0,
+    0
+  ],
   "common_source_project": "cst/projects/closed_network/kaa/KARMA7_FG_REFLECTOR_SURROGATE_BASE.cst",
   "common_reflector_geometry_hash": "81ea91d26239729787e48b24d1b64f2adb96b9707a2c0f54b5ce046fa468b90e",
   "pair_input_plan_ready": 10,
@@ -68,12 +75,12 @@
     },
     {
       "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
-      "sha256": "b8b2c20b68f4d123463d5324014d1b906ff56cb455abef4ae864ca51dfd5ea51",
-      "mesh_cells": 55678740
+      "sha256": "cb2d220e44f9525fed66b3594e8677075d8287f62ee6d70a53fd501a5ca2f750",
+      "mesh_cells": 55697382
     },
     {
       "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
-      "sha256": "b6c83e48acdc7961d18eb182f035e3b2ea8e0748f05672b1d37355ff6cb8a92d",
+      "sha256": "d3892098ec8778245a665d51a38cb4ceb04eec2a20475a48e14ce3d0650db567",
       "mesh_cells": 55522584
     },
     {
@@ -83,13 +90,13 @@
     },
     {
       "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
-      "sha256": "3402ffc81e0d31a5c1f17e486d49a623074aebd64cb42d693820c661199edcf9",
-      "mesh_cells": 10886400
+      "sha256": "feb97740ae90c95586140a1990428d21a1f40ef91e5dfc4c8642caa01a34e3be",
+      "mesh_cells": 12324015
     },
     {
       "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA2.cst",
-      "sha256": "eb941809287c6ec4d5d086d69413be28b2a44aa3676e6e6cabd235adee41b9eb",
-      "mesh_cells": 10886400
+      "sha256": "1889b743e999777d356e8922d206e7276133fcdb7a28a54cd08fd8e9da2ca454",
+      "mesh_cells": 12324015
     },
     {
       "project_file": "cst/projects/closed_network/isl/RFC_ISL_ORIGINAL.cst",
@@ -98,8 +105,8 @@
     },
     {
       "project_file": "cst/projects/closed_network/isl/RFC_INSTALLED_ISL_RX.cst",
-      "sha256": "4904f9d0f1aeb1a1b350a8d21ac31a8865616a583581ad40d528b95b93349c7c",
-      "mesh_cells": 2269049730
+      "sha256": "4020d7f1f564cca87fff55b9e24769eefe87636dcc1a3f7f877414bd559e8c2f",
+      "mesh_cells": 2184158295
     },
     {
       "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_SAR.cst",
@@ -135,8 +142,9 @@
   "tests": {
     "native_cst_standalone_reopen": "PASS_22",
     "matlab_adapter_octave_9_2": "PASS_NATIVE_FRAME_AND_SAR_BASELINE",
-    "raw_registration": "PASS_4_SYNTHETIC_TESTS",
+    "raw_registration": "PASS_6_SYNTHETIC_TESTS",
     "synthetic_end_to_end_driver": "PASS_10_FAMILIES_67_CONFIGURATIONS",
+    "installed_orientation_and_export_roundtrip": "PASS_3_TESTS_3600_DIRECTIONS; ORIGINAL_KAA_18_BINARIES_UNCHANGED",
     "comparison_outputs": "PASS_30_INSTALLED_AND_22_REFLECTOR_COMPARISONS",
     "full_mission_rfi_execution": "NOT_RUN_NO_SOLVER_RESULTS"
   }

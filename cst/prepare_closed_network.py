@@ -42,14 +42,15 @@ def geometry():
    y0,z0=vertices[r['vertex_from']];y1,z1=vertices[r['vertex_to']];pts=[[lo,y0,z0],[hi,y0,z0],[hi,y1,z1],[lo,y1,z1]]
   else:
    x=float(pars[r['face_x_ref']]);pts=[[x,*v] for v in vertices.values()]
-  faces.append(dict(panel_id=r['panel_id'],body_vertices_mm=np.array(pts).tolist(),material='PEC',surface_type='SSOT_ZERO_THICKNESS_OUTER_PANEL'))
+  faces.append(dict(panel_id=r['panel_id'],body_vertices_mm=np.array(pts).tolist(),outward_normal_body=normals[r['panel_id']].tolist(),material='PEC',surface_type='SSOT_ZERO_THICKNESS_OUTER_PANEL'))
  installations=[]
  for r in table(ds+'antenna_installations.csv'):
-  pos=np.array([float(r[k]) for k in ['x_mm','y_mm','z_mm']]);z=normals[r['panel_id']];z=z/np.linalg.norm(z)
+  panel_id='PANEL_7' if r['antenna_id']=='ISL' else r['panel_id']
+  pos=np.array([float(r[k]) for k in ['x_mm','y_mm','z_mm']]);z=normals[panel_id];z=z/np.linalg.norm(z)
   # Existing CstLocalFrameAdapter: local +Z boresight; local +X body +X orthogonalized.
-  x=np.array([1.,0.,0.]);x=x-z*np.dot(x,z);x/=np.linalg.norm(x);y=np.cross(z,x);rotation=np.column_stack([x,y,z])
+  x=np.array([0.,1.,0.]) if abs(z[0])>.99 else np.array([1.,0.,0.]);x=x-z*np.dot(x,z);x/=np.linalg.norm(x);y=np.cross(z,x);rotation=np.column_stack([x,y,z])
   assert np.linalg.norm(rotation.T@rotation-np.eye(3))<1e-8 and abs(np.linalg.det(rotation)-1)<1e-8
-  installations.append(dict(installation_id=r['antenna_id'],position_body_mm=pos.tolist(),nominal_R_BL=rotation.tolist(),mount_type=r['mount_type'],panel_id=r['panel_id']))
+  installations.append(dict(installation_id=r['antenna_id'],position_body_mm=pos.tolist(),nominal_R_BL=rotation.tolist(),mount_type=r['mount_type'],panel_id=panel_id,orientation_provenance='OWNER_PLUS_X_END_FACE_OVERRIDE' if r['antenna_id']=='ISL' else 'SSOT_PANEL_NORMAL'))
  files=[ds+f for f in ['hull_parameters.csv','hull_cross_section.csv','panels.csv','antenna_installations.csv','steering_constraints.csv']]
  return dict(model_class='FULL_SSOT_BUS_HULL_8_PANELS',mechanical_cad_fidelity='SIMPLIFIED_BUS_HULL_NOT_COMPLETE_SATELLITE_CAD',full_outer_panels=faces,installations=installations,cropped=False,source_hashes={f:sha(ROOT/f) for f in files},
   external_metal_geometry='Only eight outer panels are defined as structures by SimplifiedSpacecraftBuilder. Gimbal/antenna references included as coordinate metadata; no invented bracket/radome/reflector/SAR CAD.',
@@ -61,20 +62,49 @@ def solids(p):
   name=method(s,'GetNameOfShapeFromIndex',i);d[name]=dict(volume_mm3=method(s,'GetVolume',name),material=method(s,'GetMaterialNameForShape',name))
  return d
 
+def port_coordinates(p):
+ import pythoncom,win32com.client
+ obj=method(p,'DiscretePort');rows=[]
+ for no in range(1,5):
+  args=[win32com.client.VARIANT(pythoncom.VT_BYREF|pythoncom.VT_R8,0) for _ in range(6)]
+  assert method(obj,'GetCoordinates',no,*args)
+  rows.append([v.value for v in args])
+ return np.array(rows)
+
+def align_antenna(p,g,identity,initial):
+ inst=next(r for r in g['installations'] if r['installation_id']==identity)
+ R=np.array(inst['nominal_R_BL']);origin=np.array(inst['position_body_mm']);before=port_coordinates(p)
+ angles=[(90,0,0),(0,0,90)] if identity=='ISL' else [(float(np.degrees(np.arctan2(-R[1,2],R[2,2]))),0,0)]
+ code='WCS.ActivateWCS "global"\n'
+ for name in initial:
+  for angle in angles:
+   code+=f'With Transform\n .Reset\n .Name "{name}"\n .Origin "Free"\n .Center "0", "0", "0"\n .Angle '+', '.join(f'"{v:.12g}"' for v in angle)+'\n .MultipleObjects "False"\n .GroupObjects "False"\n .Repetitions "1"\n .MultipleSelection "False"\n .RotateAdvanced\nEnd With\n'
+  code+=f'With Transform\n .Reset\n .Name "{name}"\n .Vector '+', '.join(f'"{v:.12g}"' for v in origin)+'\n .MultipleObjects "False"\n .GroupObjects "False"\n .Repetitions "1"\n .MultipleSelection "False"\n .TranslateAdvanced\nEnd With\n'
+ add_to_history(p,'Rigid antenna alignment to body installation; no geometry tuning',code)
+ # Same existing SParameter / 50-ohm discrete ports; endpoint order and phases preserved.
+ from cst_geometry import port
+ po=method(p,'Port')
+ impedances=[float(method(po,'GetLineImpedance',i,1)) for i in range(1,5)]
+ expected=(before.reshape(4,2,3)@R.T+origin).reshape(4,6)
+ for i in range(4):
+  add_to_history(p,f'Replace port {i+1} coordinates only',f'Port.Delete "{i+1}"')
+  port(p,i+1,expected[i,:3],expected[i,3:],impedances[i])
+ assert np.max(abs(port_coordinates(p)-expected))<1e-7
+
 def full_hull(p,g,identity):
  inst=next(r for r in g['installations'] if r['installation_id']==identity);rotation=np.array(inst['nominal_R_BL']);origin=np.array(inst['position_body_mm'])
  records=[]
  for facet in g['full_outer_panels']:
-  points=(np.array(facet['body_vertices_mm'])-origin)@rotation
+  points=np.array(facet['body_vertices_mm'])
   name=facet['panel_id'];curve='full_'+name
   code=f'Curve.NewCurve "{curve}"\nWith Polygon3D\n .Reset\n .Name "outline"\n .Curve "{curve}"\n'
   for point in np.vstack([points,points[0]]):code+=' .Point '+', '.join(f'"{v:.12g}"' for v in point)+'\n'
   code+=' .Create\nEnd With\n'
   code+=f'With CoverCurve\n .Reset\n .Name "{name}"\n .Component "FULL_SPACECRAFT"\n .Material "PEC"\n .Curve "{curve}:outline"\n .Create\nEnd With'
   add_to_history(p,'Full SSOT outer panel '+name,code)
-  assert np.max(np.abs(points@rotation.T+origin-np.array(facet['body_vertices_mm'])))<1e-8
-  records.append(dict(panel_id=name,local_vertices_mm=points.tolist()))
- return dict(installation=inst,panels=records,global_solver_frame='UNCHANGED_NATIVE_ANTENNA_CST_LOCAL',body_transform='p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops',antenna_or_ports_transformed=False)
+  assert np.max(np.abs(points-np.array(facet['body_vertices_mm'])))<1e-8
+  records.append(dict(panel_id=name,body_vertices_mm=points.tolist(),outward_normal_body=facet['outward_normal_body']))
+ return dict(installation=inst,panels=records,global_solver_frame='SPACECRAFT_BODY_FIXED',body_transform='Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B',antenna_or_ports_transformed=True)
 
 def prepare(row,app,g,force=False):
  dest=ROOT/row['project_file'];evidence=dest.with_suffix('.preflight.json')
@@ -94,11 +124,13 @@ def prepare(row,app,g,force=False):
   if name not in wanted:add_to_history(p,'Remove unrelated monitor '+name,'Monitor.Delete "'+name+'"')
  for f,name in zip(frequencies,wanted):
   if name not in names:monitor(p,f)
+ if row['installation_identity']:
+  align_antenna(p,g,row['installation_identity'],initial)
  installation=full_hull(p,g,row['installation_identity']) if row['installation_identity'] else None
  final=solids(p)
  for name,original in initial.items():
   assert name in final and final[name]['material']==original['material']
-  assert abs(final[name]['volume_mm3']-original['volume_mm3'])<=1e-7*max(1,abs(original['volume_mm3']))
+  assert abs(final[name]['volume_mm3']-original['volume_mm3'])<=(1e-5 if row['installation_identity'] else 1e-7)*max(1,abs(original['volume_mm3']))
  assert int(method(method(p,'Port'),'StartPortNumberIteration'))==ports
  # Configure original quadrature without Run: no solver and no result-combination run today.
  phases=[0,90,180,270] if row['antenna']=='SBA' else [0,-90,-180,-270]
@@ -110,7 +142,7 @@ def prepare(row,app,g,force=False):
  monitors=[method(m,'GetMonitorNameFromIndex',i) for i in range(int(method(m,'GetNumberOfMonitors')))];assert sorted(monitors)==sorted(wanted)
  save(p,dest);method(p,'Quit');assert sha(source)==before
  result=dict(project_file=row['project_file'],source_project=row['source_project'],source_sha256=before,project_sha256=sha(dest),solver_started=False,solver_status='READY_NOT_SOLVED',
-  source_solids=initial,antenna_geometry_preserved_by_native_clone=True,source_materials_and_volumes_unchanged=True,ports=ports,port_geometry_preserved_by_no_port_edit=True,
+  source_solids=initial,antenna_geometry_preserved_by_native_clone=True,source_materials_preserved=True,rigid_solid_volume_relative_tolerance=1e-5 if installation else 1e-7,solid_volume_relative_errors={n:abs(final[n]['volume_mm3']-v['volume_mm3'])/max(1,abs(v['volume_mm3'])) for n,v in initial.items()},ports=ports,port_relative_geometry_preserved_by_rigid_transform=True,
   phases_deg=phases,monitor_frequencies_ghz=frequencies,verified_monitor_names=monitors,solver='HF Time Domain',boundaries='INHERITED_SOURCE_OPEN_ADD_SPACE',mesh_line_counts=lines,mesh_cells=cells,
   mesh_memory_128bytes_per_cell_gib_lower_planning_estimate=cells*128/1024**3,mesh_convergence='NOT_ESTABLISHED; closed network mesh/convergence check required',
   installed_geometry=installation,readiness_scope='Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve')
@@ -140,7 +172,7 @@ def main():
    record['surrogate_surface_geometry_sha256']=json.loads(common.read_text())['surface_geometry_sha256']
    record['geometry_provenance']='OWNER_AUTHORIZED_KARMA7_FG_ENGINEERING_SURROGATE; NOT_VENDOR_CAD'
   write_json(evidence,record)
-  row.update(port_status='NATIVE_PORTS_PRESERVED_4',monitor_status='VERIFIED_3_EDGE_CENTER',solver_status=record['solver_status']);records.append(record)
+  row.update(port_status='RIGID_TRANSFORMED_PORTS_VERIFIED_4' if row['configuration']=='INSTALLED' else 'NATIVE_PORTS_PRESERVED_4',monitor_status='VERIFIED_3_EDGE_CENTER',solver_status=record['solver_status']);records.append(record)
  for row in rows:
   row['saved_solver']='HF Time Domain'
   row['solver_selection_policy']='IE_MLFMM_OR_HYBRID_FIRST' if row['configuration']=='INSTALLED' else 'TD_FD_WITH_RESOURCE_REVIEW'

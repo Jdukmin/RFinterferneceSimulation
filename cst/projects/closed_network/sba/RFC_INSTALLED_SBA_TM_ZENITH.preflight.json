@@ -2,7 +2,7 @@
   "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
   "source_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
   "source_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
-  "project_sha256": "b6c83e48acdc7961d18eb182f035e3b2ea8e0748f05672b1d37355ff6cb8a92d",
+  "project_sha256": "d3892098ec8778245a665d51a38cb4ceb04eec2a20475a48e14ce3d0650db567",
   "solver_started": false,
   "solver_status": "READY_NOT_SOLVED",
   "source_solids": {
@@ -56,9 +56,24 @@
     }
   },
   "antenna_geometry_preserved_by_native_clone": true,
-  "source_materials_and_volumes_unchanged": true,
+  "source_materials_preserved": true,
+  "rigid_solid_volume_relative_tolerance": 1e-05,
+  "solid_volume_relative_errors": {
+    "RECONSTRUCTION:base_floor": 1.8272262248905824e-16,
+    "RECONSTRUCTION:base_center": 7.25227200078233e-07,
+    "RECONSTRUCTION:groove_wall_1": 3.6261366439050325e-07,
+    "RECONSTRUCTION:outer_wall": 1.2256371950335509e-06,
+    "RECONSTRUCTION:arm1": 4.2048913032575356e-13,
+    "RECONSTRUCTION:arm1_termination": 1.2691487515513392e-06,
+    "RECONSTRUCTION:arm2": 4.61663155727631e-12,
+    "RECONSTRUCTION:arm2_termination": 1.2691487435096357e-06,
+    "RECONSTRUCTION:arm3": 2.3767312907270934e-13,
+    "RECONSTRUCTION:arm3_termination": 1.2691487513279584e-06,
+    "RECONSTRUCTION:arm4": 8.778010235070627e-12,
+    "RECONSTRUCTION:arm4_termination": 1.2691487436213261e-06
+  },
   "ports": 4,
-  "port_geometry_preserved_by_no_port_edit": true,
+  "port_relative_geometry_preserved_by_rigid_transform": true,
   "phases_deg": [
     0,
     90,
@@ -111,235 +126,277 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_4"
+      "panel_id": "PANEL_4",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     "panels": [
       {
         "panel_id": "PANEL_1",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            -1313.188191,
-            -2040.0
+            0.0,
+            783.188191,
+            800.0
           ],
           [
-            5745.0,
-            -1313.188191,
-            -2040.0
+            6000.0,
+            783.188191,
+            800.0
           ],
           [
-            5745.0,
-            253.18819099999996,
-            -2040.0
+            6000.0,
+            -783.188191,
+            800.0
           ],
           [
-            -255.0,
-            253.18819099999996,
-            -2040.0
+            0.0,
+            -783.188191,
+            800.0
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.0,
+          1.0
         ]
       },
       {
         "panel_id": "PANEL_2",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            253.18819099999996,
-            -2040.0
+            0.0,
+            -783.188191,
+            800.0
           ],
           [
-            5745.0,
-            253.18819099999996,
-            -2040.0
+            6000.0,
+            -783.188191,
+            800.0
           ],
           [
-            5745.0,
-            554.414419,
-            -1518.26087
+            6000.0,
+            -1084.414419,
+            278.26087
           ],
           [
-            -255.0,
-            554.414419,
-            -1518.26087
+            0.0,
+            -1084.414419,
+            278.26087
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          -0.866025404,
+          0.5
         ]
       },
       {
         "panel_id": "PANEL_3",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            554.414419,
-            -1518.26087
+            0.0,
+            -1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            554.414419,
-            -1518.26087
+            6000.0,
+            -1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            -228.773773,
-            -161.73912999999993
+            6000.0,
+            -301.226227,
+            -1078.26087
           ],
           [
-            -255.0,
-            -228.773773,
-            -161.73912999999993
+            0.0,
+            -301.226227,
+            -1078.26087
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          -0.866025404,
+          -0.5
         ]
       },
       {
         "panel_id": "PANEL_4",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            -228.773773,
-            -161.73912999999993
+            0.0,
+            -301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -228.773773,
-            -161.73912999999993
+            6000.0,
+            -301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -831.226227,
-            -161.73912999999993
+            6000.0,
+            301.226227,
+            -1078.26087
           ],
           [
-            -255.0,
-            -831.226227,
-            -161.73912999999993
+            0.0,
+            301.226227,
+            -1078.26087
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.0,
+          -1.0
         ]
       },
       {
         "panel_id": "PANEL_5",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            -831.226227,
-            -161.73912999999993
+            0.0,
+            301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -831.226227,
-            -161.73912999999993
+            6000.0,
+            301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -1614.414419,
-            -1518.26087
+            6000.0,
+            1084.414419,
+            278.26087
           ],
           [
-            -255.0,
-            -1614.414419,
-            -1518.26087
+            0.0,
+            1084.414419,
+            278.26087
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.866025404,
+          -0.5
         ]
       },
       {
         "panel_id": "PANEL_6",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            -1614.414419,
-            -1518.26087
+            0.0,
+            1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            -1614.414419,
-            -1518.26087
+            6000.0,
+            1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            -1313.188191,
-            -2040.0
+            6000.0,
+            783.188191,
+            800.0
           ],
           [
-            -255.0,
-            -1313.188191,
-            -2040.0
+            0.0,
+            783.188191,
+            800.0
           ]
+        ],
+        "outward_normal_body": [
+          0.0,
+          0.866025404,
+          0.5
         ]
       },
       {
         "panel_id": "PANEL_7",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            5745.0,
-            253.18819099999996,
-            -2040.0
+            6000.0,
+            -783.188191,
+            800.0
           ],
           [
-            5745.0,
-            554.414419,
-            -1518.26087
+            6000.0,
+            -1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            -228.773773,
-            -161.73912999999993
+            6000.0,
+            -301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -831.226227,
-            -161.73912999999993
+            6000.0,
+            301.226227,
+            -1078.26087
           ],
           [
-            5745.0,
-            -1614.414419,
-            -1518.26087
+            6000.0,
+            1084.414419,
+            278.26087
           ],
           [
-            5745.0,
-            -1313.188191,
-            -2040.0
+            6000.0,
+            783.188191,
+            800.0
           ]
+        ],
+        "outward_normal_body": [
+          1.0,
+          0.0,
+          0.0
         ]
       },
       {
         "panel_id": "PANEL_8",
-        "local_vertices_mm": [
+        "body_vertices_mm": [
           [
-            -255.0,
-            253.18819099999996,
-            -2040.0
+            0.0,
+            -783.188191,
+            800.0
           ],
           [
-            -255.0,
-            554.414419,
-            -1518.26087
+            0.0,
+            -1084.414419,
+            278.26087
           ],
           [
-            -255.0,
-            -228.773773,
-            -161.73912999999993
+            0.0,
+            -301.226227,
+            -1078.26087
           ],
           [
-            -255.0,
-            -831.226227,
-            -161.73912999999993
+            0.0,
+            301.226227,
+            -1078.26087
           ],
           [
-            -255.0,
-            -1614.414419,
-            -1518.26087
+            0.0,
+            1084.414419,
+            278.26087
           ],
           [
-            -255.0,
-            -1313.188191,
-            -2040.0
+            0.0,
+            783.188191,
+            800.0
           ]
+        ],
+        "outward_normal_body": [
+          -1.0,
+          0.0,
+          0.0
         ]
       }
     ],
-    "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-    "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-    "antenna_or_ports_transformed": false
+    "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+    "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+    "antenna_or_ports_transformed": true
   },
   "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
   "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-  "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+  "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+  "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
 }

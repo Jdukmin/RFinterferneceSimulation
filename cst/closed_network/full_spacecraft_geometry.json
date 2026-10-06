@@ -26,6 +26,11 @@
           800.0
         ]
       ],
+      "outward_normal_body": [
+        0.0,
+        0.0,
+        1.0
+      ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
     },
@@ -52,6 +57,11 @@
           -1084.414419,
           278.26087
         ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        -0.866025404,
+        0.5
       ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
@@ -80,6 +90,11 @@
           -1078.26087
         ]
       ],
+      "outward_normal_body": [
+        0.0,
+        -0.866025404,
+        -0.5
+      ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
     },
@@ -106,6 +121,11 @@
           301.226227,
           -1078.26087
         ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.0,
+        -1.0
       ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
@@ -134,6 +154,11 @@
           278.26087
         ]
       ],
+      "outward_normal_body": [
+        0.0,
+        0.866025404,
+        -0.5
+      ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
     },
@@ -160,6 +185,11 @@
           783.188191,
           800.0
         ]
+      ],
+      "outward_normal_body": [
+        0.0,
+        0.866025404,
+        0.5
       ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
@@ -198,6 +228,11 @@
           800.0
         ]
       ],
+      "outward_normal_body": [
+        1.0,
+        0.0,
+        0.0
+      ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
     },
@@ -235,6 +270,11 @@
           800.0
         ]
       ],
+      "outward_normal_body": [
+        -1.0,
+        0.0,
+        0.0
+      ],
       "material": "PEC",
       "surface_type": "SSOT_ZERO_THICKNESS_OUTER_PANEL"
     }
@@ -265,7 +305,8 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_6"
+      "panel_id": "PANEL_6",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "SBA_ZENITH",
@@ -292,7 +333,8 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_4"
+      "panel_id": "PANEL_4",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "GPSA_1",
@@ -319,7 +361,8 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_3"
+      "panel_id": "PANEL_3",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "GPSA_2",
@@ -346,7 +389,8 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_3"
+      "panel_id": "PANEL_3",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "KAA_1",
@@ -373,7 +417,8 @@
         ]
       ],
       "mount_type": "GIMBAL",
-      "panel_id": "PANEL_1"
+      "panel_id": "PANEL_1",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "KAA_2",
@@ -400,7 +445,8 @@
         ]
       ],
       "mount_type": "GIMBAL",
-      "panel_id": "PANEL_5"
+      "panel_id": "PANEL_5",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     },
     {
       "installation_id": "ISL",
@@ -411,23 +457,24 @@
       ],
       "nominal_R_BL": [
         [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
           1.0,
           0.0,
           0.0
         ],
         [
           0.0,
-          -0.4999999999066592,
-          -0.866025403838329
-        ],
-        [
-          0.0,
-          0.866025403838329,
-          -0.4999999999066592
+          1.0,
+          0.0
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_3"
+      "panel_id": "PANEL_7",
+      "orientation_provenance": "OWNER_PLUS_X_END_FACE_OVERRIDE"
     },
     {
       "installation_id": "SAR_ANT",
@@ -454,7 +501,8 @@
         ]
       ],
       "mount_type": "FIXED",
-      "panel_id": "PANEL_1"
+      "panel_id": "PANEL_1",
+      "orientation_provenance": "SSOT_PANEL_NORMAL"
     }
   ],
   "cropped": false,

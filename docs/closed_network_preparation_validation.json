@@ -23186,7 +23186,7 @@
       "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
       "source_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
       "source_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
-      "project_sha256": "b8b2c20b68f4d123463d5324014d1b906ff56cb455abef4ae864ca51dfd5ea51",
+      "project_sha256": "cb2d220e44f9525fed66b3594e8677075d8287f62ee6d70a53fd501a5ca2f750",
       "solver_started": false,
       "solver_status": "READY_NOT_SOLVED",
       "source_solids": {
@@ -23240,9 +23240,24 @@
         }
       },
       "antenna_geometry_preserved_by_native_clone": true,
-      "source_materials_and_volumes_unchanged": true,
+      "source_materials_preserved": true,
+      "rigid_solid_volume_relative_tolerance": 1e-05,
+      "solid_volume_relative_errors": {
+        "RECONSTRUCTION:base_floor": 3.259265416132111e-07,
+        "RECONSTRUCTION:base_center": 8.339316841787191e-07,
+        "RECONSTRUCTION:groove_wall_1": 4.218403692957148e-08,
+        "RECONSTRUCTION:outer_wall": 1.988695461966185e-06,
+        "RECONSTRUCTION:arm1": 2.49037156215746e-06,
+        "RECONSTRUCTION:arm1_termination": 2.5550316627318986e-07,
+        "RECONSTRUCTION:arm2": 1.423654745753273e-06,
+        "RECONSTRUCTION:arm2_termination": 4.416151880899241e-07,
+        "RECONSTRUCTION:arm3": 9.245196968788971e-07,
+        "RECONSTRUCTION:arm3_termination": 2.555031660498092e-07,
+        "RECONSTRUCTION:arm4": 5.097798145844073e-07,
+        "RECONSTRUCTION:arm4_termination": 4.416151661986212e-07
+      },
       "ports": 4,
-      "port_geometry_preserved_by_no_port_edit": true,
+      "port_relative_geometry_preserved_by_rigid_transform": true,
       "phases_deg": [
         0,
         90,
@@ -23262,12 +23277,12 @@
       "solver": "HF Time Domain",
       "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
       "mesh_line_counts": [
-        508,
-        324,
-        341
+        500,
+        319,
+        352
       ],
-      "mesh_cells": 55678740,
-      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 6.637423038482666,
+      "mesh_cells": 55697382,
+      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 6.639645338058472,
       "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
       "installed_geometry": {
         "installation": {
@@ -23295,243 +23310,285 @@
             ]
           ],
           "mount_type": "FIXED",
-          "panel_id": "PANEL_6"
+          "panel_id": "PANEL_6",
+          "orientation_provenance": "SSOT_PANEL_NORMAL"
         },
         "panels": [
           {
             "panel_id": "PANEL_1",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                155.77993839091874,
-                -190.18123192569254
+                0.0,
+                783.188191,
+                800.0
               ],
               [
-                5745.0,
-                155.77993839091874,
-                -190.18123192569254
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                5745.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -255.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                0.0,
+                -783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              1.0
             ]
           },
           {
             "panel_id": "PANEL_2",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                -326.1820256782493,
-                -2068.44210141176
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                -326.1820256782493,
-                -2068.44210141176
+                0.0,
+                -1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_3",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -326.1820256782493,
-                -2068.44210141176
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -326.1820256782493,
-                -2068.44210141176
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                0.0,
+                -301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_4",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                0.0,
+                301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              -1.0
             ]
           },
           {
             "panel_id": "PANEL_5",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                758.2323931193105,
-                -190.1812311265964
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                758.2323931193105,
-                -190.1812311265964
+                0.0,
+                1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_6",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                758.2323931193105,
-                -190.1812311265964
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                758.2323931193105,
-                -190.1812311265964
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                155.77993839091874,
-                -190.18123192569254
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -255.0,
-                155.77993839091874,
-                -190.18123192569254
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_7",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                5745.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                -326.1820256782493,
-                -2068.44210141176
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                758.2323931193105,
-                -190.1812311265964
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                155.77993839091874,
-                -190.18123192569254
+                6000.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              1.0,
+              0.0,
+              0.0
             ]
           },
           {
             "panel_id": "PANEL_8",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -627.4082524628744,
-                -1546.7029707100633
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -255.0,
-                -326.1820256782493,
-                -2068.44210141176
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                1240.1943579476201,
-                -2068.4421010269307
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                1541.4205848913869,
-                -1546.7029712581884
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                758.2323931193105,
-                -190.1812311265964
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                155.77993839091874,
-                -190.18123192569254
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              -1.0,
+              0.0,
+              0.0
             ]
           }
         ],
-        "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-        "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-        "antenna_or_ports_transformed": false
+        "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+        "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+        "antenna_or_ports_transformed": true
       },
       "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
       "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-      "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+      "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+      "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
     },
     {
       "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
       "source_project": "cst/projects/SBAND_MATCHING_WIRE15.cst",
       "source_sha256": "5613807b89f36b09e3f2d268950d811d222768621e85b18ebbffdc1fa7f686c0",
-      "project_sha256": "b6c83e48acdc7961d18eb182f035e3b2ea8e0748f05672b1d37355ff6cb8a92d",
+      "project_sha256": "d3892098ec8778245a665d51a38cb4ceb04eec2a20475a48e14ce3d0650db567",
       "solver_started": false,
       "solver_status": "READY_NOT_SOLVED",
       "source_solids": {
@@ -23585,9 +23642,24 @@
         }
       },
       "antenna_geometry_preserved_by_native_clone": true,
-      "source_materials_and_volumes_unchanged": true,
+      "source_materials_preserved": true,
+      "rigid_solid_volume_relative_tolerance": 1e-05,
+      "solid_volume_relative_errors": {
+        "RECONSTRUCTION:base_floor": 1.8272262248905824e-16,
+        "RECONSTRUCTION:base_center": 7.25227200078233e-07,
+        "RECONSTRUCTION:groove_wall_1": 3.6261366439050325e-07,
+        "RECONSTRUCTION:outer_wall": 1.2256371950335509e-06,
+        "RECONSTRUCTION:arm1": 4.2048913032575356e-13,
+        "RECONSTRUCTION:arm1_termination": 1.2691487515513392e-06,
+        "RECONSTRUCTION:arm2": 4.61663155727631e-12,
+        "RECONSTRUCTION:arm2_termination": 1.2691487435096357e-06,
+        "RECONSTRUCTION:arm3": 2.3767312907270934e-13,
+        "RECONSTRUCTION:arm3_termination": 1.2691487513279584e-06,
+        "RECONSTRUCTION:arm4": 8.778010235070627e-12,
+        "RECONSTRUCTION:arm4_termination": 1.2691487436213261e-06
+      },
       "ports": 4,
-      "port_geometry_preserved_by_no_port_edit": true,
+      "port_relative_geometry_preserved_by_rigid_transform": true,
       "phases_deg": [
         0,
         90,
@@ -23640,237 +23712,279 @@
             ]
           ],
           "mount_type": "FIXED",
-          "panel_id": "PANEL_4"
+          "panel_id": "PANEL_4",
+          "orientation_provenance": "SSOT_PANEL_NORMAL"
         },
         "panels": [
           {
             "panel_id": "PANEL_1",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -1313.188191,
-                -2040.0
+                0.0,
+                783.188191,
+                800.0
               ],
               [
-                5745.0,
-                -1313.188191,
-                -2040.0
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                5745.0,
-                253.18819099999996,
-                -2040.0
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -255.0,
-                253.18819099999996,
-                -2040.0
+                0.0,
+                -783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              1.0
             ]
           },
           {
             "panel_id": "PANEL_2",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                253.18819099999996,
-                -2040.0
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                253.18819099999996,
-                -2040.0
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                554.414419,
-                -1518.26087
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                554.414419,
-                -1518.26087
+                0.0,
+                -1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_3",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                554.414419,
-                -1518.26087
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                554.414419,
-                -1518.26087
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -228.773773,
-                -161.73912999999993
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                -228.773773,
-                -161.73912999999993
+                0.0,
+                -301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_4",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -228.773773,
-                -161.73912999999993
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -228.773773,
-                -161.73912999999993
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -831.226227,
-                -161.73912999999993
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                -831.226227,
-                -161.73912999999993
+                0.0,
+                301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              -1.0
             ]
           },
           {
             "panel_id": "PANEL_5",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -831.226227,
-                -161.73912999999993
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -831.226227,
-                -161.73912999999993
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -1614.414419,
-                -1518.26087
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                -1614.414419,
-                -1518.26087
+                0.0,
+                1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_6",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                -1614.414419,
-                -1518.26087
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -1614.414419,
-                -1518.26087
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -1313.188191,
-                -2040.0
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -255.0,
-                -1313.188191,
-                -2040.0
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_7",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                5745.0,
-                253.18819099999996,
-                -2040.0
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                5745.0,
-                554.414419,
-                -1518.26087
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -228.773773,
-                -161.73912999999993
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -831.226227,
-                -161.73912999999993
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                5745.0,
-                -1614.414419,
-                -1518.26087
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                5745.0,
-                -1313.188191,
-                -2040.0
+                6000.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              1.0,
+              0.0,
+              0.0
             ]
           },
           {
             "panel_id": "PANEL_8",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -255.0,
-                253.18819099999996,
-                -2040.0
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -255.0,
-                554.414419,
-                -1518.26087
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                -228.773773,
-                -161.73912999999993
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                -831.226227,
-                -161.73912999999993
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -255.0,
-                -1614.414419,
-                -1518.26087
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -255.0,
-                -1313.188191,
-                -2040.0
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              -1.0,
+              0.0,
+              0.0
             ]
           }
         ],
-        "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-        "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-        "antenna_or_ports_transformed": false
+        "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+        "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+        "antenna_or_ports_transformed": true
       },
       "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
       "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-      "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+      "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+      "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
     },
     {
       "project_file": "cst/projects/closed_network/gps/RFC_GPS_L1_ORIGINAL.cst",
@@ -23964,7 +24078,7 @@
       "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
       "source_project": "cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst",
       "source_sha256": "4ac3ecfddc6637322c8da6baaf113dc061ca12e70b6dc4c4f4d4a5b76b5f6c66",
-      "project_sha256": "3402ffc81e0d31a5c1f17e486d49a623074aebd64cb42d693820c661199edcf9",
+      "project_sha256": "feb97740ae90c95586140a1990428d21a1f40ef91e5dfc4c8642caa01a34e3be",
       "solver_started": false,
       "solver_status": "READY_NOT_SOLVED",
       "source_solids": {
@@ -24014,9 +24128,23 @@
         }
       },
       "antenna_geometry_preserved_by_native_clone": true,
-      "source_materials_and_volumes_unchanged": true,
+      "source_materials_preserved": true,
+      "rigid_solid_volume_relative_tolerance": 1e-05,
+      "solid_volume_relative_errors": {
+        "RECONSTRUCTION:cup_floor": 3.5915231537253686e-07,
+        "RECONSTRUCTION:cup_wall": 4.788408802221048e-07,
+        "RECONSTRUCTION:choke_floor": 1.1075665948020885e-06,
+        "RECONSTRUCTION:choke_separator": 8.532372985979316e-07,
+        "RECONSTRUCTION:outer_wall": 1.952349757636007e-07,
+        "RECONSTRUCTION:lower_patch": 3.709699555086119e-07,
+        "RECONSTRUCTION:upper_patch": 5.919146169145638e-07,
+        "RECONSTRUCTION:probe1": 9.47577520091216e-07,
+        "RECONSTRUCTION:probe2": 2.2234940102453648e-07,
+        "RECONSTRUCTION:probe3": 9.475775511614383e-07,
+        "RECONSTRUCTION:probe4": 2.223493516777486e-07
+      },
       "ports": 4,
-      "port_geometry_preserved_by_no_port_edit": true,
+      "port_relative_geometry_preserved_by_rigid_transform": true,
       "phases_deg": [
         0,
         -90,
@@ -24036,12 +24164,12 @@
       "solver": "HF Time Domain",
       "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
       "mesh_line_counts": [
-        301,
-        193,
-        190
+        298,
+        194,
+        216
       ],
-      "mesh_cells": 10886400,
-      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 1.297760009765625,
+      "mesh_cells": 12324015,
+      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 1.4691370725631714,
       "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
       "installed_geometry": {
         "installation": {
@@ -24069,243 +24197,285 @@
             ]
           ],
           "mount_type": "FIXED",
-          "panel_id": "PANEL_3"
+          "panel_id": "PANEL_3",
+          "orientation_provenance": "SSOT_PANEL_NORMAL"
         },
         "panels": [
           {
             "panel_id": "PANEL_1",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ],
               [
-                3955.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                3955.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -2045.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              1.0
             ]
           },
           {
             "panel_id": "PANEL_2",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                3955.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                3955.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -2045.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_3",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -2045.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_4",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -2045.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              -1.0
             ]
           },
           {
             "panel_id": "PANEL_5",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -2045.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_6",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -2045.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_7",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                3955.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                3955.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                3955.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                3955.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              1.0,
+              0.0,
+              0.0
             ]
           },
           {
             "panel_id": "PANEL_8",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -2045.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -2045.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -2045.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -2045.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -2045.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -2045.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              -1.0,
+              0.0,
+              0.0
             ]
           }
         ],
-        "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-        "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-        "antenna_or_ports_transformed": false
+        "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+        "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+        "antenna_or_ports_transformed": true
       },
       "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
       "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-      "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+      "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+      "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
     },
     {
       "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA2.cst",
       "source_project": "cst/projects/LBAND_GNSS_FINAL_COMPROMISE.cst",
       "source_sha256": "4ac3ecfddc6637322c8da6baaf113dc061ca12e70b6dc4c4f4d4a5b76b5f6c66",
-      "project_sha256": "eb941809287c6ec4d5d086d69413be28b2a44aa3676e6e6cabd235adee41b9eb",
+      "project_sha256": "1889b743e999777d356e8922d206e7276133fcdb7a28a54cd08fd8e9da2ca454",
       "solver_started": false,
       "solver_status": "READY_NOT_SOLVED",
       "source_solids": {
@@ -24355,9 +24525,23 @@
         }
       },
       "antenna_geometry_preserved_by_native_clone": true,
-      "source_materials_and_volumes_unchanged": true,
+      "source_materials_preserved": true,
+      "rigid_solid_volume_relative_tolerance": 1e-05,
+      "solid_volume_relative_errors": {
+        "RECONSTRUCTION:cup_floor": 3.591523175437947e-07,
+        "RECONSTRUCTION:cup_wall": 4.788408802221048e-07,
+        "RECONSTRUCTION:choke_floor": 1.1075665936238174e-06,
+        "RECONSTRUCTION:choke_separator": 8.53237292274783e-07,
+        "RECONSTRUCTION:outer_wall": 1.9523499632978407e-07,
+        "RECONSTRUCTION:lower_patch": 3.7096995928985007e-07,
+        "RECONSTRUCTION:upper_patch": 5.919146198231615e-07,
+        "RECONSTRUCTION:probe1": 9.47577520091216e-07,
+        "RECONSTRUCTION:probe2": 2.2234936995433677e-07,
+        "RECONSTRUCTION:probe3": 9.47577520091216e-07,
+        "RECONSTRUCTION:probe4": 2.2234932499393002e-07
+      },
       "ports": 4,
-      "port_geometry_preserved_by_no_port_edit": true,
+      "port_relative_geometry_preserved_by_rigid_transform": true,
       "phases_deg": [
         0,
         -90,
@@ -24377,12 +24561,12 @@
       "solver": "HF Time Domain",
       "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
       "mesh_line_counts": [
-        301,
-        193,
-        190
+        298,
+        194,
+        216
       ],
-      "mesh_cells": 10886400,
-      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 1.297760009765625,
+      "mesh_cells": 12324015,
+      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 1.4691370725631714,
       "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
       "installed_geometry": {
         "installation": {
@@ -24410,237 +24594,279 @@
             ]
           ],
           "mount_type": "FIXED",
-          "panel_id": "PANEL_3"
+          "panel_id": "PANEL_3",
+          "orientation_provenance": "SSOT_PANEL_NORMAL"
         },
         "panels": [
           {
             "panel_id": "PANEL_1",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ],
               [
-                2855.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                2855.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -3145.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              1.0
             ]
           },
           {
             "panel_id": "PANEL_2",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                2855.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                2855.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -3145.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_3",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -3145.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_4",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -3145.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              -1.0
             ]
           },
           {
             "panel_id": "PANEL_5",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -3145.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_6",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -3145.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_7",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                2855.0,
-                2073.417316492931,
-                -598.7358624294229
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                2855.0,
-                1772.1910897083062,
-                -76.99673172772589
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                205.81470608243666,
-                -76.99673211255539
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                -95.41152086132998,
-                -598.7358618812978
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                2855.0,
-                687.7766709107464,
-                -1955.25760201289
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                2855.0,
-                1290.229125639138,
-                -1955.2576012137936
+                6000.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              1.0,
+              0.0,
+              0.0
             ]
           },
           {
             "panel_id": "PANEL_8",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -3145.0,
-                2073.417316492931,
-                -598.7358624294229
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -3145.0,
-                1772.1910897083062,
-                -76.99673172772589
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -3145.0,
-                205.81470608243666,
-                -76.99673211255539
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -3145.0,
-                -95.41152086132998,
-                -598.7358618812978
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -3145.0,
-                687.7766709107464,
-                -1955.25760201289
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -3145.0,
-                1290.229125639138,
-                -1955.2576012137936
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              -1.0,
+              0.0,
+              0.0
             ]
           }
         ],
-        "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-        "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-        "antenna_or_ports_transformed": false
+        "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+        "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+        "antenna_or_ports_transformed": true
       },
       "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
       "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-      "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+      "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+      "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
     },
     {
       "project_file": "cst/projects/closed_network/isl/RFC_ISL_ORIGINAL.cst",
@@ -24718,7 +24944,7 @@
       "project_file": "cst/projects/closed_network/isl/RFC_INSTALLED_ISL_RX.cst",
       "source_project": "cst/projects/ISL_C4_CUP_R14P7.cst",
       "source_sha256": "cc8f7423355095249c833028522a8411f42f1934ed883a99e5acbebf39881ca4",
-      "project_sha256": "4904f9d0f1aeb1a1b350a8d21ac31a8865616a583581ad40d528b95b93349c7c",
+      "project_sha256": "4020d7f1f564cca87fff55b9e24769eefe87636dcc1a3f7f877414bd559e8c2f",
       "solver_started": false,
       "solver_status": "READY_NOT_SOLVED",
       "source_solids": {
@@ -24752,9 +24978,19 @@
         }
       },
       "antenna_geometry_preserved_by_native_clone": true,
-      "source_materials_and_volumes_unchanged": true,
+      "source_materials_preserved": true,
+      "rigid_solid_volume_relative_tolerance": 1e-05,
+      "solid_volume_relative_errors": {
+        "RECONSTRUCTION:ground_floor": 3.626139053296845e-07,
+        "RECONSTRUCTION:rim": 1.5542526808912218e-06,
+        "RECONSTRUCTION:patch": 3.626144532149251e-07,
+        "RECONSTRUCTION:probe1": 2.005253229020454e-07,
+        "RECONSTRUCTION:probe2": 1.7630341631047486e-13,
+        "RECONSTRUCTION:probe3": 2.005253229020454e-07,
+        "RECONSTRUCTION:probe4": 1.7685852782278744e-13
+      },
       "ports": 4,
-      "port_geometry_preserved_by_no_port_edit": true,
+      "port_relative_geometry_preserved_by_rigid_transform": true,
       "phases_deg": [
         0,
         -90,
@@ -24774,12 +25010,12 @@
       "solver": "HF Time Domain",
       "boundaries": "INHERITED_SOURCE_OPEN_ADD_SPACE",
       "mesh_line_counts": [
-        1858,
-        1091,
-        1122
+        1836,
+        1090,
+        1094
       ],
-      "mesh_cells": 2269049730,
-      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 270.491806268692,
+      "mesh_cells": 2184158295,
+      "mesh_memory_128bytes_per_cell_gib_lower_planning_estimate": 260.3719586133957,
       "mesh_convergence": "NOT_ESTABLISHED; closed network mesh/convergence check required",
       "installed_geometry": {
         "installation": {
@@ -24791,253 +25027,295 @@
           ],
           "nominal_R_BL": [
             [
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
               1.0,
               0.0,
               0.0
             ],
             [
               0.0,
-              -0.4999999999066592,
-              -0.866025403838329
-            ],
-            [
-              0.0,
-              0.866025403838329,
-              -0.4999999999066592
+              1.0,
+              0.0
             ]
           ],
           "mount_type": "FIXED",
-          "panel_id": "PANEL_3"
+          "panel_id": "PANEL_7",
+          "orientation_provenance": "OWNER_PLUS_X_END_FACE_OVERRIDE"
         },
         "panels": [
           {
             "panel_id": "PANEL_1",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                0.0,
+                783.188191,
+                800.0
               ],
               [
-                -375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -6375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                0.0,
+                -783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              1.0
             ]
           },
           {
             "panel_id": "PANEL_2",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -6375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                0.0,
+                -1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_3",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -6375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                0.0,
+                -301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              -0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_4",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -6375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                0.0,
+                301.226227,
+                -1078.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.0,
+              -1.0
             ]
           },
           {
             "panel_id": "PANEL_5",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -6375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                0.0,
+                1084.414419,
+                278.26087
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              -0.5
             ]
           },
           {
             "panel_id": "PANEL_6",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                6000.0,
+                783.188191,
+                800.0
               ],
               [
-                -6375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              0.0,
+              0.866025404,
+              0.5
             ]
           },
           {
             "panel_id": "PANEL_7",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                6000.0,
+                -783.188191,
+                800.0
               ],
               [
-                -375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                6000.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                6000.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                6000.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                6000.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                6000.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              1.0,
+              0.0,
+              0.0
             ]
           },
           {
             "panel_id": "PANEL_8",
-            "local_vertices_mm": [
+            "body_vertices_mm": [
               [
-                -6375.0,
-                1484.0648686429524,
-                -639.5242457418085
+                0.0,
+                -783.188191,
+                800.0
               ],
               [
-                -6375.0,
-                1182.8386418583273,
-                -117.78511504011149
+                0.0,
+                -1084.414419,
+                278.26087
               ],
               [
-                -6375.0,
-                -383.5377417675421,
-                -117.78511542494095
+                0.0,
+                -301.226227,
+                -1078.26087
               ],
               [
-                -6375.0,
-                -684.7639687113087,
-                -639.5242451936833
+                0.0,
+                301.226227,
+                -1078.26087
               ],
               [
-                -6375.0,
-                98.42422306076763,
-                -1996.0459853252753
+                0.0,
+                1084.414419,
+                278.26087
               ],
               [
-                -6375.0,
-                700.8766777891593,
-                -1996.0459845261792
+                0.0,
+                783.188191,
+                800.0
               ]
+            ],
+            "outward_normal_body": [
+              -1.0,
+              0.0,
+              0.0
             ]
           }
         ],
-        "global_solver_frame": "UNCHANGED_NATIVE_ANTENNA_CST_LOCAL",
-        "body_transform": "p_B=R_BL*p_L+installation_position_B; all eight whole panels; no crops",
-        "antenna_or_ports_transformed": false
+        "global_solver_frame": "SPACECRAFT_BODY_FIXED",
+        "body_transform": "Hull remains SSOT body coordinates; antenna and port endpoints p_B=R_BL*p_L+position_B",
+        "antenna_or_ports_transformed": true
       },
       "readiness_scope": "Project configuration / mesh only; no claim of excitation propagation/normalization/convergence before solve",
       "solver_selection_policy": "LICENSED_CST_RESOURCE_AND_PORT_COMPATIBILITY_REVIEW; NOT_FORCED_TIME_DOMAIN",
-      "preferred_solver_review": "IE_MLFMM_OR_HYBRID"
+      "preferred_solver_review": "IE_MLFMM_OR_HYBRID",
+      "orientation_update": "OWNER_FIXED_SPACECRAFT_BODY_FRAME; ISL_PANEL_7_PLUS_X"
     },
     {
       "project_file": "cst/projects/closed_network/isl/RFC_ISL_TX_ORIGINAL_SAR.cst",

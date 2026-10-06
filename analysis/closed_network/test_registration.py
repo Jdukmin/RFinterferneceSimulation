@@ -13,8 +13,11 @@ class RegistrationTests(unittest.TestCase):
   with (self.root/'docs/closed_network_cst_project_inventory.csv').open('w',newline='') as f:
    w=csv.DictWriter(f,fieldnames=list(self.row));w.writeheader();w.writerow(self.row)
   self.meta=dict(project_file=self.row['project_file'],status='SOLVED_ACCEPTED',gain_quantity='RealizedGain',gain_unit='dBi',convergence_accepted=True,
-   frame='CST_LOCAL_PRESERVED',monitors=[dict(frequency_ghz=f,normalization_reliable=True) for f in [1,2,3]])
+   frame='CST_LOCAL_PRESERVED',solver_frame='SPACECRAFT_BODY_FIXED',gain_cut_resampled_in_antenna_local_frame=True,
+   cut_direction_rotation_local_to_solver=[[1,0,0],[0,1,0],[0,0,1]],monitors=[dict(frequency_ghz=f,normalization_reliable=True) for f in [1,2,3]])
   self.save_meta()
+  evidence=(self.root/self.row['project_file']).with_suffix('.preflight.json');evidence.parent.mkdir(parents=True)
+  evidence.write_text(json.dumps(dict(installed_geometry=dict(installation=dict(nominal_R_BL=self.meta['cut_direction_rotation_local_to_solver'])))))
   owner=self.root/'output/codex/emission_inputs';owner.mkdir(parents=True)
   original=SCRIPT.parents[2]/'output/codex'
   shutil.copy2(original/'emission_inputs/latest_owner_policy.json',owner)
@@ -37,6 +40,10 @@ class RegistrationTests(unittest.TestCase):
   self.meta['monitors'][0]['normalization_reliable']=False;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_wrong_frequency_rejected(self):
   self.meta['monitors'][0]['frequency_ghz']=1.1;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
+ def test_body_cuts_without_local_resampling_rejected(self):
+  self.meta['gain_cut_resampled_in_antenna_local_frame']=False;self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
+ def test_wrong_cut_rotation_rejected(self):
+  self.meta['cut_direction_rotation_local_to_solver']=[[0,0,1],[1,0,0],[0,1,0]];self.save_meta();self.assertNotEqual(self.run_script().returncode,0)
  def test_nan_rejected(self):
   p=self.dataset/'f1.000000_XZ.csv';p.write_text(p.read_text().replace('0,-30.0','0,nan'))
   self.assertNotEqual(self.run_script().returncode,0)

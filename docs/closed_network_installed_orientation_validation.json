@@ -1,0 +1,380 @@
+{
+  "status": "PASS",
+  "installed_projects": 5,
+  "records": [
+    {
+      "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA1.cst",
+      "sha256": "feb97740ae90c95586140a1990428d21a1f40ef91e5dfc4c8642caa01a34e3be",
+      "installation": "GPSA_1",
+      "panel": "PANEL_3",
+      "position_body_mm": [
+        2045.0,
+        -265.0,
+        -1295.0
+      ],
+      "boresight_body": [
+        0.0,
+        -0.866025403838329,
+        -0.4999999999066592
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          -0.866025403838329
+        ],
+        [
+          0.0,
+          0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "hull_global_frame": "SPACECRAFT_BODY_FIXED",
+      "standalone_reopen": true,
+      "ports_body_mm": [
+        [
+          2080.0,
+          -265.0,
+          -1295.0,
+          2080.0,
+          -266.732050808,
+          -1296.0
+        ],
+        [
+          2045.0,
+          -282.499999997,
+          -1264.68911087,
+          2045.0,
+          -284.232050804,
+          -1265.68911087
+        ],
+        [
+          2010.0,
+          -265.0,
+          -1295.0,
+          2010.0,
+          -266.732050808,
+          -1296.0
+        ],
+        [
+          2045.0,
+          -247.500000003,
+          -1325.31088913,
+          2045.0,
+          -249.232050811,
+          -1326.31088913
+        ]
+      ],
+      "ports_relative_geometry_preserved": true,
+      "mesh_cells": 12324015,
+      "solid_volume_max_relative_error": 1.1075665948020885e-06,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/gps/RFC_INSTALLED_GPS_L1_GPSA2.cst",
+      "sha256": "1889b743e999777d356e8922d206e7276133fcdb7a28a54cd08fd8e9da2ca454",
+      "installation": "GPSA_2",
+      "panel": "PANEL_3",
+      "position_body_mm": [
+        3145.0,
+        -265.0,
+        -1295.0
+      ],
+      "boresight_body": [
+        0.0,
+        -0.866025403838329,
+        -0.4999999999066592
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          -0.866025403838329
+        ],
+        [
+          0.0,
+          0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "hull_global_frame": "SPACECRAFT_BODY_FIXED",
+      "standalone_reopen": true,
+      "ports_body_mm": [
+        [
+          3180.0,
+          -265.0,
+          -1295.0,
+          3180.0,
+          -266.732050808,
+          -1296.0
+        ],
+        [
+          3145.0,
+          -282.499999997,
+          -1264.68911087,
+          3145.0,
+          -284.232050804,
+          -1265.68911087
+        ],
+        [
+          3110.0,
+          -265.0,
+          -1295.0,
+          3110.0,
+          -266.732050808,
+          -1296.0
+        ],
+        [
+          3145.0,
+          -247.500000003,
+          -1325.31088913,
+          3145.0,
+          -249.232050811,
+          -1326.31088913
+        ]
+      ],
+      "ports_relative_geometry_preserved": true,
+      "mesh_cells": 12324015,
+      "solid_volume_max_relative_error": 1.1075665936238174e-06,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/isl/RFC_INSTALLED_ISL_RX.cst",
+      "sha256": "4020d7f1f564cca87fff55b9e24769eefe87636dcc1a3f7f877414bd559e8c2f",
+      "installation": "ISL",
+      "panel": "PANEL_7",
+      "position_body_mm": [
+        6375.0,
+        -595.0,
+        -805.0
+      ],
+      "boresight_body": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "local_to_body_rotation": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "hull_global_frame": "SPACECRAFT_BODY_FIXED",
+      "standalone_reopen": true,
+      "ports_body_mm": [
+        [
+          6375.0,
+          -592.635,
+          -805.0,
+          6375.394,
+          -592.635,
+          -805.0
+        ],
+        [
+          6375.0,
+          -595.0,
+          -802.635,
+          6375.394,
+          -595.0,
+          -802.635
+        ],
+        [
+          6375.0,
+          -597.365,
+          -805.0,
+          6375.394,
+          -597.365,
+          -805.0
+        ],
+        [
+          6375.0,
+          -595.0,
+          -807.365,
+          6375.394,
+          -595.0,
+          -807.365
+        ]
+      ],
+      "ports_relative_geometry_preserved": true,
+      "mesh_cells": 2184158295,
+      "solid_volume_max_relative_error": 1.5542526808912218e-06,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_NADIR.cst",
+      "sha256": "cb2d220e44f9525fed66b3594e8677075d8287f62ee6d70a53fd501a5ca2f750",
+      "installation": "SBA_NADIR",
+      "panel": "PANEL_6",
+      "position_body_mm": [
+        255.0,
+        870.0,
+        1030.0
+      ],
+      "boresight_body": [
+        0.0,
+        0.866025403838329,
+        0.4999999999066592
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4999999999066592,
+          0.866025403838329
+        ],
+        [
+          0.0,
+          -0.866025403838329,
+          0.4999999999066592
+        ]
+      ],
+      "hull_global_frame": "SPACECRAFT_BODY_FIXED",
+      "standalone_reopen": true,
+      "ports_body_mm": [
+        [
+          264.0,
+          870.0,
+          1030.0,
+          264.0,
+          871.039230485,
+          1030.6
+        ],
+        [
+          255.0,
+          874.499999999,
+          1022.20577137,
+          255.0,
+          875.539230484,
+          1022.80577137
+        ],
+        [
+          246.0,
+          870.0,
+          1030.0,
+          246.0,
+          871.039230485,
+          1030.6
+        ],
+        [
+          255.0,
+          865.500000001,
+          1037.79422863,
+          255.0,
+          866.539230485,
+          1038.39422863
+        ]
+      ],
+      "ports_relative_geometry_preserved": true,
+      "mesh_cells": 55697382,
+      "solid_volume_max_relative_error": 2.49037156215746e-06,
+      "solver_started": false
+    },
+    {
+      "project_file": "cst/projects/closed_network/sba/RFC_INSTALLED_SBA_TM_ZENITH.cst",
+      "sha256": "d3892098ec8778245a665d51a38cb4ceb04eec2a20475a48e14ce3d0650db567",
+      "installation": "SBA_ZENITH",
+      "panel": "PANEL_4",
+      "position_body_mm": [
+        255.0,
+        -530.0,
+        -1240.0
+      ],
+      "boresight_body": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "hull_global_frame": "SPACECRAFT_BODY_FIXED",
+      "standalone_reopen": true,
+      "ports_body_mm": [
+        [
+          264.0,
+          -530.0,
+          -1240.0,
+          264.0,
+          -530.0,
+          -1241.2
+        ],
+        [
+          255.0,
+          -539.0,
+          -1240.0,
+          255.0,
+          -539.0,
+          -1241.2
+        ],
+        [
+          246.0,
+          -530.0,
+          -1240.0,
+          246.0,
+          -530.0,
+          -1241.2
+        ],
+        [
+          255.0,
+          -521.0,
+          -1240.0,
+          255.0,
+          -521.0,
+          -1241.2
+        ]
+      ],
+      "ports_relative_geometry_preserved": true,
+      "mesh_cells": 55522584,
+      "solid_volume_max_relative_error": 1.2691487515513392e-06,
+      "solver_started": false
+    }
+  ],
+  "unchanged_original_kaa_and_common_source_binaries": 18,
+  "export_roundtrip_directions_checked": 3600,
+  "body_hull_vertices_unchanged": true,
+  "port_number_impedance_phase_and_endpoint_order_preserved": true,
+  "shared_installation_csv_changed": false,
+  "isl_override_provenance": "OWNER_REQUEST_PLUS_X_END_FACE; PANEL_7; LOCAL_X_TO_BODY_Y_ROLL",
+  "port_impedance_source": "Existing source Port.GetLineImpedance(port,1); same SParameter type / voltage=1 / current=1 / monitor=False as source generator",
+  "rigid_cad_volume_audit_note": "CST volume estimator changes at ppm level after rigid translation/rotation; accepted relative tolerance 1e-5, actual maximum <2.5e-6. No dimensions tuned.",
+  "solver_started": false
+}

@@ -8,6 +8,10 @@ for r in rows:
  if not provenance.is_file():continue
  meta=json.loads(provenance.read_text());assert meta['status']=='SOLVED_ACCEPTED' and meta['gain_quantity']=='RealizedGain' and meta['gain_unit']=='dBi' and meta['convergence_accepted']
  assert meta['project_file']==r['project_file'] and meta['frame']=='CST_LOCAL_PRESERVED'
+ if r['configuration']=='INSTALLED':
+  evidence=json.loads((ROOT/r['project_file']).with_suffix('.preflight.json').read_text())
+  assert meta['solver_frame']=='SPACECRAFT_BODY_FIXED' and meta['gain_cut_resampled_in_antenna_local_frame']
+  assert meta['cut_direction_rotation_local_to_solver']==evidence['installed_geometry']['installation']['nominal_R_BL']
  assert sorted(float(m['frequency_ghz']) for m in meta['monitors'])==sorted(float(r[k]) for k in ['f_low_ghz','f_center_ghz','f_high_ghz'])
  assert all(m['normalization_reliable'] for m in meta['monitors'])
  imported=folder/'registered';imported.mkdir(exist_ok=True)

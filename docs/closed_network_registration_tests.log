@@ -1,9 +1,11 @@
 test_accepted_dataset_and_raw_unchanged (__main__.RegistrationTests.test_accepted_dataset_and_raw_unchanged) ... ok
+test_body_cuts_without_local_resampling_rejected (__main__.RegistrationTests.test_body_cuts_without_local_resampling_rejected) ... ok
 test_nan_rejected (__main__.RegistrationTests.test_nan_rejected) ... ok
 test_unreliable_normalization_rejected (__main__.RegistrationTests.test_unreliable_normalization_rejected) ... ok
+test_wrong_cut_rotation_rejected (__main__.RegistrationTests.test_wrong_cut_rotation_rejected) ... ok
 test_wrong_frequency_rejected (__main__.RegistrationTests.test_wrong_frequency_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.346s
+Ran 6 tests in 0.562s
 
 OK

@@ -1,5 +1,9 @@
 # 폐쇄망 MATLAB RFI 실행 매뉴얼
 
+Installed CST 형상에서는 spacecraft body 좌표가 고정되고 안테나와 port가 회전·이동된다. ISL은 Owner 지정 +X 끝면(PANEL_7)이며 closed-network geometry manifest의 `nominal_R_BL`이 이 결정을 반영한다. 기존 shared installation CSV를 덮어쓰지 않는다. Original 및 KAA 프로젝트는 계속 native +Z다.
+
+`export_closed_network_patterns.py`는 Installed far-field를 `d_body=R_BL*d_local` 방향에서 샘플링하여 local XZ/YZ gain CSV를 만든다. 등록기는 `solver_frame=SPACECRAFT_BODY_FIXED`, `gain_cut_resampled_in_antenna_local_frame=true` 및 preflight와 같은 rotation matrix를 확인한다. 잘못된 global XZ/YZ cut을 local cut처럼 등록하지 않는다. `cn_load_pattern`은 이 local gain cut을 기존 antenna +X boresight 규약으로 변환하고, RFI driver는 `nominal_R_BL`을 한 번만 적용한다. 안테나 방향 회전을 중복 적용하지 않는다.
+
 **22개 CST 분석 프로젝트와 기존 SAR engineering baseline으로 10개 pair를 실행하는 절차를 준비했다.** Original/Installed와 KAA Feed/Reflector 조합은 67개다. SAR에는 Installed CST가 없으므로 하나의 동일 engineering receive baseline을 사용한다. 실제 CST export는 아직 없으며 실제 위성 RFI 수치를 계산하지 않았다.
 
 ## STEP 1 — RAW 복사

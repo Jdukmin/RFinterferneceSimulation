@@ -64,7 +64,18 @@ Fe=151.111258 mm, θf=40°, secondary/obstruction diameter=44 mm는 기존 `cst/
 
 `SimplifiedSpacecraftBuilder`가 구조물 instance로 생성하는 것은 panels.csv의 SIDE 6개와 END_CAP 2개다. 8개 모두 포함했으며 정의된 구조물의 삭제/crop은 없다. Antenna installation/steering table은 좌표 metadata다. Generic `StructureType.SOLAR_ARRAY/PAYLOAD/...` enum이 존재한다는 사실은 실제 geometry instance가 있다는 뜻이 아니다. Standalone antenna library geometry도 released spacecraft assembly CAD와 구분한다. Passive antenna bodies, solar arrays, payload bodies, brackets, cables, gimbal hardware는 현재 SSOT assembly에 정의되지 않았다. 실제 위성에 없다는 뜻이 아니다.
 
-Active installed antenna/ports의 native local frame을 보존하고 전체 bus hull을 rigid transform으로 옮겼다. `p_B=R_BL*p_L+installation_position_B`의 roundtrip으로 실제 SSOT 설치 위치/방향을 확인했다. Native component label `FULL_SPACECRAFT`는 역사적 container 이름이며 CAD fidelity 표현이 아니다.
+Installed 프로젝트의 global frame은 spacecraft body 좌표계다. 8개 bus panel은 SSOT 좌표에 고정하고, 안테나 및 discrete port의 양 끝점을 `p_B=R_BL*p_L+installation_position_B`로 함께 회전·이동한다. 형상·재료·port 번호/임피던스·상대 위치·위상은 보존한다. Original 및 KAA feed/reflector 프로젝트는 기존 로컬 +Z 형상을 유지한다. ISL은 Owner 결정에 따라 +X 끝면 PANEL_7을 사용한다. 설치 좌표는 변경하지 않으며 실제 mount/bracket 접촉 형상은 제공되지 않았다. Native component label `FULL_SPACECRAFT`는 역사적 container 이름이며 CAD fidelity 표현이 아니다.
+
+| Installed identity | 설치 면 | Body boresight | Native +X가 향하는 body 축 |
+|---|---|---|---|
+| SBA_NADIR | PANEL_6 | (0, +0.8660254, +0.5) | +X |
+| SBA_ZENITH | PANEL_4 | (0, 0, −1) | +X |
+| GPSA_1 / GPSA_2 | PANEL_3 | (0, −0.8660254, −0.5) | +X |
+| ISL | PANEL_7 | (+1, 0, 0) | +Y |
+
+CST 화면의 global XYZ는 모든 Installed 프로젝트에서 같은 spacecraft 축이다. `cst/realign_closed_network_installed.py`가 fixed-body Installed 파일을 준비한다. ISL roll은 native X→body Y, native Y→body Z, native Z→body X로 정의하여 quadrature handedness를 유지한다.
+
+Installed 결과를 GUI에서 global XZ/YZ로만 export하면 기존 MATLAB loader의 안테나 로컬 cut과 일치하지 않는다. 기본 export script는 로컬 XZ/YZ 각 방향을 `R_BL`로 body 방향에 변환해 far-field를 샘플링하고, CSV의 theta는 안테나 로컬 각도로 기록한다. 따라서 gain CSV는 기존 local +Z 규약을 유지하며 MATLAB에서 설치 회전을 한 번만 적용한다. 복소 Eθ/Eφ는 샘플링 위치의 solver-global spherical basis 값으로 별도 기록한다. Full 3D global 결과는 RAW로 따로 보존하고 gain cut과 좌표계를 혼합하지 않는다. GUI export를 사용할 경우 같은 local frame resampling을 검증해야 한다.
 
 ## E. 폐쇄망 실행 순서
 
@@ -78,7 +89,7 @@ Project open → native geometry/material/port와 phase 확인 → range/monitor
 
 ## F. Solver 선택과 자원 검토
 
-저장된 native default는 HF Time Domain이다. **이 default를 모든 case의 강제 선택으로 사용하지 않는다.** 특히 ISL Installed의 기존 hex plan은 2,269,049,730 cells이므로 그대로 Start를 누르지 않는다. 128 bytes/cell의 단순 계획식만으로도 약 270.5 GiB이며 실제 CST RAM 보증값이 아니다.
+저장된 native default는 HF Time Domain이다. **이 default를 모든 case의 강제 선택으로 사용하지 않는다.** ISL Installed를 body 좌표계로 재정렬한 후 hex plan은 2,184,158,295 cells다. 그대로 Start를 누르지 않는다. 128 bytes/cell의 단순 계획식만으로도 약 260.4 GiB이며 실제 CST RAM 보증값이 아니다.
 
 [공식 CST solver 설명](https://www.3ds.com/products/simulia/cst-studio-suite/electromagnetic-simulation-solvers)은 IE의 MoM/MLFMM 및 TD/FD/IE/Asymptotic Hybrid 연계를 설명한다. [공식 system modeling 설명](https://www.3ds.com/products/simulia/cst-studio-suite/electromagnetic-systems-modeling)은 feed far-field source와 reflector IE/Asymptotic 연계를 설명한다. 폐쇄망 정식 라이선스에서 다음 순서로 결정한다.
 
