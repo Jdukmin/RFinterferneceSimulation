@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "freeze_sha": "8469e8903da83b6ebed014aae311f90855c31715",
+  "supplement_start_head": "99b96a339b68a4a1fa28ad7bd067914ab88caf48",
+  "supplement_branch": "codex/rfi-emission-8469e89",
+  "initial_tracked_worktree_clean": true,
+  "initial_worktree_status": "?? output/codex/standards/",
+  "source_psd_dbm_hz": -49.020599913279625,
+  "rescaling_db": -10,
+  "effective_source_dbm_hz": -59.020599913279625,
+  "owner_approximate_source_dbm_hz": -58,
+  "computed_minus_owner_approximate_db": -1.020599913279625,
+  "engineering_primary_pair_count": 16,
+  "lband_pair_count": 24,
+  "lband_scenario_count": 120,
+  "confidence": "ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling",
+  "mismatch_provenance_class": "OWNER_ENGINEERING_BOUND",
+  "unreliable_cst_absolute_gain_used": false,
+  "l1_extra_rescaling_applied": false,
+  "l1_regression_max_delta_db": 0,
+  "shared_freeze_hashes_unchanged": true,
+  "cst_or_octave_rerun": false,
+  "band_worst": [
+    {
+      "victim_band": "L1",
+      "itu_unwanted_source_psd_dbm_hz": -49.020599913279625,
+      "coupling_db": -80.9785683479,
+      "effective_tx_lband_source_dbm_hz": -49.020599913279625,
+      "derived_eirp_psd_dbm_hz": -60.32708859267962,
+      "psd_victim_0db_dbm_hz": -129.99916826117962,
+      "margin_0db_db": -48.00083173882038,
+      "required_additional_suppression_db": 48.00083173882038,
+      "first_passing_scenario": "FILTER_60DB",
+      "confidence": "SIMULATED"
+    },
+    {
+      "victim_band": "L2",
+      "itu_unwanted_source_psd_dbm_hz": -49.020599913279625,
+      "coupling_db": -47.785796742980565,
+      "effective_tx_lband_source_dbm_hz": -59.020599913279625,
+      "derived_eirp_psd_dbm_hz": -49.98970004336019,
+      "psd_victim_0db_dbm_hz": -96.80639665626019,
+      "margin_0db_db": -81.19360334373981,
+      "required_additional_suppression_db": 81.19360334373981,
+      "first_passing_scenario": "ABOVE_80DB_SEPARATE_DESIGN",
+      "confidence": "ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling"
+    },
+    {
+      "victim_band": "L5",
+      "itu_unwanted_source_psd_dbm_hz": -49.020599913279625,
+      "coupling_db": -47.36595916218056,
+      "effective_tx_lband_source_dbm_hz": -59.020599913279625,
+      "derived_eirp_psd_dbm_hz": -49.98970004336019,
+      "psd_victim_0db_dbm_hz": -96.38655907546018,
+      "margin_0db_db": -81.61344092453982,
+      "required_additional_suppression_db": 81.61344092453982,
+      "first_passing_scenario": "ABOVE_80DB_SEPARATE_DESIGN",
+      "confidence": "ENGINEERING_BOUND — L1-referenced 10 dB port-mismatch rescaling"
+    }
+  ],
+  "checks": [
+    "owner policy exact -10 dB and L2/L5-only scope",
+    "regulatory source unchanged and -59.0206 arithmetic",
+    "engineering EIRP excludes duplicate mismatch",
+    "unrescaled envelope-to-owner route delta exactly -10 dB",
+    "all L1 original source/coupling/port values unchanged",
+    "unreliable CST gains excluded",
+    "all pair source/coupling/margin/required identities",
+    "all five scenario signs and first PASS",
+    "all shared freeze hashes"
+  ]
+}

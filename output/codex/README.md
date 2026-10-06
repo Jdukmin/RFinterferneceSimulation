@@ -1,4 +1,28 @@
+<!-- latest-owner-primary -->
+
+현재 primary는 [결과보고서](결과보고서.md), [전체 pair](all_pair_required_suppression.csv), [Ka 요구량](ka_cutoff_pair_requirements.csv), [S→SAR 결과](stc_sar_spurious_results.csv), [최신 검증](latest_owner_validation.json)이다. WR-42 50 mm, SAR peak52/rear+2/NF4/−176 및 L2/L5 rescaling-only 정책을 적용한다. `python output/codex/complete_suppression_design.py`는 과거 Task1/2를 재생성한 뒤 최신 정책을 마지막으로 적용한다. 아래의 과거 unknown·zero-credit·행 개수·분석 scope와 task1/task2 validation은 당시 입력의 역사적 기록이다. 최신 full suite는 `python output/codex/run_latest_owner_tests.py`로 실행하며 공유 src/data/tests를 수정하지 않는다.
+
 # Octave RFI 결과와 재현
+
+최신 primary는 Task 2 scope다. **Attacker: S-TC TX / Ka DLS TX; victim-only: ISL / SAR.** [보고서](결과보고서.md), [현재 primary pair](all_pair_required_suppression.csv), [현재 scenario](design_filter_scenarios.csv), [Task 2 검증](task2_validation.json)을 먼저 읽는다. `complete_suppression_design.py`는 Task 1 재현 후 `task2_scope_analysis.py`를 자동 호출한다. 아래 inclusive Task 1 분석은 [legacy_task1](legacy_task1/all_pair_required_suppression.csv)에 보존했으며 ISL attacker와 KAA low-frequency gain envelope는 primary가 아니다.
+
+SAR는 [Owner anchors](sar_owner_pattern_anchors.csv), [engineering envelope](sar_reference_envelope.csv), [그림](sar_reference_envelope.png)으로 제공한다. MAT이나 원본 1601-point vector를 사용하지 않았다. Absolute gain은 미확정이며 reconstruction은 normalized cuts다. WR-42는 owner 후속 입력으로 선택했으며 effective length는 미확정이다. Ka PSD는 기존 ITU 60 dBc/4 kHz envelope + owner31dBi reference이며 actual cutoff attenuation credit은 0 dB로 보류한다. [dB/mm](ka_cutoff_band_results.csv), [길이 요구식](ka_cutoff_pair_requirements.csv)에 확정 가능 범위를 분리했다.
+
+Task 1에서 S-TC TX → GPS L2/L5 primary는 `PORT_MISMATCH_RESCALED_LBAND` engineering route로 전환했다. [Owner 정책](emission_inputs/owner_port_mismatch_policy.json)의 −10 dB만 적용하며, ITU −49.0206 dBm/Hz에서 effective source는 −59.0206 dBm/Hz다. 기존 accepted-power gain envelope 9.03 dBi와 정상 GPS receive RealizedGain을 결합한다. L1에는 추가 mismatch 감쇠를 넣지 않는다.
+
+[Task 1 요약](task1_lband_summary.csv), [설치/case별 24개 경로](task1_lband_pair_results.csv), [120개 filter scenario](task1_lband_filter_scenarios.csv), [원본 CST normalization 근거](task1_cst_normalization_evidence.csv), [검증](task1_validation.json)을 참조한다. `victim_band_scenarios.csv`의 이전 UNKNOWN과 `conditional_bound_required_suppression.csv`의 mismatch 미적용 결과는 과거 분석/sensitivity로 유지하며, 최신 primary 결과는 `all_pair_required_suppression.csv`다.
+
+최신 설계 결과는 [결과보고서.md](결과보고서.md)와 [main_design_results.csv](main_design_results.csv)다. 실제 역할은 **S-TC TX**(`S_TM_TX`), **S-TM RX**(`S_TC_RX`)로 표시하고, legacy ID는 조회 키로 유지한다. 이전 `source_set=PRIMARY`는 ECSS/ITU 혼합 분석이며, 최신 설계 보완은 모든 TX에 ITU RR Appendix 3 / SM.329 source를 적용한 별도 결과다.
+
+기존 독립 coupling 결과에서 추가 억제 요구만 재현하려면 `python output/codex/complete_suppression_design.py`를 실행한다. CST/Octave 재실행 없이 168개 primary pair, 76개 조건부 bound, 1,220개 filter scenario를 만든다. [all_pair_required_suppression.csv](all_pair_required_suppression.csv)에 primary의 미판정 사유를 남기고 [conditional_bound_required_suppression.csv](conditional_bound_required_suppression.csv)는 조건부 가정을 별도로 보존한다. 전체 분석의 마지막 `summarize_emission_analysis.py`도 이 보완 단계를 자동으로 호출한다.
+
+## 현재 독립 규격 분석
+
+현재 [결과보고서.md](결과보고서.md)는 freeze `8469e8903da83b6ebed014aae311f90855c31715`에서 독립 수행한 규격 기반 victim-band PSD 보고서다. [emission_inputs/tx_emission_masks.csv](emission_inputs/tx_emission_masks.csv)가 worker 독립 source 입력이며 공유 `data/`를 변경하지 않았다. 보고서 작성은 [공통 guide](../../docs/REPORTING_GUIDE.md)를 따른다.
+
+재현 순서: freeze worktree에서 `python output/codex/prepare_emission_analysis.py`, Octave에서 `addpath('tests'); addpath('output/codex'); run_emission_analysis;`, 이후 `python output/codex/summarize_emission_analysis.py`. 준비 스크립트는 HEAD가 freeze와 정확히 같은지 검사한다. 완료 commit에서 재현할 때에는 freeze에서 별도 worktree를 만들고 이 worker의 driver·보고서 정리 script·source 준비 파일·규격 evidence CSV만 복사한다. 규격 PDF는 `standards/` 임시 작업 폴더에서 조사했으며 최종 근거는 [standard_source_evidence.csv](standard_source_evidence.csv)의 공식 URL/hash다. 정리 스크립트는 PDF가 없으면 기존 evidence CSV를 유지한다.
+
+기존 `run_rfi_octave.m`·`build_report.py` 및 아래 절차는 **과거 기본파/blocker 분석**이다. 이번 victim-band 분석 재현이나 최신 결과보고서 생성에 사용하지 않는다. 기존 CSV·로그는 secondary 근거로 보존했다.
 
 보고서 생성/수정 시 [공통 reporting guide](../../docs/REPORTING_GUIDE.md)를 반드시 따른다. 현재 결과보고서는 기존 산출물을 유지한 가독성 개정본이다. 기존 `build_report.py` 템플릿은 개정 전 구조이므로 재사용 전에 guide에 맞게 수정해야 한다. 이 스크립트는 검증·snapshot·manifest도 갱신하므로 문서 편집만을 위해 실행하지 않는다.
 

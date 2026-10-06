@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "freeze_shared_hashes_unchanged": true,
+  "primary_pair_rows": 168,
+  "conditional_bound_pair_rows": 76,
+  "scenario_rows": 1220,
+  "itu_regression_required_db": {
+    "L1": 48.00083173882038,
+    "S_TC": 58.88653590672037,
+    "ISL": 39.240968602720386
+  },
+  "regression_max_delta_db": 0,
+  "actual_roles_applied": true,
+  "legacy_ids_unchanged": true,
+  "bounds": "Ka remains conditional / primary unknown; S-TC L2/L5 primary uses owner mismatch engineering route",
+  "new_cst_simulation_run": false,
+  "owner_engineering_primary_rows": 16
+}

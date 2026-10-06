@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "start_head": "16dde560b192841656f6d65e91d849e46c323d2f",
+  "branch": "codex/rfi-emission-8469e89",
+  "initial_tracked_worktree_clean": true,
+  "initial_untracked": [
+    "output/codex/standards/"
+  ],
+  "freeze_sha": "8469e8903da83b6ebed014aae311f90855c31715",
+  "shared_freeze_hashes_unchanged": true,
+  "primary_pair_count": 144,
+  "scenario_count": 720,
+  "additional_cst_run": false,
+  "full_wave_validated": false,
+  "unreliable_absolute_gain_used": false,
+  "normalized_shape_used_in_primary": false,
+  "sar_victim_primary_active": true,
+  "sar_primary_pair_count": 24,
+  "sar_latest_peak_gain_dbi": 52,
+  "sar_rear_gain_dbi": 2,
+  "sar_allowable_dbm_hz": -176,
+  "cutoff_and_gain_applied_once": true,
+  "l1_realized_gain_no_extra_mismatch": true,
+  "tests": [
+    "unchanged L1/S-TM/ISL regression",
+    "ITU4kHz and total EIRP separation",
+    "50mm TE10 attenuation and gain counted once",
+    "all pair source/PSD/margin/required/first PASS identities",
+    "five scenario signs",
+    "unreliable gain offset cancels in shape sensitivity",
+    "SAR harmonic/generic separation",
+    "actual roles and excluded attackers",
+    "shared freeze hashes unchanged"
+  ],
+  "full_suite": {
+    "exit_code": 0,
+    "passed": 1588,
+    "failed": 0,
+    "total": 1588,
+    "runtime_version": "GNU Octave 9.2.0",
+    "runner": "tests/run_all_tests.m unchanged",
+    "copy_compatibility": "Git cp.exe on process PATH; standard Octave copyfile selects cp instead of Windows xcopy",
+    "shared_files_modified": false,
+    "additional_cst_run": false,
+    "initial_attempt": "1480 passed; 3 file-copy runtime errors; latest_owner_full_tests_initial.log preserves evidence"
+  }
+}

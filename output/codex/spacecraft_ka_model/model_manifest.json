@@ -1,0 +1,437 @@
+{
+  "status": "CST_GEOMETRY_BUILD_VERIFIED_NO_MESH_NO_SOLVE",
+  "units": "mm",
+  "project": "C:\\Users\\ykyk1\\source\\repos\\RFInterferenceSimulation\\cst\\projects\\SPACECRAFT_KA_MODEL_ONLY_V2.cst",
+  "body_x_extent_mm": [
+    0.0,
+    6000.0
+  ],
+  "body_faces": [
+    {
+      "name": "PANEL_1",
+      "body_points_mm": [
+        [
+          0.0,
+          783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_2",
+      "body_points_mm": [
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_3",
+      "body_points_mm": [
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_4",
+      "body_points_mm": [
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_5",
+      "body_points_mm": [
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_6",
+      "body_points_mm": [
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_7",
+      "body_points_mm": [
+        [
+          6000.0,
+          -783.188191,
+          800.0
+        ],
+        [
+          6000.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          6000.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          6000.0,
+          783.188191,
+          800.0
+        ]
+      ]
+    },
+    {
+      "name": "PANEL_8",
+      "body_points_mm": [
+        [
+          0.0,
+          783.188191,
+          800.0
+        ],
+        [
+          0.0,
+          1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          -301.226227,
+          -1078.26087
+        ],
+        [
+          0.0,
+          -1084.414419,
+          278.26087
+        ],
+        [
+          0.0,
+          -783.188191,
+          800.0
+        ]
+      ]
+    }
+  ],
+  "reflectors": [
+    {
+      "name": "KAA_1",
+      "reference_mm": [
+        5965.0,
+        -1100.0,
+        850.0
+      ],
+      "reference_is_assumed_vertex": true,
+      "panel": "PANEL_1",
+      "boresight_body": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "diameter_mm": 220.0,
+      "equivalent_focal_length_mm": 151.11125807000423,
+      "rim_depth_mm": 20.018362884641128,
+      "optical_focus_reference_mm": [
+        5965.0,
+        -1100.0,
+        1001.1112580700042
+      ],
+      "geometry_status": "EQUIVALENT_PARABOLOID_NOT_ACTUAL_CASSEGRAIN",
+      "source": "data/Kaband_KAA_CST/ka_final_validation.json"
+    },
+    {
+      "name": "KAA_2",
+      "reference_mm": [
+        5965.0,
+        1285.0,
+        530.0
+      ],
+      "reference_is_assumed_vertex": true,
+      "panel": "PANEL_5",
+      "boresight_body": [
+        0.0,
+        0.866025403838329,
+        -0.4999999999066592
+      ],
+      "local_to_body_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.4999999999066592,
+          0.866025403838329
+        ],
+        [
+          0.0,
+          -0.866025403838329,
+          -0.4999999999066592
+        ]
+      ],
+      "diameter_mm": 220.0,
+      "equivalent_focal_length_mm": 151.11125807000423,
+      "rim_depth_mm": 20.018362884641128,
+      "optical_focus_reference_mm": [
+        5965.0,
+        1415.8661882945935,
+        454.4443709791027
+      ],
+      "geometry_status": "EQUIVALENT_PARABOLOID_NOT_ACTUAL_CASSEGRAIN",
+      "source": "data/Kaband_KAA_CST/ka_final_validation.json"
+    }
+  ],
+  "installation_references": [
+    {
+      "antenna_id": "SBA_NADIR",
+      "x_mm": "255",
+      "y_mm": "870",
+      "z_mm": "1030",
+      "panel_id": "PANEL_6",
+      "mount_type": "FIXED",
+      "assignment_provenance": "INFERRED_FROM_SIMPLIFIED_GEOMETRY",
+      "pattern_status": "CASE_DEPENDENT",
+      "pattern_dataset": "data/Sband_TMTC",
+      "note": "near the V56/V61 corner; SBA1 and SBA4 analysed as separate cases"
+    },
+    {
+      "antenna_id": "SBA_ZENITH",
+      "x_mm": "255",
+      "y_mm": "-530",
+      "z_mm": "-1240",
+      "panel_id": "PANEL_4",
+      "mount_type": "FIXED",
+      "assignment_provenance": "INFERRED_FROM_SIMPLIFIED_GEOMETRY",
+      "pattern_status": "CASE_DEPENDENT",
+      "pattern_dataset": "data/Sband_TMTC",
+      "note": "near the V34 corner; SBA1 and SBA4 analysed as separate cases"
+    },
+    {
+      "antenna_id": "GPSA_1",
+      "x_mm": "2045",
+      "y_mm": "-265",
+      "z_mm": "-1295",
+      "panel_id": "PANEL_3",
+      "mount_type": "FIXED",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "CASE_DEPENDENT",
+      "pattern_dataset": "data/Lband_GPS",
+      "note": "same Y/Z as GPSA_2; L1/L2/L5 analysed as separate cases"
+    },
+    {
+      "antenna_id": "GPSA_2",
+      "x_mm": "3145",
+      "y_mm": "-265",
+      "z_mm": "-1295",
+      "panel_id": "PANEL_3",
+      "mount_type": "FIXED",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "CASE_DEPENDENT",
+      "pattern_dataset": "data/Lband_GPS",
+      "note": "same Y/Z as GPSA_1; L1/L2/L5 analysed as separate cases"
+    },
+    {
+      "antenna_id": "KAA_1",
+      "x_mm": "5965",
+      "y_mm": "-1100",
+      "z_mm": "850",
+      "panel_id": "PANEL_1",
+      "mount_type": "GIMBAL",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "BOUND",
+      "pattern_dataset": "data/Kaband_KAA_CST",
+      "note": "gimbal-steered; CST feed + reflector surrogate; see steering_constraints.csv"
+    },
+    {
+      "antenna_id": "KAA_2",
+      "x_mm": "5965",
+      "y_mm": "1285",
+      "z_mm": "530",
+      "panel_id": "PANEL_5",
+      "mount_type": "GIMBAL",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "BOUND",
+      "pattern_dataset": "data/Kaband_KAA_CST",
+      "note": "gimbal-steered; CST feed + reflector surrogate; see steering_constraints.csv"
+    },
+    {
+      "antenna_id": "ISL",
+      "x_mm": "6375",
+      "y_mm": "-595",
+      "z_mm": "-805",
+      "panel_id": "PANEL_3",
+      "mount_type": "FIXED",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "BOUND",
+      "pattern_dataset": "data/Xband_ISL",
+      "note": "X beyond the end cap is an intentional protrusion; CST ISL_C4_CUP_R14P7"
+    },
+    {
+      "antenna_id": "SAR_ANT",
+      "x_mm": "3250",
+      "y_mm": "0",
+      "z_mm": "800",
+      "panel_id": "PANEL_1",
+      "mount_type": "FIXED",
+      "assignment_provenance": "SOURCE_EXPLICIT",
+      "pattern_status": "DEFERRED_CLOSED_NETWORK",
+      "pattern_dataset": "",
+      "note": "lies exactly on the Panel #1 supporting plane; RF analysis later in the closed network"
+    }
+  ],
+  "expected_pec_shapes": 10,
+  "em_ports": 0,
+  "mesh_generated": false,
+  "solver_started": false,
+  "material": "ideal PEC sheets; actual materials/thickness not supplied",
+  "stl_units": "mm (STL itself has no unit field)",
+  "stl_is_cad_tessellation_not_em_mesh": true,
+  "limitations": [
+    "Ka vertex mapped to installation reference is an explicit geometry assumption",
+    "Focal length is an equivalent optical model, not actual product height",
+    "44 mm subreflector value is blockage in aperture integration; no actual hyperboloid/feed/strut/hinge dimensions supplied",
+    "Other antennas are reference positions in metadata, not imported radiating solids or ports",
+    "No solar arrays/radomes/brackets/cables/material loss/thermal distortion supplied"
+  ],
+  "source_hashes": {
+    "hull_cross_section.csv": "85d20353ce4a2e88bc8dcc783105d3178a2233425289488e578f0a59ac37be9d",
+    "hull_parameters.csv": "66dc307e9439632e50be8a5ad728593a4146d9d4efa3824ae1c8d0639020b5d3",
+    "panels.csv": "1313e1e2494767da8fb4e6031a4bc4b788216757c6ce07240f9d4432771fe77a",
+    "antenna_installations.csv": "967016a7a0efdba5d4a8f86f49b5a49ca5123d807cafa6e7d2f0dfcd2ad58c6f",
+    "steering_constraints.csv": "dd29d50de2c5cdd5b9e72cf8cfff8efd9672aae20a2a31af427e963e53c7e69a"
+  },
+  "actual_pec_shapes": 10
+}
