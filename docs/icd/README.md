@@ -20,6 +20,7 @@ Where a value is a *canonical decision*, it is fixed here and must not be silent
 | [`spacecraft_geometry.md`](spacecraft_geometry.md) | **[Phase 5]** structure geometry, ray/segment intersection, antenna-to-structure FOV, LOS blockage |
 | [`installed_environment.md`](installed_environment.md) | **[Phase 5]** free-space vs installed pattern selection, comparison, config association, fallback |
 | [`mission_spacecraft.md`](mission_spacecraft.md) | **[Phase 7]** simplified spacecraft hull dataset, `ConvexPolygonGeometry` end caps, antenna installation registry, KAA gimbal steering domain |
+| [`cal_cst_3d.md`](cal_cst_3d.md) | **[CAL]** native full-sphere CST ASCII ingestion (`data/cal`), grid validation, CST-frame binding, installed figures, `main('--cal')` RFI |
 
 ## Canonical Units (fixed — see `data_requirements.md` DR-001)
 

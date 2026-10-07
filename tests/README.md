@@ -95,3 +95,11 @@ assertions of Phases 1–6 unchanged, plus 25 (`test_convex_polygon`), 264
 (`test_simplified_spacecraft`) and 225 (`test_mission_cases`). Earlier: 579 assertions / 35 files (Phases 1–5) and 628 / 36 files
 (Phase 6) under Octave 8.4. MATLAB is not available in this environment; MATLAB execution is not
 claimed.
+
+**CAL (native full-sphere CST ASCII, `src/+rfscreen/+cal`):**
+| File | Covers |
+|------|--------|
+| `test_cal_cst_ingestion` | parser (header text/broken/none, separator, spaces/tabs/CRLF, shuffled rows, column position, malformed/truncated rows, NaN, duplicate, missing sample/plane, range, step detection, phi=360 alias, pole consolidation); CST θ=0 → +X_A → az/el 0; free-space frame map; installed panel-normal alignment (GPSA_1/2, SBA_NADIR/ZENITH); XZ φ0/180 & YZ φ90/270 cuts; body cuts query the transformed 3D pattern; aliases; binding rules (GPS common L5/L2/L1, GPSA1≠GPSA2, fallback, SBA override only at 2.06/2.25, ISL no override, KAA attacker only, no wrong-frequency use, provenance separation); `+cal` free of the 2D-cut pipeline |
+| `test_cal_runner` | `main('--cal')` end-to-end on a synthetic tree (figures, CSV/TXT outputs, independent recomputation of G_tx/G_rx/FSPL/C_EM/source/margin) and the no-data INPUT_MISSING run |
+
+Fixtures: `tests/fixtures/cal_cst/` and `tests/+testutil/CalSynthetic.m` (SYNTHETIC_TEST only).
