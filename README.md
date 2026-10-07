@@ -86,6 +86,15 @@ Antenna installation geometry + radiation pattern + TX/RX RF characteristics
 > remain **deferred** (a scoped, data-only external-EM ingestion boundary is the recommended — not
 > automatic — next step; see `docs/reports/reference_validation/RPT-P6-05-phase6-closure.md §9`).
 
+## CAL — CST full-sphere 3D patterns → figures → RFI in one command
+
+Copy the owner CST ASCII exports (`GPS_*_f1.2.txt`, `RFC_ISL_f*.txt`, `RFC_KAA_f*.txt`, `RFC_SBA[_NADIR|_ZENITH]_f*.txt`)
+into `data/cal/{gps,isl,kaa,sba}/` and run `octave-cli --no-gui --eval "main('--cal')"` (or `main('--cal')` in MATLAB).
+The native 3D path (`src/+rfscreen/+cal`) validates each grid, binds free-space / installed patterns per the owner
+rules, draws pattern-frame XZ/YZ cuts, installed-on-spacecraft 3D views and body XZ/YZ/XY cuts, and evaluates the CAL
+victim-band pairs with the **existing** `VictimBandCoupling` / `PsdMath` / `ReceiverBaseline` engine into `output/cal/`.
+The 2D XZ/YZ pipeline is unchanged. Contract: [`docs/icd/cal_cst_3d.md`](docs/icd/cal_cst_3d.md).
+
 ## New here? Start with the user manual
 
 - **[`docs/user_manual.md`](docs/user_manual.md)** — top-down user manual: what the tool solves,

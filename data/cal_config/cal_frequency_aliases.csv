@@ -1,0 +1,20 @@
+# cal_config -- explicit frequency-token aliases of the CAL CST ASCII filenames (owner naming convention)
+# token: the number after "_f" in a CAL filename (GHz as written by the owner). NOT a general parser:
+#   a token that is not listed here is reported UNMAPPED_FREQUENCY and the file is not used.
+# canonical_source: RF_SYSTEM:<template_id> = canonical centre taken from data/spacecraft/simplified_spacecraft_v1/
+#   rf_systems.csv (fc_mhz of the first row with that template_id; the repository frequency SSOT);
+#   LITERAL = no SSOT row exists for that CST monitor frequency: canonical_mhz is the token itself.
+# The token and the canonical value may differ only by display precision (<= 0.1 MHz, checked at load):
+#   this is an alias table, never a frequency extrapolation or nearest-plane substitution.
+# The GPS "f1.2" token is NOT a frequency: the owner binds GPS_* files to the three GNSS rows L5/L2/L1 below.
+# Fields must not contain commas.
+token,canonical_source,canonical_mhz,label,note
+1.1764,RF_SYSTEM:GPS_L5_RX,,L5,GPS L5 1176.45 MHz (filename 1.1764 = display precision)
+1.2276,RF_SYSTEM:GPS_L2_RX,,L2,GPS L2 1227.60 MHz
+1.5754,RF_SYSTEM:GPS_L1_RX,,L1,GPS L1 1575.42 MHz (filename 1.5754 = display precision)
+2.06,LITERAL,2060,2p06,S-band 2.06 GHz CST monitor (SBA telecommand-band pattern)
+2.25,RF_SYSTEM:S_TM_TX,,2p25,S-band 2.25 GHz (rf_systems S_TM_TX centre)
+8.9,LITERAL,8900,8p9,X-band 8.9 GHz CST monitor (SAR full-band lower monitor)
+9.65,RF_SYSTEM:SAR_X_RX,,9p65,X-band SAR centre 9.65 GHz
+10.4,LITERAL,10400,10p4,X-band 10.4 GHz CST monitor (SAR full-band upper monitor)
+10.6,RF_SYSTEM:ISL_X_RX,,10p6,ISL centre 10.6 GHz

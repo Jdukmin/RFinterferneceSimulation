@@ -1,0 +1,24 @@
+# cal_config -- CAL victim-band RFI plan (which pairs the CAL runner evaluates with the existing PsdMath / VictimBandCoupling path)
+# One row per victim band x CAL frequency plane. Every listed attacker is paired with every listed victim installation
+#   except itself. The analysis frequency is the CST frequency plane of freq_token (cal_frequency_aliases.csv): the TX and RX
+#   Realized Gain are both taken AT THAT VICTIM FREQUENCY (C_EM = G_tx + G_rx - FSPL); a missing plane is INPUT_MISSING,
+#   never replaced by another band.
+# criterion_receiver: data/rfi_psd/receiver_baseline.csv row whose NF and (I/N)max give the allowable PSD
+#   (kT0 + NF + I/N, rfscreen.psd.ReceiverBaseline).
+# source_band: victim_band key of the emission-source rows (tx_system x source_band).
+# STM (2.2-2.3 GHz) is the S-band band of analysis/closed_network/rfi_plan.json (KAA/ISL -> SBA_TM); the SBA receiver NF/I-N
+#   of S_TC_RX is used. SBA attackers are not listed for STM: 2.25 GHz is the SBA's own TX carrier band (co-channel; not a
+#   spurious-domain path).
+# SAR_FULLBAND rows use the 8.9 / 10.4 GHz CST monitors of the SAR full 1.5 GHz band (rf_systems.csv SAR note: separate
+#   stress case); the SAR 525 MHz baseline band row uses 9.65 GHz.
+# Fields must not contain commas.
+victim_band,freq_token,band_lo_mhz,band_hi_mhz,band_prov,criterion_receiver,source_band,victims,attackers,note
+L5,1.1764,1164,1189,receiver_baseline.csv GPS_L5_RX,GPS_L5_RX,L5,GPSA_1;GPSA_2,KAA_1;KAA_2;SBA_NADIR;SBA_ZENITH;ISL,
+L2,1.2276,1217.37,1237.83,receiver_baseline.csv GPS_L2_RX,GPS_L2_RX,L2,GPSA_1;GPSA_2,KAA_1;KAA_2;SBA_NADIR;SBA_ZENITH;ISL,
+L1,1.5754,1563,1588,receiver_baseline.csv GPS_L1_RX,GPS_L1_RX,L1,GPSA_1;GPSA_2,KAA_1;KAA_2;SBA_NADIR;SBA_ZENITH;ISL,
+S_TC,2.06,2025,2110,receiver_baseline.csv S_TC_RX,S_TC_RX,S_TC,SBA_NADIR;SBA_ZENITH,KAA_1;KAA_2;ISL;SBA_NADIR;SBA_ZENITH,SBA -> opposite SBA only (self excluded)
+STM,2.25,2200,2300,analysis/closed_network/rfi_plan.json STM,S_TC_RX,STM,SBA_NADIR;SBA_ZENITH,KAA_1;KAA_2;ISL,SBA attackers excluded (own TX band)
+SAR,9.65,9387.5,9912.5,receiver_baseline.csv SAR_X_RX,SAR_X_RX,SAR,SAR_ANT,KAA_1;KAA_2;ISL;SBA_NADIR;SBA_ZENITH,
+SAR_FULLBAND,8.9,8900,10400,rf_systems.csv SAR full-band stress note,SAR_X_RX,SAR_FULLBAND,SAR_ANT,KAA_1;KAA_2;ISL;SBA_NADIR;SBA_ZENITH,lower monitor of the SAR full band
+SAR_FULLBAND,10.4,8900,10400,rf_systems.csv SAR full-band stress note,SAR_X_RX,SAR_FULLBAND,SAR_ANT,KAA_1;KAA_2;ISL;SBA_NADIR;SBA_ZENITH,upper monitor of the SAR full band
+ISL,10.6,10550,10650,receiver_baseline.csv ISL_X_RX,ISL_X_RX,ISL,ISL,KAA_1;KAA_2;SBA_NADIR;SBA_ZENITH,

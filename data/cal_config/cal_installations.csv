@@ -1,0 +1,16 @@
+# cal_config -- CAL role / family of each installation of data/spacecraft/simplified_spacecraft_v1 (owner definitions)
+# family: CST filename family (GPS | ISL | KAA | SBA) or SAR (no CST file; existing owner engineering receive baseline).
+# cal_roles: TX and/or RX in the CAL RFI path. KAA is ATTACKER ONLY (owner definition): binding KAA as a victim is refused.
+# tx_system: rf_systems.csv template_id whose ITU unwanted-emission source rows (data/rfi_psd/*_itu_spurious_source.csv and
+#   data/cal_config/cal_emission_sources.csv) and carrier power are used when this installation is the attacker.
+# Positions / panels / R_BA always come from antenna_installations.csv + panels.csv (never from this file).
+# Fields must not contain commas.
+installation_id,family,cal_roles,tx_system,note
+GPSA_1,GPS,RX,,GNSS receive; installed pattern GPS_GPSA1 preferred; GPS_ORIGINAL = free-space fallback
+GPSA_2,GPS,RX,,GNSS receive; installed pattern GPS_GPSA2 preferred; GPS_ORIGINAL = free-space fallback
+SBA_NADIR,SBA,TX;RX,S_TM_TX,installed RFC_SBA_NADIR at 2.06 / 2.25 GHz; generic free-space RFC_SBA elsewhere
+SBA_ZENITH,SBA,TX;RX,S_TM_TX,installed RFC_SBA_ZENITH at 2.06 / 2.25 GHz; generic free-space RFC_SBA elsewhere
+ISL,ISL,TX;RX,ISL_X_TX,free-space RFC_ISL only (no installed override)
+KAA_1,KAA,TX,KA_DLS_TX,attacker only; RFC_KAA = full reflector free-space pattern; gimbal reference orientation
+KAA_2,KAA,TX,KA_DLS_TX,attacker only; RFC_KAA = full reflector free-space pattern; gimbal reference orientation
+SAR_ANT,SAR,RX,,victim only; existing owner engineering receive baseline (data/Xband_SAR_K8_owner) - no CST file
