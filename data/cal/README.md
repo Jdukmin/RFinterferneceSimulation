@@ -29,3 +29,8 @@ data/cal/
 * No file here = `INPUT_MISSING`; nothing is synthesised.
 
 Contract: [`docs/icd/cal_cst_3d.md`](../../docs/icd/cal_cst_3d.md). Configuration: `data/cal_config/`.
+
+Installed figures (`output/cal/installed_plots/`) can be steered per dataset without touching the physical mount or RFI:
+edit `data/cal_config/installed_pattern_rotation.csv` (`rot_x_deg, rot_y_deg, rot_z_deg`; `R_user = Rz·Ry·Rx`, active,
+Body frame) and re-run `main('--cal')` until the main lobe points along the panel outward normal. Body cut axes:
+XY = X_B horizontal / Y_B vertical, XZ = X_B / Z_B, YZ = Y_B / Z_B. Details: ICD §4.2.

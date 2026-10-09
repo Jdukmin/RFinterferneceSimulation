@@ -128,16 +128,35 @@ sign flip):
 | SBA_ZENITH @ 2.06 | `diag(+1, +1, −1)` | XY normal, XZ / YZ about horizontal axis (Z) |
 | SBA_ZENITH @ 2.25 | `diag(+1, −1, −1)` | XZ (Z) and YZ about origin (Y and Z); XY reported normal (ring ⟂ −Z_B boresight) |
 
-**Boresight validation (authoritative reference = SSOT panel outward normal `n_B`).** For each dataset: high-gain
-content (samples within 10 dB of the peak, solid-angle × linear-gain weighted) and the peak in the `+n_B` / `−n_B`
-hemispheres. `main_lobe_hemisphere` = EXPECTED_BORESIGHT / OPPOSITE_BORESIGHT / AMBIGUOUS is decided by the content
-share (not by a single global peak). If the table row does not put the main lobe in `+n_B`, the row **FAILS**
-(`FAIL_TABLE_MATRIX_AUTO_RESOLVED`, printed loudly) and the figures use the 48-signed-permutation candidate whose
-main lobe is closest to `n_B` (ties: smallest change from the table row); none → `FAIL`. Output:
-`validation/installed_boresight_validation.csv` (installation, source file / frequency, correction key, table and used
-`C`, expected boresight, raw / corrected peak, main-lobe centroid and angle, hemisphere peaks and content share,
-main-lobe hemisphere, status), console and run-summary Appendix 7. Every installed figure title carries key, `C` and
-status; `pattern_plots/` stays raw and is titled `RAW CST — UNCORRECTED`.
+### 4.2 Owner steering of the installed figures (`installed_pattern_rotation.csv`)
+
+`data/cal_config/installed_pattern_rotation.csv` holds one row per installed dataset, keyed by `installation_id` + CST
+**source** frequency (GPSA_1 @ 1.2, GPSA_2 @ 1.2, SBA_NADIR @ 2.06 / 2.25, SBA_ZENITH @ 2.06 / 2.25; GPS has one 1.2 GHz
+row per antenna, not one per L5 / L2 / L1). Rows are independent: a row changes only its own dataset.
+
+* Convention (fixed): active rotation in the Body frame, `R_user = Rz(rot_z) · Ry(rot_y) · Rx(rot_x)` (a vector is
+  rotated about X_B, then Y_B, then Z_B; degrees, right-hand). `Rx = [1 0 0; 0 c −s; 0 s c]`,
+  `Ry = [c 0 s; 0 1 0; −s 0 c]`, `Rz = [c −s 0; s c 0; 0 0 1]`.
+* `C_effective = R_user · C_base`; `d_B = C_effective d_raw` (3D) and `d_raw = C_effectiveᵀ d_B` (BODY_XY / XZ / YZ,
+  LOCAL_XZ / YZ). Priority: physical geometry → raw CST → `C_base` → **owner rotation** → plot. Nothing automatic
+  overrides it; the boresight check below only reports.
+* Never changed by steering: `R_BA`, `R_BL`, positions, panel normals, CST geometry, raw `pattern_plots/`, RFI.
+* No row → 0 / 0 / 0 deg (`USER_ROTATION_NOT_CONFIGURED` in the console); unknown installation / frequency, duplicate
+  row or non-numeric value → `rfscreen:cal:badRotationConfig`.
+* Outputs: console `[CAL] INSTALLED STEERING` block per dataset, every installed figure title
+  (`<installation> @ <f> GHz | User steering: Rx=…, Ry=…, Rz=…`), `validation/installed_peak_alignment.csv`
+  (`rot_x/y/z_deg`, `base_transform`, `effective_transform`, …) and `validation/installed_pattern_rotation_effective.csv`.
+
+Procedure: (1) `main('--cal')`; (2) look at `output/cal/installed_plots/body_cuts/` (XY: horizontal X_B / vertical Y_B,
+XZ: X_B / Z_B, YZ: Y_B / Z_B); (3) edit that dataset's row in `installed_pattern_rotation.csv`; (4) re-run
+`main('--cal')`; (5) repeat until the main lobe points along the panel outward normal (magenta arrow).
+
+**Boresight validation (diagnostic only; reference = SSOT panel outward normal `n_B`).** For each dataset, with its
+`C_effective`: high-gain content (samples within 10 dB of the peak, solid-angle × linear-gain weighted) and the peak in
+the `+n_B` / `−n_B` hemispheres. `main_lobe_hemisphere` = EXPECTED_BORESIGHT / OPPOSITE_BORESIGHT / AMBIGUOUS is decided
+by the content share (not by a single global peak). Not EXPECTED → `FAIL_MAIN_LOBE_…`, printed in a `!!!` box with a
+suggested signed permutation; the figures keep the configured `C_effective`. Every installed figure title carries
+dataset, steering and status; `pattern_plots/` stays raw and is titled `RAW CST — UNCORRECTED`.
 
 * RFI rows report the raw (θ, φ) actually queried in the pattern's own source frame (`tx/rx_cst_theta_deg`,
   `tx/rx_cst_phi_deg`) and `tx/rx_pattern_source_frame`.
@@ -203,7 +222,7 @@ criterion, margin, required suppression, validity and warnings.
 
 ## 8. Outputs (`output/cal/`)
 
-`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/installed_boresight_validation.csv`,
+`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/installed_peak_alignment.csv`, `validation/installed_pattern_rotation_effective.csv`,
 `validation/pattern_binding.csv`, `pattern_plots/`,
 `installed_plots/{3d,body_cuts,local_cuts}/`,
 `rfi/pair_results.csv`, `rfi/summary.csv`, `rfi/run_summary.txt` (results first, REPORTING_GUIDE wording). The runner

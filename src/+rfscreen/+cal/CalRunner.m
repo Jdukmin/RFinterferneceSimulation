@@ -2,7 +2,8 @@ classdef CalRunner
     %CALRUNNER main('--cal'): data/cal CST ASCII -> validation -> catalog -> binding -> plots -> RFI -> exports.
     %   opts (all optional): repoRoot, calDir (default <repo>/data/cal), configDir (<repo>/data/cal_config),
     %   outDir (<repo>/output/cal), plots (true), clean (true: remove this runner's stale png/csv/txt in outDir),
-    %   verbose (true).
+    %   verbose (true), frameTableFile (<cfg>/cal_installed_frame_corrections.csv),
+    %   rotationFile (<cfg>/installed_pattern_rotation.csv: owner steering of the installed figures).
     %   Missing CST input is reported as INPUT_MISSING; no synthetic pattern is ever substituted.
     properties (Constant)
         OUT_SUBDIRS = {'validation', 'pattern_plots', 'installed_plots', 'rfi'}
@@ -32,7 +33,10 @@ classdef CalRunner
             fmap = rfscreen.cal.CalFrequencyMap.load(fullfile(cfg, 'cal_frequency_aliases.csv'), ...
                 fullfile(model.datasetDir, 'rf_systems.csv'));
             say('[CAL] 2/11 scanning %s', calDir);
-            cat = rfscreen.cal.CalPatternCatalog.scan(calDir, fmap, model);
+            rotFile = C.opt(opts, 'rotationFile', fullfile(cfg, 'installed_pattern_rotation.csv'));
+            frameFile = C.opt(opts, 'frameTableFile', fullfile(cfg, 'cal_installed_frame_corrections.csv'));
+            say('[CAL] installed display convention: %s; steering file %s', rfscreen.cal.CalPlotFrameAdapter.CONVENTION, rotFile);
+            cat = rfscreen.cal.CalPatternCatalog.scan(calDir, fmap, model, frameFile, rotFile);
             nFiles = numel(cat.entries); nValid = cat.nValid();
             say('[CAL] 3/11 validated %d CST ASCII file(s): %d valid, %d not used', nFiles, nValid, nFiles - nValid);
             for k = 1:numel(cat.discovery); say('[CAL] file_discovery: %s', cat.discovery{k}); end
@@ -46,14 +50,17 @@ classdef CalRunner
             rfscreen.cal.CalIngestDiagnostics.writeJson(diagFile, cat.entries, cat.discovery);
             say('[CAL] 4/11 catalog: %d pattern plane(s) (inventory %s, diagnostics %s)', cat.patterns.Count, invFile, diagFile);
             align = C.boresightValidation(cat);
-            alignFile = fullfile(out, 'validation', 'installed_boresight_validation.csv');
+            alignFile = fullfile(out, 'validation', 'installed_peak_alignment.csv');
             C.writeStructCsv(alignFile, C.csvRows(align));
+            rotOutFile = fullfile(out, 'validation', 'installed_pattern_rotation_effective.csv');
+            C.writeStructCsv(rotOutFile, C.rotationRows(align));
             for k = 1:numel(align)
-                say('%s', strjoin(rfscreen.cal.CalPlotFrameAdapter.validationLines(align(k)), sprintf('\n')));
+                say('%s', strjoin(rfscreen.cal.CalPlotFrameAdapter.steeringLines(align(k)), sprintf('\n')));
             end
             if ~isempty(align)
-                nBad = nnz(~strcmp({align.status}, 'PASS'));
-                say('[CAL] installed boresight validation: %d dataset(s), %d not PASS (%s)', numel(align), nBad, alignFile);
+                nBad = nnz(~strncmp({align.status}, 'PASS', 4));
+                say('[CAL] installed steering / boresight validation: %d dataset(s), %d not PASS (%s, %s)', numel(align), nBad, ...
+                    alignFile, rotOutFile);
             end
 
             % 5. binding
@@ -110,7 +117,21 @@ classdef CalRunner
         function R = csvRows(A)
             %CSVROWS Validation records without the matrix-valued helper fields.
             R = A;
-            if ~isempty(R); R = rmfield(R, {'C', 'C_table_matrix'}); end
+            if ~isempty(R); R = rmfield(R, {'C', 'C_base_matrix', 'R_user_matrix'}); end
+        end
+
+        function R = rotationRows(A)
+            %ROTATIONROWS installed_pattern_rotation_effective.csv: steering actually applied per dataset.
+            R = struct([]);
+            for k = 1:numel(A)
+                r = struct('installation_id', A(k).installation_id, 'source_frequency_ghz', A(k).source_frequency_ghz, ...
+                    'source_file', A(k).source_file, 'user_rotation_status', A(k).user_rotation_status, ...
+                    'rot_x_deg', A(k).rot_x_deg, 'rot_y_deg', A(k).rot_y_deg, 'rot_z_deg', A(k).rot_z_deg, ...
+                    'convention', rfscreen.cal.CalPlotFrameAdapter.CONVENTION, 'base_transform', A(k).base_transform, ...
+                    'user_rotation_matrix', A(k).user_rotation_matrix, 'effective_transform', A(k).effective_transform, ...
+                    'status', A(k).status);
+                if isempty(R); R = r; else; R(end+1) = r; end %#ok<AGROW>
+            end
         end
 
         function figs = makeFigures(cat, model, out, say)
@@ -288,18 +309,19 @@ classdef CalRunner
             L{end+1} = '   - Source = ITU spurious 한계값(4 kHz, 규격 가정); TX chain/filter 손실 0 dB.';
             L{end+1} = '';
             L{end+1} = sprintf('6. 출력: %s', out);
-            L{end+1} = sprintf(['   validation/pattern_inventory.csv, validation/pattern_diagnostics.json, validation/installed_boresight_validation.csv, validation/pattern_binding.csv; ' ...
+            L{end+1} = sprintf(['   validation/pattern_inventory.csv, validation/pattern_diagnostics.json, validation/installed_peak_alignment.csv, validation/installed_pattern_rotation_effective.csv, validation/pattern_binding.csv; ' ...
                 'figures: %d pattern-cut, %d installed 3D, %d body-cut, %d antenna-local cut'], ...
                 numel(figs.pattern), numel(figs.installed3d), numel(figs.bodyCuts), numel(figs.localCuts));
             L{end+1} = '   rfi/pair_results.csv, rfi/summary.csv, rfi/run_summary.txt';
             for k = 1:numel(figs.failed); L{end+1} = ['   FIGURE NOT PRODUCED: ' figs.failed{k}]; end %#ok<AGROW>
             L{end+1} = '';
-            L{end+1} = '7. Appendix - installed 패턴 표시 좌표 보정 및 boresight 검증 (raw CST 축 -> Body 표시 축, 그림 전용)';
-            L{end+1} = ['   d_B = C d_raw, dataset별 C (data/cal_config/cal_installed_frame_corrections.csv); gain 값 불변, RFI 미사용. ' ...
-                '주 lobe hemisphere가 +n_B(패널 외향 법선)가 아니면 FAIL.'];
+            L{end+1} = '7. Appendix - installed 패턴 표시 좌표 (C_base + Owner steering) 및 boresight 검증 (그림 전용)';
+            L{end+1} = ['   C_effective = R_user * C_base, R_user = Rz*Ry*Rx (Body frame active rotation, X->Y->Z 순), ' ...
+                'd_B = C_effective d_raw. 설정: data/cal_config/installed_pattern_rotation.csv (dataset별 독립). ' ...
+                'gain 값 불변, 물리 장착(R_BA/R_BL) 불변, RFI 미사용. 주 lobe hemisphere가 +n_B가 아니면 FAIL 표시(설정값은 그대로 사용).'];
             if isempty(align); L{end+1} = '   유효한 installed 패턴 없음.'; end
             for k = 1:numel(align)
-                L = [L rfscreen.cal.CalPlotFrameAdapter.validationLines(align(k))]; %#ok<AGROW>
+                L = [L rfscreen.cal.CalPlotFrameAdapter.steeringLines(align(k))]; %#ok<AGROW>
             end
             L{end+1} = '';
             L{end+1} = '8. Appendix - 패턴 입력 파일별 진단 (CAL ingestion stage)';

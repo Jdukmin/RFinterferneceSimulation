@@ -151,8 +151,9 @@ function test_cal_cst_ingestion(h)
         ni = I.read(fi);
         pin = mkInst(id, fam, stem, fsrc, fc, ni);
         fcr = pin.frameCorrection;
-        h.isTrue(sprintf('%s: own table row %s used', tag, e.key), isequal(pin.C_raw_to_body, Cx) && strcmp(fcr.correction_key, e.key) && ...
-            strcmp(fcr.resolution, 'TABLE'));
+        h.isTrue(sprintf('%s: own base row %s, steering 0/0/0 -> C_effective = C_base', tag, e.key), isequal(pin.C_raw_to_body, Cx) && ...
+            strcmp(fcr.correction_key, e.key) && strcmp(fcr.user_rotation_status, 'CONFIGURED') && ...
+            fcr.rot_x_deg == 0 && fcr.rot_y_deg == 0 && fcr.rot_z_deg == 0);
         h.isTrue(sprintf('%s: corrected main lobe in the +n_B hemisphere, PASS', tag), strcmp(fcr.main_lobe_hemisphere, 'EXPECTED_BORESIGHT') && ...
             strcmp(fcr.status, 'PASS') && fcr.angle_to_expected_boresight_deg < 15 && ...
             fcr.positive_boresight_hemisphere_peak_dbi > fcr.negative_boresight_hemisphere_peak_dbi + 10);
@@ -174,21 +175,22 @@ function test_cal_cst_ingestion(h)
         thS = [35 90 140]; phS = [20 200 310];
         h.eqTol(sprintf('%s: gain magnitude unchanged by the display mapping', tag), ...
             max(abs(pin.gainBody(fc, rfscreen.cal.CalPlotter.displayedBodyDirections(pin, thS, phS)) - ni.gainAt(thS, phS))), 0, 1e-9);
-        % same raw file with the main lobe in the OPPOSITE hemisphere: the table matrix must FAIL, the figures must not
-        % show the backlobe as boresight (nearest signed permutation with the lobe in +n_B is used, reported loudly)
+        % same raw file with the main lobe in the OPPOSITE hemisphere: validation FAILS loudly but never overrides the
+        % configured display (owner steering has priority); the owner fixes it with that dataset's steering row only
         so = sp; so.axis = -(Cx.' * n).';
         Go = S.gain(Ti, Pi, so); fo = fullfile(tmp, sprintf('opp%d', i), [stem '.txt']); S.write(fo, Ti, Pi, Go, 'cst');
         no = I.read(fo); po = mkInst(id, fam, stem, fsrc, fc, no); fo2 = po.frameCorrection;
-        h.isTrue(sprintf('%s: lobe opposite to n_B -> table matrix FAILS', tag), strcmp(fo2.table_main_lobe_hemisphere, 'OPPOSITE_BORESIGHT') && ...
-            strcmp(fo2.status, 'FAIL_TABLE_MATRIX_AUTO_RESOLVED'));
-        h.isTrue(sprintf('%s: resolved C puts the main lobe on +n_B', tag), strcmp(fo2.main_lobe_hemisphere, 'EXPECTED_BORESIGHT') && ...
-            fo2.angle_to_expected_boresight_deg < 15 && ~isequal(po.C_raw_to_body, Cx));
-        mm = cellfun(@(M) A.hemisphereMetrics(no, M, n), P48);
-        okH = strcmp({mm.hemisphere}, 'EXPECTED_BORESIGHT');
-        h.isTrue(sprintf('%s: resolved C = best-aligned passing signed permutation', tag), ...
-            round(fo2.angle_to_expected_boresight_deg) == min(round([mm(okH).centroidAngle_deg])));
-        txt = strjoin(A.validationLines(fo2), sprintf('\n'));
+        h.isTrue(sprintf('%s: lobe opposite to n_B -> FAIL, display kept as configured', tag), ...
+            strcmp(fo2.main_lobe_hemisphere, 'OPPOSITE_BORESIGHT') && strcmp(fo2.status, 'FAIL_MAIN_LOBE_OPPOSITE_BORESIGHT') && ...
+            isequal(po.C_raw_to_body, Cx) && ~strcmp(fo2.suggested_effective_transform, 'none'));
+        txt = strjoin(A.steeringLines(fo2), sprintf('\n'));
         h.isTrue(sprintf('%s: FAIL printed loudly', tag), ~isempty(strfind(txt, repmat('!', 1, 50))) && ~isempty(strfind(txt, 'FAIL')));
+        rc = struct('installation_id', id, 'source_frequency_ghz', fsrc, 'rot_x_deg', 180, 'rot_y_deg', 0, 'rot_z_deg', 0, 'note', '');
+        pr = rfscreen.cal.CstNativeInstalledPattern(['SYNTHETIC_TEST_R_' stem], no, fc, struct('R_BA', inst.R_BA, ...
+            'installationId', id, 'family', fam, 'sourceSimulationFrequency_Hz', fsrc * 1e9, 'rotationConfig', rc));
+        h.isTrue(sprintf('%s: owner steering Rx=180 deg puts the main lobe on n_B (PASS)', tag), ...
+            strcmp(pr.frameCorrection.status, 'PASS') && pr.frameCorrection.angle_to_expected_boresight_deg < 15 && ...
+            norm(pr.C_raw_to_body - A.userRotation(180, 0, 0) * Cx) < 1e-12);
     end
     % hemisphere decision uses the high-gain content, not one global peak
     sk = struct('peak', 5, 'back', -20, 'tiltX', 0, 'axis', [0 0 1], 'bump', [180 0 28 1]);
@@ -199,6 +201,66 @@ function test_cal_cst_ingestion(h)
     pFs = rfscreen.cal.CstNativeFreeSpacePattern('SYNTHETIC_TEST_FSX', a, 10.6e9, struct('family', 'ISL'));
     [Cf, kf] = A.rawToDisplayedBody(pFs);
     h.isTrue('free-space (ISL/KAA/origin) pattern: no correction', isequal(Cf, eye(3)) && strcmp(kf, 'IDENTITY_FREE_SPACE'));
+
+    %% ---------------- owner steering (installed_pattern_rotation.csv) ----------------
+    Rq = @(rx, ry, rz) A.userRotation(rx, ry, rz);
+    h.isTrue('R_user convention: Rx(90) +Y -> +Z, Ry(90) +Z -> +X, Rz(90) +X -> +Y', norm(Rq(90, 0, 0) * [0; 1; 0] - [0; 0; 1]) < 1e-12 && ...
+        norm(Rq(0, 90, 0) * [0; 0; 1] - [1; 0; 0]) < 1e-12 && norm(Rq(0, 0, 90) * [1; 0; 0] - [0; 1; 0]) < 1e-12);
+    h.isTrue('R_user = Rz*Ry*Rx: X first, then Z (Rx=90, Rz=90: +Y -> +Z)', norm(Rq(90, 0, 90) * [0; 1; 0] - [0; 0; 1]) < 1e-12);
+    h.isTrue('R_user = Rz*Ry*Rx exactly', norm(Rq(10, 20, 30) - ([cosd(30) -sind(30) 0; sind(30) cosd(30) 0; 0 0 1] * ...
+        [cosd(20) 0 sind(20); 0 1 0; -sind(20) 0 cosd(20)] * [1 0 0; 0 cosd(10) -sind(10); 0 sind(10) cosd(10)])) < 1e-12);
+    RC0 = A.loadRotationConfig();
+    h.isTrue('default steering file: 6 independent rows, all 0/0/0 deg (GPS one 1.2 GHz row per antenna)', numel(RC0) == 6 && ...
+        all([RC0.rot_x_deg RC0.rot_y_deg RC0.rot_z_deg] == 0) && nnz(strncmp({RC0.installation_id}, 'GPSA', 4)) == 2 && ...
+        all([RC0(strncmp({RC0.installation_id}, 'GPSA', 4)).source_frequency_ghz] == 1.2));
+    badRot = @(body) fullfile(tmp, sprintf('rot_%d.csv', numel(body)));
+    hdr = 'installation_id,source_frequency_ghz,rot_x_deg,rot_y_deg,rot_z_deg,note\n';
+    rows = {'GPSA_1,1.2,0,0,0,a\nGPSA_1,1.2,10,0,0,b\n', 'GPSA_3,1.2,0,0,0,x\n', 'GPSA_1,1.5754,0,0,0,L1 row\n', 'SBA_NADIR,2.25,abc,0,0,x\n'};
+    what = {'duplicate row', 'unknown installation', 'GPS steering keyed by an evaluation band', 'non-numeric angle'};
+    for k = 1:numel(rows)
+        fr = badRot([rows{k} repmat(' ', 1, k)]); fid = fopen(fr, 'w'); fprintf(fid, [hdr rows{k}]); fclose(fid);
+        h.throws(sprintf('steering validation error: %s', what{k}), @() A.loadRotationConfig(fr), 'rfscreen:cal:badRotationConfig');
+    end
+    % independence: steering SBA_NADIR @ 2.25 only changes SBA_NADIR @ 2.25
+    RC1 = RC0; k25 = find(strcmp({RC1.installation_id}, 'SBA_NADIR') & [RC1.source_frequency_ghz] == 2.25); RC1(k25).rot_x_deg = 180;
+    stems = cases(:, 4).';
+    okInd = true; P0 = {}; P1 = {};
+    for i = 1:size(cases, 1)
+        [id, ~, fam, stem, fsrc, fc] = cases{i, :};
+        nd = I.read(fullfile(tmp, sprintf('ds%d', i), [stem '.txt']));
+        mk = @(rc) rfscreen.cal.CstNativeInstalledPattern(['ST_' stem], nd, fc, struct('R_BA', model.installations(id).R_BA, ...
+            'installationId', id, 'family', fam, 'sourceSimulationFrequency_Hz', fsrc * 1e9, 'rotationConfig', rc));
+        P0{i} = mk(RC0); P1{i} = mk(RC1); %#ok<AGROW>
+        changed = ~isequal(P0{i}.C_raw_to_body, P1{i}.C_raw_to_body);
+        okInd = okInd && (changed == strcmp(stems{i}, 'RFC_SBA_NADIR_f2.25'));
+        okInd = okInd && isequal(P0{i}.R_BA, P1{i}.R_BA) && isequal(P0{i}.R_BL, P1{i}.R_BL);
+    end
+    h.isTrue('steering one row changes only that dataset; R_BA / R_BL never change', okInd);
+    i25 = find(strcmp(stems, 'RFC_SBA_NADIR_f2.25'));
+    pS = P1{i25}; pB = P0{i25};
+    [Ce, info] = A.effectiveTransform(pB, RC1);
+    h.isTrue('effectiveTransform API: C = Rz*Ry*Rx * C_base with the documented info fields', norm(Ce - pS.C_raw_to_body) < 1e-12 && ...
+        all(isfield(info, {'installation_id', 'source_frequency_ghz', 'base_transform', 'rot_x_deg', 'rot_y_deg', 'rot_z_deg', ...
+        'user_rotation_matrix', 'effective_transform'})) && info.rot_x_deg == 180 && isequal(info.base_transform, pB.C_raw_to_body) && ...
+        norm(info.user_rotation_matrix - diag([1 -1 -1])) < 1e-12);
+    Cs = pS.C_raw_to_body; dS = rfscreen.cal.CalPlotter.displayedBodyDirections(pS, [30 100], [40 250]);
+    h.isTrue('3D view uses C_effective', norm(dS - Cs * A.sphericalDirection([30 100], [40 250])) < 1e-12);
+    cS = rfscreen.cal.CalPlotter.bodyCutData(pS, 2.25e9); cB = rfscreen.cal.CalPlotter.bodyCutData(pB, 2.25e9);
+    lS = rfscreen.cal.CalPlotter.localCutData(pS, 2.25e9);
+    okC = all(arrayfun(@(c) isequal(c.dir_raw, Cs.' * c.dir_B), cS)) && all(arrayfun(@(c) isequal(c.dir_raw, Cs.' * c.dir_B), lS));
+    h.isTrue('body XY / XZ / YZ and local XZ / YZ all use the same C_effective', okC);
+    al = cS(1).alpha_deg; yzS = cS(strcmp({cS.plane}, 'YZ')).gain_dBi; yzB = cB(strcmp({cB.plane}, 'YZ')).gain_dBi;
+    rot180 = arrayfun(@(x) find(al == mod(x + 360, 360) - 180, 1), al);
+    h.eqTol('Rx=180 deg: steered body YZ cut = unsteered cut rotated by 180 deg', max(abs(yzS - yzB(rot180))), 0, 1e-9);
+    xyS = cS(strcmp({cS.plane}, 'XY')).gain_dBi; xyB = cB(strcmp({cB.plane}, 'XY')).gain_dBi;
+    h.eqTol('Rx=180 deg: steered body XY cut = unsteered cut mirrored in Y_B', max(abs(xyS - xyB(arrayfun(@(x) find(al == x, 1), -al)))), 0, 1e-9);
+    noRow = A.resolve(pB.native, A.lookup(FT, 'SBA_NADIR', 'RFC_SBA_NADIR_f2.25', 2.25), pB.R_BA(:, 1), ...
+        struct('installationId', 'SBA_NADIR', 'sourceFile', 'x', 'sourceFrequency_GHz', 2.25), RC1(~strcmp({RC1.installation_id}, 'SBA_NADIR')));
+    h.isTrue('missing steering row -> 0/0/0 and USER_ROTATION_NOT_CONFIGURED printed', strcmp(noRow.user_rotation_status, ...
+        'USER_ROTATION_NOT_CONFIGURED') && noRow.rot_x_deg == 0 && ~isempty(strfind(strjoin(A.steeringLines(noRow), ' '), ...
+        'USER_ROTATION_NOT_CONFIGURED -> using 0/0/0 deg')));
+    h.isTrue('figure titles carry the steering', ~isempty(strfind(rfscreen.cal.CalPlotter.frameTag(pS), 'User steering: Rx=180 deg, Ry=0 deg, Rz=0 deg')) && ...
+        ~isempty(strfind(rfscreen.cal.CalPlotter.frameTag(pS), 'SBA_NADIR @ 2.25 GHz')));
     h.isTrue('SBA_NADIR mount position [255 870 1030] mm', norm(model.installations('SBA_NADIR').position_m - [0.255; 0.870; 1.030]) < 1e-12);
     h.isTrue('SBA_ZENITH mount position [255 -530 -1240] mm', norm(model.installations('SBA_ZENITH').position_m - [0.255; -0.530; -1.240]) < 1e-12);
     rec = model.installationRecords;

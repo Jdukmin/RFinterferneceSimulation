@@ -29,11 +29,15 @@ classdef CalPatternCatalog
         discovery = {}      % file_discovery notes (ignored files / folders), cellstr
     end
     methods (Static)
-        function c = scan(calDir, freqMap, model, frameTableFile)
-            %SCAN frameTableFile: installed display-frame table (default data/cal_config/cal_installed_frame_corrections.csv).
+        function c = scan(calDir, freqMap, model, frameTableFile, rotationFile)
+            %SCAN frameTableFile: installed base display-frame table (default data/cal_config/cal_installed_frame_corrections.csv);
+            %   rotationFile: owner steering (default data/cal_config/installed_pattern_rotation.csv). Both are validated
+            %   up front: a bad table / steering file is an error for the whole run, never a silent fallback.
             if nargin < 3; model = []; end
             if nargin < 4; frameTableFile = ''; end
-            frameTable = [];
+            if nargin < 5; rotationFile = ''; end
+            frameTable = rfscreen.cal.CalPlotFrameAdapter.loadTable(frameTableFile);
+            rotationConfig = rfscreen.cal.CalPlotFrameAdapter.loadRotationConfig(rotationFile, frameTable);
             D = rfscreen.cal.CalIngestDiagnostics;
             c = rfscreen.cal.CalPatternCatalog();
             c.calDir = calDir;
@@ -121,11 +125,10 @@ classdef CalPatternCatalog
                         meta.R_BA = model.installations(E(a).installationId).R_BA;
                         % one display-frame resolution per installed dataset (shared by its L5/L2/L1 planes)
                         A = rfscreen.cal.CalPlotFrameAdapter;
-                        if isempty(frameTable); frameTable = A.loadTable(frameTableFile); end
                         fSrc = E(a).sourceSimulationFrequency_Hz / 1e9;
                         meta.frameCorrection = A.resolve(E(a).data, A.lookup(frameTable, E(a).installationId, E(a).stem, fSrc), ...
                             meta.R_BA(:, 1), struct('installationId', E(a).installationId, 'sourceFile', E(a).relPath, ...
-                            'sourceFrequency_GHz', fSrc));
+                            'sourceFrequency_GHz', fSrc), rotationConfig);
                     end
                     P = cell(1, numel(E(a).freqs_Hz));
                     for k = 1:numel(E(a).freqs_Hz)

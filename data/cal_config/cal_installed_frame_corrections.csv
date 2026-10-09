@@ -5,9 +5,9 @@
 # Key = (installation_id, source_file_stem, source_frequency_ghz). Every installed dataset has its own row; rows are never shared
 #   between GPSA_1 / GPSA_2, SBA_NADIR / SBA_ZENITH or 2.06 / 2.25 GHz.
 # c11..c33: full 3x3 (row-major); orthogonal (det +1 or -1) required. Any signed permutation / rotation / reflection is allowed.
-# Every row is validated at run time against the SSOT panel outward normal (main-lobe hemisphere, high-gain content); a row whose
-#   corrected main lobe is not in the +n_B hemisphere FAILS (validation/installed_boresight_validation.csv) and the figures use the
-#   nearest signed permutation that puts the main lobe in +n_B (resolution AUTO_RESOLVED, reported loudly).
+# This is C_base. The owner steering data/cal_config/installed_pattern_rotation.csv is applied on top: C_effective = R_user * C_base.
+# The displayed main lobe is checked against the SSOT panel outward normal (validation/installed_peak_alignment.csv); a FAIL is
+#   reported loudly but never overrides C_base or the owner steering.
 # Owner 2D plot conventions: XY = (X_B horiz, Y_B vert); XZ = (X_B, Z_B); YZ = (Y_B, Z_B). "mirrored about the horizontal axis" =
 #   vertical-coordinate sign flip; "about the vertical axis" = horizontal-coordinate sign flip; "about the origin" = both.
 # Fields must not contain commas.
