@@ -13,7 +13,7 @@ classdef CstNativeFreeSpacePattern < rfscreen.antenna.FreeSpacePattern
         sourceFrame = 'CST_LOCAL'                   % raw grid frame (see CstNativeSupport)
         family = ''
         installationId = ''
-        sourceSimulationFrequency_Hz = NaN   % CST solve frequency (GPS_*_f1.2: ~1.2 GHz)
+        sourceSimulationFrequency_Hz = NaN   % CST solve frequency (GPSA_*_f1.2: ~1.2 GHz)
         frequencyTreatment = 'NATIVE_PLANE'  % NATIVE_PLANE | SURROGATE (one CST solve reused at this frequency)
     end
     methods

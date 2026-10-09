@@ -4,9 +4,9 @@ classdef CalPatternCatalog
     %   (file, canonical frequency).
     %
     %   Owner naming convention (explicit; nothing else is inferred from a filename):
-    %     gps/GPS_ORIGINAL_f1.2   free-space, generic GPS, shared by L5 / L2 / L1
-    %     gps/GPS_GPSA1_f1.2      installed on GPSA_1, shared by L5 / L2 / L1
-    %     gps/GPS_GPSA2_f1.2      installed on GPSA_2, shared by L5 / L2 / L1
+    %     gps/GPSA_ORIGINAL_f1.2   free-space, generic GPS, shared by L5 / L2 / L1
+    %     gps/GPSA_GPSA1_f1.2      installed on GPSA_1, shared by L5 / L2 / L1
+    %     gps/GPSA_GPSA2_f1.2      installed on GPSA_2, shared by L5 / L2 / L1
     %     isl/RFC_ISL_f<tok>      free-space ISL at <tok>
     %     kaa/RFC_KAA_f<tok>      free-space KAA (reflector included) at <tok>
     %     sba/RFC_SBA_f<tok>      free-space generic SBA at <tok>
@@ -178,7 +178,7 @@ classdef CalPatternCatalog
                 'data', [], 'keys', {{}}, 'sourceFrame', '', 'sourceSimulationFrequency_Hz', NaN, ...
                 'frequencyTreatment', '', 'diag', D.blank());
             e.diag.last_stage_completed = 'file_discovery';
-            tok = regexpi(stem, '^GPS_(ORIGINAL|GPSA1|GPSA2)_f1\.2$', 'tokens', 'once');
+            tok = regexpi(stem, '^GPSA_(ORIGINAL|GPSA1|GPSA2)_f1\.2$', 'tokens', 'once');
             if ~isempty(tok)
                 e.family = 'GPS'; e.token = '1.2';
                 switch upper(tok{1})

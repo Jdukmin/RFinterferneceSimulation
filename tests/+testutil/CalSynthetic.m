@@ -79,11 +79,15 @@ classdef CalSynthetic
         function S = spec()
             %SPEC folder, stem, synthetic parameters (each file distinct so bindings are testable).
             fx = {'1.1764', '1.2276', '1.5754', '2.25', '8.9', '9.65', '10.4', '10.6'};
-            % Installed files are body-frame exports: main lobe along the SSOT panel normal of the installation.
+            % Installed files are raw CST exports whose main lobe, after the owner raw -> displayed-Body correction
+            % (rfscreen.cal.CalPlotFrameAdapter, d_B = C d_raw), lies along the SSOT panel normal: raw axis = C.' n_B.
+            A = rfscreen.cal.CalPlotFrameAdapter;
             n3 = [0 -0.866025404 -0.5]; n6 = [0 0.866025404 0.5]; n4 = [0 0 -1];
-            S = {'gps', 'GPS_ORIGINAL_f1.2', struct('peak', 4, 'back', -20, 'tiltX', 0); ...
-                 'gps', 'GPS_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', n3); ...
-                 'gps', 'GPS_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', n3)};
+            r3 = (A.C_GPSA.' * n3.').'; r6a = (A.C_SBA_206.' * n6.').'; r6b = (A.C_SBA_225.' * n6.').';
+            r4a = (A.C_SBA_206.' * n4.').'; r4b = (A.C_SBA_225.' * n4.').';
+            S = {'gps', 'GPSA_ORIGINAL_f1.2', struct('peak', 4, 'back', -20, 'tiltX', 0); ...
+                 'gps', 'GPSA_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', r3); ...
+                 'gps', 'GPSA_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', r3)};
             for k = 1:numel(fx)
                 v = str2double(fx{k});
                 S(end+1, :) = {'isl', ['RFC_ISL_f' fx{k}], struct('peak', 8 + v / 2, 'back', -30, 'tiltX', 1)}; %#ok<AGROW>
@@ -93,10 +97,10 @@ classdef CalSynthetic
             for k = 1:numel(fs)
                 S(end+1, :) = {'sba', ['RFC_SBA_f' fs{k}], struct('peak', 3 + str2double(fs{k}) / 10, 'back', -18, 'tiltX', 0.5)}; %#ok<AGROW>
             end
-            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.06', struct('peak', 4.1, 'back', -15, 'tiltX', 1.5, 'axis', n6)};
-            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.25', struct('peak', 4.2, 'back', -16, 'tiltX', 1.5, 'axis', n6)};
-            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.06', struct('peak', 4.3, 'back', -17, 'tiltX', -1.5, 'axis', n4)};
-            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.25', struct('peak', 4.4, 'back', -19, 'tiltX', -1.5, 'axis', n4)};
+            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.06', struct('peak', 4.1, 'back', -15, 'tiltX', 1.5, 'axis', r6a)};
+            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.25', struct('peak', 4.2, 'back', -16, 'tiltX', 1.5, 'axis', r6b)};
+            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.06', struct('peak', 4.3, 'back', -17, 'tiltX', -1.5, 'axis', r4a)};
+            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.25', struct('peak', 4.4, 'back', -19, 'tiltX', -1.5, 'axis', r4b)};
         end
     end
 end

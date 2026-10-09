@@ -45,6 +45,13 @@ classdef CalRunner
             diagFile = fullfile(out, 'validation', 'pattern_diagnostics.json');
             rfscreen.cal.CalIngestDiagnostics.writeJson(diagFile, cat.entries, cat.discovery);
             say('[CAL] 4/11 catalog: %d pattern plane(s) (inventory %s, diagnostics %s)', cat.patterns.Count, invFile, diagFile);
+            align = C.peakAlignment(cat, model);
+            alignFile = fullfile(out, 'validation', 'installed_peak_alignment.csv');
+            C.writeStructCsv(alignFile, align);
+            for k = 1:numel(align)
+                say('%s', strjoin(rfscreen.cal.CalPlotFrameAdapter.alignmentLines(align(k)), sprintf('\n')));
+            end
+            if ~isempty(align); say('[CAL] installed peak alignment written (%s)', alignFile); end
 
             % 5. binding
             binder = rfscreen.cal.CalPatternBinder(cat, fullfile(cfg, 'cal_installations.csv'));
@@ -74,7 +81,7 @@ classdef CalRunner
             summary = C.summarize(rows);
             C.writeStructCsv(fullfile(out, 'rfi', 'pair_results.csv'), rows);
             C.writeStructCsv(fullfile(out, 'rfi', 'summary.csv'), summary);
-            txt = C.runSummaryText(cat, rows, summary, figs, calDir, out, etime(clock(), t0));
+            txt = C.runSummaryText(cat, rows, summary, figs, calDir, out, etime(clock(), t0), align);
             fid = fopen(fullfile(out, 'rfi', 'run_summary.txt'), 'w');
             fprintf(fid, '%s', txt); fclose(fid);
             say('[CAL] 10/11 exported rfi/pair_results.csv (%d rows), rfi/summary.csv, rfi/run_summary.txt', numel(rows));
@@ -82,7 +89,23 @@ classdef CalRunner
             if verbose; fprintf('%s', txt); end
 
             res = struct('catalog', cat, 'binder', binder, 'rows', rows, 'summary', summary, 'figures', figs, ...
-                'outDir', out, 'model', model, 'freqMap', fmap, 'runSummary', txt);
+                'outDir', out, 'model', model, 'freqMap', fmap, 'runSummary', txt, 'peakAlignment', align);
+        end
+
+        function A = peakAlignment(cat, model)
+            %PEAKALIGNMENT Corrected raw-peak direction vs SSOT panel normal of every VALID installed file
+            %   (one row per file: the GPS L5/L2/L1 planes share one raw pattern and one correction).
+            A = struct([]);
+            E = cat.entries;
+            for a = 1:numel(E)
+                if ~strcmp(E(a).status, 'VALID') || ~strcmp(E(a).patternType, 'INSTALLED'); continue; end
+                p = cat.patterns(E(a).keys{1});
+                rec = model.installationRecords(strcmp({model.installationRecords.antennaId}, E(a).installationId));
+                s = rfscreen.cal.CalPlotFrameAdapter.peakAlignment(p, rec.nominalBoresight_B);
+                s.frequency_ghz = E(a).sourceSimulationFrequency_Hz / 1e9;          % CST solve (GPS: 1.2 GHz surrogate)
+                s.source_file = E(a).relPath; s.panel = rec.panelId;
+                if isempty(A); A = s; else; A(end+1) = s; end %#ok<AGROW>
+            end
         end
 
         function figs = makeFigures(cat, model, out, say)
@@ -177,7 +200,8 @@ classdef CalRunner
             end
         end
 
-        function txt = runSummaryText(cat, rows, S, figs, calDir, out, secs)
+        function txt = runSummaryText(cat, rows, S, figs, calDir, out, secs, align)
+            if nargin < 8; align = struct([]); end
             nl = sprintf('\n');
             E = cat.entries;
             nF = numel(E); nV = cat.nValid();
@@ -232,7 +256,7 @@ classdef CalRunner
                 L{end+1} = sprintf(['   - GPS: CST 시뮬레이션 데이터 1회(약 1.2 GHz) 패턴 %d개를 L5/L2/L1 수신 주파수에 동일 공간 패턴으로 ' ...
                     '대용(surrogate) 적용 (주파수별 CST 결과 아님).'], numel(gps));
             end
-            L{end+1} = '   파일별 진단(단계, 오류 id, theta/phi/sample 통계): 7. Appendix 및 validation/pattern_diagnostics.json';
+            L{end+1} = '   파일별 진단(단계, 오류 id, theta/phi/sample 통계): 8. Appendix 및 validation/pattern_diagnostics.json';
             L{end+1} = '';
             L{end+1} = '4. 입력 누락 (계산/판정 보류 원인)';
             miss = {};
@@ -252,7 +276,8 @@ classdef CalRunner
             L{end+1} = '';
             L{end+1} = '5. 분석 한계';
             L{end+1} = '   - 단일 CST 주파수 plane(victim 대표 주파수) 평가: victim band 전체 sweep 아님.';
-            L{end+1} = '   - Far-field FSPL 결합 모델: 근접장/구조 산란 경로는 installed CST 패턴에 포함된 범위만 반영.';
+            L{end+1} = ['   - 모든 attacker/victim은 origin(free-space) CST 패턴 사용(owner 규칙): installed 패턴은 RFI에 미사용(그림 전용). ' ...
+                'Far-field FSPL 결합 모델이며 far-field -> near-field 10 dB 마진은 이 계산에 포함되지 않음.'];
             L{end+1} = '   - KAA는 gimbal 기준(패널 법선) 자세: 지향 tracking case 아님. LOS BLOCKED는 감쇠 미적용(geometry evidence).';
             L{end+1} = '   - ISL 자세는 antenna_installations.csv(PANEL_3 법선) SSOT; closed-network geometry의 +X end-face override와 다름.';
             L{end+1} = '   - Source = ITU spurious 한계값(4 kHz, 규격 가정); TX chain/filter 손실 0 dB.';
@@ -264,7 +289,14 @@ classdef CalRunner
             L{end+1} = '   rfi/pair_results.csv, rfi/summary.csv, rfi/run_summary.txt';
             for k = 1:numel(figs.failed); L{end+1} = ['   FIGURE NOT PRODUCED: ' figs.failed{k}]; end %#ok<AGROW>
             L{end+1} = '';
-            L{end+1} = '7. Appendix - 패턴 입력 파일별 진단 (CAL ingestion stage)';
+            L{end+1} = '7. Appendix - installed 패턴 표시 좌표 보정 (raw CST 축 -> Body 표시 축, 그림 전용)';
+            L{end+1} = '   d_B = C d_raw (GPSA diag(+1,-1,+1), SBA 2.06 diag(+1,+1,-1), SBA 2.25 diag(+1,-1,-1)); gain 값 불변, RFI 미사용.';
+            if isempty(align); L{end+1} = '   유효한 installed 패턴 없음.'; end
+            for k = 1:numel(align)
+                L = [L rfscreen.cal.CalPlotFrameAdapter.alignmentLines(align(k))]; %#ok<AGROW>
+            end
+            L{end+1} = '';
+            L{end+1} = '8. Appendix - 패턴 입력 파일별 진단 (CAL ingestion stage)';
             for k = 1:numel(cat.discovery); L{end+1} = ['[CAL] file_discovery: ' cat.discovery{k}]; end %#ok<AGROW>
             if nF == 0; L{end+1} = '   CST ASCII 파일 없음 (INPUT_MISSING).'; end
             for a = 1:nF

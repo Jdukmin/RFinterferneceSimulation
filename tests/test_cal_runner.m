@@ -16,6 +16,13 @@ function test_cal_runner(h)
         h.isTrue(['output ' f{1}], exist(fullfile(out, f{1}), 'file') == 2);
     end
     h.isTrue('32 files valid', res.catalog.nValid() == 32);
+    al = res.peakAlignment;
+    h.isTrue('installed peak alignment: 6 installed files, corrected peak on the panel normal', numel(al) == 6 && ...
+        all([al.angle_error_deg] < 1e-3) && all(cellfun(@isempty, {al.warning})) && ...
+        exist(fullfile(out, 'validation', 'installed_peak_alignment.csv'), 'file') == 2);
+    h.isTrue('alignment rows carry correction keys', any(strcmp({al.correction}, 'GPSA_INSTALLED')) && ...
+        any(strcmp({al.correction}, 'SBA_INSTALLED_2P06')) && any(strcmp({al.correction}, 'SBA_INSTALLED_2P25')));
+    h.isTrue('run summary appendix reports the alignment', ~isempty(strfind(res.runSummary, 'installed peak alignment: GPSA_1')));
     inv = fileread(fullfile(out, 'validation', 'pattern_inventory.csv'));
     hdr = strsplit(strtok(inv, sprintf('\n')), ',');
     need = {'rel_path', 'family', 'installation_id', 'pattern_type', 'status', 'failure_stage', 'error_identifier', ...
@@ -29,7 +36,7 @@ function test_cal_runner(h)
         J = jsondecode(fileread(jf));
         h.isTrue('diagnostics JSON parses: one record per file', numel(J.files) == numel(res.catalog.entries));
     end
-    h.isTrue('run summary appendix lists every file', ~isempty(strfind(res.runSummary, '[CAL] gps/GPS_GPSA1_f1.2.txt')) && ...
+    h.isTrue('run summary appendix lists every file', ~isempty(strfind(res.runSummary, '[CAL] gps/GPSA_GPSA1_f1.2.txt')) && ...
         ~isempty(strfind(res.runSummary, 'bound as surrogate for: L5 / L2 / L1')));
     if plots
         h.isTrue('64 pattern-coordinate figures', numel(res.figures.pattern) == 64 && ...
@@ -52,21 +59,23 @@ function test_cal_runner(h)
     r = R(k);
     h.isTrue('KAA->GPSA_1 L1: one row', numel(k) == 1);
     h.eqStr('KAA->L1 TX file at victim frequency', r.tx_pattern_file, 'kaa/RFC_KAA_f1.5754.txt');
-    h.eqStr('GPSA_1 RX installed file', r.rx_pattern_file, 'gps/GPS_GPSA1_f1.2.txt');
-    h.isTrue('TX FREE_SPACE / RX INSTALLED', strcmp(r.tx_pattern_type, 'FREE_SPACE') && strcmp(r.rx_pattern_type, 'INSTALLED'));
-    h.isTrue('provenance strings separate', ~isempty(strfind(r.rx_pattern_provenance, 'installedSource=CST')) && ...
-        isempty(strfind(r.tx_pattern_provenance, 'installed')) && isempty(strfind([r.tx_pattern_provenance r.rx_pattern_provenance], 'APPROX')));
+    h.eqStr('GPSA_1 RX origin file', r.rx_pattern_file, 'gps/GPSA_ORIGINAL_f1.2.txt');
+    h.isTrue('TX / RX both FREE_SPACE origin', strcmp(r.tx_pattern_type, 'FREE_SPACE') && strcmp(r.rx_pattern_type, 'FREE_SPACE'));
+    h.isTrue('no installed pattern anywhere in RFI', ~any(strcmp({R.tx_pattern_type}, 'INSTALLED')) && ~any(strcmp({R.rx_pattern_type}, 'INSTALLED')) && ...
+        ~any(~cellfun(@isempty, regexp([{R.tx_pattern_file} {R.rx_pattern_file}], 'GPSA[12]_f|SBA_(NADIR|ZENITH)_f', 'once'))));
+    h.isTrue('provenance free of installed / APPROX', isempty(strfind([r.tx_pattern_provenance r.rx_pattern_provenance], 'installed')) && ...
+        isempty(strfind([r.tx_pattern_provenance r.rx_pattern_provenance], 'APPROX')));
     h.eqTol('analysis frequency = L1 canonical', r.analysis_frequency_hz, 1575.42e6, 1e-3);
     % independent recomputation
     m = res.model; iT = m.installations('KAA_1'); iR = m.installations('GPSA_1');
     d = iR.position_m - iT.position_m; dist = norm(d); u = d / dist;
-    pT = res.catalog.find('KAA', '', 'FREE_SPACE', 1575.42e6); pR = res.catalog.find('GPS', 'GPSA_1', 'INSTALLED', 1575.42e6);
+    pT = res.catalog.find('KAA', '', 'FREE_SPACE', 1575.42e6); pR = res.catalog.find('GPS', '', 'FREE_SPACE', 1575.42e6);
     M = rfscreen.kaa.CstLocalFrameAdapter.localToAntenna();
-    % free-space TX: body -> antenna -> CST local; installed RX: raw body-frame grid queried with -u as is
-    gT = pT.native.gainAtLocal(M.' * (iT.R_BA.' * u)); gR = pR.native.gainAtDirection(-u);
-    [thR, phR] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(-u);
-    h.isTrue('RX installed: raw (theta_B, phi_B) of -u reported, body source frame', abs(r.rx_cst_theta_deg - thR) < 1e-9 && ...
-        abs(mod(r.rx_cst_phi_deg - phR + 180, 360) - 180) < 1e-9 && strcmp(r.rx_pattern_source_frame, 'SPACECRAFT_BODY_FIXED') && ...
+    % origin (free-space) TX and RX: body -> antenna (R_BA') -> CST local (M_AL') -> raw grid
+    gT = pT.native.gainAtLocal(M.' * (iT.R_BA.' * u)); gR = pR.native.gainAtLocal(M.' * (iR.R_BA.' * (-u)));
+    [thR, phR] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(M.' * (iR.R_BA.' * (-u)));
+    h.isTrue('RX origin: CST local (theta, phi) reported, CST_LOCAL frame', abs(r.rx_cst_theta_deg - thR) < 1e-9 && ...
+        abs(mod(r.rx_cst_phi_deg - phR + 180, 360) - 180) < 1e-9 && strcmp(r.rx_pattern_source_frame, 'CST_LOCAL') && ...
         strcmp(r.tx_pattern_source_frame, 'CST_LOCAL'));
     h.isTrue('RX provenance: GPS surrogate of the 1.2 GHz CST solve', ~isempty(strfind(r.rx_pattern_provenance, 'SURROGATE')));
     h.eqTol('TX directional gain', r.tx_gain_dbi, gT, 1e-9);
@@ -81,8 +90,11 @@ function test_cal_runner(h)
     h.eqStr('route', r.coupling_route, 'PATTERN_GTX_GRX_FSPL');
     h.isTrue('status/verdict consistent', strcmp(r.status, 'EVALUATED') && any(strcmp(r.verdict, {'PASS', 'FAIL'})));
     s = R(strcmp({R.victim_band}, 'S_TC') & strcmp({R.tx_installation}, 'SBA_NADIR'));
-    h.isTrue('SBA->opposite SBA S_TC: both installed 2.06', numel(s) == 1 && strcmp(s.rx_installation, 'SBA_ZENITH') && ...
-        strcmp(s.tx_pattern_file, 'sba/RFC_SBA_NADIR_f2.06.txt') && strcmp(s.rx_pattern_file, 'sba/RFC_SBA_ZENITH_f2.06.txt'));
+    h.isTrue('SBA->opposite SBA S_TC: both origin RFC_SBA_f2.06', numel(s) == 1 && strcmp(s.rx_installation, 'SBA_ZENITH') && ...
+        strcmp(s.tx_pattern_file, 'sba/RFC_SBA_f2.06.txt') && strcmp(s.rx_pattern_file, 'sba/RFC_SBA_f2.06.txt'));
+    sb = R(strncmp({R.tx_installation}, 'SBA', 3));
+    h.isTrue('SBA attacker rows: 22, all evaluated with origin RFC_SBA', numel(sb) == 22 && all(strcmp({sb.status}, 'EVALUATED')) && ...
+        all(strncmp({sb.tx_pattern_file}, 'sba/RFC_SBA_f', 13)));
     kst = R(strcmp({R.victim_band}, 'S_TC') & strncmp({R.tx_installation}, 'KAA', 3));
     h.isTrue('KAA->S_TC 2.06: pattern missing, not substituted', ~isempty(kst) && all(strcmp({kst.status}, 'INPUT_MISSING_PATTERN')) && ...
         all(isnan([kst.coupling_db])) && all(strcmp({kst.verdict}, 'UNKNOWN')));
@@ -92,8 +104,8 @@ function test_cal_runner(h)
     sar = R(strcmp({R.rx_installation}, 'SAR_ANT'));
     h.isTrue('SAR victim: owner engineering baseline, not CST', ~isempty(sar) && all(strcmp({sar.rx_pattern_type}, 'OWNER_ENGINEERING_BASELINE')));
     stm = R(strcmp({R.victim_band}, 'STM') & strcmp({R.tx_installation}, 'ISL'));
-    h.isTrue('ISL->SBA STM: RFC_ISL_f2.25 + installed SBA 2.25', all(strcmp({stm.tx_pattern_file}, 'isl/RFC_ISL_f2.25.txt')) && ...
-        all(strcmp({stm.rx_pattern_type}, 'INSTALLED')));
+    h.isTrue('ISL->SBA STM: RFC_ISL_f2.25 + origin RFC_SBA_f2.25', all(strcmp({stm.tx_pattern_file}, 'isl/RFC_ISL_f2.25.txt')) && ...
+        all(strcmp({stm.rx_pattern_file}, 'sba/RFC_SBA_f2.25.txt')));
     ev = strcmp({R.status}, 'EVALUATED');
     h.isTrue('every evaluated row carries criterion / margin / route', all(isfinite([R(ev).margin_db])) && ...
         all(~cellfun(@isempty, {R(ev).receiver_criterion})) && all(~cellfun(@isempty, {R(ev).source_provenance})));

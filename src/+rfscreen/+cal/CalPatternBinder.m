@@ -1,16 +1,16 @@
 classdef CalPatternBinder
-    %CALPATTERNBINDER Owner binding rules: (installation, role, canonical frequency) -> CAL pattern.
-    %   GPSA_1 / GPSA_2 (RX)  installed GPS_GPSA1 / GPS_GPSA2 preferred; GPS_ORIGINAL (free-space) is the
-    %                         explicit fallback (warning INSTALLED_PATTERN_MISSING_FREE_SPACE_FALLBACK).
-    %   SBA_NADIR / ZENITH    installed RFC_SBA_<NADIR|ZENITH>_f<tok> where provided (2.06 / 2.25 GHz);
-    %                         generic free-space RFC_SBA_f<tok> at every other frequency. If an installed file
-    %                         of an installed-provided frequency is absent, the free-space fallback is flagged.
-    %   ISL (TX / RX)         free-space RFC_ISL_f<tok> only (no installed override).
-    %   KAA_1 / KAA_2 (TX)    free-space RFC_KAA_f<tok> (reflector included); KAA as a victim is refused.
-    %   Frequencies are matched exactly (canonical alias); a missing plane is INPUT_MISSING, never another band.
+    %CALPATTERNBINDER Owner binding rules for CAL RFI: (installation, role, canonical frequency) -> CAL pattern.
+    %   Owner rule: EVERY attacker and victim uses its ORIGIN (free-space) CST pattern. Installed CST patterns
+    %   (GPSA_GPSA1/2, RFC_SBA_NADIR/ZENITH) are NOT used for RFI (owner rationale: a far-field -> near-field 10 dB
+    %   margin is held, so the installed pattern adds nothing); they are ingested for the installed figures only.
+    %   GPSA_1 / GPSA_2 (RX)  GPSA_ORIGINAL_f1.2 (one CST solve, surrogate at L5 / L2 / L1)
+    %   SBA_NADIR / ZENITH    RFC_SBA_f<tok> at every frequency (2.06 / 2.25 GHz included)
+    %   ISL (TX / RX)         RFC_ISL_f<tok>
+    %   KAA_1 / KAA_2 (TX)    RFC_KAA_f<tok> (reflector included); KAA as a victim is refused.
+    %   Frequencies are matched exactly (canonical alias); a missing plane is INPUT_MISSING, never another band
+    %   and never an installed pattern.
     properties (Constant)
-        INSTALLED_PROVIDED = struct('SBA_NADIR', [2.06e9 2.25e9], 'SBA_ZENITH', [2.06e9 2.25e9], ...
-            'GPSA_1', [], 'GPSA_2', [])   % [] = every frequency (GPS installed pattern is band-common)
+        RFI_PATTERN_TYPE = 'FREE_SPACE'
     end
     properties (SetAccess = private)
         catalog
@@ -48,29 +48,8 @@ classdef CalPatternBinder
                 'warnings', {{}}, 'reason', '');
             C = b.catalog;
             switch info.family
-                case 'GPS'
-                    p = C.find('GPS', installationId, 'INSTALLED', f_Hz);
-                    if isempty(p)
-                        p = C.find('GPS', '', 'FREE_SPACE', f_Hz);
-                        if ~isempty(p)
-                            s.fallback = true;
-                            s.warnings{end+1} = sprintf(['INSTALLED_PATTERN_MISSING_FREE_SPACE_FALLBACK: %s installed pattern ' ...
-                                'absent - GPS_ORIGINAL used (installation effect unknown)'], installationId);
-                        end
-                    end
-                case 'SBA'
-                    prov = b.INSTALLED_PROVIDED.(installationId);
-                    p = C.find('SBA', installationId, 'INSTALLED', f_Hz);
-                    if isempty(p)
-                        p = C.find('SBA', '', 'FREE_SPACE', f_Hz);
-                        if ~isempty(p) && any(abs(prov - f_Hz) < 1e6)
-                            s.fallback = true;
-                            s.warnings{end+1} = sprintf(['INSTALLED_PATTERN_MISSING_FREE_SPACE_FALLBACK: %s installed pattern ' ...
-                                'at %.6g GHz absent - generic RFC_SBA used (installation effect unknown)'], installationId, f_Hz / 1e9);
-                        end
-                    end
-                case {'ISL', 'KAA'}
-                    p = C.find(info.family, '', 'FREE_SPACE', f_Hz);
+                case {'GPS', 'SBA', 'ISL', 'KAA'}
+                    p = C.find(info.family, '', b.RFI_PATTERN_TYPE, f_Hz);
                 case 'SAR'
                     s.reason = 'SAR has no CST CAL pattern (owner engineering receive baseline is used by the RFI analyzer)';
                     return;
@@ -78,8 +57,8 @@ classdef CalPatternBinder
                     error('rfscreen:cal:unknownFamily', 'unknown family %s.', info.family);
             end
             if isempty(p)
-                s.reason = sprintf('no CAL %s pattern for %s at %.6g GHz (no other frequency plane is substituted)', ...
-                    info.family, installationId, f_Hz / 1e9);
+                s.reason = sprintf(['no CAL %s origin (free-space) pattern for %s at %.6g GHz (no other frequency plane ' ...
+                    'and no installed pattern is substituted)'], info.family, installationId, f_Hz / 1e9);
                 return;
             end
             s.status = 'BOUND'; s.pattern = p; s.patternType = p.patternType; s.file = p.sourceFile;
