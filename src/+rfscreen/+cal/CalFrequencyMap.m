@@ -5,7 +5,7 @@ classdef CalFrequencyMap
     %   resolved (no extrapolation, no nearest plane).
     properties (Constant)
         ALIAS_TOL_MHZ = 0.1
-        GPS_COMMON_LABELS = {'L5', 'L2', 'L1'}   % owner: GPS_*_f1.2 = one spatial pattern for L5/L2/L1
+        GPS_COMMON_LABELS = {'L5', 'L2', 'L1'}   % owner: GPS_*_f1.2 = one CST solve (~1.2 GHz) used as a surrogate at L5/L2/L1
     end
     properties (SetAccess = private)
         tokens = {}          % cellstr, as written in the alias file

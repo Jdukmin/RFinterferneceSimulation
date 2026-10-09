@@ -32,12 +32,19 @@ classdef CalRunner
             fmap = rfscreen.cal.CalFrequencyMap.load(fullfile(cfg, 'cal_frequency_aliases.csv'), ...
                 fullfile(model.datasetDir, 'rf_systems.csv'));
             say('[CAL] 2/11 scanning %s', calDir);
-            cat = rfscreen.cal.CalPatternCatalog.scan(calDir, fmap);
+            cat = rfscreen.cal.CalPatternCatalog.scan(calDir, fmap, model);
             nFiles = numel(cat.entries); nValid = cat.nValid();
             say('[CAL] 3/11 validated %d CST ASCII file(s): %d valid, %d not used', nFiles, nValid, nFiles - nValid);
+            for k = 1:numel(cat.discovery); say('[CAL] file_discovery: %s', cat.discovery{k}); end
+            for a = 1:nFiles
+                blk = rfscreen.cal.CalIngestDiagnostics.consoleLines(cat.entries(a));
+                say('%s', strjoin(blk, sprintf('\n')));
+            end
             invFile = fullfile(out, 'validation', 'pattern_inventory.csv');
             C.writeInventory(invFile, cat, calDir);
-            say('[CAL] 4/11 catalog: %d pattern plane(s) (inventory %s)', cat.patterns.Count, invFile);
+            diagFile = fullfile(out, 'validation', 'pattern_diagnostics.json');
+            rfscreen.cal.CalIngestDiagnostics.writeJson(diagFile, cat.entries, cat.discovery);
+            say('[CAL] 4/11 catalog: %d pattern plane(s) (inventory %s, diagnostics %s)', cat.patterns.Count, invFile, diagFile);
 
             % 5. binding
             binder = rfscreen.cal.CalPatternBinder(cat, fullfile(cfg, 'cal_installations.csv'));
@@ -46,7 +53,7 @@ classdef CalRunner
             say('[CAL] 5/11 bindings written (%s)', bindFile);
 
             % 6-8. figures
-            figs = struct('pattern', {{}}, 'installed3d', {{}}, 'bodyCuts', {{}}, 'failed', {{}});
+            figs = struct('pattern', {{}}, 'installed3d', {{}}, 'bodyCuts', {{}}, 'localCuts', {{}}, 'failed', {{}});
             plotsOk = doPlots && nValid > 0 && rfscreen.cal.CalPlotter.setupGraphics();
             if doPlots && nValid > 0 && ~plotsOk
                 say('[CAL] WARNING: no graphics toolkit available - figures skipped');
@@ -80,14 +87,14 @@ classdef CalRunner
 
         function figs = makeFigures(cat, model, out, say)
             P = rfscreen.cal.CalPlotter;
-            figs = struct('pattern', {{}}, 'installed3d', {{}}, 'bodyCuts', {{}}, 'failed', {{}});
+            figs = struct('pattern', {{}}, 'installed3d', {{}}, 'bodyCuts', {{}}, 'localCuts', {{}}, 'failed', {{}});
             E = cat.entries;
             for a = 1:numel(E)
                 if ~strcmp(E(a).status, 'VALID'); continue; end
                 p = cat.patterns(E(a).keys{1});
                 ttl = sprintf('%s [%s, %s]', E(a).stem, E(a).patternType, strjoin(E(a).freqLabels, '/'));
                 try
-                    f = P.planeCuts(p.native, ttl, fullfile(out, 'pattern_plots', lower(E(a).folder), E(a).stem));
+                    f = P.planeCuts(p.native, ttl, fullfile(out, 'pattern_plots', lower(E(a).folder), E(a).stem), p.sourceFrame);
                     figs.pattern = [figs.pattern f];
                 catch err
                     figs.failed{end+1} = sprintf('%s XZ/YZ: %s', E(a).stem, err.message);
@@ -112,9 +119,15 @@ classdef CalRunner
                 catch err
                     figs.failed{end+1} = sprintf('%s body cuts: %s', base, err.message);
                 end
+                try
+                    fl = P.localCuts(p, E(a).freqs_Hz(1), ttl, fullfile(out, 'installed_plots', 'local_cuts', base));
+                    figs.localCuts = [figs.localCuts fl];
+                catch err
+                    figs.failed{end+1} = sprintf('%s local cuts: %s', base, err.message);
+                end
             end
             say('[CAL] 7/11 installed spacecraft 3D figures: %d', numel(figs.installed3d));
-            say('[CAL] 8/11 installed body XZ/YZ/XY figures: %d', numel(figs.bodyCuts));
+            say('[CAL] 8/11 installed body XZ/YZ/XY figures: %d; antenna-local XZ/YZ figures: %d', numel(figs.bodyCuts), numel(figs.localCuts));
             for k = 1:numel(figs.failed); say('[CAL] WARNING figure not produced: %s', figs.failed{k}); end
         end
 
@@ -209,9 +222,17 @@ classdef CalRunner
             L{end+1} = sprintf('3. 패턴 입력: %d개 파일 발견, %d개 유효, %d개 미사용', nF, nV, nF - nV);
             for a = 1:nF
                 if ~strcmp(E(a).status, 'VALID')
-                    L{end+1} = sprintf('   - %s: %s (%s)', E(a).relPath, E(a).status, E(a).message); %#ok<AGROW>
+                    L{end+1} = sprintf('   - %s: %s, 실패 단계 %s, %s', E(a).relPath, E(a).status, E(a).diag.failure_stage, ...
+                        rfscreen.cal.CalRunner.ternary(isempty(E(a).diag.error_identifier), E(a).diag.error_message, ...
+                        E(a).diag.error_identifier)); %#ok<AGROW>
                 end
             end
+            gps = E(strcmp({E.family}, 'GPS') & strcmp({E.status}, 'VALID'));
+            if ~isempty(gps)
+                L{end+1} = sprintf(['   - GPS: CST 시뮬레이션 데이터 1회(약 1.2 GHz) 패턴 %d개를 L5/L2/L1 수신 주파수에 동일 공간 패턴으로 ' ...
+                    '대용(surrogate) 적용 (주파수별 CST 결과 아님).'], numel(gps));
+            end
+            L{end+1} = '   파일별 진단(단계, 오류 id, theta/phi/sample 통계): 7. Appendix 및 validation/pattern_diagnostics.json';
             L{end+1} = '';
             L{end+1} = '4. 입력 누락 (계산/판정 보류 원인)';
             miss = {};
@@ -237,14 +258,24 @@ classdef CalRunner
             L{end+1} = '   - Source = ITU spurious 한계값(4 kHz, 규격 가정); TX chain/filter 손실 0 dB.';
             L{end+1} = '';
             L{end+1} = sprintf('6. 출력: %s', out);
-            L{end+1} = sprintf('   validation/pattern_inventory.csv, validation/pattern_binding.csv; figures: %d pattern-cut, %d installed 3D, %d body-cut', ...
-                numel(figs.pattern), numel(figs.installed3d), numel(figs.bodyCuts));
+            L{end+1} = sprintf(['   validation/pattern_inventory.csv, validation/pattern_diagnostics.json, validation/pattern_binding.csv; ' ...
+                'figures: %d pattern-cut, %d installed 3D, %d body-cut, %d antenna-local cut'], ...
+                numel(figs.pattern), numel(figs.installed3d), numel(figs.bodyCuts), numel(figs.localCuts));
             L{end+1} = '   rfi/pair_results.csv, rfi/summary.csv, rfi/run_summary.txt';
             for k = 1:numel(figs.failed); L{end+1} = ['   FIGURE NOT PRODUCED: ' figs.failed{k}]; end %#ok<AGROW>
+            L{end+1} = '';
+            L{end+1} = '7. Appendix - 패턴 입력 파일별 진단 (CAL ingestion stage)';
+            for k = 1:numel(cat.discovery); L{end+1} = ['[CAL] file_discovery: ' cat.discovery{k}]; end %#ok<AGROW>
+            if nF == 0; L{end+1} = '   CST ASCII 파일 없음 (INPUT_MISSING).'; end
+            for a = 1:nF
+                L = [L rfscreen.cal.CalIngestDiagnostics.consoleLines(E(a))]; %#ok<AGROW>
+            end
             txt = [strjoin(L, nl) nl];
         end
 
         function writeInventory(path, cat, calDir)
+            %WRITEINVENTORY validation/pattern_inventory.csv: one row per file, original columns first, then the
+            %   ingestion diagnostics (rfscreen.cal.CalIngestDiagnostics; full messages also in pattern_diagnostics.json).
             E = cat.entries;
             rows = struct([]);
             for a = 1:numel(E)
@@ -255,14 +286,39 @@ classdef CalRunner
                     'n_theta', NaN, 'n_phi', NaN, 'theta_step_deg', NaN, 'phi_step_deg', NaN, 'peak_gain_dbi', NaN, ...
                     'peak_theta_deg', NaN, 'peak_phi_deg', NaN, 'boresight_gain_dbi', NaN, 'min_gain_dbi', NaN, ...
                     'pole_spread_north_db', NaN, 'pole_spread_south_db', NaN, 'provenance', '', 'message', E(a).message);
-                if ~isempty(E(a).data)
+                d = E(a).diag;
+                r.n_rows = d.n_rows; r.n_columns = d.n_columns; r.n_theta = d.n_theta; r.n_phi = d.n_phi;
+                r.theta_step_deg = d.theta_step_deg; r.phi_step_deg = d.phi_step_deg;
+                if strcmp(E(a).status, 'VALID')
                     s = E(a).data.summary();
-                    r.n_rows = s.nRows; r.n_columns = E(a).data.info.nColumns; r.n_theta = s.nTheta; r.n_phi = s.nPhi;
+                    r.n_rows = s.nRows; r.n_theta = s.nTheta; r.n_phi = s.nPhi;
                     r.theta_step_deg = s.thetaStep_deg; r.phi_step_deg = s.phiStep_deg;
                     r.peak_gain_dbi = s.peakGain_dBi; r.peak_theta_deg = s.peakTheta_deg; r.peak_phi_deg = s.peakPhi_deg;
-                    r.boresight_gain_dbi = s.boresightGain_dBi; r.min_gain_dbi = s.minGain_dBi;
+                    r.min_gain_dbi = s.minGain_dBi;
+                    p = cat.patterns(E(a).keys{1});
+                    if strcmp(E(a).patternType, 'INSTALLED')
+                        r.boresight_gain_dbi = p.gainBody(p.cstFrequency_Hz, p.R_BA(:, 1));   % toward panel normal n_B
+                    else
+                        r.boresight_gain_dbi = s.boresightGain_dBi;                          % +Z_L
+                    end
                     r.pole_spread_north_db = s.poleSpreadNorth_dB; r.pole_spread_south_db = s.poleSpreadSouth_dB;
-                    r.provenance = sprintf('SIMULATED_3D; CST ASCII native grid; %s', E(a).patternType);
+                    r.provenance = sprintf('SIMULATED_3D; CST ASCII native grid; %s; source frame %s', E(a).patternType, E(a).sourceFrame);
+                end
+                r.rel_path = E(a).relPath; r.installation_id = E(a).installationId;
+                r.source_frame = E(a).sourceFrame;
+                r.source_simulation_frequency_ghz = E(a).sourceSimulationFrequency_Hz / 1e9;
+                r.evaluation_frequencies_ghz = r.frequencies_ghz;
+                r.frequency_treatment = E(a).frequencyTreatment;
+                r.failure_stage = d.failure_stage; r.last_stage_completed = d.last_stage_completed;
+                r.error_identifier = d.error_identifier; r.error_message = d.error_message; r.line_number = d.line_number;
+                for f = {'file_bytes', 'preamble_lines', 'theta_min_deg', 'theta_max_deg', 'n_theta_off_step', ...
+                        'phi_min_deg', 'phi_max_deg', 'n_phi_off_step', 'phi_convention', 'n_phi360_rows', ...
+                        'gain_min_dbi', 'gain_max_dbi', 'n_nonfinite_theta', 'n_nonfinite_phi', 'n_nonfinite_gain', ...
+                        'first_nonfinite_line', 'expected_samples', 'expected_full_sphere_samples', 'actual_samples', ...
+                        'duplicate_samples', 'first_duplicate_line', 'missing_samples', 'missing_theta_planes', ...
+                        'missing_phi_planes', 'example_missing_theta_deg', 'example_missing_phi_deg', 'n_rows_theta0', ...
+                        'n_rows_theta180', 'n_phi_at_theta0', 'n_phi_at_theta180'}
+                    r.(f{1}) = d.(f{1});
                 end
                 if isempty(rows); rows = r; else; rows(end+1) = r; end %#ok<AGROW>
             end

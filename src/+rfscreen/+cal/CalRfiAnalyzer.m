@@ -2,7 +2,9 @@ classdef CalRfiAnalyzer
     %CALRFIANALYZER CAL pair plan -> existing victim-band PSD engine (no new physics).
     %   For each cal_rfi_plan.csv row (victim band x CST frequency plane) and attacker/victim pair:
     %     geometry   : SimplifiedSpacecraftBuilder installations (position, R_BA); u = unit(p_rx - p_tx)
-    %     directions : u_tx,A = R_BA,tx' u ; u_rx,A = R_BA,rx' (-u)
+    %     directions : u_tx,A = R_BA,tx' u ; u_rx,A = R_BA,rx' (-u)  (antenna frame, engine contract); the pattern
+    %                  maps them to its raw CST frame: FREE_SPACE (CST_LOCAL) v_L = M_AL' u_A; INSTALLED
+    %                  (SPACECRAFT_BODY_FIXED) d_B = R_BA u_A = +/-u, queried on the raw grid without rotation
     %     coupling   : rfscreen.psd.VictimBandCoupling.patternRoute  C = G_tx(f_v) + G_rx(f_v) - FSPL(f_v)
     %                  (Realized Gain: no separate S11 loss; CST plane = victim frequency only)
     %     source     : ITU source rows (EmissionSpec) of the attacker tx_system in source_band, carrier from rf_systems.csv
@@ -65,10 +67,6 @@ classdef CalRfiAnalyzer
             uT = iT.R_BA.' * u; uR = iR.R_BA.' * (-u);
             [row.tx_az_deg, row.tx_el_deg] = DC.directionToAzEl(uT);
             [row.rx_az_deg, row.rx_el_deg] = DC.directionToAzEl(uR);
-            [row.tx_cst_theta_deg, row.tx_cst_phi_deg] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi( ...
-                rfscreen.kaa.CstLocalFrameAdapter.localToAntenna().' * uT);
-            [row.rx_cst_theta_deg, row.rx_cst_phi_deg] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi( ...
-                rfscreen.kaa.CstLocalFrameAdapter.localToAntenna().' * uR);
             los = rfscreen.geometry.LineOfSight.segment(tx, rx, iT.position_m, iR.position_m, model.structures);
             row.los_status = los.status;
             if strcmp(los.status, 'BLOCKED')
@@ -87,7 +85,11 @@ classdef CalRfiAnalyzer
             sT = binder.bind(tx, 'TX', f);
             W = [W sT.warnings];
             row.tx_pattern_type = sT.patternType; row.tx_pattern_file = sT.file;
-            if strcmp(sT.status, 'BOUND'); row.tx_pattern_class = class(sT.pattern); end
+            if strcmp(sT.status, 'BOUND')
+                row.tx_pattern_class = class(sT.pattern); row.tx_pattern_source_frame = sT.pattern.sourceFrame;
+                % raw CST (theta, phi) actually queried, in the pattern's own source frame
+                [row.tx_cst_theta_deg, row.tx_cst_phi_deg] = sT.pattern.sourceThetaPhi(uT);
+            end
             % ---- RX pattern ----
             rinfo = binder.roleInfo(rx);
             if strcmp(rinfo.family, 'SAR')
@@ -104,7 +106,8 @@ classdef CalRfiAnalyzer
                 sR = binder.bind(rx, 'RX', f);
                 row.rx_pattern_type = sR.patternType; row.rx_pattern_file = sR.file;
                 if strcmp(sR.status, 'BOUND')
-                    row.rx_pattern_class = class(sR.pattern);
+                    row.rx_pattern_class = class(sR.pattern); row.rx_pattern_source_frame = sR.pattern.sourceFrame;
+                    [row.rx_cst_theta_deg, row.rx_cst_phi_deg] = sR.pattern.sourceThetaPhi(uR);
                     rResp = rfscreen.cal.CalBandResponse.fromPattern(band, sR.pattern);
                 end
             end
@@ -171,6 +174,7 @@ classdef CalRfiAnalyzer
                 'tx_pattern_class', '', 'rx_pattern_class', '', 'tx_pattern_provenance', '', 'rx_pattern_provenance', '', ...
                 'tx_az_deg', NaN, 'tx_el_deg', NaN, 'rx_az_deg', NaN, 'rx_el_deg', NaN, ...
                 'tx_cst_theta_deg', NaN, 'tx_cst_phi_deg', NaN, 'rx_cst_theta_deg', NaN, 'rx_cst_phi_deg', NaN, ...
+                'tx_pattern_source_frame', '', 'rx_pattern_source_frame', '', ...
                 'tx_gain_dbi', NaN, 'rx_gain_dbi', NaN, 'distance_m', NaN, 'fspl_db', NaN, 'coupling_db', NaN, ...
                 'coupling_route', '', 'coupling_fidelity', '', 'los_status', '', ...
                 'source_psd_dbm_hz', NaN, 'source_plane', '', 'source_provenance', '', 'tx_chain_loss_db', NaN, ...
@@ -233,6 +237,11 @@ classdef CalRfiAnalyzer
             end
             s = sprintf('%s; %s', b.pattern.provenance, b.pattern.patternClass());
             if b.pattern.isInstalled(); s = [s '; installedSource=' b.pattern.installedSource]; end
+            s = sprintf('%s; sourceFrame=%s', s, b.pattern.sourceFrame);
+            if strcmp(b.pattern.frequencyTreatment, 'SURROGATE')
+                s = sprintf('%s; frequencyTreatment=SURROGATE (one CST solve at %.6g GHz reused at %.6g GHz)', s, ...
+                    b.pattern.sourceSimulationFrequency_Hz / 1e9, b.pattern.cstFrequency_Hz / 1e9);
+            end
         end
 
     end

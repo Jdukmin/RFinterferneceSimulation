@@ -3,7 +3,8 @@ classdef CalBandResponse
     %   rfscreen.psd.VictimBandCoupling.patternRoute unchanged (gainAt(band, f, d) contract).
     %   The band tag travels with the response (a response of another band is refused) and the
     %   pattern itself refuses any frequency other than its CST plane. Directions are antenna-frame
-    %   unit vectors u_A (+X_A = boresight).
+    %   unit vectors u_A (+X_A = boresight); each CST pattern class maps u_A to its own raw source frame
+    %   (free-space: CST local; installed: spacecraft body, d_B = R_BA u_A).
     %   kind CST_PATTERN : rfscreen.cal.CstNative*Pattern
     %   kind SAR_OWNER   : rfscreen.psd.SarOwnerPattern (normalised) + absolute peak [dBi]; off-axis
     %                      angle from +X_A (rotational envelope, existing Task-2 convention).
