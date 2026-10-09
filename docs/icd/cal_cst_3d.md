@@ -10,7 +10,7 @@ CAL victim-band RFI through the **existing** engine. The 2D XZ/YZ pipeline (`Csv
 
 ```
 data/cal/
-├─ gps/  GPS_ORIGINAL_f1.2.txt  GPS_GPSA1_f1.2.txt  GPS_GPSA2_f1.2.txt
+├─ gps/  GPSA_ORIGINAL_f1.2.txt  GPSA_GPSA1_f1.2.txt  GPSA_GPSA2_f1.2.txt
 ├─ isl/  RFC_ISL_f<tok>.txt
 ├─ kaa/  RFC_KAA_f<tok>.txt
 └─ sba/  RFC_SBA_f<tok>.txt  RFC_SBA_NADIR_f<tok>.txt  RFC_SBA_ZENITH_f<tok>.txt
@@ -18,8 +18,8 @@ data/cal/
 
 | Name | Family / installation | Type | Frequencies |
 |---|---|---|---|
-| `GPS_ORIGINAL_f1.2` | GPS, generic | FREE_SPACE (reference / fallback) | L5, L2, L1 (shared spatial pattern) |
-| `GPS_GPSA1_f1.2` / `GPS_GPSA2_f1.2` | GPSA_1 / GPSA_2 | INSTALLED | L5, L2, L1 (shared) |
+| `GPSA_ORIGINAL_f1.2` | GPS, generic | FREE_SPACE (reference / fallback) | L5, L2, L1 (shared spatial pattern) |
+| `GPSA_GPSA1_f1.2` / `GPSA_GPSA2_f1.2` | GPSA_1 / GPSA_2 | INSTALLED | L5, L2, L1 (shared) |
 | `RFC_ISL_f<tok>` | ISL | FREE_SPACE (no installed override) | `<tok>` |
 | `RFC_KAA_f<tok>` | KAA_1 / KAA_2 (reflector included) | FREE_SPACE, attacker only | `<tok>` |
 | `RFC_SBA_f<tok>` | SBA_NADIR / SBA_ZENITH | FREE_SPACE (generic) | `<tok>` |
@@ -99,14 +99,32 @@ The raw CST (θ, φ) grid is always interpolated in its **own source frame** (`s
   `M_AL = [0 0 1; 0 −1 0; 1 0 0]`; `R_BL = R_BA M_AL` (`CstLocalFrameAdapter.fromR_BA`), so `+Z_L` = panel outward
   normal and `+X_L = +X_B` orthogonalised to it (same roll as `cst/closed_network/full_spacecraft_geometry.json`).
 * Free-space regression: CST θ = 0 → `+Z_L` → `+X_A` → az = 0, el = 0.
-* Installed: `gainBody(f, d_B)` is the raw lookup. `gainAntenna(f, u_A)` (RFI engine contract) uses
-  `d_B = R_BA u_A`; antenna-local requests (`gainLocal`, local cuts) use `d_B = R_BL d_L`. The transform direction is
-  always LOCAL → BODY → raw installed query, never BODY → LOCAL. One frame definition for every frequency (no
-  flip / sign / θ+180 / φ+180 / per-frequency patch); 2.06 vs 2.25 GHz asymmetry is scattering, not orientation.
-  The installation mount `R_BA` is required at construction (`rfscreen:cal:installedMountRequired`).
+* Installed: `gainRaw(f, d_raw)` is the raw lookup on the CST result axes. The displayed Body direction is
+  `d_B = C_raw_to_body d_raw` (§4.1); `gainBody(f, d_B)` queries `d_raw = Cᵀ d_B`, `gainAntenna(f, u_A)` uses
+  `d_B = R_BA u_A`, antenna-local requests (`gainLocal`, local cuts) use `d_B = R_BL d_L`. The transform direction is
+  always LOCAL → BODY → `Cᵀ` → raw installed query, never BODY → LOCAL. The installation mount `R_BA` is required at
+  construction (`rfscreen:cal:installedMountRequired`). Installed patterns are used for figures only (RFI: §5).
 * `R_BA` / positions come only from `antenna_installations.csv` + `panels.csv` via `SimplifiedSpacecraftBuilder`
   (GPSA_1/2 → PANEL_3 `n_B = [0, −0.866, −0.5]`; SBA_NADIR [255, 870, 1030] mm → PANEL_6 `n_B = [0, +0.866, +0.5]`;
   SBA_ZENITH [255, −530, −1240] mm → PANEL_4 `n_B = [0, 0, −1]`; ISL → PANEL_3; KAA gimbal reference = panel normal).
+### 4.1 Installed plot-frame correction (`CalPlotFrameAdapter`)
+
+Owner comparison of the CAL XY / XZ / YZ figures with the CST results showed axis-sign mismatches between the raw
+installed CST result axes and the displayed Body axes. They are corrected by **one** 3×3 matrix per dataset applied to
+direction vectors (never per plane, never to gain values):
+
+| Installed dataset | `C_raw_to_body` | Owner observation reproduced |
+|---|---|---|
+| GPSA (`GPSA_GPSA1`, `GPSA_GPSA2`; every bound band) | `diag(+1, −1, +1)` | XY Y-mirrored, XZ unchanged, YZ Y-mirrored |
+| SBA_NADIR / SBA_ZENITH @ 2.06 GHz | `diag(+1, +1, −1)` | XY unchanged, XZ / YZ Z-mirrored |
+| SBA_NADIR / SBA_ZENITH @ 2.25 GHz | `diag(+1, −1, −1)` | XY Y-mirrored, XZ Z-mirrored, YZ 180° inversion |
+| free-space patterns; any other installed dataset | identity (not verified; nothing invented) | — |
+
+3D view: `d_B = C d_raw` with colour `G(θ, φ)`; body / local cuts: `d_raw = Cᵀ d_B`. `C` is a plotting-frame
+adapter, **not** the physical mount: `R_BA` / `R_BL` are unchanged. Diagnostic (`validation/installed_peak_alignment.csv`,
+console, run-summary Appendix 7): corrected raw-peak direction vs panel normal (dot product, angle error); a peak
+≥ 90° from the normal is flagged as a strong warning, nothing hard-fails.
+
 * RFI rows report the raw (θ, φ) actually queried in the pattern's own source frame (`tx/rx_cst_theta_deg`,
   `tx/rx_cst_phi_deg`) and `tx/rx_pattern_source_frame`.
 
@@ -123,7 +141,7 @@ near-field 10 dB margin is held, so the installed pattern adds nothing). Install
 
 | Installation | RFI pattern |
 |---|---|
-| GPSA_1 / GPSA_2 (RX) | `GPS_ORIGINAL_f1.2` (surrogate at L5 / L2 / L1) |
+| GPSA_1 / GPSA_2 (RX) | `GPSA_ORIGINAL_f1.2` (surrogate at L5 / L2 / L1) |
 | SBA_NADIR / SBA_ZENITH | `RFC_SBA_f<tok>` at every frequency, 2.06 / 2.25 GHz included |
 | ISL | `RFC_ISL_f<tok>` (TX and RX; 10.6 GHz is the victim pattern) |
 | KAA_1 / KAA_2 | `RFC_KAA_f<tok>` (TX only; RX binding refused: `rfscreen:cal:kaaAttackerOnly`) |
@@ -157,21 +175,22 @@ criterion, margin, required suppression, validity and warnings.
 ## 7. Figures (`CalPlotter`; values = Realized Gain, radius = visualization only)
 
 * `pattern_plots/<family>/<stem>_XZ.png | _YZ.png`: raw source-frame full cuts; XZ = φ 0 (+X, angle +θ) ∪ φ 180
-  (−X, −θ), YZ = φ 90 ∪ φ 270; 0 = +Z (free-space: boresight `+Z_L`; installed: `+Z_B`, i.e. body XZ / YZ planes).
+  (−X, −θ), YZ = φ 90 ∪ φ 270; 0 = +Z (free-space: boresight `+Z_L`; installed: raw CST `+Z`, uncorrected).
 * `installed_plots/3d/<NAME>_INSTALLED_3D.png`: hull (SSOT panels, mounting panel highlighted), body axes, mount point,
-  panel outward normal `n_B`, raw peak direction, pattern translated to the mount; raw (θ_B, φ_B) → `d_B` with no
-  rotation. Radius `r = R_vis · max(0, G − (G_max − 30 dB)) / 30 dB`.
+  panel outward normal `n_B`, corrected peak direction, pattern translated to the mount; raw (θ, φ) → `d_raw` →
+  `d_B = C d_raw` (§4.1), gain colour unchanged. Radius `r = R_vis · max(0, G − (G_max − 30 dB)) / 30 dB`.
 * `installed_plots/body_cuts/<NAME>_BODY_XZ|YZ|XY.png`: body planes `Y_B = 0`, `X_B = 0`, `Z_B = 0`; each body
-  direction queried directly on the raw installed grid (never a rotated 2D cut), with hull projection, mount point and
+  direction `d_B` queried as `d_raw = Cᵀ d_B` on the raw installed grid (never a rotated or flipped 2D cut), with hull projection, mount point and
   normal projection.
 * `installed_plots/local_cuts/<NAME>_LOCAL_XZ|YZ.png`: antenna-local cuts (`+Z_L` = `n_B`, `+X_L` = `+X_B`
-  orthogonalised); `d_L → d_B = R_BL d_L →` raw installed grid.
+  orthogonalised); `d_L → d_B = R_BL d_L → d_raw = Cᵀ d_B →` raw installed grid.
 * `<NAME>` = `GPSA1_L1L2L5` / `GPSA2_L1L2L5` (one spatial pattern shared by the three GNSS bands) or
   `SBA_NADIR_2p06`, `SBA_NADIR_2p25`, `SBA_ZENITH_2p06`, `SBA_ZENITH_2p25`.
 
 ## 8. Outputs (`output/cal/`)
 
-`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/pattern_binding.csv`, `pattern_plots/`,
+`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/installed_peak_alignment.csv`,
+`validation/pattern_binding.csv`, `pattern_plots/`,
 `installed_plots/{3d,body_cuts,local_cuts}/`,
 `rfi/pair_results.csv`, `rfi/summary.csv`, `rfi/run_summary.txt` (results first, REPORTING_GUIDE wording). The runner
 removes its own stale `png/csv/txt` in these sub-folders before writing.

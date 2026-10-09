@@ -1,9 +1,9 @@
 classdef CalPatternBinder
     %CALPATTERNBINDER Owner binding rules for CAL RFI: (installation, role, canonical frequency) -> CAL pattern.
     %   Owner rule: EVERY attacker and victim uses its ORIGIN (free-space) CST pattern. Installed CST patterns
-    %   (GPS_GPSA1/2, RFC_SBA_NADIR/ZENITH) are NOT used for RFI (owner rationale: a far-field -> near-field 10 dB
+    %   (GPSA_GPSA1/2, RFC_SBA_NADIR/ZENITH) are NOT used for RFI (owner rationale: a far-field -> near-field 10 dB
     %   margin is held, so the installed pattern adds nothing); they are ingested for the installed figures only.
-    %   GPSA_1 / GPSA_2 (RX)  GPS_ORIGINAL_f1.2 (one CST solve, surrogate at L5 / L2 / L1)
+    %   GPSA_1 / GPSA_2 (RX)  GPSA_ORIGINAL_f1.2 (one CST solve, surrogate at L5 / L2 / L1)
     %   SBA_NADIR / ZENITH    RFC_SBA_f<tok> at every frequency (2.06 / 2.25 GHz included)
     %   ISL (TX / RX)         RFC_ISL_f<tok>
     %   KAA_1 / KAA_2 (TX)    RFC_KAA_f<tok> (reflector included); KAA as a victim is refused.

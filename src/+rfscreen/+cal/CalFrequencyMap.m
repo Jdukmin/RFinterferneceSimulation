@@ -5,7 +5,7 @@ classdef CalFrequencyMap
     %   resolved (no extrapolation, no nearest plane).
     properties (Constant)
         ALIAS_TOL_MHZ = 0.1
-        GPS_COMMON_LABELS = {'L5', 'L2', 'L1'}   % owner: GPS_*_f1.2 = one CST solve (~1.2 GHz) used as a surrogate at L5/L2/L1
+        GPS_COMMON_LABELS = {'L5', 'L2', 'L1'}   % owner: GPSA_*_f1.2 = one CST solve (~1.2 GHz) used as a surrogate at L5/L2/L1
     end
     properties (SetAccess = private)
         tokens = {}          % cellstr, as written in the alias file
@@ -74,7 +74,7 @@ classdef CalFrequencyMap
         end
 
         function [f_Hz, labels] = gpsCommon(m)
-            %GPSCOMMON Canonical L5/L2/L1 frequencies shared by the GPS_*_f1.2 patterns.
+            %GPSCOMMON Canonical L5/L2/L1 frequencies shared by the GPSA_*_f1.2 patterns.
             labels = rfscreen.cal.CalFrequencyMap.GPS_COMMON_LABELS;
             f_Hz = zeros(1, numel(labels));
             for i = 1:numel(labels)

@@ -16,6 +16,13 @@ function test_cal_runner(h)
         h.isTrue(['output ' f{1}], exist(fullfile(out, f{1}), 'file') == 2);
     end
     h.isTrue('32 files valid', res.catalog.nValid() == 32);
+    al = res.peakAlignment;
+    h.isTrue('installed peak alignment: 6 installed files, corrected peak on the panel normal', numel(al) == 6 && ...
+        all([al.angle_error_deg] < 1e-3) && all(cellfun(@isempty, {al.warning})) && ...
+        exist(fullfile(out, 'validation', 'installed_peak_alignment.csv'), 'file') == 2);
+    h.isTrue('alignment rows carry correction keys', any(strcmp({al.correction}, 'GPSA_INSTALLED')) && ...
+        any(strcmp({al.correction}, 'SBA_INSTALLED_2P06')) && any(strcmp({al.correction}, 'SBA_INSTALLED_2P25')));
+    h.isTrue('run summary appendix reports the alignment', ~isempty(strfind(res.runSummary, 'installed peak alignment: GPSA_1')));
     inv = fileread(fullfile(out, 'validation', 'pattern_inventory.csv'));
     hdr = strsplit(strtok(inv, sprintf('\n')), ',');
     need = {'rel_path', 'family', 'installation_id', 'pattern_type', 'status', 'failure_stage', 'error_identifier', ...
@@ -29,7 +36,7 @@ function test_cal_runner(h)
         J = jsondecode(fileread(jf));
         h.isTrue('diagnostics JSON parses: one record per file', numel(J.files) == numel(res.catalog.entries));
     end
-    h.isTrue('run summary appendix lists every file', ~isempty(strfind(res.runSummary, '[CAL] gps/GPS_GPSA1_f1.2.txt')) && ...
+    h.isTrue('run summary appendix lists every file', ~isempty(strfind(res.runSummary, '[CAL] gps/GPSA_GPSA1_f1.2.txt')) && ...
         ~isempty(strfind(res.runSummary, 'bound as surrogate for: L5 / L2 / L1')));
     if plots
         h.isTrue('64 pattern-coordinate figures', numel(res.figures.pattern) == 64 && ...
@@ -52,7 +59,7 @@ function test_cal_runner(h)
     r = R(k);
     h.isTrue('KAA->GPSA_1 L1: one row', numel(k) == 1);
     h.eqStr('KAA->L1 TX file at victim frequency', r.tx_pattern_file, 'kaa/RFC_KAA_f1.5754.txt');
-    h.eqStr('GPSA_1 RX origin file', r.rx_pattern_file, 'gps/GPS_ORIGINAL_f1.2.txt');
+    h.eqStr('GPSA_1 RX origin file', r.rx_pattern_file, 'gps/GPSA_ORIGINAL_f1.2.txt');
     h.isTrue('TX / RX both FREE_SPACE origin', strcmp(r.tx_pattern_type, 'FREE_SPACE') && strcmp(r.rx_pattern_type, 'FREE_SPACE'));
     h.isTrue('no installed pattern anywhere in RFI', ~any(strcmp({R.tx_pattern_type}, 'INSTALLED')) && ~any(strcmp({R.rx_pattern_type}, 'INSTALLED')) && ...
         ~any(~cellfun(@isempty, regexp([{R.tx_pattern_file} {R.rx_pattern_file}], 'GPSA[12]_f|SBA_(NADIR|ZENITH)_f', 'once'))));
