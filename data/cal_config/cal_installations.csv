@@ -6,10 +6,10 @@
 # Positions / panels / R_BA always come from antenna_installations.csv + panels.csv (never from this file).
 # Fields must not contain commas.
 installation_id,family,cal_roles,tx_system,note
-GPSA_1,GPS,RX,,GNSS receive; installed pattern GPS_GPSA1 preferred; GPS_ORIGINAL = free-space fallback
-GPSA_2,GPS,RX,,GNSS receive; installed pattern GPS_GPSA2 preferred; GPS_ORIGINAL = free-space fallback
-SBA_NADIR,SBA,TX;RX,S_TM_TX,installed RFC_SBA_NADIR at 2.06 / 2.25 GHz; generic free-space RFC_SBA elsewhere
-SBA_ZENITH,SBA,TX;RX,S_TM_TX,installed RFC_SBA_ZENITH at 2.06 / 2.25 GHz; generic free-space RFC_SBA elsewhere
+GPSA_1,GPS,RX,,GNSS receive; RFI uses origin GPS_ORIGINAL (installed GPS_GPSA1 = figures only)
+GPSA_2,GPS,RX,,GNSS receive; RFI uses origin GPS_ORIGINAL (installed GPS_GPSA2 = figures only)
+SBA_NADIR,SBA,TX;RX,S_TM_TX,RFI uses origin RFC_SBA at every frequency (installed RFC_SBA_NADIR = figures only)
+SBA_ZENITH,SBA,TX;RX,S_TM_TX,RFI uses origin RFC_SBA at every frequency (installed RFC_SBA_ZENITH = figures only)
 ISL,ISL,TX;RX,ISL_X_TX,free-space RFC_ISL only (no installed override)
 KAA_1,KAA,TX,KA_DLS_TX,attacker only; RFC_KAA = full reflector free-space pattern; gimbal reference orientation
 KAA_2,KAA,TX,KA_DLS_TX,attacker only; RFC_KAA = full reflector free-space pattern; gimbal reference orientation

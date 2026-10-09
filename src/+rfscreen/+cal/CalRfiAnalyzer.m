@@ -125,9 +125,6 @@ classdef CalRfiAnalyzer
                 row.warnings = strjoin(W, ' | ');
                 return;
             end
-            if strcmp(sT.patternType, 'FREE_SPACE') || strcmp(row.rx_pattern_type, 'FREE_SPACE')
-                W{end+1} = 'FREE_SPACE_PATTERN_IN_PATH (installation effect of that antenna not included)';
-            end
             tResp = rfscreen.cal.CalBandResponse.fromPattern(band, sT.pattern);
 
             % ---- source ----

@@ -117,17 +117,19 @@ The raw CST (θ, φ) grid is always interpolated in its **own source frame** (`s
 `AntennaPattern` contract but answers **only at its own CST plane** (`rfscreen:cal:wrongFrequencyPlane` otherwise) and
 queries the native grid; `obj.grid` is an az/el resampling at the native step kept for compatibility only.
 
-`CalPatternBinder` (roles in `data/cal_config/cal_installations.csv`):
+`CalPatternBinder` (roles in `data/cal_config/cal_installations.csv`). **Owner rule: every RFI attacker and victim uses
+its origin (free-space) CST pattern; installed patterns are never used for RFI** (owner rationale: a far-field →
+near-field 10 dB margin is held, so the installed pattern adds nothing). Installed files are ingested and drawn (§7) only.
 
-| Installation | Rule |
+| Installation | RFI pattern |
 |---|---|
-| GPSA_1 / GPSA_2 (RX) | installed `GPS_GPSA1/2` → else `GPS_ORIGINAL` with `INSTALLED_PATTERN_MISSING_FREE_SPACE_FALLBACK` |
-| SBA_NADIR / SBA_ZENITH | installed file where provided (2.06 / 2.25 GHz) → else generic `RFC_SBA_f<tok>` (fallback flagged at 2.06 / 2.25) |
-| ISL | `RFC_ISL_f<tok>` free-space only (TX and RX; 10.6 GHz is the victim pattern) |
+| GPSA_1 / GPSA_2 (RX) | `GPS_ORIGINAL_f1.2` (surrogate at L5 / L2 / L1) |
+| SBA_NADIR / SBA_ZENITH | `RFC_SBA_f<tok>` at every frequency, 2.06 / 2.25 GHz included |
+| ISL | `RFC_ISL_f<tok>` (TX and RX; 10.6 GHz is the victim pattern) |
 | KAA_1 / KAA_2 | `RFC_KAA_f<tok>` (TX only; RX binding refused: `rfscreen:cal:kaaAttackerOnly`) |
 | SAR_ANT (RX) | no CST file: existing owner engineering receive baseline (`SarOwnerPattern` + 52 dBi peak) |
 
-A missing plane is `INPUT_MISSING`; another frequency's pattern is never substituted, nothing is extrapolated.
+A missing plane is `INPUT_MISSING`; another frequency's pattern or an installed pattern is never substituted, nothing is extrapolated.
 
 ## 6. CAL RFI (`CalRfiAnalyzer`, plan `data/cal_config/cal_rfi_plan.csv`)
 
@@ -148,7 +150,7 @@ No new physics: `C_EM(f_v) = G_tx,realized(f_v) + G_rx,realized(f_v) − FSPL(f_
 
 Row status: `EVALUATED` (PASS = 해당 기준 충족 / FAIL = 해당 기준 초과), `COUPLING_EVALUATED_SOURCE_MISSING`,
 `INPUT_MISSING_PATTERN` (verdict UNKNOWN = 최종 판정 보류). LOS blockage is reported as geometry evidence only (no
-attenuation). Every row records TX/RX file, type (FREE_SPACE / INSTALLED / OWNER_ENGINEERING_BASELINE), class,
+attenuation). Every row records TX/RX file, type (FREE_SPACE origin / OWNER_ENGINEERING_BASELINE), class,
 provenance, directional gains, CST θ/φ and az/el, distance, FSPL, route, source PSD and provenance, victim PSD,
 criterion, margin, required suppression, validity and warnings.
 

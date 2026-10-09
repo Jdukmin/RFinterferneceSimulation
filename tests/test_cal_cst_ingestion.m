@@ -325,8 +325,8 @@ function test_cal_cst_ingestion(h)
     h.eqStr('owner GPS installed file valid', st('gps/GPS_GPSA1_f1.2.txt'), 'VALID');
     B = rfscreen.cal.CalPatternBinder(cat, fullfile(cfg, 'cal_installations.csv'));
     g1 = {}; for fr = [f5 f2 f1]; g1{end+1} = B.bind('GPSA_1', 'RX', fr); end %#ok<AGROW>
-    h.isTrue('GPS: L5/L2/L1 share GPS_GPSA1_f1.2', all(cellfun(@(x) strcmp(x.status, 'BOUND') && ...
-        ~isempty(strfind(x.file, 'GPS_GPSA1_f1.2')) && strcmp(x.patternType, 'INSTALLED'), g1)));
+    h.isTrue('GPS RFI: L5/L2/L1 share origin GPS_ORIGINAL_f1.2 (installed GPSA1 not used)', all(cellfun(@(x) strcmp(x.status, 'BOUND') && ...
+        ~isempty(strfind(x.file, 'GPS_ORIGINAL_f1.2')) && strcmp(x.patternType, 'FREE_SPACE') && ~x.fallback && isempty(x.warnings), g1)));
     u = [0.3; -0.5; 0.81]; u = u / norm(u);
     gg = cellfun(@(x, fr) x.pattern.gainAntenna(fr, u), g1, {f5, f2, f1});
     h.eqTol('GPS: identical spatial pattern at L5/L2/L1', max(gg) - min(gg), 0, 1e-12);
@@ -360,22 +360,22 @@ function test_cal_cst_ingestion(h)
         any(~cellfun(@isempty, strfind(cat4.discovery, 'notes.csv'))));
     B4 = rfscreen.cal.CalPatternBinder(cat4, fullfile(cfg, 'cal_installations.csv'));
     b4 = B4.bind('GPSA_1', 'RX', f1);
-    h.isTrue('failed GPS files are not used (no repair, no fallback to a failed file)', strcmp(b4.status, 'INPUT_MISSING'));
+    h.isTrue('failed GPS_ORIGINAL -> INPUT_MISSING (valid installed GPSA2 never substituted)', strcmp(b4.status, 'INPUT_MISSING') && ...
+        strcmp(B4.bind('GPSA_2', 'RX', f1).status, 'INPUT_MISSING'));
     b2 = B.bind('GPSA_2', 'RX', f1);
-    h.isTrue('GPSA_2 without installed file -> GPS_ORIGINAL free-space fallback, flagged', strcmp(b2.patternType, 'FREE_SPACE') && ...
-        b2.fallback && ~isempty(strfind(b2.file, 'GPS_ORIGINAL')) && ~isempty(strfind(b2.warnings{1}, 'FALLBACK')));
+    h.isTrue('GPSA_2 -> GPS_ORIGINAL origin pattern', strcmp(b2.patternType, 'FREE_SPACE') && ~b2.fallback && ...
+        ~isempty(strfind(b2.file, 'GPS_ORIGINAL')));
     cat2 = rfscreen.cal.CalPatternCatalog.scan(fullfile(fx, 'none'), fmap);
     h.isTrue('missing cal dir -> empty catalog', isempty(cat2.entries) && cat2.patterns.Count == 0);
     root3 = fullfile(tmp, 'cal3'); S.buildTree(root3, 15);
     cat3 = rfscreen.cal.CalPatternCatalog.scan(root3, fmap);
     B3 = rfscreen.cal.CalPatternBinder(cat3, fullfile(cfg, 'cal_installations.csv'));
     a1 = B3.bind('GPSA_1', 'RX', f1); a2 = B3.bind('GPSA_2', 'RX', f1);
-    h.isTrue('GPSA1 != GPSA2 installed patterns', ~strcmp(a1.file, a2.file) && ...
-        abs(a1.pattern.gainAntenna(f1, u) - a2.pattern.gainAntenna(f1, u)) > 0.1 && ~a1.fallback && ~a2.fallback);
+    h.isTrue('GPSA_1 / GPSA_2 RFI both use GPS_ORIGINAL', strcmp(a1.file, a2.file) && ~isempty(strfind(a1.file, 'GPS_ORIGINAL')));
     s206 = B3.bind('SBA_NADIR', 'TX', 2.06e9); s225 = B3.bind('SBA_ZENITH', 'RX', 2.25e9);
     sL1 = B3.bind('SBA_NADIR', 'TX', f1); sX = B3.bind('SBA_ZENITH', 'TX', 10.6e9);
-    h.isTrue('SBA_NADIR 2.06 -> installed override', strcmp(s206.patternType, 'INSTALLED') && ~isempty(strfind(s206.file, 'RFC_SBA_NADIR_f2.06')));
-    h.isTrue('SBA_ZENITH 2.25 -> installed override', strcmp(s225.patternType, 'INSTALLED') && ~isempty(strfind(s225.file, 'RFC_SBA_ZENITH_f2.25')));
+    h.isTrue('SBA_NADIR 2.06 -> origin RFC_SBA_f2.06 (no installed override)', strcmp(s206.patternType, 'FREE_SPACE') && ~isempty(strfind(s206.file, 'RFC_SBA_f2.06')));
+    h.isTrue('SBA_ZENITH 2.25 -> origin RFC_SBA_f2.25 (no installed override)', strcmp(s225.patternType, 'FREE_SPACE') && ~isempty(strfind(s225.file, 'RFC_SBA_f2.25')));
     h.isTrue('SBA L1 -> generic free-space', strcmp(sL1.patternType, 'FREE_SPACE') && ~isempty(strfind(sL1.file, 'RFC_SBA_f1.5754')) && ~sL1.fallback);
     h.isTrue('SBA 10.6 -> generic free-space', strcmp(sX.patternType, 'FREE_SPACE') && ~isempty(strfind(sX.file, 'RFC_SBA_f10.6')));
     iX = B3.bind('ISL', 'RX', 10.6e9); iT = B3.bind('ISL', 'TX', f1);

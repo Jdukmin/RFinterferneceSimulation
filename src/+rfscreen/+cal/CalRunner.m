@@ -252,7 +252,8 @@ classdef CalRunner
             L{end+1} = '';
             L{end+1} = '5. 분석 한계';
             L{end+1} = '   - 단일 CST 주파수 plane(victim 대표 주파수) 평가: victim band 전체 sweep 아님.';
-            L{end+1} = '   - Far-field FSPL 결합 모델: 근접장/구조 산란 경로는 installed CST 패턴에 포함된 범위만 반영.';
+            L{end+1} = ['   - 모든 attacker/victim은 origin(free-space) CST 패턴 사용(owner 규칙): installed 패턴은 RFI에 미사용(그림 전용). ' ...
+                'Far-field FSPL 결합 모델이며 far-field -> near-field 10 dB 마진은 이 계산에 포함되지 않음.'];
             L{end+1} = '   - KAA는 gimbal 기준(패널 법선) 자세: 지향 tracking case 아님. LOS BLOCKED는 감쇠 미적용(geometry evidence).';
             L{end+1} = '   - ISL 자세는 antenna_installations.csv(PANEL_3 법선) SSOT; closed-network geometry의 +X end-face override와 다름.';
             L{end+1} = '   - Source = ITU spurious 한계값(4 kHz, 규격 가정); TX chain/filter 손실 0 dB.';
