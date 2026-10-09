@@ -85,6 +85,7 @@ classdef CalRfiAnalyzer
             sT = binder.bind(tx, 'TX', f);
             W = [W sT.warnings];
             row.tx_pattern_type = sT.patternType; row.tx_pattern_file = sT.file;
+            rfscreen.cal.CalRfiAnalyzer.mustBeOrigin(sT, tx);
             if strcmp(sT.status, 'BOUND')
                 row.tx_pattern_class = class(sT.pattern); row.tx_pattern_source_frame = sT.pattern.sourceFrame;
                 % raw CST (theta, phi) actually queried, in the pattern's own source frame
@@ -104,6 +105,7 @@ classdef CalRfiAnalyzer
                 end
             else
                 sR = binder.bind(rx, 'RX', f);
+                rfscreen.cal.CalRfiAnalyzer.mustBeOrigin(sR, rx);
                 row.rx_pattern_type = sR.patternType; row.rx_pattern_file = sR.file;
                 if strcmp(sR.status, 'BOUND')
                     row.rx_pattern_class = class(sR.pattern); row.rx_pattern_source_frame = sR.pattern.sourceFrame;
@@ -223,6 +225,14 @@ classdef CalRfiAnalyzer
                 sar.file = 'data/Xband_SAR_K8_owner/owner_cut_values.csv + owner_absolute_inputs.csv';
             catch err
                 sar.reason = sprintf('SAR owner engineering baseline unavailable: %s', err.message);
+            end
+        end
+
+        function mustBeOrigin(b, installationId)
+            %MUSTBEORIGIN Owner rule guard: an installed CST pattern never enters the RFI path.
+            if isfield(b, 'pattern') && ~isempty(b.pattern) && b.pattern.isInstalled()
+                error('rfscreen:cal:installedInRfi', '%s: installed pattern %s bound for RFI (origin free-space only).', ...
+                    installationId, b.file);
             end
         end
 

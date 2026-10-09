@@ -79,15 +79,17 @@ classdef CalSynthetic
         function S = spec()
             %SPEC folder, stem, synthetic parameters (each file distinct so bindings are testable).
             fx = {'1.1764', '1.2276', '1.5754', '2.25', '8.9', '9.65', '10.4', '10.6'};
-            % Installed files are raw CST exports whose main lobe, after the owner raw -> displayed-Body correction
-            % (rfscreen.cal.CalPlotFrameAdapter, d_B = C d_raw), lies along the SSOT panel normal: raw axis = C.' n_B.
-            A = rfscreen.cal.CalPlotFrameAdapter;
+            % Installed files are raw CST exports whose main lobe, after the per-dataset raw -> displayed-Body table
+            % matrix (cal_installed_frame_corrections.csv, d_B = C d_raw), lies along the SSOT panel normal: raw axis = C.' n_B.
+            A = rfscreen.cal.CalPlotFrameAdapter; T = A.loadTable();
             n3 = [0 -0.866025404 -0.5]; n6 = [0 0.866025404 0.5]; n4 = [0 0 -1];
-            r3 = (A.C_GPSA.' * n3.').'; r6a = (A.C_SBA_206.' * n6.').'; r6b = (A.C_SBA_225.' * n6.').';
-            r4a = (A.C_SBA_206.' * n4.').'; r4b = (A.C_SBA_225.' * n4.').';
+            ax = @(id, stem, f, n) (A.lookup(T, id, stem, f).C.' * n.').';
+            r3a = ax('GPSA_1', 'GPSA_GPSA1_f1.2', 1.2, n3); r3b = ax('GPSA_2', 'GPSA_GPSA2_f1.2', 1.2, n3);
+            r6a = ax('SBA_NADIR', 'RFC_SBA_NADIR_f2.06', 2.06, n6); r6b = ax('SBA_NADIR', 'RFC_SBA_NADIR_f2.25', 2.25, n6);
+            r4a = ax('SBA_ZENITH', 'RFC_SBA_ZENITH_f2.06', 2.06, n4); r4b = ax('SBA_ZENITH', 'RFC_SBA_ZENITH_f2.25', 2.25, n4);
             S = {'gps', 'GPSA_ORIGINAL_f1.2', struct('peak', 4, 'back', -20, 'tiltX', 0); ...
-                 'gps', 'GPSA_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', r3); ...
-                 'gps', 'GPSA_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', r3)};
+                 'gps', 'GPSA_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', r3a); ...
+                 'gps', 'GPSA_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', r3b)};
             for k = 1:numel(fx)
                 v = str2double(fx{k});
                 S(end+1, :) = {'isl', ['RFC_ISL_f' fx{k}], struct('peak', 8 + v / 2, 'back', -30, 'tiltX', 1)}; %#ok<AGROW>

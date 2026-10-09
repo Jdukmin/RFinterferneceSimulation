@@ -57,8 +57,13 @@ classdef CalPatternBinder
                     error('rfscreen:cal:unknownFamily', 'unknown family %s.', info.family);
             end
             if isempty(p)
+                [~, want] = C.find(info.family, '', b.RFI_PATTERN_TYPE, f_Hz);
+                have = C.patterns.keys();
+                have = have(strncmp(have, [info.family '|'], numel(info.family) + 1));
+                if isempty(have); have = {'<none>'}; end
                 s.reason = sprintf(['no CAL %s origin (free-space) pattern for %s at %.6g GHz (no other frequency plane ' ...
-                    'and no installed pattern is substituted)'], info.family, installationId, f_Hz / 1e9);
+                    'and no installed pattern is substituted); requested key %s; catalog %s keys: %s'], info.family, ...
+                    installationId, f_Hz / 1e9, want, info.family, strjoin(have, ' '));
                 return;
             end
             s.status = 'BOUND'; s.pattern = p; s.patternType = p.patternType; s.file = p.sourceFile;

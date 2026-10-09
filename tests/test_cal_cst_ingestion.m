@@ -109,64 +109,96 @@ function test_cal_cst_ingestion(h)
     h.eqStr('free-space source frame = CST_LOCAL', pf.sourceFrame, 'CST_LOCAL');
 
     % Installed CST exports: raw G(theta_raw, phi_raw) on the CST result axes. Displayed Body direction
-    % d_B = C d_raw with the owner plot-frame correction C (CalPlotFrameAdapter); the physical mount R_BA / R_BL
-    % is separate and unchanged. Gains are never altered, only re-addressed.
+    % d_B = C d_raw with a PER-DATASET matrix C (cal_installed_frame_corrections.csv, CalPlotFrameAdapter), validated
+    % against the SSOT panel outward normal; the physical mount R_BA / R_BL is separate and unchanged.
     model = rfscreen.spacecraft.SimplifiedSpacecraftBuilder.build();
     pn = @(id) model.panels(strcmp({model.panels.id}, id)).normal_B;
     A = rfscreen.cal.CalPlotFrameAdapter;
+    FT = A.loadTable();
     h.throws('installed pattern needs its SSOT mount R_BA', @() rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_INST', a, fq), ...
         'rfscreen:cal:installedMountRequired');
-    h.isTrue('GPSA raw [0 +0.866 -0.5] -> body [0 -0.866 -0.5]', norm(A.C_GPSA * [0; 0.866025404; -0.5] - [0; -0.866025404; -0.5]) < 1e-12);
-    h.isTrue('correction table', isequal(A.C_GPSA, diag([1 -1 1])) && isequal(A.C_SBA_206, diag([1 1 -1])) && ...
-        isequal(A.C_SBA_225, diag([1 -1 -1])));
-    cases = {'GPSA_1', 'PANEL_3', 'GPS', fq, A.C_GPSA, 'GPSA_INSTALLED'; ...
-             'GPSA_2', 'PANEL_3', 'GPS', 1.17645e9, A.C_GPSA, 'GPSA_INSTALLED'; ...
-             'SBA_NADIR', 'PANEL_6', 'SBA', 2.06e9, A.C_SBA_206, 'SBA_INSTALLED_2P06'; ...
-             'SBA_ZENITH', 'PANEL_4', 'SBA', 2.06e9, A.C_SBA_206, 'SBA_INSTALLED_2P06'; ...
-             'SBA_NADIR', 'PANEL_6', 'SBA', 2.25e9, A.C_SBA_225, 'SBA_INSTALLED_2P25'; ...
-             'SBA_ZENITH', 'PANEL_4', 'SBA', 2.25e9, A.C_SBA_225, 'SBA_INSTALLED_2P25'};
+    h.isTrue('one table row per installed dataset (6), unique keys', numel(FT) == 6 && numel(unique({FT.key})) == 6 && ...
+        numel(unique(strcat({FT.installationId}, '@', arrayfun(@(x) sprintf('%g', x), [FT.sourceFrequency_GHz], 'UniformOutput', false)))) == 6);
+    h.isTrue('no table row for an unknown dataset (no family-wide matrix)', isempty(A.lookup(FT, 'SBA_NADIR', 'RFC_SBA_NADIR_f2.2', 2.2)) && ...
+        isempty(A.lookup(FT, 'GPSA_1', 'GPSA_GPSA2_f1.2', 1.2)));
+    h.isTrue('GPSA raw [0 +0.866 -0.5] -> body [0 -0.866 -0.5] with the GPSA_1 row', ...
+        norm(A.lookup(FT, 'GPSA_1', 'GPSA_GPSA1_f1.2', 1.2).C * [0; 0.866025404; -0.5] - [0; -0.866025404; -0.5]) < 1e-12);
+    P48 = A.signedPermutations();
+    h.isTrue('48 signed permutations (full 3x3 search set)', numel(P48) == 48 && all(cellfun(@(M) norm(M.' * M - eye(3)) < 1e-12, P48)));
+    cases = {'GPSA_1', 'PANEL_3', 'GPS', 'GPSA_GPSA1_f1.2', 1.2, fq; ...
+             'GPSA_2', 'PANEL_3', 'GPS', 'GPSA_GPSA2_f1.2', 1.2, 1.17645e9; ...
+             'SBA_NADIR', 'PANEL_6', 'SBA', 'RFC_SBA_NADIR_f2.06', 2.06, 2.06e9; ...
+             'SBA_NADIR', 'PANEL_6', 'SBA', 'RFC_SBA_NADIR_f2.25', 2.25, 2.25e9; ...
+             'SBA_ZENITH', 'PANEL_4', 'SBA', 'RFC_SBA_ZENITH_f2.06', 2.06, 2.06e9; ...
+             'SBA_ZENITH', 'PANEL_4', 'SBA', 'RFC_SBA_ZENITH_f2.25', 2.25, 2.25e9};
+    mkInst = @(id, fam, stem, fsrc, fc, native) rfscreen.cal.CstNativeInstalledPattern(['SYNTHETIC_TEST_' stem], native, fc, ...
+        struct('R_BA', model.installations(id).R_BA, 'installationId', id, 'family', fam, 'sourceSimulationFrequency_Hz', fsrc * 1e9));
     for i = 1:size(cases, 1)
-        [id, pnl, fam, fc, Cx, key] = cases{i, :};
-        tag = sprintf('%s @ %.4g GHz', id, fc / 1e9);
+        [id, pnl, fam, stem, fsrc, fc] = cases{i, :};
+        tag = sprintf('%s %s', id, stem);
         inst = model.installations(id);
         R_BL = rfscreen.kaa.CstLocalFrameAdapter.fromR_BA(inst.R_BA);
         n = pn(pnl);
+        e = A.lookup(FT, id, stem, fsrc); Cx = e.C;
         h.isTrue(sprintf('%s: physical +Z_L = %s normal, +X_L = +X_B (R_BL unchanged)', tag, pnl), ...
             norm(R_BL(:, 3) - n) < 1e-9 && norm(R_BL(:, 1) - [1; 0; 0]) < 1e-9);
-        % raw export whose main lobe is at C.' n_B (what CST writes for a lobe along the panel normal)
-        sp = struct('peak', 6, 'back', -20, 'tiltX', 0, 'axis', (Cx.' * n).');
-        [Ti, Pi] = ndgrid(0:5:180, 0:5:355); Gi = S.gain(Ti, Pi, sp);
-        fi = fullfile(tmp, sprintf('inst_%d.txt', i)); S.write(fi, Ti, Pi, Gi, 'cst');
+        % asymmetric raw export: main lobe at C.' n_B plus an off-plane feature at C.' b_B (b_B defined in the BODY)
+        b = [0.6; -0.3; 0.74] - ([0.6; -0.3; 0.74].' * n) * n; b = b / norm(b); b = cosd(60) * n + sind(60) * b;
+        [tb, pb] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(Cx.' * b);
+        sp = struct('peak', 6, 'back', -20, 'tiltX', 1, 'axis', (Cx.' * n).', 'bump', [tb pb 6 10]);
+        [Ti, Pi] = ndgrid(0:3:180, 0:3:357); Gi = S.gain(Ti, Pi, sp);
+        fi = fullfile(tmp, sprintf('ds%d', i), [stem '.txt']); S.write(fi, Ti, Pi, Gi, 'cst');
         ni = I.read(fi);
-        pin = rfscreen.cal.CstNativeInstalledPattern(['SYNTHETIC_TEST_' id], ni, fc, ...
-            struct('R_BA', inst.R_BA, 'installationId', id, 'family', fam));
-        [Cp, kp] = A.rawToDisplayedBody(pin);
-        h.isTrue(sprintf('%s: correction %s', tag, key), isequal(Cp, Cx) && strcmp(kp, key));
-        h.eqTol(sprintf('%s: gainBody(n_B) = gainRaw(C.'' n_B)', tag), pin.gainBody(fc, n), pin.gainRaw(fc, Cx.' * n), 1e-12);
-        h.eqTol(sprintf('%s: gainBody(n_B) = main-lobe peak', tag), pin.gainBody(fc, n), ni.peakGain_dBi, 1e-6);
-        h.isTrue(sprintf('%s: uncorrected raw query along n_B is not the lobe', tag), ni.peakGain_dBi - ni.gainAtDirection(n) > 1);
+        pin = mkInst(id, fam, stem, fsrc, fc, ni);
+        fcr = pin.frameCorrection;
+        h.isTrue(sprintf('%s: own table row %s used', tag, e.key), isequal(pin.C_raw_to_body, Cx) && strcmp(fcr.correction_key, e.key) && ...
+            strcmp(fcr.resolution, 'TABLE'));
+        h.isTrue(sprintf('%s: corrected main lobe in the +n_B hemisphere, PASS', tag), strcmp(fcr.main_lobe_hemisphere, 'EXPECTED_BORESIGHT') && ...
+            strcmp(fcr.status, 'PASS') && fcr.angle_to_expected_boresight_deg < 15 && ...
+            fcr.positive_boresight_hemisphere_peak_dbi > fcr.negative_boresight_hemisphere_peak_dbi + 10);
         dPk = rfscreen.cal.CalPlotter.displayedBodyDirections(pin, ni.peakTheta_deg, ni.peakPhi_deg);
-        h.isTrue(sprintf('%s: 3D corrected peak direction = %s normal', tag, pnl), norm(dPk - n) < 1e-6);
-        al = A.peakAlignment(pin, n);
-        h.isTrue(sprintf('%s: peak alignment diagnostic ~1, no warning', tag), al.alignment_dot > 1 - 1e-9 && ...
-            al.angle_error_deg < 1e-3 && isempty(al.warning));
+        h.isTrue(sprintf('%s: 3D corrected peak near %s normal', tag, pnl), acosd(min(1, dPk.' * n)) < 6);
+        h.eqTol(sprintf('%s: gainBody(n_B) = gainRaw(C.'' n_B)', tag), pin.gainBody(fc, n), pin.gainRaw(fc, Cx.' * n), 1e-12);
+        h.isTrue(sprintf('%s: body feature shows at b_B', tag), pin.gainBody(fc, b) > ni.gainAtDirection(b) + 3 || ...
+            abs(pin.gainBody(fc, b) - ni.gainAt(tb, pb)) < 1e-9);
+        % every other axis permutation / sign misplaces the main lobe or the off-plane feature (X/Y/Z swap / sign errors)
+        ok = true;
+        for q = 1:numel(P48)
+            if isequal(P48{q}, Cx); continue; end
+            d = max(abs(ni.gainAtDirection(P48{q}.' * [n b]) - ni.gainAtDirection(Cx.' * [n b])));
+            ok = ok && d > 1;
+        end
+        h.isTrue(sprintf('%s: all 47 wrong signed permutations detectable on the asymmetric pattern', tag), ok);
         h.eqTol(sprintf('%s: antenna +X_A -> R_BA -> C.'' -> raw', tag), pin.gainAntenna(fc, [1; 0; 0]), pin.gainBody(fc, n), 1e-12);
         h.eqTol(sprintf('%s: local +Z_L -> R_BL -> C.'' -> raw', tag), pin.gainLocal(fc, [0; 0; 1]), pin.gainBody(fc, n), 1e-12);
-        h.eqTol(sprintf('%s: evaluate(az 0, el 0) = gain along n_B', tag), pin.evaluate(fc, 0, 0), pin.gainBody(fc, n), 1e-12);
-        % gain values preserved: a raw sample displayed at d_B = C d_raw reads back its own raw gain
         thS = [35 90 140]; phS = [20 200 310];
         h.eqTol(sprintf('%s: gain magnitude unchanged by the display mapping', tag), ...
             max(abs(pin.gainBody(fc, rfscreen.cal.CalPlotter.displayedBodyDirections(pin, thS, phS)) - ni.gainAt(thS, phS))), 0, 1e-9);
+        % same raw file with the main lobe in the OPPOSITE hemisphere: the table matrix must FAIL, the figures must not
+        % show the backlobe as boresight (nearest signed permutation with the lobe in +n_B is used, reported loudly)
+        so = sp; so.axis = -(Cx.' * n).';
+        Go = S.gain(Ti, Pi, so); fo = fullfile(tmp, sprintf('opp%d', i), [stem '.txt']); S.write(fo, Ti, Pi, Go, 'cst');
+        no = I.read(fo); po = mkInst(id, fam, stem, fsrc, fc, no); fo2 = po.frameCorrection;
+        h.isTrue(sprintf('%s: lobe opposite to n_B -> table matrix FAILS', tag), strcmp(fo2.table_main_lobe_hemisphere, 'OPPOSITE_BORESIGHT') && ...
+            strcmp(fo2.status, 'FAIL_TABLE_MATRIX_AUTO_RESOLVED'));
+        h.isTrue(sprintf('%s: resolved C puts the main lobe on +n_B', tag), strcmp(fo2.main_lobe_hemisphere, 'EXPECTED_BORESIGHT') && ...
+            fo2.angle_to_expected_boresight_deg < 15 && ~isequal(po.C_raw_to_body, Cx));
+        mm = cellfun(@(M) A.hemisphereMetrics(no, M, n), P48);
+        okH = strcmp({mm.hemisphere}, 'EXPECTED_BORESIGHT');
+        h.isTrue(sprintf('%s: resolved C = best-aligned passing signed permutation', tag), ...
+            round(fo2.angle_to_expected_boresight_deg) == min(round([mm(okH).centroidAngle_deg])));
+        txt = strjoin(A.validationLines(fo2), sprintf('\n'));
+        h.isTrue(sprintf('%s: FAIL printed loudly', tag), ~isempty(strfind(txt, repmat('!', 1, 50))) && ~isempty(strfind(txt, 'FAIL')));
     end
-    al = A.peakAlignment(pin, -pn('PANEL_4'));
-    h.isTrue('opposite-hemisphere peak -> strong warning (diagnostic only)', al.angle_error_deg > 179 && ~isempty(al.warning));
+    % hemisphere decision uses the high-gain content, not one global peak
+    sk = struct('peak', 5, 'back', -20, 'tiltX', 0, 'axis', [0 0 1], 'bump', [180 0 28 1]);
+    [Ts, Ps] = ndgrid(0:3:180, 0:3:357); Gs = S.gain(Ts, Ps, sk);
+    ms = A.hemisphereMetrics(rfscreen.cal.CstSphericalPatternData.fromColumns(Ts(:), Ps(:), Gs(:)), eye(3), [0 0 1]);
+    h.isTrue('narrow spike in -n_B above the broad +n_B lobe: content decides EXPECTED, peaks reported', ...
+        strcmp(ms.hemisphere, 'EXPECTED_BORESIGHT') && ms.peakNeg_dBi > ms.peakPos_dBi);
     pFs = rfscreen.cal.CstNativeFreeSpacePattern('SYNTHETIC_TEST_FSX', a, 10.6e9, struct('family', 'ISL'));
     [Cf, kf] = A.rawToDisplayedBody(pFs);
-    h.isTrue('free-space (ISL/KAA) pattern: no correction', isequal(Cf, eye(3)) && strcmp(kf, 'IDENTITY_FREE_SPACE'));
-    [Cu, ku] = A.lookup('INSTALLED', 'SBA', 2.2e9);
-    [Ci, ki] = A.lookup('INSTALLED', 'ISL', 10.6e9);
-    h.isTrue('unverified installed datasets: identity, not invented', isequal(Cu, eye(3)) && isequal(Ci, eye(3)) && ...
-        strcmp(ku, 'IDENTITY_UNVERIFIED_INSTALLED') && strcmp(ki, 'IDENTITY_UNVERIFIED_INSTALLED'));
+    h.isTrue('free-space (ISL/KAA/origin) pattern: no correction', isequal(Cf, eye(3)) && strcmp(kf, 'IDENTITY_FREE_SPACE'));
     h.isTrue('SBA_NADIR mount position [255 870 1030] mm', norm(model.installations('SBA_NADIR').position_m - [0.255; 0.870; 1.030]) < 1e-12);
     h.isTrue('SBA_ZENITH mount position [255 -530 -1240] mm', norm(model.installations('SBA_ZENITH').position_m - [0.255; -0.530; -1.240]) < 1e-12);
     rec = model.installationRecords;
@@ -191,61 +223,59 @@ function test_cal_cst_ingestion(h)
     h.isTrue('cut spans -180..180 through boresight', ang(1) == -180 && ang(end) == 180 && any(ang == 0));
     h.isTrue('XZ != YZ for an asymmetric pattern', abs(g(k) - gY(angY == 60)) > 0.5);
 
-    % Body / local cuts derive from the SAME C as the 3D view: desired d_B -> d_raw = C.' d_B -> raw query.
-    % Reference = the uncorrected raw cut of the same plane (C = I); the owner-observed plane behaviour must
-    % follow from C alone (no per-plane flip in the code).
+    % Body / local cuts derive from the SAME per-dataset C as the 3D view: desired d_B -> d_raw = C.' d_B -> raw
+    % query. Reference = the uncorrected raw cut of the same plane (C = I); the owner-observed plane behaviour must
+    % follow from C alone (no per-plane flip in the code). Plane axes: XY (X_B horiz, Y_B vert), XZ (X_B, Z_B),
+    % YZ (Y_B, Z_B); a sign flip of the vertical coordinate = mirror about the horizontal axis.
     sb = base; sb.tiltX = 2; sb.bump = [70 260 10 15];   % asymmetric in X, Y and Z
     [Tb, Pb] = ndgrid(0:2:180, 0:2:358); Gb = S.gain(Tb, Pb, sb);
-    f = fullfile(tmp, 'asym.txt'); S.write(f, Tb, Pb, Gb, 'cst');
-    nb = I.read(f);
-    planes = {'XY', [1 2]; 'XZ', [1 3]; 'YZ', [2 3]};
     alpha = -180:2:180;
-    rawCut = struct();
-    for k = 1:3
-        ij = planes{k, 2}; d = zeros(3, numel(alpha)); d(ij(1), :) = cosd(alpha); d(ij(2), :) = sind(alpha);
-        rawCut.(planes{k, 1}) = nb.gainAtDirection(d);
-    end
+    planes = {'XY', [1 2]; 'XZ', [1 3]; 'YZ', [2 3]};
+    rawCutOf = @(nat, ij) nat.gainAtDirection([cosd(alpha) * (ij(1) == 1); cosd(alpha) * (ij(1) == 2) + sind(alpha) * (ij(2) == 2); ...
+        sind(alpha) * (ij(2) == 3)]);
     at = @(g, aq) g(arrayfun(@(x) find(alpha == mod(x + 180, 360) - 180, 1), aq));
-    % expected raw-cut angle for each displayed alpha:  same = a, mirror = -a, ymirrorYZ = 180 - a, invert = a + 180
-    mapF = struct('same', @(x) x, 'mirror', @(x) -x, 'ymirrorYZ', @(x) 180 - x, 'invert', @(x) x + 180);
-    spec = {'GPS', fq, 'GPSA diag(1,-1,1)', {'XY', 'mirror'; 'XZ', 'same'; 'YZ', 'ymirrorYZ'}; ...
-            'SBA', 2.06e9, 'SBA 2.06 diag(1,1,-1)', {'XY', 'same'; 'XZ', 'mirror'; 'YZ', 'mirror'}; ...
-            'SBA', 2.25e9, 'SBA 2.25 diag(1,-1,-1)', {'XY', 'mirror'; 'XZ', 'mirror'; 'YZ', 'invert'}};
-    for c = 1:size(spec, 1)
-        for id = {'SBA_NADIR', 'SBA_ZENITH'}
-            pc = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_CUT', nb, spec{c, 2}, ...
-                struct('R_BA', model.installations(id{1}).R_BA, 'family', spec{c, 1}, 'installationId', id{1}));
-            cuts = rfscreen.cal.CalPlotter.bodyCutData(pc, spec{c, 2});
-            C = A.rawToDisplayedBody(pc);
-            rule = spec{c, 4};
-            for k = 1:size(rule, 1)
-                cc = cuts(strcmp({cuts.plane}, rule{k, 1}));
-                want = at(rawCut.(rule{k, 1}), mapF.(rule{k, 2})(alpha));
-                h.eqTol(sprintf('%s [%s] body %s cut = raw %s cut (%s)', spec{c, 3}, id{1}, rule{k, 1}, rule{k, 1}, rule{k, 2}), ...
-                    max(abs(cc.gain_dBi - want)), 0, 1e-9);
-                if ~strcmp(rule{k, 2}, 'same')
-                    h.isTrue(sprintf('%s [%s] %s: correction visible on an asymmetric pattern', spec{c, 3}, id{1}, rule{k, 1}), ...
-                        max(abs(cc.gain_dBi - rawCut.(rule{k, 1}))) > 0.5);
-                end
-                h.eqTol(sprintf('%s [%s] %s: d_raw = C.'' d_B', spec{c, 3}, id{1}, rule{k, 1}), max(max(abs(cc.dir_raw - C.' * cc.dir_B))), 0, 0);
+    mapF = struct('same', @(x) x, 'vmirror', @(x) -x, 'hmirrorYZ', @(x) 180 - x, 'origin', @(x) x + 180);
+    % owner observation per dataset -> expected relation of the corrected cut to the raw cut
+    obs = {'GPSA_1', 'GPS', 'GPSA_GPSA1_f1.2', 1.2, fq, {'XY', 'vmirror'; 'XZ', 'same'; 'YZ', 'hmirrorYZ'}; ...
+           'GPSA_2', 'GPS', 'GPSA_GPSA2_f1.2', 1.2, fq, {'XY', 'vmirror'; 'XZ', 'same'; 'YZ', 'hmirrorYZ'}; ...
+           'SBA_NADIR', 'SBA', 'RFC_SBA_NADIR_f2.06', 2.06, 2.06e9, {'XY', 'same'; 'XZ', 'vmirror'; 'YZ', 'vmirror'}; ...
+           'SBA_NADIR', 'SBA', 'RFC_SBA_NADIR_f2.25', 2.25, 2.25e9, {'XY', 'vmirror'; 'XZ', 'vmirror'; 'YZ', 'origin'}; ...
+           'SBA_ZENITH', 'SBA', 'RFC_SBA_ZENITH_f2.06', 2.06, 2.06e9, {'XY', 'same'; 'XZ', 'vmirror'; 'YZ', 'vmirror'}; ...
+           'SBA_ZENITH', 'SBA', 'RFC_SBA_ZENITH_f2.25', 2.25, 2.25e9, {'XY', 'vmirror'; 'XZ', 'vmirror'; 'YZ', 'origin'}};
+    for c = 1:size(obs, 1)
+        [id, fam, stem, fsrc, fc, rule] = obs{c, :};
+        e = A.lookup(FT, id, stem, fsrc);
+        % lobe placed where the table matrix maps it onto n_B, so the dataset passes with its own table row
+        sc = sb; sc.axis = (e.C.' * model.installations(id).R_BA(:, 1)).';
+        Gc = S.gain(Tb, Pb, sc); fcut = fullfile(tmp, sprintf('cut%d', c), [stem '.txt']); S.write(fcut, Tb, Pb, Gc, 'cst');
+        nc = I.read(fcut);
+        pc = mkInst(id, fam, stem, fsrc, fc, nc);
+        C = pc.C_raw_to_body;
+        h.isTrue(sprintf('%s: cuts use its own table row %s', stem, e.key), isequal(C, e.C) && strcmp(pc.frameCorrection.status, 'PASS'));
+        cuts = rfscreen.cal.CalPlotter.bodyCutData(pc, fc);
+        for k = 1:size(rule, 1)
+            cc = cuts(strcmp({cuts.plane}, rule{k, 1}));
+            ij = planes{strcmp(planes(:, 1), rule{k, 1}), 2};
+            rawC = rawCutOf(nc, ij);
+            h.eqTol(sprintf('%s body %s cut = raw cut (%s)', stem, rule{k, 1}, rule{k, 2}), max(abs(cc.gain_dBi - at(rawC, mapF.(rule{k, 2})(alpha)))), 0, 1e-9);
+            if ~strcmp(rule{k, 2}, 'same')
+                h.isTrue(sprintf('%s %s: correction visible on the asymmetric pattern', stem, rule{k, 1}), max(abs(cc.gain_dBi - rawC)) > 0.5);
             end
-            % antenna-local cuts: d_L -> R_BL (physical) -> d_B -> C.' -> raw
-            lc = rfscreen.cal.CalPlotter.localCutData(pc, spec{c, 2});
-            nId = model.installations(id{1}).R_BA(:, 1);
-            for k = 1:numel(lc)
-                h.isTrue(sprintf('%s [%s] local %s: d_B = R_BL d_L, d_raw = C.'' d_B, gain = raw query, angle 0 = n_B', spec{c, 3}, id{1}, lc(k).plane), ...
-                    max(max(abs(lc(k).dir_B - pc.R_BL * lc(k).dir_L))) < 1e-15 && isequal(lc(k).dir_raw, C.' * lc(k).dir_B) && ...
-                    max(abs(lc(k).gain_dBi - nb.gainAtDirection(lc(k).dir_raw))) < 1e-12 && ...
-                    norm(lc(k).dir_B(:, lc(k).ang_deg == 0) - nId) < 1e-9);
-            end
+            h.isTrue(sprintf('%s %s: d_raw = C.'' d_B', stem, rule{k, 1}), isequal(cc.dir_raw, C.' * cc.dir_B));
         end
+        lc = rfscreen.cal.CalPlotter.localCutData(pc, fc);
+        nId = model.installations(id).R_BA(:, 1);
+        for k = 1:numel(lc)
+            h.isTrue(sprintf('%s local %s: d_B = R_BL d_L, d_raw = C.'' d_B, angle 0 = n_B', stem, lc(k).plane), ...
+                max(max(abs(lc(k).dir_B - pc.R_BL * lc(k).dir_L))) < 1e-15 && isequal(lc(k).dir_raw, C.' * lc(k).dir_B) && ...
+                max(abs(lc(k).gain_dBi - nc.gainAtDirection(lc(k).dir_raw))) < 1e-12 && norm(lc(k).dir_B(:, lc(k).ang_deg == 0) - nId) < 1e-9);
+        end
+        dPk = rfscreen.cal.CalPlotter.displayedBodyDirections(pc, nc.peakTheta_deg, nc.peakPhi_deg);
+        h.isTrue(sprintf('%s: 3D / cuts share C; corrected peak in +n_B', stem), dPk.' * nId > 0.5);
     end
     cxz = cuts(strcmp({cuts.plane}, 'XZ')); cyz = cuts(strcmp({cuts.plane}, 'YZ')); cxy = cuts(strcmp({cuts.plane}, 'XY'));
     h.isTrue('body XZ cut lies in Y_B = 0, YZ in X_B = 0, XY in Z_B = 0', all(cxz.dir_B(2, :) == 0) && ...
         all(cyz.dir_B(1, :) == 0) && all(cxy.dir_B(3, :) == 0));
-    pN = rfscreen.cal.CstNativeInstalledPattern('N', nb, 2.25e9, struct('R_BA', model.installations('SBA_NADIR').R_BA, 'family', 'SBA'));
-    pZ = rfscreen.cal.CstNativeInstalledPattern('Z', nb, 2.25e9, struct('R_BA', model.installations('SBA_ZENITH').R_BA, 'family', 'SBA'));
-    h.isTrue('Nadir / Zenith share the frequency correction', isequal(A.rawToDisplayedBody(pN), A.rawToDisplayedBody(pZ)));
     h.throws('body cuts refuse a CST_LOCAL (free-space) pattern', @() rfscreen.cal.CalPlotter.bodyCutData(pf, fq), ...
         'rfscreen:cal:notBodyFramePattern');
 
@@ -406,6 +436,27 @@ function test_cal_cst_ingestion(h)
     B3 = rfscreen.cal.CalPatternBinder(cat3, fullfile(cfg, 'cal_installations.csv'));
     a1 = B3.bind('GPSA_1', 'RX', f1); a2 = B3.bind('GPSA_2', 'RX', f1);
     h.isTrue('GPSA_1 / GPSA_2 RFI both use GPSA_ORIGINAL', strcmp(a1.file, a2.file) && ~isempty(strfind(a1.file, 'GPSA_ORIGINAL')));
+    % the three owner GPS files land in the catalog with exactly their roles
+    K = @rfscreen.cal.CalPatternCatalog.patternKey;
+    okK = true;
+    for fr = [f5 f2 f1]
+        po = cat3.find('GPS', '', 'FREE_SPACE', fr); p1 = cat3.find('GPS', 'GPSA_1', 'INSTALLED', fr); p2 = cat3.find('GPS', 'GPSA_2', 'INSTALLED', fr);
+        okK = okK && cat3.patterns.isKey(K('GPS', '', 'FREE_SPACE', fr)) && ~isempty(strfind(po.sourceFile, 'GPSA_ORIGINAL_f1.2')) && ...
+            isa(po, 'rfscreen.cal.CstNativeFreeSpacePattern') && strcmp(po.frequencyTreatment, 'SURROGATE') && ...
+            ~isempty(strfind(p1.sourceFile, 'GPSA_GPSA1_f1.2')) && isa(p1, 'rfscreen.cal.CstNativeInstalledPattern') && ...
+            ~isempty(strfind(p2.sourceFile, 'GPSA_GPSA2_f1.2')) && strcmp(p2.installationId, 'GPSA_2');
+    end
+    h.isTrue('catalog: GPS|GENERIC|FREE_SPACE = GPSA_ORIGINAL, GPS|GPSA_1|INSTALLED = GPSA1, GPS|GPSA_2|INSTALLED = GPSA2 at L5/L2/L1', okK);
+    h.isTrue('catalog key text GPS|GENERIC|FREE_SPACE|<L1 Hz>', strcmp(K('GPS', '', 'FREE_SPACE', f1), sprintf('GPS|GENERIC|FREE_SPACE|%.0f', f1)));
+    okR = true;
+    for gid = {'GPSA_1', 'GPSA_2'}
+        for fr = [f5 f2 f1]
+            r = B3.bind(gid{1}, 'RX', fr);
+            okR = okR && strcmp(r.status, 'BOUND') && strcmp(r.patternType, 'FREE_SPACE') && ~isempty(strfind(r.file, 'GPSA_ORIGINAL_f1.2')) && ...
+                ~r.pattern.isInstalled();
+        end
+    end
+    h.isTrue('RFI GPS victims GPSA_1 / GPSA_2 -> GPSA_ORIGINAL at L5/L2/L1 (never GPSA_GPSA1/2)', okR);
     s206 = B3.bind('SBA_NADIR', 'TX', 2.06e9); s225 = B3.bind('SBA_ZENITH', 'RX', 2.25e9);
     sL1 = B3.bind('SBA_NADIR', 'TX', f1); sX = B3.bind('SBA_ZENITH', 'TX', 10.6e9);
     h.isTrue('SBA_NADIR 2.06 -> origin RFC_SBA_f2.06 (no installed override)', strcmp(s206.patternType, 'FREE_SPACE') && ~isempty(strfind(s206.file, 'RFC_SBA_f2.06')));
@@ -421,6 +472,8 @@ function test_cal_cst_ingestion(h)
     h.isTrue('KAA -> L1 uses RFC_KAA_f1.5754', ~isempty(strfind(kL1.file, 'RFC_KAA_f1.5754')) && strcmp(kL1.patternType, 'FREE_SPACE'));
     k206 = B3.bind('KAA_1', 'TX', 2.06e9);
     h.isTrue('no KAA 2.06 file -> INPUT_MISSING (no other band used)', strcmp(k206.status, 'INPUT_MISSING') && isempty(k206.pattern));
+    h.isTrue('INPUT_MISSING names the requested and the available catalog keys', ~isempty(strfind(k206.reason, 'requested key KAA|GENERIC|FREE_SPACE|2060000000')) && ...
+        ~isempty(strfind(k206.reason, 'catalog KAA keys: KAA|GENERIC|FREE_SPACE|')));
     kMiss = B.bind('KAA_1', 'TX', f1);
     h.isTrue('RFC_KAA_f1.5754 absent -> INPUT_MISSING although f1.2276 exists', strcmp(kMiss.status, 'INPUT_MISSING'));
     h.throws('pattern refuses another victim frequency', @() kL1.pattern.gainAntenna(f2, u), 'rfscreen:cal:wrongFrequencyPlane');

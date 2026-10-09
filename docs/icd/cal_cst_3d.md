@@ -107,23 +107,37 @@ The raw CST (θ, φ) grid is always interpolated in its **own source frame** (`s
 * `R_BA` / positions come only from `antenna_installations.csv` + `panels.csv` via `SimplifiedSpacecraftBuilder`
   (GPSA_1/2 → PANEL_3 `n_B = [0, −0.866, −0.5]`; SBA_NADIR [255, 870, 1030] mm → PANEL_6 `n_B = [0, +0.866, +0.5]`;
   SBA_ZENITH [255, −530, −1240] mm → PANEL_4 `n_B = [0, 0, −1]`; ISL → PANEL_3; KAA gimbal reference = panel normal).
-### 4.1 Installed plot-frame correction (`CalPlotFrameAdapter`)
+### 4.1 Installed plot-frame correction and boresight validation (`CalPlotFrameAdapter`)
 
-Owner comparison of the CAL XY / XZ / YZ figures with the CST results showed axis-sign mismatches between the raw
-installed CST result axes and the displayed Body axes. They are corrected by **one** 3×3 matrix per dataset applied to
-direction vectors (never per plane, never to gain values):
+The raw installed CST result axes and the displayed Body axes are related by **one 3×3 matrix per installed dataset**
+(`d_B = C d_raw`; cuts query `d_raw = C⁻¹ d_B = Cᵀ d_B`), shared by that dataset's 3D, XY, XZ, YZ and local views. No
+per-plane flip, no gain change; `C` is a plotting adapter, **not** the physical mount (`R_BA` / `R_BL` unchanged); RFI
+never uses installed patterns.
 
-| Installed dataset | `C_raw_to_body` | Owner observation reproduced |
+Table `data/cal_config/cal_installed_frame_corrections.csv`, key = (installation, source file, source frequency), full
+3×3 orthogonal matrices (permutation / rotation / reflection). One row per dataset — never shared across GPSA_1 /
+GPSA_2, NADIR / ZENITH or 2.06 / 2.25 GHz. Initial rows from the owner XY / XZ / YZ observations (plot axes: XY = X_B
+horizontal / Y_B vertical, XZ = X_B / Z_B, YZ = Y_B / Z_B; "mirrored about the horizontal axis" = vertical-coordinate
+sign flip):
+
+| Dataset | Table C | Owner observation |
 |---|---|---|
-| GPSA (`GPSA_GPSA1`, `GPSA_GPSA2`; every bound band) | `diag(+1, −1, +1)` | XY Y-mirrored, XZ unchanged, YZ Y-mirrored |
-| SBA_NADIR / SBA_ZENITH @ 2.06 GHz | `diag(+1, +1, −1)` | XY unchanged, XZ / YZ Z-mirrored |
-| SBA_NADIR / SBA_ZENITH @ 2.25 GHz | `diag(+1, −1, −1)` | XY Y-mirrored, XZ Z-mirrored, YZ 180° inversion |
-| free-space patterns; any other installed dataset | identity (not verified; nothing invented) | — |
+| GPSA_1 / GPSA_2 @ 1.2 GHz (separate rows) | `diag(+1, −1, +1)` | XY opposite (Y), XZ normal, YZ about vertical axis (Y) |
+| SBA_NADIR @ 2.06 | `diag(+1, +1, −1)` | XY normal, XZ / YZ about horizontal axis (Z) |
+| SBA_NADIR @ 2.25 | `diag(+1, −1, −1)` | XY / XZ about horizontal axis (Y, Z), YZ about origin (Y and Z) |
+| SBA_ZENITH @ 2.06 | `diag(+1, +1, −1)` | XY normal, XZ / YZ about horizontal axis (Z) |
+| SBA_ZENITH @ 2.25 | `diag(+1, −1, −1)` | XZ (Z) and YZ about origin (Y and Z); XY reported normal (ring ⟂ −Z_B boresight) |
 
-3D view: `d_B = C d_raw` with colour `G(θ, φ)`; body / local cuts: `d_raw = Cᵀ d_B`. `C` is a plotting-frame
-adapter, **not** the physical mount: `R_BA` / `R_BL` are unchanged. Diagnostic (`validation/installed_peak_alignment.csv`,
-console, run-summary Appendix 7): corrected raw-peak direction vs panel normal (dot product, angle error); a peak
-≥ 90° from the normal is flagged as a strong warning, nothing hard-fails.
+**Boresight validation (authoritative reference = SSOT panel outward normal `n_B`).** For each dataset: high-gain
+content (samples within 10 dB of the peak, solid-angle × linear-gain weighted) and the peak in the `+n_B` / `−n_B`
+hemispheres. `main_lobe_hemisphere` = EXPECTED_BORESIGHT / OPPOSITE_BORESIGHT / AMBIGUOUS is decided by the content
+share (not by a single global peak). If the table row does not put the main lobe in `+n_B`, the row **FAILS**
+(`FAIL_TABLE_MATRIX_AUTO_RESOLVED`, printed loudly) and the figures use the 48-signed-permutation candidate whose
+main lobe is closest to `n_B` (ties: smallest change from the table row); none → `FAIL`. Output:
+`validation/installed_boresight_validation.csv` (installation, source file / frequency, correction key, table and used
+`C`, expected boresight, raw / corrected peak, main-lobe centroid and angle, hemisphere peaks and content share,
+main-lobe hemisphere, status), console and run-summary Appendix 7. Every installed figure title carries key, `C` and
+status; `pattern_plots/` stays raw and is titled `RAW CST — UNCORRECTED`.
 
 * RFI rows report the raw (θ, φ) actually queried in the pattern's own source frame (`tx/rx_cst_theta_deg`,
   `tx/rx_cst_phi_deg`) and `tx/rx_pattern_source_frame`.
@@ -189,7 +203,7 @@ criterion, margin, required suppression, validity and warnings.
 
 ## 8. Outputs (`output/cal/`)
 
-`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/installed_peak_alignment.csv`,
+`validation/pattern_inventory.csv`, `validation/pattern_diagnostics.json`, `validation/installed_boresight_validation.csv`,
 `validation/pattern_binding.csv`, `pattern_plots/`,
 `installed_plots/{3d,body_cuts,local_cuts}/`,
 `rfi/pair_results.csv`, `rfi/summary.csv`, `rfi/run_summary.txt` (results first, REPORTING_GUIDE wording). The runner

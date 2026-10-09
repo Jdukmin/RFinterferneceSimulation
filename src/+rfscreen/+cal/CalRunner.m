@@ -45,13 +45,16 @@ classdef CalRunner
             diagFile = fullfile(out, 'validation', 'pattern_diagnostics.json');
             rfscreen.cal.CalIngestDiagnostics.writeJson(diagFile, cat.entries, cat.discovery);
             say('[CAL] 4/11 catalog: %d pattern plane(s) (inventory %s, diagnostics %s)', cat.patterns.Count, invFile, diagFile);
-            align = C.peakAlignment(cat, model);
-            alignFile = fullfile(out, 'validation', 'installed_peak_alignment.csv');
-            C.writeStructCsv(alignFile, align);
+            align = C.boresightValidation(cat);
+            alignFile = fullfile(out, 'validation', 'installed_boresight_validation.csv');
+            C.writeStructCsv(alignFile, C.csvRows(align));
             for k = 1:numel(align)
-                say('%s', strjoin(rfscreen.cal.CalPlotFrameAdapter.alignmentLines(align(k)), sprintf('\n')));
+                say('%s', strjoin(rfscreen.cal.CalPlotFrameAdapter.validationLines(align(k)), sprintf('\n')));
             end
-            if ~isempty(align); say('[CAL] installed peak alignment written (%s)', alignFile); end
+            if ~isempty(align)
+                nBad = nnz(~strcmp({align.status}, 'PASS'));
+                say('[CAL] installed boresight validation: %d dataset(s), %d not PASS (%s)', numel(align), nBad, alignFile);
+            end
 
             % 5. binding
             binder = rfscreen.cal.CalPatternBinder(cat, fullfile(cfg, 'cal_installations.csv'));
@@ -89,23 +92,25 @@ classdef CalRunner
             if verbose; fprintf('%s', txt); end
 
             res = struct('catalog', cat, 'binder', binder, 'rows', rows, 'summary', summary, 'figures', figs, ...
-                'outDir', out, 'model', model, 'freqMap', fmap, 'runSummary', txt, 'peakAlignment', align);
+                'outDir', out, 'model', model, 'freqMap', fmap, 'runSummary', txt, 'boresightValidation', align);
         end
 
-        function A = peakAlignment(cat, model)
-            %PEAKALIGNMENT Corrected raw-peak direction vs SSOT panel normal of every VALID installed file
-            %   (one row per file: the GPS L5/L2/L1 planes share one raw pattern and one correction).
+        function A = boresightValidation(cat)
+            %BORESIGHTVALIDATION Frame-correction / boresight records of every VALID installed dataset (one per file:
+            %   the GPS L5/L2/L1 planes share one raw pattern and one correction).
             A = struct([]);
             E = cat.entries;
             for a = 1:numel(E)
                 if ~strcmp(E(a).status, 'VALID') || ~strcmp(E(a).patternType, 'INSTALLED'); continue; end
-                p = cat.patterns(E(a).keys{1});
-                rec = model.installationRecords(strcmp({model.installationRecords.antennaId}, E(a).installationId));
-                s = rfscreen.cal.CalPlotFrameAdapter.peakAlignment(p, rec.nominalBoresight_B);
-                s.frequency_ghz = E(a).sourceSimulationFrequency_Hz / 1e9;          % CST solve (GPS: 1.2 GHz surrogate)
-                s.source_file = E(a).relPath; s.panel = rec.panelId;
-                if isempty(A); A = s; else; A(end+1) = s; end %#ok<AGROW>
+                r = cat.patterns(E(a).keys{1}).frameCorrection;
+                if isempty(A); A = r; else; A(end+1) = r; end %#ok<AGROW>
             end
+        end
+
+        function R = csvRows(A)
+            %CSVROWS Validation records without the matrix-valued helper fields.
+            R = A;
+            if ~isempty(R); R = rmfield(R, {'C', 'C_table_matrix'}); end
         end
 
         function figs = makeFigures(cat, model, out, say)
@@ -283,17 +288,18 @@ classdef CalRunner
             L{end+1} = '   - Source = ITU spurious 한계값(4 kHz, 규격 가정); TX chain/filter 손실 0 dB.';
             L{end+1} = '';
             L{end+1} = sprintf('6. 출력: %s', out);
-            L{end+1} = sprintf(['   validation/pattern_inventory.csv, validation/pattern_diagnostics.json, validation/pattern_binding.csv; ' ...
+            L{end+1} = sprintf(['   validation/pattern_inventory.csv, validation/pattern_diagnostics.json, validation/installed_boresight_validation.csv, validation/pattern_binding.csv; ' ...
                 'figures: %d pattern-cut, %d installed 3D, %d body-cut, %d antenna-local cut'], ...
                 numel(figs.pattern), numel(figs.installed3d), numel(figs.bodyCuts), numel(figs.localCuts));
             L{end+1} = '   rfi/pair_results.csv, rfi/summary.csv, rfi/run_summary.txt';
             for k = 1:numel(figs.failed); L{end+1} = ['   FIGURE NOT PRODUCED: ' figs.failed{k}]; end %#ok<AGROW>
             L{end+1} = '';
-            L{end+1} = '7. Appendix - installed 패턴 표시 좌표 보정 (raw CST 축 -> Body 표시 축, 그림 전용)';
-            L{end+1} = '   d_B = C d_raw (GPSA diag(+1,-1,+1), SBA 2.06 diag(+1,+1,-1), SBA 2.25 diag(+1,-1,-1)); gain 값 불변, RFI 미사용.';
+            L{end+1} = '7. Appendix - installed 패턴 표시 좌표 보정 및 boresight 검증 (raw CST 축 -> Body 표시 축, 그림 전용)';
+            L{end+1} = ['   d_B = C d_raw, dataset별 C (data/cal_config/cal_installed_frame_corrections.csv); gain 값 불변, RFI 미사용. ' ...
+                '주 lobe hemisphere가 +n_B(패널 외향 법선)가 아니면 FAIL.'];
             if isempty(align); L{end+1} = '   유효한 installed 패턴 없음.'; end
             for k = 1:numel(align)
-                L = [L rfscreen.cal.CalPlotFrameAdapter.alignmentLines(align(k))]; %#ok<AGROW>
+                L = [L rfscreen.cal.CalPlotFrameAdapter.validationLines(align(k))]; %#ok<AGROW>
             end
             L{end+1} = '';
             L{end+1} = '8. Appendix - 패턴 입력 파일별 진단 (CAL ingestion stage)';
