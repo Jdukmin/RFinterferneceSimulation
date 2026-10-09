@@ -4,10 +4,9 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
     %
     %   Source frame SPACECRAFT_BODY_FIXED: the installed CST model is placed in spacecraft body coordinates,
     %   so the raw far-field is G(theta_raw, phi_raw) on the CST result axes. It is NOT an antenna-local pattern
-    %   and is never rotated by R_BL / R_BA / M_AL. The CST result axes differ from the displayed Body axes by a
-    %   per-dataset matrix C (d_B = C d_raw), resolved and boresight-validated by rfscreen.cal.CalPlotFrameAdapter
-    %   (C_effective = R_user * C_base: cal_installed_frame_corrections.csv + owner steering
-    %   installed_pattern_rotation.csv; meta.frameCorrection, or resolved here with meta.rotationConfig / the default file):
+    %   and is never rotated by R_BL / R_BA / M_AL. The display uses ONLY the owner rotation angles of this dataset
+    %   (data/cal_config/installed_pattern_rotation.csv, R = Rz*Ry*Rx, d_B = R d_raw; rfscreen.cal.CalPlotFrameAdapter;
+    %   meta.frameCorrection, or resolved here with meta.rotationConfig / the default file):
     %     gainRaw(f, d_raw)    raw CST direction            -> raw grid (no transform)
     %     gainBody(f, d_B)     displayed Body direction     -> d_raw = C.' d_B -> raw
     %     gainLocal(f, d_L)    antenna-local direction      -> d_B = R_BL d_L -> d_raw = C.' d_B -> raw
@@ -29,7 +28,7 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
         R_BL = []           % antenna-local DCM (CST local L -> body B), for local cuts only
         sourceSimulationFrequency_Hz = NaN   % CST solve frequency (GPSA_*_f1.2: ~1.2 GHz)
         frequencyTreatment = 'NATIVE_PLANE'  % NATIVE_PLANE | SURROGATE (one CST solve reused at this frequency)
-        C_raw_to_body = eye(3)               % per-dataset display correction (CalPlotFrameAdapter.resolve)
+        C_raw_to_body = eye(3)               % owner rotation of this dataset (from its rot_x/y/z_deg)
         frameCorrection = struct()           % resolution / boresight-validation record of C_raw_to_body
     end
     methods
@@ -48,11 +47,9 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
                 [~, stem] = fileparts(native.sourceFile);
                 fSrc = M.metaField(meta, 'sourceSimulationFrequency_Hz', f_Hz) / 1e9;
                 inst = M.metaField(meta, 'installationId', '');
-                T = A.loadTable();
                 rc = M.metaField(meta, 'rotationConfig', []);
-                if isempty(rc); rc = A.loadRotationConfig('', T); end
-                fc = A.resolve(native, A.lookup(T, inst, stem, fSrc), R_BA(:, 1), ...
-                    struct('installationId', inst, 'sourceFile', stem, 'sourceFrequency_GHz', fSrc), rc);
+                if isempty(rc); rc = A.loadRotationConfig(); end
+                fc = A.resolve(native, R_BA(:, 1), struct('installationId', inst, 'sourceFile', stem, 'sourceFrequency_GHz', fSrc), rc);
             end
             C = fc.C;
             grid = rfscreen.cal.CstNativeSupport.antennaGrid(native, f_Hz, @(u) native.gainAtDirection(C.' * (R_BA * u)));

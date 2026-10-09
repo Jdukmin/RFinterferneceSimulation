@@ -107,56 +107,35 @@ The raw CST (θ, φ) grid is always interpolated in its **own source frame** (`s
 * `R_BA` / positions come only from `antenna_installations.csv` + `panels.csv` via `SimplifiedSpacecraftBuilder`
   (GPSA_1/2 → PANEL_3 `n_B = [0, −0.866, −0.5]`; SBA_NADIR [255, 870, 1030] mm → PANEL_6 `n_B = [0, +0.866, +0.5]`;
   SBA_ZENITH [255, −530, −1240] mm → PANEL_4 `n_B = [0, 0, −1]`; ISL → PANEL_3; KAA gimbal reference = panel normal).
-### 4.1 Installed plot-frame correction and boresight validation (`CalPlotFrameAdapter`)
+### 4.1 Owner steering of the installed figures — rotation angles only (`installed_pattern_rotation.csv`)
 
-The raw installed CST result axes and the displayed Body axes are related by **one 3×3 matrix per installed dataset**
-(`d_B = C d_raw`; cuts query `d_raw = C⁻¹ d_B = Cᵀ d_B`), shared by that dataset's 3D, XY, XZ, YZ and local views. No
-per-plane flip, no gain change; `C` is a plotting adapter, **not** the physical mount (`R_BA` / `R_BL` unchanged); RFI
-never uses installed patterns.
+The installed figures are oriented **only** by the owner's three rotation angles per installed dataset; there is no
+matrix input. `data/cal_config/installed_pattern_rotation.csv`, one row per dataset, keyed by `installation_id` + CST
+**source** frequency: GPSA_1 @ 1.2, GPSA_2 @ 1.2, SBA_NADIR @ 2.06, SBA_NADIR @ 2.25, SBA_ZENITH @ 2.06,
+SBA_ZENITH @ 2.25 (GPS: one 1.2 GHz row per antenna, not one per L5 / L2 / L1). Rows are independent.
 
-Table `data/cal_config/cal_installed_frame_corrections.csv`, key = (installation, source file, source frequency), full
-3×3 orthogonal matrices (permutation / rotation / reflection). One row per dataset — never shared across GPSA_1 /
-GPSA_2, NADIR / ZENITH or 2.06 / 2.25 GHz. Initial rows from the owner XY / XZ / YZ observations (plot axes: XY = X_B
-horizontal / Y_B vertical, XZ = X_B / Z_B, YZ = Y_B / Z_B; "mirrored about the horizontal axis" = vertical-coordinate
-sign flip):
-
-| Dataset | Table C | Owner observation |
-|---|---|---|
-| GPSA_1 / GPSA_2 @ 1.2 GHz (separate rows) | `diag(+1, −1, +1)` | XY opposite (Y), XZ normal, YZ about vertical axis (Y) |
-| SBA_NADIR @ 2.06 | `diag(+1, +1, −1)` | XY normal, XZ / YZ about horizontal axis (Z) |
-| SBA_NADIR @ 2.25 | `diag(+1, −1, −1)` | XY / XZ about horizontal axis (Y, Z), YZ about origin (Y and Z) |
-| SBA_ZENITH @ 2.06 | `diag(+1, +1, −1)` | XY normal, XZ / YZ about horizontal axis (Z) |
-| SBA_ZENITH @ 2.25 | `diag(+1, −1, −1)` | XZ (Z) and YZ about origin (Y and Z); XY reported normal (ring ⟂ −Z_B boresight) |
-
-### 4.2 Owner steering of the installed figures (`installed_pattern_rotation.csv`)
-
-`data/cal_config/installed_pattern_rotation.csv` holds one row per installed dataset, keyed by `installation_id` + CST
-**source** frequency (GPSA_1 @ 1.2, GPSA_2 @ 1.2, SBA_NADIR @ 2.06 / 2.25, SBA_ZENITH @ 2.06 / 2.25; GPS has one 1.2 GHz
-row per antenna, not one per L5 / L2 / L1). Rows are independent: a row changes only its own dataset.
-
-* Convention (fixed): active rotation in the Body frame, `R_user = Rz(rot_z) · Ry(rot_y) · Rx(rot_x)` (a vector is
-  rotated about X_B, then Y_B, then Z_B; degrees, right-hand). `Rx = [1 0 0; 0 c −s; 0 s c]`,
-  `Ry = [c 0 s; 0 1 0; −s 0 c]`, `Rz = [c −s 0; s c 0; 0 0 1]`.
-* `C_effective = R_user · C_base`; `d_B = C_effective d_raw` (3D) and `d_raw = C_effectiveᵀ d_B` (BODY_XY / XZ / YZ,
-  LOCAL_XZ / YZ). Priority: physical geometry → raw CST → `C_base` → **owner rotation** → plot. Nothing automatic
-  overrides it; the boresight check below only reports.
-* Never changed by steering: `R_BA`, `R_BL`, positions, panel normals, CST geometry, raw `pattern_plots/`, RFI.
-* No row → 0 / 0 / 0 deg (`USER_ROTATION_NOT_CONFIGURED` in the console); unknown installation / frequency, duplicate
-  row or non-numeric value → `rfscreen:cal:badRotationConfig`.
-* Outputs: console `[CAL] INSTALLED STEERING` block per dataset, every installed figure title
-  (`<installation> @ <f> GHz | User steering: Rx=…, Ry=…, Rz=…`), `validation/installed_peak_alignment.csv`
-  (`rot_x/y/z_deg`, `base_transform`, `effective_transform`, …) and `validation/installed_pattern_rotation_effective.csv`.
+* Convention (fixed): active rotation in the Body frame, `R = Rz(rot_z) · Ry(rot_y) · Rx(rot_x)` (a vector is rotated
+  about X_B, then Y_B, then Z_B; degrees, right-hand). `Rx = [1 0 0; 0 c −s; 0 s c]`, `Ry = [c 0 s; 0 1 0; −s 0 c]`,
+  `Rz = [c −s 0; s c 0; 0 0 1]`.
+* `d_B = R d_raw` (3D) and `d_raw = Rᵀ d_B` (BODY_XY / XZ / YZ, LOCAL_XZ / YZ): one rotation per dataset, shared by all
+  its installed views. 0 / 0 / 0 deg shows the raw CST axes as Body axes. Nothing automatic changes the angles.
+* Never changed: `R_BA`, `R_BL`, positions, panel normals, CST geometry, gain values, raw `pattern_plots/`
+  (`RAW CST — UNCORRECTED`), RFI.
+* No row → 0 / 0 / 0 deg (`USER_ROTATION_NOT_CONFIGURED`); unknown installation / frequency, duplicate row or
+  non-numeric value → `rfscreen:cal:badRotationConfig`.
+* Outputs: console `[CAL] INSTALLED STEERING` block per dataset; every installed figure title
+  (`<installation> @ <f> GHz | User steering: Rx=…, Ry=…, Rz=… deg`); `validation/installed_peak_alignment.csv`
+  (`rot_x/y/z_deg`, boresight check) and `validation/installed_pattern_rotation_effective.csv`.
 
 Procedure: (1) `main('--cal')`; (2) look at `output/cal/installed_plots/body_cuts/` (XY: horizontal X_B / vertical Y_B,
-XZ: X_B / Z_B, YZ: Y_B / Z_B); (3) edit that dataset's row in `installed_pattern_rotation.csv`; (4) re-run
-`main('--cal')`; (5) repeat until the main lobe points along the panel outward normal (magenta arrow).
+XZ: X_B / Z_B, YZ: Y_B / Z_B); (3) edit that dataset's `rot_x_deg / rot_y_deg / rot_z_deg`; (4) re-run `main('--cal')`;
+(5) repeat until the main lobe points along the panel outward normal (magenta arrow).
 
-**Boresight validation (diagnostic only; reference = SSOT panel outward normal `n_B`).** For each dataset, with its
-`C_effective`: high-gain content (samples within 10 dB of the peak, solid-angle × linear-gain weighted) and the peak in
-the `+n_B` / `−n_B` hemispheres. `main_lobe_hemisphere` = EXPECTED_BORESIGHT / OPPOSITE_BORESIGHT / AMBIGUOUS is decided
-by the content share (not by a single global peak). Not EXPECTED → `FAIL_MAIN_LOBE_…`, printed in a `!!!` box with a
-suggested signed permutation; the figures keep the configured `C_effective`. Every installed figure title carries
-dataset, steering and status; `pattern_plots/` stays raw and is titled `RAW CST — UNCORRECTED`.
+**Boresight check (report only; reference = SSOT panel outward normal `n_B`).** With the entered angles: high-gain
+content (samples within 10 dB of the peak, solid-angle × linear-gain weighted) and the peak in the `+n_B` / `−n_B`
+hemispheres; `main_lobe_hemisphere` (EXPECTED_BORESIGHT / OPPOSITE_BORESIGHT / AMBIGUOUS) is decided by the content
+share, not by one global peak. Not EXPECTED → `FAIL_MAIN_LOBE_…` in a `!!!` box naming the row to edit; the figures
+still use the entered angles.
 
 * RFI rows report the raw (θ, φ) actually queried in the pattern's own source frame (`tx/rx_cst_theta_deg`,
   `tx/rx_cst_phi_deg`) and `tx/rx_pattern_source_frame`.

@@ -79,14 +79,8 @@ classdef CalSynthetic
         function S = spec()
             %SPEC folder, stem, synthetic parameters (each file distinct so bindings are testable).
             fx = {'1.1764', '1.2276', '1.5754', '2.25', '8.9', '9.65', '10.4', '10.6'};
-            % Installed files are raw CST exports whose main lobe, after the per-dataset raw -> displayed-Body table
-            % matrix (cal_installed_frame_corrections.csv, d_B = C d_raw), lies along the SSOT panel normal: raw axis = C.' n_B.
-            A = rfscreen.cal.CalPlotFrameAdapter; T = A.loadTable();
-            n3 = [0 -0.866025404 -0.5]; n6 = [0 0.866025404 0.5]; n4 = [0 0 -1];
-            ax = @(id, stem, f, n) (A.lookup(T, id, stem, f).C.' * n.').';
-            r3a = ax('GPSA_1', 'GPSA_GPSA1_f1.2', 1.2, n3); r3b = ax('GPSA_2', 'GPSA_GPSA2_f1.2', 1.2, n3);
-            r6a = ax('SBA_NADIR', 'RFC_SBA_NADIR_f2.06', 2.06, n6); r6b = ax('SBA_NADIR', 'RFC_SBA_NADIR_f2.25', 2.25, n6);
-            r4a = ax('SBA_ZENITH', 'RFC_SBA_ZENITH_f2.06', 2.06, n4); r4b = ax('SBA_ZENITH', 'RFC_SBA_ZENITH_f2.25', 2.25, n4);
+            % Installed files: main lobe along the SSOT panel outward normal in the raw CST axes (owner steering 0/0/0).
+            r3a = [0 -0.866025404 -0.5]; r3b = r3a; r6a = [0 0.866025404 0.5]; r6b = r6a; r4a = [0 0 -1]; r4b = r4a;
             S = {'gps', 'GPSA_ORIGINAL_f1.2', struct('peak', 4, 'back', -20, 'tiltX', 0); ...
                  'gps', 'GPSA_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', r3a); ...
                  'gps', 'GPSA_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', r3b)};

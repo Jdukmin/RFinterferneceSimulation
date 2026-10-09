@@ -6,8 +6,8 @@ classdef CalPlotter
     %     (positive dB offset normalised to the pattern peak), because negative dBi cannot be a radius.
     %   A  planeCuts      : raw source-frame XZ (phi 0/180) and YZ (phi 90/270) full cuts through +Z_S
     %                       (free-space: S = CST local L, +Z = boresight; installed: S = body B, +Z = +Z_B)
-    %   Installed figures use ONE raw -> displayed-Body matrix per dataset, C = C_effective = R_user * C_base
-    %   (CalPlotFrameAdapter.rawToDisplayedBody; owner steering file installed_pattern_rotation.csv)
+    %   Installed figures use ONLY the owner rotation angles of each dataset (installed_pattern_rotation.csv,
+    %   R = Rz*Ry*Rx; CalPlotFrameAdapter.rawToDisplayedBody); C below = that rotation
     %   (owner axis-sign correction; not the physical mount R_BL). No per-plane flip; gains never altered.
     %   B  installed3D    : spacecraft hull (SSOT panels) + body axes + mount point + panel normal + 3D pattern;
     %                       raw (theta, phi) -> d_raw -> d_B = C d_raw (colour = raw G(theta, phi))
@@ -159,7 +159,7 @@ classdef CalPlotter
                 end
                 xlabel(sprintf('body angle from +%s toward +%s [deg]', ax{ij(1)}, ax{ij(2)}), 'interpreter', 'none');
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('Body %s cut (d_raw = C_eff^T d_B) | boresight check %s', planes{1}, pattern.frameCorrection.status), ...
+                title(sprintf('Body %s cut (d_raw = R^T d_B) | boresight check %s', planes{1}, pattern.frameCorrection.status), ...
                     'interpreter', 'none', 'fontsize', 8);
                 f = sprintf('%s_BODY_%s.png', outPrefix, planes{1});
                 C.savePng(fig, f);
