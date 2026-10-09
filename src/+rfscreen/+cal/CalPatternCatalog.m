@@ -29,8 +29,12 @@ classdef CalPatternCatalog
         discovery = {}      % file_discovery notes (ignored files / folders), cellstr
     end
     methods (Static)
-        function c = scan(calDir, freqMap, model)
+        function c = scan(calDir, freqMap, model, rotationFile)
+            %SCAN rotationFile: owner steering angles of the installed figures (default
+            %   data/cal_config/installed_pattern_rotation.csv), validated up front: a bad file is an error for the whole run.
             if nargin < 3; model = []; end
+            if nargin < 4; rotationFile = ''; end
+            rotationConfig = rfscreen.cal.CalPlotFrameAdapter.loadRotationConfig(rotationFile);
             D = rfscreen.cal.CalIngestDiagnostics;
             c = rfscreen.cal.CalPatternCatalog();
             c.calDir = calDir;
@@ -116,6 +120,11 @@ classdef CalPatternCatalog
                                 E(a).installationId);
                         end
                         meta.R_BA = model.installations(E(a).installationId).R_BA;
+                        % owner rotation of this installed dataset (one per source pattern, shared by its L5/L2/L1 planes)
+                        A = rfscreen.cal.CalPlotFrameAdapter;
+                        fSrc = E(a).sourceSimulationFrequency_Hz / 1e9;
+                        meta.frameCorrection = A.resolve(E(a).data, meta.R_BA(:, 1), struct('installationId', E(a).installationId, ...
+                            'sourceFile', E(a).relPath, 'sourceFrequency_GHz', fSrc), rotationConfig);
                     end
                     P = cell(1, numel(E(a).freqs_Hz));
                     for k = 1:numel(E(a).freqs_Hz)

@@ -6,7 +6,8 @@ classdef CalPlotter
     %     (positive dB offset normalised to the pattern peak), because negative dBi cannot be a radius.
     %   A  planeCuts      : raw source-frame XZ (phi 0/180) and YZ (phi 90/270) full cuts through +Z_S
     %                       (free-space: S = CST local L, +Z = boresight; installed: S = body B, +Z = +Z_B)
-    %   Installed figures use ONE raw -> displayed-Body matrix C = CalPlotFrameAdapter.rawToDisplayedBody
+    %   Installed figures use ONLY the owner rotation angles of each dataset (installed_pattern_rotation.csv,
+    %   R = Rz*Ry*Rx; CalPlotFrameAdapter.rawToDisplayedBody); C below = that rotation
     %   (owner axis-sign correction; not the physical mount R_BL). No per-plane flip; gains never altered.
     %   B  installed3D    : spacecraft hull (SSOT panels) + body axes + mount point + panel normal + 3D pattern;
     %                       raw (theta, phi) -> d_raw -> d_B = C d_raw (colour = raw G(theta, phi))
@@ -48,9 +49,9 @@ classdef CalPlotter
             %PLANECUTS *_XZ.png and *_YZ.png (Cartesian signed angle from +Z_S vs gain), raw source frame S.
             if nargin < 4; sourceFrame = 'CST_LOCAL'; end
             if strcmp(sourceFrame, 'SPACECRAFT_BODY_FIXED')
-                zLabel = '+Z_raw (theta = 0; raw installed CST axes, uncorrected)'; frameName = 'raw installed-CST-axes (uncorrected)';
+                zLabel = '+Z raw (theta = 0)'; frameName = 'raw installed CST axes, no display correction';
             else
-                zLabel = 'boresight +Z_L (theta = 0)'; frameName = 'CST local-frame';
+                zLabel = 'boresight +Z_L (theta = 0)'; frameName = 'CST local frame';
             end
             planes = {'XZ', 'YZ'};
             neg = {'-X half (phi = 180)', '-Y half (phi = 270)'};
@@ -64,11 +65,11 @@ classdef CalPlotter
                 plot([0 0], yl, 'k--'); ylim(yl); xlim([-180 180]);
                 set(gca, 'xtick', -180:30:180);
                 text(-170, yl(2) - 2, neg{i}); text(20, yl(2) - 2, pos{i});
-                text(2, yl(1) + 2, zLabel);
+                text(2, yl(1) + 2, sprintf('%s; %s', zLabel, frameName), 'interpreter', 'none');
                 xlabel(sprintf('signed angle from +Z in the CST %s plane [deg] (+: %s, -: %s)', planes{i}, ...
                     strtok(pos{i}, '('), strtok(neg{i}, '(')));
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('%s - %s %s cut (peak %.2f dBi)', titleText, frameName, planes{i}, max(g)), 'interpreter', 'none');
+                title(sprintf('RAW CST — UNCORRECTED: %s %s (peak %.2f dBi)', titleText, planes{i}, max(g)), 'interpreter', 'none');
                 f = sprintf('%s_%s.png', outPrefix, planes{i});
                 rfscreen.cal.CalPlotter.savePng(fig, f);
                 files{end+1} = f; %#ok<AGROW>
@@ -113,8 +114,7 @@ classdef CalPlotter
             axis equal; view(-50, 25);
             ylabel('Y_B [m]'); zlabel('Z_B [m]');
             % Single-line strings only (the gnuplot toolkit cannot render multi-line titles).
-            [~, ck] = rfscreen.cal.CalPlotFrameAdapter.rawToDisplayedBody(pattern);
-            title(sprintf('%s - installed pattern in body frame B (d_B = C d_raw, %s)', titleText, ck), 'interpreter', 'none');
+            title(sprintf('%s | 3D body frame | %s', C.frameTag(pattern), pattern.frameCorrection.status), 'interpreter', 'none', 'fontsize', 9);
             xlabel('X_B [m]');
             f = outPath;
             C.savePng(fig, f);
@@ -147,7 +147,7 @@ classdef CalPlotter
                 end
                 axis equal;
                 xlabel([ax{ij(1)} ' [m]']); ylabel([ax{ij(2)} ' [m]']);
-                title(sprintf('Body %s plane: hull projection + pattern (radius visualization only)', planes{1}), 'interpreter', 'none');
+                title(sprintf('%s | Body %s', C.frameTag(pattern), planes{1}), 'interpreter', 'none', 'fontsize', 8);
                 subplot(1, 2, 2); hold on; grid on;
                 plot(alpha, g, 'b-', 'linewidth', 1.5);
                 yl = [floor(min(g) / 5) * 5 - 5, ceil(max(g) / 5) * 5 + 5]; ylim(yl); xlim([-180 180]);
@@ -159,7 +159,8 @@ classdef CalPlotter
                 end
                 xlabel(sprintf('body angle from +%s toward +%s [deg]', ax{ij(1)}, ax{ij(2)}), 'interpreter', 'none');
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('%s - body %s cut (d_raw = C^T d_B on the raw 3D pattern)', titleText, planes{1}), 'interpreter', 'none');
+                title(sprintf('Body %s cut (d_raw = R^T d_B) | boresight check %s', planes{1}, pattern.frameCorrection.status), ...
+                    'interpreter', 'none', 'fontsize', 8);
                 f = sprintf('%s_BODY_%s.png', outPrefix, planes{1});
                 C.savePng(fig, f);
                 files{end+1} = f; %#ok<AGROW>
@@ -224,7 +225,8 @@ classdef CalPlotter
                 text(2, yl(1) + 2, '+Z_L = panel outward normal n_B');
                 xlabel(sprintf('signed angle from +Z_L toward +%s in the antenna-local %s plane [deg]', ax{i}, cuts(i).plane), 'interpreter', 'none');
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('%s - antenna-local %s cut (d_raw = C^T R_BL d_L)', titleText, cuts(i).plane), 'interpreter', 'none');
+                title(sprintf('%s | Local %s | %s', rfscreen.cal.CalPlotter.frameTag(pattern), cuts(i).plane, ...
+                    pattern.frameCorrection.status), 'interpreter', 'none', 'fontsize', 9);
                 f = sprintf('%s_LOCAL_%s.png', outPrefix, cuts(i).plane);
                 rfscreen.cal.CalPlotter.savePng(fig, f);
                 files{end+1} = f; %#ok<AGROW>
@@ -237,6 +239,18 @@ classdef CalPlotter
             rfscreen.cal.CalPlotter.mustBeBodyFrame(pattern);
             A = rfscreen.cal.CalPlotFrameAdapter;
             d = A.rawToDisplayedBody(pattern) * A.sphericalDirection(TH, PH);
+        end
+
+        function t = frameTag(pattern)
+            %FRAMETAG Dataset, owner steering and validation status shown in every installed figure title.
+            fc = pattern.frameCorrection;
+            t = sprintf('%s @ %.6g GHz | User steering: Rx=%g deg, Ry=%g deg, Rz=%g deg%s', fc.installation_id, ...
+                fc.source_frequency_ghz, fc.rot_x_deg, fc.rot_y_deg, fc.rot_z_deg, ...
+                rfscreen.cal.CalPlotter.ternary(strcmp(fc.user_rotation_status, 'CONFIGURED'), '', ' (not configured)'));
+        end
+
+        function v = ternary(c, a, b)
+            if c; v = a; else; v = b; end
         end
 
         function mustBeBodyFrame(pattern)

@@ -1,0 +1,19 @@
+# cal_config -- OWNER USER STEERING of the installed CST patterns in the CAL figures (edit and re-run main('--cal')).
+# One row per installed dataset, keyed by installation_id + CST SOURCE simulation frequency (GPS: one 1.2 GHz row per
+#   antenna, NOT one per L5 / L2 / L1). Rows are fully independent: a change affects only that dataset's figures.
+# Convention (fixed): active rotation in the spacecraft Body frame, R = Rz(rot_z) * Ry(rot_y) * Rx(rot_x), i.e. a
+#   vector is rotated about X_B first, then Y_B, then Z_B (right-hand, degrees).
+#   Rx = [1 0 0; 0 c -s; 0 s c]   Ry = [c 0 s; 0 1 0; -s 0 c]   Rz = [c -s 0; s c 0; 0 0 1]
+# These three angles are the ONLY display setting (no matrix input): d_B = R d_raw (3D view), d_raw = R' d_B (body XY / XZ /
+#   YZ and antenna-local XZ / YZ cuts); 0 / 0 / 0 shows the raw CST axes as Body axes. Raw pattern_plots/ are never rotated.
+#   Physical R_BA / R_BL / positions / panel normals are never changed. RFI never uses installed patterns.
+# A missing row = 0 / 0 / 0 deg (console: USER_ROTATION_NOT_CONFIGURED). An unknown installation / frequency or a
+#   duplicate row is a validation error.
+# Fields must not contain commas.
+installation_id,source_frequency_ghz,rot_x_deg,rot_y_deg,rot_z_deg,note
+GPSA_1,1.2,0,0,0,user steering
+GPSA_2,1.2,0,0,0,user steering
+SBA_NADIR,2.06,0,0,0,user steering
+SBA_NADIR,2.25,0,0,0,user steering
+SBA_ZENITH,2.06,0,0,0,user steering
+SBA_ZENITH,2.25,0,0,0,user steering

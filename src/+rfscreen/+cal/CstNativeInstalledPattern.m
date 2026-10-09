@@ -4,8 +4,9 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
     %
     %   Source frame SPACECRAFT_BODY_FIXED: the installed CST model is placed in spacecraft body coordinates,
     %   so the raw far-field is G(theta_raw, phi_raw) on the CST result axes. It is NOT an antenna-local pattern
-    %   and is never rotated by R_BL / R_BA / M_AL. The CST result axes differ from the displayed Body axes by
-    %   the owner-derived axis-sign matrix C = rfscreen.cal.CalPlotFrameAdapter.rawToDisplayedBody (d_B = C d_raw):
+    %   and is never rotated by R_BL / R_BA / M_AL. The display uses ONLY the owner rotation angles of this dataset
+    %   (data/cal_config/installed_pattern_rotation.csv, R = Rz*Ry*Rx, d_B = R d_raw; rfscreen.cal.CalPlotFrameAdapter;
+    %   meta.frameCorrection, or resolved here with meta.rotationConfig / the default file):
     %     gainRaw(f, d_raw)    raw CST direction            -> raw grid (no transform)
     %     gainBody(f, d_B)     displayed Body direction     -> d_raw = C.' d_B -> raw
     %     gainLocal(f, d_L)    antenna-local direction      -> d_B = R_BL d_L -> d_raw = C.' d_B -> raw
@@ -27,6 +28,8 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
         R_BL = []           % antenna-local DCM (CST local L -> body B), for local cuts only
         sourceSimulationFrequency_Hz = NaN   % CST solve frequency (GPSA_*_f1.2: ~1.2 GHz)
         frequencyTreatment = 'NATIVE_PLANE'  % NATIVE_PLANE | SURROGATE (one CST solve reused at this frequency)
+        C_raw_to_body = eye(3)               % owner rotation of this dataset (from its rot_x/y/z_deg)
+        frameCorrection = struct()           % resolution / boresight-validation record of C_raw_to_body
     end
     methods
         function obj = CstNativeInstalledPattern(name, native, f_Hz, meta)
@@ -37,12 +40,24 @@ classdef CstNativeInstalledPattern < rfscreen.antenna.InstalledPattern
             end
             R_BA = meta.R_BA;
             rfscreen.geometry.Rotation.mustBeRotationMatrix(R_BA, 'R_BA');
-            C = rfscreen.cal.CalPlotFrameAdapter.lookup('INSTALLED', rfscreen.cal.CstNativeSupport.metaField(meta, 'family', ''), f_Hz);
+            M = rfscreen.cal.CstNativeSupport;
+            fc = M.metaField(meta, 'frameCorrection', []);
+            if isempty(fc)
+                A = rfscreen.cal.CalPlotFrameAdapter;
+                [~, stem] = fileparts(native.sourceFile);
+                fSrc = M.metaField(meta, 'sourceSimulationFrequency_Hz', f_Hz) / 1e9;
+                inst = M.metaField(meta, 'installationId', '');
+                rc = M.metaField(meta, 'rotationConfig', []);
+                if isempty(rc); rc = A.loadRotationConfig(); end
+                fc = A.resolve(native, R_BA(:, 1), struct('installationId', inst, 'sourceFile', stem, 'sourceFrequency_GHz', fSrc), rc);
+            end
+            C = fc.C;
             grid = rfscreen.cal.CstNativeSupport.antennaGrid(native, f_Hz, @(u) native.gainAtDirection(C.' * (R_BA * u)));
             popts = struct('confidence', NaN, 'polarization', rfscreen.antenna.Polarization.UNKNOWN);
             obj@rfscreen.antenna.InstalledPattern(name, rfscreen.antenna.PatternProvenance.SIMULATED_3D, grid, rfscreen.antenna.InstalledPatternSource.CST, popts);
-            M = rfscreen.cal.CstNativeSupport;
             obj.native = native;
+            obj.C_raw_to_body = C;
+            obj.frameCorrection = fc;
             obj.cstFrequency_Hz = f_Hz;
             obj.sourceFile = native.sourceFile;
             obj.family = M.metaField(meta, 'family', '');
