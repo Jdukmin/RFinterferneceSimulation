@@ -106,19 +106,56 @@ function test_cal_cst_ingestion(h)
     h.eqTol('compat PatternGrid agrees at a node', pf.grid.evaluate(fq, 0, 90), pf.evaluate(fq, 0, 90), 1e-9);
     h.throws('other frequency refused', @() pf.evaluate(1.2276e9, 0, 0), 'rfscreen:cal:wrongFrequencyPlane');
 
+    h.eqStr('free-space source frame = CST_LOCAL', pf.sourceFrame, 'CST_LOCAL');
+
+    % Installed CST exports are in the spacecraft BODY frame: G_B(theta_B, phi_B). A body query is a direct
+    % raw-grid lookup (no R_BL / R_BA / M_AL); only antenna-frame / antenna-local requests are mapped
+    % LOCAL -> BODY (d_B = R_BA u_A, d_B = R_BL d_L) before the raw lookup.
     model = rfscreen.spacecraft.SimplifiedSpacecraftBuilder.build();
     pn = @(id) model.panels(strcmp({model.panels.id}, id)).normal_B;
+    M_AL = rfscreen.kaa.CstLocalFrameAdapter.localToAntenna();
+    h.throws('installed pattern needs its SSOT mount R_BA', @() rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_INST', a, fq), ...
+        'rfscreen:cal:installedMountRequired');
     expect = {'GPSA_1', 'PANEL_3'; 'GPSA_2', 'PANEL_3'; 'SBA_NADIR', 'PANEL_6'; 'SBA_ZENITH', 'PANEL_4'};
-    pin = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_INST', a, fq);
     for i = 1:size(expect, 1)
-        inst = model.installations(expect{i, 1});
+        id = expect{i, 1};
+        inst = model.installations(id);
         R_BL = rfscreen.kaa.CstLocalFrameAdapter.fromR_BA(inst.R_BA);
         n = pn(expect{i, 2});
-        h.isTrue(sprintf('%s: +Z_CST = %s outward normal', expect{i, 1}, expect{i, 2}), norm(R_BL(:, 3) - n) < 1e-9);
-        h.isTrue(sprintf('%s: +X_CST = +X_B (orthogonalised roll)', expect{i, 1}), norm(R_BL(:, 1) - [1; 0; 0]) < 1e-9);
-        h.eqTol(sprintf('%s: body query along normal = boresight gain', expect{i, 1}), ...
-            pin.gainAntenna(fq, inst.R_BA.' * n), a.poleGain_dBi(1), 1e-9);
+        % frame adapter (free-space / antenna-local view): +Z_L = panel outward normal, +X_L = +X_B orthogonalised
+        h.isTrue(sprintf('%s: local +Z_L = %s outward normal', id, expect{i, 2}), norm(R_BL(:, 3) - n) < 1e-9);
+        h.isTrue(sprintf('%s: local +X_L = +X_B (orthogonalised roll)', id), norm(R_BL(:, 1) - [1; 0; 0]) < 1e-9);
+        % body-frame installed raw export: main lobe along n_B
+        sp = struct('peak', 6, 'back', -20, 'tiltX', 0, 'axis', n.');
+        [Ti, Pi] = ndgrid(0:5:180, 0:5:355); Gi = S.gain(Ti, Pi, sp);
+        fi = fullfile(tmp, sprintf('inst_%s.txt', id)); S.write(fi, Ti, Pi, Gi, 'cst');
+        ni = I.read(fi);
+        pin = rfscreen.cal.CstNativeInstalledPattern(['SYNTHETIC_TEST_' id], ni, fq, struct('R_BA', inst.R_BA, 'installationId', id));
+        h.eqStr(sprintf('%s: installed source frame = SPACECRAFT_BODY_FIXED', id), pin.sourceFrame, 'SPACECRAFT_BODY_FIXED');
+        [tn, pnn] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(n);
+        h.eqTol(sprintf('%s: gainBody(n_B) = raw G(theta_B, phi_B) of n_B (no rotation)', id), ...
+            pin.gainBody(fq, n), ni.gainAt(tn, pnn), 1e-12);
+        h.eqTol(sprintf('%s: gainBody(n_B) = main-lobe peak', id), pin.gainBody(fq, n), ni.peakGain_dBi, 1e-6);
+        dPk = rfscreen.cal.CalPlotter.installedRawDirections(pin, ni.peakTheta_deg, ni.peakPhi_deg);
+        h.isTrue(sprintf('%s: raw peak direction (3D plot) = %s normal', id, expect{i, 2}), norm(dPk - n) < 1e-6);
+        h.eqTol(sprintf('%s: antenna boresight +X_A -> d_B = R_BA u_A = n_B', id), pin.gainAntenna(fq, [1; 0; 0]), pin.gainBody(fq, n), 1e-12);
+        h.eqTol(sprintf('%s: antenna-local +Z_L -> d_B = R_BL d_L = n_B', id), pin.gainLocal(fq, [0; 0; 1]), pin.gainBody(fq, n), 1e-12);
+        h.eqTol(sprintf('%s: evaluate(az 0, el 0) = gain along n_B', id), pin.evaluate(fq, 0, 0), pin.gainBody(fq, n), 1e-12);
+        u = [0.3; -0.5; 0.81]; u = u / norm(u);
+        h.eqTol(sprintf('%s: arbitrary body direction queried as is', id), pin.gainBody(fq, u), ...
+            ni.gainAtDirection(u), 1e-12);
+        % the former (wrong) body -> local re-interpretation reads raw +Z_B/other directions, not the main lobe
+        old = ni.gainAtLocal(M_AL.' * (inst.R_BA.' * n));
+        h.isTrue(sprintf('%s: raw installed data NOT re-rotated by R_BL (old convention differs)', id), ...
+            abs(old - pin.gainBody(fq, n)) > 1);
+        [tq, pq] = pin.sourceThetaPhi([1; 0; 0]);
+        h.isTrue(sprintf('%s: queried raw (theta, phi) = body angles of n_B', id), abs(tq - tn) < 1e-9 && abs(mod(pq - pnn + 180, 360) - 180) < 1e-9);
     end
+    h.isTrue('SBA_NADIR mount position [255 870 1030] mm', norm(model.installations('SBA_NADIR').position_m - [0.255; 0.870; 1.030]) < 1e-12);
+    h.isTrue('SBA_ZENITH mount position [255 -530 -1240] mm', norm(model.installations('SBA_ZENITH').position_m - [0.255; -0.530; -1.240]) < 1e-12);
+    rec = model.installationRecords;
+    h.eqStr('SBA_NADIR on PANEL_6', rec(strcmp({rec.antennaId}, 'SBA_NADIR')).panelId, 'PANEL_6');
+    h.eqStr('SBA_ZENITH on PANEL_4', rec(strcmp({rec.antennaId}, 'SBA_ZENITH')).panelId, 'PANEL_4');
     h.isTrue('GPSA_1/GPSA_2 normal (0,-0.866,-0.5)', norm(pn('PANEL_3') - [0; -0.866025404; -0.5]) < 1e-6);
     h.isTrue('GPSA_1/GPSA_2 distinct positions', abs(model.installations('GPSA_2').position_m(1) - ...
         model.installations('GPSA_1').position_m(1) - 1.1) < 1e-9);
@@ -138,26 +175,111 @@ function test_cal_cst_ingestion(h)
     h.isTrue('cut spans -180..180 through boresight', ang(1) == -180 && ang(end) == 180 && any(ang == 0));
     h.isTrue('XZ != YZ for an asymmetric pattern', abs(g(k) - gY(angY == 60)) > 0.5);
 
-    % body cuts query the transformed 3D pattern: an off-cut feature (phi far from 0/90/180/270)
-    inst = model.installations('GPSA_1');
-    R_BL = rfscreen.kaa.CstLocalFrameAdapter.fromR_BA(inst.R_BA);
+    % body cuts of an installed (body-frame) pattern query the raw grid directly; an off-plane feature
+    % (phi far from 0/90/180/270) defined in BODY coordinates appears exactly where it is in the body XY cut.
+    inst = model.installations('SBA_NADIR');
     dB = [cosd(-60); sind(-60); 0];                       % body XY plane, alpha = -60 deg
-    [t0, p0] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(R_BL.' * dB);
-    h.isTrue('feature lies off the CST XZ/YZ planes', min(abs(mod(p0, 90) - [0 90])) > 10 && t0 > 10 && t0 < 170);
-    sb = base; sb.tiltX = 0; sb.bump = [t0 p0 12 8];
+    [t0, p0] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(dB);
+    h.isTrue('feature lies off the raw XZ/YZ planes', min(abs(mod(p0, 90) - [0 90])) > 10 && t0 > 10 && t0 < 170);
+    sb = base; sb.tiltX = 0; sb.bump = [t0 p0 30 8]; sb.axis = pn('PANEL_6').';
     [Tb, Pb] = ndgrid(0:2:180, 0:2:358); Gb = S.gain(Tb, Pb, sb);
     f = fullfile(tmp, 'bump.txt'); S.write(f, Tb, Pb, Gb, 'cst');
     nb = I.read(f);
-    pb = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_BUMP', nb, fq);
-    cuts = rfscreen.cal.CalPlotter.bodyCutData(inst.R_BA, pb, fq);
+    pb = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_BUMP', nb, fq, struct('R_BA', inst.R_BA));
+    cuts = rfscreen.cal.CalPlotter.bodyCutData(pb, fq);
     cxy = cuts(strcmp({cuts.plane}, 'XY'));
     [gmax, kmax] = max(cxy.gain_dBi);
-    h.isTrue('body XY cut sees the off-cut 3D feature at alpha -60', abs(cxy.alpha_deg(kmax) + 60) <= 2 && gmax > sb.back + 10);
-    direct = nb.gainAtLocal(R_BL.' * cxy.dir_B);
-    h.eqTol('body cut = body->antenna->local->theta/phi->native query', max(abs(direct - cxy.gain_dBi)), 0, 1e-12);
+    h.isTrue('body XY cut sees the body-frame 3D feature at alpha -60', abs(cxy.alpha_deg(kmax) + 60) <= 2 && gmax > sb.back + 10);
+    direct = nb.gainAtDirection(cxy.dir_B);
+    h.eqTol('body cut = raw body-frame query (no R_BL / R_BA / M_AL)', max(abs(direct - cxy.gain_dBi)), 0, 1e-12);
+    R_BL = rfscreen.kaa.CstLocalFrameAdapter.fromR_BA(inst.R_BA);
+    h.isTrue('body cut differs from the former body->local re-rotation', max(abs(nb.gainAtLocal(R_BL.' * cxy.dir_B) - cxy.gain_dBi)) > 1);
+    cxz = cuts(strcmp({cuts.plane}, 'XZ')); cyz = cuts(strcmp({cuts.plane}, 'YZ'));
+    h.isTrue('body XZ cut lies in Y_B = 0, YZ in X_B = 0, XY in Z_B = 0', all(cxz.dir_B(2, :) == 0) && ...
+        all(cyz.dir_B(1, :) == 0) && all(cxy.dir_B(3, :) == 0));
     [~, gxz] = nb.planeCut('XZ'); [~, gyz] = nb.planeCut('YZ');
-    h.isTrue('feature above the boresight peak in the body cut', gmax > sb.peak + 3);
-    h.isTrue('feature absent from both CST XZ/YZ cuts (no rotated-2D shortcut)', max([gxz gyz]) < sb.peak + 0.5);
+    h.isTrue('feature above the main-lobe peak in the body cut', gmax > sb.peak + 3);
+    h.isTrue('feature absent from both raw XZ/YZ cuts (no rotated-2D shortcut)', max([gxz gyz]) < sb.peak + 0.5);
+    h.eqTol('body XZ alpha 30 = raw node (theta 60, phi 0)', cxz.gain_dBi(cxz.alpha_deg == 30), nb.gain_dBi(31, 1), 1e-9);
+    h.eqTol('body XZ alpha 150 = raw node (theta 60, phi 180)', cxz.gain_dBi(cxz.alpha_deg == 150), nb.gain_dBi(31, 91), 1e-9);
+    h.eqTol('body YZ alpha 30 = raw node (theta 60, phi 90)', cyz.gain_dBi(cyz.alpha_deg == 30), nb.gain_dBi(31, 46), 1e-9);
+    % antenna-local cuts: the ONLY local -> body mapping (d_B = R_BL d_L), never body -> local
+    lc = rfscreen.cal.CalPlotter.localCutData(pb, fq);
+    for i = 1:numel(lc)
+        h.eqTol(sprintf('local %s cut: d_B = R_BL d_L', lc(i).plane), max(max(abs(lc(i).dir_B - R_BL * lc(i).dir_L))), 0, 1e-15);
+        h.eqTol(sprintf('local %s cut: gain = raw body query of d_B', lc(i).plane), ...
+            max(abs(lc(i).gain_dBi - nb.gainAtDirection(lc(i).dir_B))), 0, 1e-12);
+        h.isTrue(sprintf('local %s cut: angle 0 = panel normal n_B', lc(i).plane), norm(lc(i).dir_B(:, lc(i).ang_deg == 0) - pn('PANEL_6')) < 1e-9);
+    end
+    pz = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_Z', nb, fq, struct('R_BA', model.installations('SBA_ZENITH').R_BA));
+    lz = rfscreen.cal.CalPlotter.localCutData(pz, fq);
+    h.isTrue('SBA_ZENITH local +Z_L = -Z_B (PANEL_4)', norm(lz(1).dir_B(:, lz(1).ang_deg == 0) - [0; 0; -1]) < 1e-12);
+    h.throws('body cuts refuse a CST_LOCAL (free-space) pattern', @() rfscreen.cal.CalPlotter.bodyCutData(pf, fq), ...
+        'rfscreen:cal:notBodyFramePattern');
+
+    % one coordinate definition for every frequency: 2.06 / 2.25 GHz planes of the same installation share R_BA / R_BL
+    p206 = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_206', nb, 2.06e9, struct('R_BA', inst.R_BA));
+    p225 = rfscreen.cal.CstNativeInstalledPattern('SYNTHETIC_TEST_225', nb, 2.25e9, struct('R_BA', inst.R_BA));
+    h.isTrue('same frame at 2.06 and 2.25 GHz', isequal(p206.R_BL, p225.R_BL) && ...
+        abs(p206.gainBody(2.06e9, dB) - p225.gainBody(2.25e9, dB)) < 1e-12);
+
+    %% ---------------- ingestion diagnostics (no parser relaxation) ----------------
+    D = rfscreen.cal.CalIngestDiagnostics;
+    [pv, dv] = D.readFile(fullfile(fx, 'SYNTHETIC_TEST_standard_15deg.txt'));
+    h.isTrue('diag: full-sphere fixture passes all read stages', ~isempty(pv) && isempty(dv.status) && ...
+        strcmp(dv.last_stage_completed, 'spherical_grid_validation') && isempty(dv.failure_stage));
+    h.isTrue('diag: full-sphere statistics', dv.n_rows == 312 && dv.n_columns == 8 && dv.n_theta == 13 && dv.n_phi == 24 && ...
+        dv.theta_step_deg == 15 && dv.phi_step_deg == 15 && dv.expected_samples == 312 && dv.actual_samples == 312 && ...
+        dv.missing_samples == 0 && dv.duplicate_samples == 0 && dv.expected_full_sphere_samples == 312);
+    h.isTrue('diag: pole statistics', dv.n_rows_theta0 == 24 && dv.n_phi_at_theta0 == 24 && dv.n_rows_theta180 == 24);
+    h.isTrue('diag: gain range', abs(dv.gain_min_dbi - min(G(:))) < 1e-5 && abs(dv.gain_max_dbi - max(G(:))) < 1e-5);
+    [~, dm] = D.readFile(fullfile(tmp, 'bad.txt'));
+    h.isTrue('diag: malformed row -> PARSE_ERROR at numeric_parsing, line 7', strcmp(dm.status, 'PARSE_ERROR') && ...
+        strcmp(dm.failure_stage, 'numeric_parsing') && strcmp(dm.error_identifier, 'rfscreen:cal:malformedRow') && dm.line_number == 7);
+    h.isTrue('diag: malformed row keeps partial statistics', dm.n_rows == 4 && dm.preamble_lines == 2 && dm.n_columns == 8);
+    [~, ds] = D.readFile(fullfile(tmp, 'short.txt'));
+    h.isTrue('diag: column-count mismatch line reported', strcmp(ds.status, 'PARSE_ERROR') && ds.line_number == 12 && ...
+        ~isempty(strfind(ds.error_message, '3 columns, expected 8')));
+    [~, dmi] = D.readFile(fullfile(tmp, 'miss.txt'));
+    h.isTrue('diag: missing sample -> GRID_VALIDATION_ERROR with sample statistics', strcmp(dmi.status, 'GRID_VALIDATION_ERROR') && ...
+        strcmp(dmi.failure_stage, 'spherical_grid_validation') && strcmp(dmi.error_identifier, 'rfscreen:cal:missingSample') && ...
+        dmi.expected_samples == 312 && dmi.actual_samples == 311 && dmi.missing_samples == 1 && dmi.missing_theta_planes == 0 && ...
+        dmi.example_missing_theta_deg == M0(50, 1) && dmi.example_missing_phi_deg == M0(50, 2));
+    [~, dpl] = D.readFile(fullfile(tmp, 'missplane.txt'));
+    h.isTrue('diag: missing phi plane counted', strcmp(dpl.error_identifier, 'rfscreen:cal:missingSample') && ...
+        dpl.missing_phi_planes == 1 && dpl.missing_samples == 13 && dpl.n_phi == 23);
+    [~, dnp] = D.readFile(fullfile(tmp, 'nopole.txt'));
+    h.isTrue('diag: incomplete theta range with min/max', strcmp(dnp.error_identifier, 'rfscreen:cal:incompleteGrid') && ...
+        dnp.theta_min_deg == 0 && dnp.theta_max_deg == 165 && dnp.missing_samples == 0 && dnp.expected_full_sphere_samples == 312 && ...
+        dnp.actual_samples == 288 && dnp.n_rows_theta180 == 0);
+    [~, dd] = D.readFile(fullfile(tmp, 'dup.txt'));
+    h.isTrue('diag: duplicate count and line', strcmp(dd.error_identifier, 'rfscreen:cal:duplicateSample') && ...
+        dd.duplicate_samples == 1 && dd.line_number == 2 + 313 && dd.actual_samples == 312);
+    [~, dn] = D.readFile(fullfile(tmp, 'nan.txt'));
+    h.isTrue('diag: NaN gain -> GRID_VALIDATION_ERROR nonFinite with line', strcmp(dn.status, 'GRID_VALIDATION_ERROR') && ...
+        strcmp(dn.error_identifier, 'rfscreen:cal:nonFinite') && dn.n_nonfinite_gain == 1 && dn.line_number == 22);
+    Mi = M0; Mi(30, 3) = Inf;
+    f = fullfile(tmp, 'inf.txt'); writeRows(f, Mi, 'h\n---\n');
+    [~, di] = D.readFile(f);
+    h.isTrue('diag: Inf gain identified', strcmp(di.error_identifier, 'rfscreen:cal:nonFinite') && di.n_nonfinite_gain == 1 && di.line_number == 32);
+    Mpl = M0(~(M0(:, 1) == 0 & M0(:, 2) > 0), :);
+    f = fullfile(tmp, 'polecollapsed.txt'); writeRows(f, Mpl, 'h\n---\n');
+    [~, dpc] = D.readFile(f);
+    h.isTrue('diag: pole with a single phi sample', strcmp(dpc.error_identifier, 'rfscreen:cal:missingSample') && ...
+        dpc.n_rows_theta0 == 1 && dpc.n_phi_at_theta0 == 1 && dpc.missing_samples == 23 && dpc.n_phi_at_theta180 == 24);
+    Mneg = M0; Mneg(:, 2) = mod(Mneg(:, 2) + 180, 360) - 180;
+    f = fullfile(tmp, 'phineg.txt'); writeRows(f, Mneg, 'h\n---\n');
+    [~, dng] = D.readFile(f);
+    h.isTrue('diag: phi -180..180 export identified (still refused)', strcmp(dng.status, 'GRID_VALIDATION_ERROR') && ...
+        strcmp(dng.error_identifier, 'rfscreen:cal:phiRange') && strcmp(dng.failure_stage, 'spherical_grid_construction') && ...
+        dng.phi_min_deg == -180 && dng.phi_max_deg == 165 && ~isempty(strfind(dng.phi_convention, '-180')));
+    h.throws('parser policy unchanged: phi -180..180 still refused by read()', @() I.read(f), 'rfscreen:cal:phiRange');
+    [~, dr] = D.readFile(fullfile(tmp, 'does_not_exist.txt'));
+    h.isTrue('diag: unreadable file -> READ_ERROR at ascii_read', strcmp(dr.status, 'READ_ERROR') && ...
+        strcmp(dr.failure_stage, 'ascii_read') && strcmp(dr.error_identifier, 'rfscreen:cal:fileNotFound'));
+    f = fullfile(tmp, 'hdronly.txt'); fid = fopen(f, 'w'); fprintf(fid, 'Theta Phi\n------\n'); fclose(fid);
+    [~, dh] = D.readFile(f);
+    h.isTrue('diag: header only -> PARSE_ERROR noData', strcmp(dh.status, 'PARSE_ERROR') && strcmp(dh.error_identifier, 'rfscreen:cal:noData'));
 
     %% ---------------- binding ----------------
     cfg = fullfile(repo, 'data', 'cal_config');
@@ -189,6 +311,17 @@ function test_cal_cst_ingestion(h)
     h.eqStr('duplicate binding (a)', st('sba/RFC_SBA_f10.6.txt'), 'DUPLICATE_BINDING');
     h.eqStr('duplicate binding (b)', st('sba/RFC_SBA_f10.60.txt'), 'DUPLICATE_BINDING');
     h.eqStr('corrupt file rejected', st('sba/RFC_SBA_f9.65.txt'), 'PARSE_ERROR');
+    dg = @(name) cat.entries(strcmp({cat.entries.relPath}, name)).diag;
+    h.isTrue('corrupt file: stage numeric_parsing + line number', strcmp(dg('sba/RFC_SBA_f9.65.txt').failure_stage, 'numeric_parsing') && ...
+        isfinite(dg('sba/RFC_SBA_f9.65.txt').line_number));
+    h.eqStr('unrecognised name stage', dg('isl/RFC_ISL_NADIR_f10.6.txt').failure_stage, 'filename_classification');
+    h.eqStr('unmapped token stage', dg('kaa/RFC_KAA_f3.3.txt').failure_stage, 'frequency_binding');
+    h.eqStr('duplicate binding stage', dg('sba/RFC_SBA_f10.6.txt').failure_stage, 'catalog_binding');
+    h.isTrue('valid file: all stages completed', strcmp(dg('gps/GPS_GPSA1_f1.2.txt').status, 'VALID') && ...
+        strcmp(dg('gps/GPS_GPSA1_f1.2.txt').last_stage_completed, 'catalog_binding'));
+    eg = cat.entries(strcmp({cat.entries.relPath}, 'gps/GPS_GPSA1_f1.2.txt'));
+    h.isTrue('GPS provenance: 1.2 GHz CST solve as SURROGATE, body frame', strcmp(eg.frequencyTreatment, 'SURROGATE') && ...
+        eg.sourceSimulationFrequency_Hz == 1.2e9 && strcmp(eg.sourceFrame, 'SPACECRAFT_BODY_FIXED'));
     h.eqStr('owner GPS installed file valid', st('gps/GPS_GPSA1_f1.2.txt'), 'VALID');
     B = rfscreen.cal.CalPatternBinder(cat, fullfile(cfg, 'cal_installations.csv'));
     g1 = {}; for fr = [f5 f2 f1]; g1{end+1} = B.bind('GPSA_1', 'RX', fr); end %#ok<AGROW>
@@ -197,6 +330,37 @@ function test_cal_cst_ingestion(h)
     u = [0.3; -0.5; 0.81]; u = u / norm(u);
     gg = cellfun(@(x, fr) x.pattern.gainAntenna(fr, u), g1, {f5, f2, f1});
     h.eqTol('GPS: identical spatial pattern at L5/L2/L1', max(gg) - min(gg), 0, 1e-12);
+    h.isTrue('GPS: pattern provenance SURROGATE of the 1.2 GHz solve', all(cellfun(@(x) strcmp(x.pattern.frequencyTreatment, 'SURROGATE') && ...
+        x.pattern.sourceSimulationFrequency_Hz == 1.2e9, g1)));
+
+    % GPS read / validation failures are reported per file with the failing stage and grid statistics
+    root4 = fullfile(tmp, 'cal4');
+    [Tg, Pg, Gg] = S.grid(15, base);
+    S.write(fullfile(root4, 'gps', 'GPS_GPSA2_f1.2.txt'), Tg, Pg, Gg);
+    Mg = [Tg(:) Pg(:) Gg(:) 0 * Tg(:) 0 * Tg(:) 0 * Tg(:) 0 * Tg(:) 0 * Tg(:)];
+    writeRows(fullfile(root4, 'gps', 'GPS_ORIGINAL_f1.2.txt'), Mg([1:99 101:end], :), 'h\n---\n');
+    writeRows(fullfile(root4, 'gps', 'GPS_GPSA1_f1.2.txt'), Mg, 'h\n---\n', 40, '15.0 30.0 1.0 x');
+    fid = fopen(fullfile(root4, 'gps', 'notes.csv'), 'w'); fprintf(fid, 'x\n'); fclose(fid);
+    fid = fopen(fullfile(root4, 'stray.txt'), 'w'); fprintf(fid, 'x\n'); fclose(fid);
+    cat4 = rfscreen.cal.CalPatternCatalog.scan(root4, fmap, model);
+    e4 = @(name) cat4.entries(strcmp({cat4.entries.relPath}, name));
+    eo = e4('gps/GPS_ORIGINAL_f1.2.txt'); ea = e4('gps/GPS_GPSA1_f1.2.txt'); eb = e4('gps/GPS_GPSA2_f1.2.txt');
+    h.isTrue('GPS missing sample: GRID_VALIDATION_ERROR + statistics', strcmp(eo.status, 'GRID_VALIDATION_ERROR') && ...
+        eo.diag.missing_samples == 1 && eo.diag.expected_samples == 312 && eo.diag.actual_samples == 311);
+    h.isTrue('GPS malformed row: PARSE_ERROR + line', strcmp(ea.status, 'PARSE_ERROR') && ea.diag.line_number == 42);
+    h.isTrue('GPS valid file bound as surrogate', strcmp(eb.status, 'VALID') && numel(eb.keys) == 3);
+    txo = strjoin(D.consoleLines(eo), sprintf('\n')); txb = strjoin(D.consoleLines(eb), sprintf('\n'));
+    h.isTrue('console: failing GPS file shows status / stage / id / samples', ~isempty(strfind(txo, '[CAL] gps/GPS_ORIGINAL_f1.2.txt')) && ...
+        ~isempty(strfind(txo, 'status: GRID_VALIDATION_ERROR')) && ~isempty(strfind(txo, 'stage : spherical_grid_validation')) && ...
+        ~isempty(strfind(txo, 'error id: rfscreen:cal:missingSample')) && ~isempty(strfind(txo, 'missing samples : 1')) && ...
+        ~isempty(strfind(txo, 'theta : 0 .. 180 deg, unique=13, step=15')));
+    h.isTrue('console: valid GPS file shows the surrogate binding', ~isempty(strfind(txb, 'status: VALID')) && ...
+        ~isempty(strfind(txb, 'source simulation frequency: 1.2 GHz')) && ~isempty(strfind(txb, 'bound as surrogate for: L5 / L2 / L1')));
+    h.isTrue('file discovery notes: stray root file and non-.txt file', any(~cellfun(@isempty, strfind(cat4.discovery, 'stray.txt'))) && ...
+        any(~cellfun(@isempty, strfind(cat4.discovery, 'notes.csv'))));
+    B4 = rfscreen.cal.CalPatternBinder(cat4, fullfile(cfg, 'cal_installations.csv'));
+    b4 = B4.bind('GPSA_1', 'RX', f1);
+    h.isTrue('failed GPS files are not used (no repair, no fallback to a failed file)', strcmp(b4.status, 'INPUT_MISSING'));
     b2 = B.bind('GPSA_2', 'RX', f1);
     h.isTrue('GPSA_2 without installed file -> GPS_ORIGINAL free-space fallback, flagged', strcmp(b2.patternType, 'FREE_SPACE') && ...
         b2.fallback && ~isempty(strfind(b2.file, 'GPS_ORIGINAL')) && ~isempty(strfind(b2.warnings{1}, 'FALLBACK')));

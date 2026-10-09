@@ -5,7 +5,20 @@ classdef CalSynthetic
         function G = gain(theta, phi, s)
             %GAIN Smooth asymmetric synthetic Realized Gain [dBi]: peak s.peak on boresight, back level
             %   s.back, +X-half tilt s.tiltX (dB) and an optional Gaussian bump (s.bump = [theta0 phi0 dB width]).
-            G = s.back + (s.peak - s.back) * ((1 + cosd(theta)) / 2) .^ 2 + s.tiltX * sind(theta) .* cosd(phi);
+            %   Boresight = +Z of the file frame, or s.axis (3-vector in the file frame) when given: an INSTALLED
+            %   export is in the spacecraft body frame, so its main lobe points along the panel normal n_B
+            %   (tilt then along +X_B orthogonalised to the axis).
+            if isfield(s, 'axis') && ~isempty(s.axis)
+                a = s.axis(:) / norm(s.axis);
+                xp = [1; 0; 0] - a(1) * a;
+                if norm(xp) < 1e-9; xp = [0; 0; 1] - a(3) * a; end
+                xp = xp / norm(xp);
+                v = [sind(theta(:)) .* cosd(phi(:)), sind(theta(:)) .* sind(phi(:)), cosd(theta(:))];
+                ca = reshape(max(-1, min(1, v * a)), size(theta));
+                G = s.back + (s.peak - s.back) * ((1 + ca) / 2) .^ 2 + s.tiltX * reshape(v * xp, size(theta));
+            else
+                G = s.back + (s.peak - s.back) * ((1 + cosd(theta)) / 2) .^ 2 + s.tiltX * sind(theta) .* cosd(phi);
+            end
             if isfield(s, 'bump') && ~isempty(s.bump)
                 b = s.bump;
                 v = [sind(theta(:)) .* cosd(phi(:)), sind(theta(:)) .* sind(phi(:)), cosd(theta(:))];
@@ -66,9 +79,11 @@ classdef CalSynthetic
         function S = spec()
             %SPEC folder, stem, synthetic parameters (each file distinct so bindings are testable).
             fx = {'1.1764', '1.2276', '1.5754', '2.25', '8.9', '9.65', '10.4', '10.6'};
+            % Installed files are body-frame exports: main lobe along the SSOT panel normal of the installation.
+            n3 = [0 -0.866025404 -0.5]; n6 = [0 0.866025404 0.5]; n4 = [0 0 -1];
             S = {'gps', 'GPS_ORIGINAL_f1.2', struct('peak', 4, 'back', -20, 'tiltX', 0); ...
-                 'gps', 'GPS_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2); ...
-                 'gps', 'GPS_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2)};
+                 'gps', 'GPS_GPSA1_f1.2', struct('peak', 5, 'back', -25, 'tiltX', 2, 'axis', n3); ...
+                 'gps', 'GPS_GPSA2_f1.2', struct('peak', 6, 'back', -22, 'tiltX', -2, 'axis', n3)};
             for k = 1:numel(fx)
                 v = str2double(fx{k});
                 S(end+1, :) = {'isl', ['RFC_ISL_f' fx{k}], struct('peak', 8 + v / 2, 'back', -30, 'tiltX', 1)}; %#ok<AGROW>
@@ -78,10 +93,10 @@ classdef CalSynthetic
             for k = 1:numel(fs)
                 S(end+1, :) = {'sba', ['RFC_SBA_f' fs{k}], struct('peak', 3 + str2double(fs{k}) / 10, 'back', -18, 'tiltX', 0.5)}; %#ok<AGROW>
             end
-            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.06', struct('peak', 4.1, 'back', -15, 'tiltX', 1.5)};
-            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.25', struct('peak', 4.2, 'back', -16, 'tiltX', 1.5)};
-            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.06', struct('peak', 4.3, 'back', -17, 'tiltX', -1.5)};
-            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.25', struct('peak', 4.4, 'back', -19, 'tiltX', -1.5)};
+            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.06', struct('peak', 4.1, 'back', -15, 'tiltX', 1.5, 'axis', n6)};
+            S(end+1, :) = {'sba', 'RFC_SBA_NADIR_f2.25', struct('peak', 4.2, 'back', -16, 'tiltX', 1.5, 'axis', n6)};
+            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.06', struct('peak', 4.3, 'back', -17, 'tiltX', -1.5, 'axis', n4)};
+            S(end+1, :) = {'sba', 'RFC_SBA_ZENITH_f2.25', struct('peak', 4.4, 'back', -19, 'tiltX', -1.5, 'axis', n4)};
         end
     end
 end

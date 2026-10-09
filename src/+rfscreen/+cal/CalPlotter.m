@@ -4,10 +4,14 @@ classdef CalPlotter
     %   - 3D / polar RADIUS is a separate visualization-only mapping
     %       r_vis = R_VIS_M * max(0, G - (G_max - VIS_RANGE_DB)) / VIS_RANGE_DB
     %     (positive dB offset normalised to the pattern peak), because negative dBi cannot be a radius.
-    %   A  planeCuts      : pattern-coordinate XZ (phi 0/180) and YZ (phi 90/270) full cuts, +Z = boresight
-    %   B  installed3D    : spacecraft hull (SSOT panels) + body axes + mount point + boresight + 3D pattern
-    %   C  bodyCuts       : body XZ / YZ / XY cross-sections; every sample is a body direction mapped
-    %                       body -> antenna (R_BA') -> CST local (M_AL') -> (theta, phi) -> native interpolation
+    %   A  planeCuts      : raw source-frame XZ (phi 0/180) and YZ (phi 90/270) full cuts through +Z_S
+    %                       (free-space: S = CST local L, +Z = boresight; installed: S = body B, +Z = +Z_B)
+    %   B  installed3D    : spacecraft hull (SSOT panels) + body axes + mount point + panel normal + 3D pattern;
+    %                       installed raw (theta_B, phi_B) -> d_B used as is (no R_BL rotation)
+    %   C  bodyCuts       : body XZ (Y_B = 0) / YZ (X_B = 0) / XY (Z_B = 0) cross-sections; every sample is a
+    %                       body direction d_B queried directly on the installed raw grid (gainBody)
+    %   D  localCuts      : antenna-local XZ / YZ cuts (+Z_L = panel normal, +X_L = +X_B orthogonalised);
+    %                       d_L -> d_B = R_BL d_L -> installed raw grid (LOCAL -> BODY only)
     properties (Constant)
         VIS_RANGE_DB = 30
         R_VIS_M = 1.5
@@ -38,8 +42,14 @@ classdef CalPlotter
             close(fig);
         end
 
-        function files = planeCuts(native, titleText, outPrefix)
-            %PLANECUTS *_XZ.png and *_YZ.png (Cartesian signed angle from boresight vs gain).
+        function files = planeCuts(native, titleText, outPrefix, sourceFrame)
+            %PLANECUTS *_XZ.png and *_YZ.png (Cartesian signed angle from +Z_S vs gain), raw source frame S.
+            if nargin < 4; sourceFrame = 'CST_LOCAL'; end
+            if strcmp(sourceFrame, 'SPACECRAFT_BODY_FIXED')
+                zLabel = '+Z_B (theta = 0; raw installed frame = body B)'; frameName = 'raw body-frame (installed CST)';
+            else
+                zLabel = 'boresight +Z_L (theta = 0)'; frameName = 'CST local-frame';
+            end
             planes = {'XZ', 'YZ'};
             neg = {'-X half (phi = 180)', '-Y half (phi = 270)'};
             pos = {'+X half (phi = 0)', '+Y half (phi = 90)'};
@@ -52,11 +62,11 @@ classdef CalPlotter
                 plot([0 0], yl, 'k--'); ylim(yl); xlim([-180 180]);
                 set(gca, 'xtick', -180:30:180);
                 text(-170, yl(2) - 2, neg{i}); text(20, yl(2) - 2, pos{i});
-                text(2, yl(1) + 2, 'boresight +Z (theta = 0)');
+                text(2, yl(1) + 2, zLabel);
                 xlabel(sprintf('signed angle from +Z in the CST %s plane [deg] (+: %s, -: %s)', planes{i}, ...
                     strtok(pos{i}, '('), strtok(neg{i}, '(')));
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('%s - pattern-coordinate %s cut (peak %.2f dBi)', titleText, planes{i}, max(g)), 'interpreter', 'none');
+                title(sprintf('%s - %s %s cut (peak %.2f dBi)', titleText, frameName, planes{i}, max(g)), 'interpreter', 'none');
                 f = sprintf('%s_%s.png', outPrefix, planes{i});
                 rfscreen.cal.CalPlotter.savePng(fig, f);
                 files{end+1} = f; %#ok<AGROW>
@@ -71,7 +81,6 @@ classdef CalPlotter
         function f = installed3D(model, installationId, pattern, titleText, outPath)
             C = rfscreen.cal.CalPlotter;
             inst = model.installations(installationId);
-            R_BL = rfscreen.kaa.CstLocalFrameAdapter.fromR_BA(inst.R_BA);
             p0 = inst.position_m;
             fig = figure('visible', 'off', 'position', [0 0 1000 800]);
             hold on; grid on;
@@ -85,8 +94,7 @@ classdef CalPlotter
             [TH, PH] = ndgrid(0:st:180, 0:st:360);
             G = nat.gainAt(TH, PH);
             r = C.visRadius(G, nat.peakGain_dBi);
-            vL = [sind(TH(:).') .* cosd(PH(:).'); sind(TH(:).') .* sind(PH(:).'); cosd(TH(:).')];
-            vB = R_BL * vL;
+            vB = C.installedRawDirections(pattern, TH, PH);
             X = reshape(p0(1) + r(:).' .* vB(1, :), size(TH));
             Y = reshape(p0(2) + r(:).' .* vB(2, :), size(TH));
             Z = reshape(p0(3) + r(:).' .* vB(3, :), size(TH));
@@ -96,11 +104,14 @@ classdef CalPlotter
             plot3(p0(1), p0(2), p0(3), 'ko', 'markerfacecolor', 'y', 'markersize', 8);
             n = inst.R_BA(:, 1) * 1.3 * C.R_VIS_M;
             quiver3(p0(1), p0(2), p0(3), n(1), n(2), n(3), 0, 'm', 'linewidth', 2.5);
-            text(p0(1) + n(1), p0(2) + n(2), p0(3) + n(3), sprintf('%s boresight = mount normal', installationId), 'interpreter', 'none');
+            text(p0(1) + n(1), p0(2) + n(2), p0(3) + n(3), sprintf('%s panel outward normal n_B', installationId), 'interpreter', 'none');
+            dPk = C.installedRawDirections(pattern, nat.peakTheta_deg, nat.peakPhi_deg) * 1.15 * C.R_VIS_M;
+            quiver3(p0(1), p0(2), p0(3), dPk(1), dPk(2), dPk(3), 0, 'c', 'linewidth', 2);
+            text(p0(1) + dPk(1), p0(2) + dPk(2), p0(3) + dPk(3), 'raw peak direction', 'interpreter', 'none');
             axis equal; view(-50, 25);
             ylabel('Y_B [m]'); zlabel('Z_B [m]');
             % Single-line strings only (the gnuplot toolkit cannot render multi-line titles).
-            title(sprintf('%s - installed pattern on spacecraft (body frame B)', titleText), 'interpreter', 'none');
+            title(sprintf('%s - installed pattern on spacecraft (raw CST = body frame B, no rotation)', titleText), 'interpreter', 'none');
             xlabel('X_B [m]');
             f = outPath;
             C.savePng(fig, f);
@@ -111,7 +122,7 @@ classdef CalPlotter
             C = rfscreen.cal.CalPlotter;
             inst = model.installations(installationId);
             nat = pattern.native;
-            cuts = C.bodyCutData(inst.R_BA, pattern, f_Hz);
+            cuts = C.bodyCutData(pattern, f_Hz);
             ax = {'X_B', 'Y_B', 'Z_B'};
             files = {};
             for i = 1:numel(cuts)
@@ -145,16 +156,17 @@ classdef CalPlotter
                 end
                 xlabel(sprintf('body angle from +%s toward +%s [deg]', ax{ij(1)}, ax{ij(2)}), 'interpreter', 'none');
                 ylabel('Realized Gain [dBi]');
-                title(sprintf('%s - body %s cut (queried from the full 3D pattern)', titleText, planes{1}), 'interpreter', 'none');
+                title(sprintf('%s - body %s cut (raw body-frame 3D pattern, no rotation)', titleText, planes{1}), 'interpreter', 'none');
                 f = sprintf('%s_BODY_%s.png', outPrefix, planes{1});
                 C.savePng(fig, f);
                 files{end+1} = f; %#ok<AGROW>
             end
         end
 
-        function cuts = bodyCutData(R_BA, pattern, f_Hz)
-            %BODYCUTDATA Body XZ / YZ / XY cuts: d_B(alpha) in the plane -> u_A = R_BA' d_B ->
-            %   pattern.gainAntenna (-> CST local -> theta/phi -> native 3D interpolation). No 2D-cut rotation.
+        function cuts = bodyCutData(pattern, f_Hz)
+            %BODYCUTDATA Body XZ (Y_B = 0) / YZ (X_B = 0) / XY (Z_B = 0) cuts of an INSTALLED pattern:
+            %   d_B(alpha) in the plane -> pattern.gainBody (raw body-frame grid; no R_BL / R_BA / M_AL).
+            rfscreen.cal.CalPlotter.mustBeBodyFrame(pattern);
             nat = pattern.native;
             step = min(nat.thetaStep_deg, nat.phiStep_deg);
             alpha = -180:step:180;
@@ -164,8 +176,62 @@ classdef CalPlotter
                 ij = planes{i, 2};
                 dB = zeros(3, numel(alpha));
                 dB(ij(1), :) = cosd(alpha); dB(ij(2), :) = sind(alpha);
-                g = pattern.gainAntenna(f_Hz, R_BA.' * dB);
+                g = pattern.gainBody(f_Hz, dB);
                 cuts(end+1) = struct('plane', planes{i, 1}, 'axes', ij, 'alpha_deg', alpha, 'gain_dBi', g, 'dir_B', dB); %#ok<AGROW>
+            end
+        end
+
+        function cuts = localCutData(pattern, f_Hz)
+            %LOCALCUTDATA Antenna-local XZ / YZ cuts of an INSTALLED pattern (antenna-geometry view):
+            %   d_L(ang) in the local plane (ang = signed angle from +Z_L toward +X_L / +Y_L)
+            %   -> d_B = R_BL d_L -> pattern.gainBody. The only place a local -> body transform is used.
+            rfscreen.cal.CalPlotter.mustBeBodyFrame(pattern);
+            nat = pattern.native;
+            step = min(nat.thetaStep_deg, nat.phiStep_deg);
+            ang = -180:step:180;
+            planes = {'XZ', 1; 'YZ', 2};
+            cuts = struct('plane', {}, 'ang_deg', {}, 'gain_dBi', {}, 'dir_L', {}, 'dir_B', {});
+            for i = 1:size(planes, 1)
+                dL = zeros(3, numel(ang));
+                dL(planes{i, 2}, :) = sind(ang); dL(3, :) = cosd(ang);
+                dB = pattern.R_BL * dL;
+                g = pattern.gainBody(f_Hz, dB);
+                cuts(end+1) = struct('plane', planes{i, 1}, 'ang_deg', ang, 'gain_dBi', g, 'dir_L', dL, 'dir_B', dB); %#ok<AGROW>
+            end
+        end
+
+        function files = localCuts(pattern, f_Hz, titleText, outPrefix)
+            %LOCALCUTS *_LOCAL_XZ.png / *_LOCAL_YZ.png of an installed pattern (antenna-local view).
+            cuts = rfscreen.cal.CalPlotter.localCutData(pattern, f_Hz);
+            ax = {'X_L', 'Y_L'};
+            files = {};
+            for i = 1:numel(cuts)
+                ang = cuts(i).ang_deg; g = cuts(i).gain_dBi;
+                fig = figure('visible', 'off', 'position', [0 0 900 520]);
+                plot(ang, g, 'b-', 'linewidth', 1.5); hold on; grid on;
+                yl = [floor(min(g) / 5) * 5 - 5, ceil(max(g) / 5) * 5 + 5];
+                plot([0 0], yl, 'k--'); ylim(yl); xlim([-180 180]);
+                set(gca, 'xtick', -180:30:180);
+                text(2, yl(1) + 2, '+Z_L = panel outward normal n_B');
+                xlabel(sprintf('signed angle from +Z_L toward +%s in the antenna-local %s plane [deg]', ax{i}, cuts(i).plane), 'interpreter', 'none');
+                ylabel('Realized Gain [dBi]');
+                title(sprintf('%s - antenna-local %s cut (d_B = R_BL d_L on the body-frame raw pattern)', titleText, cuts(i).plane), 'interpreter', 'none');
+                f = sprintf('%s_LOCAL_%s.png', outPrefix, cuts(i).plane);
+                rfscreen.cal.CalPlotter.savePng(fig, f);
+                files{end+1} = f; %#ok<AGROW>
+            end
+        end
+
+        function d = installedRawDirections(pattern, TH, PH)
+            %INSTALLEDRAWDIRECTIONS Body directions (3xN) of raw installed (theta_B, phi_B) samples: no rotation.
+            rfscreen.cal.CalPlotter.mustBeBodyFrame(pattern);
+            d = [sind(TH(:).') .* cosd(PH(:).'); sind(TH(:).') .* sind(PH(:).'); cosd(TH(:).')];
+        end
+
+        function mustBeBodyFrame(pattern)
+            if ~isprop(pattern, 'sourceFrame') || ~strcmp(pattern.sourceFrame, 'SPACECRAFT_BODY_FIXED')
+                error('rfscreen:cal:notBodyFramePattern', ['installed spacecraft figures need an INSTALLED pattern whose ' ...
+                    'raw CST frame is SPACECRAFT_BODY_FIXED.']);
             end
         end
 

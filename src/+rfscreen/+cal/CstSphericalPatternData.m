@@ -1,8 +1,13 @@
 classdef CstSphericalPatternData
     %CSTSPHERICALPATTERNDATA Validated full-sphere CST Realized Gain on its native (theta, phi) grid.
-    %   Frame: CST pattern-local frame L (+Z_L = boresight for a free-space pattern, = mounting-face
-    %   outward normal for an installed pattern). theta = polar angle from +Z_L, phi = azimuth
-    %   atan2(y_L, x_L) in [0, 360) - the rfscreen.kaa.CstLocalFrameAdapter.thetaPhi convention.
+    %   Frame: the SOURCE frame S of the CST export, i.e. the frame the CST far-field was computed in.
+    %   This class is frame-agnostic; the pattern object that owns it declares S (sourceFrame):
+    %     free-space export  S = CST_LOCAL             antenna local frame L, +Z_L = boresight
+    %     installed export   S = SPACECRAFT_BODY_FIXED spacecraft body frame B (the installed CST model
+    %                                                  is placed in body coordinates; +Z_S = +Z_B)
+    %   theta = polar angle from +Z_S, phi = azimuth atan2(y_S, x_S) in [0, 360) - the
+    %   rfscreen.kaa.CstLocalFrameAdapter.thetaPhi convention. gainAtDirection(v_S) queries a
+    %   direction already expressed in S; no rotation is applied here.
     %
     %   Validation (fromColumns; every failure is an error with a rfscreen:cal:* identifier):
     %     theta within [0, 180], phi within [0, 360]   numeric + finite theta / phi / gain
@@ -150,14 +155,19 @@ classdef CstSphericalPatternData
             g = reshape(g, sz);
         end
 
-        function g = gainAtLocal(obj, v_L)
-            %GAINATLOCAL Realized Gain [dBi] toward CST-local direction(s) v_L (3xN).
-            [th, ph] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(v_L);
+        function g = gainAtDirection(obj, v_S)
+            %GAINATDIRECTION Realized Gain [dBi] toward direction(s) v_S (3xN) expressed in the source frame S.
+            [th, ph] = rfscreen.kaa.CstLocalFrameAdapter.thetaPhi(v_S);
             g = obj.gainAt(th, ph);
         end
 
+        function g = gainAtLocal(obj, v_L)
+            %GAINATLOCAL gainAtDirection for a CST_LOCAL (free-space) export: v_L in the antenna local frame.
+            g = obj.gainAtDirection(v_L);
+        end
+
         function [ang, g, thetaUsed, phiUsed] = planeCut(obj, plane)
-            %PLANECUT Full pattern-coordinate cut through the boresight (+Z_L).
+            %PLANECUT Full source-frame cut through +Z_S (free-space: boresight +Z_L; installed: +Z_B).
             %   'XZ': phi = 0 half (+X, ang = +theta) joined with phi = 180 half (-X, ang = -theta).
             %   'YZ': phi = 90 half (+Y, ang = +theta) joined with phi = 270 half (-Y, ang = -theta).
             %   ang in [-180, 180] deg, 0 = boresight. Values come from the native grid (exact at

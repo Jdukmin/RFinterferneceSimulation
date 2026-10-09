@@ -32,8 +32,19 @@ classdef CstAscii3DImporter
         end
 
         function [data, info] = parseText(txt, label)
-            %PARSETEXT Numeric matrix (nRows x nCols) from the CST ASCII text.
+            %PARSETEXT Numeric matrix (nRows x nCols) from the CST ASCII text (error on the first malformed row).
             if nargin < 2; label = '<text>'; end
+            [data, info, err] = rfscreen.cal.CstAscii3DImporter.parseTextDiag(txt, label);
+            if ~isempty(err); error(err.identifier, '%s', err.message); end
+        end
+
+        function [data, info, err, lineNo] = parseTextDiag(txt, label)
+            %PARSETEXTDIAG parseText without throwing (same acceptance rules), for diagnostics.
+            %   err = [] or struct(identifier, message, line). On a malformed row, data holds the rows parsed
+            %   before it (partial). lineNo(k) = 1-based file line of data row k.
+            if nargin < 2; label = '<text>'; end
+            data = zeros(0, 3); err = []; lineNo = zeros(0, 1);
+            info = struct('preambleLines', NaN, 'nColumns', NaN, 'nRows', 0);
             lines = regexp(txt, '\r\n|\r|\n', 'split');
             first = 0; nCols = 0;
             for i = 1:numel(lines)
@@ -45,8 +56,12 @@ classdef CstAscii3DImporter
                 end
             end
             if first == 0
-                error('rfscreen:cal:noData', '%s: no numeric data row with >= 3 columns found.', label);
+                err = struct('identifier', 'rfscreen:cal:noData', ...
+                    'message', sprintf('%s: no numeric data row with >= 3 columns found.', label), 'line', NaN);
+                info.preambleLines = numel(lines);
+                return;
             end
+            info.preambleLines = first - 1; info.nColumns = nCols;
             body = lines(first:end);
             blk = strjoin(body, sprintf('\n'));
             % Per-line token counts (vectorised): a token starts where non-space follows space.
@@ -61,22 +76,31 @@ classdef CstAscii3DImporter
             [v, cnt, ~, nxt] = sscanf(blk, '%f');
             if nxt > numel(blk) && cnt == nCols * numel(body) && all(nTok(keep) == nCols)
                 data = reshape(v, nCols, []).';
-                info = struct('preambleLines', first - 1, 'nColumns', nCols, 'nRows', size(data, 1));
+                info.nRows = size(data, 1);
                 return;
             end
-            % Slow path: locate the first malformed row for a precise diagnostic.
+            % Slow path: locate the first malformed row for a precise diagnostic (rows before it kept).
+            data = NaN(numel(body), nCols);
             for k = 1:numel(body)
                 [vk, ok] = rfscreen.cal.CstAscii3DImporter.numericLine(strtrim(body{k}));
+                msg = '';
                 if ~ok
-                    error('rfscreen:cal:malformedRow', '%s line %d: non-numeric data row "%s".', ...
+                    msg = sprintf('%s line %d: non-numeric data row "%s".', ...
                         label, lineNo(k), rfscreen.cal.CstAscii3DImporter.clip(body{k}));
-                end
-                if numel(vk) ~= nCols
-                    error('rfscreen:cal:malformedRow', '%s line %d: %d columns, expected %d (truncated row?) "%s".', ...
+                elseif numel(vk) ~= nCols
+                    msg = sprintf('%s line %d: %d columns, expected %d (truncated row?) "%s".', ...
                         label, lineNo(k), numel(vk), nCols, rfscreen.cal.CstAscii3DImporter.clip(body{k}));
                 end
+                if ~isempty(msg)
+                    err = struct('identifier', 'rfscreen:cal:malformedRow', 'message', msg, 'line', lineNo(k));
+                    data = data(1:k-1, :); lineNo = lineNo(1:k-1); info.nRows = k - 1;
+                    return;
+                end
+                data(k, :) = vk(:).';
             end
-            error('rfscreen:cal:malformedRow', '%s: numeric block could not be parsed.', label);
+            err = struct('identifier', 'rfscreen:cal:malformedRow', ...
+                'message', sprintf('%s: numeric block could not be parsed.', label), 'line', NaN);
+            info.nRows = size(data, 1);
         end
     end
 
